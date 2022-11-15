@@ -15,7 +15,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="flex bg-gray-800 text-white">
          <MediaTypeProvider>
             <Sidebar />
-            <div className="flex-1 flex flex-col h-screen overflow-y-scroll overflow-x-hidden pr-5 pb-5">
+            <div
+               id="scroll-container"
+               className="flex-1 flex flex-col h-screen overflow-y-scroll overflow-x-hidden pr-5 pb-5"
+            >
                <Navbar />
                <AnimatePresence mode="wait">
                   <motion.div key={router.route} className="flex-1">

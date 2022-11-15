@@ -1,10 +1,11 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import RevealVertical from "../animations/RevealVertical";
+import Card from "../components/card/Card";
 
 import PageTitle from "../components/PageTitle";
-import Poster from "../components/Poster";
 import PageAnimationContainer from "../containers/PageAnimationContainer";
 import usePageLoadingContext from "../context/PageLoadingContext";
 
@@ -21,6 +22,8 @@ interface Props {
 }
 
 export default function Popular({ mediaType }: Props) {
+   const router = useRouter();
+
    const [media, setMedia] = useState<any[]>([]);
    const { setIsLoading } = usePageLoadingContext();
 
@@ -43,19 +46,26 @@ export default function Popular({ mediaType }: Props) {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <PageTitle>Popular</PageTitle>
-         <div className="grid grid-cols-4 2xl:grid-cols-5 gap-5">
-            {media.map((media) => (
-               <RevealVertical key={media.id}>
-                  <article className="aspect-[2/3] relative rounded-xl overflow-hidden">
-                     <Poster
-                        alt={media.title || media.name}
-                        posterPath={media.poster_path}
-                        size="lg"
-                     />
-                  </article>
-               </RevealVertical>
-            ))}
-         </div>
+         <AnimatePresence
+            mode="wait"
+            onExitComplete={() => {
+               const container = document.getElementById("scroll-container")!;
+               container.scrollTo({ top: 0 });
+            }}
+         >
+            <motion.div
+               initial={{ y: 100, opacity: 0 }}
+               animate={{ y: 0, opacity: 1 }}
+               exit={{ y: 100, opacity: 0 }}
+               transition={{ duration: 0.5, ease: "easeInOut" }}
+               key={router.asPath}
+               className="grid grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
+            >
+               {media.map((media) => (
+                  <Card key={media.id} media={media} />
+               ))}
+            </motion.div>
+         </AnimatePresence>
       </PageAnimationContainer>
    );
 }

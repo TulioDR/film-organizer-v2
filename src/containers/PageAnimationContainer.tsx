@@ -1,5 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
-import LoadingPage from "../components/LoadingPage";
+import { AnimatePresence } from "framer-motion";
+import LoadingPage from "../animations/LoadingPage";
+
 import usePageLoadingContext from "../context/PageLoadingContext";
 
 interface Props {
