@@ -29,7 +29,7 @@ export default function Home() {
          setIsLoading(false);
       };
       getData();
-   }, []);
+   }, [setIsLoading]);
 
    return (
       <PageAnimationContainer>

@@ -17,9 +17,12 @@ const changeDateFormat = (date: string) => {
 export default function NowPlaying({ movie }: Props) {
    return (
       <div className="rounded-2xl aspect-video w-full overflow-hidden shadow-md relative group">
-         <div className="relative w-full h-full">
-            <Poster movie={movie} />
-         </div>
+         <Poster
+            alt={movie.title}
+            posterPath={movie.backdrop_path}
+            size="xl"
+            backPoster
+         />
          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-gray-900 to-transparent">
             <div className="absolute left-4 bottom-4 w-1/2 space-y-2">
                <div className="text-3xl xl:text-4xl font-bold">

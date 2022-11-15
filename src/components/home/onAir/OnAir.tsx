@@ -1,11 +1,7 @@
-import FrontPoster from "../../FrontPoster";
+import Poster from "../../Poster";
 
 type Props = { tv: any };
 
 export default function OnAir({ tv }: Props) {
-   return (
-      <div className="rounded-2xl aspect-[2/3] overflow-hidden shadow-md relative">
-         <FrontPoster movie={tv} />
-      </div>
-   );
+   return <Poster alt={tv.name} posterPath={tv.poster_path} size="lg" />;
 }

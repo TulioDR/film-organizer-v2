@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import RevealVertical from "../animations/RevealVertical";
-import FrontPoster from "../components/FrontPoster";
+
 import PageTitle from "../components/PageTitle";
+import Poster from "../components/Poster";
 import PageAnimationContainer from "../containers/PageAnimationContainer";
 import usePageLoadingContext from "../context/PageLoadingContext";
 
@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    const { type } = context.query;
    const mediaType = type === "tv" ? "tv" : "movie";
    return {
-      props: { mediaType }, // will be passed to the page component as props
+      props: { mediaType },
    };
 };
 
@@ -24,8 +24,6 @@ export default function Popular({ mediaType }: Props) {
    const [media, setMedia] = useState<any[]>([]);
    const { setIsLoading } = usePageLoadingContext();
 
-   const router = useRouter();
-
    useEffect(() => {
       const getData = async () => {
          const res = await fetch(`/api/popular/${mediaType}/1`);
@@ -35,7 +33,7 @@ export default function Popular({ mediaType }: Props) {
          setIsLoading(false);
       };
       getData();
-   }, []);
+   }, [mediaType, setIsLoading]);
 
    return (
       <PageAnimationContainer>
@@ -49,7 +47,11 @@ export default function Popular({ mediaType }: Props) {
             {media.map((media) => (
                <RevealVertical key={media.id}>
                   <article className="aspect-[2/3] relative rounded-xl overflow-hidden">
-                     <FrontPoster movie={media} />
+                     <Poster
+                        alt={media.title || media.name}
+                        posterPath={media.poster_path}
+                        size="lg"
+                     />
                   </article>
                </RevealVertical>
             ))}
