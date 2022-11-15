@@ -1,10 +1,13 @@
 import { useState } from "react";
 import BrandHamburger from "../components/sidebar/BrandHamburger";
 import SideLink from "../components/sidebar/SideLink";
+import useMediaTypeContext from "../context/MediaTypeContext";
 
 export default function Sidebar() {
+   const { isMovie, toggle } = useMediaTypeContext();
+
    const [isOpen, setIsOpen] = useState<boolean>(true);
-   const toggle = () => {
+   const toggleSidebar = () => {
       setIsOpen(!isOpen);
    };
    return (
@@ -13,11 +16,18 @@ export default function Sidebar() {
             isOpen ? "w-60" : "w-[76px]"
          }`}
       >
-         <BrandHamburger onClick={toggle} />
+         <BrandHamburger onClick={toggleSidebar} />
          <div className="h-9 w-full pl-3">
-            <div className="h-full w-full pl-2 bg-blue-500 flex items-center rounded-lg space-x-5">
-               <span className="material-icons">movie</span>
-               <span className="truncate">Search Movies</span>
+            <div
+               onClick={toggle}
+               className="h-full w-full pl-2 cursor-pointer bg-blue-500 flex items-center rounded-lg space-x-5"
+            >
+               <span className="material-icons">
+                  {isMovie ? "movie" : "tv"}
+               </span>
+               <span className="truncate">
+                  Mode: {isMovie ? "Movies" : "TV Shows"}
+               </span>
             </div>
          </div>
 
@@ -25,7 +35,11 @@ export default function Sidebar() {
 
          <ul className="space-y-3">
             <SideLink link="/" icon="home" text="Home" />
-            <SideLink link="/popular" icon="whatshot" text="Popular" />
+            <SideLink
+               link={`/popular?type=${isMovie ? "movie" : "tv"}`}
+               icon="whatshot"
+               text="Popular"
+            />
             <SideLink
                link="/genres"
                icon="theater_comedy"

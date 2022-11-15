@@ -23,7 +23,7 @@ export default function SideLink({ link, icon, text }: Props) {
          </div>
          <div
             className={`absolute top-0 h-full bg-blue-500 rounded-r-lg -z-10 ${
-               router.pathname === link
+               router.asPath === link
                   ? "w-full duration-300"
                   : "w-0 group-hover:w-14 duration-200"
             }`}
