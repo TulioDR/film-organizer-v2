@@ -38,7 +38,7 @@ export default function Sidebar() {
             <SideLink
                link={`/popular?type=${isMovie ? "movie" : "tv"}`}
                icon="whatshot"
-               text="Popular"
+               text={`Popular ${isMovie ? "Movies" : "TV Shows"}`}
             />
             <SideLink
                link={`/genres?type=${isMovie ? "movie" : "tv"}`}

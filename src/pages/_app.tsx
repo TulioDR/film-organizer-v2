@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
             >
                <Navbar />
                <AnimatePresence mode="wait">
-                  <motion.div key={router.route} className="flex-1">
+                  <motion.div key={router.route}>
                      <PageLoadingProvider>
                         <Component {...pageProps} />
                      </PageLoadingProvider>

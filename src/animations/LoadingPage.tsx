@@ -7,7 +7,8 @@ export default function LoadingPage() {
    return (
       <motion.div
          exit={{ opacity: 0, transition: { duration: 0.3 } }}
-         className="h-full grid place-content-center"
+         className="grid place-content-center"
+         style={{ height: "calc(100vh - 96px)" }}
       >
          <div className="flex flex-col items-center">
             <div className="h-1 w-96">

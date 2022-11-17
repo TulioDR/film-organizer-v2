@@ -1,10 +1,19 @@
+import { useRouter } from "next/router";
 import Poster from "../../Poster";
 
 type Props = { movie: any };
 
 export default function Upcoming({ movie }: Props) {
+   const router = useRouter();
+   const goTo = () => {
+      router.push(`/${"movie"}/${movie.id}`);
+   };
+
    return (
-      <div className="rounded-2xl aspect-video overflow-hidden shadow-md relative">
+      <div
+         onClick={goTo}
+         className="rounded-2xl aspect-video overflow-hidden shadow-md relative cursor-pointer"
+      >
          <Poster
             alt={movie.title}
             posterPath={movie.backdrop_path}

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Card from "../components/card/Card";
@@ -11,7 +12,7 @@ import usePageLoadingContext from "../context/PageLoadingContext";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { type } = context.query;
-   const mediaType = type === "tv" ? "tv" : "movie";
+   const mediaType: "movie" | "tv" = type === "tv" ? "tv" : "movie";
    return {
       props: { mediaType },
    };
@@ -38,6 +39,8 @@ export default function Popular({ mediaType }: Props) {
       getData();
    }, [mediaType, setIsLoading]);
 
+   const [selectedImg, setSelectedImg] = useState<string | null>(null);
+
    return (
       <PageAnimationContainer>
          <Head>
@@ -62,9 +65,34 @@ export default function Popular({ mediaType }: Props) {
                className="grid grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
             >
                {media.map((media) => (
-                  <Card key={media.id} media={media} />
+                  <Card
+                     key={media.id}
+                     media={media}
+                     mediaType={mediaType}
+                     setSelectedImg={setSelectedImg}
+                  />
                ))}
             </motion.div>
+         </AnimatePresence>
+         <AnimatePresence>
+            {selectedImg && (
+               <motion.div
+                  layoutId={selectedImg}
+                  className="aspect-[2/3] fixed top-[76px]"
+                  style={{ height: "calc(100% - 96px)" }}
+                  onClick={() => setSelectedImg(null)}
+               >
+                  <div className="w-full h-full aspect-[2/3] relative rounded-xl overflow-hidden">
+                     <Image
+                        alt="selected"
+                        src={selectedImg}
+                        fill
+                        sizes="100%"
+                        priority
+                     />
+                  </div>
+               </motion.div>
+            )}
          </AnimatePresence>
       </PageAnimationContainer>
    );
