@@ -1,17 +1,11 @@
-import { AnimatePresence } from "framer-motion";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import Date from "../components/details/Date";
-import Rating from "../components/details/Rating";
-import Runtime from "../components/details/Runtime";
-import Score from "../components/details/Score";
-import Similar from "../components/details/tabs/Similar";
-import TabsContainer from "../components/details/TabsContainer";
-import { TabOptions } from "../models/detailsModel";
-import { motion } from "framer-motion";
-import Trailers from "../components/details/tabs/Trailers";
+import { useEffect } from "react";
+
+import RevealHorizontal from "../animations/RevealHorizontal";
+import MainPoster from "../components/details/MainPoster";
+import InfoBar from "../components/details/infoBar/InfoBar";
+import Tabs from "../components/details/tabs/Tabs";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    // if (!context.query.details) {
@@ -44,9 +38,6 @@ export default function details({ mediaType, id, media }: Props) {
    useEffect(() => {
       console.log(media);
    }, []);
-
-   const [selectedTab, setSelectedTab] = useState<TabOptions>("overview");
-
    return (
       <div
          className="flex space-x-5 overflow-hidden"
@@ -57,67 +48,19 @@ export default function details({ mediaType, id, media }: Props) {
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="aspect-[2/3] flex-shrink-0 h-full relative rounded-xl overflow-hidden">
-            <Image
-               alt={media.name || media.title}
-               src={`https://image.tmdb.org/t/p/w${780}${media.poster_path}`}
-               placeholder="empty"
-               fill
-               sizes="100%"
-               priority
-            />
-         </div>
-         <div className="flex-1 h-full flex flex-col">
-            <div className="text-4xl 2xl:text-5xl font-medium">
-               {media.title || media.name}
-            </div>
-            <div className="flex justify-between items-center text-gray-500 mt-2 text-sm">
-               <div className="flex items-center">
-                  <Date date={media.first_air_date || media.release_date} />
-                  <span className="mx-2">|</span>
-                  {mediaType == "movie" && (
-                     <>
-                        <Runtime runtime={media.runtime} />
-                        <span className="mx-2">|</span>
-                     </>
-                  )}
-                  <Rating
-                     rating={
-                        media.release_dates?.results ||
-                        media.content_ratings?.results
-                     }
-                     isMovie={mediaType === "movie"}
-                  />
+         <MainPoster
+            alt={media.name || media.title}
+            posterPath={media.poster_path}
+         />
+
+         <div className="flex-1 overflow-hidden h-full flex flex-col">
+            <RevealHorizontal>
+               <div className="text-4xl 2xl:text-5xl font-medium">
+                  {media.title || media.name}
                </div>
-               <Score score={media.vote_average} />
-            </div>
-            <TabsContainer
-               selectedTab={selectedTab}
-               setSelectedTab={setSelectedTab}
-               isMovie={mediaType === "movie"}
-            />
-            <AnimatePresence mode="wait">
-               <motion.div
-                  key={selectedTab}
-                  className="flex-1 w-full overflow-y-hidden"
-               >
-                  {selectedTab === "overview" && (
-                     <div className="h-full w-full bg-blue-500"></div>
-                  )}
-                  {selectedTab === "seasons" && (
-                     <div className="flex-1 w-full"></div>
-                  )}
-                  {selectedTab === "trailers" && (
-                     <Trailers trailers={media.videos.results} />
-                  )}
-                  {selectedTab === "cast&crew" && (
-                     <div className="flex-1 w-full">Cast and Crew</div>
-                  )}
-                  {selectedTab === "similar" && (
-                     <Similar similar={media.similar.results} />
-                  )}
-               </motion.div>
-            </AnimatePresence>
+            </RevealHorizontal>
+            <InfoBar media={media} mediaType={mediaType} />
+            <Tabs media={media} mediaType={mediaType} />
          </div>
       </div>
    );

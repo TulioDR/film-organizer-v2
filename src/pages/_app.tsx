@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Sidebar />
             <div
                id="scroll-container"
-               className="flex-1 flex flex-col h-screen overflow-y-scroll overflow-x-hidden pr-5 pb-5"
+               className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pr-5 pb-5"
             >
                <Navbar />
                <AnimatePresence mode="wait">

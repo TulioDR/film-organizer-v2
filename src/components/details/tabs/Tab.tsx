@@ -1,11 +1,24 @@
-import { TabOptions } from "../../models/detailsModel";
 import { motion } from "framer-motion";
+import { TabOptions } from "../../../models/detailsModel";
 
 type Props = {
    name: string;
    value: TabOptions;
    selectedTab: TabOptions;
    setSelectedTab: React.Dispatch<React.SetStateAction<TabOptions>>;
+};
+
+const item = {
+   initial: { opacity: 0, y: "100%" },
+   animate: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeInOut" },
+   },
+   exit: {
+      y: "100%",
+      opacity: 0,
+   },
 };
 
 export default function Tab({
@@ -23,7 +36,9 @@ export default function Tab({
          onClick={setTab}
          className="uppercase flex-shrink-0 relative cursor-pointer pb-2"
       >
-         {name}
+         <div className="overflow-hidden">
+            <motion.div variants={item}>{name}</motion.div>
+         </div>
          {value === selectedTab && (
             <motion.div
                layoutId="underline"

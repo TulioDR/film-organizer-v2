@@ -25,7 +25,6 @@ export default function Poster({
    trailer,
 }: Props) {
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
    const url = trailer
       ? `http://i3.ytimg.com/vi/${posterPath}/hqdefault.jpg`
       : `https://image.tmdb.org/t/p/w${width[size]}${posterPath}`;

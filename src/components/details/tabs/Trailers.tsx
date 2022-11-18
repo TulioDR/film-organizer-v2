@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Poster from "../../Poster";
 
 type Props = {
@@ -27,6 +26,10 @@ const item = {
 };
 
 export default function Trailers({ trailers }: Props) {
+   const goToTrailer = (key: string) => {
+      window.open(`https://www.youtube.com/watch?v=${key}`, "_blank");
+   };
+
    return (
       <motion.div
          variants={container}
@@ -37,6 +40,7 @@ export default function Trailers({ trailers }: Props) {
       >
          {trailers.map((trailer) => (
             <motion.article
+               onClick={() => goToTrailer(trailer.key)}
                variants={item}
                key={trailer.id}
                className="cursor-pointer flex flex-col"
