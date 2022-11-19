@@ -4,19 +4,31 @@ import { TabOptions } from "../../../models/detailsModel";
 
 import Overview from "./overview/Overview";
 import CastCrew from "./people/CastCrew";
+import SeasonDetails from "./seasonDetails/SeasonDetails";
 import Seasons from "./seasons/Seasons";
 import Similar from "./Similar";
 import TabsContainer from "./TabsContainer";
 import Trailers from "./Trailers";
 
-type Props = { media: any; mediaType: string };
+type Props = {
+   media: any;
+   mediaType: "tv" | "movie";
+   setSelectedImg: React.Dispatch<React.SetStateAction<string | null>>;
+};
 
-export default function Tabs({ media, mediaType }: Props) {
+export default function Tabs({ media, mediaType, setSelectedImg }: Props) {
    const [selectedTab, setSelectedTab] = useState<TabOptions>("overview");
+
+   const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
 
    return (
       <>
-         {/* <div className="absolute top-0 right-0 h-full w-full bg-white z-10"></div> */}
+         <SeasonDetails
+            tvShowID={media.id}
+            selectedSeason={selectedSeason}
+            setSelectedSeason={setSelectedSeason}
+            setSelectedImg={setSelectedImg}
+         />
          <TabsContainer
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
@@ -31,7 +43,10 @@ export default function Tabs({ media, mediaType }: Props) {
             className="flex-1 overflow-hidden w-full"
          >
             <AnimatePresence mode="wait">
-               <motion.div key={selectedTab} className="flex-1 w-full h-full">
+               <motion.div
+                  key={selectedTab}
+                  className="flex-1 w-full h-full overflow-hidden"
+               >
                   {selectedTab === "overview" && (
                      <Overview
                         tagline={media.tagline || null}
@@ -49,7 +64,11 @@ export default function Tabs({ media, mediaType }: Props) {
                      />
                   )}
                   {selectedTab === "seasons" && (
-                     <Seasons seasons={media.seasons} />
+                     <Seasons
+                        seasons={media.seasons}
+                        setSelectedImg={setSelectedImg}
+                        setSelectedSeason={setSelectedSeason}
+                     />
                   )}
                   {selectedTab === "trailers" && (
                      <Trailers trailers={media.videos.results} />
@@ -61,7 +80,10 @@ export default function Tabs({ media, mediaType }: Props) {
                      />
                   )}
                   {selectedTab === "similar" && (
-                     <Similar similar={media.similar.results} />
+                     <Similar
+                        mediaType={mediaType}
+                        similar={media.similar.results}
+                     />
                   )}
                </motion.div>
             </AnimatePresence>

@@ -5,6 +5,7 @@ module.exports = {
       "./src/containers/**/*.{js,ts,jsx,tsx}",
       "./src/components/**/*.{js,ts,jsx,tsx}",
       "./src/animations/**/*.{js,ts,jsx,tsx}",
+      "./src/layout/**/*.{js,ts,jsx,tsx}",
    ],
    theme: {
       extend: {},

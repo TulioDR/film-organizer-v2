@@ -1,8 +1,10 @@
 import Poster from "../../Poster";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 type Props = {
    similar: any[];
+   mediaType: "tv" | "movie";
 };
 
 const container = {
@@ -25,7 +27,11 @@ const item = {
    exit: {},
 };
 
-export default function Similar({ similar }: Props) {
+export default function Similar({ similar, mediaType }: Props) {
+   const router = useRouter();
+   const goToSimilar = (id: number) => {
+      router.push(`/${mediaType}/${id}`);
+   };
    return (
       <motion.div
          variants={container}
@@ -36,6 +42,7 @@ export default function Similar({ similar }: Props) {
       >
          {similar.map((sim) => (
             <motion.article
+               onClick={() => goToSimilar(sim.id)}
                variants={item}
                key={sim.id}
                className="cursor-pointer"

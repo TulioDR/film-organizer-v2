@@ -1,7 +1,7 @@
 import PageTitle from "../components/PageTitle";
 import useMediaTypeContext from "../context/MediaTypeContext";
 
-export default function genres() {
+export default function Genres() {
    const { isMovie } = useMediaTypeContext();
    return (
       <div>

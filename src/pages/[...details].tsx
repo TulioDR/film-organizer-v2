@@ -1,11 +1,13 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import RevealHorizontal from "../animations/RevealHorizontal";
 import MainPoster from "../components/details/MainPoster";
 import InfoBar from "../components/details/infoBar/InfoBar";
 import Tabs from "../components/details/tabs/Tabs";
+import TransitionPoster from "../animations/TransitionPoster";
+import { motion } from "framer-motion";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    // if (!context.query.details) {
@@ -29,38 +31,56 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 type Props = {
-   mediaType: string;
+   mediaType: "tv" | "movie";
    id: number;
    media: any;
 };
 
-export default function details({ mediaType, id, media }: Props) {
+export default function Details({ mediaType, id, media }: Props) {
    useEffect(() => {
       console.log(media);
-   }, []);
+   }, [media]);
+
+   const [selectedImg, setSelectedImg] = useState<string | null>(null);
    return (
-      <div
-         className="flex space-x-5 overflow-hidden"
+      <motion.div
+         exit={
+            selectedImg
+               ? {
+                    opacity: 0,
+                    transition: { duration: 0.4, ease: "easeInOut" },
+                 }
+               : {}
+         }
+         className="w-full"
          style={{ height: "calc(100vh - 96px)" }}
       >
-         <Head>
-            <title>{media.title || media.name}</title>
-            <meta name="description" content={media.overview} />
-            <link rel="icon" href="/favicon.ico" />
-         </Head>
-         <MainPoster
-            alt={media.name || media.title}
-            posterPath={media.poster_path}
-         />
-         <div className="flex-1 overflow-hidden h-full flex flex-col relative">
-            <RevealHorizontal>
-               <div className="text-4xl 2xl:text-5xl font-medium">
-                  {media.title || media.name}
-               </div>
-            </RevealHorizontal>
-            <InfoBar media={media} mediaType={mediaType} />
-            <Tabs media={media} mediaType={mediaType} />
+         <div className="flex h-full space-x-5 overflow-hidden">
+            <Head>
+               <title>{media.title || media.name}</title>
+               <meta name="description" content={media.overview} />
+               <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <MainPoster
+               alt={media.name || media.title}
+               posterPath={media.poster_path}
+            />
+            <div className="flex-1 overflow-hidden h-full flex flex-col relative">
+               <RevealHorizontal>
+                  <div className="text-4xl 2xl:text-5xl font-medium">
+                     {media.title || media.name}
+                  </div>
+               </RevealHorizontal>
+               <InfoBar media={media} mediaType={mediaType} />
+               <Tabs
+                  setSelectedImg={setSelectedImg}
+                  media={media}
+                  mediaType={mediaType}
+               />
+            </div>
          </div>
-      </div>
+
+         <TransitionPoster selectedImg={selectedImg} />
+      </motion.div>
    );
 }

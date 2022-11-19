@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import TransitionPoster from "../animations/TransitionPoster";
 import Card from "../components/card/Card";
 
 import PageTitle from "../components/PageTitle";
@@ -84,26 +85,7 @@ export default function Popular({ mediaType }: Props) {
                ))}
             </motion.div>
          </AnimatePresence>
-         <AnimatePresence>
-            {selectedImg && (
-               <motion.div
-                  layoutId={selectedImg}
-                  className="aspect-[2/3] fixed top-[76px]"
-                  style={{ height: "calc(100% - 96px)" }}
-                  onClick={() => setSelectedImg(null)}
-               >
-                  <div className="w-full h-full aspect-[2/3] relative rounded-xl overflow-hidden">
-                     <Image
-                        alt="selected"
-                        src={selectedImg}
-                        fill
-                        sizes="100%"
-                        priority
-                     />
-                  </div>
-               </motion.div>
-            )}
-         </AnimatePresence>
+         <TransitionPoster selectedImg={selectedImg} />
       </PageAnimationContainer>
    );
 }
