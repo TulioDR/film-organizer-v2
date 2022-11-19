@@ -31,7 +31,7 @@ export default function Poster({
    return (
       <div
          className={`w-full rounded-lg overflow-hidden relative ${
-            backPoster ? "aspect-video" : "aspect-[2/3]"
+            backPoster ? "aspect-video" : "aspect-[2/3] h-full"
          }`}
       >
          <Image

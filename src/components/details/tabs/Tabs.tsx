@@ -4,6 +4,7 @@ import { TabOptions } from "../../../models/detailsModel";
 
 import Overview from "./overview/Overview";
 import CastCrew from "./people/CastCrew";
+import Seasons from "./seasons/Seasons";
 import Similar from "./Similar";
 import TabsContainer from "./TabsContainer";
 import Trailers from "./Trailers";
@@ -12,8 +13,10 @@ type Props = { media: any; mediaType: string };
 
 export default function Tabs({ media, mediaType }: Props) {
    const [selectedTab, setSelectedTab] = useState<TabOptions>("overview");
+
    return (
       <>
+         {/* <div className="absolute top-0 right-0 h-full w-full bg-white z-10"></div> */}
          <TabsContainer
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
@@ -28,10 +31,7 @@ export default function Tabs({ media, mediaType }: Props) {
             className="flex-1 overflow-hidden w-full"
          >
             <AnimatePresence mode="wait">
-               <motion.div
-                  key={selectedTab}
-                  className="flex-1 overflow-hidden w-full"
-               >
+               <motion.div key={selectedTab} className="flex-1 w-full h-full">
                   {selectedTab === "overview" && (
                      <Overview
                         tagline={media.tagline || null}
@@ -49,7 +49,7 @@ export default function Tabs({ media, mediaType }: Props) {
                      />
                   )}
                   {selectedTab === "seasons" && (
-                     <div className="flex-1 w-full"></div>
+                     <Seasons seasons={media.seasons} />
                   )}
                   {selectedTab === "trailers" && (
                      <Trailers trailers={media.videos.results} />

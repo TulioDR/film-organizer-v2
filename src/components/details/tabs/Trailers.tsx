@@ -36,25 +36,31 @@ export default function Trailers({ trailers }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="h-full w-full overflow-y-scroll grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 pt-3 pr-3"
+         className="h-full w-full overflow-y-auto pt-3 pr-3"
       >
-         {trailers.map((trailer) => (
-            <motion.article
-               onClick={() => goToTrailer(trailer.key)}
-               variants={item}
-               key={trailer.id}
-               className="cursor-pointer flex flex-col"
-            >
-               <Poster
-                  alt={trailer.name}
-                  posterPath={trailer.key}
-                  size="md"
-                  backPoster
-                  trailer
-               />
-               <div className="text-sm pt-1">{trailer.name}</div>
-            </motion.article>
-         ))}
+         {trailers.length ? (
+            <div className="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+               {trailers.map((trailer) => (
+                  <motion.article
+                     onClick={() => goToTrailer(trailer.key)}
+                     variants={item}
+                     key={trailer.id}
+                     className="cursor-pointer flex flex-col"
+                  >
+                     <Poster
+                        alt={trailer.name}
+                        posterPath={trailer.key}
+                        size="md"
+                        backPoster
+                        trailer
+                     />
+                     <div className="text-sm pt-1">{trailer.name}</div>
+                  </motion.article>
+               ))}
+            </div>
+         ) : (
+            <motion.div variants={item}>No trailers available</motion.div>
+         )}
       </motion.div>
    );
 }

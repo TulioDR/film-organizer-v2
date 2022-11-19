@@ -22,6 +22,16 @@ interface Props {
    mediaType: "tv" | "movie";
 }
 
+const container = {
+   initial: {},
+   animate: { transition: { staggerChildren: 0.1 } },
+   exit: {
+      y: 100,
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+   },
+};
+
 export default function Popular({ mediaType }: Props) {
    const router = useRouter();
 
@@ -57,10 +67,10 @@ export default function Popular({ mediaType }: Props) {
             }}
          >
             <motion.div
-               initial={{ y: 100, opacity: 0 }}
-               animate={{ y: 0, opacity: 1 }}
-               exit={{ y: 100, opacity: 0 }}
-               transition={{ duration: 0.5, ease: "easeInOut" }}
+               variants={container}
+               initial="initial"
+               animate="animate"
+               exit="exit"
                key={router.asPath}
                className="grid grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
             >

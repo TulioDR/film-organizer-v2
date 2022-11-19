@@ -52,8 +52,7 @@ export default function details({ mediaType, id, media }: Props) {
             alt={media.name || media.title}
             posterPath={media.poster_path}
          />
-
-         <div className="flex-1 overflow-hidden h-full flex flex-col">
+         <div className="flex-1 overflow-hidden h-full flex flex-col relative">
             <RevealHorizontal>
                <div className="text-4xl 2xl:text-5xl font-medium">
                   {media.title || media.name}
