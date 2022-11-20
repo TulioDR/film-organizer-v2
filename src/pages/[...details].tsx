@@ -13,7 +13,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    // if (!context.query.details) {
    //    return { notFound: true };
    // }
-
    const [type, id] = context.query.details!;
    const certifications =
       type === "movie" ? "release_dates" : "content_ratings";

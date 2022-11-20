@@ -15,7 +15,7 @@ export default function LoadingPage() {
                <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: isLoading ? "75%" : "100%" }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="bg-white h-full"
                   onAnimationComplete={() => {
                      if (!isLoading) setShowLoadingAnimation(false);

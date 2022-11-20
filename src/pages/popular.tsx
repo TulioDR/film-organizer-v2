@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import TransitionPoster from "../animations/TransitionPoster";
 import Card from "../components/card/Card";
@@ -34,21 +32,21 @@ const container = {
 };
 
 export default function Popular({ mediaType }: Props) {
-   const router = useRouter();
-
    const [media, setMedia] = useState<any[]>([]);
    const { setIsLoading } = usePageLoadingContext();
 
+   const [type, setType] = useState<"tv" | "movie">(mediaType);
+
    useEffect(() => {
       const getData = async () => {
-         const res = await fetch(`/api/popular/${mediaType}/1`);
+         console.log("fetch is running");
+         const res = await fetch(`/api/popular/${type}/1`);
          const data = await res.json();
-         console.log(data.results);
          setMedia(data.results);
          setIsLoading(false);
       };
       getData();
-   }, [mediaType, setIsLoading]);
+   }, [type, setIsLoading]);
 
    const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
@@ -65,6 +63,8 @@ export default function Popular({ mediaType }: Props) {
             onExitComplete={() => {
                const container = document.getElementById("scroll-container")!;
                container.scrollTo({ top: 0 });
+               setMedia([]);
+               setType(mediaType);
             }}
          >
             <motion.div
@@ -72,7 +72,7 @@ export default function Popular({ mediaType }: Props) {
                initial="initial"
                animate="animate"
                exit="exit"
-               key={router.asPath}
+               key={mediaType}
                className="grid grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
             >
                {media.map((media) => (
