@@ -16,7 +16,7 @@ export default function Upcoming({ movie }: Props) {
       >
          <Poster
             alt={movie.title}
-            posterPath={movie.backdrop_path}
+            posterPath={movie.backdrop_path || movie.poster_path}
             size="xl"
             backPoster
          />

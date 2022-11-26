@@ -13,6 +13,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    // if (!context.query.details) {
    //    return { notFound: true };
    // }
+
+   return { notFound: true };
    const [type, id] = context.query.details!;
    const certifications =
       type === "movie" ? "release_dates" : "content_ratings";
@@ -54,12 +56,12 @@ export default function Details({ mediaType, id, media }: Props) {
          className="w-full"
          style={{ height: "calc(100vh - 96px)" }}
       >
+         <Head>
+            <title>{media.title || media.name}</title>
+            <meta name="description" content={media.overview} />
+            <link rel="icon" href="/favicon.ico" />
+         </Head>
          <div className="flex h-full space-x-5 overflow-hidden">
-            <Head>
-               <title>{media.title || media.name}</title>
-               <meta name="description" content={media.overview} />
-               <link rel="icon" href="/favicon.ico" />
-            </Head>
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}

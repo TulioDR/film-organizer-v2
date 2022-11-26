@@ -1,6 +1,8 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { SpinnerCircularFixed } from "spinners-react";
+import posterNotFound from "../data/images/not-found/poster-not-found.jpg";
+import backPosterNotFound from "../data/images/not-found/back-poster-not-found.jpg";
 
 const width = {
    sm: 92,
@@ -11,8 +13,9 @@ const width = {
 
 type Props = {
    alt: string;
-   posterPath: string;
+   posterPath: string | StaticImageData;
    size: "sm" | "md" | "lg" | "xl";
+   genres?: boolean;
    backPoster?: boolean;
    trailer?: boolean;
 };
@@ -22,21 +25,31 @@ export default function Poster({
    posterPath,
    size,
    backPoster,
+   genres,
    trailer,
 }: Props) {
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-   const url = trailer
-      ? `http://i3.ytimg.com/vi/${posterPath}/hqdefault.jpg`
-      : `https://image.tmdb.org/t/p/w${width[size]}${posterPath}`;
+
+   const getPoster = (): string | StaticImageData => {
+      if (!posterPath) {
+         if (backPoster) return backPosterNotFound;
+         else return posterNotFound;
+      }
+      if (genres) return posterPath;
+      if (trailer) return `http://i3.ytimg.com/vi/${posterPath}/hqdefault.jpg`;
+      return `https://image.tmdb.org/t/p/w${width[size]}${posterPath}`;
+   };
+
+   const image = getPoster();
    return (
       <div
-         className={`w-full rounded-lg overflow-hidden relative ${
+         className={`w-full overflow-hidden relative ${
             backPoster ? "aspect-video" : "aspect-[2/3] h-full"
          }`}
       >
          <Image
             alt={alt}
-            src={url}
+            src={image}
             fill
             sizes="100%"
             priority

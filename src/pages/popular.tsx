@@ -34,8 +34,8 @@ const container = {
 export default function Popular({ mediaType }: Props) {
    const [media, setMedia] = useState<any[]>([]);
    const { setIsLoading } = usePageLoadingContext();
-
    const [type, setType] = useState<"tv" | "movie">(mediaType);
+   const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
    useEffect(() => {
       const getData = async () => {
@@ -47,8 +47,6 @@ export default function Popular({ mediaType }: Props) {
       };
       getData();
    }, [type, setIsLoading]);
-
-   const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
    return (
       <PageAnimationContainer>
