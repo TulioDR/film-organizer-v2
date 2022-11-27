@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import PageTitle from "../components/PageTitle";
-import SlideButtons from "../components/home/SlideButtons";
 import NowPlayingContainer from "../components/home/nowPlaying/NowPlayingContainer";
 import NowPlaying from "../components/home/nowPlaying/NowPlaying";
 import OnAirContainer from "../components/home/onAir/OnAirContainer";

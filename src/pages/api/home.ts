@@ -8,7 +8,7 @@ type Data = {
 };
 
 export default async function handler(
-   req: NextApiRequest,
+   _req: NextApiRequest,
    res: NextApiResponse<Data>
 ) {
    const url1 = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`;

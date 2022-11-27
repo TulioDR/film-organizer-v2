@@ -15,6 +15,7 @@ export default function Genres({ genres, isMovie }: Props) {
          {genres.map((genre) => (
             <span
                key={genre.id}
+               onClick={() => goToGenre(genre.id)}
                className="bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md px-2 py-1 cursor-pointer mr-2 float-left my-1"
             >
                {genre.name}

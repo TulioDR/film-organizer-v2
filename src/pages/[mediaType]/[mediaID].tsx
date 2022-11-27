@@ -27,17 +27,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    // }
 
    return {
-      props: { mediaType, mediaID, media },
+      props: { mediaType, media },
    };
 };
 
 type Props = {
    mediaType: "tv" | "movie";
-   mediaID: number;
    media: any;
 };
 
-export default function Details({ mediaType, mediaID, media }: Props) {
+export default function Details({ mediaType, media }: Props) {
    useEffect(() => {
       console.log(media);
    }, [media]);
