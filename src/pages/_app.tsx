@@ -1,13 +1,14 @@
 import "../styles/globals.css";
 import "swiper/css";
 import type { AppProps } from "next/app";
-import Sidebar from "../containers/Sidebar";
-import Navbar from "../containers/Navbar";
+
 import { PageLoadingProvider } from "../context/PageLoadingContext";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { MediaTypeProvider } from "../context/MediaTypeContext";
+import Sidebar from "../layout/Sidebar";
+import Navbar from "../layout/Navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
    const router = useRouter();

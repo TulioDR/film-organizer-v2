@@ -9,8 +9,8 @@ export default async function handler(
    res: NextApiResponse<Data>
 ) {
    const { params } = req.query;
-   const [mediaType, page] = params!;
-   const url = `https://api.themoviedb.org/3/${mediaType}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
+   const [mediaType, genreID, page] = params!;
+   const url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&include_adult=false&with_genres=${genreID}&page=${page}`;
    try {
       const response = await fetch(url);
       const data = await response.json();
