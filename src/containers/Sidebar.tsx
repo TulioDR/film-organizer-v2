@@ -36,7 +36,7 @@ export default function Sidebar() {
          <ul className="space-y-3">
             <SideLink link="/" icon="home" text="Home" />
             <SideLink
-               link={`/popular?type=${isMovie ? "movie" : "tv"}`}
+               link={`/popular/${isMovie ? "movie" : "tv"}`}
                icon="whatshot"
                text={`Popular ${isMovie ? "Movies" : "TV Shows"}`}
             />
