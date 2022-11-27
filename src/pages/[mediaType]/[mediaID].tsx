@@ -2,23 +2,23 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import RevealHorizontal from "../animations/RevealHorizontal";
-import MainPoster from "../components/details/MainPoster";
-import InfoBar from "../components/details/infoBar/InfoBar";
-import Tabs from "../components/details/tabs/Tabs";
-import TransitionPoster from "../animations/TransitionPoster";
 import { motion } from "framer-motion";
+import MainPoster from "../../components/details/MainPoster";
+import RevealHorizontal from "../../animations/RevealHorizontal";
+import InfoBar from "../../components/details/infoBar/InfoBar";
+import Tabs from "../../components/details/tabs/Tabs";
+import TransitionPoster from "../../animations/TransitionPoster";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    // if (!context.query.details) {
    //    return { notFound: true };
    // }
 
-   return { notFound: true };
-   const [type, id] = context.query.details!;
+   // return { notFound: true };
+   const { mediaType, mediaID } = context.query!;
    const certifications =
-      type === "movie" ? "release_dates" : "content_ratings";
-   const url = `https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos,credits,similar,${certifications}`;
+      mediaType === "movie" ? "release_dates" : "content_ratings";
+   const url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos,credits,similar,${certifications}`;
    const res = await fetch(url);
    const media = await res.json();
 
@@ -27,17 +27,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    // }
 
    return {
-      props: { mediaType: type, id, media },
+      props: { mediaType, mediaID, media },
    };
 };
 
 type Props = {
    mediaType: "tv" | "movie";
-   id: number;
+   mediaID: number;
    media: any;
 };
 
-export default function Details({ mediaType, id, media }: Props) {
+export default function Details({ mediaType, mediaID, media }: Props) {
    useEffect(() => {
       console.log(media);
    }, [media]);

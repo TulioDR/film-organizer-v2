@@ -85,7 +85,7 @@ const tvGenres: GenreModel[] = [
    },
    {
       id: 10767,
-      name: "Talk",
+      name: "Talk Shows",
       image: talk,
    },
    {

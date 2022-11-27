@@ -2,12 +2,13 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import { useEffect, useState } from "react";
-import PageTitle from "../../components/PageTitle";
-import movieGenres from "../../data/genres/movieGenres";
-import tvGenres from "../../data/genres/tvGenres";
-import GenreModel from "../../models/genresModel";
+import PageTitle from "../../../components/PageTitle";
+import movieGenres from "../../../data/genres/movieGenres";
+import tvGenres from "../../../data/genres/tvGenres";
+import GenreModel from "../../../models/genresModel";
 import { AnimatePresence, motion } from "framer-motion";
-import Poster from "../../components/Poster";
+import Poster from "../../../components/Poster";
+import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;
@@ -54,6 +55,8 @@ export default function Genres({ isMovie, mediaType }: Props) {
       setGenres(genresArray);
    }, [type]);
 
+   const router = useRouter();
+
    return (
       <div>
          <Head>
@@ -83,6 +86,9 @@ export default function Genres({ isMovie, mediaType }: Props) {
                      <motion.div
                         key={genre.id}
                         variants={item}
+                        onClick={() => {
+                           router.push(`/genres/${mediaType}/${genre.id}`);
+                        }}
                         className={`aspect-video relative group overflow-hidden cursor-pointer`}
                      >
                         <div className="relative w-full h-full brightness-50 group-hover:brightness-100 group-hover:scale-110 ease-in-out duration-300">
