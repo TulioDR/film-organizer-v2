@@ -23,7 +23,7 @@ export default function SearchBar({}: Props) {
          <input
             ref={input}
             type="text"
-            className="outline-none flex-1 bg-transparent"
+            className="outline-none flex-1 bg-transparent pr-5"
             placeholder={`Search ${isMovie ? "Movies" : "TV Shows"}`}
          />
          <span className="material-icons text-gray-400">search</span>

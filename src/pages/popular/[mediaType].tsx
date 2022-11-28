@@ -16,7 +16,12 @@ interface Props {
 export default function Popular({ mediaType }: Props) {
    const { media } = useSearchCards(`/api/popular/${mediaType}/1`);
 
+   const type = mediaType === "movie" ? "Movies" : "TV Shows";
    return (
-      <SearchCards title="Popular" mediaType={mediaType} mediaArray={media} />
+      <SearchCards
+         title={`Popular ${type}`}
+         mediaType={mediaType}
+         mediaArray={media}
+      />
    );
 }

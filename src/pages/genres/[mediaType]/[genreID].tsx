@@ -20,7 +20,7 @@ interface Props {
    title: string;
 }
 
-export default function genrePage({ mediaType, genreID, title }: Props) {
+export default function GenrePage({ mediaType, genreID, title }: Props) {
    const { media } = useSearchCards(`/api/genres/${mediaType}/${genreID}/1`);
 
    return (

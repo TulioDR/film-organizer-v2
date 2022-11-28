@@ -6,6 +6,7 @@ import tvGenres from "../../../data/genres/tvGenres";
 import GenreModel from "../../../models/genresModel";
 import { motion } from "framer-motion";
 import GenreCard from "../../../layout/cards/GenreCard";
+import { useEffect } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;
@@ -33,14 +34,19 @@ const container = {
 };
 
 export default function Genres({ isMovie, mediaType, genresData }: Props) {
+   const title = `${isMovie ? "Movie" : "TV"} Genres`;
+   useEffect(() => {
+      const container = document.getElementById("scroll-container")!;
+      container.scrollTo({ top: 0 });
+   }, []);
    return (
       <div>
          <Head>
-            <title>{`${isMovie ? "Movie" : "TV"} Genres`}</title>
+            <title>{title}</title>
             <meta name="description" content="Which is your favorite genre?" />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <PageTitle>{isMovie ? "Movie" : "TV"} Genres</PageTitle>
+         <PageTitle>{title}</PageTitle>
          <motion.div
             variants={container}
             initial="initial"
