@@ -6,6 +6,7 @@ module.exports = {
       "./src/components/**/*.{js,ts,jsx,tsx}",
       "./src/animations/**/*.{js,ts,jsx,tsx}",
       "./src/layout/**/*.{js,ts,jsx,tsx}",
+      "./src/features/**/*.{js,ts,jsx,tsx}",
    ],
    theme: {
       extend: {},
