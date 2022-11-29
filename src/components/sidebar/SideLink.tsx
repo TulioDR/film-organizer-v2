@@ -14,9 +14,16 @@ export default function SideLink({ link, icon, text }: Props) {
    };
 
    return (
-      <li className="cursor-pointer h-9 relative group" onClick={goTo}>
+      <li
+         className={`cursor-pointer h-9 relative group ${
+            router.asPath === link
+               ? ""
+               : "text-gray-400 hover:text-white duration-100"
+         }`}
+         onClick={goTo}
+      >
          <div className="flex items-center h-full">
-            <div className="mx-5 rounded-lg grid place-content-center">
+            <div className="ml-5 mr-3 rounded-lg h-9 w-9 grid place-content-center flex-shrink-0">
                <span className="material-icons">{icon}</span>
             </div>
             <span className="truncate">{text}</span>

@@ -4,10 +4,10 @@ type Props = {
 
 export default function BrandHamburger({ onClick }: Props) {
    return (
-      <div className="flex items-center py-5 space-x-3 pl-3 truncate">
+      <div className="flex items-center py-5 space-x-3 pl-5">
          <button
             onClick={onClick}
-            className="h-9 min-w-[36px] bg-blue-500 rounded-lg grid place-content-center"
+            className="h-9 w-9 flex-shrink-0 bg-blue-500 rounded-lg grid place-content-center"
          >
             <span className="material-icons">menu</span>
          </button>

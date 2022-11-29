@@ -35,7 +35,3 @@ body::-webkit-scrollbar-thumb {
 /* body::-webkit-scrollbar-thumb:hover {
    background-color: rgba($color: #686868, $alpha: 1);
 } */
-
-.clip {
-   clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);
-}
