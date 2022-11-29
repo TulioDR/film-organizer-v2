@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import DropDown from "../../components/discover/DropDown";
 import PageTitle from "../../components/PageTitle";
@@ -14,6 +15,7 @@ import useDropDownValues from "../../hooks/useDropDownValues";
 import useLanguages from "../../hooks/useLanguages";
 
 export default function Discover() {
+   const router = useRouter();
    const {
       isMovie,
       toggle,
@@ -31,7 +33,20 @@ export default function Discover() {
 
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
-      console.log("submit");
+      const mediaType = isMovie ? "movie" : "tv";
+
+      const languageQuery = `&with_original_language=${language.value}`;
+      const genreQuery = `&with_genres=${genre.value}`;
+      const yearQuery = `&${isMovie ? "year" : "first_air_date_year"}=${
+         year.value
+      }`;
+      const ratingQuery = `&vote_average.gte=${rating.value}`;
+      const sortByQuery = `&sort_by=${sortBy.value}`;
+
+      const searchTerm =
+         languageQuery + genreQuery + yearQuery + ratingQuery + sortByQuery;
+
+      router.push(`/discover/${mediaType}?${searchTerm}`);
    };
 
    const { languagesOptions } = useLanguages();
