@@ -20,8 +20,12 @@ type Props = {
 
 export default function DiscoveredMedia({ mediaType, filters }: Props) {
    const { media } = useSearchCards(`/api/discover/${mediaType}/${filters}/1`);
-
+   const type = mediaType === "movie" ? "Movies" : "TV Shows";
    return (
-      <SearchCards title={`Founded`} mediaType={mediaType} mediaArray={media} />
+      <SearchCards
+         title={`Founded ${type}`}
+         mediaType={mediaType}
+         mediaArray={media}
+      />
    );
 }

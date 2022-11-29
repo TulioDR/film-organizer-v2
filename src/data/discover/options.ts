@@ -6,6 +6,7 @@ import tvGenres from "../genres/tvGenres";
 console.log("hello");
 const getGenresOptions = (array: GenreModel[]) => {
    let options: OptionModel[] = [];
+   options.push({ value: "", label: "All genres" });
    array.forEach((genre) => {
       options.push({ value: genre.id, label: genre.name });
    });

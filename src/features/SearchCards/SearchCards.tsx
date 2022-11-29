@@ -38,7 +38,7 @@ export default function SearchCards({ title, mediaType, mediaArray }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="grid grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
+            className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
          >
             {mediaArray.map((media) => (
                <Card
