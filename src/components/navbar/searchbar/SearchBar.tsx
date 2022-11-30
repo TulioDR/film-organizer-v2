@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { FormEvent, useRef } from "react";
-import useMediaTypeContext from "../../../context/MediaTypeContext";
+import useSidebarContext from "../../../context/SidebarContext";
 
 type Props = {};
 
 export default function SearchBar({}: Props) {
-   const { isMovie } = useMediaTypeContext();
+   const { isMovie } = useSidebarContext();
    const router = useRouter();
    const input = useRef<HTMLInputElement>(null);
 

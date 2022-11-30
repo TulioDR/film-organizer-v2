@@ -6,19 +6,20 @@ import { PageLoadingProvider } from "../context/PageLoadingContext";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { MediaTypeProvider } from "../context/MediaTypeContext";
-import Sidebar from "../layout/Sidebar";
+import { SidebarProvider } from "../context/SidebarContext";
+
 import Navbar from "../layout/Navbar";
+import SidebarsContainer from "../containers/SidebarsContainer";
 
 export default function App({ Component, pageProps }: AppProps) {
    const router = useRouter();
    return (
       <div className="flex bg-gray-800 text-white">
-         <MediaTypeProvider>
-            <Sidebar />
+         <SidebarProvider>
+            <SidebarsContainer />
             <div
                id="scroll-container"
-               className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pr-5 pb-5"
+               className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden px-5 pb-5"
             >
                <Navbar />
                <AnimatePresence mode="wait">
@@ -29,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   </motion.div>
                </AnimatePresence>
             </div>
-         </MediaTypeProvider>
+         </SidebarProvider>
       </div>
    );
 }

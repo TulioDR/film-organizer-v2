@@ -1,23 +1,18 @@
-import { useState } from "react";
 import BrandHamburger from "../components/sidebar/BrandHamburger";
 import SideLink from "../components/sidebar/SideLink";
 import ToggleButton from "../components/ToggleButton";
-import useMediaTypeContext from "../context/MediaTypeContext";
+import useSidebarContext from "../context/SidebarContext";
 
 export default function Sidebar() {
-   const { isMovie, toggle } = useMediaTypeContext();
+   const { isMovie, toggle, openSidebar } = useSidebarContext();
 
-   const [isOpen, setIsOpen] = useState<boolean>(true);
-   const toggleSidebar = () => {
-      setIsOpen(!isOpen);
-   };
    return (
       <div
-         className={`h-screen sticky top-0 duration-300 pr-5 text-sm font-semibold ${
-            isOpen ? "w-60" : "w-[76px]"
+         className={`h-screen sticky top-0 duration-300 text-sm font-semibold pr-5 lg:pr-0 ${
+            openSidebar ? "w-60 lg:w-56" : "w-14"
          }`}
       >
-         <BrandHamburger onClick={toggleSidebar} />
+         <BrandHamburger />
          <div className="h-9 w-full pl-5">
             <div
                onClick={toggle}

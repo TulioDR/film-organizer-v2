@@ -1,17 +1,20 @@
-type Props = {
-   onClick: () => void;
-};
+import useSidebarContext from "../../context/SidebarContext";
+import ToggleSidebar from "../ToggleSidebar";
 
-export default function BrandHamburger({ onClick }: Props) {
+type Props = {};
+
+export default function BrandHamburger({}: Props) {
+   const { toggleOpenSidebar, toggleShowSidebar } = useSidebarContext();
+
    return (
-      <div className="flex items-center py-5 space-x-3 pl-5">
-         <button
-            onClick={onClick}
-            className="h-9 w-9 flex-shrink-0 bg-blue-500 rounded-lg grid place-content-center"
-         >
-            <span className="material-icons">menu</span>
-         </button>
-         <span className="text-xl font-bold truncate">Film Organizer</span>
+      <div className="flex items-center py-5 pl-5">
+         <div className="hidden lg:block">
+            <ToggleSidebar onClick={toggleOpenSidebar} />
+         </div>
+         <div className="lg:hidden">
+            <ToggleSidebar onClick={toggleShowSidebar} />
+         </div>
+         <span className="text-xl font-bold truncate ml-3">Film Organizer</span>
       </div>
    );
 }
