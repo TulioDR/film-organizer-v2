@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Card from "../../components/card/Card";
 import TransitionPoster from "../../animations/TransitionPoster";
 import { useState } from "react";
+import useSidebarContext from "../../context/SidebarContext";
 
 type Props = {
    title: string;
@@ -25,6 +26,8 @@ const container = {
 export default function SearchCards({ title, mediaType, mediaArray }: Props) {
    const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
+   const { openSidebar } = useSidebarContext();
+
    return (
       <PageAnimationContainer>
          <Head>
@@ -38,7 +41,11 @@ export default function SearchCards({ title, mediaType, mediaArray }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 overflow-hidden"
+            className={`grid grid-cols-2 md:grid-cols-3 ${
+               openSidebar
+                  ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+                  : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+            }  gap-5 overflow-hidden`}
          >
             {mediaArray.map((media) => (
                <Card
