@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 
 import SearchCards from "../../features/SearchCards/SearchCards";
-import useSearchCards from "../../features/SearchCards/useSearchCards";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, sort_by, with_genres, with_original_language, year } =
@@ -19,13 +18,12 @@ type Props = {
 };
 
 export default function DiscoveredMedia({ mediaType, filters }: Props) {
-   const { media } = useSearchCards(`/api/discover/${mediaType}/${filters}/1`);
    const type = mediaType === "movie" ? "Movies" : "TV Shows";
    return (
       <SearchCards
+         url={`/api/discover/${mediaType}/${filters}`}
          title={`Founded ${type}`}
          mediaType={mediaType}
-         mediaArray={media}
       />
    );
 }

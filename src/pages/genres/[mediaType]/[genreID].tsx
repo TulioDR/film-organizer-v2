@@ -2,7 +2,6 @@ import { GetServerSideProps } from "next";
 import movieGenres from "../../../data/genres/movieGenres";
 import tvGenres from "../../../data/genres/tvGenres";
 import SearchCards from "../../../features/SearchCards/SearchCards";
-import useSearchCards from "../../../features/SearchCards/useSearchCards";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, genreID } = context.query;
@@ -21,9 +20,11 @@ interface Props {
 }
 
 export default function GenrePage({ mediaType, genreID, title }: Props) {
-   const { media } = useSearchCards(`/api/genres/${mediaType}/${genreID}/1`);
-
    return (
-      <SearchCards title={title} mediaType={mediaType} mediaArray={media} />
+      <SearchCards
+         url={`/api/genres/${mediaType}/${genreID}`}
+         title={title}
+         mediaType={mediaType}
+      />
    );
 }
