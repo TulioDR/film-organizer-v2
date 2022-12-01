@@ -8,6 +8,7 @@ module.exports = {
       "./src/layout/**/*.{js,ts,jsx,tsx}",
       "./src/features/**/*.{js,ts,jsx,tsx}",
    ],
+   darkMode: "class",
    theme: {
       extend: {},
    },

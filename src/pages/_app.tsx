@@ -14,7 +14,7 @@ import SidebarsContainer from "../containers/SidebarsContainer";
 export default function App({ Component, pageProps }: AppProps) {
    const router = useRouter();
    return (
-      <div className="flex bg-gray-800 text-white">
+      <div className="flex bg-gray-200 dark:bg-gray-800 duration-200 dark:text-white">
          <SidebarProvider>
             <SidebarsContainer />
             <div

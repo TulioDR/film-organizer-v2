@@ -1,0 +1,31 @@
+import { useEffect, useState } from "react";
+import UserItem from "./UserItem";
+
+export default function User() {
+   const [isOpen, setIsOpen] = useState<boolean>(false);
+   const toggle = () => setIsOpen(!isOpen);
+
+   const [isDark, setIsDark] = useState<boolean>(false);
+   const toggleTheme = () => setIsDark(!isDark);
+
+   useEffect(() => {
+      const root = window.document.documentElement;
+      if (isDark) root.classList.add("dark");
+      else root.classList.remove("dark");
+   }, [isDark]);
+
+   return (
+      <div onClick={toggle} className="relative">
+         <div className="h-9 w-9 rounded-full bg-gray-500 cursor-pointer"></div>
+         {isOpen && (
+            <ul className="w-60 bg-gray-500 rounded-lg py-2 absolute top-full right-0 text-sm">
+               <UserItem onClick={toggleTheme}>
+                  {isDark ? "Dark" : "Light"} Theme
+               </UserItem>
+               <UserItem onClick={toggleTheme}>Theme Color</UserItem>
+               <UserItem onClick={toggleTheme}>Log in / Sign up</UserItem>
+            </ul>
+         )}
+      </div>
+   );
+}

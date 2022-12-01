@@ -1,4 +1,5 @@
 import SearchBar from "../components/navbar/searchbar/SearchBar";
+import User from "../components/navbar/user/User";
 import ToggleSidebar from "../components/ToggleSidebar";
 import useSidebarContext from "../context/SidebarContext";
 
@@ -13,7 +14,7 @@ export default function Navbar() {
                </div>
                <SearchBar />
             </div>
-            <div className="h-9 w-9 rounded-full bg-gray-500"></div>
+            <User />
          </div>
       </div>
    );
