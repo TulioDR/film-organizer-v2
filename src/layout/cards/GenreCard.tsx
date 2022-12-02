@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import Poster from "../../components/Poster";
 import GenreModel from "../../models/genresModel";
 type Props = {
    genre: GenreModel;
@@ -28,13 +28,14 @@ export default function GenreCard({ genre, mediaType }: Props) {
          }}
          className={`aspect-video relative group overflow-hidden cursor-pointer`}
       >
-         <div className="relative w-full h-full brightness-50 group-hover:brightness-100 group-hover:scale-110 ease-in-out duration-300">
-            <Poster
+         <div className="relative w-full h-full brightness-50 group-hover:brightness-100 aspect-[2/3] group-hover:scale-110 ease-in-out duration-300">
+            <Image
                alt={genre.name}
-               posterPath={genre.image}
-               size="md"
-               genres
-               backPoster
+               src={genre.image}
+               fill
+               sizes="100%"
+               priority
+               className="object-cover"
             />
          </div>
          <div className="absolute z-10 top-0 left-0 w-full h-full grid place-content-center">

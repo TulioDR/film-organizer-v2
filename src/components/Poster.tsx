@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SpinnerCircularFixed } from "spinners-react";
 import posterNotFound from "../data/images/not-found/poster-not-found.jpg";
 import backPosterNotFound from "../data/images/not-found/back-poster-not-found.jpg";
+import personNotFound from "../data/images/not-found/person-not-found.jpg";
 
 const width = {
    sm: 92,
@@ -15,9 +16,9 @@ type Props = {
    alt: string;
    posterPath: string | StaticImageData;
    size: "sm" | "md" | "lg" | "xl";
-   genres?: boolean;
    backPoster?: boolean;
    trailer?: boolean;
+   person?: boolean;
 };
 
 export default function Poster({
@@ -25,17 +26,17 @@ export default function Poster({
    posterPath,
    size,
    backPoster,
-   genres,
    trailer,
+   person,
 }: Props) {
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
    const getPoster = (): string | StaticImageData => {
       if (!posterPath) {
          if (backPoster) return backPosterNotFound;
-         else return posterNotFound;
+         if (person) return personNotFound;
+         return posterNotFound;
       }
-      if (genres) return posterPath;
       if (trailer) return `http://i3.ytimg.com/vi/${posterPath}/hqdefault.jpg`;
       return `https://image.tmdb.org/t/p/w${width[size]}${posterPath}`;
    };
