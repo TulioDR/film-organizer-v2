@@ -3,6 +3,7 @@ import Person from "./Person";
 import PersonScroll from "./PersonScroll";
 import { motion } from "framer-motion";
 import RevealHorizontal from "../../../../animations/RevealHorizontal";
+import NavigationButtons from "../../../home/NavigationButtons";
 
 type Props = {
    cast: any[];
@@ -28,10 +29,13 @@ export default function CastCrew({ cast, crew }: Props) {
             animate="animate"
             exit="exit"
          >
-            <RevealHorizontal>
-               <div className="text-xl font-medium mb-1">Cast</div>
-            </RevealHorizontal>
-            <PersonScroll>
+            <div className="flex justify-between items-center">
+               <RevealHorizontal>
+                  <div className="text-xl font-medium mb-1">Cast</div>
+               </RevealHorizontal>
+               <NavigationButtons prevId="prev-cast" nextId="next-cast" />
+            </div>
+            <PersonScroll prevId="prev-cast" nextId="next-cast">
                {cast.map((person, index) => (
                   <SwiperSlide key={index}>
                      <Person person={person} />
@@ -45,10 +49,13 @@ export default function CastCrew({ cast, crew }: Props) {
             animate="animate"
             exit="exit"
          >
-            <RevealHorizontal>
-               <div className="text-xl font-medium mb-1">Crew</div>
-            </RevealHorizontal>
-            <PersonScroll>
+            <div className="flex justify-between items-center">
+               <RevealHorizontal>
+                  <div className="text-xl font-medium mb-1">Crew</div>
+               </RevealHorizontal>
+               <NavigationButtons prevId="prev-crew" nextId="next-crew" />
+            </div>
+            <PersonScroll prevId="prev-crew" nextId="next-crew">
                {crew.map((person, index) => (
                   <SwiperSlide key={index}>
                      <Person person={person} />

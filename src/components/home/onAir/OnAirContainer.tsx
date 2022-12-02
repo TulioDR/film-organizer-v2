@@ -1,5 +1,6 @@
 import { Swiper } from "swiper/react";
 import RevealHorizontal from "../../../animations/RevealHorizontal";
+import { Navigation } from "swiper";
 interface Props {
    children: React.ReactNode;
 }
@@ -10,9 +11,9 @@ export default function OnAirContainer({ children }: Props) {
             speed={700}
             slidesPerView={5}
             slidesPerGroup={5}
-            // loop={true}
-            // loopedSlides={20}
             spaceBetween={20}
+            navigation={{ prevEl: "#prev-air", nextEl: "#next-air" }}
+            modules={[Navigation]}
             className="mySwiper min-h-max"
          >
             {children}

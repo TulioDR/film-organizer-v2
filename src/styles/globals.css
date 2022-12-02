@@ -35,3 +35,6 @@ body::-webkit-scrollbar-thumb {
 /* body::-webkit-scrollbar-thumb:hover {
    background-color: rgba($color: #686868, $alpha: 1);
 } */
+.swiper-button-disabled {
+   @apply text-gray-500;
+}

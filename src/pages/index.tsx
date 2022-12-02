@@ -11,6 +11,7 @@ import Upcoming from "../components/home/upcoming/Upcoming";
 
 import usePageLoadingContext from "../context/PageLoadingContext";
 import PageAnimationContainer from "../containers/PageAnimationContainer";
+import NavigationButtons from "../components/home/NavigationButtons";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -39,7 +40,10 @@ export default function Home() {
          </Head>
          <div className="space-y-6">
             <div>
-               <PageTitle>Now playing on Theaters</PageTitle>
+               <div className="flex justify-between items-center">
+                  <PageTitle>Now playing on Theaters</PageTitle>
+                  <NavigationButtons prevId="prev-now" nextId="next-now" />
+               </div>
                <NowPlayingContainer>
                   {nowPlaying.map((movie) => (
                      <SwiperSlide key={movie.id}>
@@ -49,7 +53,10 @@ export default function Home() {
                </NowPlayingContainer>
             </div>
             <div>
-               <PageTitle>TV Series on Air</PageTitle>
+               <div className="flex justify-between items-center">
+                  <PageTitle>TV Series on Air</PageTitle>
+                  <NavigationButtons prevId="prev-air" nextId="next-air" />
+               </div>
                <OnAirContainer>
                   {onAir.map((tv) => (
                      <SwiperSlide key={tv.id}>
@@ -59,7 +66,10 @@ export default function Home() {
                </OnAirContainer>
             </div>
             <div>
-               <PageTitle>Upcoming Movies</PageTitle>
+               <div className="flex justify-between items-center">
+                  <PageTitle>Upcoming Movies</PageTitle>
+                  <NavigationButtons prevId="prev-upc" nextId="next-upc" />
+               </div>
                <UpcomingContainer>
                   {upcoming.map((movie) => (
                      <SwiperSlide key={movie.id}>

@@ -1,5 +1,4 @@
 import Poster from "../../Poster";
-import SlideButtons from "../SlideButtons";
 
 type Props = {
    movie: any;
@@ -37,7 +36,6 @@ export default function NowPlaying({ movie }: Props) {
                   </span>
                </div>
             </div>
-            <SlideButtons />
          </div>
       </div>
    );
