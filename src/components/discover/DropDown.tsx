@@ -8,7 +8,7 @@ type Props = {
    setValue: any;
 };
 
-export default function ({ title, options, value, setValue }: Props) {
+export default function DropDown({ title, options, value, setValue }: Props) {
    return (
       <div>
          <div className="font-medium mb-1">{title}</div>

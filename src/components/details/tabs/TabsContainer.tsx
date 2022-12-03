@@ -41,7 +41,7 @@ export default function TabsContainer({
             initial="initial"
             animate="animate"
             exit="exit"
-            className="flex space-x-3 justify-between overflow-x-auto w-full"
+            className="flex space-x-4 justify-between overflow-x-auto w-full"
          >
             <Tab
                name="Overview"

@@ -36,11 +36,13 @@ export default function CastCrew({ cast, crew }: Props) {
                <NavigationButtons prevId="prev-cast" nextId="next-cast" />
             </div>
             <PersonScroll prevId="prev-cast" nextId="next-cast">
-               {cast.map((person, index) => (
-                  <SwiperSlide key={index}>
-                     <Person person={person} />
-                  </SwiperSlide>
-               ))}
+               {cast.length
+                  ? cast.map((person, index) => (
+                       <SwiperSlide key={index}>
+                          <Person person={person} />
+                       </SwiperSlide>
+                    ))
+                  : "No information available about the crew"}
             </PersonScroll>
          </motion.div>
          <motion.div
@@ -56,11 +58,13 @@ export default function CastCrew({ cast, crew }: Props) {
                <NavigationButtons prevId="prev-crew" nextId="next-crew" />
             </div>
             <PersonScroll prevId="prev-crew" nextId="next-crew">
-               {crew.map((person, index) => (
-                  <SwiperSlide key={index}>
-                     <Person person={person} />
-                  </SwiperSlide>
-               ))}
+               {crew.length
+                  ? crew.map((person, index) => (
+                       <SwiperSlide key={index}>
+                          <Person person={person} />
+                       </SwiperSlide>
+                    ))
+                  : "No information available about the cast"}
             </PersonScroll>
          </motion.div>
       </div>

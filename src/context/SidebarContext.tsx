@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 interface AppContextInterface {
    isMovie: boolean;
-   toggle: () => void;
+   toggle: (e: React.SyntheticEvent) => void;
    showSidebar: boolean;
    toggleShowSidebar: () => void;
    openSidebar: boolean;

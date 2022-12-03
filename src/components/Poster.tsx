@@ -44,9 +44,9 @@ export default function Poster({
    const image = getPoster();
    return (
       <div
-         className={`w-full overflow-hidden relative ${
-            backPoster ? "aspect-video" : "aspect-[2/3] h-full"
-         }`}
+         className={`overflow-hidden  relative ${
+            size === "sm" ? "rounded-lg" : "rounded-xl"
+         } ${backPoster ? "aspect-video w-full" : "aspect-[2/3] h-full"}`}
       >
          <Image
             alt={alt}
@@ -60,7 +60,7 @@ export default function Poster({
          {!isLoaded && (
             <div className="absolute w-full h-full top-0 left-0 bg-gray-600 grid place-content-center">
                <SpinnerCircularFixed
-                  size={70}
+                  size={size === "sm" ? 20 : 70}
                   thickness={180}
                   speed={100}
                   color="white"
