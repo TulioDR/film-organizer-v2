@@ -11,13 +11,9 @@ type Props = {
 };
 
 const container = {
-   initial: {},
-   animate: { transition: { staggerChildren: 0.1 } },
-   exit: {
-      x: 200,
-      opacity: 0,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
+   initial: { opacity: 0 },
+   animate: { opacity: 1, transition: { duration: 0.4, ease: "easeInOut" } },
+   exit: { opacity: 0, transition: { duration: 0.4, ease: "easeInOut" } },
 };
 
 export default function CastCrew({ cast, crew }: Props) {

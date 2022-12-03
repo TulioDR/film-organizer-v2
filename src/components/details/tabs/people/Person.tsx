@@ -3,22 +3,9 @@ import { motion } from "framer-motion";
 
 type Props = { person: any };
 
-const item = {
-   initial: { opacity: 0, x: 200 },
-   animate: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-   exit: {},
-};
-
 export default function Person({ person }: Props) {
    return (
-      <motion.div
-         variants={item}
-         className="cursor-pointer relative rounded-xl overflow-hidden"
-      >
+      <motion.div className="cursor-pointer relative rounded-xl overflow-hidden">
          <Poster
             alt={person.name}
             posterPath={person.profile_path}

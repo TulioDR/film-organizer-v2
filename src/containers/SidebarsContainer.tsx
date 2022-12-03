@@ -9,7 +9,7 @@ export default function SidebarsContainer() {
             <Sidebar />
          </div>
          <div
-            className={`lg:hidden fixed top-0 left-0 z-20 bg-gray-800 duration-300 ${
+            className={`lg:hidden fixed top-0 left-0 z-30 bg-gray-800 duration-300 ${
                showSidebar ? "" : "-translate-x-full"
             }`}
          >

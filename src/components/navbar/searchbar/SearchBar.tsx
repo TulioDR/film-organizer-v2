@@ -55,7 +55,7 @@ export default function SearchBar({}: Props) {
    return (
       <form
          onSubmit={handleSubmit}
-         className="w-96 px-5 bg-gray-600 h-9 rounded-lg flex items-center relative"
+         className="w-full sm:w-96 px-5 bg-gray-600 h-9 rounded-lg flex items-center relative"
       >
          <input
             value={inputValue}
@@ -67,6 +67,7 @@ export default function SearchBar({}: Props) {
             placeholder={`Search ${isMovie ? "Movies" : "TV Shows"}`}
          />
          <span className="material-icons text-gray-400">search</span>
+
          {showResults && (
             <ul className="absolute left-0 top-full shadow-material bg-gray-400 w-full py-3 rounded-md">
                {results.map((media) => (
