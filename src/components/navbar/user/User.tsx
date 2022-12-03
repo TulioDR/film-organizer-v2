@@ -23,10 +23,18 @@ export default function User() {
       setIsLoggedIn(true);
    };
 
-   //60357297
+   const handleBlur = () => {
+      setIsOpen(false);
+   };
+
    return (
       <div className="flex">
-         <div onClick={toggle} className="relative">
+         <div
+            tabIndex={0}
+            onBlur={handleBlur}
+            onClick={toggle}
+            className="relative"
+         >
             {isLoggedIn ? (
                <div className="h-9 w-9 rounded-full bg-gray-500 cursor-pointer"></div>
             ) : (
