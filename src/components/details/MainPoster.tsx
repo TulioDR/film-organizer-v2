@@ -13,7 +13,7 @@ export default function MainPoster({ alt, posterPath }: Props) {
             x: "-100%",
             transition: { duration: 0.4, ease: "easeInOut" },
          }}
-         className="aspect-[2/3] flex-shrink-0 h-full relative rounded-xl overflow-hidden"
+         className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto rounded-xl overflow-hidden"
       >
          <Image
             alt={alt}

@@ -38,3 +38,9 @@ body::-webkit-scrollbar-thumb {
 .swiper-button-disabled {
    @apply text-gray-500;
 }
+
+@media (min-width: 1280px) {
+   .details-height {
+      height: calc(100vh - 96px);
+   }
+}
