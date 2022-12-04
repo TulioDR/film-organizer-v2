@@ -11,9 +11,18 @@ export default function UpcomingContainer({ children }: Props) {
       <RevealHorizontal fromRight>
          <Swiper
             speed={700}
-            slidesPerView={2}
-            slidesPerGroup={2}
+            slidesPerView={1.5}
+            slidesPerGroup={1}
             spaceBetween={20}
+            breakpoints={{
+               768: {
+                  slidesPerView: 2,
+               },
+               1536: {
+                  slidesPerView: 2.5,
+                  slidesPerGroup: 2,
+               },
+            }}
             navigation={{ prevEl: "#prev-upc", nextEl: "#next-upc" }}
             modules={[Navigation]}
             className="mySwiper"

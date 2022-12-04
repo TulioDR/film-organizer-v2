@@ -5,6 +5,7 @@ interface AppContextInterface {
    toggle: (e: React.SyntheticEvent) => void;
    showSidebar: boolean;
    toggleShowSidebar: () => void;
+   setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
    openSidebar: boolean;
    toggleOpenSidebar: () => void;
 }
@@ -33,6 +34,7 @@ export function SidebarProvider({ children }: ProviderProps) {
       toggle,
       showSidebar,
       toggleShowSidebar,
+      setShowSidebar,
       openSidebar,
       toggleOpenSidebar,
    };

@@ -24,9 +24,9 @@ export function PageLoadingProvider({ children }: ProviderProps) {
    const [isLoading, setIsLoading] = useState<boolean>(true);
    const [showPage, setShowPage] = useState<boolean>(false);
 
-   const { toggleShowSidebar } = useSidebarContext();
+   const { setShowSidebar } = useSidebarContext();
    useEffect(() => {
-      toggleShowSidebar(false);
+      setShowSidebar(false);
    }, []);
 
    const value: AppContextInterface = {

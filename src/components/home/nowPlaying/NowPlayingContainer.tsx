@@ -12,7 +12,15 @@ export default function NowPlayingContainer({ children }: Props) {
          <Swiper
             speed={700}
             spaceBetween={20}
-            slidesPerView={1.5}
+            slidesPerView={1.2}
+            breakpoints={{
+               640: {
+                  slidesPerView: 1.3,
+               },
+               768: {
+                  slidesPerView: 1.5,
+               },
+            }}
             navigation={{ prevEl: "#prev-now", nextEl: "#next-now" }}
             modules={[Navigation]}
             className="mySwiper"
