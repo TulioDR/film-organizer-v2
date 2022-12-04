@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import useSidebarContext from "./SidebarContext";
 
 interface AppContextInterface {
    isLoading: boolean;
@@ -22,6 +23,11 @@ export function PageLoadingProvider({ children }: ProviderProps) {
       useState<boolean>(true);
    const [isLoading, setIsLoading] = useState<boolean>(true);
    const [showPage, setShowPage] = useState<boolean>(false);
+
+   const { toggleShowSidebar } = useSidebarContext();
+   useEffect(() => {
+      toggleShowSidebar(false);
+   }, []);
 
    const value: AppContextInterface = {
       isLoading,
