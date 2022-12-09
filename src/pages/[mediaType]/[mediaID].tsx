@@ -1,5 +1,5 @@
-import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 
 import MainPoster from "../../components/details/MainPoster";
@@ -34,6 +34,8 @@ type Props = {
 
 export default function Details({ mediaType, media }: Props) {
    useEffect(() => {
+      const container = document.getElementById("scroll-container")!;
+      container.scrollTo({ top: 0 });
       console.log(media);
    }, [media]);
 
@@ -51,7 +53,7 @@ export default function Details({ mediaType, media }: Props) {
                   alt={media.name || media.title}
                   posterPath={media.poster_path}
                />
-               <div className="xl:hidden mt-5 sm:mt-0 sm:ml-5">
+               <div className="xl:hidden mt-5 sm:mt-0 flex-1 pl-5 overflow-hidden">
                   <MainTitle>{media.title || media.name}</MainTitle>
                   <InfoBarMobile media={media} mediaType={mediaType} />
                </div>
