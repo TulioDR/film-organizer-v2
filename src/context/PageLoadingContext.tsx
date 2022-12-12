@@ -27,7 +27,7 @@ export function PageLoadingProvider({ children }: ProviderProps) {
    const { setShowSidebar } = useSidebarContext();
    useEffect(() => {
       setShowSidebar(false);
-   }, []);
+   }, [setShowSidebar]);
 
    const value: AppContextInterface = {
       isLoading,

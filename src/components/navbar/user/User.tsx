@@ -1,9 +1,27 @@
-import { useEffect, useState } from "react";
-import UserItem from "./UserItem";
+import { useEffect, useRef, useState } from "react";
+import Main from "./Main";
+import MenuContainer from "./MenuContainer";
+import ThemeColors from "./ThemeColors";
 
 export default function User() {
    const [isOpen, setIsOpen] = useState<boolean>(false);
-   const toggle = () => setIsOpen(!isOpen);
+   const toggle = () => {
+      setIsOpen(!isOpen);
+      setMenu("main");
+   };
+   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+   // const handleBlur = () => {
+   //    setIsOpen(false);
+   // };
+
+   const dropdownRef = useRef<HTMLDivElement>(null);
+
+   const [menu, setMenu] = useState<"main" | "colors">("main");
+   const [menuHeight, setMenuHeight] = useState<number | "auto">("auto");
+
+   useEffect(() => {
+      setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
+   }, [menu]);
 
    const [isDark, setIsDark] = useState<boolean>(true);
    const toggleTheme = () => setIsDark(!isDark);
@@ -13,57 +31,54 @@ export default function User() {
       if (isDark) root.classList.add("dark");
       else root.classList.remove("dark");
    }, [isDark]);
-
-   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-   const logOut = () => {
-      setIsLoggedIn(false);
-   };
-   const logIn = () => {
-      setIsLoggedIn(true);
-   };
-
-   const handleBlur = () => {
-      setIsOpen(false);
-   };
-
    return (
       <div className="flex">
          <div
-            tabIndex={0}
-            onBlur={handleBlur}
-            onClick={toggle}
+            // tabIndex={0}
+            // onBlur={handleBlur}
+
             className="relative"
          >
             {isLoggedIn ? (
-               <div className="h-9 w-9 rounded-full bg-gray-500 cursor-pointer"></div>
+               <div className="h-9 w-9 rounded-full dark:bg-gray-500 cursor-pointer"></div>
             ) : (
-               <button className="grid place-content-center h-9 w-9 rounded-full hover:bg-blue-500">
+               <button
+                  onClick={toggle}
+                  className="grid place-content-center h-9 w-9 rounded-full hover:bg-blue-500"
+               >
                   <span className="material-icons">settings</span>
                </button>
             )}
             {isOpen && (
-               <ul className="w-60 bg-gray-500 rounded-lg py-2 absolute top-full right-0 text-sm">
-                  <UserItem onClick={toggleTheme}>
-                     {isDark ? "Dark" : "Light"} Theme
-                  </UserItem>
-                  <UserItem onClick={toggleTheme}>Theme Color</UserItem>
-                  {isLoggedIn ? (
-                     <UserItem onClick={logOut}>Log out</UserItem>
-                  ) : (
-                     <UserItem onClick={logIn}>Log in / Sign up</UserItem>
+               <MenuContainer
+                  divKey={menu}
+                  elRef={dropdownRef}
+                  height={menuHeight}
+               >
+                  {menu === "main" && (
+                     <Main
+                        isLoggedIn={isLoggedIn}
+                        setIsLoggedIn={setIsLoggedIn}
+                        isDark={isDark}
+                        setMenu={setMenu}
+                        toggleTheme={toggleTheme}
+                     />
                   )}
-               </ul>
+                  {menu === "colors" && <ThemeColors setMenu={setMenu} />}
+               </MenuContainer>
             )}
          </div>
-         {!isLoggedIn && (
+      </div>
+   );
+}
+
+{
+   /* {!isLoggedIn && (
             <button
                onClick={() => setIsLoggedIn(true)}
                className="h-9 px-4 bg-gray-500 cursor-pointer ml-2"
             >
                Log in
             </button>
-         )}
-      </div>
-   );
+         )} */
 }

@@ -55,7 +55,7 @@ export default function SearchBar({}: Props) {
    return (
       <form
          onSubmit={handleSubmit}
-         className="w-full sm:w-96 px-5 bg-gray-600 h-9 rounded-lg flex items-center relative"
+         className="w-full sm:w-96 px-5 bg-gray-400 dark:bg-gray-600 h-9 rounded-lg flex items-center relative"
       >
          <input
             value={inputValue}
