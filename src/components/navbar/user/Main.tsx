@@ -2,22 +2,17 @@ import UserItem from "./UserItem";
 import { motion } from "framer-motion";
 import ColorIcon from "./ColorIcon";
 import MainIcon from "./MainIcon";
+import useThemeContext from "../../../context/ThemeContext";
 
 type Props = {
-   isDark: boolean;
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
-   toggleTheme: () => void;
    isLoggedIn: boolean;
    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Main({
-   setMenu,
-   toggleTheme,
-   isDark,
-   isLoggedIn,
-   setIsLoggedIn,
-}: Props) {
+export default function Main({ setMenu, isLoggedIn, setIsLoggedIn }: Props) {
+   const { toggleDarkMode, isDark } = useThemeContext();
+
    const logOut = () => {
       setIsLoggedIn(false);
    };
@@ -40,7 +35,7 @@ export default function Main({
       >
          <UserItem
             icon={<MainIcon icon="dark_mode" />}
-            onClick={toggleTheme}
+            onClick={toggleDarkMode}
             darkMode
             isDark={isDark}
          >

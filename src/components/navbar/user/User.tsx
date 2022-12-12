@@ -23,14 +23,6 @@ export default function User() {
       setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
    }, [menu]);
 
-   const [isDark, setIsDark] = useState<boolean>(true);
-   const toggleTheme = () => setIsDark(!isDark);
-
-   useEffect(() => {
-      const root = window.document.documentElement;
-      if (isDark) root.classList.add("dark");
-      else root.classList.remove("dark");
-   }, [isDark]);
    return (
       <div className="flex">
          <div
@@ -59,9 +51,7 @@ export default function User() {
                      <Main
                         isLoggedIn={isLoggedIn}
                         setIsLoggedIn={setIsLoggedIn}
-                        isDark={isDark}
                         setMenu={setMenu}
-                        toggleTheme={toggleTheme}
                      />
                   )}
                   {menu === "colors" && <ThemeColors setMenu={setMenu} />}
