@@ -9,8 +9,8 @@ export default function OnAirContainer({ children }: Props) {
       <RevealHorizontal fromRight>
          <Swiper
             speed={700}
-            slidesPerView={2}
-            slidesPerGroup={2}
+            slidesPerView={3}
+            slidesPerGroup={3}
             spaceBetween={20}
             breakpoints={{
                640: {

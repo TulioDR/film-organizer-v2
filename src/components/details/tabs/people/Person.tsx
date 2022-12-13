@@ -4,8 +4,15 @@ import { motion } from "framer-motion";
 type Props = { person: any };
 
 export default function Person({ person }: Props) {
+   const goToWiki = () => {
+      const nameUrl = person.name.split(" ").join("_");
+      window.open(`https://en.wikipedia.org/wiki/${nameUrl}`, "_blank");
+   };
    return (
-      <motion.div className="cursor-pointer relative rounded-xl overflow-hidden">
+      <motion.div
+         onClick={goToWiki}
+         className="cursor-pointer relative rounded-xl overflow-hidden"
+      >
          <Poster
             alt={person.name}
             posterPath={person.profile_path}
