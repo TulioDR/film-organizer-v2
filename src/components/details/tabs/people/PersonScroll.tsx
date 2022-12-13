@@ -10,9 +10,20 @@ type Props = {
 export default function PersonScroll({ children, prevId, nextId }: Props) {
    return (
       <Swiper
-         slidesPerView={5}
-         slidesPerGroup={5}
-         spaceBetween={12}
+         slidesPerView={3}
+         slidesPerGroup={3}
+         spaceBetween={6}
+         breakpoints={{
+            640: {
+               slidesPerView: 4,
+               slidesPerGroup: 4,
+            },
+            768: {
+               spaceBetween: 12,
+               slidesPerView: 5,
+               slidesPerGroup: 5,
+            },
+         }}
          navigation={{ prevEl: `#${prevId}`, nextEl: `#${nextId}` }}
          modules={[Navigation]}
          className="mySwiper"
