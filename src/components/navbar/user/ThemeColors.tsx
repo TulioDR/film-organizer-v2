@@ -1,15 +1,30 @@
 import UserItem from "./UserItem";
 import { motion } from "framer-motion";
 import ColorIcon from "./ColorIcon";
+import useThemeContext from "../../../context/ThemeContext";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
 };
 
+interface ThemeColorsModel {
+   name: string;
+   color: string;
+}
+
+const themeColors: ThemeColorsModel[] = [
+   { name: "amber", color: "#d97706" },
+   { name: "orange", color: "#ea580c" },
+   { name: "lime", color: "#4d7c0f" },
+   { name: "sky", color: "#0ea5e9" },
+   { name: "blue", color: "#3b82f6" },
+   { name: "purple", color: "#a855f7" },
+   { name: "pink", color: "#ec4899" },
+];
+
 export default function ThemeColors({ setMenu }: Props) {
-   const setColor = (color: string) => {
-      console.log(color);
-   };
+   const { setThemeColor } = useThemeContext();
+
    return (
       <motion.ul
          key="colors"
@@ -32,18 +47,15 @@ export default function ThemeColors({ setMenu }: Props) {
             </button>
             <span>Theme Colors</span>
          </div>
-         <UserItem icon={<ColorIcon />} onClick={() => setColor("Red")}>
-            Red
-         </UserItem>
-         <UserItem icon={<ColorIcon />} onClick={() => setColor("Red")}>
-            Blue
-         </UserItem>
-         <UserItem icon={<ColorIcon />} onClick={() => setColor("Red")}>
-            Magenta
-         </UserItem>
-         <UserItem icon={<ColorIcon />} onClick={() => setColor("Red")}>
-            Grey
-         </UserItem>
+         {themeColors.map(({ name, color }) => (
+            <UserItem
+               key={name}
+               icon={<ColorIcon color={color} />}
+               onClick={() => setThemeColor(color)}
+            >
+               {name}
+            </UserItem>
+         ))}
       </motion.ul>
    );
 }

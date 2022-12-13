@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function Main({ setMenu, isLoggedIn, setIsLoggedIn }: Props) {
-   const { toggleDarkMode, isDark } = useThemeContext();
+   const { toggleDarkMode, isDark, themeColor } = useThemeContext();
 
    const logOut = () => {
       setIsLoggedIn(false);
@@ -42,7 +42,7 @@ export default function Main({ setMenu, isLoggedIn, setIsLoggedIn }: Props) {
             Dark Mode
          </UserItem>
          <UserItem
-            icon={<ColorIcon />}
+            icon={<ColorIcon color={themeColor} />}
             onClick={() => setMenu("colors")}
             expand
          >

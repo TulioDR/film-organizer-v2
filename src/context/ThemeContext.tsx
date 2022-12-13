@@ -3,6 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 interface AppContextInterface {
    isDark: boolean;
    toggleDarkMode: () => void;
+   themeColor: string;
+   setThemeColor: React.Dispatch<React.SetStateAction<string>>;
 }
 interface ThemeProvider {
    children: React.ReactNode;
@@ -15,14 +17,16 @@ export default function useThemeContext() {
 
 export function ThemeProvider({ children }: ThemeProvider) {
    const [isDark, setIsDark] = useState<boolean>(() => {
-      if (typeof window !== "undefined") {
-         const savedValue = localStorage.getItem("darkMode");
-         const isDarkSaved = savedValue === "true";
-         return isDarkSaved;
-      }
-      return false;
+      if (typeof window === "undefined") return false;
+      const savedValue = localStorage.getItem("darkMode");
+      return savedValue === "true";
    });
    const toggleDarkMode = () => setIsDark(!isDark);
+
+   const [themeColor, setThemeColor] = useState<string>(() => {
+      if (typeof window === "undefined") return "#3b82f6";
+      return "#3b82f6";
+   });
 
    useEffect(() => {
       const root = window.document.documentElement;
@@ -38,6 +42,8 @@ export function ThemeProvider({ children }: ThemeProvider) {
    const value: AppContextInterface = {
       isDark,
       toggleDarkMode,
+      themeColor,
+      setThemeColor,
    };
 
    return (

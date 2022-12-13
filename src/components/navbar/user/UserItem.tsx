@@ -25,7 +25,7 @@ export default function UserItem({
       >
          <div className="flex items-center space-x-2 h-full">
             {icon}
-            <span>{children}</span>
+            <span className="capitalize">{children}</span>
          </div>
          {expand && <span className="material-icons">chevron_right</span>}
          {darkMode && <ToggleModeButton isOn={isDark!} />}

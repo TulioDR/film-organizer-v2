@@ -1,9 +1,14 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+   color: string;
+};
 
-export default function ColorIcon({}: Props) {
+export default function ColorIcon({ color }: Props) {
    return (
-      <div className="h-full aspect-square rounded-full bg-blue-500 border-4 border-gray-400 dark:border-gray-600"></div>
+      <div
+         style={{ backgroundColor: color }}
+         className="h-full aspect-square rounded-full border-4 border-gray-400 dark:border-gray-600"
+      ></div>
    );
 }

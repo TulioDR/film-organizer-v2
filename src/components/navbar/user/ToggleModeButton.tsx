@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import useThemeContext from "../../../context/ThemeContext";
 
 type Props = {
    isOn: boolean;
@@ -9,11 +10,13 @@ const spring = {
    damping: 30,
 };
 export default function ToggleModeButton({ isOn }: Props) {
+   const { themeColor } = useThemeContext();
    return (
       <div className="h-full py-2">
          <div
+            style={{ backgroundColor: isOn ? themeColor : "#d1d5db" }}
             className={`switch h-full w-9 p-[3px] flex rounded-full ${
-               isOn ? "justify-end bg-blue-500" : "justify-start bg-gray-300"
+               isOn ? "justify-end" : "justify-start bg-gray-300"
             }`}
          >
             <motion.div

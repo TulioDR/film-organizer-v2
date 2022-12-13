@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import useThemeContext from "../../context/ThemeContext";
 
 type Props = {
    link: string;
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export default function SideLink({ link, icon, text }: Props) {
+   const { themeColor } = useThemeContext();
+
    const router = useRouter();
 
    const goTo = () => {
@@ -29,7 +32,8 @@ export default function SideLink({ link, icon, text }: Props) {
             <span className="truncate">{text}</span>
          </div>
          <div
-            className={`absolute top-0 h-full bg-blue-500 rounded-r-lg -z-10 ${
+            style={{ backgroundColor: themeColor }}
+            className={`absolute top-0 h-full rounded-r-lg -z-10 ${
                router.asPath === link
                   ? "w-full duration-300"
                   : "w-0 group-hover:w-14 duration-200"
