@@ -23,10 +23,7 @@ export function ThemeProvider({ children }: ThemeProvider) {
    });
    const toggleDarkMode = () => setIsDark(!isDark);
 
-   const [themeColor, setThemeColor] = useState<string>(() => {
-      if (typeof window === "undefined") return "#3b82f6";
-      return "#3b82f6";
-   });
+   const [themeColor, setThemeColor] = useState<string>("#3b82f6");
 
    useEffect(() => {
       const root = window.document.documentElement;
@@ -38,6 +35,16 @@ export function ThemeProvider({ children }: ThemeProvider) {
          root.classList.remove("dark");
       }
    }, [isDark]);
+
+   useEffect(() => {
+      const savedValue = localStorage.getItem("theme");
+      if (savedValue) setThemeColor(savedValue);
+      else localStorage.setItem("theme", "#3b82f6");
+   }, []);
+
+   useEffect(() => {
+      localStorage.setItem("theme", themeColor);
+   }, [themeColor]);
 
    const value: AppContextInterface = {
       isDark,
