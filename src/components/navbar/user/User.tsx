@@ -2,17 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import Main from "./Main";
 import MenuContainer from "./MenuContainer";
 import ThemeColors from "./ThemeColors";
+import { motion } from "framer-motion";
+import useThemeContext from "../../../context/ThemeContext";
 
 export default function User() {
+   const { themeColor } = useThemeContext();
+
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => {
       setIsOpen(!isOpen);
       setMenu("main");
    };
    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-   // const handleBlur = () => {
-   //    setIsOpen(false);
-   // };
+   const handleBlur = () => {
+      setIsOpen(false);
+   };
 
    const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -25,22 +29,25 @@ export default function User() {
 
    return (
       <div className="flex">
-         <div
-            // tabIndex={0}
-            // onBlur={handleBlur}
-
-            className="relative"
-         >
+         <div tabIndex={0} onBlur={handleBlur} className="relative">
             {isLoggedIn ? (
-               <div className="h-9 w-9 rounded-full dark:bg-gray-500 cursor-pointer"></div>
-            ) : (
-               <button
+               <div
                   onClick={toggle}
-                  className="grid place-content-center h-9 w-9 rounded-full hover:bg-blue-500"
+                  className="h-9 w-9 rounded-full dark:bg-gray-500 cursor-pointer"
+               ></div>
+            ) : (
+               <motion.button
+                  onClick={toggle}
+                  whileHover={{
+                     backgroundColor: themeColor,
+                  }}
+                  transition={{ duration: 0 }}
+                  className="grid place-content-center h-9 w-9 rounded-full"
                >
                   <span className="material-icons">settings</span>
-               </button>
+               </motion.button>
             )}
+
             {isOpen && (
                <MenuContainer
                   divKey={menu}
@@ -51,6 +58,7 @@ export default function User() {
                      <Main
                         isLoggedIn={isLoggedIn}
                         setIsLoggedIn={setIsLoggedIn}
+                        setIsOpen={setIsOpen}
                         setMenu={setMenu}
                      />
                   )}
@@ -58,17 +66,14 @@ export default function User() {
                </MenuContainer>
             )}
          </div>
-      </div>
-   );
-}
-
-{
-   /* {!isLoggedIn && (
+         {!isLoggedIn && (
             <button
                onClick={() => setIsLoggedIn(true)}
-               className="h-9 px-4 bg-gray-500 cursor-pointer ml-2"
+               className="h-9 px-4 bg-gray-500 cursor-pointer ml-2 hidden sm:block"
             >
                Log in
             </button>
-         )} */
+         )}
+      </div>
+   );
 }

@@ -7,17 +7,25 @@ import useThemeContext from "../../../context/ThemeContext";
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
    isLoggedIn: boolean;
+   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Main({ setMenu, isLoggedIn, setIsLoggedIn }: Props) {
+export default function Main({
+   setMenu,
+   isLoggedIn,
+   setIsLoggedIn,
+   setIsOpen,
+}: Props) {
    const { toggleDarkMode, isDark, themeColor } = useThemeContext();
 
    const logOut = () => {
       setIsLoggedIn(false);
+      setIsOpen(false);
    };
    const logIn = () => {
       setIsLoggedIn(true);
+      setIsOpen(false);
    };
 
    return (

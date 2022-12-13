@@ -14,7 +14,10 @@ export default function MenuContainer({
    elRef,
 }: Props) {
    return (
-      <div className="w-72 absolute top-full right-0 text-sm p-2 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white drop-shadow-xl rounded-lg overflow-hidden">
+      <div
+         onMouseDown={(e) => e.preventDefault()}
+         className="w-72 absolute top-full right-0 text-sm p-2 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white drop-shadow-xl rounded-lg overflow-hidden"
+      >
          <motion.div
             animate={{
                height: height,

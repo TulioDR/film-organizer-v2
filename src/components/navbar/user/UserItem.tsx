@@ -20,7 +20,6 @@ export default function UserItem({
    return (
       <li
          className="px-2 h-9 w-full hover:bg-gray-400 dark:hover:bg-gray-600 flex items-center justify-between cursor-pointer rounded-md"
-         onMouseDown={(e) => e.preventDefault()}
          onClick={onClick}
       >
          <div className="flex items-center space-x-2 h-full">
