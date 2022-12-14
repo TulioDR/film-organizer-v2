@@ -22,7 +22,11 @@ export default function Card({ media, mediaType, setSelectedImg }: Props) {
    const router = useRouter();
    const goTo = () => {
       router.push(`/${mediaType}/${media.id}`);
-      setSelectedImg(`https://image.tmdb.org/t/p/w${780}${media.poster_path}`);
+      if (window.innerWidth >= 1280) {
+         setSelectedImg(
+            `https://image.tmdb.org/t/p/w${780}${media.poster_path}`
+         );
+      }
    };
 
    return (

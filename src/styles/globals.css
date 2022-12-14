@@ -31,9 +31,26 @@ a {
 #scroll-container::-webkit-scrollbar-thumb {
    background-color: gray;
 }
-/* body::-webkit-scrollbar-thumb:hover {
-   background-color: rgba($color: #686868, $alpha: 1);
-} */
+
+/* Other Scroll bars */
+.main-scrollbar::-webkit-scrollbar {
+   width: 10px;
+}
+
+.main-scrollbar::-webkit-scrollbar-track {
+   @apply bg-gray-400;
+}
+.main-scrollbar::-webkit-scrollbar-thumb {
+   @apply bg-gray-800;
+}
+
+.dark .main-scrollbar::-webkit-scrollbar-track {
+   @apply bg-gray-800;
+}
+.dark .main-scrollbar::-webkit-scrollbar-thumb {
+   @apply bg-gray-400;
+}
+
 .swiper-button-disabled {
    @apply text-gray-500;
 }

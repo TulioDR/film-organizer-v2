@@ -33,7 +33,7 @@ export default function SeasonCard({ season, openSeasonInfo }: Props) {
                size="lg"
             />
          </motion.div>
-         <div className="px-3 w-full h-full overflow-y-auto text-sm">
+         <div className="px-3 w-full h-full overflow-y-auto main-scrollbar text-sm">
             <div className="text-base lg:text-lg font-medium">
                {season.name}
             </div>

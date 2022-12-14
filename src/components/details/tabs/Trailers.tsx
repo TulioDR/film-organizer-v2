@@ -36,7 +36,7 @@ export default function Trailers({ trailers }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="h-full w-full overflow-y-auto pt-3 pr-3"
+         className="h-full w-full overflow-y-auto pt-3 pr-3 main-scrollbar"
       >
          {trailers.length ? (
             <div className="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">

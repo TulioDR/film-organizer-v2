@@ -38,7 +38,7 @@ export default function Similar({ similar, mediaType }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="h-full w-full overflow-y-auto grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 pt-3 pr-3"
+         className="h-full w-full overflow-y-auto grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 pt-3 pr-3 main-scrollbar"
       >
          {similar.map((sim) => (
             <motion.article

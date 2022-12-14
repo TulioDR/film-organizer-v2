@@ -57,7 +57,7 @@ export default function Overview({
          animate={{ y: 0, opacity: 1 }}
          exit={{ y: 100, opacity: 0 }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="pt-5"
+         className="pt-5 main-scrollbar"
       >
          {overview && <div className="italic font-bold mb-1">{tagline}</div>}
          <div className="text-sm">{overview || "No overview available"}</div>

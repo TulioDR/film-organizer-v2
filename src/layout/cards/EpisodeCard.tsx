@@ -28,7 +28,7 @@ export default function EpisodeCard({ episode }: Props) {
                </div>
             </div>
          </div>
-         <div className="overflow-y-auto flex-1">
+         <div className="overflow-y-auto flex-1 main-scrollbar">
             <div className="text-lg font-medium my-1">{episode.name}</div>
             <p className="text-xs sm:text-sm leading-snug text-gray-400">
                {episode.overview || "No description available for this episode"}

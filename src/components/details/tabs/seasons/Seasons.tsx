@@ -36,7 +36,7 @@ export default function Seasons({
          initial="initial"
          animate="animate"
          exit="exit"
-         className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 pt-5 pr-4 overflow-y-auto h-full"
+         className="main-scrollbar grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 pt-5 pr-4 overflow-y-auto h-full"
       >
          {seasons.map((season) => (
             <SeasonCard
