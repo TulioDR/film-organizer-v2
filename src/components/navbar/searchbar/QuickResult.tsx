@@ -20,7 +20,7 @@ export default function QuickResult({ media, setShowResults }: Props) {
       <li
          onClick={getDetails}
          onMouseDown={(e) => e.preventDefault()}
-         className="hover:bg-gray-700 h-20 cursor-pointer flex p-2 items-center"
+         className="hover:bg-light-bg dark:hover:bg-dark-bg h-20 cursor-pointer flex py-2 px-5"
       >
          <Poster
             alt={media.title || media.name}
@@ -28,10 +28,10 @@ export default function QuickResult({ media, setShowResults }: Props) {
             posterPath={media.poster_path}
          />
          <div className="pl-2">
-            <div className="text-black dark:text-white">
+            <div className="text-black dark:text-white text-sm">
                {isMovie ? media.title : media.name}
             </div>
-            <div className="text-gray-500 text-sm">
+            <div className="text-gray-dark dark:text-gray-light text-xs">
                {isMovie
                   ? media.release_date?.substr(0, 4) || "N/A"
                   : media.first_air_date?.substr(0, 4) || "N/A"}

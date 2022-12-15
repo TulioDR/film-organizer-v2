@@ -10,7 +10,30 @@ module.exports = {
    ],
    darkMode: "class",
    theme: {
-      extend: {},
+      extend: {
+         colors: {
+            light: {
+               text: {
+                  soft: "#6b7280",
+                  normal: "#334155",
+                  hard: "#0f172a",
+               },
+               bg: "#e5e7eb",
+            },
+            dark: {
+               text: {
+                  soft: "#9ca3af",
+                  normal: "#d1d5db",
+                  hard: "#f9fafb",
+               },
+               bg: "#1f2937",
+            },
+            gray: {
+               dark: "#4b5563",
+               light: "#9ca3af",
+            },
+         },
+      },
    },
    plugins: [],
 };

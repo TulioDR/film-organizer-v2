@@ -11,7 +11,7 @@ type Props = {
 
 export default function InfoBar({ media, mediaType }: Props) {
    return (
-      <div className="flex justify-between items-center text-gray-500 mt-2 text-sm">
+      <div className="flex justify-between items-center text-light-text-soft dark:text-dark-text-soft mt-2 text-sm">
          <RevealHorizontal>
             <div className="flex items-center">
                <Date date={media.first_air_date || media.release_date} />

@@ -34,14 +34,14 @@ export default function TabsContainer({
             animate={{ width: "100%" }}
             exit={{ width: 0 }}
             transition={{ duration: 0.5 }}
-            className="h-[1px] bg-gray-400 absolute bottom-0 left-0"
+            className="h-[1px] bg-light-text-soft dark:bg-dark-text-soft absolute bottom-0 left-0"
          ></motion.div>
          <motion.div
             variants={container}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="flex space-x-4 justify-between overflow-x-auto w-full"
+            className="flex space-x-4 justify-between overflow-x-auto w-full text-light-text-soft dark:text-dark-text-soft"
          >
             <Tab
                name="Overview"

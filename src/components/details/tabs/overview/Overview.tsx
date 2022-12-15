@@ -59,8 +59,14 @@ export default function Overview({
          transition={{ duration: 0.4, ease: "easeInOut" }}
          className="pt-5 main-scrollbar"
       >
-         {overview && <div className="italic font-bold mb-1">{tagline}</div>}
-         <div className="text-sm">{overview || "No overview available"}</div>
+         {overview && (
+            <div className="italic font-bold mb-1 text-light-text-hard dark:text-dark-text-hard">
+               {tagline}
+            </div>
+         )}
+         <div className="text-sm text-light-text-normal dark:text-dark-text-normal">
+            {overview || "No overview available"}
+         </div>
 
          <table className="text-sm mt-5">
             <tbody>

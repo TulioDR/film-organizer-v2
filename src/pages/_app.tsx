@@ -15,7 +15,7 @@ import { ThemeProvider } from "../context/ThemeContext";
 export default function App({ Component, pageProps }: AppProps) {
    const router = useRouter();
    return (
-      <div className="flex bg-gray-200 dark:bg-gray-800 duration-200 dark:text-white">
+      <div className="flex bg-light-bg dark:bg-dark-bg text-light-text-hard dark:text-dark-text-hard">
          <ThemeProvider>
             <SidebarProvider>
                <SidebarsContainer />

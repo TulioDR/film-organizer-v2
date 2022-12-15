@@ -33,7 +33,7 @@ export default function User() {
             {isLoggedIn ? (
                <div
                   onClick={toggle}
-                  className="h-9 w-9 rounded-full dark:bg-gray-500 cursor-pointer"
+                  className="h-9 w-9 rounded-full bg-gray-light dark:bg-gray-dark cursor-pointer"
                ></div>
             ) : (
                <motion.button
@@ -69,7 +69,7 @@ export default function User() {
          {!isLoggedIn && (
             <button
                onClick={() => setIsLoggedIn(true)}
-               className="h-9 px-4 bg-gray-500 cursor-pointer ml-2 hidden sm:block"
+               className="h-9 px-4 bg-gray-light dark:bg-gray-dark cursor-pointer ml-2 hidden sm:block"
             >
                Log in
             </button>

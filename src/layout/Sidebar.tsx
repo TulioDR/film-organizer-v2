@@ -17,7 +17,9 @@ export default function Sidebar() {
             <ToggleModeButton />
          </div>
 
-         <div className="ml-5 text-xs uppercase my-3 text-gray-400">Menu</div>
+         <div className="ml-5 text-xs uppercase my-3 text-light-text-soft dark:text-dark-text-soft">
+            Menu
+         </div>
          <ul className="space-y-3">
             <SideLink link="/" icon="home" text="Home" />
             <SideLink

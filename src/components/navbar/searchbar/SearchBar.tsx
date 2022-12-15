@@ -55,21 +55,26 @@ export default function SearchBar({}: Props) {
    return (
       <form
          onSubmit={handleSubmit}
-         className="w-full sm:w-96 px-5 bg-gray-400 dark:bg-gray-600 h-9 rounded-lg flex items-center relative"
+         className={`w-full sm:w-96 px-5 bg-gray-light h-9 dark:bg-gray-dark rounded-t-lg flex flex-col relative ${
+            showResults ? "shadow-lg" : "rounded-b-lg"
+         }`}
       >
-         <input
-            value={inputValue}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            type="text"
-            className="outline-none flex-1 bg-transparent pr-5"
-            placeholder={`Search ${isMovie ? "Movies" : "TV Shows"}`}
-         />
-         <span className="material-icons text-gray-400">search</span>
-
+         <div className="flex items-center h-full">
+            <input
+               value={inputValue}
+               onChange={handleInputChange}
+               onFocus={handleInputFocus}
+               onBlur={handleInputBlur}
+               type="text"
+               className="outline-none flex-1 bg-transparent pr-5 text-light-text-hard dark:text-dark-text-hard placeholder:text-light-text-soft placeholder:dark:text-dark-text-soft"
+               placeholder={`Search ${isMovie ? "Movies" : "TV Shows"}`}
+            />
+            <span className="material-icons text-light-text-soft dark:text-dark-text-soft">
+               search
+            </span>
+         </div>
          {showResults && (
-            <ul className="absolute left-0 top-full shadow-material bg-gray-400 w-full py-3 rounded-md">
+            <ul className="absolute top-full left-0 w-full py-3 rounded-b-lg bg-gray-light dark:bg-gray-dark shadow-lg">
                {results.map((media) => (
                   <QuickResult
                      key={media.id}

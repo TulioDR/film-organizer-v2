@@ -21,7 +21,7 @@ export default function SideLink({ link, icon, text }: Props) {
          className={`cursor-pointer h-9 relative group ${
             router.asPath === link
                ? ""
-               : "text-gray-400 hover:text-white duration-100"
+               : "text-light-text-soft dark:text-dark-text-soft hover:text-light-text-hard dark:hover:text-dark-text-hard duration-100"
          }`}
          onClick={goTo}
       >

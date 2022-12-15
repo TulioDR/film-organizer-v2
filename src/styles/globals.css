@@ -38,14 +38,14 @@ a {
 }
 
 .main-scrollbar::-webkit-scrollbar-track {
-   @apply bg-gray-400;
+   @apply bg-light-bg;
 }
 .main-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-gray-800;
 }
 
 .dark .main-scrollbar::-webkit-scrollbar-track {
-   @apply bg-gray-800;
+   @apply bg-dark-bg;
 }
 .dark .main-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-gray-400;

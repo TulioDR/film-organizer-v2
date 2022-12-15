@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import RevealHorizontal from "../../../../animations/RevealHorizontal";
-import EpisodeCard from "../../../../layout/cards/EpisodeCard";
-import Date from "../../infoBar/Date";
+import RevealHorizontal from "../../../../../animations/RevealHorizontal";
+import EpisodeCard from "../../../../../layout/cards/EpisodeCard";
+import Date from "../../../infoBar/Date";
 type Props = {
    tvShowID: number;
    selectedSeason: number | null;
@@ -42,30 +42,32 @@ export default function SeasonDetails({
                animate={{ x: 0 }}
                exit={{ x: "100%" }}
                transition={{ duration: 0.4, ease: "easeInOut" }}
-               className="absolute top-0 right-0 h-full w-full bg-gray-800 z-10 overflow-hidden overflow-y-auto"
+               className="absolute top-0 right-0 h-full w-full bg-light-bg dark:bg-dark-bg z-10 overflow-hidden overflow-y-auto pr-5 main-scrollbar"
             >
                <div className="w-full h-full relative">
                   <button
                      onClick={close}
-                     className="absolute z-10 top-0 right-0 w-10 h-10 rounded-md bg-white text-black grid place-content-center"
+                     className="absolute z-10 top-0 right-0 w-10 h-10 rounded-md bg-light-text-hard text-dark-text-hard dark:bg-dark-text-hard dark:text-light-text-hard grid place-content-center"
                   >
                      <span className="material-icons">close</span>
                   </button>
                   <RevealHorizontal>
-                     <div className="text-4xl 2xl:text-5xl font-medium">
+                     <div className="text-4xl 2xl:text-5xl font-semibold text-light-text-hard dark:text-dark-text-hard">
                         {season.name}
                      </div>
-                     <div className="flex items-center text-gray-500 mt-3 text-sm">
+                     <div className="flex items-center text-light-text-soft dark:text-dark-text-soft mt-3 text-sm">
                         <Date date={season.air_date} />
                         <span className="mx-2">|</span>
                         <span>{season.episodes.length} episodes</span>
                      </div>
-                     <div className="mt-3">
+                     <div className="mt-3 text-light-text-normal dark:text-dark-text-normal">
                         {season.overview ||
                            "No overview available for this season"}
                      </div>
-                     <div className="my-8">Episodes</div>
-                     <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-6">
+                     <div className="my-8 text-light-text-hard dark:text-dark-text-hard text-3xl 2xl:text-4xl font-medium">
+                        Episodes
+                     </div>
+                     <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10">
                         {season.episodes.map((ep: any) => (
                            <EpisodeCard key={ep.id} episode={ep} />
                         ))}

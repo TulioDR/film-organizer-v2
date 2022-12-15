@@ -4,7 +4,7 @@ import { TabOptions } from "../../../models/detailsModel";
 
 import Overview from "./overview/Overview";
 import CastCrew from "./people/CastCrew";
-import SeasonDetails from "./seasonDetails/SeasonDetails";
+import SeasonDetails from "./seasons/seasonDetails/SeasonDetails";
 import Seasons from "./seasons/Seasons";
 import Similar from "./Similar";
 import TabsContainer from "./TabsContainer";

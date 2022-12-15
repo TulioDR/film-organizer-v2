@@ -21,7 +21,7 @@ export default function SeasonCard({ season, openSeasonInfo }: Props) {
       <motion.article
          onClick={() => openSeasonInfo(season)}
          variants={item}
-         className="flex rounded-xl h-40 lg:h-52 overflow-hidden cursor-pointer hover:bg-gray-700"
+         className="flex rounded-xl h-40 lg:h-52 overflow-hidden cursor-pointer hover:bg-gray-light dark:hover:bg-gray-dark"
       >
          <motion.div
             layoutId={`https://image.tmdb.org/t/p/w${780}${season.poster_path}`}
@@ -34,15 +34,15 @@ export default function SeasonCard({ season, openSeasonInfo }: Props) {
             />
          </motion.div>
          <div className="px-3 w-full h-full overflow-y-auto main-scrollbar text-sm">
-            <div className="text-base lg:text-lg font-medium">
+            <div className="text-base lg:text-lg font-medium text-light-text-hard dark:text-dark-text-hard">
                {season.name}
             </div>
-            <div className="flex items-center text-gray-400 dark:text-gray-400 my-1">
+            <div className="flex items-center text-light-text-soft dark:text-dark-text-soft my-1">
                <div>{season.air_date || "N/A"}</div>
                <div className="h-6 mx-2">|</div>
                <div>{season.episode_count} Episodes</div>
             </div>
-            <div>
+            <div className="text-light-text-normal dark:text-dark-text-normal">
                {season.overview || "No overview available for this season"}
             </div>
          </div>

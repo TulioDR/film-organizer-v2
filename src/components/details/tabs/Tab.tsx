@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import useThemeContext from "../../../context/ThemeContext";
 import { TabOptions } from "../../../models/detailsModel";
 
 type Props = {
@@ -27,22 +28,32 @@ export default function Tab({
    selectedTab,
    setSelectedTab,
 }: Props) {
+   const { themeColor } = useThemeContext();
    const setTab = () => {
       setSelectedTab(value);
    };
-
    return (
       <div
          onClick={setTab}
          className="uppercase flex-shrink-0 relative cursor-pointer pb-2"
       >
          <div className="overflow-hidden">
-            <motion.div variants={item}>{name}</motion.div>
+            <motion.div
+               variants={item}
+               className={`font-medium ${
+                  value === selectedTab
+                     ? "text-light-text-hard dark:text-dark-text-hard"
+                     : ""
+               }`}
+            >
+               {name}
+            </motion.div>
          </div>
          {value === selectedTab && (
             <motion.div
                layoutId="underline"
-               className="w-full bg-blue-400 dark:bg-blue-600 absolute bottom-0 h-1"
+               style={{ backgroundColor: themeColor }}
+               className="w-full absolute bottom-0 h-1"
             />
          )}
       </div>

@@ -6,7 +6,7 @@ import useSidebarContext from "../context/SidebarContext";
 export default function Navbar() {
    const { toggleShowSidebar } = useSidebarContext();
    return (
-      <div className="py-5 w-full z-10 sticky top-0 flex items-center justify-between space-x-3 lg:space-x-0">
+      <div className="py-5 w-full z-20 sticky top-0 flex items-center justify-between space-x-3 lg:space-x-0">
          <div className="lg:hidden">
             <ToggleSidebar onClick={toggleShowSidebar} />
          </div>
