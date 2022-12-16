@@ -6,7 +6,7 @@ type Props = {
 
 export default function EpisodeCard({ episode }: Props) {
    return (
-      <article className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-gray-light dark:bg-gray-dark shadow-material cursor-pointer">
+      <article className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-gray-light dark:bg-gray-dark shadow-lg hover:-translate-y-2 duration-200">
          <div className="w-full rounded-lg -mt-6 shadow-lg relative overflow-hidden">
             <Poster
                alt={episode.name}
