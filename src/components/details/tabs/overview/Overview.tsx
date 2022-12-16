@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { addCommasToNumber, separateByCommas } from "../../../../utils/commas";
+import Directors from "./Directors";
 import Genres from "./Genres";
 import Row from "./Row";
 
@@ -48,9 +49,9 @@ export default function Overview({
       ? `${addCommasToNumber(revenue)}$`
       : "Not Available";
 
-   const directorsValue = separateArray(
-      crew.filter((person) => person.job === "Director")
-   );
+   const directorsValue = crew.filter((person) => person.job === "Director");
+
+   console.log(directorsValue);
    return (
       <motion.div
          initial={{ y: 100, opacity: 0 }}
@@ -75,9 +76,12 @@ export default function Overview({
                   value={<Genres genres={genres} isMovie={isMovie} />}
                />
                {isMovie ? (
-                  <Row name="Directed by" value={directorsValue} />
+                  <Row
+                     name="Directed by"
+                     value={<Directors array={directorsValue} />}
+                  />
                ) : (
-                  <Row name="Created by" value={separateArray(crew)} />
+                  <Row name="Created by" value={<Directors array={crew} />} />
                )}
                <Row
                   name="Production Companies"

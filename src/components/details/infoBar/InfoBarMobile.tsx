@@ -11,7 +11,7 @@ type Props = {
 
 export default function InfoBarMobileMobile({ media, mediaType }: Props) {
    return (
-      <div className="text-gray-500 mt-5 text-base md:text-lg">
+      <div className="text-light-text-soft dark:text-dark-text-soft mt-5 text-base md:text-lg">
          <RevealHorizontal>
             <div className="flex flex-col">
                <Subtitle>Released:</Subtitle>
@@ -51,5 +51,9 @@ interface SubProps {
 }
 
 function Subtitle({ children }: SubProps) {
-   return <div className="text-white text-sm md:text-base">{children}</div>;
+   return (
+      <div className="text-light-text-hard dark:text-dark-text-hard text-sm md:text-base">
+         {children}
+      </div>
+   );
 }
