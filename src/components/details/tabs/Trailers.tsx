@@ -36,15 +36,15 @@ export default function Trailers({ trailers }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="h-full w-full overflow-y-auto pt-3 pr-3 main-scrollbar"
+         className="w-full pt-3 pr-3"
       >
          {trailers.length ? (
             <div className="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
                {trailers.map((trailer) => (
                   <motion.article
-                     onClick={() => goToTrailer(trailer.key)}
-                     variants={item}
                      key={trailer.id}
+                     variants={item}
+                     onClick={() => goToTrailer(trailer.key)}
                      className="cursor-pointer flex flex-col"
                   >
                      <Poster

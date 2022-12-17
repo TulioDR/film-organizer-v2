@@ -40,53 +40,55 @@ export default function Tabs({ media, mediaType, setSelectedImg }: Props) {
                opacity: 0,
                transition: { duration: 0.4, ease: "easeInOut" },
             }}
-            className="flex-1 overflow-hidden w-full"
+            className="flex-1 w-full overflow-hidden"
          >
-            <AnimatePresence mode="wait">
-               <motion.div
-                  key={selectedTab}
-                  className="flex-1 w-full h-full overflow-hidden"
-               >
-                  {selectedTab === "overview" && (
-                     <Overview
-                        tagline={media.tagline || null}
-                        overview={media.overview}
-                        genres={media.genres}
-                        crew={media.created_by || media.credits.crew}
-                        isMovie={mediaType === "movie"}
-                        productionCompanies={media.production_companies}
-                        spokenLanguages={media.spoken_languages}
-                        seasons={media.number_of_seasons}
-                        episodes={media.number_of_episodes}
-                        networks={media.networks}
-                        budget={media.budget}
-                        revenue={media.revenue}
-                     />
-                  )}
-                  {selectedTab === "seasons" && (
-                     <Seasons
-                        seasons={media.seasons}
-                        setSelectedImg={setSelectedImg}
-                        setSelectedSeason={setSelectedSeason}
-                     />
-                  )}
-                  {selectedTab === "trailers" && (
-                     <Trailers trailers={media.videos.results} />
-                  )}
-                  {selectedTab === "cast&crew" && (
-                     <CastCrew
-                        cast={media.credits?.cast}
-                        crew={media.credits?.crew}
-                     />
-                  )}
-                  {selectedTab === "similar" && (
-                     <Similar
-                        mediaType={mediaType}
-                        similar={media.similar.results}
-                     />
-                  )}
-               </motion.div>
-            </AnimatePresence>
+            <div className="h-full w-full overflow-y-auto main-scrollbar">
+               <AnimatePresence mode="wait">
+                  <motion.div
+                     key={selectedTab}
+                     className="w-full overflow-hidden"
+                  >
+                     {selectedTab === "overview" && (
+                        <Overview
+                           tagline={media.tagline || null}
+                           overview={media.overview}
+                           genres={media.genres}
+                           crew={media.created_by || media.credits.crew}
+                           isMovie={mediaType === "movie"}
+                           productionCompanies={media.production_companies}
+                           spokenLanguages={media.spoken_languages}
+                           seasons={media.number_of_seasons}
+                           episodes={media.number_of_episodes}
+                           networks={media.networks}
+                           budget={media.budget}
+                           revenue={media.revenue}
+                        />
+                     )}
+                     {selectedTab === "seasons" && (
+                        <Seasons
+                           seasons={media.seasons}
+                           setSelectedImg={setSelectedImg}
+                           setSelectedSeason={setSelectedSeason}
+                        />
+                     )}
+                     {selectedTab === "trailers" && (
+                        <Trailers trailers={media.videos.results} />
+                     )}
+                     {selectedTab === "cast&crew" && (
+                        <CastCrew
+                           cast={media.credits?.cast}
+                           crew={media.credits?.crew}
+                        />
+                     )}
+                     {selectedTab === "similar" && (
+                        <Similar
+                           mediaType={mediaType}
+                           similar={media.similar.results}
+                        />
+                     )}
+                  </motion.div>
+               </AnimatePresence>
+            </div>
          </motion.div>
       </>
    );

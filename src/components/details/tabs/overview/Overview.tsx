@@ -58,7 +58,7 @@ export default function Overview({
          animate={{ y: 0, opacity: 1 }}
          exit={{ y: 100, opacity: 0 }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="pt-5 main-scrollbar"
+         className="pt-5"
       >
          {overview && (
             <div className="italic font-bold mb-1 text-light-text-hard dark:text-dark-text-hard">

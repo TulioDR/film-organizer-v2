@@ -18,7 +18,7 @@ const container = {
 
 export default function CastCrew({ cast, crew }: Props) {
    return (
-      <div className="space-y-3 pt-2 overflow-y-auto h-full w-full overflow-x-hidden main-scrollbar">
+      <div className="space-y-3 pt-2 w-full">
          <motion.div
             variants={container}
             initial="initial"
