@@ -1,4 +1,6 @@
 import Poster from "../../components/Poster";
+import { motion } from "framer-motion";
+import { staggerItem } from "../../animations/StaggerCards";
 
 type Props = {
    episode: any;
@@ -6,7 +8,10 @@ type Props = {
 
 export default function EpisodeCard({ episode }: Props) {
    return (
-      <article className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-gray-light dark:bg-gray-dark shadow-lg hover:-translate-y-2 duration-200">
+      <motion.article
+         variants={staggerItem}
+         className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-gray-light dark:bg-gray-dark shadow-lg hover:-translate-y-2 duration-200"
+      >
          <div className="w-full rounded-lg -mt-6 shadow-lg relative overflow-hidden">
             <Poster
                alt={episode.name}
@@ -36,6 +41,6 @@ export default function EpisodeCard({ episode }: Props) {
                {episode.overview || "No description available for this episode"}
             </p>
          </div>
-      </article>
+      </motion.article>
    );
 }

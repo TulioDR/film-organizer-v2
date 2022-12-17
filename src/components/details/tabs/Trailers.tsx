@@ -1,28 +1,12 @@
 import { motion } from "framer-motion";
+import {
+   staggerContainer,
+   staggerItem,
+} from "../../../animations/StaggerCards";
 import Poster from "../../Poster";
 
 type Props = {
    trailers: any[];
-};
-
-const container = {
-   initial: {},
-   animate: { transition: { staggerChildren: 0.1 } },
-   exit: {
-      y: 100,
-      opacity: 0,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-};
-
-const item = {
-   initial: { opacity: 0, y: 100 },
-   animate: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-   exit: {},
 };
 
 export default function Trailers({ trailers }: Props) {
@@ -32,7 +16,7 @@ export default function Trailers({ trailers }: Props) {
 
    return (
       <motion.div
-         variants={container}
+         variants={staggerContainer}
          initial="initial"
          animate="animate"
          exit="exit"
@@ -43,7 +27,7 @@ export default function Trailers({ trailers }: Props) {
                {trailers.map((trailer) => (
                   <motion.article
                      key={trailer.id}
-                     variants={item}
+                     variants={staggerItem}
                      onClick={() => goToTrailer(trailer.key)}
                      className="cursor-pointer flex flex-col"
                   >
@@ -59,7 +43,9 @@ export default function Trailers({ trailers }: Props) {
                ))}
             </div>
          ) : (
-            <motion.div variants={item}>No trailers available</motion.div>
+            <motion.div variants={staggerItem}>
+               No trailers available
+            </motion.div>
          )}
       </motion.div>
    );

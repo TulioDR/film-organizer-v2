@@ -1,30 +1,14 @@
 import Poster from "../../Poster";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import {
+   staggerContainer,
+   staggerItem,
+} from "../../../animations/StaggerCards";
 
 type Props = {
    similar: any[];
    mediaType: "tv" | "movie";
-};
-
-const container = {
-   initial: {},
-   animate: { transition: { staggerChildren: 0.1 } },
-   exit: {
-      y: 100,
-      opacity: 0,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-};
-
-const item = {
-   initial: { opacity: 0, y: 100 },
-   animate: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-   exit: {},
 };
 
 export default function Similar({ similar, mediaType }: Props) {
@@ -34,7 +18,7 @@ export default function Similar({ similar, mediaType }: Props) {
    };
    return (
       <motion.div
-         variants={container}
+         variants={staggerContainer}
          initial="initial"
          animate="animate"
          exit="exit"
@@ -43,7 +27,7 @@ export default function Similar({ similar, mediaType }: Props) {
          {similar.map((sim) => (
             <motion.article
                onClick={() => goToSimilar(sim.id)}
-               variants={item}
+               variants={staggerItem}
                key={sim.id}
                className="cursor-pointer"
             >

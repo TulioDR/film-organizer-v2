@@ -52,7 +52,7 @@ interface SubProps {
 
 function Subtitle({ children }: SubProps) {
    return (
-      <div className="text-light-text-hard dark:text-dark-text-hard text-sm md:text-base">
+      <div className="text-light-text-normal dark:text-dark-text-normal text-sm md:text-base font-semibold">
          {children}
       </div>
    );

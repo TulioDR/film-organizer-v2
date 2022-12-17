@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import RevealHorizontal from "../../../../../animations/RevealHorizontal";
+import { staggerContainer } from "../../../../../animations/StaggerCards";
 import EpisodeCard from "../../../../../layout/cards/EpisodeCard";
 import Date from "../../../infoBar/Date";
 type Props = {
@@ -17,6 +18,7 @@ export default function SeasonDetails({
    setSelectedImg,
 }: Props) {
    const [season, setSeason] = useState<any>(null);
+   const [data, setData] = useState<any>(null);
    useEffect(() => {
       if (selectedSeason === null) return;
       const getData = async () => {
@@ -24,7 +26,7 @@ export default function SeasonDetails({
          const res = await fetch(url);
          const data = await res.json();
          console.log(data);
-         setSeason(data);
+         setData(data);
       };
       getData();
    }, [selectedSeason, tvShowID]);
@@ -34,46 +36,93 @@ export default function SeasonDetails({
       setSelectedImg(null);
    };
 
+   const onAnimationComplete = (e: any) => {
+      console.log("complete", e);
+      console.log(e);
+      if (e.x === 0) {
+         console.log("set the data");
+         setSeason(data);
+      } else {
+         setSeason(null);
+      }
+   };
+
+   const container = {
+      initial: {},
+      animate: {
+         transition: {
+            staggerChildren: 0.1,
+         },
+      },
+      exit: {},
+   };
+
    return (
       <AnimatePresence>
-         {selectedSeason !== null && season && (
+         {selectedSeason !== null && (
             <motion.div
                initial={{ x: "100%" }}
                animate={{ x: 0 }}
                exit={{ x: "100%" }}
                transition={{ duration: 0.4, ease: "easeInOut" }}
-               className="absolute top-0 right-0 h-full w-full bg-light-bg dark:bg-dark-bg z-10 overflow-hidden overflow-y-auto pr-5 main-scrollbar"
+               onAnimationComplete={onAnimationComplete}
+               className="absolute top-0 right-0 h-full w-full bg-light-bg dark:bg-dark-bg z-10 overflow-y-auto overflow-x-hidden pr-5 main-scrollbar"
             >
-               <div className="w-full h-full relative">
-                  <button
-                     onClick={close}
-                     className="absolute z-10 top-0 right-0 w-10 h-10 rounded-md bg-light-text-hard text-dark-text-hard dark:bg-dark-text-hard dark:text-light-text-hard grid place-content-center"
+               {season ? (
+                  <motion.div
+                     variants={container}
+                     initial="initial"
+                     animate="animate"
+                     exit="exit"
+                     className="w-full h-full relative"
                   >
-                     <span className="material-icons">close</span>
-                  </button>
-                  <RevealHorizontal>
-                     <div className="text-4xl 2xl:text-5xl font-semibold text-light-text-hard dark:text-dark-text-hard">
-                        {season.name}
+                     <div className="absolute z-10 top-0 right-0">
+                        <RevealHorizontal fromRight>
+                           <button
+                              onClick={close}
+                              className=" w-10 h-10 rounded-md bg-light-text-hard text-dark-text-hard dark:bg-dark-text-hard dark:text-light-text-hard grid place-content-center"
+                           >
+                              <span className="material-icons">close</span>
+                           </button>
+                        </RevealHorizontal>
                      </div>
-                     <div className="flex items-center text-light-text-soft dark:text-dark-text-soft mt-3 text-sm">
-                        <Date date={season.air_date} />
-                        <span className="mx-2">|</span>
-                        <span>{season.episodes.length} episodes</span>
-                     </div>
-                     <div className="mt-3 text-light-text-normal dark:text-dark-text-normal">
-                        {season.overview ||
-                           "No overview available for this season"}
-                     </div>
-                     <div className="my-8 text-light-text-hard dark:text-dark-text-hard text-3xl 2xl:text-4xl font-medium">
-                        Episodes
-                     </div>
-                     <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10">
+                     <RevealHorizontal>
+                        <div className="text-4xl 2xl:text-5xl font-semibold text-light-text-hard dark:text-dark-text-hard">
+                           {season.name}
+                        </div>
+                     </RevealHorizontal>
+                     <RevealHorizontal>
+                        <div className="flex items-center text-light-text-soft dark:text-dark-text-soft mt-3 text-sm">
+                           <Date date={season.air_date} />
+                           <span className="mx-2">|</span>
+                           <span>{season.episodes.length} episodes</span>
+                        </div>
+                     </RevealHorizontal>
+                     <RevealHorizontal>
+                        <div className="mt-3 text-light-text-normal dark:text-dark-text-normal">
+                           {season.overview ||
+                              "No overview available for this season"}
+                        </div>
+                     </RevealHorizontal>
+                     <RevealHorizontal>
+                        <div className="my-8 text-light-text-hard dark:text-dark-text-hard text-3xl 2xl:text-4xl font-medium">
+                           Episodes
+                        </div>
+                     </RevealHorizontal>
+                     <motion.div
+                        variants={staggerContainer}
+                        className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10"
+                     >
                         {season.episodes.map((ep: any) => (
                            <EpisodeCard key={ep.id} episode={ep} />
                         ))}
-                     </div>
-                  </RevealHorizontal>
-               </div>
+                     </motion.div>
+                  </motion.div>
+               ) : (
+                  <div className="h-full w-full flex items-center justify-center">
+                     <div className="w-40 h-40 bg-blue-500">Loading...</div>
+                  </div>
+               )}
             </motion.div>
          )}
       </AnimatePresence>

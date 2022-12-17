@@ -7,21 +7,12 @@ import TransitionPoster from "../../animations/TransitionPoster";
 import { useEffect, useState } from "react";
 import useSidebarContext from "../../context/SidebarContext";
 import usePageLoadingContext from "../../context/PageLoadingContext";
+import { staggerContainer } from "../../animations/StaggerCards";
 
 type Props = {
    title: string;
    mediaType: "tv" | "movie";
    url: string;
-};
-
-const container = {
-   initial: {},
-   animate: { transition: { staggerChildren: 0.1 } },
-   exit: {
-      y: 100,
-      opacity: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
-   },
 };
 
 export default function SearchCards({ title, mediaType, url }: Props) {
@@ -73,7 +64,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
          </Head>
          <PageTitle>{title}</PageTitle>
          <motion.div
-            variants={container}
+            variants={staggerContainer}
             initial="initial"
             animate="animate"
             exit="exit"
