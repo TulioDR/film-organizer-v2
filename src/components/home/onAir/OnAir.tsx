@@ -21,23 +21,27 @@ export default function OnAir({ tv }: Props) {
          onHoverStart={() => setIsHovering(true)}
          onHoverEnd={() => setIsHovering(false)}
          onClick={() => getMediaDetails("tv", tv.id)}
-         className="relative cursor-pointer rounded-lg group aspect-[2/3] overflow-hidden"
+         className="relative cursor-pointer group aspect-[2/3] overflow-hidden"
       >
-         <motion.div
-            animate={{
-               y: isHovering ? -height : 0,
-            }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="w-full"
-         >
-            <Poster alt={tv.name} posterPath={tv.poster_path} size="lg" />
+         <div className="w-full h-full">
+            <motion.div
+               animate={{
+                  height: isHovering ? `calc(100% - ${height}px)` : "100%",
+               }}
+               transition={{ duration: 0.2, ease: "easeInOut" }}
+               className="overflow-hidden rounded-2xl"
+            >
+               <div className="w-full">
+                  <Poster alt={tv.name} posterPath={tv.poster_path} size="lg" />
+               </div>
+            </motion.div>
             <div
                ref={elRef}
                className="text-center font-normal sm:font-medium text-xs sm:text-sm w-full px-4"
             >
                {tv.name}
             </div>
-         </motion.div>
+         </div>
       </motion.div>
    );
 }
