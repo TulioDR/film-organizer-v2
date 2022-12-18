@@ -51,7 +51,7 @@ export default function SeasonDetails({
       initial: {},
       animate: {
          transition: {
-            staggerChildren: 0.1,
+            staggerChildren: 0.15,
          },
       },
       exit: {},
@@ -77,7 +77,7 @@ export default function SeasonDetails({
                      className="w-full h-full relative"
                   >
                      <div className="absolute z-10 top-0 right-0">
-                        <RevealHorizontal fromRight>
+                        <RevealHorizontal stagger fromRight>
                            <button
                               onClick={close}
                               className=" w-10 h-10 rounded-md bg-light-text-hard text-dark-text-hard dark:bg-dark-text-hard dark:text-light-text-hard grid place-content-center"
@@ -86,25 +86,25 @@ export default function SeasonDetails({
                            </button>
                         </RevealHorizontal>
                      </div>
-                     <RevealHorizontal>
+                     <RevealHorizontal stagger>
                         <div className="text-4xl 2xl:text-5xl font-semibold text-light-text-hard dark:text-dark-text-hard">
                            {season.name}
                         </div>
                      </RevealHorizontal>
-                     <RevealHorizontal>
+                     <RevealHorizontal stagger>
                         <div className="flex items-center text-light-text-soft dark:text-dark-text-soft mt-3 text-sm">
                            <Date date={season.air_date} />
                            <span className="mx-2">|</span>
                            <span>{season.episodes.length} episodes</span>
                         </div>
                      </RevealHorizontal>
-                     <RevealHorizontal>
+                     <RevealHorizontal stagger>
                         <div className="mt-3 text-light-text-normal dark:text-dark-text-normal">
                            {season.overview ||
                               "No overview available for this season"}
                         </div>
                      </RevealHorizontal>
-                     <RevealHorizontal>
+                     <RevealHorizontal stagger>
                         <div className="my-8 text-light-text-hard dark:text-dark-text-hard text-3xl 2xl:text-4xl font-medium">
                            Episodes
                         </div>
