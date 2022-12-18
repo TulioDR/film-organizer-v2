@@ -1,23 +1,22 @@
-import { useRouter } from "next/router";
+import useThemeContext from "../../../context/ThemeContext";
+import useMediaDetails from "../../../hooks/useMediaDetails";
 import {
    changeDateFormat,
    daysToRelease,
    isReleased,
 } from "../../../utils/date";
+
 import Poster from "../../Poster";
 
 type Props = { movie: any };
 
 export default function Upcoming({ movie }: Props) {
-   const router = useRouter();
-   const goTo = () => {
-      router.push(`/${"movie"}/${movie.id}`);
-   };
-
+   const { getMediaDetails } = useMediaDetails();
+   const { themeColor } = useThemeContext();
    return (
       <div
-         onClick={goTo}
-         className="rounded-2xl aspect-video overflow-hidden shadow-md relative cursor-pointer"
+         onClick={() => getMediaDetails("movie", movie.id)}
+         className="rounded-2xl overflow-hidden group relative cursor-pointer"
       >
          <Poster
             alt={movie.title}
@@ -25,9 +24,15 @@ export default function Upcoming({ movie }: Props) {
             size="xl"
             backPoster
          />
-         <div className="w-full absolute bottom-0 bg-gradient-to-t from-gray-900 to-transparent px-4 pb-3 pt-14">
-            <div className="">{movie.title}</div>
-            <div className="flex space-x-2 text-gray-500 dark:text-gray-300 text-sm">
+         <div className="w-full absolute bottom-0 bg-gradient-to-t from-dark-bg to-transparent px-4 pb-3 pt-14">
+            <div className="font-medium text-dark-text-hard relative w-max">
+               {movie.title}
+               <div
+                  style={{ backgroundColor: themeColor }}
+                  className="h-[3px] w-0 group-hover:w-full duration-200 absolute left-0 bottom-0"
+               ></div>
+            </div>
+            <div className="flex space-x-2 text-dark-text-normal text-sm">
                <span>{changeDateFormat(movie.release_date)}</span>
                {isReleased(movie.release_date) ? (
                   <span className="ml-1">(released)</span>

@@ -1,3 +1,5 @@
+import useThemeContext from "../../../context/ThemeContext";
+import useMediaDetails from "../../../hooks/useMediaDetails";
 import Poster from "../../Poster";
 
 type Props = {
@@ -14,26 +16,40 @@ const changeDateFormat = (date: string) => {
 };
 
 export default function NowPlaying({ movie }: Props) {
+   const { getMediaDetails } = useMediaDetails();
+   const { themeColor } = useThemeContext();
    return (
-      <div className="rounded-2xl aspect-video w-full overflow-hidden shadow-md relative group">
+      <div className="rounded-2xl aspect-video w-full overflow-hidden shadow-md relative">
          <Poster
             alt={movie.title}
             posterPath={movie.backdrop_path}
             size="xl"
             backPoster
          />
-         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-gray-900 to-transparent">
+         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-dark-bg to-transparent">
             <div className="absolute left-4 bottom-4 w-1/2 space-y-2">
-               <div className="text-3xl xl:text-4xl font-bold">
+               <div className="text-3xl xl:text-4xl font-bold text-dark-text-hard">
                   {movie.title}
                </div>
-               <div className="text-sm">
+               <div className="text-sm text-dark-text-normal">
                   {changeDateFormat(movie.release_date)}
                </div>
-               <div className="w-6 grid place-content-center">
-                  <span className="material-icons text-5xl">
-                     bookmark_border
-                  </span>
+               <div className="flex items-center space-x-4 text-dark-text-hard">
+                  <div className="w-6 grid place-content-center">
+                     <span className="material-icons text-5xl">
+                        bookmark_border
+                     </span>
+                  </div>
+                  <button
+                     onClick={() => getMediaDetails("movie", movie.id)}
+                     className="rounded-lg group backdrop-blur drop-shadow-lg px-3 border border-gray-500 h-10 text-sm font-medium relative overflow-hidden text-white"
+                  >
+                     <div
+                        style={{ backgroundColor: themeColor }}
+                        className="absolute h-full top-0 left-0 -z-10 w-0 group-hover:w-full duration-200"
+                     ></div>
+                     Learn More
+                  </button>
                </div>
             </div>
          </div>

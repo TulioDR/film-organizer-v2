@@ -26,7 +26,7 @@ module.exports = {
                   normal: "#d1d5db",
                   hard: "#f9fafb",
                },
-               bg: "#1f2937",
+               bg: "#111827",
             },
             gray: {
                dark: "#4b5563",
