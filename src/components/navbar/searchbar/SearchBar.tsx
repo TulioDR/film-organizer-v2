@@ -22,16 +22,20 @@ export default function SearchBar({}: Props) {
       const getFoundedMedia = async () => {
          if (!isOnFocus) return;
          if (inputValue.length > 0) {
+            console.log("fetching");
             const type = isMovie ? "movie" : "tv";
             const res = await fetch(`/api/results/${type}/${inputValue}/1`);
             const data = await res.json();
             setResults(data.results.slice(0, 5));
+            console.log(data.results.slice(0, 5));
          } else {
             setResults([]);
          }
       };
       getFoundedMedia();
    }, [inputValue, isMovie, isOnFocus]);
+
+   useEffect(() => {}, [isMovie]);
 
    useEffect(() => {
       if (results.length > 0) setShowResults(true);

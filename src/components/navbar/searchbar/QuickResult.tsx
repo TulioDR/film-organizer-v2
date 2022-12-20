@@ -1,6 +1,6 @@
 import React from "react";
-import useSidebarContext from "../../../context/SidebarContext";
 import Poster from "../../Poster";
+import { motion } from "framer-motion";
 
 type Props = {
    media: any;
@@ -17,11 +17,14 @@ export default function QuickResult({
    setCurrentIndex,
    getDetails,
 }: Props) {
-   const { isMovie } = useSidebarContext();
-
    const selected = index !== null && index === currentIndex;
+
+   const getDate = (date?: string): string => {
+      if (date) return date.substring(0, 4);
+      return "N/A";
+   };
    return (
-      <li
+      <motion.li
          onClick={() => getDetails(index)}
          onMouseDown={(e) => e.preventDefault()}
          onMouseEnter={() => setCurrentIndex(index)}
@@ -37,14 +40,12 @@ export default function QuickResult({
          />
          <div className="pl-2">
             <div className="text-black dark:text-white text-sm">
-               {isMovie ? media.title : media.name}
+               {media.title || media.name}
             </div>
             <div className="text-gray-dark dark:text-gray-light text-xs">
-               {isMovie
-                  ? media.release_date?.substr(0, 4) || "N/A"
-                  : media.first_air_date?.substr(0, 4) || "N/A"}
+               {getDate(media.release_date || media.first_air_date)}
             </div>
          </div>
-      </li>
+      </motion.li>
    );
 }

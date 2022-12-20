@@ -18,11 +18,10 @@ export default function ResultsContainer({
       if (!results.length) return;
       const arrowUp = e.key === "ArrowUp";
       const arrowDown = e.key === "ArrowDown";
-      const enter = e.key === "Enter";
-      if (!arrowUp && !arrowDown && !enter) return;
+      if (!arrowUp && !arrowDown) return;
+      e.preventDefault();
 
       if (arrowUp) {
-         e.preventDefault();
          setCurrentIndex((current) => {
             if (current === 0) return null;
             if (current === null) return results.length - 1;
@@ -30,7 +29,6 @@ export default function ResultsContainer({
          });
       }
       if (arrowDown) {
-         e.preventDefault();
          setCurrentIndex((current) => {
             if (current === results.length - 1) return null;
             if (current === null) return 0;
@@ -47,8 +45,8 @@ export default function ResultsContainer({
    });
 
    return (
-      <ul className="absolute top-full left-0 w-full py-3 rounded-b-lg bg-gray-light dark:bg-gray-dark shadow-lg">
-         {children}
+      <ul className="absolute top-full left-0 w-full py-3 rounded-b-lg bg-gray-light dark:bg-gray-dark shadow-lg overflow-hidden">
+         <div className="relative">{children}</div>
       </ul>
    );
 }
