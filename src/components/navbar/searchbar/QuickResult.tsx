@@ -1,26 +1,34 @@
-import { useRouter } from "next/router";
 import React from "react";
 import useSidebarContext from "../../../context/SidebarContext";
 import Poster from "../../Poster";
 
 type Props = {
    media: any;
-   setShowResults: React.Dispatch<React.SetStateAction<boolean>>;
+   index: number;
+   currentIndex: number | null;
+   setCurrentIndex: React.Dispatch<React.SetStateAction<number | null>>;
+   getDetails: (index: number) => void;
 };
 
-export default function QuickResult({ media, setShowResults }: Props) {
+export default function QuickResult({
+   media,
+   index,
+   currentIndex,
+   setCurrentIndex,
+   getDetails,
+}: Props) {
    const { isMovie } = useSidebarContext();
-   const router = useRouter();
-   const getDetails = () => {
-      const type = isMovie ? "movie" : "tv";
-      router.push(`/${type}/${media.id}`);
-      setShowResults(false);
-   };
+
+   const selected = index !== null && index === currentIndex;
    return (
       <li
-         onClick={getDetails}
+         onClick={() => getDetails(index)}
          onMouseDown={(e) => e.preventDefault()}
-         className="hover:bg-light-bg dark:hover:bg-dark-bg h-20 cursor-pointer flex py-2 px-5"
+         onMouseEnter={() => setCurrentIndex(index)}
+         onMouseLeave={() => setCurrentIndex(null)}
+         className={`h-20 cursor-pointer flex py-2 px-5 ${
+            selected ? "bg-light-bg dark:bg-dark-bg" : ""
+         }`}
       >
          <Poster
             alt={media.title || media.name}

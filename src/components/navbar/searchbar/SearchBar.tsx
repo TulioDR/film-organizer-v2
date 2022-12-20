@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import useSidebarContext from "../../../context/SidebarContext";
+import useMediaDetails from "../../../hooks/useMediaDetails";
 import QuickResult from "./QuickResult";
+import ResultsContainer from "./ResultsContainer";
 
 type Props = {};
 
@@ -13,6 +15,8 @@ export default function SearchBar({}: Props) {
    const [showResults, setShowResults] = useState<boolean>(false);
    const [inputValue, setInputValue] = useState<string>("");
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
+
+   const { getMediaDetails } = useMediaDetails();
 
    useEffect(() => {
       const getFoundedMedia = async () => {
@@ -45,11 +49,25 @@ export default function SearchBar({}: Props) {
       setIsOnFocus(false);
       setShowResults(false);
    };
+
+   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+
+   const getDetails = (index: number) => {
+      const type = isMovie ? "movie" : "tv";
+      const id = results[index].id;
+      getMediaDetails(type, id);
+   };
+
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
-      const type = isMovie ? "movie" : "tv";
-      const value = inputValue.toLowerCase();
-      router.push(`/results/${type}?search_query=${value}`);
+      setShowResults(false);
+      if (currentIndex === null) {
+         const type = isMovie ? "movie" : "tv";
+         const value = inputValue.toLowerCase();
+         router.push(`/results/${type}?search_query=${value}`);
+      } else {
+         getDetails(currentIndex);
+      }
    };
 
    return (
@@ -74,15 +92,22 @@ export default function SearchBar({}: Props) {
             </span>
          </div>
          {showResults && (
-            <ul className="absolute top-full left-0 w-full py-3 rounded-b-lg bg-gray-light dark:bg-gray-dark shadow-lg">
-               {results.map((media) => (
+            <ResultsContainer
+               showResults={showResults}
+               results={results}
+               setCurrentIndex={setCurrentIndex}
+            >
+               {results.map((media, index) => (
                   <QuickResult
                      key={media.id}
                      media={media}
-                     setShowResults={setShowResults}
+                     index={index}
+                     currentIndex={currentIndex}
+                     setCurrentIndex={setCurrentIndex}
+                     getDetails={getDetails}
                   />
                ))}
-            </ul>
+            </ResultsContainer>
          )}
       </form>
    );
