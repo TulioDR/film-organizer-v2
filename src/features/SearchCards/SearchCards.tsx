@@ -1,12 +1,13 @@
 import PageTitle from "../../components/PageTitle";
 import PageAnimationContainer from "../../containers/PageAnimationContainer";
 import { motion } from "framer-motion";
-import Card from "../../components/card/Card";
+
 import TransitionPoster from "../../animations/TransitionPoster";
 import { useEffect, useState } from "react";
 import useSidebarContext from "../../context/SidebarContext";
 import usePageLoadingContext from "../../context/PageLoadingContext";
 import { staggerContainer } from "../../animations/StaggerCards";
+import MainCard from "../../layout/cards/MainCard";
 
 type Props = {
    title: string;
@@ -69,7 +70,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             }  gap-5 overflow-hidden`}
          >
             {media.map((media) => (
-               <Card
+               <MainCard
                   key={media.id}
                   media={media}
                   mediaType={mediaType}

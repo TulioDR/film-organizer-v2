@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import Poster from "../Poster";
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
+import Poster from "../../components/Poster";
 
 type Props = {
    media: any;
@@ -9,7 +9,7 @@ type Props = {
    setSelectedImg: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export default function Card({ media, mediaType, setSelectedImg }: Props) {
+export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
    const router = useRouter();
    const goTo = () => {
       router.push(`/${mediaType}/${media.id}`);
