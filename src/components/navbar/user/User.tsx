@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import Main from "./Main";
-import MenuContainer from "./MenuContainer";
-import ThemeColors from "./ThemeColors";
+
 import { motion } from "framer-motion";
 import useThemeContext from "../../../context/ThemeContext";
+import DropdownMenu from "./DropdownMenu";
+import MainMenu from "./menus/MainMenu";
+import ThemeColorsMenu from "./menus/ThemeColorsMenu";
 
 export default function User() {
    const { themeColor } = useThemeContext();
@@ -49,21 +50,21 @@ export default function User() {
             )}
 
             {isOpen && (
-               <MenuContainer
+               <DropdownMenu
                   divKey={menu}
                   elRef={dropdownRef}
                   height={menuHeight}
                >
                   {menu === "main" && (
-                     <Main
+                     <MainMenu
                         isLoggedIn={isLoggedIn}
                         setIsLoggedIn={setIsLoggedIn}
                         setIsOpen={setIsOpen}
                         setMenu={setMenu}
                      />
                   )}
-                  {menu === "colors" && <ThemeColors setMenu={setMenu} />}
-               </MenuContainer>
+                  {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
+               </DropdownMenu>
             )}
          </div>
          {!isLoggedIn && (

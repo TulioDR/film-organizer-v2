@@ -7,7 +7,7 @@ type Props = {
    elRef: React.RefObject<HTMLDivElement>;
 };
 
-export default function MenuContainer({
+export default function DropdownMenu({
    children,
    divKey,
    height,

@@ -1,8 +1,9 @@
-import UserItem from "./UserItem";
 import { motion } from "framer-motion";
-import ColorIcon from "./ColorIcon";
-import MainIcon from "./MainIcon";
-import useThemeContext from "../../../context/ThemeContext";
+import ColorIcon from "./../ColorIcon";
+import MainIcon from "./../MainIcon";
+import useThemeContext from "../../../../context/ThemeContext";
+import DropdownItem from "./../DropdownItem";
+import ToggleDarkMode from "./../ToggleDarkMode";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -11,7 +12,7 @@ type Props = {
    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Main({
+export default function MainMenu({
    setMenu,
    isLoggedIn,
    setIsLoggedIn,
@@ -41,29 +42,30 @@ export default function Main({
          transition={{ duration: 0.4 }}
          className="w-full space-y-2"
       >
-         <UserItem
+         <DropdownItem
             icon={<MainIcon icon="dark_mode" />}
             onClick={toggleDarkMode}
-            darkMode
-            isDark={isDark}
          >
-            Dark Mode
-         </UserItem>
-         <UserItem
+            <div className="flex items-center justify-between h-full w-full">
+               <span>Dark Mode</span>
+               <ToggleDarkMode isOn={isDark} />
+            </div>
+         </DropdownItem>
+         <DropdownItem
             icon={<ColorIcon color={themeColor} />}
             onClick={() => setMenu("colors")}
             expand
          >
             Theme Colors
-         </UserItem>
+         </DropdownItem>
          {isLoggedIn ? (
-            <UserItem icon={<MainIcon icon="logout" />} onClick={logOut}>
+            <DropdownItem icon={<MainIcon icon="logout" />} onClick={logOut}>
                Log out
-            </UserItem>
+            </DropdownItem>
          ) : (
-            <UserItem icon={<MainIcon icon="login" />} onClick={logIn}>
+            <DropdownItem icon={<MainIcon icon="login" />} onClick={logIn}>
                Log in / Sign up
-            </UserItem>
+            </DropdownItem>
          )}
       </motion.ul>
    );

@@ -1,7 +1,7 @@
-import UserItem from "./UserItem";
 import { motion } from "framer-motion";
-import ColorIcon from "./ColorIcon";
-import useThemeContext from "../../../context/ThemeContext";
+import ColorIcon from "../ColorIcon";
+import useThemeContext from "../../../../context/ThemeContext";
+import DropdownItem from "../DropdownItem";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -22,7 +22,7 @@ const themeColors: ThemeColorsModel[] = [
    { name: "pink", color: "#ec4899" },
 ];
 
-export default function ThemeColors({ setMenu }: Props) {
+export default function ThemeColorsMenu({ setMenu }: Props) {
    const { setThemeColor } = useThemeContext();
 
    return (
@@ -48,13 +48,13 @@ export default function ThemeColors({ setMenu }: Props) {
             <span>Theme Colors</span>
          </div>
          {themeColors.map(({ name, color }) => (
-            <UserItem
+            <DropdownItem
                key={name}
                icon={<ColorIcon color={color} />}
                onClick={() => setThemeColor(color)}
             >
                {name}
-            </UserItem>
+            </DropdownItem>
          ))}
       </motion.ul>
    );

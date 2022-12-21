@@ -9,7 +9,7 @@ const spring = {
    stiffness: 700,
    damping: 30,
 };
-export default function ToggleModeButton({ isOn }: Props) {
+export default function ToggleDarkMode({ isOn }: Props) {
    const { themeColor } = useThemeContext();
    return (
       <div className="h-full py-2">
