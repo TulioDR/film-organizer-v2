@@ -18,8 +18,12 @@ type Props = {
 export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
    const router = useRouter();
    const [isOpen, setIsOpen] = useState<boolean>(false);
+   const toggle = () => setIsOpen(!isOpen);
 
-   const goTo = () => {
+   const [isLeaving, setIsLeaving] = useState<boolean>(false);
+
+   const onExitComplete = () => {
+      if (!isLeaving) return;
       router.push(`/${mediaType}/${media.id}`);
       if (window.innerWidth >= 1280) {
          setSelectedImg(
@@ -28,8 +32,9 @@ export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
       }
    };
 
-   const toggle = () => {
-      setIsOpen(!isOpen);
+   const learnMore = () => {
+      setIsLeaving(true);
+      toggle();
    };
 
    return (
@@ -45,7 +50,7 @@ export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
                size="lg"
             />
          </div>
-         <CardBack isOpen={isOpen}>
+         <CardBack isOpen={isOpen} onExitComplete={onExitComplete}>
             <BackButton onClick={toggle} />
             <Poster
                alt={media.title || media.name}
@@ -61,7 +66,7 @@ export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
                   overview={media.overview || "N/A"}
                />
                <div className="flex justify-between items-center h-9 w-full">
-                  <LearnMore />
+                  <LearnMore onClick={learnMore} />
                   <Bookmark />
                </div>
             </div>

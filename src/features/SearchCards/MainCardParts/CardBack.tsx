@@ -3,11 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 type Props = {
    isOpen: boolean;
    children: React.ReactNode;
+   onExitComplete: () => void;
 };
 
-export default function CardBack({ isOpen, children }: Props) {
+export default function CardBack({ isOpen, children, onExitComplete }: Props) {
    return (
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={onExitComplete}>
          {isOpen && (
             <motion.div
                initial={{ y: "100%" }}
