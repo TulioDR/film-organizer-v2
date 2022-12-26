@@ -3,8 +3,30 @@ import SideLink from "../components/sidebar/SideLink";
 import ToggleModeButton from "../components/sidebar/ToggleModeButton";
 import useSidebarContext from "../context/SidebarContext";
 
+import { useEffect, useState } from "react";
+import CreateListButton from "../components/sidebar/CreateListButton";
+import CreateListForm from "../components/sidebar/CreateListForm";
+
 export default function Sidebar() {
    const { isMovie, openSidebar } = useSidebarContext();
+   const [lists, setLists] = useState<any[]>([]);
+
+   useEffect(() => {
+      const getLists = async () => {
+         const res = await fetch("/api/lists");
+         const data = await res.json();
+         setLists(data);
+      };
+      getLists();
+   }, []);
+
+   const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
+   const openForm = () => {
+      setShowCreateForm(true);
+   };
+   const closeForm = () => {
+      setShowCreateForm(false);
+   };
 
    return (
       <div
@@ -39,6 +61,21 @@ export default function Sidebar() {
                text="Manage Lists"
             />
          </ul>
+         <CreateListButton onClick={openForm} />
+         <div className="ml-5 text-xs uppercase my-3 text-light-text-soft dark:text-dark-text-soft">
+            Lists
+         </div>
+         <ul className="space-y-3">
+            {lists.map((list) => (
+               <SideLink
+                  key={list.id}
+                  link="/"
+                  icon="featured_play_list"
+                  text={list.name}
+               />
+            ))}
+         </ul>
+         {showCreateForm && <CreateListForm close={closeForm} />}
       </div>
    );
 }

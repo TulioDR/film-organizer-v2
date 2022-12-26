@@ -50,8 +50,6 @@ export default function Overview({
       : "Not Available";
 
    const directorsValue = crew.filter((person) => person.job === "Director");
-
-   console.log(directorsValue);
    return (
       <motion.div
          initial={{ y: 100, opacity: 0 }}
