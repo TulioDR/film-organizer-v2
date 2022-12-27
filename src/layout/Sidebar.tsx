@@ -5,10 +5,12 @@ import useSidebarContext from "../context/SidebarContext";
 
 import { useEffect, useState } from "react";
 import CreateListButton from "../components/sidebar/CreateListButton";
-import CreateListForm from "../components/sidebar/CreateListForm";
 import { getLists } from "../actions/lists";
 
-export default function Sidebar() {
+interface Props {
+   openForm: () => void;
+}
+export default function Sidebar({ openForm }: Props) {
    const { isMovie, openSidebar } = useSidebarContext();
    const [lists, setLists] = useState<any[]>([]);
 
@@ -19,14 +21,6 @@ export default function Sidebar() {
       };
       getListsItems();
    }, []);
-
-   const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
-   const openForm = () => {
-      setShowCreateForm(true);
-   };
-   const closeForm = () => {
-      setShowCreateForm(false);
-   };
 
    return (
       <div
@@ -75,7 +69,6 @@ export default function Sidebar() {
                />
             ))}
          </ul>
-         {showCreateForm && <CreateListForm close={closeForm} />}
       </div>
    );
 }

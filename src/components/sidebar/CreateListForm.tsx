@@ -1,48 +1,91 @@
-import React, { FormEvent, useRef } from "react";
+import { useState } from "react";
 import { createList } from "../../actions/lists";
+import { Formik, Form, Field } from "formik";
+import { AnimatePresence, motion } from "framer-motion";
+import useThemeContext from "../../context/ThemeContext";
 
 type Props = {
    close: () => void;
 };
 
 export default function CreateListForm({ close }: Props) {
-   const inputRef = useRef<HTMLInputElement>(null);
+   const { themeColor } = useThemeContext();
+   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-   const handleSubmit = (e: FormEvent) => {
-      e.preventDefault();
-      // close();
-      const listName = inputRef.current?.value!;
-      createList({ listName });
+   function onlyLettersAndNumbers(str: string) {
+      return /^[A-Za-z0-9]*$/.test(str);
+   }
+   const handleSubmit = (values: any) => {
+      createList({ listName: values.name });
       console.log("submitted");
+      close();
    };
 
    return (
-      <div className="fixed top-0 left-0 w-full h-screen bg-gray-500 bg-opacity-50 grid place-content-center">
-         <form
+      <div className="fixed top-0 left-0 w-screen h-screen bg-gray-500 bg-opacity-50 grid place-content-center z-50">
+         <Formik
+            initialValues={{ name: "" }}
+            validate={(values) => {
+               let error: any = {};
+               if (!values.name) {
+                  error.name = "Name required";
+               } else if (!onlyLettersAndNumbers(values.name)) {
+                  error.name =
+                     "Invalid name, it should only contain letters and numbers";
+               }
+               return error;
+            }}
             onSubmit={handleSubmit}
-            className="h-80 w-80 p-5 bg-light-bg dark:bg-dark-bg flex flex-col space-y-2"
          >
-            <input
-               ref={inputRef}
-               type="text"
-               className="w-full h-9 bg-transparent border-b-2 border-blue-600 outline-none"
-            />
-            <div className="w-full flex justify-end space-x-2">
-               <button
-                  type="button"
-                  onClick={close}
-                  className="px-3 py-2 rounded-lg bg-red-600"
-               >
-                  Close
-               </button>
-               <button
-                  type="submit"
-                  className="px-3 py-2 rounded-lg bg-blue-600"
-               >
-                  Create
-               </button>
-            </div>
-         </form>
+            {({ errors, touched }) => (
+               <Form className="rounded-lg w-96 p-10 bg-light-bg dark:bg-dark-bg">
+                  <div className="relative overflow-hidden">
+                     <Field
+                        name="name"
+                        placeholder="List name"
+                        autoComplete="off"
+                        maxLength="20"
+                        className="w-full h-9 bg-transparent text-light-text-normal dark:text-dark-text-normal placeholder:text-light-text-soft dark:placeholder:text-dark-text-soft border-b-2 border-light-text-normal dark:border-dark-text-normal outline-none"
+                        autoFocus
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
+                     />
+                     <AnimatePresence>
+                        {isFocused && (
+                           <motion.div
+                              initial={{ x: "-100%" }}
+                              animate={{ x: 0 }}
+                              exit={{ x: "100%" }}
+                              transition={{ duration: 0.4, ease: "easeInOut" }}
+                              className="absolute bottom-0 left-0 w-full h-1"
+                              style={{ backgroundColor: themeColor }}
+                           ></motion.div>
+                        )}
+                     </AnimatePresence>
+                  </div>
+                  {touched.name && errors.name && (
+                     <div className="w-full text-red-600 dark:text-red-400">
+                        {errors.name}
+                     </div>
+                  )}
+                  <div className="w-full flex justify-end space-x-2 mt-5">
+                     <button
+                        type="button"
+                        onClick={close}
+                        className="px-3 py-2 rounded-lg bg-red-600"
+                     >
+                        Close
+                     </button>
+                     <button
+                        type="submit"
+                        className="px-3 py-2 rounded-lg bg-blue-600"
+                     >
+                        Create
+                     </button>
+                  </div>
+               </Form>
+            )}
+         </Formik>
       </div>
    );
 }
