@@ -56,7 +56,7 @@ export default function Sidebar() {
             />
             <SideLink link="/discover" icon="travel_explore" text="Discover" />
             <SideLink
-               link="/manage"
+               link="/lists"
                icon="format_list_bulleted"
                text="Manage Lists"
             />
@@ -69,7 +69,7 @@ export default function Sidebar() {
             {lists.map((list) => (
                <SideLink
                   key={list.id}
-                  link="/"
+                  link={`/lists/${list.id}`}
                   icon="featured_play_list"
                   text={list.name}
                />

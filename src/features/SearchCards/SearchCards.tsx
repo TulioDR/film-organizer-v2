@@ -78,7 +78,10 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                />
             ))}
          </motion.div>
-         <TransitionPoster selectedImg={selectedImg} />
+         <TransitionPoster
+            selectedImg={selectedImg}
+            setSelectedImg={setSelectedImg}
+         />
       </PageAnimationContainer>
    );
 }
