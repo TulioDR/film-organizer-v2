@@ -6,18 +6,18 @@ import useSidebarContext from "../context/SidebarContext";
 import { useEffect, useState } from "react";
 import CreateListButton from "../components/sidebar/CreateListButton";
 import CreateListForm from "../components/sidebar/CreateListForm";
+import { getLists } from "../actions/lists";
 
 export default function Sidebar() {
    const { isMovie, openSidebar } = useSidebarContext();
    const [lists, setLists] = useState<any[]>([]);
 
    useEffect(() => {
-      const getLists = async () => {
-         const res = await fetch("/api/lists");
-         const data = await res.json();
+      const getListsItems = async () => {
+         const data = await getLists();
          setLists(data);
       };
-      getLists();
+      getListsItems();
    }, []);
 
    const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
