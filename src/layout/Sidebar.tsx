@@ -3,24 +3,15 @@ import SideLink from "../components/sidebar/SideLink";
 import ToggleModeButton from "../components/sidebar/ToggleModeButton";
 import useSidebarContext from "../context/SidebarContext";
 
-import { useEffect, useState } from "react";
 import CreateListButton from "../components/sidebar/CreateListButton";
-import { getLists } from "../actions/lists";
+import useListsContext from "../context/ListsContext";
 
 interface Props {
    openForm: () => void;
 }
 export default function Sidebar({ openForm }: Props) {
    const { isMovie, openSidebar } = useSidebarContext();
-   const [lists, setLists] = useState<any[]>([]);
-
-   useEffect(() => {
-      const getListsItems = async () => {
-         const data = await getLists();
-         setLists(data);
-      };
-      getListsItems();
-   }, []);
+   const { lists } = useListsContext();
 
    return (
       <div

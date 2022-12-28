@@ -11,28 +11,31 @@ import { SidebarProvider } from "../context/SidebarContext";
 import Navbar from "../layout/Navbar";
 import SidebarsContainer from "../containers/SidebarsContainer";
 import { ThemeProvider } from "../context/ThemeContext";
+import { ListsProvider } from "../context/ListsContext";
 
 export default function App({ Component, pageProps }: AppProps) {
    const router = useRouter();
    return (
       <div className="flex bg-light-bg dark:bg-dark-bg text-light-text-hard dark:text-dark-text-hard">
          <ThemeProvider>
-            <SidebarProvider>
-               <SidebarsContainer />
-               <div
-                  id="scroll-container"
-                  className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden px-5 pb-5"
-               >
-                  <Navbar />
-                  <AnimatePresence mode="wait">
-                     <motion.div key={router.asPath}>
-                        <PageLoadingProvider>
-                           <Component {...pageProps} />
-                        </PageLoadingProvider>
-                     </motion.div>
-                  </AnimatePresence>
-               </div>
-            </SidebarProvider>
+            <ListsProvider>
+               <SidebarProvider>
+                  <SidebarsContainer />
+                  <div
+                     id="scroll-container"
+                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden px-5 pb-5"
+                  >
+                     <Navbar />
+                     <AnimatePresence mode="wait">
+                        <motion.div key={router.asPath}>
+                           <PageLoadingProvider>
+                              <Component {...pageProps} />
+                           </PageLoadingProvider>
+                        </motion.div>
+                     </AnimatePresence>
+                  </div>
+               </SidebarProvider>
+            </ListsProvider>
          </ThemeProvider>
       </div>
    );
