@@ -3,6 +3,7 @@ import { createList } from "../../actions/lists";
 import { Formik, Form, Field } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
 import useThemeContext from "../../context/ThemeContext";
+import listNameValidation from "../../utils/listNameValidation";
 
 type Props = {
    close: () => void;
@@ -12,9 +13,6 @@ export default function CreateListForm({ close }: Props) {
    const { themeColor } = useThemeContext();
    const [isFocused, setIsFocused] = useState<boolean>(false);
 
-   function onlyLettersAndNumbers(str: string) {
-      return /^[A-Za-z0-9]*$/.test(str);
-   }
    const handleSubmit = (values: any) => {
       createList({ listName: values.name });
       console.log("submitted");
@@ -25,16 +23,7 @@ export default function CreateListForm({ close }: Props) {
       <div className="fixed top-0 left-0 w-screen h-screen bg-gray-500 bg-opacity-50 grid place-content-center z-50">
          <Formik
             initialValues={{ name: "" }}
-            validate={(values) => {
-               let error: any = {};
-               if (!values.name) {
-                  error.name = "Name required";
-               } else if (!onlyLettersAndNumbers(values.name)) {
-                  error.name =
-                     "Invalid name, it should only contain letters and numbers";
-               }
-               return error;
-            }}
+            validate={listNameValidation}
             onSubmit={handleSubmit}
          >
             {({ errors, touched }) => (
@@ -44,7 +33,7 @@ export default function CreateListForm({ close }: Props) {
                         name="name"
                         placeholder="List name"
                         autoComplete="off"
-                        maxLength="20"
+                        maxLength={20}
                         className="w-full h-9 bg-transparent text-light-text-normal dark:text-dark-text-normal placeholder:text-light-text-soft dark:placeholder:text-dark-text-soft border-b-2 border-light-text-normal dark:border-dark-text-normal outline-none"
                         autoFocus
                         onFocus={() => setIsFocused(true)}
@@ -57,8 +46,8 @@ export default function CreateListForm({ close }: Props) {
                               animate={{ x: 0 }}
                               exit={{ x: "100%" }}
                               transition={{ duration: 0.3, ease: "easeInOut" }}
-                              className="absolute bottom-0 left-0 w-full h-1"
                               style={{ backgroundColor: themeColor }}
+                              className="absolute bottom-0 left-0 w-full h-1"
                            ></motion.div>
                         )}
                      </AnimatePresence>

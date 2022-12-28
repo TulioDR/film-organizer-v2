@@ -1,7 +1,10 @@
 import Head from "next/head";
+import ListCard from "../../components/manage/ListCard";
 import PageTitle from "../../components/PageTitle";
+import useListsContext from "../../context/ListsContext";
 
 export default function Lists() {
+   const { lists } = useListsContext();
    return (
       <div>
          <Head>
@@ -10,6 +13,11 @@ export default function Lists() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <PageTitle>Manage</PageTitle>
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20">
+            {lists.map((list) => (
+               <ListCard key={list.id} list={list} />
+            ))}
+         </div>
       </div>
    );
 }
