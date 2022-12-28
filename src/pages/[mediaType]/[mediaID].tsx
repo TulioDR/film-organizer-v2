@@ -70,7 +70,10 @@ export default function Details({ mediaType, media }: Props) {
                />
             </div>
          </div>
-         <TransitionPoster selectedImg={selectedImg} />
+         <TransitionPoster
+            selectedImg={selectedImg}
+            setSelectedImg={setSelectedImg}
+         />
       </ExitDetails>
    );
 }
