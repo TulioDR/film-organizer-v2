@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { FormEvent, useRef, useState } from "react";
-import { updateList } from "../../actions/lists";
+import { deleteList, updateList } from "../../actions/lists";
 import listNameValidation from "../../utils/listNameValidation";
 import BottomBorder from "./BottomBorder";
 
@@ -23,8 +23,9 @@ export default function ListCard({ list }: Props) {
       setShowEditButtons(true);
       inputRef.current?.focus();
    };
-   const deleteList = () => {
+   const deleteListButton = () => {
       console.log("delete");
+      deleteList(list.id);
    };
    const saveEdit = () => {
       if (value === list.name) {
@@ -81,7 +82,7 @@ export default function ListCard({ list }: Props) {
                </div>
                <div className="h-full relative overflow-hidden">
                   <EditButton onClick={openEdit} icon="edit" />
-                  <EditButton onClick={deleteList} icon="delete" red />
+                  <EditButton onClick={deleteListButton} icon="delete" red />
                   <EditButtonsContainer showEditButtons={showEditButtons}>
                      <EditButton onClick={saveEdit} icon="done" />
                      <EditButton onClick={cancelEdit} icon="close" red />

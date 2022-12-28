@@ -26,13 +26,14 @@ export const updateList = (id: string, newName: any) => {
    }
 };
 
-// export const deleteList = (id: string) => {
-//    try {
-//       api.deleteList(id);
-//    } catch (error) {
-//       console.log(error);
-//    }
-// };
+export const deleteList = (id: string) => {
+   try {
+      const data = axios.delete(`/api/lists/${id}`);
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
 
 // export const getList = async (id: string) => {
 //    try {
