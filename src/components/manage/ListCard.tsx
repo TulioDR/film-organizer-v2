@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { FormEvent, useRef, useState } from "react";
+import { updateList } from "../../actions/lists";
 import listNameValidation from "../../utils/listNameValidation";
 import BottomBorder from "./BottomBorder";
 
@@ -30,6 +31,7 @@ export default function ListCard({ list }: Props) {
          console.log("nothing was saved");
       } else {
          console.log("list saved");
+         updateList(list.id, { name: value });
       }
    };
    const cancelEdit = () => {

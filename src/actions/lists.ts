@@ -17,27 +17,27 @@ export const createList = async (listName: any) => {
    }
 };
 
-// export const getList = async (id: string) => {
-//    try {
-//       const { data } = await api.getList(id);
-//       return data;
-//    } catch (error) {
-//       console.log(error);
-//    }
-// };
-
-// export const updateList = (id: string, list: any) => {
-//    try {
-//       const { data } = await api.updateList(id, list);
-//       return data;
-//    } catch (error) {
-//       console.log(error);
-//    }
-// };
+export const updateList = (id: string, newName: any) => {
+   try {
+      const data = axios.put(`/api/lists/${id}`, newName);
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
 
 // export const deleteList = (id: string) => {
 //    try {
 //       api.deleteList(id);
+//    } catch (error) {
+//       console.log(error);
+//    }
+// };
+
+// export const getList = async (id: string) => {
+//    try {
+//       const { data } = await api.getList(id);
+//       return data;
 //    } catch (error) {
 //       console.log(error);
 //    }
