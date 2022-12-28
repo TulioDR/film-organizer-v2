@@ -56,7 +56,7 @@ export default function CreateListForm({ close }: Props) {
                               initial={{ x: "-100%" }}
                               animate={{ x: 0 }}
                               exit={{ x: "100%" }}
-                              transition={{ duration: 0.4, ease: "easeInOut" }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
                               className="absolute bottom-0 left-0 w-full h-1"
                               style={{ backgroundColor: themeColor }}
                            ></motion.div>
