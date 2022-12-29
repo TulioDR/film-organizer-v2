@@ -12,6 +12,7 @@ import Navbar from "../layout/Navbar";
 import SidebarsContainer from "../containers/SidebarsContainer";
 import { ThemeProvider } from "../context/ThemeContext";
 import { ListsProvider } from "../context/ListsContext";
+import SaveMediaModal from "../components/SaveMediaModal";
 
 export default function App({ Component, pageProps }: AppProps) {
    const router = useRouter();
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
          <ThemeProvider>
             <ListsProvider>
                <SidebarProvider>
+                  <SaveMediaModal />
                   <SidebarsContainer />
                   <div
                      id="scroll-container"

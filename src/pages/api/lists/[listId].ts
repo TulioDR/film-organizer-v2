@@ -37,7 +37,12 @@ export default async function handler(
                id: req.query.listId as string,
             },
          });
-         res.status(200).json(list);
+         const media = await prisma.media.findMany({
+            where: {
+               listId: req.query.listId as string,
+            },
+         });
+         res.status(200).json({ list, media });
       } catch (error: any) {
          res.status(404).json(error);
       }

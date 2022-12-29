@@ -1,3 +1,4 @@
+import useListsContext from "../../../context/ListsContext";
 import useThemeContext from "../../../context/ThemeContext";
 import useMediaDetails from "../../../hooks/useMediaDetails";
 import Poster from "../../Poster";
@@ -18,6 +19,8 @@ const changeDateFormat = (date: string) => {
 export default function NowPlaying({ movie }: Props) {
    const { getMediaDetails } = useMediaDetails();
    const { themeColor } = useThemeContext();
+   const { openSaveMediaModal } = useListsContext();
+
    return (
       <div className="rounded-2xl aspect-video w-full overflow-hidden shadow-md relative">
          <Poster
@@ -35,11 +38,14 @@ export default function NowPlaying({ movie }: Props) {
                   {changeDateFormat(movie.release_date)}
                </div>
                <div className="flex items-center space-x-4 text-dark-text-hard">
-                  <div className="w-6 grid place-content-center">
+                  <button
+                     onClick={() => openSaveMediaModal("movie", movie)}
+                     className="w-6 grid place-content-center"
+                  >
                      <span className="material-icons text-5xl">
                         bookmark_border
                      </span>
-                  </div>
+                  </button>
                   <button
                      onClick={() => getMediaDetails("movie", movie.id)}
                      className="rounded-lg group backdrop-blur drop-shadow-lg px-3 border border-gray-500 h-10 text-sm font-medium relative overflow-hidden text-white"
