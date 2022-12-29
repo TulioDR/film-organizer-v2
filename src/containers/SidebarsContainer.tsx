@@ -21,7 +21,7 @@ export default function SidebarsContainer() {
          >
             <Sidebar openForm={openForm} />
          </div>
-         {showCreateForm && <CreateListForm close={closeForm} />}
+         <CreateListForm isOpen={showCreateForm} close={closeForm} />
       </>
    );
 }

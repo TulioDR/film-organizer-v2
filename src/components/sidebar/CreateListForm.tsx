@@ -4,12 +4,16 @@ import { Formik, Form, Field } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
 import useThemeContext from "../../context/ThemeContext";
 import listNameValidation from "../../utils/listNameValidation";
+import ModalContainer from "../modals/ModalContainer";
+import ModalTItle from "../modals/ModalTItle";
+import ModalButton from "../modals/ModalButton";
 
 type Props = {
+   isOpen: boolean;
    close: () => void;
 };
 
-export default function CreateListForm({ close }: Props) {
+export default function CreateListForm({ isOpen, close }: Props) {
    const { themeColor } = useThemeContext();
    const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -20,14 +24,15 @@ export default function CreateListForm({ close }: Props) {
    };
 
    return (
-      <div className="fixed top-0 left-0 w-screen h-screen bg-gray-500 bg-opacity-50 grid place-content-center z-50">
+      <ModalContainer isOpen={isOpen} close={close}>
          <Formik
             initialValues={{ name: "" }}
             validate={listNameValidation}
             onSubmit={handleSubmit}
          >
             {({ errors, touched }) => (
-               <Form className="rounded-lg w-96 p-10 bg-light-bg dark:bg-dark-bg">
+               <Form className="w-72">
+                  <ModalTItle>Create a List</ModalTItle>
                   <div className="relative overflow-hidden">
                      <Field
                         name="name"
@@ -58,23 +63,14 @@ export default function CreateListForm({ close }: Props) {
                      </div>
                   )}
                   <div className="w-full flex justify-end space-x-2 mt-5">
-                     <button
-                        type="button"
-                        onClick={close}
-                        className="px-3 py-2 rounded-lg bg-red-600"
-                     >
-                        Close
-                     </button>
-                     <button
-                        type="submit"
-                        className="px-3 py-2 rounded-lg bg-blue-600"
-                     >
+                     <ModalButton onClick={close}>Cancel</ModalButton>
+                     <ModalButton submit blue>
                         Create
-                     </button>
+                     </ModalButton>
                   </div>
                </Form>
             )}
          </Formik>
-      </div>
+      </ModalContainer>
    );
 }
