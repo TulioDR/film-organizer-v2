@@ -1,6 +1,7 @@
 import { deleteList } from "../../actions/lists";
 import ListModel from "../../models/listModel";
 import ModalButton from "../modals/ModalButton";
+import ModalButtonsContainer from "../modals/ModalButtonsContainer";
 import ModalContainer from "../modals/ModalContainer";
 import ModalTItle from "../modals/ModalTItle";
 
@@ -35,12 +36,12 @@ export default function DeleteListModal({
                undone.
             </p>
          </div>
-         <div className="w-full flex justify-end space-x-2 mt-5">
+         <ModalButtonsContainer>
             <ModalButton onClick={close}>Cancel</ModalButton>
             <ModalButton onClick={deleteListFinally} red>
                Delete
             </ModalButton>
-         </div>
+         </ModalButtonsContainer>
       </ModalContainer>
    );
 }

@@ -7,6 +7,7 @@ import listNameValidation from "../../utils/listNameValidation";
 import ModalContainer from "../modals/ModalContainer";
 import ModalTItle from "../modals/ModalTItle";
 import ModalButton from "../modals/ModalButton";
+import ModalButtonsContainer from "../modals/ModalButtonsContainer";
 
 type Props = {
    isOpen: boolean;
@@ -62,12 +63,12 @@ export default function CreateListForm({ isOpen, close }: Props) {
                         {errors.name}
                      </div>
                   )}
-                  <div className="w-full flex justify-end space-x-2 mt-5">
+                  <ModalButtonsContainer>
                      <ModalButton onClick={close}>Cancel</ModalButton>
                      <ModalButton submit blue>
                         Create
                      </ModalButton>
-                  </div>
+                  </ModalButtonsContainer>
                </Form>
             )}
          </Formik>
