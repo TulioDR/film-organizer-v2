@@ -31,13 +31,15 @@ export default async function handler(
       }
    }
    if (req.method === "GET") {
-      // try {
-      //    const list = await prisma.list.create({
-      //       data: { name: req.body.listName },
-      //    });
-      //    res.status(200).json(list);
-      // } catch (error: any) {
-      //    res.status(404).json(error);
-      // }
+      try {
+         const list = await prisma.list.findUnique({
+            where: {
+               id: req.query.listId as string,
+            },
+         });
+         res.status(200).json(list);
+      } catch (error: any) {
+         res.status(404).json(error);
+      }
    }
 }

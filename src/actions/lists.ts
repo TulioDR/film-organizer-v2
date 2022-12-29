@@ -1,7 +1,18 @@
 import axios from "axios";
+const API = axios.create({ baseURL: "/api/lists" });
+
 export const getLists = async () => {
    try {
-      const { data } = await axios.get("/api/lists");
+      const { data } = await API.get("/");
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const getList = async (id: string) => {
+   try {
+      const { data } = await API.get(`/${id}`);
       return data;
    } catch (error) {
       console.log(error);
@@ -10,7 +21,7 @@ export const getLists = async () => {
 
 export const createList = async (listName: any) => {
    try {
-      const data = await axios.post("/api/lists", listName);
+      const data = await API.post("/", listName);
       return data;
    } catch (error) {
       console.log(error);
@@ -19,7 +30,7 @@ export const createList = async (listName: any) => {
 
 export const updateList = (id: string, newName: any) => {
    try {
-      const data = axios.put(`/api/lists/${id}`, newName);
+      const data = API.put(`/${id}`, newName);
       return data;
    } catch (error) {
       console.log(error);
@@ -28,18 +39,9 @@ export const updateList = (id: string, newName: any) => {
 
 export const deleteList = (id: string) => {
    try {
-      const data = axios.delete(`/api/lists/${id}`);
+      const data = API.delete(`/${id}`);
       return data;
    } catch (error) {
       console.log(error);
    }
 };
-
-// export const getList = async (id: string) => {
-//    try {
-//       const { data } = await api.getList(id);
-//       return data;
-//    } catch (error) {
-//       console.log(error);
-//    }
-// };

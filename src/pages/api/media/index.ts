@@ -5,18 +5,11 @@ export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse
 ) {
-   if (req.method === "GET") {
-      try {
-         const lists = await prisma.list.findMany();
-         res.status(200).json(lists);
-      } catch (error: any) {
-         res.status(404).json(error);
-      }
-   }
    if (req.method === "POST") {
       try {
-         const list = await prisma.list.create({
-            data: { name: req.body.listName },
+         const { name, poster_path, type, listId } = req.body;
+         const list = await prisma.media.create({
+            data: { name, poster_path, type, listId },
          });
          res.status(200).json(list);
       } catch (error: any) {

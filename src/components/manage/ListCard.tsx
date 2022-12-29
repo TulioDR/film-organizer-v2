@@ -24,10 +24,6 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       setShowEditButtons(true);
       inputRef.current?.focus();
    };
-   // const openDeleteModal = () => {
-   //    console.log("delete");
-   //    deleteList(list.id);
-   // };
    const saveEdit = () => {
       if (value === list.name) {
          console.log("nothing was saved");

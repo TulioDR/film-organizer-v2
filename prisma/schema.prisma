@@ -13,6 +13,18 @@ datasource db {
 model List {
    id String @id @default(uuid())
    name String
+   createdAt DateTime @default(now())
+   media Media[]
+}
+
+model Media {
+   id String @id @default(uuid())
+   name String
+   poster_path String
+   type String
+   createdAt DateTime @default(now())
+   list List @relation(fields: [listId], references:[id])
+   listId String
 }
 
 // model User {
@@ -28,10 +40,5 @@ model List {
 //    creatorId String
 // }
 
-// model Media {
-//    id Int @id @default(autoincrement())
-//    name String
-//    poster_path String
-//    type String
-// }
+
 
