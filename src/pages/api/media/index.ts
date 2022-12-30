@@ -16,4 +16,14 @@ export default async function handler(
          res.status(404).json(error);
       }
    }
+   if (req.method === "DELETE") {
+      try {
+         const media = await prisma.media.deleteMany({
+            where: { id: { in: req.body } },
+         });
+         res.status(200).json(media);
+      } catch (error: any) {
+         res.status(404).json(error);
+      }
+   }
 }

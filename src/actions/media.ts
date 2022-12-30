@@ -10,3 +10,12 @@ export const createMedia = async (media: MediaModel) => {
       console.log(error);
    }
 };
+
+export const deleteMedia = async (idsArray: any) => {
+   try {
+      const data = await API.delete("/", { data: idsArray });
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};

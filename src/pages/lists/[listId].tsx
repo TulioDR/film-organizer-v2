@@ -8,6 +8,7 @@ import useSidebarContext from "../../context/SidebarContext";
 import MediaModel from "../../models/MediaModel";
 // import ListModel from "../../models/listModel";
 import SavedCard from "../../components/list/SavedCard";
+import DeleteMediaModal from "../../components/list/DeleteMediaModal";
 
 type Props = { listID: string };
 
@@ -32,6 +33,14 @@ export default function ListID({ listID }: Props) {
    const closeDelete = () => {
       setIsDeleteOpen(false);
       setMediaToDelete([]);
+   };
+
+   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+   const openDeleteModal = () => {
+      setIsDeleteModalOpen(true);
+   };
+   const closeDeleteModal = () => {
+      setIsDeleteModalOpen(false);
    };
 
    useEffect(() => {
@@ -67,8 +76,16 @@ export default function ListID({ listID }: Props) {
          </div>
 
          <DeleteButton
+            mediaToDelete={mediaToDelete}
             isDeleteOpen={isDeleteOpen}
             onClick={isDeleteOpen ? closeDelete : openDelete}
+            openDeleteModal={openDeleteModal}
+         />
+         <DeleteMediaModal
+            list={list}
+            isOpen={isDeleteModalOpen}
+            close={closeDeleteModal}
+            mediaToDelete={mediaToDelete}
          />
       </div>
    );
