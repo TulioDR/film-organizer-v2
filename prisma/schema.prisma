@@ -23,7 +23,7 @@ model Media {
    poster_path String
    type String
    createdAt DateTime @default(now())
-   list List @relation(fields: [listId], references:[id])
+   list List @relation(fields: [listId], references:[id], onDelete: Cascade)
    listId String
 }
 
@@ -32,13 +32,5 @@ model Media {
 //    name String
 //    lists List[]
 // }
-
-// model List {
-//    id String @id @default(uuid())
-//    name String
-//    creator User @relation(fields: [creatorId], references: [id])
-//    creatorId String
-// }
-
 
 

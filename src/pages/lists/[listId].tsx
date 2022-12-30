@@ -1,11 +1,13 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 import { getList } from "../../actions/lists";
+import DeleteButton from "../../components/list/DeleteButton";
+
 import PageTitle from "../../components/PageTitle";
-import Poster from "../../components/Poster";
 import useSidebarContext from "../../context/SidebarContext";
 import MediaModel from "../../models/MediaModel";
 // import ListModel from "../../models/listModel";
+import SavedCard from "../../components/list/SavedCard";
 
 type Props = { listID: string };
 
@@ -18,14 +20,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default function ListID({ listID }: Props) {
    const [list, setList] = useState<any>();
-   const [media, setMedia] = useState<MediaModel[]>([]);
    const { openSidebar } = useSidebarContext();
+
+   const [media, setMedia] = useState<MediaModel[]>([]);
+   const [mediaToDelete, setMediaToDelete] = useState<MediaModel[]>([]);
+
+   const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
+   const openDelete = () => {
+      setIsDeleteOpen(true);
+   };
+   const closeDelete = () => {
+      setIsDeleteOpen(false);
+      setMediaToDelete([]);
+   };
 
    useEffect(() => {
       const getListFunc = async () => {
          const { list, media } = await getList(listID);
-         console.log(list);
-         console.log(media);
+         // console.log(list);
+         // console.log(media);
          setMedia(media);
          setList(list);
       };
@@ -43,16 +56,20 @@ export default function ListID({ listID }: Props) {
             }  gap-5`}
          >
             {media.map((media) => (
-               <div className="relative">
-                  <Poster
-                     alt={media.name}
-                     posterPath={media.poster_path}
-                     size="lg"
-                  />
-                  <div className="absolute w-full h-full">{media.name}</div>
-               </div>
+               <SavedCard
+                  key={media.id}
+                  media={media}
+                  isDeleteOpen={isDeleteOpen}
+                  mediaToDelete={mediaToDelete}
+                  setMediaToDelete={setMediaToDelete}
+               />
             ))}
          </div>
+
+         <DeleteButton
+            isDeleteOpen={isDeleteOpen}
+            onClick={isDeleteOpen ? closeDelete : openDelete}
+         />
       </div>
    );
 }
