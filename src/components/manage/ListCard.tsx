@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import { FormEvent, useRef, useState } from "react";
 import { updateList } from "../../actions/lists";
+import useListsContext from "../../context/ListsContext";
 import listNameValidation from "../../utils/listNameValidation";
 import BottomBorder from "./BottomBorder";
 
@@ -20,16 +21,20 @@ export default function ListCard({ list, openDeleteModal }: Props) {
 
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
 
+   const { refresh } = useListsContext();
+
    const openEdit = () => {
       setShowEditButtons(true);
       inputRef.current?.focus();
    };
-   const saveEdit = () => {
+   const saveEdit = async () => {
       if (value === list.name) {
          console.log("nothing was saved");
       } else {
          console.log("list saved");
-         updateList(list.id, { name: value });
+         const updatedList = await updateList(list.id, { name: value });
+         console.log(updatedList);
+         refresh();
       }
    };
    const cancelEdit = () => {
