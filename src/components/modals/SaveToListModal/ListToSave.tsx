@@ -4,6 +4,7 @@ import {
    deleteUniqueMedia,
    getUniqueMedia,
 } from "../../../actions/media";
+import useListsContext from "../../../context/ListsContext";
 import useRefresh from "../../../hooks/useRefresh";
 
 interface ListProps {
@@ -14,8 +15,9 @@ interface ListProps {
 
 export default function ListToSave({ list, media, mediaType }: ListProps) {
    const [isSaved, setIsSaved] = useState<boolean>(false);
-
    const { search, refresh } = useRefresh();
+
+   const { refreshBookmark } = useListsContext();
 
    const saveToList = async () => {
       const createdMedia = await createMedia({
@@ -27,6 +29,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       });
       console.log(createdMedia);
       refresh();
+      refreshBookmark();
    };
 
    const removeFromList = async () => {
@@ -37,6 +40,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       });
       console.log(deletedMedia);
       refresh();
+      refreshBookmark();
    };
 
    useEffect(() => {
@@ -50,7 +54,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          else setIsSaved(false);
       };
       getIsSaved();
-   }, [search]);
+   }, [search, media.id, list.id, mediaType]);
 
    return (
       <li

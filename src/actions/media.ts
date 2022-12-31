@@ -21,6 +21,16 @@ export const getUniqueMedia = async (params: any) => {
    }
 };
 
+export const getFirstMedia = async (params: any) => {
+   try {
+      const { media_id, media_type } = params;
+      const { data } = await API.get(`/first/${media_id}/${media_type}`);
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
 export const deleteUniqueMedia = async (params: any) => {
    try {
       const { media_id, media_type, listId } = params;

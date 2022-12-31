@@ -10,6 +10,8 @@ interface ListsContextInterface {
    currentType: "movie" | "tv";
    currentMedia: any;
    refresh: () => void;
+   refreshBookmark: () => void;
+   refreshCard: boolean;
 }
 
 const ListsContext = createContext({} as ListsContextInterface);
@@ -27,6 +29,9 @@ export function ListsProvider({ children }: Props) {
    const [currentType, setCurrentType] = useState<"movie" | "tv">("movie");
    const [currentMedia, setCurrentMedia] = useState<any>(null);
    const { search, refresh } = useRefresh();
+
+   const [refreshCard, setRefreshCard] = useState<boolean>(true);
+   const refreshBookmark = () => setRefreshCard(!refreshCard);
 
    const openSaveMediaModal = (type: "movie" | "tv", media: any) => {
       setIsSaveMediaOpen(true);
@@ -54,6 +59,8 @@ export function ListsProvider({ children }: Props) {
       currentType,
       currentMedia,
       refresh,
+      refreshBookmark,
+      refreshCard,
    };
    return (
       <ListsContext.Provider value={value}>{children}</ListsContext.Provider>

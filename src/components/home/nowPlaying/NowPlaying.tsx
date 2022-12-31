@@ -1,5 +1,6 @@
 import useListsContext from "../../../context/ListsContext";
 import useThemeContext from "../../../context/ThemeContext";
+import useIsMediaSaved from "../../../hooks/useIsMediaSaved";
 import useMediaDetails from "../../../hooks/useMediaDetails";
 import Poster from "../../Poster";
 
@@ -20,6 +21,8 @@ export default function NowPlaying({ movie }: Props) {
    const { getMediaDetails } = useMediaDetails();
    const { themeColor } = useThemeContext();
    const { openSaveMediaModal } = useListsContext();
+
+   const { isMediaSaved } = useIsMediaSaved(movie.id, "movie");
 
    return (
       <div className="rounded-2xl aspect-video w-full overflow-hidden shadow-md relative">
@@ -43,7 +46,7 @@ export default function NowPlaying({ movie }: Props) {
                      className="w-6 grid place-content-center"
                   >
                      <span className="material-icons text-5xl">
-                        bookmark_border
+                        {isMediaSaved ? "bookmark" : "bookmark_border"}
                      </span>
                   </button>
                   <button

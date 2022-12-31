@@ -48,7 +48,7 @@ export default function DeleteMediaModal({
             <div>The next items are going to be deleted:</div>
             <div>
                Note: Deleting an item from the list is a permanent action and
-               can't be undone.
+               cannot be undone.
             </div>
             <div>
                <div className="mt-2 text-lg font-medium text-light-text-normal dark:text-dark-text-normal">
