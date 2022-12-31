@@ -2,6 +2,35 @@ import axios from "axios";
 import MediaModel from "../models/MediaModel";
 const API = axios.create({ baseURL: "/api/media" });
 
+export const getMedia = async (listId: string) => {
+   try {
+      const { data } = await API.get(`/${listId}`);
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const getUniqueMedia = async (params: any) => {
+   try {
+      const { media_id, media_type, listId } = params;
+      const { data } = await API.get(`/${listId}/${media_id}/${media_type}`);
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const deleteUniqueMedia = async (params: any) => {
+   try {
+      const { media_id, media_type, listId } = params;
+      const { data } = await API.delete(`/${listId}/${media_id}/${media_type}`);
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
 export const createMedia = async (media: MediaModel) => {
    try {
       const data = await API.post("/", media);

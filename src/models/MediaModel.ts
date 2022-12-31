@@ -1,7 +1,8 @@
 export default interface MediaModel {
-   id: string;
+   id?: string;
+   media_id: number;
    name: string;
    poster_path: string;
-   type: "movie" | "tv";
+   media_type: "movie" | "tv";
    listId: string;
 }

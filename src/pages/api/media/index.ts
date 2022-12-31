@@ -7,9 +7,9 @@ export default async function handler(
 ) {
    if (req.method === "POST") {
       try {
-         const { name, poster_path, type, listId } = req.body;
+         const { media_id, name, poster_path, media_type, listId } = req.body;
          const list = await prisma.media.create({
-            data: { name, poster_path, type, listId },
+            data: { media_id, name, poster_path, media_type, listId },
          });
          res.status(200).json(list);
       } catch (error: any) {

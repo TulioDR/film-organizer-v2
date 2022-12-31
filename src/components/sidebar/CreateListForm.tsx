@@ -8,6 +8,7 @@ import ModalContainer from "../modals/ModalContainer";
 import ModalTItle from "../modals/ModalTItle";
 import ModalButton from "../modals/ModalButton";
 import ModalButtonsContainer from "../modals/ModalButtonsContainer";
+import useListsContext from "../../context/ListsContext";
 
 type Props = {
    isOpen: boolean;
@@ -15,12 +16,15 @@ type Props = {
 };
 
 export default function CreateListForm({ isOpen, close }: Props) {
+   const { refresh } = useListsContext();
+
    const { themeColor } = useThemeContext();
    const [isFocused, setIsFocused] = useState<boolean>(false);
 
-   const handleSubmit = (values: any) => {
-      createList({ listName: values.name });
-      console.log("submitted");
+   const handleSubmit = async (values: any) => {
+      const createdList = await createList({ listName: values.name });
+      console.log(createdList);
+      refresh();
       close();
    };
 

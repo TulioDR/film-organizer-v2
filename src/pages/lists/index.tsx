@@ -8,7 +8,6 @@ import ListModel from "../../models/listModel";
 
 export default function Lists() {
    const { lists } = useListsContext();
-
    const [listToDelete, setListToDelete] = useState<ListModel | null>(null);
 
    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

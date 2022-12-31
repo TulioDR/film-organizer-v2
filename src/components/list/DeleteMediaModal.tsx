@@ -11,6 +11,7 @@ type Props = {
    close: () => void;
    mediaToDelete: MediaModel[];
    list: any;
+   refresh: () => void;
 };
 
 export default function DeleteMediaModal({
@@ -18,20 +19,26 @@ export default function DeleteMediaModal({
    close,
    mediaToDelete,
    list,
+   refresh,
 }: Props) {
    const [movies, setMovies] = useState<MediaModel[]>([]);
    const [tvSeries, setTvSeries] = useState<MediaModel[]>([]);
 
    useEffect(() => {
-      const movie = mediaToDelete.filter(({ type }) => type === "movie");
-      const tv = mediaToDelete.filter(({ type }) => type === "tv");
+      const movie = mediaToDelete.filter(
+         ({ media_type }) => media_type === "movie"
+      );
+      const tv = mediaToDelete.filter(({ media_type }) => media_type === "tv");
       setMovies(movie);
       setTvSeries(tv);
    }, [mediaToDelete]);
 
-   const deleteMediaFunction = () => {
+   const deleteMediaFunction = async () => {
       const ids = mediaToDelete.map(({ id }) => id);
-      deleteMedia(ids);
+      const deletedMedia = await deleteMedia(ids);
+      console.log(deletedMedia);
+      refresh();
+      close();
    };
 
    return (

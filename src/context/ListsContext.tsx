@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getLists } from "../actions/lists";
+import useRefresh from "../hooks/useRefresh";
 
 interface ListsContextInterface {
    lists: any[];
@@ -8,6 +9,7 @@ interface ListsContextInterface {
    closeSaveMediaModal: () => void;
    currentType: "movie" | "tv";
    currentMedia: any;
+   refresh: () => void;
 }
 
 const ListsContext = createContext({} as ListsContextInterface);
@@ -24,6 +26,7 @@ export function ListsProvider({ children }: Props) {
 
    const [currentType, setCurrentType] = useState<"movie" | "tv">("movie");
    const [currentMedia, setCurrentMedia] = useState<any>(null);
+   const { search, refresh } = useRefresh();
 
    const openSaveMediaModal = (type: "movie" | "tv", media: any) => {
       setIsSaveMediaOpen(true);
@@ -41,7 +44,7 @@ export function ListsProvider({ children }: Props) {
          setLists(data);
       };
       getListsItems();
-   }, []);
+   }, [search]);
 
    const value: ListsContextInterface = {
       lists,
@@ -50,6 +53,7 @@ export function ListsProvider({ children }: Props) {
       closeSaveMediaModal,
       currentType,
       currentMedia,
+      refresh,
    };
    return (
       <ListsContext.Provider value={value}>{children}</ListsContext.Provider>

@@ -9,6 +9,8 @@ import MediaModel from "../../models/MediaModel";
 // import ListModel from "../../models/listModel";
 import SavedCard from "../../components/list/SavedCard";
 import DeleteMediaModal from "../../components/list/DeleteMediaModal";
+import { getMedia } from "../../actions/media";
+import useRefresh from "../../hooks/useRefresh";
 
 type Props = { listID: string };
 
@@ -41,18 +43,26 @@ export default function ListID({ listID }: Props) {
    };
    const closeDeleteModal = () => {
       setIsDeleteModalOpen(false);
+      closeDelete();
    };
 
    useEffect(() => {
       const getListFunc = async () => {
-         const { list, media } = await getList(listID);
-         // console.log(list);
-         // console.log(media);
-         setMedia(media);
+         const list = await getList(listID);
          setList(list);
       };
       getListFunc();
    }, [listID]);
+
+   const { search, refresh } = useRefresh();
+
+   useEffect(() => {
+      const getMediaFunc = async () => {
+         const media = await getMedia(listID);
+         setMedia(media);
+      };
+      getMediaFunc();
+   }, [listID, search]);
 
    return (
       <div>
@@ -86,6 +96,7 @@ export default function ListID({ listID }: Props) {
             isOpen={isDeleteModalOpen}
             close={closeDeleteModal}
             mediaToDelete={mediaToDelete}
+            refresh={refresh}
          />
       </div>
    );

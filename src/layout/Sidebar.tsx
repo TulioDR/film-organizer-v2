@@ -15,7 +15,7 @@ export default function Sidebar({ openForm }: Props) {
 
    return (
       <div
-         className={`h-screen sticky top-0 duration-300 text-sm font-semibold pr-5 lg:pr-0 ${
+         className={`h-screen sticky top-0 duration-300 overflow-y-hidden hover:overflow-y-auto text-sm font-semibold pr-5 lg:pr-0 ${
             openSidebar ? "w-60 lg:w-56" : "w-14"
          }`}
       >

@@ -19,12 +19,15 @@ model List {
 
 model Media {
    id String @id @default(uuid())
+   media_id Int
    name String
    poster_path String
-   type String
+   media_type String
    createdAt DateTime @default(now())
    list List @relation(fields: [listId], references:[id], onDelete: Cascade)
    listId String
+
+   @@unique([media_type, media_id, listId])
 }
 
 // model User {
