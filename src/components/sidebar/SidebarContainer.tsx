@@ -12,7 +12,7 @@ export default function SidebarContainer({ children }: Props) {
             openSidebar ? "w-60 lg:w-56" : "w-16"
          }`}
       >
-         <div className="w-full h-full pr-5 lg:pr-2 hover:lg:pr-0 overflow-y-hidden hover:overflow-y-auto sidebar-scrollbar">
+         <div className="w-full h-full py-5 pr-5 lg:pr-2 hover:lg:pr-0 overflow-y-hidden hover:overflow-y-scroll sidebar-scrollbar">
             {children}
          </div>
       </div>

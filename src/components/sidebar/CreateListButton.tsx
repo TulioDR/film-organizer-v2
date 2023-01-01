@@ -11,7 +11,7 @@ export default function CreateListButton({ onClick }: Props) {
       <button
          onClick={onClick}
          style={{ backgroundColor: themeColor }}
-         className="rounded-lg h-9 grid place-content-center mt-2 w-full"
+         className="rounded-lg h-9 grid place-content-center mt-2 w-full overflow-hidden"
       >
          CreateListButton
       </button>

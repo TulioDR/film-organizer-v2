@@ -2,14 +2,15 @@ import React from "react";
 
 type Props = {
    icon: string;
-   onClick: () => void;
+   onClick?: () => void;
    red?: boolean;
+   submit?: boolean;
 };
 
-export default function EditButton({ icon, onClick, red }: Props) {
+export default function EditButton({ icon, onClick, red, submit }: Props) {
    return (
       <button
-         type="button"
+         type={submit ? "submit" : "button"}
          onClick={onClick}
          onMouseDown={(e) => e.preventDefault()}
          className={`w-12 h-full hover:text-white ${

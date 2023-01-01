@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import useThemeContext from "../../context/ThemeContext";
 
 type Props = {
@@ -9,17 +10,21 @@ type Props = {
 
 export default function SideLink({ link, icon, text }: Props) {
    const { themeColor } = useThemeContext();
-
    const router = useRouter();
-
    const goTo = () => {
       router.push(link);
    };
 
+   const [isSelected, setIsSelected] = useState<boolean>(false);
+   useEffect(() => {
+      if (router.asPath === link) setIsSelected(true);
+      else setIsSelected(false);
+   }, [router.asPath, link]);
+
    return (
       <li
          className={`cursor-pointer h-9 relative group ${
-            router.asPath === link
+            isSelected
                ? ""
                : "text-light-text-soft dark:text-dark-text-soft hover:text-light-text-hard dark:hover:text-dark-text-hard duration-100"
          }`}
@@ -34,7 +39,7 @@ export default function SideLink({ link, icon, text }: Props) {
          <div
             style={{ backgroundColor: themeColor }}
             className={`absolute top-0 h-full rounded-r-lg -z-10 ${
-               router.asPath === link
+               isSelected
                   ? "w-full duration-300"
                   : "w-0 group-hover:w-14 duration-200"
             }`}
