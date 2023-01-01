@@ -5,20 +5,17 @@ import useSidebarContext from "../context/SidebarContext";
 
 import CreateListButton from "../components/sidebar/CreateListButton";
 import useListsContext from "../context/ListsContext";
+import SidebarContainer from "../components/sidebar/SidebarContainer";
 
 interface Props {
    openForm: () => void;
 }
 export default function Sidebar({ openForm }: Props) {
-   const { isMovie, openSidebar } = useSidebarContext();
+   const { isMovie } = useSidebarContext();
    const { lists } = useListsContext();
 
    return (
-      <div
-         className={`h-screen sticky top-0 duration-300 overflow-y-hidden hover:overflow-y-auto text-sm font-semibold pr-5 lg:pr-0 ${
-            openSidebar ? "w-60 lg:w-56" : "w-14"
-         }`}
-      >
+      <SidebarContainer>
          <BrandHamburger />
          <div className="h-9 w-full pl-5">
             <ToggleModeButton />
@@ -60,6 +57,6 @@ export default function Sidebar({ openForm }: Props) {
                />
             ))}
          </ul>
-      </div>
+      </SidebarContainer>
    );
 }
