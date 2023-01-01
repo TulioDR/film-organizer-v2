@@ -28,7 +28,7 @@ export default function Lists() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <PageTitle>Manage</PageTitle>
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-5 2xl:px-20">
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20">
             {lists.map((list) => (
                <ListCard
                   key={list.id}

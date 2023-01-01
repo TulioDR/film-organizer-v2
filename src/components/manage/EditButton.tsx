@@ -12,7 +12,7 @@ export default function EditButton({ icon, onClick, red, submit }: Props) {
       <button
          type={submit ? "submit" : "button"}
          onClick={onClick}
-         onMouseDown={(e) => e.preventDefault()}
+         // onMouseDown={(e) => e.preventDefault()}
          className={`w-12 h-full hover:text-white ${
             red
                ? "text-red-500 hover:bg-red-500"

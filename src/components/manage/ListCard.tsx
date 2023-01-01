@@ -6,6 +6,7 @@ import BottomBorder from "./BottomBorder";
 
 import EditButton from "./EditButton";
 import EditButtonsContainer from "./EditButtonsContainer";
+import ErrorMessageForName from "./ErrorMessageForName";
 
 type Props = {
    list: any;
@@ -17,49 +18,41 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    const [value, setValue] = useState<string>(list.name);
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
+   const [showError, setShowError] = useState<string | null>(null);
    const { refresh } = useListsContext();
 
-   const [showError, setShowError] = useState<string | null>(null);
-
-   const nameValidation = (value: string): boolean => {
+   const nameValidation = (value: string): null | string => {
+      let error = null;
       if (!value) {
-         setShowError("Name required");
-         setTimeout(() => {
-            setShowError(null);
-         }, 5000);
-         return false;
+         error = "Name required";
       } else if (!onlyLettersNumbersSpaces(value)) {
-         setShowError(
-            "Invalid name, it should only contain letters, numbers and spaces"
-         );
-         setTimeout(() => {
-            setShowError(null);
-         }, 5000);
-         return false;
+         error = "Name should only contain letters, numbers and spaces";
       }
-      return true;
+      setShowError(error);
+      if (error) setTimeout(() => setShowError(null), 5000);
+      return error;
    };
 
    const openEdit = () => {
       setShowEditButtons(true);
       inputRef.current?.focus();
    };
-   const saveEdit = async (e: React.FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const isValid = nameValidation(value);
-      if (!isValid) return;
+      const isInvalid = nameValidation(value);
+      if (isInvalid) return;
       if (value !== list.name) {
          const updatedList = await updateList(list.id, { name: value });
          console.log(updatedList);
          refresh();
-         setShowEditButtons(false);
-         setIsOnFocus(false);
-         setShowError(null);
-         inputRef.current?.blur();
       }
+      closeEdit();
+   };
+   const cancelEdit = () => {
+      setValue(list.name);
+      closeEdit();
    };
    const closeEdit = () => {
-      setValue(list.name);
       setShowEditButtons(false);
       setIsOnFocus(false);
       setShowError(null);
@@ -74,12 +67,12 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    };
 
    const handleKeyDown = (e: any) => {
-      if (e.key === "Escape") closeEdit();
+      if (e.key === "Escape") cancelEdit();
    };
 
    return (
       <li className="relative px-5 shadow-lg bg-gray-light dark:bg-gray-dark rounded-lg list-none">
-         <form onSubmit={saveEdit} className="flex w-full h-full space-x-5">
+         <form onSubmit={handleSubmit} className="flex w-full h-full space-x-5">
             <div className="flex-1 py-3 relative overflow-hidden flex">
                <input
                   ref={inputRef}
@@ -105,20 +98,15 @@ export default function ListCard({ list, openDeleteModal }: Props) {
                />
                <EditButtonsContainer showEditButtons={showEditButtons}>
                   <EditButton submit icon="done" />
-                  <EditButton onClick={closeEdit} icon="close" red />
+                  <EditButton onClick={cancelEdit} icon="close" red />
                </EditButtonsContainer>
             </div>
          </form>
          {showError && isOnFocus && (
-            <div className="absolute left-0 top-full bg-red-500 text-white w-full h-8  rounded-lg px-5 flex items-center justify-between">
-               <span className="text-xs 2xl:text-sm">{showError}</span>
-               <button
-                  onClick={() => setShowError(null)}
-                  className="h-full grid place-content-center w-12"
-               >
-                  <span className="material-icons">close</span>
-               </button>
-            </div>
+            <ErrorMessageForName
+               error={showError}
+               setShowError={setShowError}
+            />
          )}
       </li>
    );
