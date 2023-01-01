@@ -37,17 +37,6 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       setShowEditButtons(true);
       inputRef.current?.focus();
    };
-   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const isInvalid = nameValidation(value);
-      if (isInvalid) return;
-      if (value !== list.name) {
-         const updatedList = await updateList(list.id, { name: value });
-         console.log(updatedList);
-         refresh();
-      }
-      closeEdit();
-   };
    const cancelEdit = () => {
       setValue(list.name);
       closeEdit();
@@ -58,16 +47,26 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       setShowError(null);
       inputRef.current?.blur();
    };
+
    const handleFocus = (e: React.FormEvent<HTMLInputElement>) => {
       setIsOnFocus(true);
-      e.currentTarget.setSelectionRange(
-         e.currentTarget.value.length,
-         e.currentTarget.value.length
-      );
+      const { setSelectionRange, value } = e.currentTarget;
+      setSelectionRange(value.length, value.length);
+   };
+   const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") cancelEdit();
    };
 
-   const handleKeyDown = (e: any) => {
-      if (e.key === "Escape") cancelEdit();
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const isInvalid = nameValidation(value);
+      if (isInvalid) return;
+      if (value !== list.name) {
+         const updatedList = await updateList(list.id, { name: value });
+         console.log(updatedList);
+         refresh();
+      }
+      closeEdit();
    };
 
    return (
