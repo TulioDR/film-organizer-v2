@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteMedia } from "../../actions/media";
+import { deleteMedia } from "../../api/media";
 import MediaModel from "../../models/MediaModel";
 import ModalButton from "../modals/ModalButton";
 import ModalButtonsContainer from "../modals/ModalButtonsContainer";

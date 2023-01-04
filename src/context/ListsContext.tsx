@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getLists } from "../actions/lists";
+import { getLists } from "../api/lists";
 import useRefresh from "../hooks/useRefresh";
 
 interface ListsContextInterface {

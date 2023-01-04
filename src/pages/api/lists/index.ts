@@ -8,7 +8,7 @@ export default async function handler(
    if (req.method === "GET") {
       try {
          const lists = await prisma.list.findMany({
-            orderBy: [{ createdAt: "desc" }],
+            orderBy: [{ createdAt: "asc" }],
          });
          res.status(200).json(lists);
       } catch (error: any) {

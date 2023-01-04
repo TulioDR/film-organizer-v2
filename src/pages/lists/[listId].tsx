@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-import { getList } from "../../actions/lists";
+import { getList } from "../../api/lists";
 import DeleteButton from "../../components/list/DeleteButton";
 
 import PageTitle from "../../components/PageTitle";
@@ -9,7 +9,7 @@ import MediaModel from "../../models/MediaModel";
 // import ListModel from "../../models/listModel";
 import SavedCard from "../../components/list/SavedCard";
 import DeleteMediaModal from "../../components/list/DeleteMediaModal";
-import { getMedia } from "../../actions/media";
+import { getMedia } from "../../api/media";
 import useRefresh from "../../hooks/useRefresh";
 import Head from "next/head";
 

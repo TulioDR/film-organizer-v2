@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { updateList } from "../../actions/lists";
+import { updateList } from "../../api/lists";
 import useListsContext from "../../context/ListsContext";
 import { onlyLettersNumbersSpaces } from "../../utils/listNameValidation";
 import BottomBorder from "./BottomBorder";

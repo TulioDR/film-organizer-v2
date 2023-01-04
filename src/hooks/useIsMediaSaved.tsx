@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFirstMedia } from "../actions/media";
+import { getFirstMedia } from "../api/media";
 import useListsContext from "../context/ListsContext";
 
 export default function useIsMediaSaved(id: number, type: "movie" | "tv") {

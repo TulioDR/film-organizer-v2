@@ -1,4 +1,4 @@
-import { deleteList } from "../../actions/lists";
+import { deleteList } from "../../api/lists";
 import useListsContext from "../../context/ListsContext";
 import ListModel from "../../models/listModel";
 import ModalButton from "../modals/ModalButton";

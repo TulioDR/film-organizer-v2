@@ -3,7 +3,7 @@ import {
    createMedia,
    deleteUniqueMedia,
    getUniqueMedia,
-} from "../../../actions/media";
+} from "../../../api/media";
 import useListsContext from "../../../context/ListsContext";
 import useRefresh from "../../../hooks/useRefresh";
 
