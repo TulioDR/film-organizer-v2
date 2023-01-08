@@ -6,8 +6,10 @@ export default async function handler(
    res: NextApiResponse
 ) {
    if (req.method === "GET") {
+      const { authorId } = req.query;
       try {
          const lists = await prisma.list.findMany({
+            where: { authorId: authorId as string },
             orderBy: [{ createdAt: "asc" }],
          });
          res.status(200).json(lists);
@@ -17,8 +19,9 @@ export default async function handler(
    }
    if (req.method === "POST") {
       try {
+         const { name, authorId } = req.body;
          const list = await prisma.list.create({
-            data: { name: req.body.listName },
+            data: { name, authorId },
          });
          res.status(200).json(list);
       } catch (error: any) {

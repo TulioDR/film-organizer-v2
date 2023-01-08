@@ -9,6 +9,7 @@ import ModalTItle from "../modals/ModalTItle";
 import ModalButton from "../modals/ModalButton";
 import ModalButtonsContainer from "../modals/ModalButtonsContainer";
 import useListsContext from "../../context/ListsContext";
+import { useUser } from "@supabase/auth-helpers-react";
 
 type Props = {
    isOpen: boolean;
@@ -21,8 +22,13 @@ export default function CreateListForm({ isOpen, close }: Props) {
    const { themeColor } = useThemeContext();
    const [isFocused, setIsFocused] = useState<boolean>(false);
 
+   const user = useUser();
+
    const handleSubmit = async (values: any) => {
-      const createdList = await createList({ listName: values.name });
+      const createdList = await createList({
+         name: values.name,
+         authorId: user?.id,
+      });
       console.log(createdList);
       refresh();
       close();

@@ -6,7 +6,6 @@ import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
 import { useRouter } from "next/router";
-import { supabase } from "../../../database/client";
 import { useUser } from "@supabase/auth-helpers-react";
 
 export default function User() {
@@ -21,15 +20,6 @@ export default function User() {
    const handleBlur = () => {
       setIsOpen(false);
    };
-
-   useEffect(() => {
-      console.log(user);
-      const func = async () => {
-         const found = await supabase.auth.getUser();
-         console.log(found.data.user);
-      };
-      func();
-   }, [isOpen]);
 
    const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -78,7 +68,7 @@ export default function User() {
                </DropdownMenu>
             )}
          </div>
-         {!supabase.auth.getUser() && (
+         {!user && (
             <button
                onClick={goToLogin}
                className="h-9 px-4 bg-gray-light dark:bg-gray-dark cursor-pointer ml-2 hidden sm:block"

@@ -1,9 +1,11 @@
 import axios from "axios";
 const API = axios.create({ baseURL: "/api/lists" });
 
-export const getLists = async () => {
+export const getLists = async (authorId: string) => {
    try {
-      const { data } = await API.get("/");
+      const { data } = await API.get(`/`, {
+         params: { authorId },
+      });
       return data;
    } catch (error) {
       console.log(error);

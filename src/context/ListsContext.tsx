@@ -1,3 +1,4 @@
+import { useUser } from "@supabase/auth-helpers-react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getLists } from "../api/lists";
 import useRefresh from "../hooks/useRefresh";
@@ -43,13 +44,16 @@ export function ListsProvider({ children }: Props) {
       setCurrentMedia(null);
    };
 
+   const user = useUser();
    useEffect(() => {
       const getListsItems = async () => {
-         const data = await getLists();
+         if (!user) return;
+         console.log("lets fetch");
+         const data = await getLists(user.id);
          setLists(data);
       };
       getListsItems();
-   }, [search]);
+   }, [search, user]);
 
    const value: ListsContextInterface = {
       lists,

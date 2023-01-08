@@ -5,8 +5,7 @@ import useThemeContext from "../../../../context/ThemeContext";
 import DropdownItem from "./../DropdownItem";
 import ToggleDarkMode from "./../ToggleDarkMode";
 import { useRouter } from "next/router";
-import { supabase } from "../../../../database/client";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -15,15 +14,17 @@ type Props = {
 
 export default function MainMenu({ setMenu, setIsOpen }: Props) {
    const { toggleDarkMode, isDark, themeColor } = useThemeContext();
-
+   const supabaseClient = useSupabaseClient();
    const user = useUser();
+   console.log(user);
    const router = useRouter();
    const logIn = () => {
       router.push("/auth");
       setIsOpen(false);
    };
-   const logOut = () => {
-      supabase.auth.signOut();
+   const logOut = async () => {
+      const data = await supabaseClient.auth.signOut();
+      console.log(data);
       setIsOpen(false);
    };
 

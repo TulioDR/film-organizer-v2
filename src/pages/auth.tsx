@@ -5,10 +5,10 @@ import AuthContainer from "../components/auth/AuthContainer";
 import Description from "../components/auth/Description";
 import FormContainer from "../components/auth/FormContainer";
 import ToggleType from "../components/auth/ToggleType";
-import { supabase } from "../database/client";
 import { GetServerSideProps } from "next";
 
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const supabase = createServerSupabaseClient(context);
@@ -32,14 +32,14 @@ export default function Auth() {
    const toggle = () => setIsLogin(!isLogin);
 
    const emailRef = useRef<HTMLInputElement>(null);
-
+   const supabaseClient = useSupabaseClient();
    const router = useRouter();
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       const email = emailRef.current?.value;
       if (!email) return;
       try {
-         const result = await supabase.auth.signInWithOtp({ email });
+         const result = await supabaseClient.auth.signInWithOtp({ email });
          console.log(result);
          router;
       } catch (error) {
