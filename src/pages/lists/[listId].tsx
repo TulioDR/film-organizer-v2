@@ -12,6 +12,7 @@ import DeleteMediaModal from "../../components/list/DeleteMediaModal";
 import { getMedia } from "../../api/media";
 import useRefresh from "../../hooks/useRefresh";
 import Head from "next/head";
+import Error from "next/error";
 
 type Props = { listID: string };
 
@@ -65,6 +66,9 @@ export default function ListID({ listID }: Props) {
       getMediaFunc();
    }, [listID, search]);
 
+   if (list === null) {
+      return <Error statusCode={404} />;
+   }
    return (
       <div>
          <Head>

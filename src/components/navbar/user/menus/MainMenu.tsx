@@ -4,28 +4,26 @@ import MainIcon from "./../MainIcon";
 import useThemeContext from "../../../../context/ThemeContext";
 import DropdownItem from "./../DropdownItem";
 import ToggleDarkMode from "./../ToggleDarkMode";
+import { useRouter } from "next/router";
+import { supabase } from "../../../../database/client";
+import { useUser } from "@supabase/auth-helpers-react";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
-   isLoggedIn: boolean;
    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function MainMenu({
-   setMenu,
-   isLoggedIn,
-   setIsLoggedIn,
-   setIsOpen,
-}: Props) {
+export default function MainMenu({ setMenu, setIsOpen }: Props) {
    const { toggleDarkMode, isDark, themeColor } = useThemeContext();
 
-   const logOut = () => {
-      setIsLoggedIn(false);
+   const user = useUser();
+   const router = useRouter();
+   const logIn = () => {
+      router.push("/auth");
       setIsOpen(false);
    };
-   const logIn = () => {
-      setIsLoggedIn(true);
+   const logOut = () => {
+      supabase.auth.signOut();
       setIsOpen(false);
    };
 
@@ -58,7 +56,7 @@ export default function MainMenu({
          >
             Theme Colors
          </DropdownItem>
-         {isLoggedIn ? (
+         {user ? (
             <DropdownItem icon={<MainIcon icon="logout" />} onClick={logOut}>
                Log out
             </DropdownItem>

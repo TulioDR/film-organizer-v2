@@ -5,19 +5,31 @@ import useThemeContext from "../../../context/ThemeContext";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
+import { useRouter } from "next/router";
+import { supabase } from "../../../database/client";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export default function User() {
    const { themeColor } = useThemeContext();
+   const user = useUser();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => {
       setIsOpen(!isOpen);
       setMenu("main");
    };
-   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
    const handleBlur = () => {
       setIsOpen(false);
    };
+
+   useEffect(() => {
+      console.log(user);
+      const func = async () => {
+         const found = await supabase.auth.getUser();
+         console.log(found.data.user);
+      };
+      func();
+   }, [isOpen]);
 
    const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -28,10 +40,15 @@ export default function User() {
       setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
    }, [menu]);
 
+   const router = useRouter();
+   const goToLogin = () => {
+      router.push("/auth");
+   };
+
    return (
       <div className="flex">
          <div tabIndex={0} onBlur={handleBlur} className="relative">
-            {isLoggedIn ? (
+            {user ? (
                <div
                   onClick={toggle}
                   className="h-9 w-9 rounded-full bg-gray-light dark:bg-gray-dark cursor-pointer"
@@ -48,7 +65,6 @@ export default function User() {
                   <span className="material-icons">settings</span>
                </motion.button>
             )}
-
             {isOpen && (
                <DropdownMenu
                   divKey={menu}
@@ -56,20 +72,15 @@ export default function User() {
                   height={menuHeight}
                >
                   {menu === "main" && (
-                     <MainMenu
-                        isLoggedIn={isLoggedIn}
-                        setIsLoggedIn={setIsLoggedIn}
-                        setIsOpen={setIsOpen}
-                        setMenu={setMenu}
-                     />
+                     <MainMenu setIsOpen={setIsOpen} setMenu={setMenu} />
                   )}
                   {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
                </DropdownMenu>
             )}
          </div>
-         {!isLoggedIn && (
+         {!supabase.auth.getUser() && (
             <button
-               onClick={() => setIsLoggedIn(true)}
+               onClick={goToLogin}
                className="h-9 px-4 bg-gray-light dark:bg-gray-dark cursor-pointer ml-2 hidden sm:block"
             >
                Log in

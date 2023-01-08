@@ -12,6 +12,7 @@ model List {
    name String
    createdAt DateTime @default(now())
    media Media[]
+   authorId String
 }
 
 model Media {
@@ -26,11 +27,5 @@ model Media {
 
    @@unique([media_type, media_id, listId])
 }
-
-// model User {
-//    id String @id @default(uuid())
-//    name String
-//    lists List[]
-// }
 
 

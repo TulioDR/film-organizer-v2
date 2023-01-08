@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
+import SearchCards from "../../../components/SearchCards";
 import movieGenres from "../../../data/genres/movieGenres";
 import tvGenres from "../../../data/genres/tvGenres";
-import SearchCards from "../../../features/SearchCards/SearchCards";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, genreID } = context.query;

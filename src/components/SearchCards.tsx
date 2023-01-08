@@ -1,13 +1,12 @@
-import PageTitle from "../../components/PageTitle";
-import PageAnimationContainer from "../../containers/PageAnimationContainer";
 import { motion } from "framer-motion";
-
-import TransitionPoster from "../../animations/TransitionPoster";
 import { useEffect, useState } from "react";
-import useSidebarContext from "../../context/SidebarContext";
-import usePageLoadingContext from "../../context/PageLoadingContext";
-import { staggerContainer } from "../../animations/StaggerCards";
-import MainCard from "../../layout/cards/MainCard";
+import MainCard from "../layout/cards/MainCard";
+import { staggerContainer } from "../animations/StaggerCards";
+import usePageLoadingContext from "../context/PageLoadingContext";
+import useSidebarContext from "../context/SidebarContext";
+import TransitionPoster from "../animations/TransitionPoster";
+import PageAnimationContainer from "../containers/PageAnimationContainer";
+import PageTitle from "./PageTitle";
 
 type Props = {
    title: string;

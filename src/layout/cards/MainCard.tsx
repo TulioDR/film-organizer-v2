@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
 import Poster from "../../components/Poster";
 import { useState } from "react";
-import CardBack from "../../features/SearchCards/MainCardParts/CardBack";
-import BackButton from "../../features/SearchCards/MainCardParts/BackButton";
-import LearnMore from "../../features/SearchCards/MainCardParts/LearnMore";
-import Bookmark from "../../features/SearchCards/MainCardParts/Bookmark";
-import BackInfo from "../../features/SearchCards/MainCardParts/BackInfo";
+import CardBack from "../../components/MainCardParts/CardBack";
+import BackButton from "../../components/MainCardParts/BackButton";
+import LearnMore from "../../components/MainCardParts/LearnMore";
+import Bookmark from "../../components/MainCardParts/Bookmark";
+import BackInfo from "../../components/MainCardParts/BackInfo";
 
 type Props = {
    media: any;
@@ -41,7 +41,7 @@ export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
       <motion.article
          variants={staggerItem}
          layoutId={`https://image.tmdb.org/t/p/w${780}${media.poster_path}`}
-         className="aspect-[2/3] relative rounded-xl overflow-hidden shadow-xl"
+         className="relative rounded-xl overflow-hidden shadow-xl p-[2px] bg-gradient-to-t from-slate-900 to-slate-600"
       >
          <div onClick={toggle} className="cursor-pointer">
             <Poster
