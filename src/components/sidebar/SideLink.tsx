@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useThemeContext from "../../context/ThemeContext";
@@ -11,9 +12,6 @@ type Props = {
 export default function SideLink({ link, icon, text }: Props) {
    const { themeColor } = useThemeContext();
    const router = useRouter();
-   const goTo = () => {
-      router.push(link);
-   };
 
    const [isSelected, setIsSelected] = useState<boolean>(false);
    useEffect(() => {
@@ -28,14 +26,13 @@ export default function SideLink({ link, icon, text }: Props) {
                ? ""
                : "text-light-text-soft dark:text-dark-text-soft hover:text-light-text-hard dark:hover:text-dark-text-hard duration-100"
          }`}
-         onClick={goTo}
       >
-         <div className="flex items-center h-full">
+         <Link href={link} className="flex items-center h-full">
             <div className="ml-5 mr-3 rounded-lg h-9 w-9 grid place-content-center flex-shrink-0">
                <span className="material-icons">{icon}</span>
             </div>
             <span className="truncate">{text}</span>
-         </div>
+         </Link>
          <div
             style={{ backgroundColor: themeColor }}
             className={`absolute top-0 h-full rounded-r-lg -z-10 ${

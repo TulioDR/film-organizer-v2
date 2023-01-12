@@ -16,7 +16,6 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
    const { toggleDarkMode, isDark, themeColor } = useThemeContext();
    const supabaseClient = useSupabaseClient();
    const user = useUser();
-   console.log(user);
    const router = useRouter();
    const logIn = () => {
       router.push("/auth");

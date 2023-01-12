@@ -17,6 +17,7 @@ export default function AuthErrorMessage({ error, setError }: Props) {
                className="absolute bottom-0 left-0 pb-5 pl-5"
             >
                <div className="text-xs sm:text-sm text-white bg-red-700 rounded-lg py-2 px-4 flex items-center space-x-2">
+                  <span className="material-icons">error_outline</span>
                   <span>{error}</span>
                   <button onClick={() => setError(null)}>
                      <span className="material-icons text-xl">close</span>

@@ -5,8 +5,8 @@ import useThemeContext from "../../../context/ThemeContext";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
-import { useRouter } from "next/router";
 import { useUser } from "@supabase/auth-helpers-react";
+import Link from "next/link";
 
 export default function User() {
    const { themeColor } = useThemeContext();
@@ -29,11 +29,6 @@ export default function User() {
    useEffect(() => {
       setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
    }, [menu]);
-
-   const router = useRouter();
-   const goToLogin = () => {
-      router.push("/auth");
-   };
 
    return (
       <div className="flex">
@@ -69,12 +64,12 @@ export default function User() {
             )}
          </div>
          {!user && (
-            <button
-               onClick={goToLogin}
-               className="h-9 px-4 bg-gray-light dark:bg-gray-dark cursor-pointer ml-2 hidden sm:block"
+            <Link
+               href="/auth"
+               className="h-9 px-4 bg-gray-light dark:bg-gray-dark cursor-pointer ml-2 hidden sm:flex items-center"
             >
                Log in
-            </button>
+            </Link>
          )}
       </div>
    );

@@ -38,16 +38,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default function Auth() {
    const supabaseClient = useSupabaseClient();
+   const router = useRouter();
+
    const [isLogin, setIsLogin] = useState(true);
    const toggle = () => setIsLogin(!isLogin);
-   const [emailSent, setEmailSent] = useState<string>("null");
-   const [error, setError] = useState<string | null>(null);
-   const [showModal, setShowModal] = useState<boolean>(false);
-   const closeModal = () => {
-      setShowModal(false);
-   };
 
-   const router = useRouter();
+   const [showModal, setShowModal] = useState<boolean>(false);
+   const closeModal = () => setShowModal(false);
+
+   const [emailSent, setEmailSent] = useState<string>("");
+   const [error, setError] = useState<string | null>(null);
+
    const loginHandler = async (values: any) => {
       const { email, password } = values;
       const { error } = await supabaseClient.auth.signInWithPassword({
@@ -57,6 +58,7 @@ export default function Auth() {
       if (error) setError(error.message);
       else router.push("/");
    };
+
    const SignUpHandler = async (values: any, resetForm: any) => {
       const { email, password } = values;
       const { error, data } = await supabaseClient.auth.signUp({
@@ -81,7 +83,7 @@ export default function Auth() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <AuthBackground />
-         <AuthContainer>
+         <AuthContainer setError={setError}>
             <AuthHeader />
             <div className="text-light-text-normal">
                {isLogin

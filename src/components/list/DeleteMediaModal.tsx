@@ -43,7 +43,9 @@ export default function DeleteMediaModal({
 
    return (
       <ModalContainer isOpen={isOpen} close={close}>
-         <ModalTItle>Delete from {list?.name}</ModalTItle>
+         <ModalTItle>
+            Delete from <em>{list?.name}</em>
+         </ModalTItle>
          <div className="text-sm text-light-text-soft dark:text-dark-text-soft">
             <div>The next items are going to be deleted:</div>
             <div>

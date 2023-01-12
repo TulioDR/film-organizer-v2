@@ -41,13 +41,15 @@ export function ListsProvider({ children }: Props) {
    };
    const closeSaveMediaModal = () => {
       setIsSaveMediaOpen(false);
-      setCurrentMedia(null);
    };
 
    const user = useUser();
    useEffect(() => {
       const getListsItems = async () => {
-         if (!user) return;
+         if (!user) {
+            setLists([]);
+            return;
+         }
          console.log("fetch lists");
          const data = await getLists(user.id);
          setLists(data);
