@@ -7,7 +7,7 @@ import SubmitButton from "./SubmitButton";
 type Props = {
    isLogin: boolean;
    toggleType: () => void;
-   submitHandler: (values: any) => any;
+   submitHandler: (values: any, reset: any) => any;
 };
 
 export default function FormikForm({
@@ -42,11 +42,9 @@ export default function FormikForm({
       }
       return error;
    };
-   const handleSubmit = async (values: any) => {
+   const handleSubmit = async (values: any, { resetForm }: any) => {
       try {
-         const result = await submitHandler(values);
-         const { data, error } = result;
-         console.log(data, error);
+         await submitHandler(values, resetForm);
       } catch (error) {
          console.log(error);
       }

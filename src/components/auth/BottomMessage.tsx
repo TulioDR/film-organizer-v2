@@ -12,11 +12,11 @@ export default function BottomMessage({ isLogin, toggle }: Props) {
       toggle();
    };
    return (
-      <div className="text-sm text-center mt-5 text-gray-dark">
+      <div className="text-sm text-center mt-5 text-light-text-normal">
          {isLogin && (
-            <div className="hover:underline cursor-pointer mb-1">
+            <span className="hover:underline cursor-pointer mb-1">
                Forgot your password?
-            </div>
+            </span>
          )}
          <div>
             <span>

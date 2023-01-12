@@ -48,7 +48,7 @@ export function ListsProvider({ children }: Props) {
    useEffect(() => {
       const getListsItems = async () => {
          if (!user) return;
-         console.log("lets fetch");
+         console.log("fetch lists");
          const data = await getLists(user.id);
          setLists(data);
       };
