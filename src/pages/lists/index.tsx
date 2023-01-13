@@ -5,6 +5,8 @@ import ListCard from "../../components/manage/ListCard";
 import PageTitle from "../../components/PageTitle";
 import useListsContext from "../../context/ListsContext";
 import ListModel from "../../models/listModel";
+import { motion } from "framer-motion";
+import { staggerContainer } from "../../animations/StaggerCards";
 
 export default function Lists() {
    const { lists } = useListsContext();
@@ -28,7 +30,13 @@ export default function Lists() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <PageTitle>Manage</PageTitle>
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20">
+         <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
+         >
             {lists.map((list) => (
                <ListCard
                   key={list.id}
@@ -36,7 +44,7 @@ export default function Lists() {
                   openDeleteModal={openDeleteModal}
                />
             ))}
-         </div>
+         </motion.div>
          <DeleteListModal
             isOpen={isModalOpen}
             close={closeDeleteModal}

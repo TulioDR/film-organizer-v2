@@ -7,6 +7,8 @@ import BottomBorder from "./BottomBorder";
 import EditButton from "./EditButton";
 import EditButtonsContainer from "./EditButtonsContainer";
 import ErrorMessageForName from "./ErrorMessageForName";
+import { motion } from "framer-motion";
+import { staggerItem } from "../../animations/StaggerCards";
 
 type Props = {
    list: any;
@@ -48,10 +50,8 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       inputRef.current?.blur();
    };
 
-   const handleFocus = (e: React.FormEvent<HTMLInputElement>) => {
+   const handleFocus = () => {
       setIsOnFocus(true);
-      const { setSelectionRange, value } = e.currentTarget;
-      setSelectionRange(value.length, value.length);
    };
    const handleKeyDown = (e: React.KeyboardEvent) => {
       if (e.key === "Escape") cancelEdit();
@@ -70,7 +70,10 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    };
 
    return (
-      <li className="relative px-5 shadow-lg bg-gray-light dark:bg-gray-dark rounded-lg list-none">
+      <motion.li
+         variants={staggerItem}
+         className="relative px-5 shadow-xl bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-lg list-none"
+      >
          <form onSubmit={handleSubmit} className="flex w-full h-full space-x-5">
             <div className="flex-1 py-3 relative overflow-hidden flex">
                <input
@@ -107,6 +110,6 @@ export default function ListCard({ list, openDeleteModal }: Props) {
                setShowError={setShowError}
             />
          )}
-      </li>
+      </motion.li>
    );
 }
