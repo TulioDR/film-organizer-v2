@@ -36,7 +36,7 @@ export default function User() {
             {user ? (
                <div
                   onClick={toggle}
-                  className="h-9 w-9 rounded-full bg-gray-light dark:bg-gray-dark cursor-pointer"
+                  className="h-9 w-9 rounded-full bg-light-bg-secondary shadow-lg dark:bg-gray-dark cursor-pointer"
                ></div>
             ) : (
                <motion.button

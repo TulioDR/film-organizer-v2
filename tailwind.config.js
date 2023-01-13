@@ -18,7 +18,10 @@ module.exports = {
                   normal: "#334155",
                   hard: "#0f172a",
                },
-               bg: "#e5e7eb",
+               bg: {
+                  primary: "#e5e7eb",
+                  secondary: "#ffffff",
+               },
             },
             dark: {
                text: {
@@ -26,7 +29,10 @@ module.exports = {
                   normal: "#d1d5db",
                   hard: "#f9fafb",
                },
-               bg: "#111827",
+               bg: {
+                  primary: "#111827",
+                  secondary: "#ffffff",
+               },
             },
             gray: {
                dark: "#4b5563",

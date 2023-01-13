@@ -32,7 +32,7 @@ export default function NowPlaying({ movie }: Props) {
             size="xl"
             backPoster
          />
-         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-dark-bg to-transparent">
+         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-dark-bg-primary to-transparent">
             <div className="absolute left-4 bottom-4 w-1/2 space-y-2">
                <div className="text-3xl xl:text-4xl font-bold text-dark-text-hard">
                   {movie.title}

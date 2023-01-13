@@ -41,14 +41,14 @@ a {
 }
 
 .main-scrollbar::-webkit-scrollbar-track {
-   @apply bg-light-bg;
+   @apply bg-light-bg-primary;
 }
 .main-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-light-text-hard;
 }
 
 .dark .main-scrollbar::-webkit-scrollbar-track {
-   @apply bg-dark-bg;
+   @apply bg-dark-bg-primary;
 }
 .dark .main-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-dark-text-hard;
@@ -70,14 +70,14 @@ a {
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {
-   @apply bg-light-bg;
+   @apply bg-light-bg-primary;
 }
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-gray-light;
 }
 
 .dark .sidebar-scrollbar::-webkit-scrollbar-track {
-   @apply bg-dark-bg;
+   @apply bg-dark-bg-primary;
 }
 .dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-gray-dark;

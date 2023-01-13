@@ -24,7 +24,7 @@ export default function Upcoming({ movie }: Props) {
             size="xl"
             backPoster
          />
-         <div className="w-full absolute bottom-0 bg-gradient-to-t from-dark-bg to-transparent px-4 pb-3 pt-14">
+         <div className="w-full h-full absolute bottom-0 bg-gradient-to-t from-dark-bg-primary to-transparent px-4 pb-3 flex flex-col justify-end">
             <div className="font-medium text-dark-text-hard relative truncate max-w-max">
                {movie.title}
                <div

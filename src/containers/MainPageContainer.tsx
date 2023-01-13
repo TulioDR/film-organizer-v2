@@ -15,7 +15,7 @@ type Props = {
 export default function MainPageContainer({ children }: Props) {
    const router = useRouter();
    return (
-      <div className="flex bg-light-bg dark:bg-dark-bg text-light-text-hard dark:text-dark-text-hard">
+      <div className="flex bg-light-bg-primary dark:bg-dark-bg-primary text-light-text-hard dark:text-dark-text-hard">
          <ThemeProvider>
             <ListsProvider>
                <SidebarProvider>

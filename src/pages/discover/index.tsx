@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import DropDown from "../../components/discover/DropDown";
+import TypeButton from "../../components/discover/TypeButton";
 import PageTitle from "../../components/PageTitle";
 import {
    ratings,
@@ -60,44 +61,42 @@ export default function Discover() {
          </Head>
          <PageTitle>Discover</PageTitle>
          <form onSubmit={handleSubmit} className="">
-            <button
-               type="button"
-               onClick={toggle}
-               className="px-5 py-3 rounded-xl bg-blue-500 flex space-x-1"
-            >
-               <span>Search:</span>
-               <span>{isMovie ? "Movies" : "TV Shows"}</span>
-            </button>
-            <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:px-20">
+            <TypeButton onClick={toggle} isMovie={isMovie} />
+            <div className="grid gap-x-5 gap-y-10 mt-10 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:px-20">
                <DropDown
                   title="Languages"
                   options={languagesOptions}
                   value={language}
                   setValue={setLanguage}
+                  icon="translate"
                />
                <DropDown
                   title="Genres"
                   options={isMovie ? movieGenresOptions : tvGenresOptions}
                   value={genre}
                   setValue={setGenre}
+                  icon="theater_comedy"
                />
                <DropDown
                   title="Year of Release"
                   options={releaseYears}
                   value={year}
                   setValue={setYear}
+                  icon="event"
                />
                <DropDown
                   title="Rating"
                   options={ratings}
                   value={rating}
                   setValue={setRating}
+                  icon="star_rate"
                />
                <DropDown
                   title="Sort By"
                   options={isMovie ? sortByMovie : sortByTv}
                   value={sortBy}
                   setValue={setSortBy}
+                  icon="whatshot"
                />
             </div>
 

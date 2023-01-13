@@ -39,7 +39,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
             />
          </div>
          <div className="absolute z-10 top-0 left-0 w-full h-full grid place-content-center">
-            <span className="text-3xl font-bold group-hover:opacity-0 duration-300">
+            <span className="text-3xl font-bold group-hover:opacity-0 duration-300 text-dark-text-hard">
                {genre.name}
             </span>
          </div>

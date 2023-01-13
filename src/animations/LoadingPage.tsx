@@ -16,7 +16,7 @@ export default function LoadingPage() {
                   initial={{ width: 0 }}
                   animate={{ width: isLoading ? "75%" : "100%" }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="bg-dark-bg dark:bg-light-bg h-full"
+                  className="bg-dark-bg-primary dark:bg-light-bg-primary h-full"
                   onAnimationComplete={() => {
                      if (!isLoading) setShowLoadingAnimation(false);
                   }}

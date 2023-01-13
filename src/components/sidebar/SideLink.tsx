@@ -35,7 +35,7 @@ export default function SideLink({ link, icon, text }: Props) {
          </Link>
          <div
             style={{ backgroundColor: themeColor }}
-            className={`absolute top-0 h-full rounded-r-lg -z-10 ${
+            className={`absolute top-0 h-full rounded-r-lg -z-10 shadow-lg ${
                isSelected
                   ? "w-full duration-300"
                   : "w-0 group-hover:w-14 duration-200"

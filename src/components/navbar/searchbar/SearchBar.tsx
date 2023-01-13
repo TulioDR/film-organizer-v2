@@ -72,7 +72,7 @@ export default function SearchBar({}: Props) {
    return (
       <form
          onSubmit={handleSubmit}
-         className={`w-full sm:w-96 px-5 bg-gray-light h-9 dark:bg-gray-dark rounded-t-lg flex flex-col relative ${
+         className={`w-full sm:w-96 px-5 bg-light-bg-secondary shadow-lg h-9 dark:bg-gray-dark rounded-t-lg flex flex-col relative ${
             showResults ? "shadow-lg" : "rounded-b-lg"
          }`}
       >
