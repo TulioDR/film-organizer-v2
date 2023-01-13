@@ -47,11 +47,13 @@ export default function Details({ mediaType, media }: Props) {
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="flex flex-col xl:flex-row xl:h-full xl:space-x-5 space-y-5 xl:space-y-0 overflow-hidden">
+         <div className="flex flex-col xl:flex-row xl:h-full xl:space-x-10 space-y-5 xl:space-y-0 overflow-hidden">
             <div className="sm:flex xl:block xl:h-full xl:aspect-[2/3] xl:flex-shrink-0">
                <MainPoster
                   alt={media.name || media.title}
                   posterPath={media.poster_path}
+                  media={media}
+                  mediaType={mediaType}
                />
                <div className="xl:hidden mt-5 sm:mt-0 flex-1 pl-5 overflow-hidden">
                   <MainTitle>{media.title || media.name}</MainTitle>
