@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent } from "react";
+import { staggerContainer } from "../../animations/StaggerCards";
 import DropDown from "../../components/discover/DropDown";
 import TypeButton from "../../components/discover/TypeButton";
 import PageTitle from "../../components/PageTitle";
@@ -14,6 +15,8 @@ import {
 } from "../../data/discover/options";
 import useDropDownValues from "../../hooks/useDropDownValues";
 import useLanguages from "../../hooks/useLanguages";
+
+import { motion } from "framer-motion";
 
 export default function Discover() {
    const router = useRouter();
@@ -60,9 +63,15 @@ export default function Discover() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <PageTitle>Discover</PageTitle>
-         <form onSubmit={handleSubmit} className="">
+         <form onSubmit={handleSubmit}>
             <TypeButton onClick={toggle} isMovie={isMovie} />
-            <div className="grid gap-x-5 gap-y-10 mt-10 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:px-20">
+            <motion.div
+               variants={staggerContainer}
+               initial="initial"
+               animate="animate"
+               exit="exit"
+               className="grid gap-x-5 gap-y-10 mt-10 sm:grid-cols-2 xl:grid-cols-3 2xl:px-20"
+            >
                <DropDown
                   title="Languages"
                   options={languagesOptions}
@@ -96,10 +105,9 @@ export default function Discover() {
                   options={isMovie ? sortByMovie : sortByTv}
                   value={sortBy}
                   setValue={setSortBy}
-                  icon="whatshot"
+                  icon="sort"
                />
-            </div>
-
+            </motion.div>
             <button
                type="submit"
                className="px-5 py-3 rounded-xl bg-blue-500 mx-auto block mt-5"

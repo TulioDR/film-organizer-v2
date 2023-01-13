@@ -21,7 +21,7 @@ export default function SeasonCard({ season, openSeasonInfo }: Props) {
       <motion.article
          onClick={() => openSeasonInfo(season)}
          variants={item}
-         className="flex rounded-xl h-40 lg:h-52 overflow-hidden cursor-pointer hover:bg-gray-light dark:hover:bg-gray-dark"
+         className="flex rounded-xl h-40 lg:h-52 overflow-hidden cursor-pointer hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary"
       >
          <motion.div
             layoutId={`https://image.tmdb.org/t/p/w${780}${season.poster_path}`}

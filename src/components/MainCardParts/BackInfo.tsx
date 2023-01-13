@@ -30,7 +30,7 @@ export default function BackInfo({
          </h4>
          <div className="flex-1 relative overflow-hidden text-sm leading-tight text-light-text-normal dark:text-dark-text-normal">
             <p>{overview}</p>
-            <div className="w-full absolute bottom-0 left-0 h-8 bg-gradient-to-t from-light-bg dark:from-dark-bg to-transparent"></div>
+            <div className="w-full absolute bottom-0 left-0 h-8 bg-gradient-to-t from-light-bg-secondary dark:from-dark-bg-secondary to-transparent"></div>
          </div>
       </div>
    );

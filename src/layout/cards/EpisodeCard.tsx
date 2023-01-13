@@ -10,7 +10,7 @@ export default function EpisodeCard({ episode }: Props) {
    return (
       <motion.article
          variants={staggerItem}
-         className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-gray-light dark:bg-gray-dark shadow-lg hover:-translate-y-2 duration-200"
+         className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg hover:-translate-y-2 duration-200"
       >
          <div className="w-full rounded-lg -mt-6 shadow-lg relative overflow-hidden">
             <Poster

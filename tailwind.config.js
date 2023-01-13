@@ -30,13 +30,9 @@ module.exports = {
                   hard: "#f9fafb",
                },
                bg: {
-                  primary: "#111827",
-                  secondary: "#ffffff",
+                  primary: "#1A1B20",
+                  secondary: "#2D2F3B",
                },
-            },
-            gray: {
-               dark: "#4b5563",
-               light: "#9ca3af",
             },
          },
       },

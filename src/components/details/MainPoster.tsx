@@ -26,7 +26,7 @@ export default function MainPoster({
             x: "-100%",
             transition: { duration: 0.4, ease: "easeInOut" },
          }}
-         className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto"
+         className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto shadow-lg"
       >
          <Image
             alt={alt}
@@ -37,7 +37,11 @@ export default function MainPoster({
             priority
             className="rounded-xl"
          />
-         <button
+         <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
             style={{ backgroundColor: themeColor }}
             onClick={() => openSaveMediaModal(mediaType, media)}
             className="absolute bottom-20 w-12 h-14 right-0 translate-x-1/2 grid place-content-center rounded-md"
@@ -45,7 +49,7 @@ export default function MainPoster({
             <span className="material-icons text-5xl">
                {isMediaSaved ? "bookmark" : "bookmark_border"}
             </span>
-         </button>
+         </motion.button>
       </motion.div>
    );
 }

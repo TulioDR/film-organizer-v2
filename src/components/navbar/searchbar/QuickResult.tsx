@@ -30,7 +30,7 @@ export default function QuickResult({
          onMouseEnter={() => setCurrentIndex(index)}
          onMouseLeave={() => setCurrentIndex(null)}
          className={`h-20 cursor-pointer flex py-2 px-5 ${
-            selected ? "bg-light-bg dark:bg-dark-bg" : ""
+            selected ? "bg-light-bg-primary dark:bg-dark-bg-primary" : ""
          }`}
       >
          <Poster
@@ -39,10 +39,10 @@ export default function QuickResult({
             posterPath={media.poster_path}
          />
          <div className="pl-2">
-            <div className="text-black dark:text-white text-sm">
+            <div className="text-light-text-normal dark:text-dark-text-normal text-sm">
                {media.title || media.name}
             </div>
-            <div className="text-gray-dark dark:text-gray-light text-xs">
+            <div className="text-light-text-soft dark:text-dark-text-soft text-xs">
                {getDate(media.release_date || media.first_air_date)}
             </div>
          </div>

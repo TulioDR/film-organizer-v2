@@ -66,7 +66,7 @@ export default function SeasonDetails({
                exit={{ x: "100%" }}
                transition={{ duration: 0.4, ease: "easeInOut" }}
                onAnimationComplete={onAnimationComplete}
-               className="absolute top-0 right-0 h-full w-full bg-light-bg dark:bg-dark-bg z-10 overflow-y-auto overflow-x-hidden pr-5 main-scrollbar"
+               className="absolute top-0 right-0 h-full w-full bg-light-bg-primary dark:bg-dark-bg-primary z-10 overflow-y-auto overflow-x-hidden pr-5 main-scrollbar"
             >
                {season ? (
                   <motion.div
@@ -80,7 +80,7 @@ export default function SeasonDetails({
                         <RevealHorizontal stagger fromRight>
                            <button
                               onClick={close}
-                              className=" w-10 h-10 rounded-md bg-light-text-hard text-dark-text-hard dark:bg-dark-text-hard dark:text-light-text-hard grid place-content-center"
+                              className=" w-10 h-10 rounded-md bg-light-bg-secondary text-light-text-hard dark:bg-dark-bg-secondary dark:text-dark-text-hard grid place-content-center shadow-lg"
                            >
                               <span className="material-icons">close</span>
                            </button>

@@ -45,7 +45,7 @@ export default function ResultsContainer({
    });
 
    return (
-      <ul className="absolute top-full left-0 w-full py-3 rounded-b-lg bg-light-bg-secondary dark:bg-gray-dark shadow-lg overflow-hidden">
+      <ul className="absolute top-full left-0 w-full py-3 rounded-b-lg bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg overflow-hidden">
          <div className="relative">{children}</div>
       </ul>
    );
