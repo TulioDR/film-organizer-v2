@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import { motion } from "framer-motion";
-import useThemeContext from "../../../context/ThemeContext";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
@@ -9,7 +8,6 @@ import { useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 
 export default function User() {
-   const { themeColor } = useThemeContext();
    const user = useUser();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,23 +31,18 @@ export default function User() {
    return (
       <div className="flex">
          <div tabIndex={0} onBlur={handleBlur} className="relative">
-            {user ? (
-               <div
-                  onClick={toggle}
-                  className="h-9 w-9 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg cursor-pointer"
-               ></div>
-            ) : (
-               <motion.button
-                  onClick={toggle}
-                  whileHover={{
-                     backgroundColor: themeColor,
-                  }}
-                  transition={{ duration: 0 }}
-                  className="grid place-content-center h-9 w-9 rounded-full"
-               >
+            <motion.button
+               onClick={toggle}
+               className="grid place-content-center h-9 w-9 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg"
+            >
+               {user ? (
+                  <span className="uppercase text-xl">
+                     {user.email?.charAt(0)}
+                  </span>
+               ) : (
                   <span className="material-icons">settings</span>
-               </motion.button>
-            )}
+               )}
+            </motion.button>
             {isOpen && (
                <DropdownMenu
                   divKey={menu}
@@ -66,7 +59,7 @@ export default function User() {
          {!user && (
             <Link
                href="/auth"
-               className="h-9 px-4 bg-gray-light dark:bg-gray-dark cursor-pointer ml-2 hidden sm:flex items-center"
+               className="h-9 px-4 bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg cursor-pointer ml-2 hidden sm:flex items-center"
             >
                Log in
             </Link>

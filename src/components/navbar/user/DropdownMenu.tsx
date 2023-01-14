@@ -16,7 +16,7 @@ export default function DropdownMenu({
    return (
       <div
          onMouseDown={(e) => e.preventDefault()}
-         className="w-72 absolute top-full right-0 text-sm p-2 bg-light-bg-secondary dark:bg-dark-bg-secondary text-gray-text-dark dark:text-white drop-shadow-xl rounded-lg overflow-hidden"
+         className="w-72 absolute top-full translate-y-2 right-0 text-sm p-2 bg-light-bg-secondary dark:bg-dark-bg-secondary text-gray-text-dark dark:text-white drop-shadow-xl rounded-lg overflow-hidden"
       >
          <motion.div
             animate={{
