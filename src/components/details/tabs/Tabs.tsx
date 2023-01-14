@@ -40,9 +40,9 @@ export default function Tabs({ media, mediaType, setSelectedImg }: Props) {
                opacity: 0,
                transition: { duration: 0.4, ease: "easeInOut" },
             }}
-            className="flex-1 w-full overflow-hidden"
+            className="flex-1 w-full overflow-y-hidden overflow-x-visible"
          >
-            <div className="h-full w-full overflow-y-auto main-scrollbar">
+            <div className="h-full w-full overflow-y-auto main-scrollbar overflow-x-visible">
                <AnimatePresence mode="wait">
                   <motion.div
                      key={selectedTab}

@@ -62,11 +62,11 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className={`grid grid-cols-2 md:grid-cols-3 ${
+            className={`gap-5 overflow-hidden grid grid-cols-2 md:grid-cols-3 ${
                openSidebar
                   ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
                   : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-            }  gap-5 overflow-hidden`}
+            }`}
          >
             {media.map((media) => (
                <MainCard

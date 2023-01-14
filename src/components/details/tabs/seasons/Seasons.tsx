@@ -36,7 +36,7 @@ export default function Seasons({
          initial="initial"
          animate="animate"
          exit="exit"
-         className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 pt-5 pr-4"
+         className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 pt-4 pl-1 pr-4"
       >
          {seasons.map((season) => (
             <SeasonCard

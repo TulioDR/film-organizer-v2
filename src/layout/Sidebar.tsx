@@ -6,6 +6,10 @@ import useSidebarContext from "../context/SidebarContext";
 import CreateListButton from "../components/sidebar/CreateListButton";
 import useListsContext from "../context/ListsContext";
 import SidebarContainer from "../components/sidebar/SidebarContainer";
+import SideSubtitle from "../components/sidebar/SideSubtitle";
+import SideButtonContainer from "../components/sidebar/SideButtonContainer";
+import { useUser } from "@supabase/auth-helpers-react";
+import SideLoginMessage from "../components/sidebar/SideLoginMessage";
 
 interface Props {
    openForm: () => void;
@@ -13,18 +17,15 @@ interface Props {
 export default function Sidebar({ openForm }: Props) {
    const { isMovie } = useSidebarContext();
    const { lists } = useListsContext();
-
+   const user = useUser();
    return (
       <SidebarContainer>
          <BrandHamburger />
-         <div className="h-9 w-full pl-5">
+         <SideButtonContainer>
             <ToggleModeButton />
-         </div>
-
-         <div className="ml-5 text-xs uppercase my-3 text-light-text-soft dark:text-dark-text-soft">
-            Menu
-         </div>
-         <ul className="space-y-3">
+         </SideButtonContainer>
+         <SideSubtitle>Menu</SideSubtitle>
+         <ul className="space-y-3 mb-3">
             <SideLink link="/" icon="home" text="Home" />
             <SideLink
                link={`/popular/${isMovie ? "movie" : "tv"}`}
@@ -43,20 +44,26 @@ export default function Sidebar({ openForm }: Props) {
                text="Manage Lists"
             />
          </ul>
-         <CreateListButton onClick={openForm} />
-         <div className="ml-5 text-xs uppercase my-3 text-light-text-soft dark:text-dark-text-soft">
-            Lists
-         </div>
-         <ul className="space-y-3">
-            {lists.map((list) => (
-               <SideLink
-                  key={list.id}
-                  link={`/lists/${list.id}`}
-                  icon="featured_play_list"
-                  text={list.name}
-               />
-            ))}
-         </ul>
+         {user ? (
+            <>
+               <SideButtonContainer>
+                  <CreateListButton onClick={openForm} />
+               </SideButtonContainer>
+               <SideSubtitle>Lists</SideSubtitle>
+               <ul className="space-y-3">
+                  {lists.map((list) => (
+                     <SideLink
+                        key={list.id}
+                        link={`/lists/${list.id}`}
+                        icon="featured_play_list"
+                        text={list.name}
+                     />
+                  ))}
+               </ul>
+            </>
+         ) : (
+            <SideLoginMessage />
+         )}
       </SidebarContainer>
    );
 }

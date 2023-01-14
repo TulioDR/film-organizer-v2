@@ -11,7 +11,7 @@ export default function ToggleModeButton() {
          onClick={toggle}
          onMouseDown={(e) => e.preventDefault()}
          style={{ backgroundColor: themeColor }}
-         className="overflow-hidden select-none h-full w-full cursor-pointer flex items-center rounded-lg"
+         className="overflow-hidden select-none h-full w-full cursor-pointer flex items-center"
       >
          <div className="w-9 h-9 flex justify-center items-center mr-3 flex-shrink-0">
             <span className="material-icons ">{isMovie ? "movie" : "tv"}</span>

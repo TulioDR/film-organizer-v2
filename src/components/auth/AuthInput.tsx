@@ -24,7 +24,7 @@ export default function AuthInput({
    return (
       <div>
          <div className="flex items-center relative">
-            <div className="text-gray-dark w-10 text-center">
+            <div className="text-dark-bg-secondary w-10 text-center">
                <span className="material-icons text-2xl">{icon}</span>
             </div>
             <Field
@@ -32,7 +32,7 @@ export default function AuthInput({
                type={type}
                placeholder={placeholder}
                autoComplete="off"
-               className={`rounded-lg bg-gray-dark h-10 outline-none pl-3 placeholder:text-gray-light text-white flex-1 ${
+               className={`rounded-lg bg-gray-dark h-10 outline-none pl-3 placeholder:text-light-text-soft text-light-text-normal flex-1 shadow-xl ${
                   password ? "pr-10" : "pr-3"
                }`}
             />

@@ -44,42 +44,40 @@ export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
       <motion.article
          variants={staggerItem}
          layoutId={`https://image.tmdb.org/t/p/w${780}${media.poster_path}`}
-         className="rounded-xl overflow-hidden shadow-xl p-[2px] bg-gradient-to-t from-slate-900 to-slate-600"
+         className="rounded-lg sm:rounded-xl overflow-hidden shadow-xl relative"
       >
-         <div className="w-full h-full relative">
-            <div onClick={toggle} className="cursor-pointer">
-               <Poster
-                  alt={media.title || media.name}
-                  posterPath={media.poster_path}
-                  size="lg"
-               />
-            </div>
-            <CardBack isOpen={isOpen} onExitComplete={onExitComplete}>
-               <BackButton onClick={toggle} />
-               <Poster
-                  alt={media.title || media.name}
-                  posterPath={media.backdrop_path}
-                  size="lg"
-                  backPoster
-               />
-               <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-t-xl w-full flex-1 flex flex-col -mt-5 z-10 p-4 overflow-hidden">
-                  <BackInfo
-                     title={media.title || media.name}
-                     voteAverage={media.vote_average}
-                     year={media.release_date || media.first_air_date}
-                     overview={media.overview || "N/A"}
-                  />
-                  <div className="flex justify-between items-center h-9 w-full">
-                     <LearnMore onClick={learnMore} />
-                     <Bookmark
-                        media={media}
-                        mediaType={mediaType}
-                        isMediaSaved={isMediaSaved}
-                     />
-                  </div>
-               </div>
-            </CardBack>
+         <div onClick={toggle} className="cursor-pointer">
+            <Poster
+               alt={media.title || media.name}
+               posterPath={media.poster_path}
+               size="lg"
+            />
          </div>
+         <CardBack isOpen={isOpen} onExitComplete={onExitComplete}>
+            <BackButton onClick={toggle} />
+            <Poster
+               alt={media.title || media.name}
+               posterPath={media.backdrop_path}
+               size="lg"
+               backPoster
+            />
+            <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-t-xl w-full flex-1 flex flex-col -mt-5 z-10 p-4 overflow-hidden">
+               <BackInfo
+                  title={media.title || media.name}
+                  voteAverage={media.vote_average}
+                  year={media.release_date || media.first_air_date}
+                  overview={media.overview || "N/A"}
+               />
+               <div className="flex justify-between items-center h-9 w-full">
+                  <LearnMore onClick={learnMore} />
+                  <Bookmark
+                     media={media}
+                     mediaType={mediaType}
+                     isMediaSaved={isMediaSaved}
+                  />
+               </div>
+            </div>
+         </CardBack>
       </motion.article>
    );
 }

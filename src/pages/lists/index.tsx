@@ -7,8 +7,11 @@ import useListsContext from "../../context/ListsContext";
 import ListModel from "../../models/listModel";
 import { motion } from "framer-motion";
 import { staggerContainer } from "../../animations/StaggerCards";
+import { useUser } from "@supabase/auth-helpers-react";
+import ListsLoginAdvice from "../../components/manage/ListsLoginAdvice";
 
 export default function Lists() {
+   const user = useUser();
    const { lists } = useListsContext();
    const [listToDelete, setListToDelete] = useState<ListModel | null>(null);
 
@@ -30,21 +33,26 @@ export default function Lists() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <PageTitle>Manage</PageTitle>
-         <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
-         >
-            {lists.map((list) => (
-               <ListCard
-                  key={list.id}
-                  list={list}
-                  openDeleteModal={openDeleteModal}
-               />
-            ))}
-         </motion.div>
+         {user ? (
+            <motion.div
+               variants={staggerContainer}
+               initial="initial"
+               animate="animate"
+               exit="exit"
+               className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
+            >
+               {lists.map((list) => (
+                  <ListCard
+                     key={list.id}
+                     list={list}
+                     openDeleteModal={openDeleteModal}
+                  />
+               ))}
+            </motion.div>
+         ) : (
+            <ListsLoginAdvice />
+         )}
+
          <DeleteListModal
             isOpen={isModalOpen}
             close={closeDeleteModal}
