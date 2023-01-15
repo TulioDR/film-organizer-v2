@@ -30,16 +30,4 @@ export default async function handler(
          res.status(404).json(error);
       }
    }
-   if (req.method === "GET") {
-      try {
-         const list = await prisma.list.findUnique({
-            where: {
-               id: req.query.listId as string,
-            },
-         });
-         res.status(200).json(list);
-      } catch (error: any) {
-         res.status(404).json(error);
-      }
-   }
 }

@@ -44,7 +44,7 @@ export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
       <motion.article
          variants={staggerItem}
          layoutId={`https://image.tmdb.org/t/p/w${780}${media.poster_path}`}
-         className="rounded-lg sm:rounded-xl overflow-hidden shadow-xl relative"
+         className="relative rounded-xl overflow-hidden shadow-xl"
       >
          <div onClick={toggle} className="cursor-pointer">
             <Poster

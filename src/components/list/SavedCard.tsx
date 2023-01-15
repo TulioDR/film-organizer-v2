@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { staggerItem } from "../../animations/StaggerCards";
 import MediaModel from "../../models/MediaModel";
 import Poster from "../Poster";
 
@@ -26,7 +27,10 @@ export default function SavedCard({
    };
 
    return (
-      <div className="relative rounded-xl overflow-hidden">
+      <motion.article
+         variants={staggerItem}
+         className="relative rounded-xl overflow-hidden shadow-xl"
+      >
          <Poster alt={media.name} posterPath={media.poster_path} size="lg" />
          {isDeleteOpen && (
             <div
@@ -60,8 +64,7 @@ export default function SavedCard({
                </div>
             </div>
          )}
-
          <div className="absolute w-full h-full">{media.name}</div>
-      </div>
+      </motion.article>
    );
 }
