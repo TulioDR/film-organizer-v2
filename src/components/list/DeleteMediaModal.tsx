@@ -35,10 +35,10 @@ export default function DeleteMediaModal({
 
    const deleteMediaFunction = async () => {
       const ids = mediaToDelete.map(({ id }) => id);
+      close();
       const deletedMedia = await deleteMedia(ids);
       console.log(deletedMedia);
       refresh();
-      close();
    };
 
    return (

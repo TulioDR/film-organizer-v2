@@ -39,7 +39,7 @@ export default function AuthInput({
             {password && (
                <div
                   onClick={toggle}
-                  className="text-white w-10 text-center absolute right-0 top-0 h-full grid place-content-center cursor-pointer"
+                  className="text-light-text-normal w-10 text-center absolute right-0 top-0 h-full grid place-content-center cursor-pointer"
                >
                   <span className="material-icons text-2xl">
                      {type === "password" ? "visibility" : "visibility_off"}

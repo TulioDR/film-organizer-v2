@@ -55,6 +55,7 @@ export default function SearchBar({}: Props) {
       const type = isMovie ? "movie" : "tv";
       const id = results[index].id;
       getMediaDetails(type, id);
+      setShowResults(false);
    };
 
    const handleSubmit = (e: FormEvent) => {

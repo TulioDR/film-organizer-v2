@@ -5,7 +5,6 @@ import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
 import { useUser } from "@supabase/auth-helpers-react";
-import Link from "next/link";
 
 export default function User() {
    const user = useUser();
@@ -29,40 +28,26 @@ export default function User() {
    }, [menu]);
 
    return (
-      <div className="flex">
-         <div tabIndex={0} onBlur={handleBlur} className="relative">
-            <motion.button
-               onClick={toggle}
-               className="grid place-content-center h-9 w-9 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg"
-            >
-               {user ? (
-                  <span className="uppercase text-xl">
-                     {user.email?.charAt(0)}
-                  </span>
-               ) : (
-                  <span className="material-icons">settings</span>
-               )}
-            </motion.button>
-            {isOpen && (
-               <DropdownMenu
-                  divKey={menu}
-                  elRef={dropdownRef}
-                  height={menuHeight}
-               >
-                  {menu === "main" && (
-                     <MainMenu setIsOpen={setIsOpen} setMenu={setMenu} />
-                  )}
-                  {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
-               </DropdownMenu>
+      <div tabIndex={0} onBlur={handleBlur} className="relative">
+         <motion.button
+            onClick={toggle}
+            className="grid place-content-center h-9 w-9 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg"
+         >
+            {user ? (
+               <span className="uppercase text-xl">
+                  {user.email?.charAt(0)}
+               </span>
+            ) : (
+               <span className="material-icons">settings</span>
             )}
-         </div>
-         {!user && (
-            <Link
-               href="/auth"
-               className="h-9 px-4 bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg cursor-pointer ml-2 hidden sm:flex items-center"
-            >
-               Log in
-            </Link>
+         </motion.button>
+         {isOpen && (
+            <DropdownMenu divKey={menu} elRef={dropdownRef} height={menuHeight}>
+               {menu === "main" && (
+                  <MainMenu setIsOpen={setIsOpen} setMenu={setMenu} />
+               )}
+               {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
+            </DropdownMenu>
          )}
       </div>
    );

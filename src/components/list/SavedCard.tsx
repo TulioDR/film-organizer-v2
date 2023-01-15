@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
+// import { staggerItem } from "../../animations/StaggerCards";
 import MediaModel from "../../models/MediaModel";
 import Poster from "../Poster";
 
@@ -28,6 +29,7 @@ export default function SavedCard({
 
    return (
       <motion.article
+         layout
          variants={staggerItem}
          className="relative rounded-xl overflow-hidden shadow-xl"
       >

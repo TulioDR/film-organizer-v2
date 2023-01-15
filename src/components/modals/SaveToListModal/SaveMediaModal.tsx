@@ -17,7 +17,7 @@ export default function SaveMediaModal() {
    return (
       <ModalContainer isOpen={isSaveMediaOpen} close={closeSaveMediaModal}>
          <ModalTItle>Save to...</ModalTItle>
-         <ul className="w-56">
+         <ul className="w-56 border-y border-light-text-soft dark:border-dark-text-soft">
             {lists.map((list) => (
                <ListToSave
                   key={list.id}

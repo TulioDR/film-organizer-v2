@@ -1,3 +1,4 @@
+import LoginButton from "../components/navbar/LoginButton";
 import SearchBar from "../components/navbar/searchbar/SearchBar";
 import User from "../components/navbar/user/User";
 import ToggleSidebar from "../components/ToggleSidebar";
@@ -13,7 +14,10 @@ export default function Navbar() {
          <div className="flex-1 h-full">
             <SearchBar />
          </div>
-         <User />
+         <div className="flex space-x-2">
+            <User />
+            <LoginButton />
+         </div>
       </div>
    );
 }

@@ -14,7 +14,7 @@ export default function ListsLoginAdvice() {
             format_list_bulleted
          </span>
          <div className="text-3xl mb-4 text-center">
-            Don't miss the opportunity to create your own Lists
+            {"Don't miss the opportunity to create your own Lists"}
          </div>
          <div className="text-lg text-center">
             Log in to save the Movies and Shows as you need
