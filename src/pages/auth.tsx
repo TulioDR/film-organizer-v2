@@ -59,7 +59,7 @@ export default function Auth() {
       else router.push("/");
    };
 
-   const SignUpHandler = async (values: any, resetForm: any) => {
+   const signUpHandler = async (values: any, resetForm: any) => {
       const { email, password } = values;
       const { error, data } = await supabaseClient.auth.signUp({
          email,
@@ -72,6 +72,20 @@ export default function Auth() {
          setShowModal(true);
       }
       if (alreadyExist) setError("User already exist");
+      if (error) setError(error.message);
+   };
+
+   const signInWithGoogle = async () => {
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+         provider: "google",
+      });
+      if (error) setError(error.message);
+   };
+
+   const signInWithGitHub = async () => {
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+         provider: "github",
+      });
       if (error) setError(error.message);
    };
 
@@ -91,14 +105,26 @@ export default function Auth() {
                   : "Sign Up today to start saving your lists!"}
             </div>
             <div className="border-b border-gray-light pb-4 grid grid-cols-3 gap-1 sm:gap-2">
-               <SocialLogin provider="Google" logo={google} />
-               <SocialLogin provider="LinkedIn" logo={linkedin} />
-               <SocialLogin provider="Github" logo={github} />
+               <SocialLogin
+                  provider="google"
+                  logo={google}
+                  onClick={signInWithGoogle}
+               />
+               <SocialLogin
+                  provider="LinkedIn"
+                  logo={linkedin}
+                  onClick={() => {}}
+               />
+               <SocialLogin
+                  provider="github"
+                  logo={github}
+                  onClick={signInWithGitHub}
+               />
             </div>
             <FormikForm
                isLogin={isLogin}
                toggleType={toggle}
-               submitHandler={isLogin ? loginHandler : SignUpHandler}
+               submitHandler={isLogin ? loginHandler : signUpHandler}
             />
             <SkipButton />
          </AuthContainer>

@@ -27,6 +27,10 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
       setIsOpen(false);
    };
 
+   const profile = () => {
+      router.push("/profile");
+   };
+
    return (
       <motion.ul
          key="main"
@@ -40,6 +44,9 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
          transition={{ duration: 0.4 }}
          className="w-full space-y-2"
       >
+         <DropdownItem icon={<MainIcon icon="person" />} onClick={profile}>
+            Profile
+         </DropdownItem>
          <DropdownItem
             icon={<MainIcon icon="dark_mode" />}
             onClick={toggleDarkMode}
@@ -56,6 +63,7 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
          >
             Theme Colors
          </DropdownItem>
+
          {user ? (
             <DropdownItem icon={<MainIcon icon="logout" />} onClick={logOut}>
                Log out

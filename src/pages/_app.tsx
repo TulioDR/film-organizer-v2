@@ -15,6 +15,7 @@ export default function App({
 }>) {
    const router = useRouter();
    const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
    return (
       <SessionContextProvider
          supabaseClient={supabaseClient}
