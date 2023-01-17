@@ -8,14 +8,12 @@ type Props = {
    tvShowID: number;
    selectedSeason: number | null;
    setSelectedSeason: React.Dispatch<React.SetStateAction<number | null>>;
-   setSelectedImg: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export default function SeasonDetails({
    tvShowID,
    selectedSeason,
    setSelectedSeason,
-   setSelectedImg,
 }: Props) {
    const [season, setSeason] = useState<any>(null);
    const [data, setData] = useState<any>(null);
@@ -33,7 +31,6 @@ export default function SeasonDetails({
 
    const close = () => {
       setSelectedSeason(null);
-      setSelectedImg(null);
    };
 
    const onAnimationComplete = (e: any) => {

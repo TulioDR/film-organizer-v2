@@ -1,8 +1,7 @@
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
 import Poster from "../../components/Poster";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CardBack from "../../components/MainCardParts/CardBack";
 import BackButton from "../../components/MainCardParts/BackButton";
 import LearnMore from "../../components/MainCardParts/LearnMore";
@@ -13,38 +12,46 @@ import useIsMediaSaved from "../../hooks/useIsMediaSaved";
 type Props = {
    media: any;
    mediaType: "tv" | "movie";
-   setSelectedImg: React.Dispatch<React.SetStateAction<string | null>>;
+   setTransitionValues: (
+      posterPath: string,
+      link: string,
+      element: HTMLDivElement,
+      setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
+   ) => void;
 };
 
-export default function MainCard({ media, mediaType, setSelectedImg }: Props) {
-   const router = useRouter();
+export default function MainCard({
+   media,
+   mediaType,
+   setTransitionValues,
+}: Props) {
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => setIsOpen(!isOpen);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
-
-   const onExitComplete = () => {
-      if (!isLeaving) return;
-      router.push(`/${mediaType}/${media.id}`);
-      if (window.innerWidth >= 1280) {
-         setSelectedImg(
-            `https://image.tmdb.org/t/p/w${780}${media.poster_path}`
-         );
-      }
-   };
 
    const learnMore = () => {
       setIsLeaving(true);
       toggle();
    };
 
-   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
+   const cardRef = useRef<HTMLDivElement>(null);
+   const [isInvisible, setIsInvisible] = useState<boolean>(false);
+   const onExitComplete = () => {
+      if (!isLeaving) return;
+      const link = `/${mediaType}/${media.id}`;
+      const element = cardRef.current!;
+      setTransitionValues(media.poster_path, link, element, setIsInvisible);
+   };
 
+   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    return (
       <motion.article
+         ref={cardRef}
          variants={staggerItem}
-         layoutId={`https://image.tmdb.org/t/p/w${780}${media.poster_path}`}
-         className="relative rounded-xl overflow-hidden shadow-xl"
+         className={`relative rounded-xl overflow-hidden ${
+            isInvisible ? "invisible" : "shadow-xl"
+         }`}
       >
          <div onClick={toggle} className="cursor-pointer">
             <Poster

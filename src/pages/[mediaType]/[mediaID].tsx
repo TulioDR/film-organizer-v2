@@ -1,11 +1,10 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import MainPoster from "../../components/details/MainPoster";
 import InfoBar from "../../components/details/infoBar/InfoBar";
 import Tabs from "../../components/details/tabs/Tabs";
-import TransitionPoster from "../../animations/TransitionPoster";
 import MainTitle from "../../components/details/MainTitle";
 import ExitDetails from "../../animations/ExitDetails";
 import InfoBarMobile from "../../components/details/infoBar/InfoBarMobile";
@@ -39,9 +38,8 @@ export default function Details({ mediaType, media }: Props) {
       console.log(media);
    }, [media]);
 
-   const [selectedImg, setSelectedImg] = useState<string | null>(null);
    return (
-      <ExitDetails selectedImg={selectedImg}>
+      <ExitDetails>
          <Head>
             <title>{media.title || media.name}</title>
             <meta name="description" content={media.overview} />
@@ -65,17 +63,9 @@ export default function Details({ mediaType, media }: Props) {
                   <MainTitle>{media.title || media.name}</MainTitle>
                   <InfoBar media={media} mediaType={mediaType} />
                </div>
-               <Tabs
-                  setSelectedImg={setSelectedImg}
-                  media={media}
-                  mediaType={mediaType}
-               />
+               <Tabs media={media} mediaType={mediaType} />
             </div>
          </div>
-         <TransitionPoster
-            selectedImg={selectedImg}
-            setSelectedImg={setSelectedImg}
-         />
       </ExitDetails>
    );
 }

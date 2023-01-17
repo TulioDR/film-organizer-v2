@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
 
 type Props = {
-   selectedImg: string | null;
    children: React.ReactNode;
 };
 
-export default function ExitDetails({ selectedImg, children }: Props) {
+export default function ExitDetails({ children }: Props) {
    return (
       <motion.div
          exit={
-            selectedImg
+            true
                ? {
                     opacity: 0,
                     transition: { duration: 0.4, ease: "easeInOut" },

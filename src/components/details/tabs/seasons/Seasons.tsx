@@ -13,20 +13,10 @@ const container = {
 
 type Props = {
    seasons: any[];
-   setSelectedImg: React.Dispatch<React.SetStateAction<string | null>>;
    setSelectedSeason: React.Dispatch<React.SetStateAction<number | null>>;
 };
-export default function Seasons({
-   seasons,
-   setSelectedImg,
-   setSelectedSeason,
-}: Props) {
+export default function Seasons({ seasons, setSelectedSeason }: Props) {
    const openSeasonInfo = (season: any) => {
-      if (window.innerWidth >= 1280) {
-         setSelectedImg(
-            `https://image.tmdb.org/t/p/w${780}${season.poster_path}`
-         );
-      }
       setSelectedSeason(season.season_number);
    };
 

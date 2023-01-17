@@ -4,9 +4,10 @@ import MainCard from "../layout/cards/MainCard";
 import { staggerContainer } from "../animations/StaggerCards";
 import usePageLoadingContext from "../context/PageLoadingContext";
 import useSidebarContext from "../context/SidebarContext";
-import TransitionPoster from "../animations/TransitionPoster";
 import PageAnimationContainer from "../containers/PageAnimationContainer";
 import PageTitle from "./PageTitle";
+import TransitionPoster from "../animations/TransitionPoster";
+import useTransitionPoster from "../hooks/useTransitionPoster";
 
 type Props = {
    title: string;
@@ -15,10 +16,7 @@ type Props = {
 };
 
 export default function SearchCards({ title, mediaType, url }: Props) {
-   const [selectedImg, setSelectedImg] = useState<string | null>(null);
-
    const { openSidebar } = useSidebarContext();
-
    const [media, setMedia] = useState<any[]>([]);
    const [page, setPage] = useState<number>(1);
    const { setIsLoading } = usePageLoadingContext();
@@ -40,7 +38,6 @@ export default function SearchCards({ title, mediaType, url }: Props) {
 
    useEffect(() => {
       const container = document.getElementById("scroll-container")!;
-
       const handleScroll = () => {
          const { scrollHeight, scrollTop, clientHeight } = container;
          const bottom = scrollHeight - scrollTop === clientHeight;
@@ -49,38 +46,43 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             setPage((page) => page + 1);
          }
       };
-
       container.addEventListener("scroll", handleScroll, { passive: true });
       return () => container.removeEventListener("scroll", handleScroll);
    });
 
+   const { selectedImg, link, position, setTransitionValues } =
+      useTransitionPoster();
+
    return (
-      <PageAnimationContainer title={title}>
-         <PageTitle>{title}</PageTitle>
-         <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className={`gap-5 grid grid-cols-2 md:grid-cols-3 ${
-               openSidebar
-                  ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-                  : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-            }`}
-         >
-            {media.map((media) => (
-               <MainCard
-                  key={media.id}
-                  media={media}
-                  mediaType={mediaType}
-                  setSelectedImg={setSelectedImg}
-               />
-            ))}
-         </motion.div>
-         <TransitionPoster
-            selectedImg={selectedImg}
-            setSelectedImg={setSelectedImg}
-         />
-      </PageAnimationContainer>
+      <div className="relative">
+         <PageAnimationContainer title={title}>
+            <PageTitle>{title}</PageTitle>
+            <motion.div
+               variants={staggerContainer}
+               initial="initial"
+               animate="animate"
+               exit="exit"
+               className={`gap-5 grid grid-cols-2 md:grid-cols-3 ${
+                  openSidebar
+                     ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+                     : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+               }`}
+            >
+               {media.map((media) => (
+                  <MainCard
+                     key={media.id}
+                     media={media}
+                     mediaType={mediaType}
+                     setTransitionValues={setTransitionValues}
+                  />
+               ))}
+            </motion.div>
+            <TransitionPoster
+               link={link}
+               position={position}
+               selectedImg={selectedImg}
+            />
+         </PageAnimationContainer>
+      </div>
    );
 }

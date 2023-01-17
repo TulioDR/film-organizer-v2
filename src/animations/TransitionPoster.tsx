@@ -1,40 +1,49 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { PositionModel } from "../models/TransitionPosterModels";
 
 type Props = {
    selectedImg: string | null;
-   setSelectedImg: React.Dispatch<React.SetStateAction<string | null>>;
+   position: PositionModel;
+   link: string;
 };
 
 export default function TransitionPoster({
+   link,
    selectedImg,
-   setSelectedImg,
+   position,
 }: Props) {
-   const onAnimationComplete = () => {
-      console.log("finished");
-   };
+   const { push } = useRouter();
+   const { top, left, height } = position;
    return (
       <AnimatePresence>
          {selectedImg && (
-            <motion.div
-               onAnimationComplete={onAnimationComplete}
-               initial={{ opacity: 1 }}
-               animate={{ opacity: 1, transition: { duration: 1 } }}
-               exit={{ opacity: 0, transition: { duration: 0 } }}
-               layoutId={selectedImg}
-               onClick={() => setSelectedImg(null)}
-               className="fixed top-[76px] aspect-[2/3] rounded-xl overflow-hidden details-height"
-            >
-               <div className="relative w-full h-full">
-                  <Image
-                     alt="selected"
-                     src={selectedImg}
-                     fill
-                     sizes="100%"
-                     priority
-                  />
-               </div>
-            </motion.div>
+            <>
+               <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="absolute top-0 left-0 w-full h-full bg-light-bg-primary dark:bg-dark-bg-primary"
+               ></motion.div>
+               <motion.div
+                  onAnimationComplete={() => push(link)}
+                  initial={{ top: top, x: left, height }}
+                  animate={{ top: 76, x: 0, height: "calc(100vh - 96px)" }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="fixed rounded-xl aspect-[2/3] overflow-hidden"
+               >
+                  <div className="relative w-full h-full">
+                     <Image
+                        alt="selected"
+                        src={selectedImg}
+                        fill
+                        sizes="100%"
+                        priority
+                     />
+                  </div>
+               </motion.div>
+            </>
          )}
       </AnimatePresence>
    );
