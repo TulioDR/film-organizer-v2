@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PositionModel } from "../models/TransitionPosterModels";
+import { PositionModel } from "../../../models/TransitionPosterModels";
 
 export default function useTransitionPoster() {
    const [selectedImg, setSelectedImg] = useState<string | null>(null);

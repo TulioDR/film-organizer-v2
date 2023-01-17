@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { PositionModel } from "../models/TransitionPosterModels";
+import { PositionModel } from "../../../models/TransitionPosterModels";
 
 type Props = {
    selectedImg: string | null;

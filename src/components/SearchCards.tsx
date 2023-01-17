@@ -6,8 +6,8 @@ import usePageLoadingContext from "../context/PageLoadingContext";
 import useSidebarContext from "../context/SidebarContext";
 import PageAnimationContainer from "../containers/PageAnimationContainer";
 import PageTitle from "./PageTitle";
-import TransitionPoster from "../animations/TransitionPoster";
-import useTransitionPoster from "../hooks/useTransitionPoster";
+import TransitionPoster from "../features/transitionPoster/components/TransitionPoster";
+import useTransitionPoster from "../features/transitionPoster/hooks/useTransitionPoster";
 
 type Props = {
    title: string;

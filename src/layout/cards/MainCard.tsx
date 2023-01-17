@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
 import Poster from "../../components/Poster";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import CardBack from "../../components/MainCardParts/CardBack";
 import BackButton from "../../components/MainCardParts/BackButton";
 import LearnMore from "../../components/MainCardParts/LearnMore";
 import Bookmark from "../../components/MainCardParts/Bookmark";
 import BackInfo from "../../components/MainCardParts/BackInfo";
 import useIsMediaSaved from "../../hooks/useIsMediaSaved";
+import useTransitionCard from "../../features/transitionPoster/hooks/useTransitionCard";
 
 type Props = {
    media: any;
@@ -25,29 +26,28 @@ export default function MainCard({
    mediaType,
    setTransitionValues,
 }: Props) {
+   const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
+   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
+
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => setIsOpen(!isOpen);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
-
    const learnMore = () => {
       setIsLeaving(true);
       toggle();
    };
 
-   const cardRef = useRef<HTMLDivElement>(null);
-   const [isInvisible, setIsInvisible] = useState<boolean>(false);
    const onExitComplete = () => {
       if (!isLeaving) return;
       const link = `/${mediaType}/${media.id}`;
-      const element = cardRef.current!;
+      const element = transitionCard.current!;
       setTransitionValues(media.poster_path, link, element, setIsInvisible);
    };
 
-   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    return (
       <motion.article
-         ref={cardRef}
+         ref={transitionCard}
          variants={staggerItem}
          className={`relative rounded-xl overflow-hidden ${
             isInvisible ? "invisible" : "shadow-xl"
