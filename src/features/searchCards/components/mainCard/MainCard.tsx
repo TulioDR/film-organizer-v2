@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import { staggerItem } from "../../animations/StaggerCards";
-import Poster from "../../components/Poster";
+import { staggerItem } from "../../../../animations/StaggerCards";
+import Poster from "../../../../components/Poster";
 import { useState } from "react";
-import CardBack from "../../components/MainCardParts/CardBack";
-import BackButton from "../../components/MainCardParts/BackButton";
-import LearnMore from "../../components/MainCardParts/LearnMore";
-import Bookmark from "../../components/MainCardParts/Bookmark";
-import BackInfo from "../../components/MainCardParts/BackInfo";
-import useIsMediaSaved from "../../hooks/useIsMediaSaved";
-import useTransitionCard from "../../features/transitionPoster/hooks/useTransitionCard";
+import CardBack from "./CardBack";
+import BackButton from "./BackButton";
+import LearnMore from "./LearnMore";
+import Bookmark from "./Bookmark";
+import BackInfo from "./BackInfo";
+import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
+import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
 
 type Props = {
    media: any;
@@ -47,6 +47,7 @@ export default function MainCard({
 
    return (
       <motion.article
+         layout
          ref={transitionCard}
          variants={staggerItem}
          className={`relative rounded-xl overflow-hidden ${

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import MainCard from "../../../layout/cards/MainCard";
+import MainCard from "./mainCard/MainCard";
 import { staggerContainer } from "../../../animations/StaggerCards";
 import useSidebarContext from "../../../context/SidebarContext";
 import PageAnimationContainer from "../../../containers/PageAnimationContainer";
@@ -22,7 +22,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
       useTransitionPoster();
 
    return (
-      <div className="relative overflow-x-hidden">
+      <div className="relative overflow-x-hidden overflow-y-hidden">
          <PageAnimationContainer title={title}>
             <PageTitle>{title}</PageTitle>
             <motion.div
@@ -30,7 +30,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                initial="initial"
                animate="animate"
                exit="exit"
-               className={`gap-5 grid grid-cols-2 md:grid-cols-3 ${
+               className={`gap-5 grid grid-cols-2 md:grid-cols-3 overflow-y-hidden ${
                   openSidebar
                      ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
                      : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"

@@ -1,7 +1,7 @@
 import React from "react";
+import ToggleButton from "../../components/ToggleButton";
 import useSidebarContext from "../../context/SidebarContext";
 import useThemeContext from "../../context/ThemeContext";
-import ToggleButton from "../ToggleButton";
 
 export default function ToggleModeButton() {
    const { isMovie, toggle } = useSidebarContext();

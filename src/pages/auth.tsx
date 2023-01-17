@@ -16,8 +16,7 @@ import AuthHeader from "../components/auth/AuthHeader";
 import linkedin from "../data/images/logos/linkedin.png";
 import github from "../data/images/logos/github.png";
 import google from "../data/images/logos/google.png";
-
-import ConfirmEmailModal from "../components/modals/ConfirmEmail/ConfirmEmailModal";
+import ConfirmEmailModal from "../layout/modals/confirmEmail/ConfirmEmailModal";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const supabase = createServerSupabaseClient(context);

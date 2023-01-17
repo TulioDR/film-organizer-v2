@@ -1,5 +1,5 @@
+import ToggleSidebar from "../../components/ToggleSidebar";
 import useSidebarContext from "../../context/SidebarContext";
-import ToggleSidebar from "../ToggleSidebar";
 
 type Props = {};
 

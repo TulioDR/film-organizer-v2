@@ -1,10 +1,10 @@
-import { deleteList } from "../../api/lists";
-import useListsContext from "../../context/ListsContext";
-import ListModel from "../../models/listModel";
-import ModalButton from "../modals/ModalButton";
-import ModalButtonsContainer from "../modals/ModalButtonsContainer";
-import ModalContainer from "../modals/ModalContainer";
-import ModalTItle from "../modals/ModalTItle";
+import { deleteList } from "../../../api/lists";
+import useListsContext from "../../../context/ListsContext";
+import ListModel from "../../../models/listModel";
+import ModalButton from "../ModalButton";
+import ModalButtonsContainer from "../ModalButtonsContainer";
+import ModalContainer from "../ModalContainer";
+import ModalTItle from "../ModalTItle";
 
 type Props = {
    isOpen: boolean;

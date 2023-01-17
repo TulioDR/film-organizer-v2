@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { deleteMedia } from "../../api/media";
-import MediaModel from "../../models/MediaModel";
-import ModalButton from "../modals/ModalButton";
-import ModalButtonsContainer from "../modals/ModalButtonsContainer";
-import ModalContainer from "../modals/ModalContainer";
-import ModalTItle from "../modals/ModalTItle";
+import { deleteMedia } from "../../../api/media";
+import MediaModel from "../../../models/MediaModel";
+import ModalButton from "../ModalButton";
+import ModalButtonsContainer from "../ModalButtonsContainer";
+import ModalContainer from "../ModalContainer";
+import ModalTItle from "../ModalTItle";
+import MediaToDelete from "./MediaToDelete";
+import Subtitle from "./Subtitle";
 
 type Props = {
    isOpen: boolean;
@@ -53,38 +55,10 @@ export default function DeleteMediaModal({
                cannot be undone.
             </div>
             <div>
-               <div className="mt-2 text-lg font-medium text-light-text-normal dark:text-dark-text-normal">
-                  Movies
-               </div>
-               <ul>
-                  {movies.length ? (
-                     movies.map((item) => (
-                        <li key={item.id} className="h-6 pl-2">
-                           - {item.name}
-                        </li>
-                     ))
-                  ) : (
-                     <span className="h-6 pl-2">
-                        No Movies are going to be deleted
-                     </span>
-                  )}
-               </ul>
-               <div className="mt-2 text-lg font-medium text-light-text-normal dark:text-dark-text-normal">
-                  TV Series
-               </div>
-               <ul>
-                  {tvSeries.length ? (
-                     tvSeries.map((item) => (
-                        <li key={item.id} className="h-6 pl-2">
-                           - {item.name}
-                        </li>
-                     ))
-                  ) : (
-                     <span className="h-6 pl-2">
-                        No TV Series are going to be deleted
-                     </span>
-                  )}
-               </ul>
+               <Subtitle>Movies</Subtitle>
+               <MediaToDelete media={movies} movie />
+               <Subtitle>TV Series</Subtitle>
+               <MediaToDelete media={tvSeries} />
             </div>
          </div>
          <ModalButtonsContainer>

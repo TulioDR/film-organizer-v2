@@ -1,22 +1,25 @@
 import { useState } from "react";
-import { createList } from "../../api/lists";
+
 import { Formik, Form, Field } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
-import useThemeContext from "../../context/ThemeContext";
-import listNameValidation from "../../utils/listNameValidation";
-import ModalContainer from "../modals/ModalContainer";
-import ModalTItle from "../modals/ModalTItle";
-import ModalButton from "../modals/ModalButton";
-import ModalButtonsContainer from "../modals/ModalButtonsContainer";
-import useListsContext from "../../context/ListsContext";
+
 import { useUser } from "@supabase/auth-helpers-react";
+
+import ModalContainer from "../ModalContainer";
+import ModalTItle from "../ModalTItle";
+import ModalButtonsContainer from "../ModalButtonsContainer";
+import ModalButton from "../ModalButton";
+import useListsContext from "../../../context/ListsContext";
+import listNameValidation from "../../../utils/listNameValidation";
+import useThemeContext from "../../../context/ThemeContext";
+import { createList } from "../../../api/lists";
 
 type Props = {
    isOpen: boolean;
    close: () => void;
 };
 
-export default function CreateListForm({ isOpen, close }: Props) {
+export default function CreateListModal({ isOpen, close }: Props) {
    const { refresh } = useListsContext();
 
    const { themeColor } = useThemeContext();

@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import SaveMediaModal from "../components/modals/SaveToListModal/SaveMediaModal";
+
 import { ListsProvider } from "../context/ListsContext";
 import { PageLoadingProvider } from "../context/PageLoadingContext";
 import { SidebarProvider } from "../context/SidebarContext";
 import { ThemeProvider } from "../context/ThemeContext";
-import Navbar from "../layout/Navbar";
+import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
+import Navbar from "../layout/navbar/Navbar";
 import SidebarsContainer from "./SidebarsContainer";
 
 type Props = {

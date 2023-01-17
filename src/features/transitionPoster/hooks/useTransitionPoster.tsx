@@ -1,4 +1,6 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { windowExtraLarge } from "../../../data/constants/windowWidht";
 import { PositionModel } from "../../../models/TransitionPosterModels";
 
 export default function useTransitionPoster() {
@@ -10,13 +12,17 @@ export default function useTransitionPoster() {
       height: 0,
    });
 
+   const router = useRouter();
    const setTransitionValues = (
       posterPath: string,
       link: string,
       element: HTMLDivElement,
       setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
    ) => {
-      if (window.innerWidth < 1280) return;
+      if (window.innerWidth < windowExtraLarge) {
+         router.push(link);
+         return;
+      }
       setIsSelected(true);
       const img = `https://image.tmdb.org/t/p/w780${posterPath}`;
       setSelectedImg(img);

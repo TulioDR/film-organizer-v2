@@ -20,12 +20,13 @@ export default function MainPoster({
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    const { openSaveMediaModal } = useListsContext();
    const { themeColor } = useThemeContext();
+
    return (
       <motion.div
-         exit={{
-            x: "-100%",
-            transition: { duration: 0.4, ease: "easeInOut" },
-         }}
+         initial={{ x: 0 }}
+         animate={{ x: 0 }}
+         exit={{ x: "-100%" }}
+         transition={{ duration: 0.4, ease: "easeInOut" }}
          className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto"
       >
          <Image

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import DeleteListModal from "../../components/manage/DeleteListModal";
+
 import ListCard from "../../components/manage/ListCard";
 import PageTitle from "../../components/PageTitle";
 import useListsContext from "../../context/ListsContext";
@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { staggerContainer } from "../../animations/StaggerCards";
 import { useUser } from "@supabase/auth-helpers-react";
 import ListsLoginAdvice from "../../components/manage/ListsLoginAdvice";
+import DeleteListModal from "../../layout/modals/deleteList/DeleteListModal";
 
 export default function Lists() {
    const user = useUser();

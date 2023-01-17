@@ -1,15 +1,14 @@
-import BrandHamburger from "../components/sidebar/BrandHamburger";
-import SideLink from "../components/sidebar/SideLink";
-import ToggleModeButton from "../components/sidebar/ToggleModeButton";
-import useSidebarContext from "../context/SidebarContext";
-
-import CreateListButton from "../components/sidebar/CreateListButton";
-import useListsContext from "../context/ListsContext";
-import SidebarContainer from "../components/sidebar/SidebarContainer";
-import SideSubtitle from "../components/sidebar/SideSubtitle";
-import SideButtonContainer from "../components/sidebar/SideButtonContainer";
 import { useUser } from "@supabase/auth-helpers-react";
-import SideLoginMessage from "../components/sidebar/SideLoginMessage";
+import useListsContext from "../../context/ListsContext";
+import useSidebarContext from "../../context/SidebarContext";
+import BrandHamburger from "./BrandHamburger";
+import CreateListButton from "./CreateListButton";
+import SidebarContainer from "./SidebarContainer";
+import SideButtonContainer from "./SideButtonContainer";
+import SideLink from "./SideLink";
+import SideLoginMessage from "./SideLoginMessage";
+import SideSubtitle from "./SideSubtitle";
+import ToggleModeButton from "./ToggleModeButton";
 
 interface Props {
    openForm: () => void;

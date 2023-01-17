@@ -1,6 +1,7 @@
 import React from "react";
-import Poster from "../../Poster";
+
 import { motion } from "framer-motion";
+import Poster from "../../../components/Poster";
 
 type Props = {
    media: any;

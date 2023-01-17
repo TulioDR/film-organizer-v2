@@ -1,8 +1,8 @@
-import LoginButton from "../components/navbar/LoginButton";
-import SearchBar from "../components/navbar/searchbar/SearchBar";
-import User from "../components/navbar/user/User";
-import ToggleSidebar from "../components/ToggleSidebar";
-import useSidebarContext from "../context/SidebarContext";
+import LoginButton from "./LoginButton";
+import SearchBar from "./searchbar/SearchBar";
+import User from "./user/User";
+import ToggleSidebar from "../../components/ToggleSidebar";
+import useSidebarContext from "../../context/SidebarContext";
 
 export default function Navbar() {
    const { toggleShowSidebar } = useSidebarContext();
