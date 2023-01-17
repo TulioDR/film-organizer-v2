@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import SearchCards from "../../components/SearchCards";
+import SearchCards from "../../features/searchCards/components/SearchCards";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;

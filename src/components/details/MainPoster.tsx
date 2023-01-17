@@ -26,7 +26,7 @@ export default function MainPoster({
             x: "-100%",
             transition: { duration: 0.4, ease: "easeInOut" },
          }}
-         className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto shadow-lg"
+         className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto"
       >
          <Image
             alt={alt}
