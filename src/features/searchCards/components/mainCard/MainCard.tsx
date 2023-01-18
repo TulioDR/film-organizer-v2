@@ -9,6 +9,7 @@ import Bookmark from "./Bookmark";
 import BackInfo from "./BackInfo";
 import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
+import usePosterAnimationContext from "../../../../context/PosterAnimationContext";
 
 type Props = {
    media: any;
@@ -28,12 +29,15 @@ export default function MainCard({
 }: Props) {
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
+   const { changeAnimatePoster } = usePosterAnimationContext();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => setIsOpen(!isOpen);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
-   const learnMore = () => {
+
+   const onLearnMoreClick = () => {
+      changeAnimatePoster(false);
       setIsLeaving(true);
       toggle();
    };
@@ -77,7 +81,7 @@ export default function MainCard({
                   overview={media.overview || "N/A"}
                />
                <div className="flex justify-between items-center h-9 w-full">
-                  <LearnMore onClick={learnMore} />
+                  <LearnMore onClick={onLearnMoreClick} />
                   <Bookmark
                      media={media}
                      mediaType={mediaType}

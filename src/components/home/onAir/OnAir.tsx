@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import useMediaDetails from "../../../hooks/useMediaDetails";
 import Poster from "../../Poster";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import usePosterAnimationContext from "../../../context/PosterAnimationContext";
 
 type Props = { tv: any };
 
 export default function OnAir({ tv }: Props) {
-   const { getMediaDetails } = useMediaDetails();
+   const { changeAnimatePoster } = usePosterAnimationContext();
    const elRef = useRef<HTMLDivElement>(null);
    const [height, setHeight] = useState<number>(0);
    const [isHovering, setIsHovering] = useState<boolean>(false);
@@ -20,10 +21,10 @@ export default function OnAir({ tv }: Props) {
       <motion.div
          onHoverStart={() => setIsHovering(true)}
          onHoverEnd={() => setIsHovering(false)}
-         onClick={() => getMediaDetails("tv", tv.id)}
+         onClick={() => changeAnimatePoster(true)}
          className="relative cursor-pointer group aspect-[2/3] overflow-hidden"
       >
-         <div className="w-full h-full">
+         <Link href={`/tv/${tv.id}`} className="w-full h-full">
             <motion.div
                animate={{
                   height: isHovering ? `calc(100% - ${height}px)` : "100%",
@@ -41,7 +42,7 @@ export default function OnAir({ tv }: Props) {
             >
                {tv.name}
             </div>
-         </div>
+         </Link>
       </motion.div>
    );
 }

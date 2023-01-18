@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { ListsProvider } from "../context/ListsContext";
 import { PageLoadingProvider } from "../context/PageLoadingContext";
+import { PosterAnimationProvider } from "../context/PosterAnimationContext";
 import { SidebarProvider } from "../context/SidebarContext";
 import { ThemeProvider } from "../context/ThemeContext";
 import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
@@ -26,12 +27,16 @@ export default function MainPageContainer({ children }: Props) {
                      id="scroll-container"
                      className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pr-5 pl-3 pb-5"
                   >
-                     <Navbar />
-                     <AnimatePresence mode="wait">
-                        <motion.div key={router.asPath} className="relative">
-                           <PageLoadingProvider>{children}</PageLoadingProvider>
-                        </motion.div>
-                     </AnimatePresence>
+                     <PosterAnimationProvider>
+                        <Navbar />
+                        <AnimatePresence mode="wait">
+                           <motion.div key={router.asPath} className="relative">
+                              <PageLoadingProvider>
+                                 {children}
+                              </PageLoadingProvider>
+                           </motion.div>
+                        </AnimatePresence>
+                     </PosterAnimationProvider>
                   </div>
                </SidebarProvider>
             </ListsProvider>

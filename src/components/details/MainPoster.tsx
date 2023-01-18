@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import useListsContext from "../../context/ListsContext";
+import usePosterAnimationContext from "../../context/PosterAnimationContext";
 import useThemeContext from "../../context/ThemeContext";
 import useIsMediaSaved from "../../hooks/useIsMediaSaved";
 
@@ -20,10 +21,11 @@ export default function MainPoster({
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    const { openSaveMediaModal } = useListsContext();
    const { themeColor } = useThemeContext();
+   const { animatePoster } = usePosterAnimationContext();
 
    return (
       <motion.div
-         initial={{ x: 0 }}
+         initial={{ x: animatePoster ? "-100%" : 0 }}
          animate={{ x: 0 }}
          exit={{ x: "-100%" }}
          transition={{ duration: 0.4, ease: "easeInOut" }}

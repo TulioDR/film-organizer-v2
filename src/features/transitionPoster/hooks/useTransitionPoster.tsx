@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { windowExtraLarge } from "../../../data/constants/windowWidht";
+import { windowExtraLarge } from "../../../data/constants/windowWidth";
 import { PositionModel } from "../../../models/TransitionPosterModels";
 
 export default function useTransitionPoster() {

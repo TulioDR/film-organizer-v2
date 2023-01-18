@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import useSidebarContext from "../../../context/SidebarContext";
-import useMediaDetails from "../../../hooks/useMediaDetails";
 import QuickResult from "./QuickResult";
 import ResultsContainer from "./ResultsContainer";
 import SearchInput from "./SearchInput";
@@ -10,7 +9,6 @@ type Props = {};
 
 export default function SearchBar({}: Props) {
    const { isMovie } = useSidebarContext();
-   const { getMediaDetails } = useMediaDetails();
    const router = useRouter();
 
    const [results, setResults] = useState<any[]>([]);
@@ -54,7 +52,7 @@ export default function SearchBar({}: Props) {
    const getDetails = (index: number) => {
       const type = isMovie ? "movie" : "tv";
       const id = results[index].id;
-      getMediaDetails(type, id);
+      router.push(`/${type}/${id}`);
       setShowResults(false);
    };
 

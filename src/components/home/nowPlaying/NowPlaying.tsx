@@ -1,7 +1,8 @@
+import Link from "next/link";
 import useListsContext from "../../../context/ListsContext";
+import usePosterAnimationContext from "../../../context/PosterAnimationContext";
 import useThemeContext from "../../../context/ThemeContext";
 import useIsMediaSaved from "../../../hooks/useIsMediaSaved";
-import useMediaDetails from "../../../hooks/useMediaDetails";
 import Poster from "../../Poster";
 
 type Props = {
@@ -18,11 +19,15 @@ const changeDateFormat = (date: string) => {
 };
 
 export default function NowPlaying({ movie }: Props) {
-   const { getMediaDetails } = useMediaDetails();
    const { themeColor } = useThemeContext();
    const { openSaveMediaModal } = useListsContext();
+   const { changeAnimatePoster } = usePosterAnimationContext();
 
    const { isMediaSaved } = useIsMediaSaved(movie.id, "movie");
+
+   const handleLearnMoreClick = () => {
+      changeAnimatePoster(true);
+   };
 
    return (
       <div className="rounded-2xl aspect-video w-full overflow-hidden shadow-md relative">
@@ -49,16 +54,17 @@ export default function NowPlaying({ movie }: Props) {
                         {isMediaSaved ? "bookmark" : "bookmark_border"}
                      </span>
                   </button>
-                  <button
-                     onClick={() => getMediaDetails("movie", movie.id)}
-                     className="rounded-lg group backdrop-blur drop-shadow-lg px-3 border border-gray-500 h-10 text-sm font-medium relative overflow-hidden text-white"
+                  <Link
+                     href={`/movie/${movie.id}`}
+                     onClick={handleLearnMoreClick}
+                     className="rounded-lg group backdrop-blur drop-shadow-lg px-3 border border-gray-500 h-10 text-sm font-medium relative overflow-hidden text-white flex items-center"
                   >
                      <div
                         style={{ backgroundColor: themeColor }}
                         className="absolute h-full top-0 left-0 -z-10 w-0 group-hover:w-full duration-200"
                      ></div>
                      Learn More
-                  </button>
+                  </Link>
                </div>
             </div>
          </div>

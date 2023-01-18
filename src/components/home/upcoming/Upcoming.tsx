@@ -1,5 +1,6 @@
+import Link from "next/link";
+import usePosterAnimationContext from "../../../context/PosterAnimationContext";
 import useThemeContext from "../../../context/ThemeContext";
-import useMediaDetails from "../../../hooks/useMediaDetails";
 import {
    changeDateFormat,
    daysToRelease,
@@ -11,11 +12,12 @@ import Poster from "../../Poster";
 type Props = { movie: any };
 
 export default function Upcoming({ movie }: Props) {
-   const { getMediaDetails } = useMediaDetails();
    const { themeColor } = useThemeContext();
+   const { changeAnimatePoster } = usePosterAnimationContext();
    return (
-      <div
-         onClick={() => getMediaDetails("movie", movie.id)}
+      <Link
+         href={`/movie/${movie.id}`}
+         onClick={() => changeAnimatePoster(true)}
          className="rounded-2xl overflow-hidden group relative cursor-pointer"
       >
          <Poster
@@ -43,6 +45,6 @@ export default function Upcoming({ movie }: Props) {
                )}
             </div>
          </div>
-      </div>
+      </Link>
    );
 }

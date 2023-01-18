@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
+import usePosterAnimationContext from "../../context/PosterAnimationContext";
 import useTransitionCard from "../../features/transitionPoster/hooks/useTransitionCard";
-// import { staggerItem } from "../../animations/StaggerCards";
 import MediaModel from "../../models/MediaModel";
 import Poster from "../Poster";
 
@@ -25,6 +25,7 @@ export default function SavedCard({
    setMediaToDelete,
    setTransitionValues,
 }: Props) {
+   const { changeAnimatePoster } = usePosterAnimationContext();
    const isSelected = mediaToDelete.includes(media);
    const onTap = () => {
       if (isSelected) {
@@ -36,6 +37,7 @@ export default function SavedCard({
 
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
    const handleClick = () => {
+      changeAnimatePoster(false);
       const link = `/${media.media_type}/${media.media_id}`;
       const element = transitionCard.current!;
       setTransitionValues(media.poster_path, link, element, setIsInvisible);
