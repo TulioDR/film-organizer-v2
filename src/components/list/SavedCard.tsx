@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
+import useTransitionCard from "../../features/transitionPoster/hooks/useTransitionCard";
 // import { staggerItem } from "../../animations/StaggerCards";
 import MediaModel from "../../models/MediaModel";
 import Poster from "../Poster";
@@ -9,6 +10,12 @@ type Props = {
    isDeleteOpen: boolean;
    mediaToDelete: MediaModel[];
    setMediaToDelete: React.Dispatch<React.SetStateAction<MediaModel[]>>;
+   setTransitionValues: (
+      posterPath: string,
+      link: string,
+      element: HTMLDivElement,
+      setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
+   ) => void;
 };
 
 export default function SavedCard({
@@ -16,9 +23,9 @@ export default function SavedCard({
    isDeleteOpen,
    mediaToDelete,
    setMediaToDelete,
+   setTransitionValues,
 }: Props) {
    const isSelected = mediaToDelete.includes(media);
-
    const onTap = () => {
       if (isSelected) {
          setMediaToDelete((old) => old.filter(({ id }) => id !== media.id));
@@ -27,11 +34,22 @@ export default function SavedCard({
       }
    };
 
+   const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
+   const handleClick = () => {
+      const link = `/${media.media_type}/${media.media_id}`;
+      const element = transitionCard.current!;
+      setTransitionValues(media.poster_path, link, element, setIsInvisible);
+   };
+
    return (
       <motion.article
          layout
          variants={staggerItem}
-         className="relative rounded-xl overflow-hidden shadow-xl"
+         ref={transitionCard}
+         className={`relative rounded-xl overflow-hidden ${
+            isInvisible ? "invisible" : "shadow-xl cursor-pointer"
+         }`}
+         onClick={!isDeleteOpen ? handleClick : undefined}
       >
          <Poster alt={media.name} posterPath={media.poster_path} size="lg" />
          {isDeleteOpen && (

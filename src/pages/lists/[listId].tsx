@@ -6,7 +6,7 @@ import PageTitle from "../../components/PageTitle";
 import useSidebarContext from "../../context/SidebarContext";
 import MediaModel from "../../models/MediaModel";
 import SavedCard from "../../components/list/SavedCard";
-import DeleteMediaModal from "../../components/list/DeleteMediaModal";
+
 import { getMedia } from "../../api/media";
 import useRefresh from "../../hooks/useRefresh";
 import Head from "next/head";
@@ -15,6 +15,9 @@ import { motion } from "framer-motion";
 
 import prisma from "../../lib/prisma";
 import TypePill from "../../components/list/TypePill";
+import DeleteMediaModal from "../../layout/modals/deleteMedia/DeleteMediaModal";
+import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
+import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
 
 type Props = { listId: string; list: any; initialMedia: MediaModel[] };
 
@@ -83,6 +86,9 @@ export default function ListID({ listId, list, initialMedia }: Props) {
          setFilteredMedia(filtered);
       }
    }, [media, selectedType]);
+
+   const { selectedImg, link, position, setTransitionValues } =
+      useTransitionPoster();
    return (
       <div>
          <Head>
@@ -131,10 +137,15 @@ export default function ListID({ listId, list, initialMedia }: Props) {
                   isDeleteOpen={isDeleteOpen}
                   mediaToDelete={mediaToDelete}
                   setMediaToDelete={setMediaToDelete}
+                  setTransitionValues={setTransitionValues}
                />
             ))}
          </motion.div>
-
+         <TransitionPoster
+            link={link}
+            position={position}
+            selectedImg={selectedImg}
+         />
          <DeleteButton
             mediaToDelete={mediaToDelete}
             isDeleteOpen={isDeleteOpen}

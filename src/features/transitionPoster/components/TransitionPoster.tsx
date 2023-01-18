@@ -9,6 +9,7 @@ type Props = {
    link: string;
 };
 
+// WARNING, PARENT ELEMENT MUST HAVE POSITION:RELATIVE
 export default function TransitionPoster({
    link,
    selectedImg,

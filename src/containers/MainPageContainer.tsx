@@ -28,7 +28,7 @@ export default function MainPageContainer({ children }: Props) {
                   >
                      <Navbar />
                      <AnimatePresence mode="wait">
-                        <motion.div key={router.asPath}>
+                        <motion.div key={router.asPath} className="relative">
                            <PageLoadingProvider>{children}</PageLoadingProvider>
                         </motion.div>
                      </AnimatePresence>
