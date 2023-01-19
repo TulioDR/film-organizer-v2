@@ -10,12 +10,15 @@ type Props = {
 export default function NewPasswordForm({ submitHandler }: Props) {
    const initialValues = {
       password: "",
+      confirmPassword: "",
    };
    const validation = (values: any) => {
-      const { password } = values;
+      const { password, confirmPassword } = values;
       let error: any = {};
       if (!password) {
          error.password = "Please type a new password";
+      } else if (password !== confirmPassword) {
+         error.password = "Passwords do not match";
       }
       return error;
    };
@@ -28,7 +31,9 @@ export default function NewPasswordForm({ submitHandler }: Props) {
    };
 
    const [showPassword, setShowPassword] = useState<boolean>(false);
+   const [showPassword2, setShowPassword2] = useState<boolean>(false);
    const togglePassword = () => setShowPassword(!showPassword);
+   const togglePassword2 = () => setShowPassword2(!showPassword2);
    return (
       <Formik
          initialValues={initialValues}
@@ -44,6 +49,16 @@ export default function NewPasswordForm({ submitHandler }: Props) {
                   type={showPassword ? "text" : "password"}
                   password
                   toggle={togglePassword}
+                  touched={touched}
+                  errors={errors}
+               />
+               <AuthInput
+                  icon="lock"
+                  name="confirmPassword"
+                  placeholder="Confirm New Password"
+                  type={showPassword ? "text" : "password"}
+                  password
+                  toggle={togglePassword2}
                   touched={touched}
                   errors={errors}
                />
