@@ -102,23 +102,25 @@ export default function Auth() {
          </Head>
          <AuthBackground />
          <AuthContainer setError={setError}>
-            <AppName />
-            <AuthHeader isLogin={isLogin} forgotPassWord={forgotPassWord} />
-            {!forgotPassWord && <SocialLogin setError={setError} />}
-            <FormikForm
-               isLogin={isLogin}
-               toggleType={toggle}
-               submitHandler={
-                  forgotPassWord
-                     ? forgotPasswordHandler
-                     : isLogin
-                     ? loginHandler
-                     : signUpHandler
-               }
-               forgotPassWord={forgotPassWord}
-               setForgotPassword={setForgotPassword}
-            />
-            <SkipButton />
+            <div className="space-y-4">
+               <AppName />
+               <AuthHeader isLogin={isLogin} forgotPassWord={forgotPassWord} />
+               {!forgotPassWord && <SocialLogin setError={setError} />}
+               <FormikForm
+                  isLogin={isLogin}
+                  toggleType={toggle}
+                  submitHandler={
+                     forgotPassWord
+                        ? forgotPasswordHandler
+                        : isLogin
+                        ? loginHandler
+                        : signUpHandler
+                  }
+                  forgotPassWord={forgotPassWord}
+                  setForgotPassword={setForgotPassword}
+               />
+               <SkipButton />
+            </div>
          </AuthContainer>
          <EmailSentModal
             isOpen={showModal}

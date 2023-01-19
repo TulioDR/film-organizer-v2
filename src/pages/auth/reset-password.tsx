@@ -1,6 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AppName from "../../components/auth/AppName";
 import AuthBackground from "../../components/auth/AuthBackground";
@@ -10,6 +9,7 @@ import NewPasswordForm from "../../components/auth/resetPassword/NewPasswordForm
 import SkipButton from "../../components/auth/SkipButton";
 import { GetServerSideProps } from "next";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import SuccessMessage from "../../components/auth/resetPassword/SuccessMessage";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const supabase = createServerSupabaseClient(context);
@@ -32,18 +32,12 @@ export default function ResetPassword({}: any) {
    const [showResetPage, setShowResetPage] = useState<boolean>(false);
    const [error, setError] = useState<string | null>(null);
    const supabaseClient = useSupabaseClient();
-   const router = useRouter();
+   const [successMessage, setSuccessMessage] = useState<boolean>(false);
 
    useEffect(() => {
       supabaseClient.auth.onAuthStateChange((event) => {
          if (event === "PASSWORD_RECOVERY") setShowResetPage(true);
       });
-   }, []);
-
-   useEffect(() => {
-      const handleRouteChange = () => supabaseClient.auth.signOut();
-      router.events.on("routeChangeStart", handleRouteChange);
-      return () => router.events.off("routeChangeStart", handleRouteChange);
    }, []);
 
    const newPasswordHandler = async (values: any) => {
@@ -52,6 +46,7 @@ export default function ResetPassword({}: any) {
          password,
       });
       if (error) setError(error.message);
+      else setSuccessMessage(true);
    };
 
    if (!showResetPage) {
@@ -70,10 +65,15 @@ export default function ResetPassword({}: any) {
          </Head>
          <AuthBackground />
          <AuthContainer setError={setError}>
-            <AppName />
-            <div className="text-light-text-normal">Type your new password</div>
-            <NewPasswordForm submitHandler={newPasswordHandler} />
-            <SkipButton reset />
+            <div className="space-y-4">
+               <AppName />
+               <div className="text-light-text-normal">
+                  Type your new password
+               </div>
+               <NewPasswordForm submitHandler={newPasswordHandler} />
+               <SkipButton reset />
+            </div>
+            <SuccessMessage successMessage={successMessage} />
          </AuthContainer>
          <AuthErrorMessage error={error} setError={setError} />
       </div>
