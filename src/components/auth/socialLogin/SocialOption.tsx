@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 type Props = { provider: string; logo: StaticImageData; onClick: () => void };
 
-export default function SocialLogin({ provider, logo, onClick }: Props) {
+export default function SocialOption({ provider, logo, onClick }: Props) {
    return (
       <motion.button
          onTap={onClick}

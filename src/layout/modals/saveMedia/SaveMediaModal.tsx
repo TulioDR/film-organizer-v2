@@ -2,7 +2,8 @@ import useListsContext from "../../../context/ListsContext";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
-import ModalTItle from "../ModalTItle";
+import ModalTitle from "../ModalTitle";
+
 import ListToSave from "./ListToSave";
 
 export default function SaveMediaModal() {
@@ -16,7 +17,7 @@ export default function SaveMediaModal() {
 
    return (
       <ModalContainer isOpen={isSaveMediaOpen} close={closeSaveMediaModal}>
-         <ModalTItle>Save to...</ModalTItle>
+         <ModalTitle>Save to...</ModalTitle>
          <ul className="w-56 border-y border-light-text-soft dark:border-dark-text-soft">
             {lists.map((list) => (
                <ListToSave

@@ -4,7 +4,7 @@ import ListModel from "../../../models/listModel";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
-import ModalTItle from "../ModalTItle";
+import ModalTitle from "../ModalTitle";
 
 type Props = {
    isOpen: boolean;
@@ -27,19 +27,19 @@ export default function DeleteListModal({
    };
    return (
       <ModalContainer isOpen={isOpen} close={close}>
-         <ModalTItle>Delete List</ModalTItle>
+         <ModalTitle>Delete List</ModalTitle>
          <div className="text-sm leading-relaxed text-light-text-normal dark:text-dark-text-normal font-normal w-96">
-            <p>
+            <div>
                <span>Are you sure you want to delete the list </span>
                <em className="text-light-text-hard dark:text-dark-text-hard">
                   <strong>{`"${listToDelete?.name}"`}</strong>
                </em>
                <span>?</span>
-            </p>
-            <p>
+            </div>
+            <div>
                Note: Deleting a list is a permanent action and it cannot be
                undone.
-            </p>
+            </div>
          </div>
          <ModalButtonsContainer>
             <ModalButton onClick={close}>Cancel</ModalButton>

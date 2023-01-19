@@ -29,6 +29,7 @@ export default function User() {
 
    useEffect(() => {
       console.log(user?.app_metadata.providers);
+      console.log(user);
    }, [isOpen, user]);
 
    return (

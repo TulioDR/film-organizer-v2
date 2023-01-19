@@ -2,10 +2,10 @@ import { useFormikContext } from "formik";
 import { motion } from "framer-motion";
 
 type Props = {
-   isLogin: boolean;
+   children: React.ReactNode;
 };
 
-export default function SubmitButton({ isLogin }: Props) {
+export default function SubmitButton({ children }: Props) {
    const { submitForm } = useFormikContext();
    return (
       <motion.button
@@ -14,7 +14,7 @@ export default function SubmitButton({ isLogin }: Props) {
          onTap={submitForm}
          className="h-10 bg-slate-800 rounded-full text-dark-text-hard shadow-xl uppercase font-semibold tracking-wide"
       >
-         {isLogin ? "Login" : "Register"}
+         {children}
       </motion.button>
    );
 }

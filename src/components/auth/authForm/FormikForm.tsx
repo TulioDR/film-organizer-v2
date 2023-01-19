@@ -1,6 +1,5 @@
 import { Form, Formik } from "formik";
-import { useState } from "react";
-import AuthInput from "./AuthInput";
+import AuthInputsContainer from "./AuthInputsContainer";
 import BottomMessage from "./BottomMessage";
 import SubmitButton from "./SubmitButton";
 
@@ -8,18 +7,17 @@ type Props = {
    isLogin: boolean;
    toggleType: () => void;
    submitHandler: (values: any, reset: any) => any;
+   forgotPassWord: boolean;
+   setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function FormikForm({
    isLogin,
    toggleType,
    submitHandler,
+   forgotPassWord,
+   setForgotPassword,
 }: Props) {
-   const [showPassword, setShowPassword] = useState<boolean>(false);
-   const [showPassword2, setShowPassword2] = useState<boolean>(false);
-   const togglePassword = () => setShowPassword(!showPassword);
-   const togglePassword2 = () => setShowPassword2(!showPassword2);
-
    const initialValues = {
       email: "",
       password: "",
@@ -31,6 +29,14 @@ export default function FormikForm({
    const validation = (values: any) => {
       const { email, password, confirmPassword } = values;
       let error: any = {};
+      if (forgotPassWord) {
+         if (!email) {
+            error.email = "Email required";
+         } else if (!checkEmailValidity(email)) {
+            error.email = "Invalid Email";
+         }
+         return error;
+      }
       if (!email) {
          error.email = "Email required";
       } else if (!checkEmailValidity(email)) {
@@ -57,38 +63,25 @@ export default function FormikForm({
       >
          {({ errors, touched }) => (
             <Form className="flex flex-col space-y-4">
-               <AuthInput
-                  icon="mail"
-                  name="email"
-                  placeholder="Email Address"
-                  type="email"
+               <AuthInputsContainer
                   touched={touched}
                   errors={errors}
+                  isLogin={isLogin}
+                  forgotPassWord={forgotPassWord}
                />
-               <AuthInput
-                  icon="lock"
-                  name="password"
-                  placeholder="Password"
-                  type={showPassword ? "text" : "password"}
-                  password
-                  toggle={togglePassword}
-                  touched={touched}
-                  errors={errors}
+               <SubmitButton>
+                  {forgotPassWord
+                     ? "Send Reset Email"
+                     : isLogin
+                     ? "Login"
+                     : "Register"}
+               </SubmitButton>
+               <BottomMessage
+                  isLogin={isLogin}
+                  toggle={toggleType}
+                  forgotPassWord={forgotPassWord}
+                  setForgotPassword={setForgotPassword}
                />
-               {!isLogin && (
-                  <AuthInput
-                     icon="lock"
-                     name="confirmPassword"
-                     placeholder="Confirm Password"
-                     type={showPassword2 ? "text" : "password"}
-                     password
-                     toggle={togglePassword2}
-                     touched={touched}
-                     errors={errors}
-                  />
-               )}
-               <SubmitButton isLogin={isLogin} />
-               <BottomMessage isLogin={isLogin} toggle={toggleType} />
             </Form>
          )}
       </Formik>

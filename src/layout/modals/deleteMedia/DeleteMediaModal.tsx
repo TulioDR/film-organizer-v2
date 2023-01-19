@@ -4,7 +4,7 @@ import MediaModel from "../../../models/MediaModel";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
-import ModalTItle from "../ModalTItle";
+import ModalTitle from "../ModalTitle";
 import MediaToDelete from "./MediaToDelete";
 import Subtitle from "./Subtitle";
 
@@ -45,9 +45,9 @@ export default function DeleteMediaModal({
 
    return (
       <ModalContainer isOpen={isOpen} close={close}>
-         <ModalTItle>
+         <ModalTitle>
             Delete from <em>{list?.name}</em>
-         </ModalTItle>
+         </ModalTitle>
          <div className="text-sm text-light-text-soft dark:text-dark-text-soft">
             <div>The next items are going to be deleted:</div>
             <div>

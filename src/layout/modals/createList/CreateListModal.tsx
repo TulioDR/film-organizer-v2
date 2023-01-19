@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useUser } from "@supabase/auth-helpers-react";
 
 import ModalContainer from "../ModalContainer";
-import ModalTItle from "../ModalTItle";
+import ModalTitle from "../ModalTitle";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalButton from "../ModalButton";
 import useListsContext from "../../../context/ListsContext";
@@ -46,7 +46,7 @@ export default function CreateListModal({ isOpen, close }: Props) {
          >
             {({ errors, touched }) => (
                <Form className="w-72">
-                  <ModalTItle>Create a List</ModalTItle>
+                  <ModalTitle>Create a List</ModalTitle>
                   <div className="relative overflow-hidden">
                      <Field
                         name="name"

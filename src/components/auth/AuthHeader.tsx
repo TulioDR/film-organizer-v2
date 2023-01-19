@@ -1,20 +1,24 @@
-import Image from "next/image";
-import filmOrganizer from "../../data/images/logos/film-organizer.png";
-
-export default function AuthHeader() {
+interface Props {
+   isLogin: boolean;
+   forgotPassWord: boolean;
+}
+export default function AuthHeader({ isLogin, forgotPassWord }: Props) {
    return (
-      <div className="flex items-center space-x-2">
-         <span>
-            <Image
-               src={filmOrganizer}
-               alt="Film Organizer"
-               width={40}
-               height={40}
-            />
-         </span>
-         <span className="text-2xl font-bold text-light-text-hard">
-            Film Organizer
-         </span>
-      </div>
+      <>
+         <div className="text-light-text-normal">
+            {forgotPassWord
+               ? "Reset your password"
+               : isLogin
+               ? "Login to your account"
+               : "Sign Up today to start saving your lists!"}
+         </div>
+         {forgotPassWord && (
+            <div className="text-sm text-light-text-normal">
+               {
+                  "Type in your email and we'll send you a link to reset your password"
+               }
+            </div>
+         )}
+      </>
    );
 }

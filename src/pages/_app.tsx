@@ -13,15 +13,15 @@ export default function App({
 }: AppProps<{
    initialSession: Session;
 }>) {
-   const router = useRouter();
+   const { route } = useRouter();
    const [supabaseClient] = useState(() => createBrowserSupabaseClient());
-
+   const isAuth = route === "/auth" || route === "/auth/reset-password";
    return (
       <SessionContextProvider
          supabaseClient={supabaseClient}
          initialSession={pageProps.initialSession}
       >
-         {router.asPath === "/auth" ? (
+         {isAuth ? (
             <Component {...pageProps} />
          ) : (
             <MainPageContainer>
