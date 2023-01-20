@@ -76,7 +76,7 @@ export default function Auth() {
    const forgotPasswordHandler = async (values: any) => {
       const { email } = values;
       const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-         redirectTo: "http://localhost:3000/auth/reset-password",
+         redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
       });
       if (error) setError(error.message);
       else {
