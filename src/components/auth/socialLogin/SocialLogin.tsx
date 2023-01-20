@@ -1,5 +1,4 @@
 import SocialOption from "./SocialOption";
-import linkedin from "../../../data/images/logos/linkedin.png";
 import github from "../../../data/images/logos/github.png";
 import google from "../../../data/images/logos/google.png";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -24,13 +23,12 @@ export default function SocialLogin({ setError }: Props) {
    };
 
    return (
-      <div className="border-b border-gray-light grid grid-cols-3 gap-1 sm:gap-2">
+      <div className="border-b border-gray-light grid grid-cols-2 gap-2">
          <SocialOption
             provider="google"
             logo={google}
             onClick={signInWithGoogle}
          />
-         <SocialOption provider="LinkedIn" logo={linkedin} onClick={() => {}} />
          <SocialOption
             provider="github"
             logo={github}

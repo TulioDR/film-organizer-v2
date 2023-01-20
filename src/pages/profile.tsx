@@ -1,5 +1,6 @@
 import PageTitle from "../components/PageTitle";
 
+// This page needs to have (user Image)
 export default function Profile() {
    return (
       <div>
