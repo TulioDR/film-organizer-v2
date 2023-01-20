@@ -10,7 +10,7 @@ export default function ToggleSidebar({ onClick }: Props) {
       <button
          style={{ backgroundColor: themeColor }}
          onClick={onClick}
-         className="h-9 w-9 flex-shrink-0 rounded-lg grid place-content-center shadow-lg"
+         className="h-9 w-9 flex-shrink-0 rounded-lg grid place-content-center"
       >
          <span className="material-icons">menu</span>
       </button>

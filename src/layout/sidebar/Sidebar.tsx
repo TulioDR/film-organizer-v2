@@ -24,7 +24,7 @@ export default function Sidebar({ openForm }: Props) {
             <ToggleModeButton />
          </SideButtonContainer>
          <SideSubtitle>Menu</SideSubtitle>
-         <ul className="space-y-3 mb-3">
+         <ul className="space-y-2">
             <SideLink link="/" icon="home" text="Home" />
             <SideLink
                link={`/popular/${isMovie ? "movie" : "tv"}`}

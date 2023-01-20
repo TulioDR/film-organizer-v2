@@ -25,7 +25,8 @@ export default function MainPageContainer({ children }: Props) {
                   <SidebarsContainer />
                   <div
                      id="scroll-container"
-                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pr-5 pl-3 pb-5"
+                     // The change on the padding right occurs because of the sidebar's scrollbar width
+                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pr-5 pl-5 lg:pl-3 pb-5"
                   >
                      <PosterAnimationProvider>
                         <Navbar />

@@ -73,12 +73,12 @@ a {
    @apply bg-light-bg-primary;
 }
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-   @apply bg-light-bg-secondary;
+   @apply bg-light-text-soft;
 }
 
 .dark .sidebar-scrollbar::-webkit-scrollbar-track {
    @apply bg-dark-bg-primary;
 }
 .dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
-   @apply bg-dark-bg-secondary;
+   @apply bg-dark-text-soft;
 }

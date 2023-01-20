@@ -7,7 +7,7 @@ export default function BrandHamburger({}: Props) {
    const { toggleOpenSidebar, toggleShowSidebar } = useSidebarContext();
 
    return (
-      <div className="flex items-center pb-5 pl-5">
+      <div className="flex items-center pl-5 mb-5">
          <div className="hidden lg:block">
             <ToggleSidebar onClick={toggleOpenSidebar} />
          </div>
