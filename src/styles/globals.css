@@ -20,13 +20,13 @@ a {
 }
 
 #scroll-container::-webkit-scrollbar {
-   width: 20px;
+   width: 12px;
 }
 #scroll-container::-webkit-scrollbar-track {
-   @apply bg-light-bg-secondary;
+   @apply bg-light-text-hard;
 }
 #scroll-container::-webkit-scrollbar-thumb {
-   @apply bg-dark-text-hard;
+   @apply bg-light-text-soft;
 }
 .dark #scroll-container::-webkit-scrollbar-track {
    @apply bg-dark-bg-secondary;
