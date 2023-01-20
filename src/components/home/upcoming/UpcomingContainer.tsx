@@ -1,14 +1,32 @@
 import { Swiper } from "swiper/react";
-import RevealHorizontal from "../../../animations/RevealHorizontal";
+import { motion, useAnimation } from "framer-motion";
 import { Navigation } from "swiper";
+import { useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { homeCardContainer } from "../../../animations/homeAnimations";
 
 interface Props {
    children: React.ReactNode;
 }
 
 export default function UpcomingContainer({ children }: Props) {
+   const containerRef = useRef<HTMLDivElement>(null);
+   const isInView = useInView(containerRef, {
+      once: true,
+   });
+   const controls = useAnimation();
+   useEffect(() => {
+      if (isInView) controls.start("animate");
+   }, [controls, isInView]);
+
    return (
-      <RevealHorizontal fromRight>
+      <motion.div
+         variants={homeCardContainer}
+         initial="initial"
+         animate={controls}
+         exit="exit"
+         ref={containerRef}
+      >
          <Swiper
             speed={700}
             slidesPerView={1.5}
@@ -29,6 +47,6 @@ export default function UpcomingContainer({ children }: Props) {
          >
             {children}
          </Swiper>
-      </RevealHorizontal>
+      </motion.div>
    );
 }

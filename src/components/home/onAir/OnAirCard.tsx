@@ -3,10 +3,11 @@ import Poster from "../../Poster";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import usePosterAnimationContext from "../../../context/PosterAnimationContext";
+import { homeCard } from "../../../animations/homeAnimations";
 
 type Props = { tv: any };
 
-export default function OnAir({ tv }: Props) {
+export default function OnAirCard({ tv }: Props) {
    const { changeAnimatePoster } = usePosterAnimationContext();
    const elRef = useRef<HTMLDivElement>(null);
    const [height, setHeight] = useState<number>(0);
@@ -19,6 +20,7 @@ export default function OnAir({ tv }: Props) {
 
    return (
       <motion.div
+         variants={homeCard}
          onHoverStart={() => setIsHovering(true)}
          onHoverEnd={() => setIsHovering(false)}
          onClick={() => changeAnimatePoster(true)}

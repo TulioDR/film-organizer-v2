@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
-import PageTitle from "../components/PageTitle";
 import NowPlayingContainer from "../components/home/nowPlaying/NowPlayingContainer";
-import NowPlaying from "../components/home/nowPlaying/NowPlaying";
 import OnAirContainer from "../components/home/onAir/OnAirContainer";
-import OnAir from "../components/home/onAir/OnAir";
 import UpcomingContainer from "../components/home/upcoming/UpcomingContainer";
-import Upcoming from "../components/home/upcoming/Upcoming";
 
 import usePageLoadingContext from "../context/PageLoadingContext";
 import PageAnimationContainer from "../containers/PageAnimationContainer";
 import NavigationButtons from "../components/home/NavigationButtons";
+import NowPlayingCard from "../components/home/nowPlaying/nowPlayingCard/NowPlayingCard";
+import HomeContainer from "../components/home/HomeContainer";
+import HomeTitle from "../components/home/HomeTitle";
+import OnAirCard from "../components/home/onAir/OnAirCard";
+import UpcomingCard from "../components/home/upcoming/UpcomingCard";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -32,47 +33,47 @@ export default function Home() {
 
    return (
       <PageAnimationContainer title="Film Organizer">
-         <div className="space-y-6">
+         <HomeContainer>
             <div>
                <div className="flex justify-between items-center">
-                  <PageTitle>Now playing on Theaters</PageTitle>
+                  <HomeTitle>Now playing on Theaters</HomeTitle>
                   <NavigationButtons prevId="prev-now" nextId="next-now" />
                </div>
                <NowPlayingContainer>
                   {nowPlaying.map((movie) => (
                      <SwiperSlide key={movie.id}>
-                        <NowPlaying movie={movie} />
+                        <NowPlayingCard movie={movie} />
                      </SwiperSlide>
                   ))}
                </NowPlayingContainer>
             </div>
             <div>
                <div className="flex justify-between items-center">
-                  <PageTitle>TV Series on Air</PageTitle>
+                  <HomeTitle>TV Series on Air</HomeTitle>
                   <NavigationButtons prevId="prev-air" nextId="next-air" />
                </div>
                <OnAirContainer>
                   {onAir.map((tv) => (
                      <SwiperSlide key={tv.id}>
-                        <OnAir tv={tv} />
+                        <OnAirCard tv={tv} />
                      </SwiperSlide>
                   ))}
                </OnAirContainer>
             </div>
             <div>
                <div className="flex justify-between items-center">
-                  <PageTitle>Upcoming Movies</PageTitle>
+                  <HomeTitle upcoming>Upcoming Movies</HomeTitle>
                   <NavigationButtons prevId="prev-upc" nextId="next-upc" />
                </div>
                <UpcomingContainer>
                   {upcoming.map((movie) => (
                      <SwiperSlide key={movie.id}>
-                        <Upcoming movie={movie} />
+                        <UpcomingCard movie={movie} />
                      </SwiperSlide>
                   ))}
                </UpcomingContainer>
             </div>
-         </div>
+         </HomeContainer>
       </PageAnimationContainer>
    );
 }

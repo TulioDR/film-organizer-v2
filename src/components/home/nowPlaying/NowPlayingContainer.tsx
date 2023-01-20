@@ -1,6 +1,7 @@
-import RevealHorizontal from "../../../animations/RevealHorizontal";
+import { motion } from "framer-motion";
 import { Swiper } from "swiper/react";
 import { Navigation } from "swiper";
+import { homeCardContainer } from "../../../animations/homeAnimations";
 
 interface Props {
    children: React.ReactNode;
@@ -8,7 +9,7 @@ interface Props {
 
 export default function NowPlayingContainer({ children }: Props) {
    return (
-      <RevealHorizontal fromRight>
+      <motion.div variants={homeCardContainer}>
          <Swiper
             speed={700}
             spaceBetween={20}
@@ -27,6 +28,6 @@ export default function NowPlayingContainer({ children }: Props) {
          >
             {children}
          </Swiper>
-      </RevealHorizontal>
+      </motion.div>
    );
 }

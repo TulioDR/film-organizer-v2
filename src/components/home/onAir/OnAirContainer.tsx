@@ -1,12 +1,13 @@
 import { Swiper } from "swiper/react";
-import RevealHorizontal from "../../../animations/RevealHorizontal";
+import { motion } from "framer-motion";
 import { Navigation } from "swiper";
+import { homeCardContainer } from "../../../animations/homeAnimations";
 interface Props {
    children: React.ReactNode;
 }
 export default function OnAirContainer({ children }: Props) {
    return (
-      <RevealHorizontal fromRight>
+      <motion.div variants={homeCardContainer}>
          <Swiper
             speed={700}
             slidesPerView={3}
@@ -36,6 +37,6 @@ export default function OnAirContainer({ children }: Props) {
          >
             {children}
          </Swiper>
-      </RevealHorizontal>
+      </motion.div>
    );
 }
