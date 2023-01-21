@@ -27,11 +27,6 @@ export default function User() {
       setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
    }, [menu]);
 
-   useEffect(() => {
-      console.log(user?.app_metadata.providers);
-      console.log(user);
-   }, [isOpen, user]);
-
    return (
       <div tabIndex={0} onBlur={handleBlur} className="relative">
          <motion.button

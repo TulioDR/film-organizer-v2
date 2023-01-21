@@ -6,7 +6,7 @@ type Props = {
    isOpen: boolean;
    close: () => void;
    email: string;
-   forgotPassWord: boolean;
+   forgotPassWord?: boolean;
 };
 
 export default function EmailSentModal({

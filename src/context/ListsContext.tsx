@@ -50,7 +50,6 @@ export function ListsProvider({ children }: Props) {
             setLists([]);
             return;
          }
-         console.log("there is an user so...");
          console.log("fetch lists");
          const data = await getLists(user.id);
          setLists(data);

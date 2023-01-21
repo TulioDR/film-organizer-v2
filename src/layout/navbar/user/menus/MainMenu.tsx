@@ -29,6 +29,7 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
 
    const profile = () => {
       router.push("/profile");
+      setIsOpen(false);
    };
 
    return (

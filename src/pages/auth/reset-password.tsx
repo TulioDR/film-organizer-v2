@@ -38,7 +38,7 @@ export default function ResetPassword({}: any) {
       supabaseClient.auth.onAuthStateChange((event) => {
          if (event === "PASSWORD_RECOVERY") setShowResetPage(true);
       });
-   }, []);
+   }, [supabaseClient.auth]);
 
    const newPasswordHandler = async (values: any) => {
       const { password } = values;
