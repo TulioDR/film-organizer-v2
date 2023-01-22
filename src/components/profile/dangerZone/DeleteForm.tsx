@@ -28,7 +28,7 @@ export default function DeleteForm({ close }: Props) {
       >
          <div className="text-sm">
             <div>Are you sure you want to delete your account?.</div>
-            <div>This can't be undone.</div>
+            <div>{"This can't be undone."}</div>
          </div>
          <DeleteInput setEnableDelete={setEnableDelete} />
          <div className="flex space-x-3">

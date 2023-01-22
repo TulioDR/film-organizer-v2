@@ -17,16 +17,19 @@ type Props = {
 
 export default function Tabs({ media, mediaType }: Props) {
    const [selectedTab, setSelectedTab] = useState<TabOptions>("overview");
-
    const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
 
    return (
       <>
-         <SeasonDetails
-            tvShowID={media.id}
-            selectedSeason={selectedSeason}
-            setSelectedSeason={setSelectedSeason}
-         />
+         <AnimatePresence>
+            {selectedSeason !== null && (
+               <SeasonDetails
+                  tvShowID={media.id}
+                  selectedSeason={selectedSeason}
+                  setSelectedSeason={setSelectedSeason}
+               />
+            )}
+         </AnimatePresence>
          <TabsContainer
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}

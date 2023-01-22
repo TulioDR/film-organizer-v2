@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { staggerContainer } from "../../../../../animations/StaggerCards";
 import { getSeason } from "../../../../../api/media";
@@ -7,13 +7,14 @@ import CloseSeasonButton from "./CloseSeasonButton";
 import SeasonContainer from "./SeasonContainer";
 import SeasonInfo from "./SeasonInfo";
 import SeasonInnerContainer from "./SeasonInnerContainer";
+import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonOverview from "./SeasonOverview";
 import SeasonSubtitle from "./SeasonSubtitle";
 import SeasonTitle from "./SeasonTitle";
 
 type Props = {
    tvShowID: number;
-   selectedSeason: number | null;
+   selectedSeason: number;
    setSelectedSeason: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
@@ -28,12 +29,12 @@ export default function SeasonDetails({
       useState<boolean>(false);
 
    const close = () => setSelectedSeason(null);
+   const onAnimationComplete = () => setIsAnimationComplete(true);
 
    useEffect(() => {
-      if (selectedSeason === null) return;
       const getSeasonData = async () => {
-         const data = await getSeason(tvShowID, selectedSeason);
-         setData(data);
+         const seasonData = await getSeason(tvShowID, selectedSeason);
+         setData(seasonData);
       };
       getSeasonData();
    }, [selectedSeason, tvShowID]);
@@ -44,37 +45,27 @@ export default function SeasonDetails({
       setSeason(data);
    }, [isAnimationComplete, data]);
 
-   const onAnimationComplete = () => {
-      setIsAnimationComplete(true);
-   };
-
    return (
-      <AnimatePresence>
-         {selectedSeason !== null && (
-            <SeasonContainer onAnimationComplete={onAnimationComplete}>
-               {season ? (
-                  <SeasonInnerContainer>
-                     <CloseSeasonButton onClick={close} />
-                     <SeasonTitle>{season.name}</SeasonTitle>
-                     <SeasonInfo season={season} />
-                     <SeasonOverview overview={season.overview} />
-                     <SeasonSubtitle>Episodes</SeasonSubtitle>
-                     <motion.div
-                        variants={staggerContainer}
-                        className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10"
-                     >
-                        {season.episodes.map((ep: any) => (
-                           <EpisodeCard key={ep.id} episode={ep} />
-                        ))}
-                     </motion.div>
-                  </SeasonInnerContainer>
-               ) : (
-                  <div className="h-full w-full flex items-center justify-center">
-                     <div className="w-40 h-40 bg-blue-500">Loading...</div>
-                  </div>
-               )}
-            </SeasonContainer>
+      <SeasonContainer onAnimationComplete={onAnimationComplete}>
+         {season ? (
+            <SeasonInnerContainer>
+               <CloseSeasonButton onClick={close} />
+               <SeasonTitle>{season.name}</SeasonTitle>
+               <SeasonInfo season={season} />
+               <SeasonOverview overview={season.overview} />
+               <SeasonSubtitle>Episodes</SeasonSubtitle>
+               <motion.div
+                  variants={staggerContainer}
+                  className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10"
+               >
+                  {season.episodes.map((ep: any) => (
+                     <EpisodeCard key={ep.id} episode={ep} />
+                  ))}
+               </motion.div>
+            </SeasonInnerContainer>
+         ) : (
+            <SeasonLoadingAnimation />
          )}
-      </AnimatePresence>
+      </SeasonContainer>
    );
 }
