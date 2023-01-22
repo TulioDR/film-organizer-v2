@@ -5,10 +5,10 @@ import PageTitle from "../components/PageTitle";
 import DangerZoneCard from "../components/profile/dangerZone/DangerZoneCard";
 import MainInfoCard from "../components/profile/MainInfoCard";
 import ProfilePicture from "../components/profile/ProfilePicture";
-import EmailSentModal from "../layout/modals/EmailSent/EmailSentModal";
+import EmailSentModal from "../layout/modals/emailSent/EmailSentModal";
 import { GetServerSideProps } from "next";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import ProfilePictureModal from "../layout/modals/ProfilePicture/ProfilePictureModal";
+import ProfilePictureModal from "../layout/modals/profilePicture/ProfilePictureModal";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const supabase = createServerSupabaseClient(context);

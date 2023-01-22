@@ -14,7 +14,7 @@ import AuthErrorMessage from "../../components/auth/AuthErrorMessage";
 import AuthHeader from "../../components/auth/AuthHeader";
 
 import SocialLogin from "../../components/auth/socialLogin/SocialLogin";
-import EmailSentModal from "../../layout/modals/EmailSent/EmailSentModal";
+import EmailSentModal from "../../layout/modals/emailSent/EmailSentModal";
 import AppName from "../../components/auth/AppName";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
