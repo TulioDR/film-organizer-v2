@@ -3,6 +3,7 @@ import useListsContext from "../../context/ListsContext";
 import useSidebarContext from "../../context/SidebarContext";
 import BrandHamburger from "./BrandHamburger";
 import CreateListButton from "./CreateListButton";
+import NoListsMessage from "./NoListsMessage";
 import SidebarContainer from "./SidebarContainer";
 import SideButtonContainer from "./SideButtonContainer";
 import SideLink from "./SideLink";
@@ -49,16 +50,20 @@ export default function Sidebar({ openForm }: Props) {
                   <CreateListButton onClick={openForm} />
                </SideButtonContainer>
                <SideSubtitle>Lists</SideSubtitle>
-               <ul className="space-y-3">
-                  {lists.map((list) => (
-                     <SideLink
-                        key={list.id}
-                        link={`/lists/${list.id}`}
-                        icon="featured_play_list"
-                        text={list.name}
-                     />
-                  ))}
-               </ul>
+               {lists.length > 0 ? (
+                  <ul className="space-y-2">
+                     {lists.map((list) => (
+                        <SideLink
+                           key={list.id}
+                           link={`/lists/${list.id}`}
+                           icon="featured_play_list"
+                           text={list.name}
+                        />
+                     ))}
+                  </ul>
+               ) : (
+                  <NoListsMessage />
+               )}
             </>
          ) : (
             <SideLoginMessage />
