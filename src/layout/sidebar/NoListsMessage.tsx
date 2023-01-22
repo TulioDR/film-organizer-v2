@@ -14,10 +14,10 @@ export default function NoListsMessage({}: Props) {
             <motion.div
                initial={{ opacity: 0 }}
                animate={{ opacity: 1, transition: { delay: 0.2 } }}
-               className="w-full pl-5"
+               className="w-full pl-5 overflow-hidden"
             >
                <div
-                  className="p-5 rounded-lg text-center"
+                  className="px-5 rounded-lg text-center h-[100px] flex items-center"
                   style={{ backgroundColor: themeColor }}
                >
                   Create a list to start saving your favorite Movies and TV
