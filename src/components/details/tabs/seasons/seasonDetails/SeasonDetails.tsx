@@ -1,10 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import RevealHorizontal from "../../../../../animations/RevealHorizontal";
 import { staggerContainer } from "../../../../../animations/StaggerCards";
 import { getSeason } from "../../../../../api/media";
 import EpisodeCard from "../../../../../layout/cards/EpisodeCard/EpisodeCard";
-import Date from "../../../infoBar/Date";
+import CloseSeasonButton from "./CloseSeasonButton";
+import SeasonContainer from "./SeasonContainer";
+import SeasonInfo from "./SeasonInfo";
+import SeasonInnerContainer from "./SeasonInnerContainer";
+import SeasonOverview from "./SeasonOverview";
+import SeasonSubtitle from "./SeasonSubtitle";
+import SeasonTitle from "./SeasonTitle";
+
 type Props = {
    tvShowID: number;
    selectedSeason: number | null;
@@ -18,87 +24,41 @@ export default function SeasonDetails({
 }: Props) {
    const [season, setSeason] = useState<any>(null);
    const [data, setData] = useState<any>(null);
+   const [isAnimationComplete, setIsAnimationComplete] =
+      useState<boolean>(false);
+
+   const close = () => setSelectedSeason(null);
+
    useEffect(() => {
       if (selectedSeason === null) return;
-      const getData = async () => {
+      const getSeasonData = async () => {
          const data = await getSeason(tvShowID, selectedSeason);
-         console.log(data);
          setData(data);
       };
-      getData();
+      getSeasonData();
    }, [selectedSeason, tvShowID]);
 
-   const close = () => {
-      setSelectedSeason(null);
-   };
+   useEffect(() => {
+      if (!isAnimationComplete) return;
+      if (!data) return;
+      setSeason(data);
+   }, [isAnimationComplete, data]);
 
-   const onAnimationComplete = (e: any) => {
-      if (e.x === 0) setSeason(data);
-      else setSeason(null);
-   };
-
-   const container = {
-      initial: {},
-      animate: {
-         transition: {
-            staggerChildren: 0.15,
-         },
-      },
-      exit: {},
+   const onAnimationComplete = () => {
+      setIsAnimationComplete(true);
    };
 
    return (
       <AnimatePresence>
          {selectedSeason !== null && (
-            <motion.div
-               initial={{ x: "100%" }}
-               animate={{ x: 0 }}
-               exit={{ x: "100%" }}
-               transition={{ duration: 0.4, ease: "easeInOut" }}
-               onAnimationComplete={onAnimationComplete}
-               className="absolute top-0 right-0 h-full w-full bg-light-bg-primary dark:bg-dark-bg-primary z-10 overflow-y-auto overflow-x-hidden xl:pr-5 main-scrollbar"
-            >
+            <SeasonContainer onAnimationComplete={onAnimationComplete}>
                {season ? (
-                  <motion.div
-                     variants={container}
-                     initial="initial"
-                     animate="animate"
-                     exit="exit"
-                     className="w-full h-full relative"
-                  >
-                     <div className="absolute z-10 top-0 right-0">
-                        <RevealHorizontal stagger fromRight>
-                           <button
-                              onClick={close}
-                              className=" w-10 h-10 rounded-md bg-light-bg-secondary text-light-text-hard dark:bg-dark-bg-secondary dark:text-dark-text-hard grid place-content-center shadow-lg"
-                           >
-                              <span className="material-icons">close</span>
-                           </button>
-                        </RevealHorizontal>
-                     </div>
-                     <RevealHorizontal stagger>
-                        <div className="text-4xl 2xl:text-5xl font-semibold text-light-text-hard dark:text-dark-text-hard">
-                           {season.name}
-                        </div>
-                     </RevealHorizontal>
-                     <RevealHorizontal stagger>
-                        <div className="flex items-center text-light-text-soft dark:text-dark-text-soft mt-3 text-sm">
-                           <Date date={season.air_date} />
-                           <span className="mx-2">|</span>
-                           <span>{season.episodes.length} episodes</span>
-                        </div>
-                     </RevealHorizontal>
-                     <RevealHorizontal stagger>
-                        <div className="mt-3 text-light-text-normal dark:text-dark-text-normal">
-                           {season.overview ||
-                              "No overview available for this season"}
-                        </div>
-                     </RevealHorizontal>
-                     <RevealHorizontal stagger>
-                        <div className="my-8 text-light-text-hard dark:text-dark-text-hard text-3xl 2xl:text-4xl font-medium">
-                           Episodes
-                        </div>
-                     </RevealHorizontal>
+                  <SeasonInnerContainer>
+                     <CloseSeasonButton onClick={close} />
+                     <SeasonTitle>{season.name}</SeasonTitle>
+                     <SeasonInfo season={season} />
+                     <SeasonOverview overview={season.overview} />
+                     <SeasonSubtitle>Episodes</SeasonSubtitle>
                      <motion.div
                         variants={staggerContainer}
                         className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-10"
@@ -107,13 +67,13 @@ export default function SeasonDetails({
                            <EpisodeCard key={ep.id} episode={ep} />
                         ))}
                      </motion.div>
-                  </motion.div>
+                  </SeasonInnerContainer>
                ) : (
                   <div className="h-full w-full flex items-center justify-center">
                      <div className="w-40 h-40 bg-blue-500">Loading...</div>
                   </div>
                )}
-            </motion.div>
+            </SeasonContainer>
          )}
       </AnimatePresence>
    );
