@@ -5,6 +5,7 @@ import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
 import { useUser } from "@supabase/auth-helpers-react";
+import UserImage from "./UserImage";
 
 export default function User() {
    const user = useUser();
@@ -31,12 +32,10 @@ export default function User() {
       <div tabIndex={0} onBlur={handleBlur} className="relative">
          <motion.button
             onClick={toggle}
-            className="grid place-content-center h-9 w-9 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg"
+            className="grid place-content-center h-9 w-9 rounded-full overflow-hidden bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg relative"
          >
             {user ? (
-               <span className="uppercase text-xl">
-                  {user.email?.charAt(0)}
-               </span>
+               <UserImage />
             ) : (
                <span className="material-icons">settings</span>
             )}
