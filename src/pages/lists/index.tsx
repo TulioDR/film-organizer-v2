@@ -11,6 +11,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import ListsLoginAdvice from "../../components/manage/ListsLoginAdvice";
 import DeleteListModal from "../../layout/modals/deleteList/DeleteListModal";
 import ListFinder from "../../components/manage/ListFinder";
+import NoListsMessage from "../../components/manage/NoListsMessage";
 
 export default function Lists() {
    const user = useUser();
@@ -50,21 +51,27 @@ export default function Lists() {
             />
          </div>
          {user ? (
-            <motion.div
-               variants={staggerContainer}
-               initial="initial"
-               animate="animate"
-               exit="exit"
-               className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
-            >
-               {filteredLists.map((list) => (
-                  <ListCard
-                     key={list.id}
-                     list={list}
-                     openDeleteModal={openDeleteModal}
-                  />
-               ))}
-            </motion.div>
+            <div>
+               {filteredLists.length > 0 ? (
+                  <motion.div
+                     variants={staggerContainer}
+                     initial="initial"
+                     animate="animate"
+                     exit="exit"
+                     className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
+                  >
+                     {filteredLists.map((list) => (
+                        <ListCard
+                           key={list.id}
+                           list={list}
+                           openDeleteModal={openDeleteModal}
+                        />
+                     ))}
+                  </motion.div>
+               ) : (
+                  <NoListsMessage />
+               )}
+            </div>
          ) : (
             <ListsLoginAdvice />
          )}
