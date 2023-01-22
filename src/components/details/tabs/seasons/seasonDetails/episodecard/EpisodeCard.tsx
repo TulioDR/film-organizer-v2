@@ -1,8 +1,8 @@
-import Poster from "../../../components/Poster";
 import { motion } from "framer-motion";
-import { staggerItem } from "../../../animations/StaggerCards";
 import InfoInPoster from "./InfoInPoster";
-import { changeDateFormat } from "../../../utils/date";
+import Poster from "../../../../../Poster";
+import { staggerItem } from "../../../../../../animations/StaggerCards";
+import { changeDateFormat } from "../../../../../../utils/date";
 
 type Props = {
    episode: any;
