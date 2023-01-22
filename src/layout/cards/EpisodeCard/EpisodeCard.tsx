@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { staggerItem } from "../../../animations/StaggerCards";
 import InfoInPoster from "./InfoInPoster";
 import { changeDateFormat } from "../../../utils/date";
+
 type Props = {
    episode: any;
 };
