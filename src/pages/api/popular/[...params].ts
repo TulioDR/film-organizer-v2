@@ -10,8 +10,8 @@ export default async function handler(
 ) {
    const { params } = req.query;
    const [mediaType, page] = params!;
-   const url = `https://api.themoviedb.org/3/${mediaType}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
    try {
+      const url = `https://api.themoviedb.org/3/${mediaType}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
       const response = await fetch(url);
       const data = await response.json();
       res.status(200).json(data);

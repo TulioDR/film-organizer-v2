@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function EpisodeCard({ episode }: Props) {
-   console.log(episode);
    return (
       <motion.article
          variants={staggerItem}

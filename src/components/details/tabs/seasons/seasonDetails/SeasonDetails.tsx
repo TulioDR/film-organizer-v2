@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import RevealHorizontal from "../../../../../animations/RevealHorizontal";
 import { staggerContainer } from "../../../../../animations/StaggerCards";
+import { getSeason } from "../../../../../api/media";
 import EpisodeCard from "../../../../../layout/cards/EpisodeCard/EpisodeCard";
 import Date from "../../../infoBar/Date";
 type Props = {
@@ -20,9 +21,7 @@ export default function SeasonDetails({
    useEffect(() => {
       if (selectedSeason === null) return;
       const getData = async () => {
-         const url = `https://api.themoviedb.org/3/tv/${tvShowID}/season/${selectedSeason}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`;
-         const res = await fetch(url);
-         const data = await res.json();
+         const data = await getSeason(tvShowID, selectedSeason);
          console.log(data);
          setData(data);
       };
@@ -34,14 +33,8 @@ export default function SeasonDetails({
    };
 
    const onAnimationComplete = (e: any) => {
-      console.log("complete", e);
-      console.log(e);
-      if (e.x === 0) {
-         console.log("set the data");
-         setSeason(data);
-      } else {
-         setSeason(null);
-      }
+      if (e.x === 0) setSeason(data);
+      else setSeason(null);
    };
 
    const container = {
