@@ -5,18 +5,10 @@ import { homeCard } from "../../../../animations/homeAnimations";
 import LearnMoreButton from "./LearnMoreButton";
 import NowBookmark from "./NowBookmark";
 import NowInfoContainer from "./NowInfoContainer";
+import { changeDateFormat } from "../../../../utils/date";
 
 type Props = {
    movie: any;
-};
-
-const changeDateFormat = (date: string) => {
-   return new Date(date).toLocaleDateString("en-gb", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      timeZone: "utc",
-   });
 };
 
 export default function NowPlayingCard({ movie }: Props) {
@@ -38,13 +30,13 @@ export default function NowPlayingCard({ movie }: Props) {
             backPoster
          />
          <NowInfoContainer>
-            <div className="text-3xl xl:text-4xl font-bold text-dark-text-hard">
+            <div className="text-base sm:text-xl md:text-3xl xl:text-4xl font-bold text-dark-text-hard">
                {movie.title}
             </div>
-            <div className="text-sm text-dark-text-normal">
+            <div className="text-sm text-dark-text-normal hidden sm:block">
                {changeDateFormat(movie.release_date)}
             </div>
-            <div className="flex items-center space-x-4 text-dark-text-hard">
+            <div className="hidden sm:flex items-center space-x-4 text-dark-text-hard">
                <NowBookmark movie={movie} />
                <LearnMoreButton id={movie.id} onClick={handleLearnMoreClick} />
             </div>
