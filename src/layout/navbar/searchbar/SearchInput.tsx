@@ -15,14 +15,14 @@ export default function SearchInput({
 }: Props) {
    const { isMovie } = useSidebarContext();
    return (
-      <div className="flex items-center h-full">
+      <div className="flex items-center space-x-5 h-full text-sm sm:text-base">
          <input
             value={value}
             onChange={onChange}
             onFocus={onFocus}
             onBlur={onBlur}
             type="text"
-            className="outline-none flex-1 bg-transparent pr-5 text-light-text-hard dark:text-dark-text-hard placeholder:text-light-text-soft placeholder:dark:text-dark-text-soft"
+            className="w-full outline-none bg-transparent text-light-text-hard dark:text-dark-text-hard placeholder:text-light-text-soft placeholder:dark:text-dark-text-soft"
             placeholder={`Search ${isMovie ? "Movies" : "TV Shows"}`}
          />
          <span className="material-icons text-light-text-soft dark:text-dark-text-soft">
