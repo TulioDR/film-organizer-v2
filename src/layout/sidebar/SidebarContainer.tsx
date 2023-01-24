@@ -13,7 +13,7 @@ export default function SidebarContainer({ children }: Props) {
          }`}
       >
          {/* The change on the padding right on hover occurs because of the scrollbar width */}
-         <div className="w-full h-full py-5 pr-5 lg:pr-2 hover:lg:pr-0 overflow-y-hidden hover:overflow-y-scroll sidebar-scrollbar space-y-2">
+         <div className="w-full h-full py-5 pr-5 hover:pr-3 lg:pr-2 hover:lg:pr-0 overflow-y-hidden hover:overflow-y-scroll sidebar-scrollbar space-y-2">
             {children}
          </div>
       </div>
