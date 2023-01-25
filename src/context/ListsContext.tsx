@@ -9,7 +9,7 @@ interface ListsContextInterface {
    closeSaveMediaModal: () => void;
    isLoginAdviceOpen: boolean;
    closeLoginAdviceModal: () => void;
-   useBookmark: (type: "movie" | "tv", media: any) => void;
+   openBookmark: (type: "movie" | "tv", media: any) => void;
    currentType: "movie" | "tv";
    currentMedia: any;
    refresh: () => void;
@@ -39,7 +39,7 @@ export function ListsProvider({ children }: Props) {
    const [currentMedia, setCurrentMedia] = useState<any>(null);
    const { search, refresh } = useRefresh();
 
-   const useBookmark = (type: "movie" | "tv", media: any) => {
+   const openBookmark = (type: "movie" | "tv", media: any) => {
       if (user) {
          setIsSaveMediaOpen(true);
          setCurrentMedia(media);
@@ -71,7 +71,7 @@ export function ListsProvider({ children }: Props) {
       closeSaveMediaModal,
       isLoginAdviceOpen,
       closeLoginAdviceModal,
-      useBookmark,
+      openBookmark,
       currentType,
       currentMedia,
       refresh,

@@ -19,7 +19,7 @@ export default function MainPoster({
    mediaType,
 }: Props) {
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
-   const { useBookmark } = useListsContext();
+   const { openBookmark } = useListsContext();
    const { themeColor } = useThemeContext();
    const { animatePoster } = usePosterAnimationContext();
 
@@ -46,7 +46,7 @@ export default function MainPoster({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             style={{ backgroundColor: themeColor }}
-            onClick={() => useBookmark(mediaType, media)}
+            onClick={() => openBookmark(mediaType, media)}
             className="absolute bottom-20 w-12 h-14 right-0 translate-x-1/2 grid place-content-center rounded-md"
          >
             <span className="material-icons text-5xl">
