@@ -10,8 +10,8 @@ export default function OnAirContainer({ children }: Props) {
       <motion.div variants={homeCardContainer}>
          <Swiper
             speed={700}
-            slidesPerView={3}
-            slidesPerGroup={3}
+            slidesPerView={2}
+            slidesPerGroup={2}
             spaceBetween={20}
             breakpoints={{
                640: {
