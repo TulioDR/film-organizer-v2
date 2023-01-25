@@ -7,11 +7,11 @@ export default function LoadingPage() {
    return (
       <motion.div
          exit={{ opacity: 0, transition: { duration: 0.3 } }}
-         className="grid place-content-center"
+         className="flex items-center justify-center"
          style={{ height: "calc(100vh - 96px)" }}
       >
-         <div className="flex flex-col items-center">
-            <div className="h-1 w-96">
+         <div className="flex flex-col items-center w-full">
+            <div className="h-1 w-full sm:w-96">
                <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: isLoading ? "75%" : "100%" }}
