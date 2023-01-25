@@ -6,8 +6,10 @@ import useRefresh from "../hooks/useRefresh";
 interface ListsContextInterface {
    lists: any[];
    isSaveMediaOpen: boolean;
-   openSaveMediaModal: (type: "movie" | "tv", media: any) => void;
    closeSaveMediaModal: () => void;
+   isLoginAdviceOpen: boolean;
+   closeLoginAdviceModal: () => void;
+   useBookmark: (type: "movie" | "tv", media: any) => void;
    currentType: "movie" | "tv";
    currentMedia: any;
    refresh: () => void;
@@ -24,26 +26,32 @@ interface Props {
    children: React.ReactNode;
 }
 export function ListsProvider({ children }: Props) {
+   const user = useUser();
+
    const [lists, setLists] = useState<any[]>([]);
    const [isSaveMediaOpen, setIsSaveMediaOpen] = useState<boolean>(false);
+   const [isLoginAdviceOpen, setIsLoginAdviceOpen] = useState<boolean>(false);
+
+   const closeSaveMediaModal = () => setIsSaveMediaOpen(false);
+   const closeLoginAdviceModal = () => setIsLoginAdviceOpen(false);
 
    const [currentType, setCurrentType] = useState<"movie" | "tv">("movie");
    const [currentMedia, setCurrentMedia] = useState<any>(null);
    const { search, refresh } = useRefresh();
 
+   const useBookmark = (type: "movie" | "tv", media: any) => {
+      if (user) {
+         setIsSaveMediaOpen(true);
+         setCurrentMedia(media);
+         setCurrentType(type);
+      } else {
+         setIsLoginAdviceOpen(true);
+      }
+   };
+
    const [refreshCard, setRefreshCard] = useState<boolean>(true);
    const refreshBookmark = () => setRefreshCard(!refreshCard);
 
-   const openSaveMediaModal = (type: "movie" | "tv", media: any) => {
-      setIsSaveMediaOpen(true);
-      setCurrentMedia(media);
-      setCurrentType(type);
-   };
-   const closeSaveMediaModal = () => {
-      setIsSaveMediaOpen(false);
-   };
-
-   const user = useUser();
    useEffect(() => {
       const getListsItems = async () => {
          if (!user) {
@@ -60,8 +68,10 @@ export function ListsProvider({ children }: Props) {
    const value: ListsContextInterface = {
       lists,
       isSaveMediaOpen,
-      openSaveMediaModal,
       closeSaveMediaModal,
+      isLoginAdviceOpen,
+      closeLoginAdviceModal,
+      useBookmark,
       currentType,
       currentMedia,
       refresh,

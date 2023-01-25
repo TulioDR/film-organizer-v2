@@ -7,10 +7,10 @@ type Props = {
 };
 
 export default function Bookmark({ media, mediaType, isMediaSaved }: Props) {
-   const { openSaveMediaModal } = useListsContext();
+   const { useBookmark } = useListsContext();
    return (
       <button
-         onClick={() => openSaveMediaModal(mediaType, media)}
+         onClick={() => useBookmark(mediaType, media)}
          className="h-full grid place-content-center"
       >
          <span className="material-icons text-5xl">

@@ -6,6 +6,7 @@ import { PageLoadingProvider } from "../context/PageLoadingContext";
 import { PosterAnimationProvider } from "../context/PosterAnimationContext";
 import { SidebarProvider } from "../context/SidebarContext";
 import { ThemeProvider } from "../context/ThemeContext";
+import LoginAdviceModal from "../layout/modals/loginAdvice/LoginAdviceModal";
 import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
 import Navbar from "../layout/navbar/Navbar";
 import SidebarsContainer from "./SidebarsContainer";
@@ -22,6 +23,7 @@ export default function MainPageContainer({ children }: Props) {
             <ListsProvider>
                <SidebarProvider>
                   <SaveMediaModal />
+                  <LoginAdviceModal />
                   <SidebarsContainer />
                   <div
                      id="scroll-container"

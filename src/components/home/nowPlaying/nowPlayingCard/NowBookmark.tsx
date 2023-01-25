@@ -6,11 +6,11 @@ type Props = {
 };
 
 export default function NowBookmark({ movie }: Props) {
-   const { openSaveMediaModal } = useListsContext();
+   const { useBookmark } = useListsContext();
    const { isMediaSaved } = useIsMediaSaved(movie.id, "movie");
    return (
       <button
-         onClick={() => openSaveMediaModal("movie", movie)}
+         onClick={() => useBookmark("movie", movie)}
          className="w-6 grid place-content-center"
       >
          <span className="material-icons text-5xl">

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import MainCard from "./mainCard/MainCard";
 import { staggerContainer } from "../../../animations/StaggerCards";
 import useSidebarContext from "../../../context/SidebarContext";
