@@ -11,7 +11,7 @@ export default function ListsLoginAdvice() {
    return (
       <div className="flex flex-col items-center justify-center text-light-text-normal dark:text-dark-text-normal mt-5">
          <div className="text-light-text-hard dark:text-dark-text-hard">
-            <span className="material-icons text-7xl sm:text-9xl">
+            <span className="material-icons !text-7xl sm:!text-9xl">
                format_list_bulleted
             </span>
          </div>
