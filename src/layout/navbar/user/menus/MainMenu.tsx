@@ -45,9 +45,11 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
          transition={{ duration: 0.4 }}
          className="w-full space-y-2"
       >
-         <DropdownItem icon={<MainIcon icon="person" />} onClick={profile}>
-            Profile
-         </DropdownItem>
+         {user && (
+            <DropdownItem icon={<MainIcon icon="person" />} onClick={profile}>
+               Profile
+            </DropdownItem>
+         )}
          <DropdownItem
             icon={<MainIcon icon="dark_mode" />}
             onClick={toggleDarkMode}
