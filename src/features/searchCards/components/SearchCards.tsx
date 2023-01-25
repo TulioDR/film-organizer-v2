@@ -8,6 +8,7 @@ import PageTitle from "../../../components/PageTitle";
 import TransitionPoster from "../../transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../transitionPoster/hooks/useTransitionPoster";
 import useSearchCards from "../hooks/useSearchCards";
+import MainCardMobile from "./mainCardMobile/MainCardMobile";
 
 type Props = {
    title: string;
@@ -36,12 +37,23 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             }`}
          >
             {media.map((media) => (
-               <MainCard
-                  key={media.id}
-                  media={media}
-                  mediaType={mediaType}
-                  setTransitionValues={setTransitionValues}
-               />
+               <>
+                  <div className="sm:hidden">
+                     <MainCardMobile
+                        key={media.id}
+                        media={media}
+                        mediaType={mediaType}
+                     />
+                  </div>
+                  <div className="hidden sm:block">
+                     <MainCard
+                        key={media.id}
+                        media={media}
+                        mediaType={mediaType}
+                        setTransitionValues={setTransitionValues}
+                     />
+                  </div>
+               </>
             ))}
          </motion.div>
          <TransitionPoster
