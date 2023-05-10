@@ -14,7 +14,7 @@ export default function SideLoginMessage({}: Props) {
       router.push("/auth");
    };
    return (
-      <div className="pl-5 w-full">
+      <div className="pl-10 w-full">
          <motion.div
             whileTap={{
                scale: 0.95,

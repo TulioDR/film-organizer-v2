@@ -21,26 +21,19 @@ export default function SideLink({ link, icon, text }: Props) {
 
    return (
       <li
-         className={`cursor-pointer h-9 relative group ${
+         className={`cursor-pointer relative group list-none flex justify-items-stretch ${
             isSelected
                ? ""
-               : "text-light-text-soft dark:text-dark-text-soft hover:text-light-text-hard dark:hover:text-dark-text-hard duration-100"
+               : "text-light-text-soft dark:text-dark-text-normal hover:text-light-text-hard dark:hover:text-dark-text-hard duration-100"
          }`}
       >
-         <Link href={link} className="flex items-center h-full">
-            <div className="ml-5 mr-3 rounded-lg h-9 w-9 grid place-content-center flex-shrink-0">
-               <span className="material-icons">{icon}</span>
-            </div>
+         <div className="w-10">
+            {isSelected && <div className="w-1 h-full bg-white"></div>}
+         </div>
+         <Link href={link} className="flex items-center h-full space-x-5">
+            <span className="material-icons">{icon}</span>
             <span className="truncate">{text}</span>
          </Link>
-         <div
-            style={{ backgroundColor: themeColor }}
-            className={`absolute top-0 h-full rounded-r-lg -z-10 ${
-               isSelected
-                  ? "w-full duration-300"
-                  : "w-0 group-hover:w-14 duration-200"
-            }`}
-         ></div>
       </li>
    );
 }

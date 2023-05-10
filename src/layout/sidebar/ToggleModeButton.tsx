@@ -1,23 +1,19 @@
 import React from "react";
 import ToggleButton from "../../components/ToggleButton";
 import useSidebarContext from "../../context/SidebarContext";
-import useThemeContext from "../../context/ThemeContext";
 
 export default function ToggleModeButton() {
    const { isMovie, toggle } = useSidebarContext();
-   const { themeColor } = useThemeContext();
    return (
       <button
          onClick={toggle}
          onMouseDown={(e) => e.preventDefault()}
-         style={{ backgroundColor: themeColor }}
-         className="overflow-hidden select-none h-full w-full cursor-pointer flex items-center"
+         // style={{ backgroundColor: themeColor }}
+         className="overflow-hidden select-none h-full w-full cursor-pointer flex items-center space-x-5"
       >
-         <div className="w-9 h-9 flex justify-center items-center mr-3 flex-shrink-0">
-            <span className="material-icons ">{isMovie ? "movie" : "tv"}</span>
-         </div>
+         <span className="material-icons ">{isMovie ? "movie" : "tv"}</span>
          <span className="truncate flex-1 text-left">
-            Mode: {isMovie ? "Movies" : "TV"}
+            {isMovie ? "Movies" : "Series"}
          </span>
          <ToggleButton isOn={isMovie} />
       </button>

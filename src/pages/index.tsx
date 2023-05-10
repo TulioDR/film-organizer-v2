@@ -33,7 +33,7 @@ export default function Home() {
 
    return (
       <PageAnimationContainer title="Film Organizer">
-         <HomeContainer>
+         {/* <HomeContainer>
             <div>
                <div className="flex justify-between items-center">
                   <HomeTitle>Now playing on Theaters</HomeTitle>
@@ -73,7 +73,7 @@ export default function Home() {
                   ))}
                </UpcomingContainer>
             </div>
-         </HomeContainer>
+         </HomeContainer> */}
       </PageAnimationContainer>
    );
 }

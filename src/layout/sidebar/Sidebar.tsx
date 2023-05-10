@@ -10,6 +10,7 @@ import SideLink from "./SideLink";
 import SideLoginMessage from "./SideLoginMessage";
 import SideSubtitle from "./SideSubtitle";
 import ToggleModeButton from "./ToggleModeButton";
+import SideLine from "./SideLine";
 
 interface Props {
    openForm: () => void;
@@ -21,29 +22,29 @@ export default function Sidebar({ openForm }: Props) {
    return (
       <SidebarContainer>
          <BrandHamburger />
+         <SideLine />
          <SideButtonContainer>
             <ToggleModeButton />
          </SideButtonContainer>
-         <SideSubtitle>Menu</SideSubtitle>
-         <ul className="space-y-2">
-            <SideLink link="/" icon="home" text="Home" />
-            <SideLink
-               link={`/popular/${isMovie ? "movie" : "tv"}`}
-               icon="whatshot"
-               text={`Popular ${isMovie ? "Movies" : "TV Shows"}`}
-            />
-            <SideLink
-               link={`/genres/${isMovie ? "movie" : "tv"}`}
-               icon="theater_comedy"
-               text={`${isMovie ? "Movie" : "TV"} Genres`}
-            />
-            <SideLink link="/discover" icon="travel_explore" text="Discover" />
-            <SideLink
-               link="/lists"
-               icon="format_list_bulleted"
-               text="Manage Lists"
-            />
-         </ul>
+         <SideLine />
+         <SideLink link="/" icon="home" text="Home" />
+         <SideLink
+            link={`/popular/${isMovie ? "movie" : "tv"}`}
+            icon="whatshot"
+            text={`Popular ${isMovie ? "Movies" : "Series"}`}
+         />
+         <SideLink
+            link={`/genres/${isMovie ? "movie" : "tv"}`}
+            icon="theater_comedy"
+            text={`${isMovie ? "Movie" : "TV"} Genres`}
+         />
+         <SideLink link="/discover" icon="travel_explore" text="Discover" />
+         <SideLink
+            link="/lists"
+            icon="format_list_bulleted"
+            text="Manage Lists"
+         />
+         <SideLine />
          {user ? (
             <>
                <SideButtonContainer>

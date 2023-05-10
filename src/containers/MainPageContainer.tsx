@@ -10,6 +10,7 @@ import LoginAdviceModal from "../layout/modals/loginAdvice/LoginAdviceModal";
 import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
 import Navbar from "../layout/navbar/Navbar";
 import SidebarsContainer from "./SidebarsContainer";
+import BackgroundImage from "../components/BackgroundImage";
 
 type Props = {
    children: React.ReactNode;
@@ -22,13 +23,14 @@ export default function MainPageContainer({ children }: Props) {
          <ThemeProvider>
             <ListsProvider>
                <SidebarProvider>
+                  <BackgroundImage />
                   <SaveMediaModal />
                   <LoginAdviceModal />
                   <SidebarsContainer />
                   <div
                      id="scroll-container"
                      // The change on the padding right occurs because of the sidebar's scrollbar width
-                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pr-5 pl-5 lg:pl-3 pb-5"
+                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden px-10 pb-5"
                   >
                      <PosterAnimationProvider>
                         <Navbar />
