@@ -11,9 +11,9 @@ export default function NowBookmark({ movie }: Props) {
    return (
       <button
          onClick={() => openBookmark("movie", movie)}
-         className="w-6 grid place-content-center"
+         className="h-full grid place-content-center aspect-square bg-white text-black"
       >
-         <span className="material-icons text-5xl">
+         <span className="material-icons !text-3xl !2xl:text-5xl">
             {isMediaSaved ? "bookmark" : "bookmark_border"}
          </span>
       </button>

@@ -19,18 +19,18 @@ type Props = {
 export default function MainPageContainer({ children }: Props) {
    const router = useRouter();
    return (
-      <div className="flex bg-light-bg-primary dark:bg-dark-bg-primary text-light-text-hard dark:text-dark-text-hard">
+      <div className="flex text-light-text-hard dark:text-dark-text-hard">
+         {/* <div className="flex bg-light-bg-primary dark:bg-dark-bg-primary text-light-text-hard dark:text-dark-text-hard"> */}
          <ThemeProvider>
             <ListsProvider>
                <SidebarProvider>
-                  <BackgroundImage />
                   <SaveMediaModal />
                   <LoginAdviceModal />
                   <SidebarsContainer />
                   <div
                      id="scroll-container"
                      // The change on the padding right occurs because of the sidebar's scrollbar width
-                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden px-10 pb-5"
+                     className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden pb-5"
                   >
                      <PosterAnimationProvider>
                         <Navbar />

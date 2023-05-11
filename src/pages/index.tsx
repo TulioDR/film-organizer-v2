@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import NowPlayingContainer from "../components/home/nowPlaying/NowPlayingContainer";
-import OnAirContainer from "../components/home/onAir/OnAirContainer";
-import UpcomingContainer from "../components/home/upcoming/UpcomingContainer";
+// import NowPlayingContainer from "../components/home/nowPlaying/NowPlayingContainer";
+// import OnAirContainer from "../components/home/onAir/OnAirContainer";
+// import UpcomingContainer from "../components/home/upcoming/UpcomingContainer";
 
 import usePageLoadingContext from "../context/PageLoadingContext";
-import PageAnimationContainer from "../containers/PageAnimationContainer";
-import NavigationButtons from "../components/home/NavigationButtons";
-import NowPlayingCard from "../components/home/nowPlaying/nowPlayingCard/NowPlayingCard";
-import HomeContainer from "../components/home/HomeContainer";
+// import HomeContainer from "../components/home/HomeContainer";
 import HomeTitle from "../components/home/HomeTitle";
-import OnAirCard from "../components/home/onAir/OnAirCard";
-import UpcomingCard from "../components/home/upcoming/UpcomingCard";
+// import OnAirCard from "../components/home/onAir/OnAirCard";
+// import UpcomingCard from "../components/home/upcoming/UpcomingCard";
+// import NowPlaying from "../components/home/NowPlaying";
+
+import BackgroundImage from "../components/BackgroundImage";
+import ChangeShowcase from "../components/home/ChangeShowcase";
+import HomeGenres from "../components/home/HomeGenres";
+import NowBookmark from "../components/home/nowPlaying/nowPlayingCard/NowBookmark";
+import LearnMoreButton from "../components/home/nowPlaying/nowPlayingCard/LearnMoreButton";
+import HomeSlider from "../components/home/HomeSlider";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -31,49 +35,50 @@ export default function Home() {
       getData();
    }, [setIsLoading]);
 
+   const [activeIndex, setActiveIndex] = useState<number>(0);
+   const [currentMedia, setCurrentMedia] = useState<any>(nowPlaying[0]);
+   const [currentArray, setCurrentArray] = useState<any[]>(nowPlaying);
+
+   useEffect(() => {
+      setCurrentMedia(currentArray[activeIndex]);
+   }, [activeIndex, currentArray]);
+
+   const [currentShowcase, setCurrentShowcase] = useState<
+      "movies" | "series" | "upcoming"
+   >("movies");
+
+   useEffect(() => {
+      if (currentShowcase === "movies") setCurrentArray(nowPlaying);
+      if (currentShowcase === "series") setCurrentArray(onAir);
+      if (currentShowcase === "upcoming") setCurrentArray(upcoming);
+   }, [currentShowcase, nowPlaying, onAir, upcoming]);
+
+   if (!currentMedia) return <></>;
    return (
-      <PageAnimationContainer title="Film Organizer">
-         {/* <HomeContainer>
-            <div>
-               <div className="flex justify-between items-center">
-                  <HomeTitle>Now playing on Theaters</HomeTitle>
-                  <NavigationButtons prevId="prev-now" nextId="next-now" />
+      <div
+         style={{ height: "calc(100vh - 136px)" }}
+         className="w-full flex flex-col"
+      >
+         <BackgroundImage currentImg={currentMedia.backdrop_path} />
+         <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
+            <ChangeShowcase
+               currentShowcase={currentShowcase}
+               setCurrentShowcase={setCurrentShowcase}
+            />
+            <div className="space-y-2 2xl:space-y-3">
+               <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
+               <HomeGenres />
+               <div className="hidden sm:flex items-center text-dark-text-hard h-10 2xl:h-14">
+                  <NowBookmark movie={currentMedia} />
+                  <LearnMoreButton id={currentMedia.id} onClick={() => {}} />
                </div>
-               <NowPlayingContainer>
-                  {nowPlaying.map((movie) => (
-                     <SwiperSlide key={movie.id}>
-                        <NowPlayingCard movie={movie} />
-                     </SwiperSlide>
-                  ))}
-               </NowPlayingContainer>
             </div>
-            <div>
-               <div className="flex justify-between items-center">
-                  <HomeTitle>TV Series on Air</HomeTitle>
-                  <NavigationButtons prevId="prev-air" nextId="next-air" />
-               </div>
-               <OnAirContainer>
-                  {onAir.map((tv) => (
-                     <SwiperSlide key={tv.id}>
-                        <OnAirCard tv={tv} />
-                     </SwiperSlide>
-                  ))}
-               </OnAirContainer>
-            </div>
-            <div>
-               <div className="flex justify-between items-center">
-                  <HomeTitle upcoming>Upcoming Movies</HomeTitle>
-                  <NavigationButtons prevId="prev-upc" nextId="next-upc" />
-               </div>
-               <UpcomingContainer>
-                  {upcoming.map((movie) => (
-                     <SwiperSlide key={movie.id}>
-                        <UpcomingCard movie={movie} />
-                     </SwiperSlide>
-                  ))}
-               </UpcomingContainer>
-            </div>
-         </HomeContainer> */}
-      </PageAnimationContainer>
+         </div>
+         <HomeSlider
+            displayedCards={currentArray}
+            setActiveIndex={setActiveIndex}
+            activeIndex={activeIndex}
+         />
+      </div>
    );
 }

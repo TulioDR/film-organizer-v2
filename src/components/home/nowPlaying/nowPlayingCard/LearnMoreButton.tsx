@@ -12,7 +12,7 @@ export default function LearnMoreButton({ onClick, id }: Props) {
       <Link
          href={`/movie/${id}`}
          onClick={onClick}
-         className="rounded-lg group backdrop-blur drop-shadow-lg px-3 border border-gray-500 h-10 text-sm font-medium relative overflow-hidden text-white flex items-center"
+         className="group backdrop-blur drop-shadow-lg px-3 2xl:px-5 border border-white h-full text-sm font-medium relative overflow-hidden text-white flex items-center"
       >
          <div
             style={{ backgroundColor: themeColor }}

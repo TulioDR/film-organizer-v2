@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import useThemeContext from "../../context/ThemeContext";
 
 type Props = {
    link: string;
@@ -10,7 +9,6 @@ type Props = {
 };
 
 export default function SideLink({ link, icon, text }: Props) {
-   const { themeColor } = useThemeContext();
    const router = useRouter();
 
    const [isSelected, setIsSelected] = useState<boolean>(false);
