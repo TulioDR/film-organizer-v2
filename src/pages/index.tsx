@@ -5,17 +5,14 @@ import { useEffect, useState } from "react";
 
 import usePageLoadingContext from "../context/PageLoadingContext";
 // import HomeContainer from "../components/home/HomeContainer";
-import HomeTitle from "../components/home/HomeTitle";
 // import OnAirCard from "../components/home/onAir/OnAirCard";
 // import UpcomingCard from "../components/home/upcoming/UpcomingCard";
 // import NowPlaying from "../components/home/NowPlaying";
 
 import BackgroundImage from "../components/BackgroundImage";
 import ChangeShowcase from "../components/home/ChangeShowcase";
-import HomeGenres from "../components/home/HomeGenres";
-import NowBookmark from "../components/home/nowPlaying/nowPlayingCard/NowBookmark";
-import LearnMoreButton from "../components/home/nowPlaying/nowPlayingCard/LearnMoreButton";
 import HomeSlider from "../components/home/HomeSlider";
+import MediaDescription from "../components/home/MediaDescription";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -48,6 +45,7 @@ export default function Home() {
    >("movies");
 
    useEffect(() => {
+      setActiveIndex(0);
       if (currentShowcase === "movies") setCurrentArray(nowPlaying);
       if (currentShowcase === "series") setCurrentArray(onAir);
       if (currentShowcase === "upcoming") setCurrentArray(upcoming);
@@ -57,7 +55,7 @@ export default function Home() {
    return (
       <div
          style={{ height: "calc(100vh - 136px)" }}
-         className="w-full flex flex-col"
+         className="w-full flex flex-col overflow-hidden"
       >
          <BackgroundImage currentImg={currentMedia.backdrop_path} />
          <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
@@ -65,16 +63,10 @@ export default function Home() {
                currentShowcase={currentShowcase}
                setCurrentShowcase={setCurrentShowcase}
             />
-            <div className="space-y-2 2xl:space-y-3">
-               <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
-               <HomeGenres />
-               <div className="hidden sm:flex items-center text-dark-text-hard h-10 2xl:h-14">
-                  <NowBookmark movie={currentMedia} />
-                  <LearnMoreButton id={currentMedia.id} onClick={() => {}} />
-               </div>
-            </div>
+            <MediaDescription currentMedia={currentMedia} />
          </div>
          <HomeSlider
+            currentShowcase={currentShowcase}
             displayedCards={currentArray}
             setActiveIndex={setActiveIndex}
             activeIndex={activeIndex}

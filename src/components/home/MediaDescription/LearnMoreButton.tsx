@@ -1,5 +1,5 @@
 import Link from "next/link";
-import useThemeContext from "../../../../context/ThemeContext";
+import useThemeContext from "../../../context/ThemeContext";
 
 type Props = {
    onClick: () => void;

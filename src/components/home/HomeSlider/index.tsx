@@ -1,40 +1,55 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import NavigationButtons from "./NavigationButtons";
 import HomeCard from "./HomeCard";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {
    displayedCards: any[];
    activeIndex: number;
    setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+   currentShowcase: string;
 };
 
 export default function HomeSlider({
    displayedCards,
    activeIndex,
    setActiveIndex,
+   currentShowcase,
 }: Props) {
    return (
-      <div className="w-full">
-         <Swiper
-            slidesPerView={"auto"}
-            spaceBetween={20}
-            className="w-full !px-10 !overflow-visible select-none relative"
+      <AnimatePresence mode="wait">
+         <motion.div
+            key={currentShowcase}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "100%", opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="w-full"
          >
-            <NavigationButtons
-               activeIndex={activeIndex}
-               setActiveIndex={setActiveIndex}
-            />
-            {displayedCards.map((media, index) => (
-               <SwiperSlide key={media.id} className="max-w-min flex items-end">
-                  <HomeCard
-                     index={index}
-                     activeIndex={activeIndex}
-                     setActiveIndex={setActiveIndex}
-                     movie={media}
-                  />
-               </SwiperSlide>
-            ))}
-         </Swiper>
-      </div>
+            <Swiper
+               slidesPerView={"auto"}
+               spaceBetween={20}
+               className="w-full !px-10 !overflow-visible select-none relative"
+            >
+               <NavigationButtons
+                  activeIndex={activeIndex}
+                  setActiveIndex={setActiveIndex}
+               />
+               {displayedCards.map((media, index) => (
+                  <SwiperSlide
+                     key={media.id}
+                     className="max-w-min flex items-end"
+                  >
+                     <HomeCard
+                        index={index}
+                        activeIndex={activeIndex}
+                        setActiveIndex={setActiveIndex}
+                        movie={media}
+                     />
+                  </SwiperSlide>
+               ))}
+            </Swiper>
+         </motion.div>
+      </AnimatePresence>
    );
 }

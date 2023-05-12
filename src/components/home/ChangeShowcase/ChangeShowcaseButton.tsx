@@ -27,14 +27,16 @@ export default function ChangeShowcaseButton({
          </span>
          <AnimatePresence>
             {showcase === currentShowcase && (
-               <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  exit={{ width: 0 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ backgroundColor: themeColor }}
-                  className="absolute h-[2px] top-full"
-               ></motion.div>
+               <div className="absolute h-[2px] w-full flex justify-center">
+                  <motion.div
+                     initial={{ width: 0 }}
+                     animate={{ width: "100%" }}
+                     exit={{ width: 0 }}
+                     transition={{ duration: 0.3 }}
+                     style={{ backgroundColor: themeColor }}
+                     className="h-full top-full"
+                  ></motion.div>
+               </div>
             )}
          </AnimatePresence>
       </button>

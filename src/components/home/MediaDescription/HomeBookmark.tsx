@@ -1,11 +1,11 @@
-import useListsContext from "../../../../context/ListsContext";
-import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
+import useListsContext from "../../../context/ListsContext";
+import useIsMediaSaved from "../../../hooks/useIsMediaSaved";
 
 type Props = {
    movie: any;
 };
 
-export default function NowBookmark({ movie }: Props) {
+export default function HomeBookmark({ movie }: Props) {
    const { openBookmark } = useListsContext();
    const { isMediaSaved } = useIsMediaSaved(movie.id, "movie");
    return (
