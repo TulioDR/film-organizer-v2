@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useThemeContext from "../../context/ThemeContext";
 
 type Props = {
    link: string;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function SideLink({ link, icon, text }: Props) {
+   const { themeColor } = useThemeContext();
    const router = useRouter();
 
    const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -26,7 +28,12 @@ export default function SideLink({ link, icon, text }: Props) {
          }`}
       >
          <div className="w-10">
-            {isSelected && <div className="w-1 h-full bg-white"></div>}
+            {isSelected && (
+               <div
+                  style={{ backgroundColor: themeColor }}
+                  className="w-1 h-full"
+               ></div>
+            )}
          </div>
          <Link href={link} className="flex items-center h-full space-x-5">
             <span className="material-icons">{icon}</span>

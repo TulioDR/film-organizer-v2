@@ -11,6 +11,10 @@ module.exports = {
    darkMode: "class",
    theme: {
       extend: {
+         fontFamily: {
+            oswald: "'Oswald', sans-serif",
+            roboto: "'Roboto', sans-serif",
+         },
          colors: {
             light: {
                text: {

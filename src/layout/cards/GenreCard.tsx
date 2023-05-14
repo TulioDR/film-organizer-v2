@@ -22,13 +22,12 @@ export default function GenreCard({ genre, mediaType }: Props) {
 
    return (
       <motion.article
-         variants={item}
          onClick={() => {
             router.push(`/genres/${mediaType}/${genre.id}`);
          }}
-         className={`aspect-video relative group overflow-hidden cursor-pointer`}
+         className={`h-[400px] 2xl:h-[600px] flex-1 hover:flex-[5] duration-500 relative group overflow-hidden cursor-pointer`}
       >
-         <div className="relative w-full h-full brightness-50 group-hover:brightness-100 aspect-[2/3] group-hover:scale-110 ease-in-out duration-300">
+         <div className="relative w-full h-full brightness-50 group-hover:brightness-100 ease-in-out duration-300">
             <Image
                alt={genre.name}
                src={genre.image}
@@ -39,7 +38,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
             />
          </div>
          <div className="absolute z-10 top-0 left-0 w-full h-full grid place-content-center">
-            <span className="text-3xl font-bold group-hover:opacity-0 duration-300 text-dark-text-hard">
+            <span className="text-lg group-hover:opacity-0 duration-300 text-white text-center w-min">
                {genre.name}
             </span>
          </div>

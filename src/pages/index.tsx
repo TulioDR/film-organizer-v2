@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
-// import NowPlayingContainer from "../components/home/nowPlaying/NowPlayingContainer";
-// import OnAirContainer from "../components/home/onAir/OnAirContainer";
-// import UpcomingContainer from "../components/home/upcoming/UpcomingContainer";
 
 import usePageLoadingContext from "../context/PageLoadingContext";
-// import HomeContainer from "../components/home/HomeContainer";
-// import OnAirCard from "../components/home/onAir/OnAirCard";
-// import UpcomingCard from "../components/home/upcoming/UpcomingCard";
-// import NowPlaying from "../components/home/NowPlaying";
 
 import BackgroundImage from "../components/BackgroundImage";
 import ChangeShowcase from "../components/home/ChangeShowcase";
@@ -51,26 +44,34 @@ export default function Home() {
       if (currentShowcase === "upcoming") setCurrentArray(upcoming);
    }, [currentShowcase, nowPlaying, onAir, upcoming]);
 
-   if (!currentMedia) return <></>;
    return (
       <div
          style={{ height: "calc(100vh - 136px)" }}
          className="w-full flex flex-col overflow-hidden"
       >
-         <BackgroundImage currentImg={currentMedia.backdrop_path} />
-         <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
-            <ChangeShowcase
-               currentShowcase={currentShowcase}
-               setCurrentShowcase={setCurrentShowcase}
-            />
-            <MediaDescription currentMedia={currentMedia} />
-         </div>
-         <HomeSlider
-            currentShowcase={currentShowcase}
-            displayedCards={currentArray}
-            setActiveIndex={setActiveIndex}
-            activeIndex={activeIndex}
-         />
+         {!currentMedia ? (
+            <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black"></div>
+         ) : (
+            <>
+               <BackgroundImage currentImg={currentMedia.backdrop_path} />
+               <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
+                  <ChangeShowcase
+                     currentShowcase={currentShowcase}
+                     setCurrentShowcase={setCurrentShowcase}
+                  />
+                  <MediaDescription
+                     currentMedia={currentMedia}
+                     currentShowcase={currentShowcase}
+                  />
+               </div>
+               <HomeSlider
+                  currentShowcase={currentShowcase}
+                  displayedCards={currentArray}
+                  setActiveIndex={setActiveIndex}
+                  activeIndex={activeIndex}
+               />
+            </>
+         )}
       </div>
    );
 }

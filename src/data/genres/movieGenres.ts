@@ -1,4 +1,4 @@
-import action from "./movie/action.png";
+import action from "./movie/action.jpg";
 import adventure from "./movie/adventure.jpg";
 import animation from "./movie/animation.jpg";
 import comedy from "./movie/comedy.jpg";
@@ -12,8 +12,8 @@ import horror from "./movie/horror.jpg";
 import music from "./movie/music.jpg";
 import mystery from "./movie/mystery.jpg";
 import romance from "./movie/romance.jpg";
-import scienceFiction from "./movie/science-fiction.png";
-import tvMovie from "./movie/tv-movie.jpg";
+import scienceFiction from "./movie/science-fiction.jpg";
+import tvMovie from "./movie/tv-movie.png";
 import thriller from "./movie/thriller.jpg";
 import war from "./movie/war.jpg";
 import western from "./movie/western.jpg";

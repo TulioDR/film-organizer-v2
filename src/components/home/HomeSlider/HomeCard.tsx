@@ -23,7 +23,7 @@ export default function HomeCard({
    return (
       <div
          onClick={handleClick}
-         className={`aspect-[2/3] bg-black w-32 xl:w-36 2xl:w-52 cursor-pointer duration-300 origin-bottom-right ${
+         className={`aspect-[2/3] bg-black w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer duration-300 origin-bottom-right ${
             activeIndex === index ? "-translate-y-5" : ""
          }`}
       >

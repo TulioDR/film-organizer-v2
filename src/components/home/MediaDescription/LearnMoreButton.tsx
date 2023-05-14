@@ -18,7 +18,7 @@ export default function LearnMoreButton({ onClick, id }: Props) {
             style={{ backgroundColor: themeColor }}
             className="absolute h-full top-0 left-0 -z-10 w-0 group-hover:w-full duration-200"
          ></div>
-         Learn More
+         <span className="uppercase">Learn More</span>
       </Link>
    );
 }

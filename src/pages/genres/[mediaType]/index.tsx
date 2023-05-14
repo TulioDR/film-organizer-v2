@@ -5,9 +5,10 @@ import movieGenres from "../../../data/genres/movieGenres";
 import tvGenres from "../../../data/genres/tvGenres";
 import GenreModel from "../../../models/genresModel";
 import { motion } from "framer-motion";
-import GenreCard from "../../../layout/cards/GenreCard";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import MovieLayout from "../../../components/Genres/MovieLayout";
+import TvLayout from "../../../components/Genres/TvLayout";
+import { useRouter } from "next/router";
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;
    const isMovie = mediaType === "movie";
@@ -33,14 +34,23 @@ const container = {
    },
 };
 
-export default function Genres({ isMovie, mediaType, genresData }: Props) {
+export default function Genres({ isMovie, mediaType }: Props) {
    const title = `${isMovie ? "Movie" : "TV"} Genres`;
    useEffect(() => {
       const container = document.getElementById("scroll-container")!;
       container.scrollTo({ top: 0 });
    }, []);
+
+   const [genresData, setGenresData] = useState<any[]>(movieGenres);
+
+   const { query } = useRouter();
+   useEffect(() => {
+      if (query.mediaType === "movie") setGenresData(movieGenres);
+      else setGenresData(tvGenres);
+   }, [query]);
+
    return (
-      <div>
+      <div className="flex flex-col px-10">
          <Head>
             <title>{title}</title>
             <meta name="description" content="Which is your favorite genre?" />
@@ -52,11 +62,13 @@ export default function Genres({ isMovie, mediaType, genresData }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="grid grid-cols-2 xl:grid-cols-3 overflow-hidden"
+            className="w-full flex flex-col gap-5"
          >
-            {genresData.map((genre) => (
-               <GenreCard key={genre.id} genre={genre} mediaType={mediaType} />
-            ))}
+            {mediaType === "movie" ? (
+               <MovieLayout mediaType={mediaType} genres={genresData} />
+            ) : (
+               <TvLayout mediaType={mediaType} genres={genresData} />
+            )}
          </motion.div>
       </div>
    );
