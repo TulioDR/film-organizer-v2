@@ -5,19 +5,24 @@ import GenreModel from "../../models/genresModel";
 type Props = {
    genre: GenreModel;
    mediaType: "tv" | "movie";
+   setCurrentGenre: React.Dispatch<any>;
 };
 
-const item = {
-   initial: { opacity: 0, y: 100 },
-   animate: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-   exit: {},
-};
+// const item = {
+//    initial: { opacity: 0, y: 100 },
+//    animate: {
+//       y: 0,
+//       opacity: 1,
+//       transition: { duration: 0.4, ease: "easeInOut" },
+//    },
+//    exit: {},
+// };
 
-export default function GenreCard({ genre, mediaType }: Props) {
+export default function GenreCard({
+   genre,
+   mediaType,
+   setCurrentGenre,
+}: Props) {
    const router = useRouter();
 
    return (
@@ -25,6 +30,8 @@ export default function GenreCard({ genre, mediaType }: Props) {
          onClick={() => {
             router.push(`/genres/${mediaType}/${genre.id}`);
          }}
+         onHoverStart={() => setCurrentGenre(genre)}
+         onHoverEnd={() => setCurrentGenre(null)}
          className={`h-[400px] 2xl:h-[600px] flex-1 hover:flex-[5] duration-500 relative group overflow-hidden cursor-pointer`}
       >
          <div className="relative w-full h-full brightness-50 group-hover:brightness-100 ease-in-out duration-300">
