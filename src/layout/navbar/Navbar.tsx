@@ -7,15 +7,15 @@ import useSidebarContext from "../../context/SidebarContext";
 export default function Navbar() {
    const { toggleShowSidebar } = useSidebarContext();
    return (
-      <div className="w-full z-20 sticky top-0 pt-10 pb-5 px-10 flex items-center">
+      <div className="w-full z-20 sticky top-0 pt-10 pb-5 px-10 flex items-center pointer-events-none">
          <div className="h-9 flex items-center justify-between space-x-3 lg:space-x-0 w-full">
-            <div className="lg:hidden">
+            <div className="lg:hidden pointer-events-auto">
                <ToggleSidebar onClick={toggleShowSidebar} />
             </div>
-            <div className="flex-1 h-full">
+            <div className="h-full pointer-events-auto">
                <SearchBar />
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 pointer-events-auto">
                <User />
                <LoginButton />
             </div>

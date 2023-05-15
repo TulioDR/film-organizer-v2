@@ -14,7 +14,7 @@ import mystery from "./movie/mystery.jpg";
 import romance from "./movie/romance.jpg";
 import scienceFiction from "./movie/science-fiction.jpg";
 import tvMovie from "./movie/tv-movie.png";
-import thriller from "./movie/thriller.jpg";
+import thriller from "./movie/thriller.jpeg";
 import war from "./movie/war.jpg";
 import western from "./movie/western.jpg";
 

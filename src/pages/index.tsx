@@ -46,8 +46,8 @@ export default function Home() {
 
    return (
       <div
-         style={{ height: "calc(100vh - 136px)" }}
-         className="w-full flex flex-col overflow-hidden"
+         style={{ height: "calc(100vh - 96px)" }}
+         className="w-full flex flex-col overflow-hidden pb-10"
       >
          {!currentMedia ? (
             <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black"></div>

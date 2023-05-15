@@ -4,12 +4,13 @@ import PageTitle from "../../../components/PageTitle";
 import movieGenres from "../../../data/genres/movieGenres";
 import tvGenres from "../../../data/genres/tvGenres";
 import GenreModel from "../../../models/genresModel";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import MovieLayout from "../../../components/Genres/MovieLayout";
 import TvLayout from "../../../components/Genres/TvLayout";
 import { useRouter } from "next/router";
 import BackgroundImage2 from "../../../components/BackgroundImage2";
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;
    const isMovie = mediaType === "movie";
@@ -28,11 +29,7 @@ type Props = {
 const container = {
    initial: {},
    animate: { transition: { staggerChildren: 0.1 } },
-   exit: {
-      y: 100,
-      opacity: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
-   },
+   exit: {},
 };
 
 export default function Genres({ isMovie, mediaType }: Props) {
@@ -45,13 +42,22 @@ export default function Genres({ isMovie, mediaType }: Props) {
    const [genresData, setGenresData] = useState<any[]>(movieGenres);
 
    const { query } = useRouter();
-   useEffect(() => {
-      if (query.mediaType === "movie") setGenresData(movieGenres);
-      else setGenresData(tvGenres);
-   }, [query]);
 
    const [currentGenre, setCurrentGenre] = useState<any>(null);
 
+   const [type, setType] = useState<"tv" | "movie">("movie");
+
+   useEffect(() => {
+      if (type === "movie") setGenresData(movieGenres);
+      else setGenresData(tvGenres);
+   }, [type]);
+
+   const setMovies = () => {
+      setType("movie");
+   };
+   const setShows = () => {
+      setType("tv");
+   };
    return (
       <div className="flex flex-col px-10">
          <Head>
@@ -63,28 +69,41 @@ export default function Genres({ isMovie, mediaType }: Props) {
             currentImg={currentGenre?.image}
             imageKey={currentGenre?.id}
          />
-         <PageTitle>{title}</PageTitle>
-         <motion.div
-            variants={container}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="w-full flex flex-col gap-5"
-         >
-            {mediaType === "movie" ? (
-               <MovieLayout
-                  mediaType={mediaType}
-                  genres={genresData}
-                  setCurrentGenre={setCurrentGenre}
-               />
-            ) : (
-               <TvLayout
-                  mediaType={mediaType}
-                  genres={genresData}
-                  setCurrentGenre={setCurrentGenre}
-               />
-            )}
-         </motion.div>
+         <div className="flex justify-between">
+            <PageTitle>{title}</PageTitle>
+            <div>
+               <button className="h-full px-10" onClick={setMovies}>
+                  Movie
+               </button>
+               <button className="h-full px-10" onClick={setShows}>
+                  TV
+               </button>
+            </div>
+         </div>
+         <AnimatePresence mode="wait">
+            <motion.div
+               key={type}
+               variants={container}
+               initial="initial"
+               animate="animate"
+               exit="exit"
+               className="w-full flex flex-col gap-5 pb-10"
+            >
+               {type === "movie" ? (
+                  <MovieLayout
+                     mediaType={mediaType}
+                     genres={genresData}
+                     setCurrentGenre={setCurrentGenre}
+                  />
+               ) : (
+                  <TvLayout
+                     mediaType={mediaType}
+                     genres={genresData}
+                     setCurrentGenre={setCurrentGenre}
+                  />
+               )}
+            </motion.div>
+         </AnimatePresence>
       </div>
    );
 }
