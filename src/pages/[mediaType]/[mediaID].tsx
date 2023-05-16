@@ -63,7 +63,7 @@ export default function Details({ mediaType, media }: Props) {
                   <MainTitle>{media.title || media.name}</MainTitle>
                   <InfoBar media={media} mediaType={mediaType} />
                </div>
-               <Tabs media={media} mediaType={mediaType} />
+               {/* <Tabs media={media} mediaType={mediaType} /> */}
             </div>
          </div>
       </ExitDetails>

@@ -6,7 +6,7 @@ html,
 body {
    padding: 0;
    margin: 0;
-   @apply font-roboto;
+   @apply font-roboto bg-black;
    /* @apply font-roboto bg-light-bg-primary dark:bg-dark-bg-primary; */
 }
 
@@ -70,14 +70,14 @@ a {
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {
-   @apply bg-light-bg-primary;
+   @apply backdrop-blur-md;
 }
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-light-text-soft;
 }
 
 .dark .sidebar-scrollbar::-webkit-scrollbar-track {
-   @apply bg-dark-bg-primary;
+   @apply backdrop-blur-md;
 }
 .dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-dark-text-soft;

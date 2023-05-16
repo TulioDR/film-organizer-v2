@@ -16,7 +16,7 @@ export default function TvLayout({
          <div className="flex h-full space-x-5">
             {genres.slice(0, 5).map((genre) => (
                <GenreCard
-                  key={genre.id}
+                  key={genre.id + mediaType}
                   genre={genre}
                   mediaType={mediaType}
                   setCurrentGenre={setCurrentGenre}
@@ -26,7 +26,7 @@ export default function TvLayout({
          <div className="flex h-full gap-5">
             {genres.slice(5, 11).map((genre) => (
                <GenreCard
-                  key={genre.id}
+                  key={genre.id + mediaType}
                   genre={genre}
                   mediaType={mediaType}
                   setCurrentGenre={setCurrentGenre}
@@ -36,7 +36,7 @@ export default function TvLayout({
          <div className="flex h-full gap-5">
             {genres.slice(11, 16).map((genre) => (
                <GenreCard
-                  key={genre.id}
+                  key={genre.id + mediaType}
                   genre={genre}
                   mediaType={mediaType}
                   setCurrentGenre={setCurrentGenre}
