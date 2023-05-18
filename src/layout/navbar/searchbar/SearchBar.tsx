@@ -1,15 +1,17 @@
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
-import useSidebarContext from "../../../context/SidebarContext";
 import QuickResult from "./QuickResult";
 import ResultsContainer from "./ResultsContainer";
 import SearchInput from "./SearchInput";
+import ToggleModeButton from "./ToggleModeButton";
 
 type Props = {};
 
 export default function SearchBar({}: Props) {
-   const { isMovie } = useSidebarContext();
    const router = useRouter();
+
+   const [isMovie, setIsMovie] = useState<boolean>(false);
+   const toggleMediaType = () => setIsMovie((prev) => !prev);
 
    const [results, setResults] = useState<any[]>([]);
    const [inputValue, setInputValue] = useState<string>("");
@@ -69,18 +71,25 @@ export default function SearchBar({}: Props) {
    };
 
    return (
-      <form
-         onSubmit={handleSubmit}
-         className={`w-full sm:w-96 px-5 h-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg rounded-t-lg flex flex-col relative ${
-            showResults ? "shadow-lg" : "rounded-b-lg"
-         }`}
-      >
-         <SearchInput
-            value={inputValue}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-         />
+      <form onSubmit={handleSubmit} className={`h-full relative`}>
+         <div
+            className={`flex h-full shadow-lg rounded-t-lg bg-dark-bg-secondary ${
+               showResults ? "shadow-lg" : "rounded-b-lg"
+            }`}
+         >
+            <SearchInput
+               value={inputValue}
+               onChange={handleInputChange}
+               onFocus={handleInputFocus}
+               onBlur={handleInputBlur}
+               placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
+            />
+            <ToggleModeButton
+               isMovie={isMovie}
+               onClick={toggleMediaType}
+               showResults={showResults}
+            />
+         </div>
          {showResults && (
             <ResultsContainer
                showResults={showResults}

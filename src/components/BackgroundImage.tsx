@@ -10,7 +10,7 @@ export default function BackgroundImage({ currentImg, details }: Props) {
    return (
       <div
          className={`${
-            details ? "brightness-75" : ""
+            details ? "brightness-50" : ""
          } fixed top-0 left-0 h-screen -z-10 w-full text-white flex items-center justify-center`}
       >
          {!currentImg ? (
@@ -34,10 +34,13 @@ export default function BackgroundImage({ currentImg, details }: Props) {
                      priority
                      className="object-cover"
                   />
-
-                  <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute top-0 left-0 h-1/2 w-full bg-gradient-to-b from-black/60 to-transparent"></div>
-                  <div className="absolute top-0 left-0 w-4/5 h-full bg-gradient-to-r from-black/60 to-transparent"></div>
+                  {!details && (
+                     <>
+                        <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute top-0 left-0 h-1/2 w-full bg-gradient-to-b from-black/60 to-transparent"></div>
+                        <div className="absolute top-0 left-0 w-4/5 h-full bg-gradient-to-r from-black/60 to-transparent"></div>
+                     </>
+                  )}
                </motion.div>
             </AnimatePresence>
          )}

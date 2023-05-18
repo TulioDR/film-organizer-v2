@@ -1,10 +1,9 @@
-import useSidebarContext from "../../../context/SidebarContext";
-
 type Props = {
    value: string;
    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
    onFocus: () => void;
    onBlur: () => void;
+   placeholder: string;
 };
 
 export default function SearchInput({
@@ -12,22 +11,22 @@ export default function SearchInput({
    onChange,
    onFocus,
    onBlur,
+   placeholder,
 }: Props) {
-   const { isMovie } = useSidebarContext();
    return (
-      <div className="flex items-center space-x-5 h-full text-sm sm:text-base">
+      <div
+         className={`flex items-center w-96 gap-5 px-5 h-full text-sm sm:text-base`}
+      >
          <input
             value={value}
             onChange={onChange}
             onFocus={onFocus}
             onBlur={onBlur}
             type="text"
-            className="w-full outline-none bg-transparent text-light-text-hard dark:text-dark-text-hard placeholder:text-light-text-soft placeholder:dark:text-dark-text-soft"
-            placeholder={`Search ${isMovie ? "Movies" : "TV Shows"}`}
+            className="w-full outline-none bg-transparent text-dark-text-hard placeholder:dark:text-dark-text-soft"
+            placeholder={placeholder}
          />
-         <span className="material-icons text-light-text-soft dark:text-dark-text-soft">
-            search
-         </span>
+         <span className="material-icons !text-dark-text-soft">search</span>
       </div>
    );
 }

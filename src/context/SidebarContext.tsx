@@ -1,8 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
 interface AppContextInterface {
-   isMovie: boolean;
-   toggle: (e: React.SyntheticEvent) => void;
    showSidebar: boolean;
    toggleShowSidebar: () => void;
    setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,9 +18,6 @@ export default function useSidebarContext() {
 }
 
 export function SidebarProvider({ children }: ProviderProps) {
-   const [isMovie, setIsMovie] = useState<boolean>(true);
-   const toggle = () => setIsMovie(!isMovie);
-
    const [showSidebar, setShowSidebar] = useState<boolean>(false);
    const toggleShowSidebar = () => setShowSidebar(!showSidebar);
 
@@ -30,8 +25,6 @@ export function SidebarProvider({ children }: ProviderProps) {
    const toggleOpenSidebar = () => setOpenSidebar(!openSidebar);
 
    const value: AppContextInterface = {
-      isMovie,
-      toggle,
       showSidebar,
       toggleShowSidebar,
       setShowSidebar,
