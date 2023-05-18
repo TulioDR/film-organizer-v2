@@ -30,13 +30,14 @@ export default function SideLink({
    const [isSelected, setIsSelected] = useState<boolean>(false);
    useEffect(() => {
       if (mediaType) {
+         console.log;
          if (query.mediaType === mediaType) setIsSelected(true);
          else setIsSelected(false);
          return;
       }
       if (asPath === link) setIsSelected(true);
       else setIsSelected(false);
-   }, [asPath, link, mediaType]);
+   }, [asPath, link, mediaType, query.mediaType]);
 
    const [open, setOpen] = useState<boolean>(false);
    const toggle = () => setOpen((prev) => !prev);

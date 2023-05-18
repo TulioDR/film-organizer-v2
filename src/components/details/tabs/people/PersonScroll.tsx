@@ -12,16 +12,23 @@ export default function PersonScroll({ children, prevId, nextId }: Props) {
       <Swiper
          slidesPerView={3}
          slidesPerGroup={3}
-         spaceBetween={6}
+         spaceBetween={20}
          breakpoints={{
             640: {
                slidesPerView: 4,
                slidesPerGroup: 4,
             },
             768: {
-               spaceBetween: 12,
+               slidesPerView: 4,
+               slidesPerGroup: 4,
+            },
+            1280: {
                slidesPerView: 5,
                slidesPerGroup: 5,
+            },
+            1536: {
+               slidesPerView: 7,
+               slidesPerGroup: 7,
             },
          }}
          navigation={{ prevEl: `#${prevId}`, nextEl: `#${nextId}` }}

@@ -4,6 +4,7 @@ import {
    staggerItem,
 } from "../../../animations/StaggerCards";
 import Poster from "../../Poster";
+import InfoSubtitle from "../InfoSubtitle";
 
 type Props = {
    trailers: any[];
@@ -15,15 +16,10 @@ export default function Trailers({ trailers }: Props) {
    };
 
    return (
-      <motion.div
-         variants={staggerContainer}
-         initial="initial"
-         animate="animate"
-         exit="exit"
-         className="w-full pt-3 pr-3"
-      >
-         {trailers.length ? (
-            <div className="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+      <div className="w-full">
+         <InfoSubtitle>Trailers</InfoSubtitle>
+         {trailers.length > 0 ? (
+            <div className="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                {trailers.map((trailer) => (
                   <motion.article
                      key={trailer.id}
@@ -43,10 +39,8 @@ export default function Trailers({ trailers }: Props) {
                ))}
             </div>
          ) : (
-            <motion.div variants={staggerItem}>
-               No trailers available
-            </motion.div>
+            <div>No trailers available</div>
          )}
-      </motion.div>
+      </div>
    );
 }

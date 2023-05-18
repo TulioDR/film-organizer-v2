@@ -3,11 +3,16 @@ import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {
    currentImg: string;
+   details?: boolean;
 };
 
-export default function BackgroundImage({ currentImg }: Props) {
+export default function BackgroundImage({ currentImg, details }: Props) {
    return (
-      <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black text-white flex items-center justify-center">
+      <div
+         className={`${
+            details ? "brightness-75" : ""
+         } fixed top-0 left-0 h-screen -z-10 w-full text-white flex items-center justify-center`}
+      >
          {!currentImg ? (
             <div className="bg-black w-full h-full"></div>
          ) : (

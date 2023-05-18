@@ -13,5 +13,9 @@ export default function Rating({ rating, isMovie }: Props) {
          );
       else return country?.rating;
    };
-   return <div>{getRating(rating, isMovie) || "No Rating Available"}</div>;
+   return (
+      <span className="">
+         {getRating(rating, isMovie) || "No Rating Available"}
+      </span>
+   );
 }

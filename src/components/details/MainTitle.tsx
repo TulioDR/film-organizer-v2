@@ -7,9 +7,9 @@ type Props = {
 export default function MainTitle({ children }: Props) {
    return (
       <RevealHorizontal>
-         <div className="text-2xl xl:text-4xl 2xl:text-5xl font-medium">
+         <h1 className="text-6xl xl:text-7xl 2xl:text-8xl font-medium font-oswald leading-tight">
             {children}
-         </div>
+         </h1>
       </RevealHorizontal>
    );
 }

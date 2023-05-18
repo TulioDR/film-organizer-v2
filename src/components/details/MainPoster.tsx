@@ -29,7 +29,7 @@ export default function MainPoster({
          animate={{ x: 0 }}
          exit={{ x: "-100%" }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="aspect-[2/3] flex-shrink-0 w-2/3 mx-auto sm:mx-0 sm:w-1/2 md:w-2/5 relative xl:h-full xl:w-auto"
+         className="aspect-[2/3] h-full relative"
       >
          <Image
             alt={alt}
@@ -47,9 +47,9 @@ export default function MainPoster({
             transition={{ duration: 0.4 }}
             style={{ backgroundColor: themeColor }}
             onClick={() => openBookmark(mediaType, media)}
-            className="absolute bottom-20 w-12 h-14 right-0 translate-x-1/2 grid place-content-center rounded-md"
+            className="absolute bottom-20 h-12 w-10 right-0 translate-x-1/2 grid place-content-center rounded-md"
          >
-            <span className="material-icons text-5xl">
+            <span className="material-icons !text-4xl">
                {isMediaSaved ? "bookmark" : "bookmark_border"}
             </span>
          </motion.button>

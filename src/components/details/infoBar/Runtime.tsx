@@ -1,6 +1,10 @@
+import useThemeContext from "@/context/ThemeContext";
+
 type Props = { runtime: number };
 
 export default function Runtime({ runtime }: Props) {
+   const { themeColor } = useThemeContext();
+
    const getMovieDuration = (duration: number): string => {
       var runtime = duration;
       var hours = Math.floor(runtime / 60);
@@ -9,6 +13,11 @@ export default function Runtime({ runtime }: Props) {
       return fullRuntime;
    };
    return (
-      <div>{runtime ? getMovieDuration(runtime) : "No Runtime Available"}</div>
+      <div
+         style={{ backgroundColor: themeColor }}
+         className="w-max rounded-lg py-1 px-2 flex-shrink-0"
+      >
+         {runtime ? getMovieDuration(runtime) : "No Runtime Available"}
+      </div>
    );
 }

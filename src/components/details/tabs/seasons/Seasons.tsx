@@ -13,11 +13,11 @@ const container = {
 
 type Props = {
    seasons: any[];
-   setSelectedSeason: React.Dispatch<React.SetStateAction<number | null>>;
+   // setSelectedSeason: React.Dispatch<React.SetStateAction<number | null>>;
 };
-export default function Seasons({ seasons, setSelectedSeason }: Props) {
+export default function Seasons({ seasons }: Props) {
    const openSeasonInfo = (season: any) => {
-      setSelectedSeason(season.season_number);
+      // setSelectedSeason(season.season_number);
    };
 
    return (
@@ -26,7 +26,7 @@ export default function Seasons({ seasons, setSelectedSeason }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 pt-4 pl-1 pr-4"
+         className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-5"
       >
          {seasons.map((season) => (
             <SeasonCard

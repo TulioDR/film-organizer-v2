@@ -31,9 +31,6 @@ export default function InfoBar({ media, mediaType }: Props) {
                />
             </div>
          </RevealHorizontal>
-         <RevealHorizontal fromRight>
-            <Score score={media.vote_average} />
-         </RevealHorizontal>
       </div>
    );
 }
