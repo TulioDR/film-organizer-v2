@@ -1,39 +1,17 @@
 import { motion } from "framer-motion";
-import { addCommasToNumber, separateByCommas } from "../../../../utils/commas";
+import { addCommasToNumber, separateByCommas } from "@/utils/commas";
 import Directors from "./Directors";
 import Genres from "./Genres";
 import Row from "./Row";
-import InfoSubtitle from "../../InfoSubtitle";
+import InfoSubtitle from "@/components/MediaDetails/InfoSubtitle";
 
 type Props = {
-   tagline: string | null;
-   overview: string;
-   genres: any[];
+   media: any;
    isMovie: boolean;
    crew: any[];
-   productionCompanies: any[];
-   spokenLanguages: any[];
-   seasons: number;
-   episodes: number;
-   networks: any[];
-   budget: number | null;
-   revenue: number | null;
 };
 
-export default function Overview({
-   tagline,
-   overview,
-   genres,
-   isMovie,
-   crew,
-   productionCompanies,
-   spokenLanguages,
-   seasons,
-   episodes,
-   networks,
-   budget,
-   revenue,
-}: Props) {
+export default function Overview({ media, isMovie, crew }: Props) {
    const separateArray = (array: any[]): JSX.Element[] => {
       return array.map((item, index) => (
          <span key={item.iso_639_1 || item.id} className="mr-2">
@@ -42,12 +20,12 @@ export default function Overview({
          </span>
       ));
    };
-   const budgetValue = budget
-      ? `${addCommasToNumber(budget)}$`
+   const budgetValue = media.budget
+      ? `${addCommasToNumber(media.budget)}$`
       : "Not Available";
 
-   const revenueValue = revenue
-      ? `${addCommasToNumber(revenue)}$`
+   const revenueValue = media.revenue
+      ? `${addCommasToNumber(media.revenue)}$`
       : "Not Available";
 
    const directorsValue = crew.filter((person) => person.job === "Director");
@@ -60,20 +38,20 @@ export default function Overview({
          className=""
       >
          <InfoSubtitle>Overview</InfoSubtitle>
-         {overview && (
-            <div className="italic font-bold mb-1 text-light-text-hard dark:text-dark-text-hard">
-               {tagline}
+         {media.tagline && (
+            <div className="italic font-bold mb-1 text-dark-text-hard">
+               {media.tagline}
             </div>
          )}
          <div className="text-sm text-light-text-normal dark:text-dark-text-normal">
-            {overview || "No overview available"}
+            {media.overview || "No overview available"}
          </div>
 
          <table className="text-sm mt-5">
             <tbody>
                <Row
                   name="Genres"
-                  value={<Genres genres={genres} isMovie={isMovie} />}
+                  value={<Genres genres={media.genres} isMovie={isMovie} />}
                />
                {isMovie ? (
                   <Row
@@ -85,11 +63,11 @@ export default function Overview({
                )}
                <Row
                   name="Production Companies"
-                  value={separateArray(productionCompanies)}
+                  value={separateArray(media.production_companies)}
                />
                <Row
                   name="Spoken Languages"
-                  value={separateArray(spokenLanguages)}
+                  value={separateArray(media.spoken_languages)}
                />
                {isMovie ? (
                   <>
@@ -98,9 +76,18 @@ export default function Overview({
                   </>
                ) : (
                   <>
-                     <Row name="Networks" value={separateArray(networks)} />
-                     <Row name="Seasons" value={seasons || "Not Available"} />
-                     <Row name="Episodes" value={episodes || "Not Available"} />
+                     <Row
+                        name="Networks"
+                        value={separateArray(media.networks)}
+                     />
+                     <Row
+                        name="Seasons"
+                        value={media.number_of_seasons || "Not Available"}
+                     />
+                     <Row
+                        name="Episodes"
+                        value={media.number_of_episodes || "Not Available"}
+                     />
                   </>
                )}
             </tbody>

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { staggerContainer } from "../../../../../animations/StaggerCards";
-import { getSeason } from "../../../../../api/media";
-import EpisodeCard from "../../../../../layout/cards/episodeCard/EpisodeCard";
+import { staggerContainer } from "../../../../animations/StaggerCards";
+import { getSeason } from "../../../../api/media";
+import EpisodeCard from "../../../../layout/cards/episodeCard/EpisodeCard";
 import CloseSeasonButton from "./CloseSeasonButton";
 
 import SeasonContainer from "./SeasonContainer";

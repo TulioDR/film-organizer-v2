@@ -1,10 +1,5 @@
-import { motion } from "framer-motion";
-import {
-   staggerContainer,
-   staggerItem,
-} from "../../../animations/StaggerCards";
-import Poster from "../../Poster";
-import InfoSubtitle from "../InfoSubtitle";
+import Poster from "../Poster";
+import InfoSubtitle from "./InfoSubtitle";
 
 type Props = {
    trailers: any[];
@@ -21,9 +16,8 @@ export default function Trailers({ trailers }: Props) {
          {trailers.length > 0 ? (
             <div className="w-full grid grid-cols-3 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
                {trailers.map((trailer) => (
-                  <motion.article
+                  <article
                      key={trailer.id}
-                     variants={staggerItem}
                      onClick={() => goToTrailer(trailer.key)}
                      className="cursor-pointer flex flex-col"
                   >
@@ -35,7 +29,7 @@ export default function Trailers({ trailers }: Props) {
                         trailer
                      />
                      <div className="text-sm pt-1">{trailer.name}</div>
-                  </motion.article>
+                  </article>
                ))}
             </div>
          ) : (

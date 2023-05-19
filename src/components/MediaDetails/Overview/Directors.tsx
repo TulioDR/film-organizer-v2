@@ -1,5 +1,5 @@
-import { separateByCommas } from "../../../../utils/commas";
-import personWiki from "../../../../utils/personWiki";
+import { separateByCommas } from "@/utils/commas";
+import personWiki from "@/utils/personWiki";
 
 type Props = {
    array: any[];

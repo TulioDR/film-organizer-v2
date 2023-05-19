@@ -1,4 +1,4 @@
-import RevealHorizontal from "../../animations/RevealHorizontal";
+import RevealHorizontal from "@/animations/RevealHorizontal";
 
 type Props = {
    children: React.ReactNode;

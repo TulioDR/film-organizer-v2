@@ -1,5 +1,5 @@
 import { SpinnerCircularFixed } from "spinners-react";
-import useThemeContext from "../../../../../context/ThemeContext";
+import useThemeContext from "../../../../context/ThemeContext";
 
 export default function SeasonLoadingAnimation() {
    const { themeColor } = useThemeContext();

@@ -1,6 +1,6 @@
-import Poster from "../../../Poster";
+import Poster from "@/components/Poster";
+import personWiki from "@/utils/personWiki";
 import { motion } from "framer-motion";
-import personWiki from "../../../../utils/personWiki";
 
 type Props = { person: any };
 

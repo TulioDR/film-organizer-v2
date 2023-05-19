@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import useThemeContext from "../../../../context/ThemeContext";
+import useThemeContext from "@/context/ThemeContext";
 
 type Props = {
    genres: any[];

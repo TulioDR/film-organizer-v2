@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Poster from "../../components/Poster";
+import Poster from "@/components/Poster";
 
 type Props = {
    season: any;
