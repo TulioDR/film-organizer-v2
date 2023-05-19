@@ -1,26 +1,16 @@
 import { motion } from "framer-motion";
 import Poster from "@/components/Poster";
+import { changeDateFormat } from "@/utils/date";
 
 type Props = {
    season: any;
    openSeasonInfo: (season: any) => void;
 };
 
-const item = {
-   initial: { opacity: 0, y: 100 },
-   animate: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-   exit: {},
-};
-
 export default function SeasonCard({ season, openSeasonInfo }: Props) {
    return (
-      <motion.article
+      <article
          onClick={() => openSeasonInfo(season)}
-         variants={item}
          className="flex gap-5 rounded-xl h-40 lg:h-52 overflow-hidden cursor-pointer hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary hover:shadow-xl"
       >
          <motion.div
@@ -34,18 +24,18 @@ export default function SeasonCard({ season, openSeasonInfo }: Props) {
             />
          </motion.div>
          <div className="w-full h-full overflow-y-auto main-scrollbar text-sm">
-            <div className="text-base lg:text-lg font-bold text-light-text-hard dark:text-dark-text-hard">
+            <div className="text-base font-oswald font-semibold text-light-text-hard dark:text-dark-text-hard">
                {season.name}
             </div>
             <div className="flex items-center text-light-text-soft dark:text-dark-text-soft my-1">
-               <div>{season.air_date || "N/A"}</div>
-               <div className="h-6 mx-2">|</div>
+               <div>{changeDateFormat(season.air_date, true) || "N/A"}</div>
+               <div className="mx-2">○</div>
                <div>{season.episode_count} Episodes</div>
             </div>
             <div className="text-light-text-normal dark:text-dark-text-normal">
                {season.overview || "No overview available for this season"}
             </div>
          </div>
-      </motion.article>
+      </article>
    );
 }

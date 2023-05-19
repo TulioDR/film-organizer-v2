@@ -1,5 +1,7 @@
 import { Swiper } from "swiper/react";
-import { Navigation } from "swiper";
+import { Navigation, Pagination } from "swiper";
+import * as ReactDOMServer from "react-dom/server";
+import PaginationBullet from "./PaginationBullet";
 
 type Props = {
    children: React.ReactNode;
@@ -13,6 +15,15 @@ export default function PersonScroll({ children, prevId, nextId }: Props) {
          slidesPerView={3}
          slidesPerGroup={3}
          spaceBetween={20}
+         pagination={{
+            clickable: true,
+            el: ".pagination-custom-container",
+            bulletClass: "custom-bullet",
+            bulletActiveClass: "custom-bullet-active",
+            renderBullet: () => {
+               return ReactDOMServer.renderToStaticMarkup(<PaginationBullet />);
+            },
+         }}
          breakpoints={{
             640: {
                slidesPerView: 4,
@@ -32,7 +43,7 @@ export default function PersonScroll({ children, prevId, nextId }: Props) {
             },
          }}
          navigation={{ prevEl: `#${prevId}`, nextEl: `#${nextId}` }}
-         modules={[Navigation]}
+         modules={[Pagination, Navigation]}
          className="mySwiper"
       >
          {children}

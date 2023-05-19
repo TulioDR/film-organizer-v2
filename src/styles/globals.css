@@ -82,3 +82,6 @@ a {
 .dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-dark-text-soft;
 }
+.custom-bullet-active {
+   @apply bg-white;
+}

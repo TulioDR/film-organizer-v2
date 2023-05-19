@@ -59,20 +59,23 @@ export default function Details({ mediaType, media }: Props) {
             <MainInfo media={media} mediaType={mediaType} />
             <ScrollDownIcon />
          </div>
-         <div className="backdrop-blur-md p-10 flex gap-10">
+         <div className="backdrop-blur-md p-10 lg:flex gap-10">
             <div className="flex-1 space-y-10 overflow-hidden">
                <Overview
                   media={media}
                   crew={media.created_by || media.credits.crew}
                   isMovie={mediaType === "movie"}
                />
+
                <People type="Cast" people={media.credits?.cast} />
                <People type="Crew" people={media.credits?.crew} />
                {mediaType === "tv" && <Seasons seasons={media.seasons} />}
                <Trailers trailers={media.videos.results} />
             </div>
             <div className="">
-               <Similar media={media} mediaType={mediaType} />
+               <div className="lg:border-l border-white lg:pl-10 w-full lg:w-72 xl:w-80 2xl:w-96">
+                  <Similar media={media} mediaType={mediaType} />
+               </div>
             </div>
          </div>
       </div>

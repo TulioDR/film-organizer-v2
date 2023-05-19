@@ -13,15 +13,18 @@ export default function People({ people, type }: Props) {
    return (
       <div>
          <InfoSubtitle>{type}</InfoSubtitle>
-         <PersonScroll prevId="prev-cast" nextId="next-cast">
-            {people.length
-               ? people.map((person, index) => (
-                    <SwiperSlide key={index}>
-                       <Person person={person} />
-                    </SwiperSlide>
-                 ))
-               : "No information available about the crew"}
-         </PersonScroll>
+         {people.length ? (
+            <PersonScroll prevId="prev-cast" nextId="next-cast">
+               {people.map((person, index) => (
+                  <SwiperSlide key={index + person.id}>
+                     <Person person={person} />
+                  </SwiperSlide>
+               ))}
+               <div className="w-full pagination-custom-container flex justify-center mt-1 space-x-1"></div>
+            </PersonScroll>
+         ) : (
+            <div>No information available about the crew</div>
+         )}
       </div>
    );
 }

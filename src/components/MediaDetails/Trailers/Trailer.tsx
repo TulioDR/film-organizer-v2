@@ -26,7 +26,7 @@ export default function Trailer({ trailer }: Props) {
                <span className="material-icons">play_arrow</span>
             </div>
          </div>
-         <div className="text-sm pt-1">{trailer.name}</div>
+         <div className="text-xs sm:text-sm pt-1">{trailer.name}</div>
       </a>
    );
 }
