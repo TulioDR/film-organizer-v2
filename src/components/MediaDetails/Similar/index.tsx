@@ -10,19 +10,26 @@ type Props = {
 export default function Similar({ media, mediaType }: Props) {
    return (
       <div>
-         <InfoSubtitle>Similar Movies</InfoSubtitle>
+         <InfoSubtitle>
+            Similar {mediaType === "movie" ? "Movies" : "Series"}
+         </InfoSubtitle>
          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-2 gap-5">
             {media.similar.results.map((sim: any) => (
                <Link
                   key={sim.id}
                   href={`/${mediaType}/${media.id}`}
-                  className="cursor-pointer w-full"
+                  className="cursor-pointer w-full flex flex-col gap-1"
                >
-                  <Poster
-                     alt={sim.title || sim.name}
-                     posterPath={sim.poster_path}
-                     size="md"
-                  />
+                  <div className="w-full">
+                     <Poster
+                        alt={sim.title || sim.name}
+                        posterPath={sim.poster_path}
+                        size="md"
+                     />
+                  </div>
+                  <div className="w-full text-xs sm:text-sm text-center">
+                     {sim.title || sim.name}
+                  </div>
                </Link>
             ))}
          </div>
