@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import NavigationButtons from "./NavigationButtons";
+import HomeNavButtonsContainer from "./HomeNavButtonsContainer";
 import HomeCard from "./HomeCard";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -31,7 +31,7 @@ export default function HomeSlider({
                spaceBetween={20}
                className="w-full !px-10 !overflow-visible select-none relative"
             >
-               <NavigationButtons
+               <HomeNavButtonsContainer
                   activeIndex={activeIndex}
                   setActiveIndex={setActiveIndex}
                />

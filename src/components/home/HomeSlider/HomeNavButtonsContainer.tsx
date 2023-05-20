@@ -1,12 +1,12 @@
 import { useSwiper } from "swiper/react";
-import NavigationButton from "./NavigationButton";
+import HomeNavButton from "./HomeNavButton";
 
 type Props = {
    activeIndex: number;
    setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function NavigationButtons({
+export default function HomeNavButtonsContainer({
    setActiveIndex,
    activeIndex,
 }: Props) {
@@ -23,8 +23,8 @@ export default function NavigationButtons({
 
    return (
       <div className="absolute bottom-full right-0 pr-10 pb-10 flex gap-5">
-         <NavigationButton onClick={back} disabled={activeIndex <= 0} back />
-         <NavigationButton onClick={next} disabled={activeIndex >= 19} />
+         <HomeNavButton onClick={back} disabled={activeIndex <= 0} back />
+         <HomeNavButton onClick={next} disabled={activeIndex >= 19} />
       </div>
    );
 }

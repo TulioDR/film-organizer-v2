@@ -66,7 +66,6 @@ export default function Details({ mediaType, media }: Props) {
                   crew={media.created_by || media.credits.crew}
                   isMovie={mediaType === "movie"}
                />
-
                <People type="Cast" people={media.credits?.cast} />
                <People type="Crew" people={media.credits?.crew} />
                {mediaType === "tv" && <Seasons seasons={media.seasons} />}

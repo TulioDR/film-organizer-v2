@@ -4,7 +4,7 @@ type Props = {
    back?: true;
 };
 
-export default function NavigationButton({ onClick, disabled, back }: Props) {
+export default function HomeNavButton({ onClick, disabled, back }: Props) {
    return (
       <button
          onClick={onClick}
