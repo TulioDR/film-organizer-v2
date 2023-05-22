@@ -68,7 +68,9 @@ export default function Details({ mediaType, media }: Props) {
                />
                <People type="Cast" people={media.credits?.cast} />
                <People type="Crew" people={media.credits?.crew} />
-               {mediaType === "tv" && <Seasons seasons={media.seasons} />}
+               {mediaType === "tv" && (
+                  <Seasons seasons={media.seasons} seriesID={media.id} />
+               )}
                <Trailers trailers={media.videos.results} />
             </div>
             <div className="">

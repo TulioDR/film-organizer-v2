@@ -4,7 +4,7 @@ type Props = { onClick: () => void };
 
 export default function CloseSeasonButton({ onClick }: Props) {
    return (
-      <div className="absolute z-10 top-0 right-0">
+      <div className="absolute z-10 top-0 right-4">
          <RevealHorizontal stagger fromRight>
             <button
                onClick={onClick}

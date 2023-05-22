@@ -3,6 +3,7 @@ import { useState } from "react";
 import useSidebarContext from "../context/SidebarContext";
 import CreateListModal from "../layout/modals/createList/CreateListModal";
 import Sidebar from "../layout/sidebar/Sidebar";
+import ModalPortal from "@/layout/modals/ModalPortal";
 
 export default function SidebarsContainer() {
    const { showSidebar } = useSidebarContext();
@@ -22,7 +23,9 @@ export default function SidebarsContainer() {
          >
             <Sidebar openForm={openForm} />
          </div>
-         <CreateListModal isOpen={showCreateForm} close={closeForm} />
+         <ModalPortal isOpen={showCreateForm}>
+            <CreateListModal close={closeForm} />
+         </ModalPortal>
       </>
    );
 }

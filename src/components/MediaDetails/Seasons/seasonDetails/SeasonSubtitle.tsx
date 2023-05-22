@@ -7,7 +7,7 @@ type Props = {
 export default function SeasonSubtitle({ children }: Props) {
    return (
       <RevealHorizontal stagger>
-         <div className="my-8 text-light-text-hard dark:text-dark-text-hard text-3xl 2xl:text-4xl font-medium">
+         <div className="my-5 text-white text-2xl 2xl:text-3xl font-medium">
             {children}
          </div>
       </RevealHorizontal>

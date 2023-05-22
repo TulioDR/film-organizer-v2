@@ -15,11 +15,10 @@ import useThemeContext from "../../../context/ThemeContext";
 import { createList } from "../../../api/lists";
 
 type Props = {
-   isOpen: boolean;
    close: () => void;
 };
 
-export default function CreateListModal({ isOpen, close }: Props) {
+export default function CreateListModal({ close }: Props) {
    const { refresh } = useListsContext();
 
    const { themeColor } = useThemeContext();
@@ -38,7 +37,7 @@ export default function CreateListModal({ isOpen, close }: Props) {
    };
 
    return (
-      <ModalContainer isOpen={isOpen} close={close}>
+      <ModalContainer close={close}>
          <Formik
             initialValues={{ name: "" }}
             validate={listNameValidation}

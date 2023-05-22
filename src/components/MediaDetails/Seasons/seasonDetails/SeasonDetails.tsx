@@ -35,6 +35,7 @@ export default function SeasonDetails({
    useEffect(() => {
       const getSeasonData = async () => {
          const seasonData = await getSeason(tvShowID, selectedSeason);
+         console.log(seasonData);
          setData(seasonData);
       };
       getSeasonData();

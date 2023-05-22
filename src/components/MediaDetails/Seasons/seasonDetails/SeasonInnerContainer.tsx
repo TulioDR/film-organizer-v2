@@ -20,7 +20,7 @@ export default function SeasonInnerContainer({ children }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="w-full h-full relative"
+         className="w-full relative pb-40"
       >
          {children}
       </motion.div>

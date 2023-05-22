@@ -25,6 +25,7 @@ export default function MainPageContainer({ children }: Props) {
                <SidebarProvider>
                   <SaveMediaModal />
                   <LoginAdviceModal />
+                  <div id="modals-container"></div>
                   <SidebarsContainer />
                   <div
                      id="scroll-container"

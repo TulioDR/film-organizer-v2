@@ -4,7 +4,7 @@ type Props = {
 
 export default function InfoInPoster({ episode }: Props) {
    return (
-      <div className="px-2 pb-1 pt-4 absolute bottom-0 w-full flex justify-between items-center text-dark-text-hard bg-gradient-to-t from-black to-transparent">
+      <div className="px-2 pb-1 pt-10 absolute bottom-0 w-full flex justify-between items-center text-dark-text-hard bg-gradient-to-t from-black/80 to-transparent">
          <div className="text-xs">Episode {episode.episode_number}</div>
          <div className="flex items-center space-x-1">
             <div>

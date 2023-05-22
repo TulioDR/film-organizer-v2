@@ -1,39 +1,55 @@
 import { motion } from "framer-motion";
 import InfoInPoster from "./InfoInPoster";
 
-import { staggerItem } from "../../../animations/StaggerCards";
 import { changeDateFormat } from "../../../utils/date";
 import Poster from "../../../components/Poster";
+import { useState } from "react";
 
 type Props = {
    episode: any;
 };
 
 export default function EpisodeCard({ episode }: Props) {
+   const [isHovered, setIsHovered] = useState<boolean>(false);
+
+   const enterHover = () => {
+      setIsHovered(true);
+   };
+
+   const leaveHover = () => {
+      setIsHovered(false);
+   };
+
    return (
       <motion.article
-         variants={staggerItem}
-         className="aspect-[2/3] w-full rounded-xl p-3 flex flex-col bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg hover:-translate-y-2 duration-200"
+         onHoverStart={enterHover}
+         onHoverEnd={leaveHover}
+         className="w-full bg-accent shadow-lg rounded-xl hover:scale-105 hover:z-10 duration-200"
       >
-         <div className="w-full rounded-lg -mt-6 shadow-lg relative overflow-hidden">
+         <div className="w-full relative rounded-t-xl overflow-hidden">
             <Poster
                alt={episode.name}
-               size="md"
+               size="lg"
                posterPath={episode.still_path}
                backPoster
             />
             <InfoInPoster episode={episode} />
          </div>
-         <div className="overflow-y-auto flex-1 main-scrollbar">
-            <div className="text-xs sm:text-sm text-light-text-soft dark:text-dark-text-soft">
-               {changeDateFormat(episode.air_date)}
+         <div className="p-3 space-y-1">
+            <div className="text-xs sm:text-sm text-dark-text-soft font-oswald">
+               {changeDateFormat(episode.air_date, true)}
             </div>
-            <div className="text-lg font-medium my-1 text-light-text-hard dark:text-dark-text-hard">
+            <div className="uppercase font-oswald font-medium text-light-text-hard dark:text-dark-text-hard">
                {episode.name}
             </div>
-            <p className="text-xs sm:text-sm leading-snug text-light-text-normal dark:text-dark-text-normal">
-               {episode.overview || "No description available for this episode"}
-            </p>
+            {isHovered && (
+               <div className="absolute left-0 w-full pb-3 px-3 bg-accent rounded-b-xl">
+                  <p className="text-xs sm:text-sm leading-snug text-dark-text-normal">
+                     {episode.overview ||
+                        "No description available for this episode"}
+                  </p>
+               </div>
+            )}
          </div>
       </motion.article>
    );

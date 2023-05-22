@@ -16,6 +16,9 @@ module.exports = {
             roboto: "'Roboto', sans-serif",
          },
          colors: {
+            primary: "#0D0D0D",
+            accent: "#202020",
+            silver: "#A6A6A6",
             light: {
                text: {
                   soft: "#6b7280",
