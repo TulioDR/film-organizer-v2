@@ -4,6 +4,7 @@ import ListModel from "../../../models/listModel";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
+import ModalPortal from "../ModalPortal";
 import ModalTitle from "../ModalTitle";
 
 type Props = {
@@ -26,27 +27,29 @@ export default function DeleteListModal({
       close();
    };
    return (
-      <ModalContainer isOpen={isOpen} close={close}>
-         <ModalTitle>Delete List</ModalTitle>
-         <div className="text-sm leading-relaxed text-light-text-normal dark:text-dark-text-normal font-normal w-96">
-            <div>
-               <span>Are you sure you want to delete the list </span>
-               <em className="text-light-text-hard dark:text-dark-text-hard">
-                  <strong>{`"${listToDelete?.name}"`}</strong>
-               </em>
-               <span>?</span>
+      <ModalPortal isOpen={isOpen}>
+         <ModalContainer close={close}>
+            <ModalTitle>Delete List</ModalTitle>
+            <div className="text-sm leading-relaxed text-dark-text-normal font-normal w-96">
+               <div>
+                  <span>Are you sure you want to delete the list </span>
+                  <em className="text-white">
+                     <strong>{`"${listToDelete?.name}"`}</strong>
+                  </em>
+                  <span>?</span>
+               </div>
+               <div>
+                  Note: Deleting a list is a permanent action and it cannot be
+                  undone.
+               </div>
             </div>
-            <div>
-               Note: Deleting a list is a permanent action and it cannot be
-               undone.
-            </div>
-         </div>
-         <ModalButtonsContainer>
-            <ModalButton onClick={close}>Cancel</ModalButton>
-            <ModalButton onClick={deleteListFinally} red>
-               Delete
-            </ModalButton>
-         </ModalButtonsContainer>
-      </ModalContainer>
+            <ModalButtonsContainer>
+               <ModalButton onClick={close}>Cancel</ModalButton>
+               <ModalButton onClick={deleteListFinally} red>
+                  Delete
+               </ModalButton>
+            </ModalButtonsContainer>
+         </ModalContainer>
+      </ModalPortal>
    );
 }

@@ -39,7 +39,7 @@ export default function EpisodeCard({ episode }: Props) {
             <div className="text-xs sm:text-sm text-dark-text-soft font-oswald">
                {changeDateFormat(episode.air_date, true)}
             </div>
-            <div className="uppercase font-oswald font-medium text-light-text-hard dark:text-dark-text-hard">
+            <div className="uppercase font-oswald font-medium text-white">
                {episode.name}
             </div>
             {isHovered && (

@@ -32,7 +32,7 @@ export default function User() {
       <div tabIndex={0} onBlur={handleBlur} className="relative">
          <motion.button
             onClick={toggle}
-            className="grid place-content-center h-9 w-9 rounded-full overflow-hidden bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-lg relative"
+            className="grid place-content-center h-9 w-9 rounded-full overflow-hidden bg-secondary shadow-lg relative"
          >
             {user ? (
                <UserImage />

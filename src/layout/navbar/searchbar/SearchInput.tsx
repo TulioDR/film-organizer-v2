@@ -23,7 +23,7 @@ export default function SearchInput({
             onFocus={onFocus}
             onBlur={onBlur}
             type="text"
-            className="w-full outline-none bg-transparent text-dark-text-hard placeholder:dark:text-dark-text-soft"
+            className="w-full outline-none bg-transparent text-dark-text-hard placeholder:text-dark-text-soft"
             placeholder={placeholder}
          />
          <span className="material-icons !text-dark-text-soft">search</span>

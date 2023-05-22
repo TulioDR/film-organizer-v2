@@ -3,7 +3,7 @@ import ColorIcon from "./../ColorIcon";
 import MainIcon from "./../MainIcon";
 import useThemeContext from "../../../../context/ThemeContext";
 import DropdownItem from "./../DropdownItem";
-import ToggleDarkMode from "./../ToggleDarkMode";
+// import ToggleDarkMode from "./../ToggleDarkMode";
 import { useRouter } from "next/router";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function MainMenu({ setMenu, setIsOpen }: Props) {
-   const { toggleDarkMode, isDark, themeColor } = useThemeContext();
+   const { themeColor } = useThemeContext();
    const supabaseClient = useSupabaseClient();
    const user = useUser();
    const router = useRouter();
@@ -52,11 +52,12 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
          )}
          <DropdownItem
             icon={<MainIcon icon="dark_mode" />}
-            onClick={toggleDarkMode}
+            // onClick={toggleDarkMode}
+            onClick={() => {}}
          >
             <div className="flex items-center justify-between h-full w-full">
                <span>Dark Mode</span>
-               <ToggleDarkMode isOn={isDark} />
+               {/* <ToggleDarkMode isOn={isDark} /> */}
             </div>
          </DropdownItem>
          <DropdownItem

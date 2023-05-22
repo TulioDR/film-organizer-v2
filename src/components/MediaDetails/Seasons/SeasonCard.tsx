@@ -27,12 +27,12 @@ export default function SeasonCard({ season, onClick }: Props) {
             <div className="text-base font-oswald font-semibold text-white">
                {season.name}
             </div>
-            <div className="flex items-center text-light-text-soft dark:text-dark-text-soft my-1">
+            <div className="flex items-center text-dark-text-soft my-1">
                <div>{changeDateFormat(season.air_date, true) || "N/A"}</div>
                <div className="mx-2">○</div>
                <div>{season.episode_count} Episodes</div>
             </div>
-            <div className="text-light-text-normal dark:text-dark-text-normal">
+            <div className="text-dark-text-normal">
                {season.overview || "No overview available for this season"}
             </div>
          </div>

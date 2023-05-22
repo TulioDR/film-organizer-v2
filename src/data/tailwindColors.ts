@@ -1,15 +1,4 @@
 const tailwindColors = {
-   light: {
-      text: {
-         soft: "#6b7280",
-         normal: "#334155",
-         hard: "#0f172a",
-      },
-      bg: {
-         primary: "#e5e7eb",
-         secondary: "#ffffff",
-      },
-   },
    dark: {
       text: {
          soft: "#9ca3af",

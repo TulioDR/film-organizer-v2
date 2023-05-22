@@ -8,7 +8,7 @@ export default function ProfileImage() {
    return (
       <motion.div
          layoutId="profilePicture"
-         className="aspect-square w-full sm:w-72 bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-xl relative rounded-full overflow-hidden border-[6px] border-light-bg-secondary dark:border-dark-bg-secondary"
+         className="aspect-square w-full sm:w-72 bg-secondary shadow-xl relative rounded-full overflow-hidden border-[6px] border-secondary"
       >
          {image ? (
             <Image

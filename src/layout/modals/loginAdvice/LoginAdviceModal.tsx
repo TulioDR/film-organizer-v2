@@ -18,7 +18,7 @@ export default function LoginAdviceModal() {
       <ModalPortal isOpen={isLoginAdviceOpen}>
          <ModalContainer close={closeLoginAdviceModal}>
             <ModalTitle>Login First!</ModalTitle>
-            <div className="w-full sm:w-80 text-light-text-normal dark:text-dark-text-normal">
+            <div className="w-full sm:w-80 text-dark-text-normal">
                You need to be Logged in first to save Movies and TV Shows to
                your Lists
             </div>

@@ -4,7 +4,7 @@ type Props = {
 
 export default function Subtitle({ children }: Props) {
    return (
-      <div className="mt-2 text-lg font-medium text-light-text-normal dark:text-dark-text-normal">
+      <div className="mt-2 text-lg font-medium text-dark-text-normal">
          {children}
       </div>
    );

@@ -72,7 +72,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    return (
       <motion.li
          variants={staggerItem}
-         className="relative px-5 shadow-xl bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-lg list-none"
+         className="relative px-5 shadow-xl bg-dark-bg-secondary rounded-lg list-none"
       >
          <form onSubmit={handleSubmit} className="flex w-full h-full space-x-5">
             <div className="flex-1 py-3 relative overflow-hidden flex">
@@ -85,7 +85,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
                   autoComplete="off"
                   onKeyDown={handleKeyDown}
                   onChange={(e) => setValue(e.currentTarget.value)}
-                  className={`h-9 w-full outline-none bg-transparent text-light-text-hard dark:text-dark-text-hard ${
+                  className={`h-9 w-full outline-none bg-transparent text-dark-text-hard ${
                      isOnFocus ? "" : "pointer-events-none"
                   }`}
                />

@@ -41,7 +41,7 @@ export default function ThemeColorsMenu({ setMenu }: Props) {
          <div className="font-semibold text-2xl flex space-x-2 pl-2">
             <button
                onClick={() => setMenu("main")}
-               className="rounded-full aspect-square w-9 hover:bg-light-bg-primary dark:hover:bg-dark-bg-primary grid place-content-center"
+               className="rounded-full aspect-square w-9 hover:bg-primary grid place-content-center"
             >
                <span className="material-icons ">west</span>
             </button>

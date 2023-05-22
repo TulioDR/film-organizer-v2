@@ -8,7 +8,7 @@ export default function CloseSeasonButton({ onClick }: Props) {
          <RevealHorizontal stagger fromRight>
             <button
                onClick={onClick}
-               className="w-10 h-10 rounded-md bg-light-bg-secondary text-light-text-hard dark:bg-dark-bg-secondary dark:text-dark-text-hard grid place-content-center shadow-lg"
+               className="w-10 h-10 rounded-md bg-secondary text-white grid place-content-center shadow-lg"
             >
                <span className="material-icons">close</span>
             </button>

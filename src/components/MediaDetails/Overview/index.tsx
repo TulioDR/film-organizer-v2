@@ -43,7 +43,7 @@ export default function Overview({ media, isMovie, crew }: Props) {
                {media.tagline}
             </div>
          )}
-         <div className="text-sm text-light-text-normal dark:text-dark-text-normal">
+         <div className="text-sm text-dark-text-normal">
             {media.overview || "No overview available"}
          </div>
 

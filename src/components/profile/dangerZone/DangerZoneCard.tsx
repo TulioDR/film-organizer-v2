@@ -16,7 +16,7 @@ export default function DangerZoneCard({}: Props) {
          animate={{ y: 0, opacity: 1 }}
          exit={{ y: "100%", opacity: 0 }}
          transition={{ duration: 0.4 }}
-         className="w-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-xl rounded-xl p-5"
+         className="w-full bg-secondary shadow-xl rounded-xl p-5"
       >
          <CardTitle>Danger Zone</CardTitle>
          <AnimatePresence mode="wait" initial={false}>

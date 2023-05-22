@@ -25,7 +25,7 @@ export default function MainInfoCard({ openModal }: Props) {
          animate={{ x: 0 }}
          exit={{ x: "100%" }}
          transition={{ duration: 0.4 }}
-         className="md:flex-1 flex flex-col h-72 md:h-auto w-full bg-light-bg-secondary dark:bg-dark-bg-secondary shadow-xl rounded-xl p-5"
+         className="md:flex-1 flex flex-col h-72 md:h-auto w-full bg-secondary shadow-xl rounded-xl p-5"
       >
          <CardTitle>{user.user_metadata.full_name || "User"}</CardTitle>
          <div className="flex flex-col justify-center flex-1 text-sm md:text-base space-y-1">

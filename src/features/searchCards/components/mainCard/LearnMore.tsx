@@ -9,7 +9,7 @@ export default function LearnMore({ onClick }: Props) {
    return (
       <button
          onClick={onClick}
-         className="rounded-md h-full text-sm px-3 font-medium"
+         className="rounded-md h-full text-sm px-3 font-medium font-oswald uppercase"
          style={{ backgroundColor: themeColor }}
       >
          Learn More

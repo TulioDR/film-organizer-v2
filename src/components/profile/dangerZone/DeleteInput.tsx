@@ -17,7 +17,7 @@ export default function DeleteInput({ setEnableDelete }: Props) {
             onChange={handleOnChange}
             type="text"
             placeholder="Type your email here"
-            className="px-3 py-2 rounded-lg w-72 outline-none bg-light-bg-primary dark:bg-dark-bg-primary placeholder:text-light-text-soft dark:placeholder:text-dark-text-soft"
+            className="px-3 py-2 rounded-lg w-72 outline-none bg-primary placeholder:text-dark-text-soft"
          />
       </div>
    );

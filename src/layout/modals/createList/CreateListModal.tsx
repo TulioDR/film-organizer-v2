@@ -52,7 +52,7 @@ export default function CreateListModal({ close }: Props) {
                         placeholder="List name"
                         autoComplete="off"
                         maxLength={20}
-                        className="w-full h-9 bg-transparent text-light-text-normal dark:text-dark-text-normal placeholder:text-light-text-soft dark:placeholder:text-dark-text-soft border-b-2 border-light-text-normal dark:border-dark-text-normal outline-none"
+                        className="w-full h-9 bg-transparent text-dark-text-normal placeholder:text-dark-text-soft border-b-2 border-dark-text-normal outline-none"
                         autoFocus
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
@@ -71,9 +71,7 @@ export default function CreateListModal({ close }: Props) {
                      </AnimatePresence>
                   </div>
                   {touched.name && errors.name && (
-                     <div className="w-full text-red-600 dark:text-red-400">
-                        {errors.name}
-                     </div>
+                     <div className="w-full text-red-400">{errors.name}</div>
                   )}
                   <ModalButtonsContainer>
                      <ModalButton onClick={close}>Cancel</ModalButton>

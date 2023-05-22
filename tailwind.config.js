@@ -17,19 +17,8 @@ module.exports = {
          },
          colors: {
             primary: "#0D0D0D",
-            accent: "#202020",
+            secondary: "#404040",
             silver: "#A6A6A6",
-            light: {
-               text: {
-                  soft: "#6b7280",
-                  normal: "#334155",
-                  hard: "#0f172a",
-               },
-               bg: {
-                  primary: "#e5e7eb",
-                  secondary: "#ffffff",
-               },
-            },
             dark: {
                text: {
                   soft: "#9ca3af",

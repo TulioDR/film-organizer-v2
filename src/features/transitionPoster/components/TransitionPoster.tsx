@@ -25,7 +25,7 @@ export default function TransitionPoster({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="absolute top-0 left-0 w-full h-full bg-light-bg-primary dark:bg-dark-bg-primary"
+                  className="absolute top-0 left-0 w-full h-full bg-primary"
                ></motion.div>
                <motion.div
                   onAnimationComplete={() => push(link)}

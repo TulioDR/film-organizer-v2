@@ -59,7 +59,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
    return (
       <li
          onClick={isSaved ? removeFromList : saveToList}
-         className="h-9 flex items-center cursor-pointer hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary text-light-text-normal dark:text-dark-text-normal"
+         className="h-9 flex items-center cursor-pointer hover:bg-secondary text-dark-text-normal"
       >
          <span className="material-icons mx-2">
             {isSaved ? "check_box" : "check_box_outline_blank"}

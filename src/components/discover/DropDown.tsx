@@ -20,13 +20,13 @@ export default function DropDown({
    setValue,
    icon,
 }: Props) {
-   const { themeColor, isDark } = useThemeContext();
+   const { themeColor } = useThemeContext();
 
-   const { light, dark } = tailwindColors;
+   const { dark } = tailwindColors;
    return (
       <motion.div
          variants={staggerItem}
-         className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-xl shadow-lg p-5"
+         className="bg-dark-bg-secondary rounded-xl shadow-lg p-5"
       >
          <div
             className="-mt-10 w-full h-16 rounded-xl grid place-content-center drop-shadow-lg"
@@ -42,29 +42,23 @@ export default function DropDown({
             styles={{
                control: (styles) => ({
                   ...styles,
-                  backgroundColor: isDark
-                     ? dark.bg.secondary
-                     : light.bg.secondary,
-                  borderColor: isDark ? dark.text.soft : light.text.soft,
+                  backgroundColor: dark.bg.secondary,
+                  borderColor: dark.text.soft,
                }),
                singleValue: (styles) => ({
                   ...styles,
-                  color: isDark ? dark.text.normal : light.text.normal,
+                  color: dark.text.normal,
                }),
                menu: (styles) => ({
                   ...styles,
-                  backgroundColor: isDark
-                     ? dark.bg.secondary
-                     : light.bg.secondary,
+                  backgroundColor: dark.bg.secondary,
                }),
                option: (styles, state) => ({
                   ...styles,
                   backgroundColor: state.isSelected ? themeColor : "",
                   "&:hover": {
                      ...styles,
-                     backgroundColor: isDark
-                        ? dark.bg.primary
-                        : light.bg.primary,
+                     backgroundColor: dark.bg.primary,
                   },
                }),
             }}

@@ -73,7 +73,7 @@ export default function MainCard({
                size="lg"
                backPoster
             />
-            <div className="bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-t-xl w-full flex-1 flex flex-col -mt-5 z-10 p-4 overflow-hidden">
+            <div className="bg-secondary rounded-t-xl w-full flex-1 flex flex-col -mt-5 z-10 p-4 overflow-hidden">
                <BackInfo
                   title={media.title || media.name}
                   voteAverage={media.vote_average}
