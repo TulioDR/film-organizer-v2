@@ -20,7 +20,7 @@ export default function SearchBar({}: Props) {
    const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
    useEffect(() => {
-      const getFoundedMedia = async () => {
+      const timeoutId = setTimeout(async () => {
          if (!isOnFocus) return;
          if (inputValue.length > 0) {
             const type = isMovie ? "movie" : "tv";
@@ -30,8 +30,10 @@ export default function SearchBar({}: Props) {
          } else {
             setResults([]);
          }
+      }, 400);
+      return () => {
+         clearTimeout(timeoutId);
       };
-      getFoundedMedia();
    }, [inputValue, isMovie, isOnFocus]);
 
    useEffect(() => {
