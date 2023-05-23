@@ -17,7 +17,7 @@ export default function SidebarsContainer() {
             <Sidebar openForm={openForm} />
          </div>
          <div
-            className={`lg:hidden fixed top-0 left-0 z-50 bg-primary duration-300 ${
+            className={`lg:hidden fixed top-0 left-0 z-50 duration-300 ${
                showSidebar ? "" : "-translate-x-full"
             }`}
          >

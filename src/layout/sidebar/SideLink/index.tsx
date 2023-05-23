@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import DropdownItems from "./DropdownItems";
 import SelectedMark from "./SelectedMark";
 import DropdownIcon from "./DropdownIcon";
+import useSidebarContext from "@/context/SidebarContext";
 
 type Props = {
    link: string;
@@ -25,12 +26,12 @@ export default function SideLink({
    item,
    mediaType,
 }: Props) {
+   const { openSidebar, setShowSidebar } = useSidebarContext();
    const { asPath, query } = useRouter();
 
    const [isSelected, setIsSelected] = useState<boolean>(false);
    useEffect(() => {
       if (mediaType) {
-         console.log;
          if (query.mediaType === mediaType) setIsSelected(true);
          else setIsSelected(false);
          return;
@@ -41,6 +42,8 @@ export default function SideLink({
 
    const [open, setOpen] = useState<boolean>(false);
    const toggle = () => setOpen((prev) => !prev);
+
+   const hideSidebar = () => setShowSidebar(false);
 
    return (
       <li
@@ -53,7 +56,7 @@ export default function SideLink({
          <SelectedMark item={item} isSelected={isSelected} />
          <div className="flex-1">
             <div
-               onClick={dropdown ? toggle : undefined}
+               onClick={dropdown ? toggle : hideSidebar}
                className="flex w-full justify-between items-center"
             >
                <Link
@@ -62,8 +65,10 @@ export default function SideLink({
                      dropdown ? "pointer-events-none" : ""
                   }`}
                >
-                  <span className="material-icons">{icon}</span>
-                  <span className="truncate">{text}</span>
+                  <span className="material-icons !w-9 !text-center !flex-shrink-0">
+                     {icon}
+                  </span>
+                  {openSidebar && <span className="flex-shrink-0">{text}</span>}
                </Link>
                {dropdown && <DropdownIcon open={open} />}
             </div>
