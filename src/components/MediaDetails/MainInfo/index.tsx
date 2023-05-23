@@ -4,6 +4,7 @@ import Date from "./Date";
 import Rating from "./Rating";
 import Runtime from "./Runtime";
 import Score from "./Score";
+import MainBookmark from "../MainBookmark";
 
 type Props = {
    media: any;
@@ -46,7 +47,10 @@ export default function MainInfo({ media, mediaType }: Props) {
             )}
             <span>{separateArray(media.genres)}</span>
          </div>
-         <Score score={media.vote_average} />
+         <div className="flex items-center gap-5">
+            <Score score={media.vote_average} />
+            <MainBookmark media={media} mediaType={mediaType} />
+         </div>
       </div>
    );
 }

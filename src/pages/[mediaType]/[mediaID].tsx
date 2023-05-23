@@ -9,8 +9,8 @@ import Similar from "@/components/MediaDetails/Similar";
 import Trailers from "@/components/MediaDetails/Trailers";
 import MainInfo from "@/components/MediaDetails/MainInfo";
 import Overview from "@/components/MediaDetails/Overview";
-import MainPoster from "@/components/MediaDetails/MainPoster";
 import ScrollDownIcon from "@/components/MediaDetails/ScrollDownIcon";
+import MainPoster from "@/components/MediaDetails/MainPoster";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, mediaID } = context.query!;
@@ -53,8 +53,6 @@ export default function Details({ mediaType, media }: Props) {
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}
-               media={media}
-               mediaType={mediaType}
             />
             <MainInfo media={media} mediaType={mediaType} />
             <ScrollDownIcon />

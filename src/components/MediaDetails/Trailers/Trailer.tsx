@@ -10,6 +10,7 @@ export default function Trailer({ trailer }: Props) {
       <a
          href={`https://www.youtube.com/watch?v=${trailer.key}`}
          target="_blank"
+         rel="noreferrer"
          className="cursor-pointer flex flex-col"
       >
          <div className="relative">
