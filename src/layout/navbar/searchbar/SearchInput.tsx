@@ -15,7 +15,7 @@ export default function SearchInput({
 }: Props) {
    return (
       <div
-         className={`flex items-center w-96 gap-5 px-5 h-full text-sm sm:text-base`}
+         className={`flex items-center w-full sm:w-80 gap-5 px-5 h-full text-sm sm:text-base`}
       >
          <input
             value={value}

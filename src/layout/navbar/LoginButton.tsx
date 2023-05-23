@@ -7,7 +7,7 @@ export default function LoginButton() {
    return (
       <Link
          href="/auth"
-         className="h-9 px-4 bg-secondary shadow-lg cursor-pointer hidden sm:flex items-center"
+         className="h-9 px-4 bg-secondary shadow-lg cursor-pointer hidden sm:flex items-center flex-shrink-0"
       >
          Log in
       </Link>

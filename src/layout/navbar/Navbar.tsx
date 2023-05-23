@@ -12,7 +12,7 @@ export default function Navbar() {
             <div className="lg:hidden pointer-events-auto">
                <ToggleSidebar onClick={toggleShowSidebar} />
             </div>
-            <div className="h-full pointer-events-auto">
+            <div className="h-full pointer-events-auto flex-1 sm:flex-initial">
                <SearchBar />
             </div>
             <div className="flex space-x-2 pointer-events-auto">
