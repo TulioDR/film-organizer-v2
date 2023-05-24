@@ -4,6 +4,8 @@ import QuickResult from "./QuickResult";
 import ResultsContainer from "./ResultsContainer";
 import SearchInput from "./SearchInput";
 import ToggleModeButton from "./ToggleModeButton";
+import { SpinnerCircularFixed } from "spinners-react";
+import useThemeContext from "@/context/ThemeContext";
 
 type Props = {};
 
@@ -18,35 +20,38 @@ export default function SearchBar({}: Props) {
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
    const [showResults, setShowResults] = useState<boolean>(false);
    const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
    useEffect(() => {
       const timeoutId = setTimeout(async () => {
-         if (!isOnFocus) return;
+         if (!isOnFocus) {
+            setResults([]);
+            setShowResults(false);
+            return;
+         }
          if (inputValue.length > 0) {
+            setIsLoading(true);
             const type = isMovie ? "movie" : "tv";
             const res = await fetch(`/api/results/${type}/${inputValue}/1`);
             const data = await res.json();
             setResults(data.results.slice(0, 5));
+            setShowResults(true);
+            setIsLoading(false);
          } else {
             setResults([]);
+            setShowResults(false);
          }
-      }, 400);
+      }, 300);
       return () => {
          clearTimeout(timeoutId);
       };
    }, [inputValue, isMovie, isOnFocus]);
-
-   useEffect(() => {
-      if (results.length > 0) setShowResults(true);
-      else setShowResults(false);
-   }, [results]);
 
    const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
       setInputValue(e.currentTarget.value);
    };
    const handleInputFocus = () => {
       setIsOnFocus(true);
-      if (inputValue.length) setShowResults(true);
    };
    const handleInputBlur = () => {
       setIsOnFocus(false);
@@ -71,6 +76,8 @@ export default function SearchBar({}: Props) {
          getDetails(currentIndex);
       }
    };
+
+   const { themeColor } = useThemeContext();
 
    return (
       <form onSubmit={handleSubmit} className={`h-full relative`}>
@@ -98,16 +105,32 @@ export default function SearchBar({}: Props) {
                results={results}
                setCurrentIndex={setCurrentIndex}
             >
-               {results.map((media, index) => (
-                  <QuickResult
-                     key={media.id}
-                     media={media}
-                     index={index}
-                     currentIndex={currentIndex}
-                     setCurrentIndex={setCurrentIndex}
-                     getDetails={getDetails}
-                  />
-               ))}
+               {isLoading ? (
+                  <div className="w-full grid place-content-center h-40">
+                     <SpinnerCircularFixed
+                        size={50}
+                        thickness={100}
+                        speed={100}
+                        color={themeColor}
+                        secondaryColor="rgba(0, 0, 0, 0.44)"
+                     />
+                  </div>
+               ) : results.length ? (
+                  results.map((media, index) => (
+                     <QuickResult
+                        key={media.id}
+                        media={media}
+                        index={index}
+                        currentIndex={currentIndex}
+                        setCurrentIndex={setCurrentIndex}
+                        getDetails={getDetails}
+                     />
+                  ))
+               ) : (
+                  <div className="w-full px-5 h-10 grid place-content-center">
+                     Nothing was found
+                  </div>
+               )}
             </ResultsContainer>
          )}
       </form>

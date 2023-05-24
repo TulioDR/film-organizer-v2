@@ -34,7 +34,8 @@ export default function BackgroundImage({ currentImg, details }: Props) {
                      priority
                      className="object-cover"
                   />
-                  {!details && (
+                  {true && (
+                     // {!details && (
                      <>
                         <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <div className="absolute top-0 left-0 h-1/2 w-full bg-gradient-to-b from-black/60 to-transparent"></div>

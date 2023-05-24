@@ -14,6 +14,7 @@ export default function ToggleModeButton({
    const { themeColor } = useThemeContext();
    return (
       <button
+         onMouseDown={(e) => e.preventDefault()}
          type="button"
          onClick={onClick}
          className={`h-full px-2 flex items-center gap-1 relative group rounded-tr-lg ${

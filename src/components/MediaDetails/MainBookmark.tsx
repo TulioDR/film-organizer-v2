@@ -34,10 +34,6 @@ export default function MainBookmark({ mediaType, media }: Props) {
    return (
       <div ref={buttonRef} className="relative h-12 aspect-square">
          <motion.button
-            // initial={{ opacity: 0 }}
-            // animate={{ opacity: 1 }}
-            // exit={{ opacity: 0 }}
-            // transition={{ duration: 0.4 }}
             style={{ backgroundColor: themeColor }}
             onClick={() => openBookmark(mediaType, media)}
             layout="position"
