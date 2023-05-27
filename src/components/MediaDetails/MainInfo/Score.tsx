@@ -1,11 +1,11 @@
-import useThemeContext from "@/context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    score: number;
 };
 
 export default function Score({ score }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
 
    const oneDecimal = (voteAverage: number): string | number => {
       if (voteAverage) {

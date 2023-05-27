@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import ColorIcon from "./../ColorIcon";
 import MainIcon from "./../MainIcon";
-import useThemeContext from "../../../../context/ThemeContext";
 import DropdownItem from "./../DropdownItem";
 // import ToggleDarkMode from "./../ToggleDarkMode";
 import { useRouter } from "next/router";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { useSelector } from "react-redux";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -13,7 +13,8 @@ type Props = {
 };
 
 export default function MainMenu({ setMenu, setIsOpen }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const supabaseClient = useSupabaseClient();
    const user = useUser();
    const router = useRouter();

@@ -1,11 +1,12 @@
-import useThemeContext from "../../../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    onClick: () => void;
 };
 
 export default function LearnMore({ onClick }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <button
          onClick={onClick}

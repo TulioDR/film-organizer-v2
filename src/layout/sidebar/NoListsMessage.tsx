@@ -1,12 +1,12 @@
+import { useSelector } from "react-redux";
 import useSidebarContext from "../../context/SidebarContext";
-import useThemeContext from "../../context/ThemeContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {};
 
 export default function NoListsMessage({}: Props) {
    const { openSidebar } = useSidebarContext();
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
 
    return (
       <AnimatePresence>

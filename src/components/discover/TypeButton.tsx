@@ -1,10 +1,11 @@
-import useThemeContext from "../../context/ThemeContext";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 type Props = { onClick: () => void; isMovie: boolean };
 
 export default function TypeButton({ onClick, isMovie }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <motion.div
          onTap={onClick}

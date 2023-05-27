@@ -6,28 +6,37 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import MainPageContainer from "../containers/MainPageContainer";
+import wrapper from "@/store";
+import { Provider } from "react-redux";
 
-export default function App({
+function App({
    Component,
-   pageProps,
+   ...rest
 }: AppProps<{
    initialSession: Session;
 }>) {
    const { route } = useRouter();
    const [supabaseClient] = useState(() => createBrowserSupabaseClient());
    const isAuth = route === "/auth" || route === "/auth/reset-password";
+
+   const { store, props } = wrapper.useWrappedStore(rest);
+   const { pageProps } = props;
    return (
-      <SessionContextProvider
-         supabaseClient={supabaseClient}
-         initialSession={pageProps.initialSession}
-      >
-         {isAuth ? (
-            <Component {...pageProps} />
-         ) : (
-            <MainPageContainer>
+      <Provider store={store}>
+         <SessionContextProvider
+            supabaseClient={supabaseClient}
+            initialSession={pageProps.initialSession}
+         >
+            {isAuth ? (
                <Component {...pageProps} />
-            </MainPageContainer>
-         )}
-      </SessionContextProvider>
+            ) : (
+               <MainPageContainer>
+                  <Component {...pageProps} />
+               </MainPageContainer>
+            )}
+         </SessionContextProvider>
+      </Provider>
    );
 }
+
+export default App;

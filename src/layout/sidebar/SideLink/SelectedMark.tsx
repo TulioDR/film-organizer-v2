@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import useThemeContext from "../../../context/ThemeContext";
 import useSidebarContext from "@/context/SidebarContext";
+import { useSelector } from "react-redux";
 
 type Props = { item?: boolean; isSelected: boolean };
 
 export default function SelectedMark({ isSelected, item }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const { openSidebar } = useSidebarContext();
    return (
       <div

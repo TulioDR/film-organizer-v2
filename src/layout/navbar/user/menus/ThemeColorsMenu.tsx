@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import ColorIcon from "../ColorIcon";
-import useThemeContext from "../../../../context/ThemeContext";
 import DropdownItem from "../DropdownItem";
+import { useDispatch } from "react-redux";
+import { themeActions } from "@/store/slices/theme-slice";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -23,7 +24,10 @@ const themeColors: ThemeColorsModel[] = [
 ];
 
 export default function ThemeColorsMenu({ setMenu }: Props) {
-   const { setThemeColor } = useThemeContext();
+   const dispatch = useDispatch();
+   const setNewColor = (color: string) => {
+      dispatch(themeActions.changeThemeColor(color));
+   };
 
    return (
       <motion.ul
@@ -51,7 +55,7 @@ export default function ThemeColorsMenu({ setMenu }: Props) {
             <DropdownItem
                key={name}
                icon={<ColorIcon color={color} />}
-               onClick={() => setThemeColor(color)}
+               onClick={() => setNewColor(color)}
             >
                {name}
             </DropdownItem>

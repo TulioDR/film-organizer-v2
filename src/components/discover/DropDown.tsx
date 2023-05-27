@@ -1,9 +1,9 @@
 import Select from "react-select";
 import { staggerItem } from "../../animations/StaggerCards";
-import useThemeContext from "../../context/ThemeContext";
 import { OptionModel } from "../../models/DiscoverModel";
 import { motion } from "framer-motion";
 import tailwindColors from "../../data/tailwindColors";
+import { useSelector } from "react-redux";
 
 type Props = {
    title: string;
@@ -20,7 +20,7 @@ export default function DropDown({
    setValue,
    icon,
 }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
 
    const { dark } = tailwindColors;
    return (

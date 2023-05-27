@@ -1,10 +1,12 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { motion } from "framer-motion";
-import useThemeContext from "../../context/ThemeContext";
+import { useSelector } from "react-redux";
+
 type Props = { openModal: () => void };
 
 export default function ResetPasswordButton({ openModal }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const supabaseClient = useSupabaseClient();
    const user = useUser()!;
    const forgotPasswordHandler = async () => {

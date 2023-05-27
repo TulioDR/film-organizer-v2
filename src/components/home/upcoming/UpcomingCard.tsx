@@ -1,6 +1,5 @@
 import Link from "next/link";
 import usePosterAnimationContext from "../../../context/PosterAnimationContext";
-import useThemeContext from "../../../context/ThemeContext";
 import {
    changeDateFormat,
    daysToRelease,
@@ -10,11 +9,13 @@ import { motion } from "framer-motion";
 
 import Poster from "../../Poster";
 import { homeCard } from "../../../animations/homeAnimations";
+import { useSelector } from "react-redux";
 
 type Props = { movie: any };
 
 export default function UpcomingCard({ movie }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const { changeAnimatePoster } = usePosterAnimationContext();
    return (
       <motion.div variants={homeCard}>

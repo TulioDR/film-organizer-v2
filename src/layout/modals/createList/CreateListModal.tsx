@@ -11,8 +11,8 @@ import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalButton from "../ModalButton";
 import useListsContext from "../../../context/ListsContext";
 import listNameValidation from "../../../utils/listNameValidation";
-import useThemeContext from "../../../context/ThemeContext";
 import { createList } from "../../../api/lists";
+import { useSelector } from "react-redux";
 
 type Props = {
    close: () => void;
@@ -21,7 +21,8 @@ type Props = {
 export default function CreateListModal({ close }: Props) {
    const { refresh } = useListsContext();
 
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const [isFocused, setIsFocused] = useState<boolean>(false);
 
    const user = useUser();

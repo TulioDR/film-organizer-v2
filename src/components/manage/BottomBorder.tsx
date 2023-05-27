@@ -1,12 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
-import useThemeContext from "../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    isOnFocus: boolean;
 };
 
 export default function BottomBorder({ isOnFocus }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <AnimatePresence>
          {isOnFocus && (

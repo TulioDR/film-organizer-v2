@@ -1,5 +1,5 @@
 import Link from "next/link";
-import useThemeContext from "../../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    onClick: () => void;
@@ -7,7 +7,8 @@ type Props = {
 };
 
 export default function LearnMoreButton({ onClick, id }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <Link
          href={`/movie/${id}`}

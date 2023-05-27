@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import useThemeContext from "../../../context/ThemeContext";
+
+import { useSelector } from "react-redux";
 
 type Props = {
    isOn: boolean;
@@ -10,7 +11,8 @@ const spring = {
    damping: 30,
 };
 export default function ToggleDarkMode({ isOn }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <div className="h-full py-2">
          <div

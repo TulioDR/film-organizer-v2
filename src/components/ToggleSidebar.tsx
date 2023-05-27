@@ -1,11 +1,16 @@
-import useThemeContext from "../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    onClick: () => void;
 };
+interface ThemeState {
+   theme: {
+      themeColor: string;
+   };
+}
 
 export default function ToggleSidebar({ onClick }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: ThemeState) => state.theme);
    return (
       <button
          style={{ backgroundColor: themeColor }}

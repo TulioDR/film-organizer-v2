@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import useThemeContext from "@/context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    genres: any[];
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function Genres({ genres, isMovie }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
 
    const router = useRouter();
    const goToGenre = (id: number): void => {

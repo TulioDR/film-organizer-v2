@@ -1,8 +1,9 @@
 import { SpinnerCircularFixed } from "spinners-react";
-import useThemeContext from "../../../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 export default function SeasonLoadingAnimation() {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <div className="h-full w-full flex items-center justify-center">
          <SpinnerCircularFixed

@@ -1,13 +1,13 @@
-import useThemeContext from "../../context/ThemeContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import useSidebarContext from "../../context/SidebarContext";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
 export default function SideLoginMessage({}: Props) {
    const { openSidebar } = useSidebarContext();
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
 
    const router = useRouter();
    const goToAuth = () => {

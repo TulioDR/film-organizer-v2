@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import useSidebarContext from "../../context/SidebarContext";
-import useThemeContext from "../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    onClick: () => void;
 };
 
 export default function CreateListButton({ onClick }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const { openSidebar } = useSidebarContext();
    return (
       <div className="w-full pl-10">

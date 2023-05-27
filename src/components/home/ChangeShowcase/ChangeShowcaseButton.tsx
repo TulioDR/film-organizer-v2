@@ -1,4 +1,4 @@
-import useThemeContext from "../../../context/ThemeContext";
+import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {
@@ -14,7 +14,8 @@ export default function ChangeShowcaseButton({
    children,
    onClick,
 }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <button className="relative">
          <span

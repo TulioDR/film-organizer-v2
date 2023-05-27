@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import useThemeContext from "../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    isOn: boolean;
 };
 export default function ToggleButton({ isOn }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
    return (
       <div
          className={`switch h-4 w-7 p-[3px] flex rounded-full bg-white ${

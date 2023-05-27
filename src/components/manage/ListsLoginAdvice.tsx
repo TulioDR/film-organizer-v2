@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import useThemeContext from "../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 export default function ListsLoginAdvice() {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const router = useRouter();
    const goToLogin = () => {
       router.push("/auth");

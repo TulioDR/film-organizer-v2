@@ -1,9 +1,9 @@
-import useThemeContext from "@/context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = { runtime: number };
 
 export default function Runtime({ runtime }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
 
    const getMovieDuration = (duration: number): string => {
       var runtime = duration;

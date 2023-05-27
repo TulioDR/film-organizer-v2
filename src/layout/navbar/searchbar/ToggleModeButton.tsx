@@ -1,4 +1,4 @@
-import useThemeContext from "@/context/ThemeContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    isMovie: boolean;
@@ -11,7 +11,8 @@ export default function ToggleModeButton({
    onClick,
    showResults,
 }: Props) {
-   const { themeColor } = useThemeContext();
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <button
          onMouseDown={(e) => e.preventDefault()}

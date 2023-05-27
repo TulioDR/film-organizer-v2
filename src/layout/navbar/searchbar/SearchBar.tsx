@@ -5,11 +5,14 @@ import ResultsContainer from "./ResultsContainer";
 import SearchInput from "./SearchInput";
 import ToggleModeButton from "./ToggleModeButton";
 import { SpinnerCircularFixed } from "spinners-react";
-import useThemeContext from "@/context/ThemeContext";
+
+import { useSelector } from "react-redux";
 
 type Props = {};
 
 export default function SearchBar({}: Props) {
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    const router = useRouter();
 
    const [isMovie, setIsMovie] = useState<boolean>(false);
@@ -24,11 +27,7 @@ export default function SearchBar({}: Props) {
 
    useEffect(() => {
       const timeoutId = setTimeout(async () => {
-         if (!isOnFocus) {
-            setResults([]);
-            setShowResults(false);
-            return;
-         }
+         if (!isOnFocus) return;
          if (inputValue.length > 0) {
             setIsLoading(true);
             const type = isMovie ? "movie" : "tv";
@@ -42,9 +41,7 @@ export default function SearchBar({}: Props) {
             setShowResults(false);
          }
       }, 300);
-      return () => {
-         clearTimeout(timeoutId);
-      };
+      return () => clearTimeout(timeoutId);
    }, [inputValue, isMovie, isOnFocus]);
 
    const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
@@ -76,8 +73,6 @@ export default function SearchBar({}: Props) {
          getDetails(currentIndex);
       }
    };
-
-   const { themeColor } = useThemeContext();
 
    return (
       <form onSubmit={handleSubmit} className={`h-full relative`}>
