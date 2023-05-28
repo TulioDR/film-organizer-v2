@@ -1,12 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import useSidebarContext from "../../context/SidebarContext";
 import { useSelector } from "react-redux";
 
 type Props = {};
 
 export default function SideLoginMessage({}: Props) {
-   const { openSidebar } = useSidebarContext();
+   const { expandSidebar } = useSelector((state: any) => state.sidebar);
    const { themeColor } = useSelector((state: any) => state.theme);
 
    const router = useRouter();
@@ -20,17 +19,17 @@ export default function SideLoginMessage({}: Props) {
                scale: 0.95,
             }}
             animate={{
-               height: openSidebar ? 80 : 48,
+               height: expandSidebar ? 80 : 48,
                transition: { duration: 0.2 },
             }}
             onTap={goToAuth}
             className={`rounded-xl w-full text-center cursor-pointer flex items-center shadow-lg ${
-               openSidebar ? "px-5" : ""
+               expandSidebar ? "px-5" : ""
             }`}
             style={{ backgroundColor: themeColor }}
          >
             <AnimatePresence mode="wait">
-               {openSidebar ? (
+               {expandSidebar ? (
                   <motion.div
                      key="message"
                      initial={{ opacity: 0 }}

@@ -5,8 +5,6 @@ const themeSlice = createSlice({
    initialState: { themeColor: "#3b82f6" },
    reducers: {
       changeThemeColor(state, action) {
-         console.log(action.payload);
-         localStorage.setItem("theme", action.payload);
          state.themeColor = action.payload;
       },
    },

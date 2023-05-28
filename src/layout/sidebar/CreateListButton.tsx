@@ -1,6 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import useSidebarContext from "../../context/SidebarContext";
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -9,8 +7,8 @@ type Props = {
 
 export default function CreateListButton({ onClick }: Props) {
    const { themeColor } = useSelector((state: any) => state.theme);
+   const { expandSidebar } = useSelector((state: any) => state.sidebar);
 
-   const { openSidebar } = useSidebarContext();
    return (
       <div className="w-full pl-10">
          <div className="rounded-lg overflow-hidden h-full">
@@ -20,7 +18,7 @@ export default function CreateListButton({ onClick }: Props) {
                className="h-full grid place-content-center w-full truncate"
             >
                <AnimatePresence mode="wait">
-                  {openSidebar ? (
+                  {expandSidebar ? (
                      <motion.span
                         initial={{ opacity: 0 }}
                         animate={{

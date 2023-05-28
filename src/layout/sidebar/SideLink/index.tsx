@@ -5,7 +5,8 @@ import { AnimatePresence } from "framer-motion";
 import DropdownItems from "./DropdownItems";
 import SelectedMark from "./SelectedMark";
 import DropdownIcon from "./DropdownIcon";
-import useSidebarContext from "@/context/SidebarContext";
+import { useDispatch, useSelector } from "react-redux";
+import { sidebarActions } from "@/store/slices/sidebar-slice";
 
 type Props = {
    link: string;
@@ -26,7 +27,10 @@ export default function SideLink({
    item,
    mediaType,
 }: Props) {
-   const { openSidebar, setShowSidebar } = useSidebarContext();
+   const dispatch = useDispatch();
+   const hideSidebar = () => dispatch(sidebarActions.closeReveal());
+   const { expandSidebar } = useSelector((state: any) => state.sidebar);
+
    const { asPath, query } = useRouter();
 
    const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -42,8 +46,6 @@ export default function SideLink({
 
    const [open, setOpen] = useState<boolean>(false);
    const toggle = () => setOpen((prev) => !prev);
-
-   const hideSidebar = () => setShowSidebar(false);
 
    return (
       <li
@@ -68,7 +70,9 @@ export default function SideLink({
                   <span className="material-icons !w-9 !text-center !flex-shrink-0">
                      {icon}
                   </span>
-                  {openSidebar && <span className="flex-shrink-0">{text}</span>}
+                  {expandSidebar && (
+                     <span className="flex-shrink-0">{text}</span>
+                  )}
                </Link>
                {dropdown && <DropdownIcon open={open} />}
             </div>

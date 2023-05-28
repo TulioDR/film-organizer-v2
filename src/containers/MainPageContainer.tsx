@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { ListsProvider } from "../context/ListsContext";
 import { PageLoadingProvider } from "../context/PageLoadingContext";
 import { PosterAnimationProvider } from "../context/PosterAnimationContext";
-import { SidebarProvider } from "../context/SidebarContext";
 import LoginAdviceModal from "../layout/modals/loginAdvice/LoginAdviceModal";
 import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
 import Navbar from "../layout/navbar/Navbar";
@@ -23,26 +22,24 @@ export default function MainPageContainer({ children }: Props) {
    return (
       <div className="flex text-white">
          <ListsProvider>
-            <SidebarProvider>
-               <SaveMediaModal />
-               <LoginAdviceModal />
-               <div id="modals-container"></div>
-               <SidebarsContainer />
-               <div
-                  id="scroll-container"
-                  // The change on the padding right occurs because of the sidebar's scrollbar width
-                  className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden"
-               >
-                  <PosterAnimationProvider>
-                     <Navbar />
-                     <AnimatePresence mode="wait">
-                        <motion.div key={router.asPath} className="relative">
-                           <PageLoadingProvider>{children}</PageLoadingProvider>
-                        </motion.div>
-                     </AnimatePresence>
-                  </PosterAnimationProvider>
-               </div>
-            </SidebarProvider>
+            <SaveMediaModal />
+            <LoginAdviceModal />
+            <div id="modals-container"></div>
+            <SidebarsContainer />
+            <div
+               id="scroll-container"
+               // The change on the padding right occurs because of the sidebar's scrollbar width
+               className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden"
+            >
+               <PosterAnimationProvider>
+                  <Navbar />
+                  <AnimatePresence mode="wait">
+                     <motion.div key={router.asPath} className="relative">
+                        <PageLoadingProvider>{children}</PageLoadingProvider>
+                     </motion.div>
+                  </AnimatePresence>
+               </PosterAnimationProvider>
+            </div>
          </ListsProvider>
       </div>
    );

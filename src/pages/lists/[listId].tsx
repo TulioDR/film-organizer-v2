@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import DeleteButton from "../../components/list/DeleteButton";
 
 import PageTitle from "../../components/PageTitle";
-import useSidebarContext from "../../context/SidebarContext";
 import MediaModel from "../../models/MediaModel";
 import SavedCard from "../../components/list/SavedCard";
 
@@ -18,6 +17,7 @@ import TypePill from "../../components/list/TypePill";
 import DeleteMediaModal from "../../layout/modals/deleteMedia/DeleteMediaModal";
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
+import { useSelector } from "react-redux";
 
 type Props = { listId: string; list: any; initialMedia: MediaModel[] };
 
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function ListID({ listId, list, initialMedia }: Props) {
-   const { openSidebar } = useSidebarContext();
+   const { expandSidebar } = useSelector((state: any) => state.sidebar);
 
    const [media, setMedia] = useState<MediaModel[]>(initialMedia);
    const [mediaToDelete, setMediaToDelete] = useState<MediaModel[]>([]);
@@ -125,7 +125,7 @@ export default function ListID({ listId, list, initialMedia }: Props) {
             animate="animate"
             exit="exit"
             className={`gap-5 grid grid-cols-2 md:grid-cols-3 ${
-               openSidebar
+               expandSidebar
                   ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
                   : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
             }`}
