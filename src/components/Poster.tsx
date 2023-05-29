@@ -4,6 +4,7 @@ import { SpinnerCircularFixed } from "spinners-react";
 import posterNotFound from "../data/images/not-found/poster-not-found.jpg";
 import backPosterNotFound from "../data/images/not-found/back-poster-not-found.jpg";
 import personNotFound from "../data/images/not-found/person-not-found.jpg";
+import { useSelector } from "react-redux";
 
 const width = {
    sm: 92,
@@ -44,6 +45,8 @@ export default function Poster({
    };
 
    const image = getPoster();
+
+   const { themeColor } = useSelector((state: any) => state.theme);
    return (
       <div
          className={`overflow-hidden  relative ${
@@ -60,13 +63,13 @@ export default function Poster({
             className="object-cover"
          />
          {!isLoaded && (
-            <div className="absolute w-full h-full top-0 left-0 bg-gray-600 grid place-content-center">
+            <div className="absolute w-full h-full top-0 left-0 bg-primary grid place-content-center">
                <SpinnerCircularFixed
                   size={size === "sm" ? 20 : 70}
                   thickness={180}
                   speed={100}
-                  color="white"
-                  secondaryColor="rgb(31 41 55)"
+                  color={themeColor}
+                  secondaryColor="white"
                />
             </div>
          )}

@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import usePageLoadingContext from "../context/PageLoadingContext";
+import { useSelector } from "react-redux";
 
 export default function LoadingPage() {
    const { isLoading, setShowLoadingAnimation } = usePageLoadingContext();
 
+   const { themeColor } = useSelector((state: any) => state.theme);
    return (
       <motion.div
          exit={{ opacity: 0, transition: { duration: 0.3 } }}
@@ -11,23 +13,24 @@ export default function LoadingPage() {
          style={{ height: "calc(100vh - 96px)" }}
       >
          <div className="flex flex-col items-center w-full">
-            <div className="h-1 w-full sm:w-96">
-               <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: isLoading ? "75%" : "100%" }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="bg-light-bg-primary h-full"
-                  onAnimationComplete={() => {
-                     if (!isLoading) setShowLoadingAnimation(false);
-                  }}
-               ></motion.div>
-            </div>
             <motion.div
                initial={{ opacity: 0 }}
                animate={{ opacity: 1, transition: { duration: 0.3 } }}
             >
-               Film Organizer
+               Loading...
             </motion.div>
+            <div className="h-9 w-full sm:w-96 border-4 border-white rounded-full overflow-hidden">
+               <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: isLoading ? "75%" : "100%" }}
+                  transition={{ duration: 1, ease: "easeInOut" }}
+                  className="h-full "
+                  style={{ backgroundColor: themeColor }}
+                  onAnimationComplete={() => {
+                     if (!isLoading) setShowLoadingAnimation(false);
+                  }}
+               />
+            </div>
          </div>
       </motion.div>
    );

@@ -10,6 +10,7 @@ import BackInfo from "./BackInfo";
 import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
 import usePosterAnimationContext from "../../../../context/PosterAnimationContext";
+import { useSelector } from "react-redux";
 
 type Props = {
    media: any;
@@ -49,16 +50,24 @@ export default function MainCard({
       setTransitionValues(media.poster_path, link, element, setIsInvisible);
    };
 
+   const { themeColor } = useSelector((state: any) => state.theme);
+
    return (
       <motion.article
          layout
          ref={transitionCard}
          variants={staggerItem}
-         className={`relative rounded-xl overflow-hidden ${
+         style={{
+            background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
+         }}
+         className={`relative rounded-xl overflow-hidden p-1 ${
             isInvisible ? "invisible" : "shadow-xl"
          }`}
       >
-         <div onClick={toggle} className="cursor-pointer">
+         <div
+            onClick={toggle}
+            className="cursor-pointer rounded-xl overflow-hidden"
+         >
             <Poster
                alt={media.title || media.name}
                posterPath={media.poster_path}

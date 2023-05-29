@@ -9,9 +9,8 @@ export const staggerContainer = {
 };
 
 export const staggerItem = {
-   initial: { opacity: 0, y: 100 },
+   initial: { opacity: 0 },
    animate: {
-      y: 0,
       opacity: 1,
       transition: { duration: 0.4, ease: "easeInOut" },
    },
