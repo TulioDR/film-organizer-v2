@@ -2,16 +2,36 @@ import { AnimatePresence } from "framer-motion";
 import LoadingPage from "../animations/LoadingPage";
 import Head from "next/head";
 
-import usePageLoadingContext from "../context/PageLoadingContext";
-
 interface Props {
    children: React.ReactNode;
    title: string;
+   showPage: boolean;
+   setShowPage: React.Dispatch<React.SetStateAction<boolean>>;
+   showLoadingAnimation: boolean;
+   setShowLoadingAnimation: React.Dispatch<React.SetStateAction<boolean>>;
+   isLoading: boolean;
 }
 
-export default function PageAnimationContainer({ children, title }: Props) {
-   const { showPage, setShowPage, showLoadingAnimation } =
-      usePageLoadingContext();
+export default function PageAnimationContainer({
+   children,
+   title,
+   showPage,
+   setShowPage,
+   showLoadingAnimation,
+   setShowLoadingAnimation,
+   isLoading,
+}: Props) {
+   // const {
+   //    showPage,
+   //    setShowPage,
+   //    showLoadingAnimation,
+   //    setShowLoadingAnimation,
+   //    isLoading,
+   // } = usePageLoadingContext();
+
+   const onAnimationComplete = () => {
+      if (!isLoading) setShowLoadingAnimation(false);
+   };
    return (
       <>
          <Head>
@@ -21,7 +41,12 @@ export default function PageAnimationContainer({ children, title }: Props) {
          </Head>
          {showPage && children}
          <AnimatePresence onExitComplete={() => setShowPage(true)}>
-            {showLoadingAnimation && <LoadingPage />}
+            {showLoadingAnimation && (
+               <LoadingPage
+                  isLoading={isLoading}
+                  onAnimationComplete={onAnimationComplete}
+               />
+            )}
          </AnimatePresence>
       </>
    );

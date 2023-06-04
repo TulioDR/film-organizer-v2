@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import usePageLoadingContext from "../context/PageLoadingContext";
 import { useSelector } from "react-redux";
 
-export default function LoadingPage() {
-   const { isLoading, setShowLoadingAnimation } = usePageLoadingContext();
-
+interface Props {
+   onAnimationComplete: () => void;
+   isLoading: boolean;
+}
+export default function LoadingPage({ isLoading, onAnimationComplete }: Props) {
    const { themeColor } = useSelector((state: any) => state.theme);
    return (
       <motion.div
@@ -25,9 +26,7 @@ export default function LoadingPage() {
                   transition={{ duration: 1, ease: "easeInOut" }}
                   className="h-full "
                   style={{ backgroundColor: themeColor }}
-                  onAnimationComplete={() => {
-                     if (!isLoading) setShowLoadingAnimation(false);
-                  }}
+                  onAnimationComplete={onAnimationComplete}
                />
             </div>
          </div>

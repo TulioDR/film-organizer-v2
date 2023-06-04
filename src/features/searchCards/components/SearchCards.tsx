@@ -7,7 +7,7 @@ import TransitionPoster from "../../transitionPoster/components/TransitionPoster
 import useTransitionPoster from "../../transitionPoster/hooks/useTransitionPoster";
 import useSearchCards from "../hooks/useSearchCards";
 import MainCardMobile from "./mainCardMobile/MainCardMobile";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -19,12 +19,24 @@ type Props = {
 export default function SearchCards({ title, mediaType, url }: Props) {
    const { expandSidebar } = useSelector((state: any) => state.sidebar);
 
-   const { media } = useSearchCards(url);
+   const [showLoadingAnimation, setShowLoadingAnimation] =
+      useState<boolean>(true);
+   const [isLoading, setIsLoading] = useState<boolean>(true);
+   const [showPage, setShowPage] = useState<boolean>(false);
+
+   const { media } = useSearchCards(url, setIsLoading);
    const { selectedImg, link, position, setTransitionValues } =
       useTransitionPoster();
 
    return (
-      <PageAnimationContainer title={title}>
+      <PageAnimationContainer
+         title={title}
+         showPage={showPage}
+         setShowPage={setShowPage}
+         isLoading={isLoading}
+         showLoadingAnimation={showLoadingAnimation}
+         setShowLoadingAnimation={setShowLoadingAnimation}
+      >
          <div className="px-10">
             <PageTitle>{title}</PageTitle>
             <motion.div

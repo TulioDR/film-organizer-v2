@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import usePageLoadingContext from "../../../context/PageLoadingContext";
 
-export default function useSearchCards(url: string) {
+export default function useSearchCards(
+   url: string,
+   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+) {
    const [media, setMedia] = useState<any[]>([]);
    const [page, setPage] = useState<number>(1);
-   const { setIsLoading } = usePageLoadingContext();
 
    useEffect(() => {
       const getData = async () => {

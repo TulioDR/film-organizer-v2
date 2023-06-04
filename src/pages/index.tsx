@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-import usePageLoadingContext from "../context/PageLoadingContext";
-
 import BackgroundImage from "../components/BackgroundImage";
 import ChangeShowcase from "../components/home/ChangeShowcase";
 import HomeSlider from "../components/home/HomeSlider";
@@ -11,7 +9,6 @@ export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
    const [onAir, setOnAir] = useState<any[]>([]);
    const [upcoming, setUpcoming] = useState<any[]>([]);
-   const { setIsLoading } = usePageLoadingContext();
 
    useEffect(() => {
       const getData = async () => {
@@ -20,10 +17,9 @@ export default function Home() {
          setNowPlaying(data[0].results);
          setOnAir(data[1].results);
          setUpcoming(data[2].results);
-         setIsLoading(false);
       };
       getData();
-   }, [setIsLoading]);
+   }, []);
 
    const [activeIndex, setActiveIndex] = useState<number>(0);
    const [currentMedia, setCurrentMedia] = useState<any>(nowPlaying[0]);
