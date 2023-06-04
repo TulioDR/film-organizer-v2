@@ -7,8 +7,8 @@ import { PosterAnimationProvider } from "../context/PosterAnimationContext";
 import LoginAdviceModal from "../layout/modals/loginAdvice/LoginAdviceModal";
 import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
 import Navbar from "../layout/navbar/Navbar";
-import SidebarsContainer from "./SidebarsContainer";
 import useInitialThemeColor from "@/hooks/useInitialThemeColor";
+import Sidebar from "@/layout/sidebar/Sidebar";
 
 type Props = {
    children: React.ReactNode;
@@ -25,7 +25,7 @@ export default function MainPageContainer({ children }: Props) {
             <SaveMediaModal />
             <LoginAdviceModal />
             <div id="modals-container"></div>
-            <SidebarsContainer />
+            <Sidebar />
             <div
                id="scroll-container"
                // The change on the padding right occurs because of the sidebar's scrollbar width

@@ -9,16 +9,18 @@ export default function SelectedMark({ isSelected, item }: Props) {
    return (
       <div
          className={`flex-shrink-0 ${
-            item ? `${expandSidebar ? "w-5" : "w-0"} duration-300` : "w-10 "
+            item ? `${expandSidebar ? "w-5" : "w-0"} duration-300` : "w-10"
          }`}
       >
-         {isSelected && (
-            <motion.div
-               style={{ backgroundColor: themeColor }}
-               className="w-1 h-full"
-               layoutId={item ? "underline-item" : "underline"}
-            />
-         )}
+         <div className="w-1/2 h-full ml-auto">
+            {isSelected && (
+               <motion.div
+                  style={{ backgroundColor: themeColor }}
+                  className="w-1 h-full"
+                  layoutId={item ? "underline-item" : "underline"}
+               />
+            )}
+         </div>
       </div>
    );
 }

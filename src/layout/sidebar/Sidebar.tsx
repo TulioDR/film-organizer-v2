@@ -9,81 +9,32 @@ import SideLoginMessage from "./SideLoginMessage";
 import SideSubtitle from "./SideSubtitle";
 import SideLine from "./SideLine";
 import { AnimateSharedLayout } from "framer-motion";
+import SideLinks from "./SideLinks";
+import ModalPortal from "../modals/ModalPortal";
+import CreateListModal from "../modals/createList/CreateListModal";
+import { useState } from "react";
 
-interface Props {
-   openForm: () => void;
-}
-export default function Sidebar({ openForm }: Props) {
+export default function Sidebar() {
    const { lists } = useListsContext();
    const user = useUser();
+
+   const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
+   const openForm = () => setShowCreateForm(true);
+   const closeForm = () => setShowCreateForm(false);
+
    return (
-      <AnimateSharedLayout>
-         <SidebarContainer>
+      <SidebarContainer>
+         <AnimateSharedLayout>
             <BrandHamburger />
             <SideLine />
-            <SideLink link="/" icon="home" text="Home" />
-            <SideLink
-               link="#"
-               icon="movie"
-               text="Movies"
-               mediaType="movie"
-               dropdown
-            >
-               <SideLink
-                  link="/popular/movie"
-                  icon="whatshot"
-                  text="Popular"
-                  item
-               />
-               <SideLink
-                  link="/genres/movie"
-                  icon="theater_comedy"
-                  text="Genres"
-                  item
-               />
-               <SideLink
-                  link="/trending/movie"
-                  icon="trending_up"
-                  text="Trending"
-                  item
-               />
-            </SideLink>
-            <SideLink
-               link="#"
-               icon="smart_display"
-               text="Series"
-               mediaType="tv"
-               dropdown
-            >
-               <SideLink
-                  link="/popular/tv"
-                  icon="whatshot"
-                  text="Popular"
-                  item
-               />
-               <SideLink
-                  link="/genres/tv"
-                  icon="theater_comedy"
-                  text="Genres"
-                  item
-               />
-               <SideLink
-                  link="/trending/tv"
-                  icon="trending_up"
-                  text="Trending"
-                  item
-               />
-            </SideLink>
-            <SideLink link="/discover" icon="travel_explore" text="Discover" />
-            <SideLink
-               link="/lists"
-               icon="format_list_bulleted"
-               text="Manage Lists"
-            />
+            <SideLinks />
             <SideLine />
             {user ? (
                <>
                   <CreateListButton onClick={openForm} />
+                  <ModalPortal isOpen={showCreateForm}>
+                     <CreateListModal close={closeForm} />
+                  </ModalPortal>
                   <SideSubtitle>Lists</SideSubtitle>
                   {lists.length > 0 ? (
                      lists.map((list) => (
@@ -101,7 +52,7 @@ export default function Sidebar({ openForm }: Props) {
             ) : (
                <SideLoginMessage />
             )}
-         </SidebarContainer>
-      </AnimateSharedLayout>
+         </AnimateSharedLayout>
+      </SidebarContainer>
    );
 }

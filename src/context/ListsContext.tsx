@@ -29,10 +29,11 @@ export function ListsProvider({ children }: Props) {
    const user = useUser();
 
    const [lists, setLists] = useState<any[]>([]);
-   const [isSaveMediaOpen, setIsSaveMediaOpen] = useState<boolean>(false);
-   const [isLoginAdviceOpen, setIsLoginAdviceOpen] = useState<boolean>(false);
 
+   const [isSaveMediaOpen, setIsSaveMediaOpen] = useState<boolean>(false);
    const closeSaveMediaModal = () => setIsSaveMediaOpen(false);
+
+   const [isLoginAdviceOpen, setIsLoginAdviceOpen] = useState<boolean>(false);
    const closeLoginAdviceModal = () => setIsLoginAdviceOpen(false);
 
    const [currentType, setCurrentType] = useState<"movie" | "tv">("movie");
@@ -53,7 +54,7 @@ export function ListsProvider({ children }: Props) {
    const refreshBookmark = () => setRefreshCard(!refreshCard);
 
    useEffect(() => {
-      const getListsItems = async () => {
+      const getListsEffect = async () => {
          if (!user) {
             setLists([]);
             return;
@@ -62,8 +63,17 @@ export function ListsProvider({ children }: Props) {
          const data = await getLists(user.id);
          setLists(data);
       };
-      getListsItems();
+      getListsEffect();
    }, [search, user]);
+
+   const getListsFunction = async () => {
+      if (!user) {
+         setLists([]);
+         return;
+      }
+      const listsData = await getLists(user.id);
+      setLists(listsData);
+   };
 
    const value: ListsContextInterface = {
       lists,
