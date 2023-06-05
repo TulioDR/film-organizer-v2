@@ -1,4 +1,4 @@
-import useListsContext from "../../../../context/ListsContext";
+import useBookmark from "@/hooks/useBookmark";
 
 type Props = {
    media: any;
@@ -7,10 +7,10 @@ type Props = {
 };
 
 export default function Bookmark({ media, mediaType, isMediaSaved }: Props) {
-   const { openBookmark } = useListsContext();
+   const { handleBookmarkClick } = useBookmark(media, mediaType);
    return (
       <button
-         onClick={() => openBookmark(mediaType, media)}
+         onClick={handleBookmarkClick}
          className="h-full grid place-content-center"
       >
          <span className="material-icons !text-4xl">

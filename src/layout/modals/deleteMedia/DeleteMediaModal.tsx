@@ -14,7 +14,6 @@ type Props = {
    close: () => void;
    mediaToDelete: MediaModel[];
    list: any;
-   refresh: () => void;
 };
 
 export default function DeleteMediaModal({
@@ -22,7 +21,6 @@ export default function DeleteMediaModal({
    close,
    mediaToDelete,
    list,
-   refresh,
 }: Props) {
    const [movies, setMovies] = useState<MediaModel[]>([]);
    const [tvSeries, setTvSeries] = useState<MediaModel[]>([]);
@@ -41,7 +39,6 @@ export default function DeleteMediaModal({
       close();
       const deletedMedia = await deleteMedia(ids);
       console.log(deletedMedia);
-      refresh();
    };
 
    return (

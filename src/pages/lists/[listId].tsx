@@ -7,7 +7,7 @@ import MediaModel from "../../models/MediaModel";
 import SavedCard from "../../components/list/SavedCard";
 
 import { getMedia } from "../../api/media";
-import useRefresh from "../../hooks/useRefresh";
+
 import Head from "next/head";
 import { staggerContainer } from "../../animations/StaggerCards";
 import { motion } from "framer-motion";
@@ -43,8 +43,6 @@ export default function ListID({ listId, list, initialMedia }: Props) {
    const [media, setMedia] = useState<MediaModel[]>(initialMedia);
    const [mediaToDelete, setMediaToDelete] = useState<MediaModel[]>([]);
 
-   const { search, refresh } = useRefresh();
-
    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
    const openDelete = () => {
       setIsDeleteOpen(true);
@@ -74,7 +72,7 @@ export default function ListID({ listId, list, initialMedia }: Props) {
          setMedia(media);
       };
       getMediaOnRefresh();
-   }, [listId, search]);
+   }, [listId]);
 
    useEffect(() => {
       if (selectedType === "all") {
@@ -157,7 +155,6 @@ export default function ListID({ listId, list, initialMedia }: Props) {
             isOpen={isDeleteModalOpen}
             close={closeDeleteModal}
             mediaToDelete={mediaToDelete}
-            refresh={refresh}
          />
       </div>
    );

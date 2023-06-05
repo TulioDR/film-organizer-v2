@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const listSlice = createSlice({
-   name: "list",
+   name: "lists",
    initialState: {
       lists: [],
-      revealSidebar: false,
    },
    reducers: {
       setLists(state, action) {

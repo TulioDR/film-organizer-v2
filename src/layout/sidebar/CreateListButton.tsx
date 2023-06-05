@@ -10,7 +10,7 @@ export default function CreateListButton({ onClick }: Props) {
    const { expandSidebar } = useSelector((state: any) => state.sidebar);
 
    return (
-      <div className="w-full pl-10">
+      <div className="w-full pl-10 h-9">
          <div className="rounded-lg overflow-hidden h-full">
             <button
                onClick={onClick}

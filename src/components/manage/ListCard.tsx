@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { updateList } from "../../api/lists";
-import useListsContext from "../../context/ListsContext";
+
 import { onlyLettersNumbersSpaces } from "../../utils/listNameValidation";
 import BottomBorder from "./BottomBorder";
 
@@ -9,6 +9,7 @@ import EditButtonsContainer from "./EditButtonsContainer";
 import ErrorMessageForName from "./ErrorMessageForName";
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
+import useListsRefresh from "@/hooks/useListsRefresh";
 
 type Props = {
    list: any;
@@ -21,7 +22,6 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
    const [showError, setShowError] = useState<string | null>(null);
-   const { refresh } = useListsContext();
 
    const nameValidation = (value: string): null | string => {
       let error = null;
@@ -57,6 +57,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       if (e.key === "Escape") cancelEdit();
    };
 
+   const { refreshLists } = useListsRefresh();
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const isInvalid = nameValidation(value);
@@ -64,7 +65,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       if (value !== list.name) {
          const updatedList = await updateList(list.id, { name: value });
          console.log(updatedList);
-         refresh();
+         refreshLists();
       }
       closeEdit();
    };

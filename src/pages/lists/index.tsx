@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import ListCard from "../../components/manage/ListCard";
 import PageTitle from "../../components/PageTitle";
-import useListsContext from "../../context/ListsContext";
 import ListModel from "../../models/listModel";
 import { motion } from "framer-motion";
 import { staggerContainer } from "../../animations/StaggerCards";
@@ -12,10 +11,12 @@ import ListsLoginAdvice from "../../components/manage/ListsLoginAdvice";
 import DeleteListModal from "../../layout/modals/deleteList/DeleteListModal";
 import ListFinder from "../../components/manage/ListFinder";
 import NoListsMessage from "../../components/manage/NoListsMessage";
+import { useSelector } from "react-redux";
 
 export default function Lists() {
    const user = useUser();
-   const { lists } = useListsContext();
+   const { lists } = useSelector((state: any) => state.lists);
+
    const [listToDelete, setListToDelete] = useState<ListModel | null>(null);
 
    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -30,7 +31,7 @@ export default function Lists() {
    const [inputValue, setInputValue] = useState<string>("");
    const [filteredLists, setFilteredLists] = useState<any[]>([]);
    useEffect(() => {
-      const founded = lists.filter(({ name }) =>
+      const founded = lists.filter(({ name }: any) =>
          name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
       );
       setFilteredLists(founded);

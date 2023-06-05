@@ -21,14 +21,6 @@ export default function PageAnimationContainer({
    setShowLoadingAnimation,
    isLoading,
 }: Props) {
-   // const {
-   //    showPage,
-   //    setShowPage,
-   //    showLoadingAnimation,
-   //    setShowLoadingAnimation,
-   //    isLoading,
-   // } = usePageLoadingContext();
-
    const onAnimationComplete = () => {
       if (!isLoading) setShowLoadingAnimation(false);
    };

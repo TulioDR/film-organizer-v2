@@ -122,12 +122,12 @@ export default function Auth() {
                <SkipButton />
             </div>
          </AuthContainer>
-         <EmailSentModal
+         {/* <EmailSentModal
             isOpen={showModal}
             close={closeModal}
             email={emailSent}
             forgotPassWord={forgotPassWord}
-         />
+         /> */}
          <AuthErrorMessage error={error} setError={setError} />
       </div>
    );

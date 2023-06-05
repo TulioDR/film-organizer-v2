@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {};
 
-export default function NoListsMessage({}: Props) {
+export default function SideNoListsMessage({}: Props) {
    const { themeColor } = useSelector((state: any) => state.theme);
    const { expandSidebar } = useSelector((state: any) => state.sidebar);
 

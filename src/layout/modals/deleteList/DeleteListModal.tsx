@@ -1,5 +1,5 @@
+import useListsRefresh from "@/hooks/useListsRefresh";
 import { deleteList } from "../../../api/lists";
-import useListsContext from "../../../context/ListsContext";
 import ListModel from "../../../models/listModel";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
@@ -18,12 +18,12 @@ export default function DeleteListModal({
    listToDelete,
    close,
 }: Props) {
-   const { refresh } = useListsContext();
+   const { refreshLists } = useListsRefresh();
 
    const deleteListFinally = async () => {
       const deletedList = await deleteList(listToDelete!.id);
       console.log(deletedList);
-      refresh();
+      refreshLists();
       close();
    };
    return (

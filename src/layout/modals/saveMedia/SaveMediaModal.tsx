@@ -1,4 +1,4 @@
-import useListsContext from "../../../context/ListsContext";
+import { useDispatch, useSelector } from "react-redux";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
@@ -6,28 +6,31 @@ import ModalPortal from "../ModalPortal";
 import ModalTitle from "../ModalTitle";
 
 import ListToSave from "./ListToSave";
+import { bookmarkActions } from "@/store/slices/bookmark-slice";
+import StoreModel from "@/models/StoreModel";
 
 export default function SaveMediaModal() {
-   const {
-      isSaveMediaOpen,
-      closeSaveMediaModal,
-      lists,
-      currentMedia,
-      currentType,
-   } = useListsContext();
+   const { lists } = useSelector((state: StoreModel) => state.lists);
+   const { mediaToSave } = useSelector((state: StoreModel) => state.bookmark);
 
+   const dispatch = useDispatch();
+   const closeModal = () => {
+      dispatch(bookmarkActions.closeSaveMediaModal());
+   };
+
+   if (!mediaToSave) return <></>;
    return (
-      <ModalPortal isOpen={isSaveMediaOpen}>
-         <ModalContainer close={closeSaveMediaModal}>
+      <ModalPortal isOpen={mediaToSave !== null}>
+         <ModalContainer close={closeModal}>
             <ModalTitle>Save to...</ModalTitle>
             <div className="w-56 border-y border-dark-text-soft">
                {lists.length > 0 ? (
-                  lists.map((list) => (
+                  lists.map((list: any) => (
                      <ListToSave
                         key={list.id}
                         list={list}
-                        media={currentMedia}
-                        mediaType={currentType}
+                        media={mediaToSave.media}
+                        mediaType={mediaToSave.mediaType}
                      />
                   ))
                ) : (
@@ -39,7 +42,7 @@ export default function SaveMediaModal() {
             </div>
 
             <ModalButtonsContainer>
-               <ModalButton onClick={closeSaveMediaModal}>Close</ModalButton>
+               <ModalButton onClick={closeModal}>Close</ModalButton>
             </ModalButtonsContainer>
          </ModalContainer>
       </ModalPortal>

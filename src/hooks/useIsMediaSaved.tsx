@@ -1,12 +1,9 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { getFirstMedia } from "../api/media";
-import useListsContext from "../context/ListsContext";
 
 export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
-
-   const { refreshCard, currentMedia } = useListsContext();
    const user = useUser();
 
    useEffect(() => {
@@ -15,7 +12,7 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
             setIsMediaSaved(false);
             return;
          }
-         if (currentMedia && currentMedia?.id !== id) return;
+         // if (currentMedia && currentMedia?.id !== id) return;
          const firstFounded = await getFirstMedia({
             media_id: id,
             media_type: type,
@@ -25,7 +22,7 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
          else setIsMediaSaved(false);
       };
       getIsMediaSaved();
-   }, [refreshCard, id, type, currentMedia, user]);
+   }, [id, type, user]);
 
    return { isMediaSaved };
 }

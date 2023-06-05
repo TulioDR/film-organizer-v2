@@ -4,8 +4,9 @@ import {
    deleteUniqueMedia,
    getUniqueMedia,
 } from "../../../api/media";
-import useListsContext from "../../../context/ListsContext";
-import useRefresh from "../../../hooks/useRefresh";
+import { SpinnerCircularFixed } from "spinners-react";
+import { useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
 
 interface ListProps {
    list: any;
@@ -14,12 +15,16 @@ interface ListProps {
 }
 
 export default function ListToSave({ list, media, mediaType }: ListProps) {
-   const [isSaved, setIsSaved] = useState<boolean>(false);
-   const { search, refresh } = useRefresh();
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
-   const { refreshBookmark } = useListsContext();
+   const [isSaved, setIsSaved] = useState<boolean>(false);
+   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+   const [refreshEffect, setRefreshEffect] = useState<boolean>(true);
+   const refresh = () => setRefreshEffect((prev) => !prev);
 
    const saveToList = async () => {
+      setIsLoading(true);
       const createdMedia = await createMedia({
          media_id: media.id,
          name: media.title || media.name,
@@ -29,10 +34,10 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       });
       console.log(createdMedia);
       refresh();
-      refreshBookmark();
    };
 
    const removeFromList = async () => {
+      setIsLoading(true);
       const deletedMedia = await deleteUniqueMedia({
          media_id: media.id,
          media_type: mediaType,
@@ -40,11 +45,10 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       });
       console.log(deletedMedia);
       refresh();
-      refreshBookmark();
    };
 
    useEffect(() => {
-      const getIsSaved = async () => {
+      const checkIfSaved = async () => {
          const isMediaSaved = await getUniqueMedia({
             media_id: media.id,
             media_type: mediaType,
@@ -52,18 +56,31 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          });
          if (isMediaSaved) setIsSaved(true);
          else setIsSaved(false);
+         setIsLoading(false);
       };
-      getIsSaved();
-   }, [search, media.id, list.id, mediaType]);
+      checkIfSaved();
+   }, [media.id, list.id, mediaType, refreshEffect]);
 
    return (
       <li
          onClick={isSaved ? removeFromList : saveToList}
          className="h-9 flex items-center cursor-pointer hover:bg-secondary text-dark-text-normal"
       >
-         <span className="material-icons mx-2">
-            {isSaved ? "check_box" : "check_box_outline_blank"}
-         </span>
+         <div className="h-full aspect-square grid place-content-center">
+            {isLoading ? (
+               <SpinnerCircularFixed
+                  size={24}
+                  thickness={100}
+                  speed={100}
+                  color={themeColor}
+                  secondaryColor="gray"
+               />
+            ) : (
+               <span className="material-icons">
+                  {isSaved ? "check_box" : "check_box_outline_blank"}
+               </span>
+            )}
+         </div>
          <span className="text-sm">{list.name}</span>
       </li>
    );

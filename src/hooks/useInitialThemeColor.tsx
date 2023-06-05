@@ -5,14 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 export default function useInitialThemeColor() {
    const dispatch = useDispatch();
    const { themeColor } = useSelector((state: any) => state.theme);
-   const setNewColor = (color: string) => {
-      dispatch(themeActions.changeThemeColor(color));
-   };
+
    useEffect(() => {
       const savedValue = localStorage.getItem("theme");
-      if (savedValue) setNewColor(savedValue);
+      if (savedValue) dispatch(themeActions.changeThemeColor(savedValue));
       else localStorage.setItem("theme", "#3b82f6");
-   }, []);
+   }, [dispatch]);
 
    useEffect(() => {
       localStorage.setItem("theme", themeColor);

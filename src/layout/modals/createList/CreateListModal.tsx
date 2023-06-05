@@ -9,17 +9,17 @@ import ModalContainer from "../ModalContainer";
 import ModalTitle from "../ModalTitle";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalButton from "../ModalButton";
-import useListsContext from "../../../context/ListsContext";
 import listNameValidation from "../../../utils/listNameValidation";
 import { createList } from "../../../api/lists";
 import { useSelector } from "react-redux";
+import useListsRefresh from "@/hooks/useListsRefresh";
 
 type Props = {
    close: () => void;
 };
 
 export default function CreateListModal({ close }: Props) {
-   const { refresh } = useListsContext();
+   const { refreshLists } = useListsRefresh();
 
    const { themeColor } = useSelector((state: any) => state.theme);
 
@@ -33,7 +33,7 @@ export default function CreateListModal({ close }: Props) {
          authorId: user?.id,
       });
       console.log(createdList);
-      refresh();
+      refreshLists();
       close();
    };
 

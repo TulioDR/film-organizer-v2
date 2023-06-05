@@ -1,5 +1,6 @@
-import useListsContext from "@/context/ListsContext";
+import useBookmark from "@/hooks/useBookmark";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
+import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,10 +10,9 @@ type Props = {
 };
 
 export default function MainBookmark({ mediaType, media }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
-
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
-   const { openBookmark } = useListsContext();
+   const { handleBookmarkClick } = useBookmark(media, mediaType);
 
    const buttonRef = useRef<HTMLDivElement>(null);
    const [isFixed, setIsFixed] = useState<boolean>(false);
@@ -26,8 +26,8 @@ export default function MainBookmark({ mediaType, media }: Props) {
             if (isFixed) setIsFixed(false);
          }
       };
-      const container = document.getElementById("scroll-container")!;
 
+      const container = document.getElementById("scroll-container")!;
       container.addEventListener("scroll", handleScroll, { passive: true });
       return () => container.removeEventListener("scroll", handleScroll);
    }, [isFixed]);
@@ -36,7 +36,7 @@ export default function MainBookmark({ mediaType, media }: Props) {
       <div ref={buttonRef} className="relative h-12 aspect-square">
          <motion.button
             style={{ backgroundColor: themeColor }}
-            onClick={() => openBookmark(mediaType, media)}
+            onClick={handleBookmarkClick}
             layout="position"
             className={`h-12 grid place-content-center rounded-full aspect-square z-10 ${
                isFixed ? "fixed top-24 right-[52px]" : ""
