@@ -12,6 +12,7 @@ import { getLists } from "@/api/lists";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useDispatch } from "react-redux";
 import { listActions } from "@/store/slices/list-slice";
+import BackgroundImage from "@/components/BackgroundImage";
 
 type Props = {
    children: React.ReactNode;
@@ -40,6 +41,7 @@ export default function MainPageContainer({ children }: Props) {
 
    return (
       <div className="flex text-white">
+         <BackgroundImage />
          <SaveMediaModal />
          <LoginAdviceModal />
          <div id="modals-container"></div>

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import MovieLayout from "../../../components/Genres/MovieLayout";
 import TvLayout from "../../../components/Genres/TvLayout";
-import BackgroundImage2 from "../../../components/BackgroundImage2";
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;
    const isMovie = mediaType === "movie";
@@ -38,7 +38,6 @@ export default function Genres({ isMovie, mediaType }: Props) {
    }, []);
 
    const [genresData, setGenresData] = useState<any[]>(movieGenres);
-   const [currentGenre, setCurrentGenre] = useState<any>(null);
 
    useEffect(() => {
       if (mediaType === "movie") setGenresData(movieGenres);
@@ -52,10 +51,6 @@ export default function Genres({ isMovie, mediaType }: Props) {
             <meta name="description" content="Which is your favorite genre?" />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <BackgroundImage2
-            currentImg={currentGenre?.image}
-            imageKey={currentGenre?.id}
-         />
          <div className="flex justify-between">
             <PageTitle>{title}</PageTitle>
          </div>
@@ -67,17 +62,9 @@ export default function Genres({ isMovie, mediaType }: Props) {
             className="w-full flex flex-col gap-5 pb-10"
          >
             {mediaType === "movie" ? (
-               <MovieLayout
-                  mediaType={mediaType}
-                  genres={genresData}
-                  setCurrentGenre={setCurrentGenre}
-               />
+               <MovieLayout mediaType={mediaType} genres={genresData} />
             ) : (
-               <TvLayout
-                  mediaType={mediaType}
-                  genres={genresData}
-                  setCurrentGenre={setCurrentGenre}
-               />
+               <TvLayout mediaType={mediaType} genres={genresData} />
             )}
          </motion.div>
       </div>

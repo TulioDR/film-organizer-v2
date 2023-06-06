@@ -57,6 +57,7 @@ export default function MainCard({
          layout
          ref={transitionCard}
          variants={staggerItem}
+         whileHover={{ y: -8 }}
          style={{
             background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
          }}

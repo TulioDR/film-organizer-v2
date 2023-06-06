@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
-import BackgroundImage from "@/components/BackgroundImage";
+// import BackgroundImage from "@/components/BackgroundImage";
 
 import People from "@/components/MediaDetails/People";
 import Seasons from "@/components/MediaDetails/Seasons";
@@ -11,6 +11,8 @@ import MainInfo from "@/components/MediaDetails/MainInfo";
 import Overview from "@/components/MediaDetails/Overview";
 import ScrollDownIcon from "@/components/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/MediaDetails/MainPoster";
+import { useDispatch } from "react-redux";
+import { backgroundActions } from "@/store/slices/background-slice";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, mediaID } = context.query!;
@@ -35,15 +37,21 @@ type Props = {
 };
 
 export default function Details({ mediaType, media }: Props) {
+   const dispatch = useDispatch();
+
    useEffect(() => {
       const container = document.getElementById("scroll-container")!;
       container.scrollTo({ top: 0 });
       console.log(media);
-   }, [media]);
+      const background = {
+         backgroundImage: media.backdrop_path,
+         backgroundKey: media.id,
+      };
+      dispatch(backgroundActions.setBackground(background));
+   }, [media, dispatch]);
 
    return (
       <div className="w-full">
-         <BackgroundImage currentImg={media.backdrop_path} details />
          <Head>
             <title>{media.title || media.name}</title>
             <meta name="description" content={media.overview} />

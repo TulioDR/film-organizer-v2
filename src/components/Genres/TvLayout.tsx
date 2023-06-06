@@ -3,14 +3,9 @@ import GenreCard from "../../layout/cards/GenreCard";
 type Props = {
    genres: any[];
    mediaType: "tv" | "movie";
-   setCurrentGenre: React.Dispatch<any>;
 };
 
-export default function TvLayout({
-   genres,
-   mediaType,
-   setCurrentGenre,
-}: Props) {
+export default function TvLayout({ genres, mediaType }: Props) {
    return (
       <>
          <div className="flex h-full space-x-5">
@@ -19,7 +14,6 @@ export default function TvLayout({
                   key={genre.id + mediaType}
                   genre={genre}
                   mediaType={mediaType}
-                  setCurrentGenre={setCurrentGenre}
                />
             ))}
          </div>
@@ -29,7 +23,6 @@ export default function TvLayout({
                   key={genre.id + mediaType}
                   genre={genre}
                   mediaType={mediaType}
-                  setCurrentGenre={setCurrentGenre}
                />
             ))}
          </div>
@@ -39,7 +32,6 @@ export default function TvLayout({
                   key={genre.id + mediaType}
                   genre={genre}
                   mediaType={mediaType}
-                  setCurrentGenre={setCurrentGenre}
                />
             ))}
          </div>

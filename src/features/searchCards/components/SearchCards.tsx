@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import MainCard from "./mainCard/MainCard";
+import MainCard from "./MainCard";
 import { staggerContainer } from "../../../animations/StaggerCards";
 import PageAnimationContainer from "../../../containers/PageAnimationContainer";
 import PageTitle from "../../../components/PageTitle";
@@ -7,8 +7,9 @@ import TransitionPoster from "../../transitionPoster/components/TransitionPoster
 import useTransitionPoster from "../../transitionPoster/hooks/useTransitionPoster";
 import useSearchCards from "../hooks/useSearchCards";
 import MainCardMobile from "./mainCardMobile/MainCardMobile";
-import { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { backgroundActions } from "@/store/slices/background-slice";
 
 type Props = {
    title: string;
@@ -27,6 +28,11 @@ export default function SearchCards({ title, mediaType, url }: Props) {
    const { media } = useSearchCards(url, setIsLoading);
    const { selectedImg, link, position, setTransitionValues } =
       useTransitionPoster();
+
+   const dispatch = useDispatch();
+   useEffect(() => {
+      dispatch(backgroundActions.removeBackground());
+   }, [dispatch]);
 
    return (
       <PageAnimationContainer

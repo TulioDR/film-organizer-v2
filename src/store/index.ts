@@ -4,6 +4,7 @@ import { createWrapper } from "next-redux-wrapper";
 import sidebarSlice from "./slices/sidebar-slice";
 import listSlice from "./slices/list-slice";
 import bookmarkSlice from "./slices/bookmark-slice";
+import backgroundSlice from "./slices/background-slice";
 
 const store = configureStore({
    reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
       sidebar: sidebarSlice.reducer,
       lists: listSlice.reducer,
       bookmark: bookmarkSlice.reducer,
+      background: backgroundSlice.reducer,
    },
 });
 const makeStore = () => store;

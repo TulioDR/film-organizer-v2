@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface ThemeModel {
    themeColor: string;
 }
@@ -15,10 +17,15 @@ export interface BookmarkModel {
       mediaType: "tv" | "movie";
    };
 }
+export interface BackgroundModel {
+   backgroundImage: string | StaticImageData | null;
+   backgroundKey: string;
+}
 
 export default interface StoreModel {
    theme: ThemeModel;
    sidebar: SidebarModel;
    lists: ListsModel;
    bookmark: BookmarkModel;
+   background: BackgroundModel;
 }

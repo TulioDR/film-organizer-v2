@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-import BackgroundImage from "../components/BackgroundImage";
 import ChangeShowcase from "../components/home/ChangeShowcase";
 import HomeSlider from "../components/home/HomeSlider";
 import MediaDescription from "../components/home/MediaDescription";
+import { useDispatch } from "react-redux";
+import { backgroundActions } from "@/store/slices/background-slice";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -25,9 +26,17 @@ export default function Home() {
    const [currentMedia, setCurrentMedia] = useState<any>(nowPlaying[0]);
    const [currentArray, setCurrentArray] = useState<any[]>(nowPlaying);
 
+   const dispatch = useDispatch();
    useEffect(() => {
-      setCurrentMedia(currentArray[activeIndex]);
-   }, [activeIndex, currentArray]);
+      const current = currentArray[activeIndex];
+      if (!current) return;
+      const background = {
+         backgroundImage: current.backdrop_path,
+         backgroundKey: current.id,
+      };
+      dispatch(backgroundActions.setBackground(background));
+      setCurrentMedia(current);
+   }, [activeIndex, currentArray, dispatch]);
 
    const [currentShowcase, setCurrentShowcase] = useState<
       "movies" | "series" | "upcoming"
@@ -49,7 +58,6 @@ export default function Home() {
             <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black"></div>
          ) : (
             <>
-               <BackgroundImage currentImg={currentMedia.backdrop_path} />
                <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
                   <ChangeShowcase
                      currentShowcase={currentShowcase}
