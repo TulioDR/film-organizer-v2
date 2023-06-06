@@ -10,7 +10,7 @@ export default function SidebarContainer({ children }: Props) {
    );
    return (
       <div
-         className={`fixed top-0 left-0 lg:static z-50 duration-300 ${
+         className={`fixed top-0 left-0 lg:static z-40 duration-300 ${
             revealSidebar ? "" : "-translate-x-full lg:translate-x-0"
          }`}
       >

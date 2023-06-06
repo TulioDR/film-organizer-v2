@@ -6,7 +6,7 @@ import PageTitle from "../../../components/PageTitle";
 import TransitionPoster from "../../transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../transitionPoster/hooks/useTransitionPoster";
 import useSearchCards from "../hooks/useSearchCards";
-import MainCardMobile from "./mainCardMobile/MainCardMobile";
+import MainCardMobile from "./MainCardMobile";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";

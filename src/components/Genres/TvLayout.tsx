@@ -1,4 +1,4 @@
-import GenreCard from "../../layout/cards/GenreCard";
+import GenreCard from "./GenreCard";
 
 type Props = {
    genres: any[];

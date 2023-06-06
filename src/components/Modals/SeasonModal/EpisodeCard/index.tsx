@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import InfoInPoster from "./InfoInPoster";
 
-import { changeDateFormat } from "../../../utils/date";
-import Poster from "../../../components/Poster";
+import { changeDateFormat } from "@/utils/date";
+import Poster from "@/components/Poster";
 import { useState } from "react";
 
 type Props = {
