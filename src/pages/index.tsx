@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import ChangeShowcase from "../components/home/ChangeShowcase";
-import HomeSlider from "../components/home/HomeSlider";
-import MediaDescription from "../components/home/MediaDescription";
+import ChangeShowcase from "../components/Home/ChangeShowcase";
+import HomeSlider from "../components/Home/HomeSlider";
+import MediaDescription from "../components/Home/MediaDescription";
 import { useDispatch } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
 

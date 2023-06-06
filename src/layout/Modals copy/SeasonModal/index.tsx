@@ -1,16 +1,17 @@
 import { getSeason } from "@/api/media";
 
 import React, { useEffect, useState } from "react";
-import SeasonModalContainer from "./SeasonModalContainer";
+
 import Poster from "@/components/Poster";
 import Date from "@/components/MediaDetails/MainInfo/Date";
 import InfoSubtitle from "@/components/MediaDetails/InfoSubtitle";
-import EpisodeCard from "@/components/Modals/SeasonModal/EpisodeCard";
+import EpisodeCard from "./EpisodeCard";
 import CloseSeasonButton from "./CloseSeasonButton";
 import SeasonTitle from "./SeasonTitle";
 import SeasonOverview from "./SeasonOverview";
 import SeasonSubtitle from "./SeasonSubtitle";
 import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
+import SeasonModalContainer from "./SeasonModalContainer";
 
 type Props = {
    close: () => void;
