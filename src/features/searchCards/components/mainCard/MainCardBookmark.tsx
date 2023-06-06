@@ -6,7 +6,11 @@ type Props = {
    isMediaSaved: boolean;
 };
 
-export default function Bookmark({ media, mediaType, isMediaSaved }: Props) {
+export default function MainCardBookmark({
+   media,
+   mediaType,
+   isMediaSaved,
+}: Props) {
    const { handleBookmarkClick } = useBookmark(media, mediaType);
    return (
       <button

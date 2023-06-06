@@ -10,7 +10,10 @@ export interface ListsModel {
 }
 export interface BookmarkModel {
    isLoginAdviceOpen: boolean;
-   mediaToSave: null | any;
+   mediaToSave: null | {
+      media: any;
+      mediaType: "tv" | "movie";
+   };
 }
 
 export default interface StoreModel {

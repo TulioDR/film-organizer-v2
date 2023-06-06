@@ -5,7 +5,7 @@ import { useState } from "react";
 import CardBack from "./CardBack";
 import BackButton from "./BackButton";
 import LearnMore from "./LearnMore";
-import Bookmark from "./Bookmark";
+import MainCardBookmark from "./MainCardBookmark";
 import BackInfo from "./BackInfo";
 import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
@@ -91,7 +91,7 @@ export default function MainCard({
                />
                <div className="flex justify-between items-center h-9 w-full">
                   <LearnMore onClick={onLearnMoreClick} />
-                  <Bookmark
+                  <MainCardBookmark
                      media={media}
                      mediaType={mediaType}
                      isMediaSaved={isMediaSaved}

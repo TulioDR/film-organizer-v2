@@ -20,10 +20,10 @@ export default function HomeSlider({
       <AnimatePresence mode="wait">
          <motion.div
             key={currentShowcase}
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "100%", opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            // initial={{ y: "100%", opacity: 0 }}
+            // animate={{ y: 0, opacity: 1 }}
+            // exit={{ y: "100%", opacity: 0 }}
+            // transition={{ duration: 0.3 }}
             className="w-full"
          >
             <Swiper
