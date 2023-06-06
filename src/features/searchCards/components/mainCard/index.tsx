@@ -11,6 +11,7 @@ import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
 import usePosterAnimationContext from "../../../../context/PosterAnimationContext";
 import { useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    media: any;
@@ -50,7 +51,7 @@ export default function MainCard({
       setTransitionValues(media.poster_path, link, element, setIsInvisible);
    };
 
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
    return (
       <motion.article

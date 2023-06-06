@@ -6,6 +6,8 @@ import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
 import { useUser } from "@supabase/auth-helpers-react";
 import UserImage from "./UserImage";
+import { useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
 
 export default function User() {
    const user = useUser();
@@ -28,16 +30,25 @@ export default function User() {
       setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
    }, [menu]);
 
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+
    return (
-      <div tabIndex={0} onBlur={handleBlur} className="relative">
+      <div
+         tabIndex={0}
+         onBlur={handleBlur}
+         className="relative p-[2px] rounded-full h-9 aspect-square"
+         style={{
+            background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
+         }}
+      >
          <motion.button
             onClick={toggle}
-            className="grid place-content-center h-9 w-9 rounded-full overflow-hidden bg-secondary shadow-lg relative"
+            className="grid place-content-center h-full w-full rounded-full overflow-hidden shadow-lg relative p-1"
          >
             {user ? (
                <UserImage />
             ) : (
-               <span className="material-icons">settings</span>
+               <span className="material-icons">user</span>
             )}
          </motion.button>
          {isOpen && (
