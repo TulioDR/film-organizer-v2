@@ -2,8 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 import { PosterAnimationProvider } from "../context/PosterAnimationContext";
-import LoginAdviceModal from "../layout/modals/loginAdvice/LoginAdviceModal";
-import SaveMediaModal from "../layout/modals/saveMedia/SaveMediaModal";
+
 import Navbar from "../layout/Navbar";
 import useInitialThemeColor from "@/hooks/useInitialThemeColor";
 import Sidebar from "@/layout/Sidebar";
@@ -13,6 +12,8 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { useDispatch } from "react-redux";
 import { listActions } from "@/store/slices/list-slice";
 import BackgroundImage from "@/components/BackgroundImage";
+import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
+import SaveMediaModal from "@/components/Modals/SaveMediaModal";
 
 type Props = {
    children: React.ReactNode;

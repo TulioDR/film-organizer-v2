@@ -1,6 +1,5 @@
-import React from "react";
-import RevealHorizontal from "../../../../animations/RevealHorizontal";
-import Date from "../../MainInfo/Date";
+import RevealHorizontal from "@/animations/RevealHorizontal";
+import Date from "@/components/MediaDetails/MainInfo/Date";
 
 type Props = {
    season: any;

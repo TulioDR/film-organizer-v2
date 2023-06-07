@@ -14,10 +14,11 @@ import { motion } from "framer-motion";
 
 import prisma from "../../lib/prisma";
 import TypePill from "../../components/list/TypePill";
-import DeleteMediaModal from "../../layout/modals/deleteMedia/DeleteMediaModal";
+
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
 import { useSelector } from "react-redux";
+import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 
 type Props = { listId: string; list: any; initialMedia: MediaModel[] };
 

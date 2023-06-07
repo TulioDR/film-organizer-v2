@@ -8,10 +8,11 @@ import { motion } from "framer-motion";
 import { staggerContainer } from "../../animations/StaggerCards";
 import { useUser } from "@supabase/auth-helpers-react";
 import ListsLoginAdvice from "../../components/manage/ListsLoginAdvice";
-import DeleteListModal from "../../layout/modals/deleteList/DeleteListModal";
+
 import ListFinder from "../../components/manage/ListFinder";
 import NoListsMessage from "../../components/manage/NoListsMessage";
 import { useSelector } from "react-redux";
+import DeleteListModal from "@/components/Modals/DeleteListModal";
 
 export default function Lists() {
    const user = useUser();

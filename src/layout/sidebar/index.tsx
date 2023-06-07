@@ -7,10 +7,11 @@ import SideSubtitle from "./SideSubtitle";
 import SideLine from "./SideLine";
 import { AnimateSharedLayout } from "framer-motion";
 import SideLinks from "./SideLinks";
-import ModalPortal from "../modals/ModalPortal";
-import CreateListModal from "../modals/createList/CreateListModal";
+
 import { useState } from "react";
 import SideLists from "./SideLists";
+import ModalPortal from "@/components/Modals/ModalPortal";
+import CreateListModal from "@/components/Modals/CreateListModal";
 
 export default function Sidebar() {
    const user = useUser();

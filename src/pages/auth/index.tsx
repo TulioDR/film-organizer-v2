@@ -14,8 +14,8 @@ import AuthErrorMessage from "../../components/auth/AuthErrorMessage";
 import AuthHeader from "../../components/auth/AuthHeader";
 
 import SocialLogin from "../../components/auth/socialLogin/SocialLogin";
-import EmailSentModal from "../../layout/modals/emailSent/EmailSentModal";
 import AppName from "../../components/auth/AppName";
+import EmailSentModal from "@/components/Modals/EmailSentModal";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const supabase = createServerSupabaseClient(context);
@@ -122,12 +122,12 @@ export default function Auth() {
                <SkipButton />
             </div>
          </AuthContainer>
-         {/* <EmailSentModal
+         <EmailSentModal
             isOpen={showModal}
             close={closeModal}
             email={emailSent}
             forgotPassWord={forgotPassWord}
-         /> */}
+         />
          <AuthErrorMessage error={error} setError={setError} />
       </div>
    );

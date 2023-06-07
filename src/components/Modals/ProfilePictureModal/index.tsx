@@ -1,6 +1,5 @@
-import { useUser } from "@supabase/auth-helpers-react";
 import { AnimatePresence, motion } from "framer-motion";
-import ProfileImage from "../../../components/profile/ProfileImage";
+import ProfileImage from "../../profile/ProfileImage";
 
 type Props = {
    isOpen: boolean;
@@ -8,8 +7,6 @@ type Props = {
 };
 
 export default function ProfilePictureModal({ isOpen, close }: Props) {
-   const user = useUser();
-   console.log(user);
    return (
       <AnimatePresence>
          {isOpen && (
