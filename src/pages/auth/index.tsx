@@ -5,16 +5,16 @@ import { GetServerSideProps } from "next";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
-import AuthBackground from "../../components/auth/AuthBackground";
-import AuthContainer from "../../components/auth/AuthContainer";
-import FormikForm from "../../components/auth/authForm/FormikForm";
+import AuthBackground from "../../components/Auth/AuthBackground";
+import AuthContainer from "../../components/Auth/AuthContainer";
+import FormikForm from "../../components/Auth/AuthForm/FormikForm";
 
-import SkipButton from "../../components/auth/SkipButton";
-import AuthErrorMessage from "../../components/auth/AuthErrorMessage";
-import AuthHeader from "../../components/auth/AuthHeader";
+import SkipButton from "../../components/Auth/SkipButton";
+import AuthErrorMessage from "../../components/Auth/AuthErrorMessage";
+import AuthHeader from "../../components/Auth/AuthHeader";
 
-import SocialLogin from "../../components/auth/socialLogin/SocialLogin";
-import AppName from "../../components/auth/AppName";
+import SocialLogin from "../../components/Auth/SocialLogin/SocialLogin";
+import AppName from "../../components/Auth/AppName";
 import EmailSentModal from "@/components/Modals/EmailSentModal";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

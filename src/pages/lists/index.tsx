@@ -1,16 +1,16 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import ListCard from "../../components/manage/ListCard";
+import ListCard from "../../components/Manage/ListCard";
 import PageTitle from "../../components/PageTitle";
 import ListModel from "../../models/listModel";
 import { motion } from "framer-motion";
 import { staggerContainer } from "../../animations/StaggerCards";
 import { useUser } from "@supabase/auth-helpers-react";
-import ListsLoginAdvice from "../../components/manage/ListsLoginAdvice";
+import ListsLoginAdvice from "../../components/Manage/ListsLoginAdvice";
 
-import ListFinder from "../../components/manage/ListFinder";
-import NoListsMessage from "../../components/manage/NoListsMessage";
+import ListFinder from "../../components/Manage/ListFinder";
+import NoListsMessage from "../../components/Manage/NoListsMessage";
 import { useSelector } from "react-redux";
 import DeleteListModal from "@/components/Modals/DeleteListModal";
 

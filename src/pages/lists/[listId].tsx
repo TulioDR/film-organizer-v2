@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-import DeleteButton from "../../components/list/DeleteButton";
+import DeleteButton from "../../components/ListDetails/DeleteButton";
 
 import PageTitle from "../../components/PageTitle";
 import MediaModel from "../../models/MediaModel";
-import SavedCard from "../../components/list/SavedCard";
+import SavedCard from "../../components/ListDetails/SavedCard";
 
 import { getMedia } from "../../api/media";
 
@@ -13,7 +13,7 @@ import { staggerContainer } from "../../animations/StaggerCards";
 import { motion } from "framer-motion";
 
 import prisma from "../../lib/prisma";
-import TypePill from "../../components/list/TypePill";
+import TypePill from "../../components/ListDetails/TypePill";
 
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
