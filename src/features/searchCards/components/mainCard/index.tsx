@@ -10,12 +10,14 @@ import BackInfo from "./BackInfo";
 import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
 import usePosterAnimationContext from "../../../../context/PosterAnimationContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import { backgroundActions } from "@/store/slices/background-slice";
 
 type Props = {
    media: any;
    mediaType: "tv" | "movie";
+   leavePage: () => void;
    setTransitionValues: (
       posterPath: string,
       link: string,
@@ -28,6 +30,7 @@ export default function MainCard({
    media,
    mediaType,
    setTransitionValues,
+   leavePage,
 }: Props) {
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
@@ -37,11 +40,17 @@ export default function MainCard({
    const toggle = () => setIsOpen(!isOpen);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
+   const dispatch = useDispatch();
 
    const onLearnMoreClick = () => {
       changeAnimatePoster(false);
       setIsLeaving(true);
       toggle();
+      const background = {
+         backgroundImage: media.backdrop_path,
+         backgroundKey: media.id,
+      };
+      dispatch(backgroundActions.setBackground(background));
    };
 
    const onExitComplete = () => {
@@ -49,6 +58,7 @@ export default function MainCard({
       const link = `/${mediaType}/${media.id}`;
       const element = transitionCard.current!;
       setTransitionValues(media.poster_path, link, element, setIsInvisible);
+      leavePage();
    };
 
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
@@ -58,7 +68,6 @@ export default function MainCard({
          layout
          ref={transitionCard}
          variants={staggerItem}
-         whileHover={{ y: -8 }}
          style={{
             background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
          }}

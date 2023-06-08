@@ -19,7 +19,7 @@ export default function LoadingPage({ isLoading, onAnimationComplete }: Props) {
             >
                Loading...
             </motion.div>
-            <div className="h-9 w-full sm:w-96 border-4 border-white rounded-full overflow-hidden">
+            <div className="h-9 w-full sm:w-96 border-2 border-white rounded-full overflow-hidden">
                <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: isLoading ? "75%" : "100%" }}

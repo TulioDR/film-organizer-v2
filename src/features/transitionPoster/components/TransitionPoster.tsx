@@ -9,42 +9,36 @@ type Props = {
    link: string;
 };
 
-// WARNING, PARENT ELEMENT MUST HAVE POSITION:RELATIVE
 export default function TransitionPoster({
    link,
    selectedImg,
    position,
 }: Props) {
-   const { push } = useRouter();
+   const router = useRouter();
    const { top, left, height } = position;
+   const onAnimationComplete = () => {
+      router.push(link);
+   };
    return (
       <AnimatePresence>
          {selectedImg && (
-            <>
-               <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="absolute top-0 left-0 w-full h-full bg-primary"
-               ></motion.div>
-               <motion.div
-                  onAnimationComplete={() => push(link)}
-                  initial={{ top: top, x: left, height }}
-                  animate={{ top: 76, x: 0, height: "calc(100vh - 96px)" }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="fixed rounded-xl aspect-[2/3] overflow-hidden"
-               >
-                  <div className="relative w-full h-full">
-                     <Image
-                        alt="selected"
-                        src={selectedImg}
-                        fill
-                        sizes="100%"
-                        priority
-                     />
-                  </div>
-               </motion.div>
-            </>
+            <motion.div
+               onAnimationComplete={onAnimationComplete}
+               initial={{ top: top, x: left, height }}
+               animate={{ top: 96, x: 40, height: "calc(100vh - 136px)" }}
+               transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}
+               className="fixed"
+            >
+               <div className="relative h-full aspect-[2/3] rounded-xl overflow-hidden">
+                  <Image
+                     alt="selected"
+                     src={selectedImg}
+                     fill
+                     sizes="100%"
+                     priority
+                  />
+               </div>
+            </motion.div>
          )}
       </AnimatePresence>
    );

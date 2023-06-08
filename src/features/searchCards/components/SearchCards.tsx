@@ -10,6 +10,7 @@ import MainCardMobile from "./MainCardMobile";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    title: string;
@@ -18,7 +19,7 @@ type Props = {
 };
 
 export default function SearchCards({ title, mediaType, url }: Props) {
-   const { expandSidebar } = useSelector((state: any) => state.sidebar);
+   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    const [showLoadingAnimation, setShowLoadingAnimation] =
       useState<boolean>(true);
@@ -34,6 +35,11 @@ export default function SearchCards({ title, mediaType, url }: Props) {
       dispatch(backgroundActions.removeBackground());
    }, [dispatch]);
 
+   const [hidePage, setHidePage] = useState<boolean>(false);
+   const leavePage = () => {
+      setHidePage(true);
+   };
+
    return (
       <PageAnimationContainer
          title={title}
@@ -43,7 +49,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
          showLoadingAnimation={showLoadingAnimation}
          setShowLoadingAnimation={setShowLoadingAnimation}
       >
-         <div className="px-10">
+         <div className={`px-10 ${hidePage ? "opacity-0 duration-300" : ""}`}>
             <PageTitle>{title}</PageTitle>
             <motion.div
                variants={staggerContainer}
@@ -66,6 +72,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                            media={media}
                            mediaType={mediaType}
                            setTransitionValues={setTransitionValues}
+                           leavePage={leavePage}
                         />
                      </div>
                   </Fragment>
