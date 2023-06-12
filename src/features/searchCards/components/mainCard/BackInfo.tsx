@@ -13,16 +13,22 @@ export default function BackInfo({
 }: Props) {
    return (
       <div className="w-full flex-1 flex flex-col overflow-hidden pb-4">
-         <h4 className="leading-5 font-semibold text-dark-text-hard">
-            {title}
-         </h4>
-         <div className="flex justify-between items-center text-dark-text-soft text-sm">
-            <span className="">{year ? year.substring(0, 4) : "N/A"}</span>
-            <div className="flex items-center space-x-1">
-               <span className="material-icons text-yellow-500 text-sm">
-                  star_rate
+         <div className="flex justify-between gap-1 text-dark-text-soft">
+            <div className="flex-1">
+               <h4 className="leading-5 font-semibold text-dark-text-hard text-base uppercase">
+                  {title}
+               </h4>
+               <div className="text-xs">
+                  {year ? year.substring(0, 4) : "N/A"}
+               </div>
+            </div>
+            <div className="flex items-start gap-[1px] h-7">
+               <span className="text-xl font-bold text-white">
+                  {voteAverage || "N/A"}
                </span>
-               <span>{voteAverage || "N/A"}</span>
+               <span className="material-icons-round text-yellow-600 !text-2xl h-full grid place-content-center">
+                  star
+               </span>
             </div>
          </div>
          <div className="flex-1 relative overflow-hidden text-sm leading-tight text-dark-text-normal mt-1">

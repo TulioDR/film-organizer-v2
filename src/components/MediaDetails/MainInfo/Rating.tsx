@@ -13,9 +13,19 @@ export default function Rating({ rating, isMovie }: Props) {
          );
       else return country?.rating;
    };
+
+   const rated = getRating(rating, isMovie);
+
    return (
       <span className="">
-         {getRating(rating, isMovie) || "No Rating Available"}
+         {rated ? (
+            <>
+               <span className="mr-1 uppercase text-xs">Rated</span>
+               <span className="text-base">{rated}</span>
+            </>
+         ) : (
+            <span className="text-xs">Not yet Rated</span>
+         )}
       </span>
    );
 }

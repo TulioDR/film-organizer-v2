@@ -64,6 +64,7 @@ export default function MainCard({
 
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    const { handleBookmarkClick } = useBookmark(media, mediaType);
+
    return (
       <motion.article
          layout
