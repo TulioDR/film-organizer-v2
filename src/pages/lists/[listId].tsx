@@ -4,7 +4,6 @@ import DeleteButton from "../../components/ListDetails/DeleteButton";
 
 import PageTitle from "../../components/PageTitle";
 import MediaModel from "../../models/MediaModel";
-import SavedCard from "../../components/ListDetails/SavedCard";
 
 import { getMedia } from "../../api/media";
 
@@ -19,6 +18,7 @@ import TransitionPoster from "../../features/transitionPoster/components/Transit
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
 import { useSelector } from "react-redux";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
+import SavedMediaCard from "@/components/ListDetails/SavedMediaCard";
 
 type Props = { listId: string; list: any; initialMedia: MediaModel[] };
 
@@ -130,7 +130,7 @@ export default function ListID({ listId, list, initialMedia }: Props) {
             }`}
          >
             {filteredMedia.map((media) => (
-               <SavedCard
+               <SavedMediaCard
                   key={media.name}
                   media={media}
                   isDeleteOpen={isDeleteOpen}

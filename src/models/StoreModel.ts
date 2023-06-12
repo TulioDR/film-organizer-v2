@@ -22,6 +22,9 @@ export interface BackgroundModel {
    backgroundImage: string | StaticImageData | null;
    backgroundKey: string;
 }
+export interface PosterAnimationModel {
+   animatePoster: boolean;
+}
 
 export default interface StoreModel {
    theme: ThemeModel;
@@ -29,4 +32,5 @@ export default interface StoreModel {
    lists: ListsModel;
    bookmark: BookmarkModel;
    background: BackgroundModel;
+   posterAnimation: PosterAnimationModel;
 }

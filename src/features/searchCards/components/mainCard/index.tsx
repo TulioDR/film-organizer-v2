@@ -8,12 +8,12 @@ import LearnMore from "./LearnMore";
 import MainCardBookmark from "./MainCardBookmark";
 import BackInfo from "./BackInfo";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
-import usePosterAnimationContext from "../../../../context/PosterAnimationContext";
 import { useDispatch, useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import { backgroundActions } from "@/store/slices/background-slice";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 import useBookmark from "@/hooks/useBookmark";
+import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 
 type Props = {
    media: any;
@@ -35,8 +35,6 @@ export default function MainCard({
 }: Props) {
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
 
-   const { changeAnimatePoster } = usePosterAnimationContext();
-
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => setIsOpen(!isOpen);
 
@@ -44,7 +42,6 @@ export default function MainCard({
    const dispatch = useDispatch();
 
    const onLearnMoreClick = () => {
-      changeAnimatePoster(false);
       setIsLeaving(true);
       toggle();
       const background = {
@@ -52,6 +49,7 @@ export default function MainCard({
          backgroundKey: media.id,
       };
       dispatch(backgroundActions.setBackground(background));
+      dispatch(posterAnimationActions.changePosterAnimation(false));
    };
 
    const onExitComplete = () => {

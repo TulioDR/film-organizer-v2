@@ -1,8 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-
-import { PosterAnimationProvider } from "../context/PosterAnimationContext";
-
 import Navbar from "../layout/Navbar";
 import useInitialThemeColor from "@/hooks/useInitialThemeColor";
 import Sidebar from "@/layout/Sidebar";
@@ -40,14 +37,12 @@ export default function MainPageContainer({ children }: Props) {
             id="scroll-container"
             className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden"
          >
-            <PosterAnimationProvider>
-               <Navbar />
-               <AnimatePresence mode="wait">
-                  <motion.div key={router.asPath} className="relative">
-                     {children}
-                  </motion.div>
-               </AnimatePresence>
-            </PosterAnimationProvider>
+            <Navbar />
+            <AnimatePresence mode="wait">
+               <motion.div key={router.asPath} className="relative">
+                  {children}
+               </motion.div>
+            </AnimatePresence>
          </div>
       </div>
    );

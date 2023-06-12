@@ -5,6 +5,7 @@ import sidebarSlice from "./slices/sidebar-slice";
 import listSlice from "./slices/list-slice";
 import bookmarkSlice from "./slices/bookmark-slice";
 import backgroundSlice from "./slices/background-slice";
+import posterAnimationSlice from "./slices/poster-animation-slice";
 
 const store = configureStore({
    reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
       lists: listSlice.reducer,
       bookmark: bookmarkSlice.reducer,
       background: backgroundSlice.reducer,
+      posterAnimation: posterAnimationSlice.reducer,
    },
 });
 const makeStore = () => store;

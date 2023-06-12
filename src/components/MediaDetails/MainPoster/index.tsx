@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import usePosterAnimationContext from "../../../context/PosterAnimationContext";
+import { useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    alt: string;
@@ -9,7 +10,9 @@ type Props = {
 };
 
 export default function MainPoster({ alt, posterPath }: Props) {
-   const { animatePoster } = usePosterAnimationContext();
+   const { animatePoster } = useSelector(
+      (state: StoreModel) => state.posterAnimation
+   );
    return (
       <motion.div
          initial={{ x: animatePoster ? "-100%" : 0 }}
