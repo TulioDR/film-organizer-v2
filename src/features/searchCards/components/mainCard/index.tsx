@@ -7,12 +7,13 @@ import BackButton from "./BackButton";
 import LearnMore from "./LearnMore";
 import MainCardBookmark from "./MainCardBookmark";
 import BackInfo from "./BackInfo";
-import useIsMediaSaved from "../../../../hooks/useIsMediaSaved";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
 import usePosterAnimationContext from "../../../../context/PosterAnimationContext";
 import { useDispatch, useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import { backgroundActions } from "@/store/slices/background-slice";
+import useIsMediaSaved from "@/hooks/useIsMediaSaved";
+import useBookmark from "@/hooks/useBookmark";
 
 type Props = {
    media: any;
@@ -33,7 +34,7 @@ export default function MainCard({
    leavePage,
 }: Props) {
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
-   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
+
    const { changeAnimatePoster } = usePosterAnimationContext();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -63,6 +64,8 @@ export default function MainCard({
 
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
+   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
+   const { handleBookmarkClick } = useBookmark(media, mediaType);
    return (
       <motion.article
          layout
@@ -103,8 +106,7 @@ export default function MainCard({
                <div className="flex justify-between items-center h-9 w-full">
                   <LearnMore onClick={onLearnMoreClick} />
                   <MainCardBookmark
-                     media={media}
-                     mediaType={mediaType}
+                     onClick={handleBookmarkClick}
                      isMediaSaved={isMediaSaved}
                   />
                </div>

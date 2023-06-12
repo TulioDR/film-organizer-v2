@@ -12,6 +12,7 @@ export interface ListsModel {
 }
 export interface BookmarkModel {
    isLoginAdviceOpen: boolean;
+   isSaveMediaOpen: boolean;
    mediaToSave: null | {
       media: any;
       mediaType: "tv" | "movie";

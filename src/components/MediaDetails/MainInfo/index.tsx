@@ -4,7 +4,7 @@ import Date from "./Date";
 import Rating from "./Rating";
 import Runtime from "./Runtime";
 import Score from "./Score";
-import MainBookmark from "../MainBookmark";
+import MainDetailsBookmark from "../MainDetailsBookmark";
 import { motion } from "framer-motion";
 
 import RevealHorizontal from "@/animations/RevealHorizontal";
@@ -65,12 +65,12 @@ export default function MainInfo({ media, mediaType }: Props) {
                   <span>{separateArray(media.genres)}</span>
                </div>
             </RevealHorizontal>
-            <RevealHorizontal stagger>
-               <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5">
+               <RevealHorizontal stagger>
                   <Score score={media.vote_average} />
-                  <MainBookmark media={media} mediaType={mediaType} />
-               </div>
-            </RevealHorizontal>
+               </RevealHorizontal>
+               <MainDetailsBookmark media={media} mediaType={mediaType} />
+            </div>
          </motion.div>
       </div>
    );

@@ -11,7 +11,9 @@ import StoreModel from "@/models/StoreModel";
 
 export default function SaveMediaModal() {
    const { lists } = useSelector((state: StoreModel) => state.lists);
-   const { mediaToSave } = useSelector((state: StoreModel) => state.bookmark);
+   const { mediaToSave, isSaveMediaOpen } = useSelector(
+      (state: StoreModel) => state.bookmark
+   );
 
    const dispatch = useDispatch();
    const closeModal = () => {
@@ -20,7 +22,7 @@ export default function SaveMediaModal() {
 
    if (!mediaToSave) return <></>;
    return (
-      <ModalPortal isOpen={mediaToSave !== null}>
+      <ModalPortal isOpen={isSaveMediaOpen}>
          <ModalContainer close={closeModal}>
             <ModalTitle>Save to...</ModalTitle>
             <div className="w-56 border-y border-dark-text-soft">

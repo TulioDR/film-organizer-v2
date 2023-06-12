@@ -4,15 +4,17 @@ import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { SpinnerCircularFixed } from "spinners-react";
 type Props = {
    media: any;
    mediaType: "movie" | "tv";
 };
 
-export default function MainBookmark({ mediaType, media }: Props) {
+export default function MainDetailsBookmark({ mediaType, media }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
-   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
+
    const { handleBookmarkClick } = useBookmark(media, mediaType);
+   const { isMediaSaved, isLoading } = useIsMediaSaved(media.id, mediaType);
 
    const buttonRef = useRef<HTMLDivElement>(null);
    const [isFixed, setIsFixed] = useState<boolean>(false);
@@ -33,8 +35,10 @@ export default function MainBookmark({ mediaType, media }: Props) {
    }, [isFixed]);
 
    return (
-      <div ref={buttonRef} className="relative h-12 aspect-square">
+      <div ref={buttonRef} className="h-12 aspect-square">
          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.4 } }}
             style={{ backgroundColor: themeColor }}
             onClick={handleBookmarkClick}
             layout="position"
@@ -42,9 +46,21 @@ export default function MainBookmark({ mediaType, media }: Props) {
                isFixed ? "fixed top-24 right-[52px]" : ""
             }`}
          >
-            <span className="material-icons !text-4xl">
-               {isMediaSaved ? "bookmark" : "bookmark_border"}
-            </span>
+            {isLoading ? (
+               <div className="w-full h-full flex items-center justify-center">
+                  <SpinnerCircularFixed
+                     size={"75%"}
+                     thickness={100}
+                     speed={100}
+                     color={"white"}
+                     secondaryColor="gray"
+                  />
+               </div>
+            ) : (
+               <span className="material-icons !text-4xl">
+                  {isMediaSaved ? "bookmark" : "bookmark_border"}
+               </span>
+            )}
          </motion.button>
       </div>
    );

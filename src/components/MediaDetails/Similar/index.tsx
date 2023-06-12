@@ -13,7 +13,7 @@ export default function Similar({ media, mediaType }: Props) {
          <InfoSubtitle>
             Similar {mediaType === "movie" ? "Movies" : "Series"}
          </InfoSubtitle>
-         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-2 gap-5">
+         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-5">
             {media.similar.results.map((sim: any) => (
                <Link
                   key={sim.id}

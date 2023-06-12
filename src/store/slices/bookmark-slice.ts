@@ -4,14 +4,16 @@ const bookmarkSlice = createSlice({
    name: "bookmark",
    initialState: {
       isLoginAdviceOpen: false,
+      isSaveMediaOpen: false,
       mediaToSave: null,
    },
    reducers: {
       openSaveMediaModal(state, action) {
+         state.isSaveMediaOpen = true;
          state.mediaToSave = action.payload;
       },
       closeSaveMediaModal(state) {
-         state.mediaToSave = null;
+         state.isSaveMediaOpen = false;
       },
       openLoginAdviceModal(state) {
          state.isLoginAdviceOpen = true;

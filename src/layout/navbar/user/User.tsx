@@ -43,7 +43,7 @@ export default function User() {
       >
          <motion.button
             onClick={toggle}
-            className="grid place-content-center h-full w-full rounded-full overflow-hidden shadow-lg relative p-1"
+            className="h-full w-full rounded-full overflow-hidden shadow-lg relative"
          >
             {user ? (
                <UserImage />

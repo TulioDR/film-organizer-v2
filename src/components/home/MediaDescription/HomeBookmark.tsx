@@ -6,9 +6,9 @@ type Props = {
 };
 
 export default function HomeBookmark({ movie }: Props) {
+   const { handleBookmarkClick } = useBookmark(movie, "movie");
    const { isMediaSaved } = useIsMediaSaved(movie.id, "movie");
 
-   const { handleBookmarkClick } = useBookmark(movie, "movie");
    return (
       <button
          onClick={handleBookmarkClick}

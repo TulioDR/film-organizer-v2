@@ -6,9 +6,13 @@ import { useSelector } from "react-redux";
 
 export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
+   const [isLoading, setIsLoading] = useState<boolean>(true);
+
    const user = useUser();
 
-   const { mediaToSave } = useSelector((state: StoreModel) => state.bookmark);
+   const { mediaToSave, isSaveMediaOpen } = useSelector(
+      (state: StoreModel) => state.bookmark
+   );
 
    useEffect(() => {
       const getIsMediaSaved = async () => {
@@ -16,17 +20,20 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
             setIsMediaSaved(false);
             return;
          }
+         if (isSaveMediaOpen) return;
          if (mediaToSave && mediaToSave.media.id !== id) return;
-         const foundedInAList = await getFirstMedia({
+         console.log("checking if media is saved");
+         setIsLoading(true);
+         const foundInAList = await getFirstMedia({
             media_id: id,
             media_type: type,
          });
-         console.log("checking if media is saved");
-         if (foundedInAList) setIsMediaSaved(true);
+         setIsLoading(false);
+         if (foundInAList) setIsMediaSaved(true);
          else setIsMediaSaved(false);
       };
       getIsMediaSaved();
-   }, [id, type, user, mediaToSave]);
+   }, [id, type, user, mediaToSave, isSaveMediaOpen]);
 
-   return { isMediaSaved };
+   return { isMediaSaved, isLoading };
 }

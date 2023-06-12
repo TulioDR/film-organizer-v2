@@ -1,22 +1,11 @@
-import useBookmark from "@/hooks/useBookmark";
-
 type Props = {
-   media: any;
-   mediaType: "movie" | "tv";
    isMediaSaved: boolean;
+   onClick: () => void;
 };
 
-export default function MainCardBookmark({
-   media,
-   mediaType,
-   isMediaSaved,
-}: Props) {
-   const { handleBookmarkClick } = useBookmark(media, mediaType);
+export default function MainCardBookmark({ isMediaSaved, onClick }: Props) {
    return (
-      <button
-         onClick={handleBookmarkClick}
-         className="h-full grid place-content-center"
-      >
+      <button onClick={onClick} className="h-full grid place-content-center">
          <span className="material-icons !text-4xl">
             {isMediaSaved ? "bookmark" : "bookmark_border"}
          </span>
