@@ -13,7 +13,7 @@ export default function BackInfo({
 }: Props) {
    return (
       <div className="w-full flex-1 flex flex-col overflow-hidden pb-4">
-         <div className="flex justify-between gap-1 text-dark-text-soft">
+         <div className="flex justify-between gap-2 text-dark-text-soft">
             <div className="flex-1">
                <h4 className="leading-5 font-semibold text-dark-text-hard text-base uppercase">
                   {title}
@@ -26,7 +26,7 @@ export default function BackInfo({
                <span className="text-xl font-bold text-white">
                   {voteAverage || "N/A"}
                </span>
-               <span className="material-icons-round text-yellow-600 !text-2xl h-full grid place-content-center">
+               <span className="material-icons-round text-yellow-600 !text-lg grid place-content-center -translate-y-[2px]">
                   star
                </span>
             </div>

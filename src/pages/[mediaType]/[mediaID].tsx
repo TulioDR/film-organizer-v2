@@ -40,7 +40,7 @@ export default function Details({ mediaType, media }: Props) {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      const container = document.getElementById("scroll-container")!;
+      const container = document.body;
       container.scrollTo({ top: 0 });
       console.log(media);
       const background = {

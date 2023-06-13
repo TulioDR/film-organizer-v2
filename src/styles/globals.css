@@ -6,7 +6,7 @@ html,
 body {
    padding: 0;
    margin: 0;
-   @apply font-roboto;
+   @apply font-roboto text-white;
 }
 
 a {
@@ -18,22 +18,20 @@ a {
    box-sizing: border-box;
 }
 
-#scroll-container::-webkit-scrollbar {
+body::-webkit-scrollbar {
    width: 12px;
 }
-
-#scroll-container::-webkit-scrollbar-track {
-   @apply bg-dark-bg-secondary;
+body::-webkit-scrollbar-track {
+   @apply bg-primary;
 }
-#scroll-container::-webkit-scrollbar-thumb {
-   @apply bg-dark-text-soft;
+body::-webkit-scrollbar-thumb {
+   @apply bg-silver;
 }
 
 /* Other Scroll bars */
 .main-scrollbar::-webkit-scrollbar {
    width: 8px;
 }
-
 .main-scrollbar::-webkit-scrollbar-track {
    @apply bg-dark-bg-primary;
 }

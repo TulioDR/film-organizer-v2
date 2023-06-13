@@ -33,7 +33,7 @@ const container = {
 export default function Genres({ isMovie, mediaType }: Props) {
    const title = `${isMovie ? "Movie" : "TV"} Genres`;
    useEffect(() => {
-      const container = document.getElementById("scroll-container")!;
+      const container = document.body;
       container.scrollTo({ top: 0 });
    }, []);
 

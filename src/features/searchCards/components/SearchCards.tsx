@@ -11,6 +11,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
 import StoreModel from "@/models/StoreModel";
+import LoadingMore from "./LoadingMore";
 
 type Props = {
    title: string;
@@ -26,7 +27,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
    const [isLoading, setIsLoading] = useState<boolean>(true);
    const [showPage, setShowPage] = useState<boolean>(false);
 
-   const { media } = useSearchCards(url, setIsLoading);
+   const { media, page, setPage } = useSearchCards(url, setIsLoading);
    const { selectedImg, link, position, setTransitionValues } =
       useTransitionPoster();
 
@@ -49,7 +50,11 @@ export default function SearchCards({ title, mediaType, url }: Props) {
          showLoadingAnimation={showLoadingAnimation}
          setShowLoadingAnimation={setShowLoadingAnimation}
       >
-         <div className={`px-10 ${hidePage ? "opacity-0 duration-300" : ""}`}>
+         <div
+            className={`px-10 pb-10 ${
+               hidePage ? "opacity-0 duration-300" : ""
+            }`}
+         >
             <PageTitle>{title}</PageTitle>
             <motion.div
                variants={staggerContainer}
@@ -79,6 +84,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                ))}
             </motion.div>
          </div>
+         <LoadingMore page={page} setPage={setPage} />
          <TransitionPoster
             link={link}
             position={position}

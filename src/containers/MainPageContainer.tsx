@@ -27,23 +27,20 @@ export default function MainPageContainer({ children }: Props) {
    }, [user]);
 
    return (
-      <div className="flex text-white">
+      <>
+         <div id="modals-container"></div>
          <BackgroundImage />
          <SaveMediaModal />
          <LoginAdviceModal />
-         <div id="modals-container"></div>
-         <Sidebar />
-         <div
-            id="scroll-container"
-            className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden"
-         >
-            <Navbar />
-            <AnimatePresence mode="wait">
-               <motion.div key={router.asPath} className="relative">
-                  {children}
-               </motion.div>
-            </AnimatePresence>
+         <div className="flex">
+            <Sidebar />
+            <div className="flex-1 overflow-x-hidden">
+               <Navbar />
+               <AnimatePresence mode="wait">
+                  <motion.div key={router.asPath}>{children}</motion.div>
+               </AnimatePresence>
+            </div>
          </div>
-      </div>
+      </>
    );
 }

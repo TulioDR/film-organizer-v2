@@ -29,7 +29,7 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
          }
       };
 
-      const container = document.getElementById("scroll-container")!;
+      const container = document.body;
       container.addEventListener("scroll", handleScroll, { passive: true });
       return () => container.removeEventListener("scroll", handleScroll);
    }, [isFixed]);
