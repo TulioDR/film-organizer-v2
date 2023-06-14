@@ -1,5 +1,5 @@
+import ProfileImage from "@/components/Profile/ProfileImage";
 import { AnimatePresence, motion } from "framer-motion";
-import ProfileImage from "../../profile/ProfileImage";
 
 type Props = {
    isOpen: boolean;

@@ -1,7 +1,7 @@
-import MediaModel from "../../models/MediaModel";
+import { SavedMediaModel } from "../../models/MediaModel";
 
 type Props = {
-   mediaToDelete: MediaModel[];
+   mediaToDelete: SavedMediaModel[];
    isDeleteOpen: boolean;
    onClick: () => void;
    openDeleteModal: () => void;

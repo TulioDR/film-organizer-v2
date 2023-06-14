@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import DeleteButton from "../../components/ListDetails/DeleteButton";
 
 import PageTitle from "../../components/PageTitle";
-import MediaModel from "../../models/MediaModel";
+import { SavedMediaModel } from "../../models/MediaModel";
 
 import { getMedia } from "../../api/media";
 
@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 import SavedMediaCard from "@/components/ListDetails/SavedMediaCard";
 
-type Props = { listId: string; list: any; initialMedia: MediaModel[] };
+type Props = { listId: string; list: any; initialMedia: SavedMediaModel[] };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { listId } = context.query!;
@@ -41,8 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function ListID({ listId, list, initialMedia }: Props) {
    const { expandSidebar } = useSelector((state: any) => state.sidebar);
 
-   const [media, setMedia] = useState<MediaModel[]>(initialMedia);
-   const [mediaToDelete, setMediaToDelete] = useState<MediaModel[]>([]);
+   const [media, setMedia] = useState<SavedMediaModel[]>(initialMedia);
+   const [mediaToDelete, setMediaToDelete] = useState<SavedMediaModel[]>([]);
 
    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
    const openDelete = () => {
@@ -62,7 +62,8 @@ export default function ListID({ listId, list, initialMedia }: Props) {
       closeDelete();
    };
 
-   const [filteredMedia, setFilteredMedia] = useState<any[]>(initialMedia);
+   const [filteredMedia, setFilteredMedia] =
+      useState<SavedMediaModel[]>(initialMedia);
    const [selectedType, setSelectedType] = useState<"movie" | "tv" | "all">(
       "all"
    );

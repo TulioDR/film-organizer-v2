@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { deleteMedia } from "../../../api/media";
-import MediaModel from "../../../models/MediaModel";
+import { SavedMediaModel } from "../../../models/MediaModel";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
@@ -12,7 +12,7 @@ import ModalPortal from "../ModalPortal";
 type Props = {
    isOpen: boolean;
    close: () => void;
-   mediaToDelete: MediaModel[];
+   mediaToDelete: SavedMediaModel[];
    list: any;
 };
 
@@ -22,8 +22,8 @@ export default function DeleteMediaModal({
    mediaToDelete,
    list,
 }: Props) {
-   const [movies, setMovies] = useState<MediaModel[]>([]);
-   const [tvSeries, setTvSeries] = useState<MediaModel[]>([]);
+   const [movies, setMovies] = useState<SavedMediaModel[]>([]);
+   const [tvSeries, setTvSeries] = useState<SavedMediaModel[]>([]);
 
    useEffect(() => {
       const movie = mediaToDelete.filter(

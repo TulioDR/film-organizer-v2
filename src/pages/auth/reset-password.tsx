@@ -1,15 +1,16 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import AppName from "../../components/auth/AppName";
-import AuthBackground from "../../components/auth/AuthBackground";
-import AuthContainer from "../../components/auth/AuthContainer";
-import AuthErrorMessage from "../../components/auth/AuthErrorMessage";
-import NewPasswordForm from "../../components/auth/resetPassword/NewPasswordForm";
-import SkipButton from "../../components/auth/SkipButton";
+import AppName from "../../components/Auth/AppName";
+import AuthBackground from "../../components/Auth/AuthBackground";
+import AuthContainer from "../../components/Auth/AuthContainer";
+import AuthErrorMessage from "../../components/Auth/AuthErrorMessage";
+
+import SkipButton from "../../components/Auth/SkipButton";
 import { GetServerSideProps } from "next";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import SuccessMessage from "../../components/auth/resetPassword/SuccessMessage";
+import SuccessMessage from "@/components/Auth/ResetPassword/SuccessMessage";
+import NewPasswordForm from "@/components/Auth/ResetPassword/NewPasswordForm";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const supabase = createServerSupabaseClient(context);

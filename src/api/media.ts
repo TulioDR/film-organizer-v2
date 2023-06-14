@@ -1,5 +1,5 @@
 import axios from "axios";
-import MediaModel from "../models/MediaModel";
+import { MediaModel } from "../models/MediaModel";
 const API = axios.create({ baseURL: "/api/media" });
 
 export const getMedia = async (listId: string) => {

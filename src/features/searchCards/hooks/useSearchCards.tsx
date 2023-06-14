@@ -9,7 +9,7 @@ export default function useSearchCards(
 
    useEffect(() => {
       const getData = async () => {
-         console.log("fetch is running");
+         console.log("fetching cards");
          const res = await fetch(`${url}/${page}`);
          const data = await res.json();
          if (page === 1) {

@@ -40,7 +40,6 @@ export default function SearchCards({ title, mediaType, url }: Props) {
    const leavePage = () => {
       setHidePage(true);
    };
-
    return (
       <PageAnimationContainer
          title={title}

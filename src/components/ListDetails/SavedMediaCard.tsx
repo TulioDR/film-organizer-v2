@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
 import useTransitionCard from "../../features/transitionPoster/hooks/useTransitionCard";
-import MediaModel from "../../models/MediaModel";
+import { SavedMediaModel } from "../../models/MediaModel";
 import Poster from "../Poster";
 import { useDispatch } from "react-redux";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
@@ -9,8 +9,8 @@ import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 type Props = {
    media: any;
    isDeleteOpen: boolean;
-   mediaToDelete: MediaModel[];
-   setMediaToDelete: React.Dispatch<React.SetStateAction<MediaModel[]>>;
+   mediaToDelete: SavedMediaModel[];
+   setMediaToDelete: React.Dispatch<React.SetStateAction<SavedMediaModel[]>>;
    setTransitionValues: (
       posterPath: string,
       link: string,

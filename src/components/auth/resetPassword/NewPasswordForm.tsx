@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
-import AuthInput from "../authForm/AuthInput";
-import SubmitButton from "../authForm/SubmitButton";
+import AuthInput from "../AuthForm/AuthInput";
+import SubmitButton from "../AuthForm/SubmitButton";
 
 type Props = {
    submitHandler: (values: any, reset: any) => any;

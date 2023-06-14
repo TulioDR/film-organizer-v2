@@ -13,6 +13,7 @@ import ScrollDownIcon from "@/components/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/MediaDetails/MainPoster";
 import { useDispatch } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
+import { MediaDetailsModel } from "@/models/MediaModel";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, mediaID } = context.query!;
@@ -33,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 type Props = {
    mediaType: "tv" | "movie";
-   media: any;
+   media: MediaDetailsModel;
 };
 
 export default function Details({ mediaType, media }: Props) {
