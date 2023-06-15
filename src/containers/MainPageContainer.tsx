@@ -4,11 +4,12 @@ import Navbar from "../layout/Navbar";
 import useInitialThemeColor from "@/hooks/useInitialThemeColor";
 import Sidebar from "@/layout/Sidebar";
 import { useEffect } from "react";
-import BackgroundImage from "@/components/BackgroundImage";
+
 import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
 import SaveMediaModal from "@/components/Modals/SaveMediaModal";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import { useUser } from "@supabase/auth-helpers-react";
+import BackgroundImage from "@/components/BackgroundImage";
 
 type Props = {
    children: React.ReactNode;

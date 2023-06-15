@@ -5,6 +5,7 @@ import posterNotFound from "../data/images/not-found/poster-not-found.jpg";
 import backPosterNotFound from "../data/images/not-found/back-poster-not-found.jpg";
 import personNotFound from "../data/images/not-found/person-not-found.jpg";
 import { useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
 
 const width = {
    sm: 92,
@@ -46,7 +47,7 @@ export default function Poster({
 
    const image = getPoster();
 
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
    return (
       <div
          className={`overflow-hidden  relative ${

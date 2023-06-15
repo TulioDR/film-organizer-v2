@@ -1,8 +1,9 @@
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import Backdrop from "./Backdrop";
 
 export default function BackgroundImage() {
    const { backgroundImage, backgroundKey } = useSelector(
@@ -30,17 +31,10 @@ export default function BackgroundImage() {
                   initial={{ filter: "brightness(0)" }}
                   animate={{ filter: "brightness(1)" }}
                   exit={{ filter: "brightness(0)" }}
-                  transition={{ duration: 0.2 }}
-                  className="relative w-full h-full "
+                  transition={{ duration: 0.3 }}
+                  className="relative w-full h-full"
                >
-                  <Image
-                     src={src}
-                     alt={backgroundKey}
-                     fill
-                     sizes="100%"
-                     priority
-                     className="object-cover"
-                  />
+                  <Backdrop src={src} backgroundKey={backgroundKey} />
                </motion.div>
             </AnimatePresence>
          )}
