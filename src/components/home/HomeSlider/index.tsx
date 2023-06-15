@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import HomeNavButtonsContainer from "./HomeNavButtonsContainer";
 import HomeCard from "./HomeCard";
 import { AnimatePresence, motion } from "framer-motion";
+import { staggerContainer } from "@/animations/StaggerCards";
 
 type Props = {
    displayedCards: any[];
@@ -20,10 +21,10 @@ export default function HomeSlider({
       <AnimatePresence mode="wait">
          <motion.div
             key={currentShowcase}
-            // initial={{ y: "100%", opacity: 0 }}
-            // animate={{ y: 0, opacity: 1 }}
-            // exit={{ y: "100%", opacity: 0 }}
-            // transition={{ duration: 0.3 }}
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             className="w-full"
          >
             <Swiper

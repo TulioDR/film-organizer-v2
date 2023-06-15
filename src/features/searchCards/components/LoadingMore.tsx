@@ -16,7 +16,7 @@ export default function LoadingMore({ page, setPage }: Props) {
          setPage((page) => page + 1);
          console.log("load more");
       }
-   }, [isInView]);
+   }, [isInView, setPage]);
 
    if (page >= 4) return <></>;
    return (

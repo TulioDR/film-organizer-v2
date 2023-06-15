@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MediaModel } from "../models/MediaModel";
+import { SavedMediaModel } from "../models/MediaModel";
 const API = axios.create({ baseURL: "/api/media" });
 
 export const getMedia = async (listId: string) => {
@@ -50,7 +50,7 @@ export const deleteUniqueMedia = async (params: any) => {
    }
 };
 
-export const createMedia = async (media: MediaModel) => {
+export const createMedia = async (media: SavedMediaModel) => {
    try {
       const data = await API.post("/", media);
       return data;

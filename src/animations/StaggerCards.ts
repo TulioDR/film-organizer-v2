@@ -1,6 +1,6 @@
 export const staggerContainer = {
    initial: {},
-   animate: { transition: { staggerChildren: 0.1 } },
+   animate: { transition: { staggerChildren: 0.15 } },
    exit: {
       opacity: 0,
       transition: { duration: 0.4 },

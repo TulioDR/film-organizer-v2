@@ -81,7 +81,7 @@ export default function Details({ mediaType, media }: Props) {
                <Trailers trailers={media.videos.results} />
             </div>
             <div className="">
-               <div className="xl:border-l border-white xl:pl-10 w-full xl:w-80 2xl:w-96">
+               <div className="mt-10 xl:mt-0 xl:border-l border-white xl:pl-10 w-full xl:w-80 2xl:w-96">
                   <Similar media={media} mediaType={mediaType} />
                </div>
             </div>
