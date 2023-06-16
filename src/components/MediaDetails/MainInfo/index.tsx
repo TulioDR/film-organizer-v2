@@ -30,13 +30,13 @@ export default function MainInfo({ media, mediaType }: Props) {
       ));
    };
    return (
-      <div className="flex-1 overflow-hidden h-full pl-10">
+      <div className="flex-1 overflow-hidden h-full md:pl-10">
          <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full h-full flex flex-col gap-5 justify-center overflow-hidden"
+            className="w-full h-full flex flex-col items-end md:items-start gap-5 justify-center overflow-hidden"
          >
             <RevealHorizontal stagger>
                <MainTitle>{media.title || media.name}</MainTitle>

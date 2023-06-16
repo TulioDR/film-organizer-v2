@@ -17,7 +17,7 @@ export default function TransitionPoster({
    const router = useRouter();
    const { top, left, height } = position;
    const onAnimationComplete = () => {
-      router.push(link);
+      // router.push(link);
    };
    return (
       <AnimatePresence>
@@ -26,7 +26,7 @@ export default function TransitionPoster({
                onAnimationComplete={onAnimationComplete}
                initial={{ top: top, x: left, height }}
                animate={{ top: 96, x: 40, height: "calc(100vh - 136px)" }}
-               transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}
+               transition={{ duration: 3, ease: [0.645, 0.045, 0.355, 1] }}
                className="fixed"
             >
                <div className="relative h-full aspect-[2/3] rounded-xl overflow-hidden">

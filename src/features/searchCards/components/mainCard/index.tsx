@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { staggerItem } from "../../../../animations/StaggerCards";
 import Poster from "../../../../components/Poster";
 import { useState } from "react";
 import CardBack from "./CardBack";
@@ -14,6 +13,7 @@ import { backgroundActions } from "@/store/slices/background-slice";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 import useBookmark from "@/hooks/useBookmark";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
+// import { cards } from "@/animations/CardsAnimations";
 
 type Props = {
    media: any;
@@ -65,11 +65,20 @@ export default function MainCard({
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    const { handleBookmarkClick } = useBookmark(media, mediaType);
 
+   const cards = {
+      initial: { opacity: 0, scale: 0.7 },
+      animate: {
+         opacity: 1,
+         scale: 1,
+         transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] },
+      },
+      exit: {},
+   };
+
    return (
       <motion.article
-         layout
          ref={transitionCard}
-         variants={staggerItem}
+         variants={cards}
          style={{
             background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
          }}

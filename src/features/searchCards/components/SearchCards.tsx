@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 import MainCard from "./MainCard";
-import { staggerContainer } from "../../../animations/StaggerCards";
-import PageAnimationContainer from "../../../containers/PageAnimationContainer";
-import PageTitle from "../../../components/PageTitle";
-import TransitionPoster from "../../transitionPoster/components/TransitionPoster";
-import useTransitionPoster from "../../transitionPoster/hooks/useTransitionPoster";
+
 import useSearchCards from "../hooks/useSearchCards";
 import MainCardMobile from "./MainCardMobile";
 import { Fragment, useEffect, useState } from "react";
@@ -12,6 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
 import StoreModel from "@/models/StoreModel";
 import LoadingMore from "./LoadingMore";
+// import { cardsContainer } from "@/animations/CardsAnimations";
+import useTransitionPoster from "@/features/transitionPoster/hooks/useTransitionPoster";
+import PageAnimationContainer from "@/containers/PageAnimationContainer";
+import PageTitle from "@/components/PageTitle";
+import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 
 type Props = {
    title: string;
@@ -40,6 +41,15 @@ export default function SearchCards({ title, mediaType, url }: Props) {
    const leavePage = () => {
       setHidePage(true);
    };
+
+   const cardsContainer = {
+      initial: {},
+      animate: { transition: { staggerChildren: 0.12 } },
+      exit: {
+         opacity: 0,
+         transition: { duration: 0.4 },
+      },
+   };
    return (
       <PageAnimationContainer
          title={title}
@@ -56,7 +66,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
          >
             <PageTitle>{title}</PageTitle>
             <motion.div
-               variants={staggerContainer}
+               variants={cardsContainer}
                initial="initial"
                animate="animate"
                exit="exit"
@@ -67,19 +77,20 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                }`}
             >
                {media.map((media) => (
-                  <Fragment key={media.id}>
-                     <div className="sm:hidden">
-                        <MainCardMobile media={media} mediaType={mediaType} />
-                     </div>
-                     <div className="hidden sm:block">
-                        <MainCard
-                           media={media}
-                           mediaType={mediaType}
-                           setTransitionValues={setTransitionValues}
-                           leavePage={leavePage}
-                        />
-                     </div>
-                  </Fragment>
+                  // <Fragment key={media.id}>
+                  //    <div className="sm:hidden">
+                  //       <MainCardMobile media={media} mediaType={mediaType} />
+                  //    </div>
+                  //    <div className="hidden sm:block">
+                  <MainCard
+                     key={media.id}
+                     media={media}
+                     mediaType={mediaType}
+                     setTransitionValues={setTransitionValues}
+                     leavePage={leavePage}
+                  />
+                  //    {/* </div>
+                  // </Fragment> */}
                ))}
             </motion.div>
          </div>
