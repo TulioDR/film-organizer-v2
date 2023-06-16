@@ -23,7 +23,7 @@ export default function BackgroundImage() {
    return (
       <div className="fixed top-0 left-0 h-screen brightness-50 bg-primary -z-10 w-full text-white flex items-center justify-center">
          {!src ? (
-            <div className="w-full h-full bg-slate-700"></div>
+            <div className="w-full h-full"></div>
          ) : (
             <AnimatePresence mode="wait">
                <motion.div

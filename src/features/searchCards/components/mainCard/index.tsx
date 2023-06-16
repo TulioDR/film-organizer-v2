@@ -73,7 +73,7 @@ export default function MainCard({
          style={{
             background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
          }}
-         className={`relative rounded-xl overflow-hidden p-1 origin-bottom ${
+         className={`relative rounded-xl overflow-hidden p-[2px] origin-bottom ${
             isInvisible ? "invisible" : "shadow-xl"
          }`}
       >

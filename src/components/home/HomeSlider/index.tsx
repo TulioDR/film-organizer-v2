@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import HomeNavButtonsContainer from "./HomeNavButtonsContainer";
 import HomeCard from "./HomeCard";
 import { AnimatePresence, motion } from "framer-motion";
-import { staggerContainer } from "@/animations/StaggerCards";
+import { homeSlider } from "@/animations/homeAnimations";
 
 type Props = {
    displayedCards: any[];
@@ -21,7 +21,7 @@ export default function HomeSlider({
       <AnimatePresence mode="wait">
          <motion.div
             key={currentShowcase}
-            variants={staggerContainer}
+            variants={homeSlider}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -29,7 +29,7 @@ export default function HomeSlider({
          >
             <Swiper
                slidesPerView={"auto"}
-               spaceBetween={20}
+               spaceBetween={12}
                className="w-full !px-10 !overflow-visible select-none relative"
             >
                <HomeNavButtonsContainer

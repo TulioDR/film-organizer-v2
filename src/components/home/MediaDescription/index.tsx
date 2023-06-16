@@ -7,6 +7,7 @@ import {
    daysToRelease,
    isReleased,
 } from "../../../utils/date";
+import { mediaDescription } from "@/animations/homeAnimations";
 
 type Props = { currentMedia: any; currentShowcase: string };
 
@@ -14,22 +15,19 @@ export default function MediaDescription({
    currentMedia,
    currentShowcase,
 }: Props) {
+   const date = currentMedia.release_date || currentMedia.first_air_date;
    return (
       <AnimatePresence mode="wait">
          <motion.div
             key={currentMedia.id + currentShowcase}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            variants={mediaDescription}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             className="space-y-2 2xl:space-y-3 font-oswald"
          >
             <div className="text-white font-extrabold tracking-wide uppercase flex gap-1">
-               <span>
-                  {changeDateFormat(
-                     currentMedia.release_date || currentMedia.first_air_date
-                  )}
-               </span>
+               <span>{changeDateFormat(date, true)}</span>
                {currentShowcase === "upcoming" && (
                   <span>
                      {isReleased(currentMedia.release_date) ? (

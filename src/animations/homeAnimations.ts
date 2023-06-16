@@ -1,39 +1,24 @@
-export const homeContainer = {
+export const homeSlider = {
    initial: {},
-   animate: { transition: { staggerChildren: 0.5 } },
-   exit: {},
-};
-
-export const homeCardContainer = {
-   initial: {},
-   animate: { transition: { staggerChildren: 0.2 } },
+   animate: { transition: { staggerChildren: 0.15 } },
    exit: {
-      x: 200,
       opacity: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
+      transition: { duration: 0.3 },
    },
 };
 
 export const homeCard = {
-   initial: { x: 200, opacity: 0 },
+   initial: { opacity: 0, scale: 0.8 },
    animate: {
-      x: 0,
       opacity: 1,
+      scale: 1,
       transition: { duration: 0.4, ease: "easeInOut" },
    },
    exit: {},
 };
 
-export const homeTitle = {
-   initial: { x: "-100%", opacity: 0 },
-   animate: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
-   exit: {
-      x: "-100%",
-      opacity: 0,
-      transition: { duration: 0.4, ease: "easeInOut" },
-   },
+export const mediaDescription = {
+   initial: { opacity: 0 },
+   animate: { opacity: 1, transition: { duration: 0.3 } },
+   exit: { opacity: 0, transition: { duration: 0.3 } },
 };

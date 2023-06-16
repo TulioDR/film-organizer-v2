@@ -6,7 +6,7 @@ import StoreModel from "@/models/StoreModel";
 export default function SideLists() {
    const { lists } = useSelector((state: StoreModel) => state.lists);
 
-   if (lists.length <= 0) return <SideNoListsMessage />;
+   if (lists?.length <= 0) return <SideNoListsMessage />;
    return (
       <>
          {lists.map((list: any) => (
