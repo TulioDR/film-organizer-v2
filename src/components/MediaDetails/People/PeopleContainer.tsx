@@ -51,7 +51,7 @@ export default function PeopleContainer({
          onSwiper={({ snapGrid }) => setScrollLength(snapGrid.length)}
          breakpoints={breakpoints}
          modules={[Pagination]}
-         className="mySwiper relative !overflow-visible"
+         className="mySwiper relative w-full"
       >
          {children}
       </Swiper>

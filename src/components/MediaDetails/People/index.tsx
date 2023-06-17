@@ -14,7 +14,7 @@ export default function People({ people, type }: Props) {
    const [activeSnapIndex, setSnapActiveIndex] = useState<number>(0);
    const [scrollLength, setScrollLength] = useState<number>(0);
    return (
-      <div>
+      <div className="">
          <InfoSubtitle>{type}</InfoSubtitle>
          {people.length ? (
             <PeopleContainer

@@ -9,6 +9,7 @@ export interface MediaModel {
    popularity: number;
    poster_path: string;
    release_date: Date;
+   first_air_date: Date;
    title: string;
    name: string;
    vote_average: number;

@@ -29,9 +29,8 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
          }
       };
 
-      const container = document.body;
-      container.addEventListener("scroll", handleScroll, { passive: true });
-      return () => container.removeEventListener("scroll", handleScroll);
+      document.addEventListener("scroll", handleScroll);
+      return () => document.removeEventListener("scroll", handleScroll);
    }, [isFixed]);
 
    return (

@@ -13,10 +13,11 @@ import { backgroundActions } from "@/store/slices/background-slice";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 import useBookmark from "@/hooks/useBookmark";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
+import { MediaModel } from "@/models/MediaModel";
 // import { cards } from "@/animations/CardsAnimations";
 
 type Props = {
-   media: any;
+   media: MediaModel;
    mediaType: "tv" | "movie";
    leavePage: () => void;
    setTransitionValues: (
@@ -36,7 +37,10 @@ export default function MainCard({
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
-   const toggle = () => setIsOpen(!isOpen);
+   const toggle = () => {
+      setIsOpen((prev) => !prev);
+      console.log(media.backdrop_path);
+   };
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
    const dispatch = useDispatch();
@@ -46,7 +50,7 @@ export default function MainCard({
       toggle();
       const background = {
          backgroundImage: media.backdrop_path,
-         backgroundKey: media.id,
+         backgroundKey: media.backdrop_path,
       };
       dispatch(backgroundActions.setBackground(background));
       dispatch(posterAnimationActions.changePosterAnimation(false));

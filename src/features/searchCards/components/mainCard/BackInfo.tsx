@@ -1,8 +1,8 @@
 type Props = {
-   voteAverage: string;
+   voteAverage: number;
    title: string;
    overview: string;
-   year: string;
+   year: any;
 };
 
 export default function BackInfo({

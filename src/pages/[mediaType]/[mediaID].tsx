@@ -43,10 +43,10 @@ export default function Details({ mediaType, media }: Props) {
    useEffect(() => {
       const container = document.body;
       container.scrollTo({ top: 0 });
-      console.log(media);
+      console.log(media.backdrop_path);
       const background = {
          backgroundImage: media.backdrop_path,
-         backgroundKey: media.id,
+         backgroundKey: media.backdrop_path,
       };
       dispatch(backgroundActions.setBackground(background));
    }, [media, dispatch]);
