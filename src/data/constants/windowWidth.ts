@@ -1,1 +1,1 @@
-export const windowExtraLarge = 1280;
+export const windowExtraLarge = 1024;

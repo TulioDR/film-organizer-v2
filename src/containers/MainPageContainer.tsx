@@ -35,7 +35,7 @@ export default function MainPageContainer({ children }: Props) {
          <LoginAdviceModal />
          <div className="flex">
             <Sidebar />
-            <div className="flex-1 overflow-x-hidden">
+            <div className="flex-1 overflow-x-hidden relative">
                <Navbar />
                <AnimatePresence mode="wait">
                   <motion.div key={router.asPath}>{children}</motion.div>

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { windowExtraLarge } from "../../../data/constants/windowWidth";
-import { PositionModel } from "../../../models/TransitionPosterModels";
+import { windowExtraLarge } from "@/data/constants/windowWidth";
+import { PositionModel } from "@/models/TransitionPosterModels";
 
 export default function useTransitionPoster() {
    const [selectedImg, setSelectedImg] = useState<string | null>(null);
@@ -27,13 +27,17 @@ export default function useTransitionPoster() {
       const img = `https://image.tmdb.org/t/p/w780${posterPath}`;
       setSelectedImg(img);
       setLink(link);
-      const { offsetLeft, clientHeight } = element;
-      const { y } = element.getBoundingClientRect();
+      const { y, height } = element.getBoundingClientRect();
+      const { offsetLeft } = element;
       setPosition({
          top: y,
          left: offsetLeft,
-         height: clientHeight,
+         height: height,
       });
+   };
+
+   const closePoster = () => {
+      setSelectedImg(null);
    };
 
    return {
@@ -41,5 +45,6 @@ export default function useTransitionPoster() {
       position,
       link,
       setTransitionValues,
+      closePoster,
    };
 }

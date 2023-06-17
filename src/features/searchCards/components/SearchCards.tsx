@@ -2,17 +2,16 @@ import { motion } from "framer-motion";
 import MainCard from "./MainCard";
 
 import useSearchCards from "../hooks/useSearchCards";
-import MainCardMobile from "./MainCardMobile";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
 import StoreModel from "@/models/StoreModel";
 import LoadingMore from "./LoadingMore";
-// import { cardsContainer } from "@/animations/CardsAnimations";
 import useTransitionPoster from "@/features/transitionPoster/hooks/useTransitionPoster";
 import PageAnimationContainer from "@/containers/PageAnimationContainer";
 import PageTitle from "@/components/PageTitle";
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
+import { useRouter } from "next/router";
 
 type Props = {
    title: string;
@@ -29,8 +28,6 @@ export default function SearchCards({ title, mediaType, url }: Props) {
    const [showPage, setShowPage] = useState<boolean>(false);
 
    const { media, page, setPage } = useSearchCards(url, setIsLoading);
-   const { selectedImg, link, position, setTransitionValues } =
-      useTransitionPoster();
 
    const dispatch = useDispatch();
    useEffect(() => {
@@ -50,6 +47,16 @@ export default function SearchCards({ title, mediaType, url }: Props) {
          transition: { duration: 0.4 },
       },
    };
+
+   const [showSpinner, setShowSpinner] = useState<boolean>(false);
+   const { selectedImg, link, position, setTransitionValues, closePoster } =
+      useTransitionPoster();
+   const router = useRouter();
+   const onPosterAnimationComplete = () => {
+      router.push(link);
+      setShowSpinner(true);
+   };
+
    return (
       <PageAnimationContainer
          title={title}
@@ -77,11 +84,6 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                }`}
             >
                {media.map((media) => (
-                  // <Fragment key={media.id}>
-                  //    <div className="sm:hidden">
-                  //       <MainCardMobile media={media} mediaType={mediaType} />
-                  //    </div>
-                  //    <div className="hidden sm:block">
                   <MainCard
                      key={media.id}
                      media={media}
@@ -89,16 +91,16 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                      setTransitionValues={setTransitionValues}
                      leavePage={leavePage}
                   />
-                  //    {/* </div>
-                  // </Fragment> */}
                ))}
             </motion.div>
          </div>
          <LoadingMore page={page} setPage={setPage} />
          <TransitionPoster
-            link={link}
             position={position}
             selectedImg={selectedImg}
+            closePoster={closePoster}
+            onAnimationComplete={onPosterAnimationComplete}
+            showSpinner={showSpinner}
          />
       </PageAnimationContainer>
    );

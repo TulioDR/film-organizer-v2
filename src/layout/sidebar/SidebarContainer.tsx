@@ -15,6 +15,7 @@ export default function SidebarContainer({ children }: Props) {
          }`}
       >
          <div
+            id="sidebar"
             className={`h-screen sticky top-0 duration-200 font-semibold backdrop-blur-md ${
                expandSidebar ? "w-60" : "w-[116px]"
             }`}
