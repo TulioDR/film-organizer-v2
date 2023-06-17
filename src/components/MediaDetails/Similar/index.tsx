@@ -1,9 +1,9 @@
-import Poster from "@/components/Poster";
 import InfoSubtitle from "@/components/MediaDetails/InfoSubtitle";
-import Link from "next/link";
+import { MediaDetailsModel } from "@/models/MediaModel";
+import SimilarCard from "./SimilarCard";
 
 type Props = {
-   media: any;
+   media: MediaDetailsModel;
    mediaType: "tv" | "movie";
 };
 
@@ -14,23 +14,12 @@ export default function Similar({ media, mediaType }: Props) {
             Similar {mediaType === "movie" ? "Movies" : "Series"}
          </InfoSubtitle>
          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-5">
-            {media.similar.results.map((sim: any) => (
-               <Link
-                  key={sim.id}
+            {media.similar.results.map((similar) => (
+               <SimilarCard
+                  key={similar.id}
                   href={`/${mediaType}/${media.id}`}
-                  className="cursor-pointer w-full flex flex-col gap-1"
-               >
-                  <div className="w-full">
-                     <Poster
-                        alt={sim.title || sim.name}
-                        posterPath={sim.poster_path}
-                        size="md"
-                     />
-                  </div>
-                  <div className="w-full text-xs sm:text-sm text-center">
-                     {sim.title || sim.name}
-                  </div>
-               </Link>
+                  similar={similar}
+               />
             ))}
          </div>
       </div>
