@@ -12,10 +12,7 @@ export default function LoadingMore({ page, setPage }: Props) {
    const isInView = useInView(loadingRef);
 
    useEffect(() => {
-      if (isInView) {
-         setPage((page) => page + 1);
-         console.log("load more");
-      }
+      if (isInView) setPage((page) => page + 1);
    }, [isInView, setPage]);
 
    if (page >= 4) return <></>;

@@ -37,10 +37,7 @@ export default function MainCard({
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
-   const toggle = () => {
-      setIsOpen((prev) => !prev);
-      console.log(media.backdrop_path);
-   };
+   const toggle = () => setIsOpen((prev) => !prev);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
    const dispatch = useDispatch();

@@ -17,7 +17,7 @@ export default function Similar({ media, mediaType }: Props) {
             {media.similar.results.map((similar) => (
                <SimilarCard
                   key={similar.id}
-                  href={`/${mediaType}/${media.id}`}
+                  href={`/${mediaType}/${similar.id}`}
                   similar={similar}
                />
             ))}
