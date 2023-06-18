@@ -11,7 +11,6 @@ import useTransitionPoster from "@/features/transitionPoster/hooks/useTransition
 import PageAnimationContainer from "@/containers/PageAnimationContainer";
 import PageTitle from "@/components/PageTitle";
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
-import { useRouter } from "next/router";
 
 type Props = {
    title: string;
@@ -34,11 +33,6 @@ export default function SearchCards({ title, mediaType, url }: Props) {
       dispatch(backgroundActions.removeBackground());
    }, [dispatch]);
 
-   const [hidePage, setHidePage] = useState<boolean>(false);
-   const leavePage = () => {
-      setHidePage(true);
-   };
-
    const cardsContainer = {
       initial: {},
       animate: { transition: { staggerChildren: 0.12 } },
@@ -48,14 +42,16 @@ export default function SearchCards({ title, mediaType, url }: Props) {
       },
    };
 
-   const [showSpinner, setShowSpinner] = useState<boolean>(false);
-   const { selectedImg, link, position, setTransitionValues, closePoster } =
-      useTransitionPoster();
-   const router = useRouter();
-   const onPosterAnimationComplete = () => {
-      router.push(link);
-      setShowSpinner(true);
-   };
+   const {
+      selectedImg,
+      position,
+      setTransitionValues,
+      closePoster,
+      showSpinner,
+      onPosterAnimationComplete,
+      hidePage,
+      leavingPage,
+   } = useTransitionPoster();
 
    return (
       <PageAnimationContainer
@@ -89,7 +85,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                      media={media}
                      mediaType={mediaType}
                      setTransitionValues={setTransitionValues}
-                     leavePage={leavePage}
+                     leavePage={leavingPage}
                   />
                ))}
             </motion.div>

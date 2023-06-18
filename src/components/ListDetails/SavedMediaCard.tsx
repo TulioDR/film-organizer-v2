@@ -17,6 +17,7 @@ type Props = {
       element: HTMLDivElement,
       setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
    ) => void;
+   leavingPage: () => void;
 };
 
 export default function SavedMediaCard({
@@ -25,6 +26,7 @@ export default function SavedMediaCard({
    mediaToDelete,
    setMediaToDelete,
    setTransitionValues,
+   leavingPage,
 }: Props) {
    const isSelected = mediaToDelete.includes(media);
    const onTap = () => {
@@ -42,6 +44,7 @@ export default function SavedMediaCard({
       const link = `/${media.media_type}/${media.media_id}`;
       const element = transitionCard.current!;
       setTransitionValues(media.poster_path, link, element, setIsInvisible);
+      leavingPage();
    };
 
    return (

@@ -11,6 +11,7 @@ export default function useTransitionPoster() {
       left: 0,
       height: 0,
    });
+   const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
    const router = useRouter();
    const setTransitionValues = (
@@ -40,11 +41,25 @@ export default function useTransitionPoster() {
       setSelectedImg(null);
    };
 
+   const onPosterAnimationComplete = () => {
+      router.push(link);
+      setShowSpinner(true);
+   };
+
+   const [hidePage, setHidePage] = useState<boolean>(false);
+   const leavingPage = () => {
+      setHidePage(true);
+   };
+
    return {
       selectedImg,
       position,
       link,
       setTransitionValues,
       closePoster,
+      showSpinner,
+      onPosterAnimationComplete,
+      hidePage,
+      leavingPage,
    };
 }
