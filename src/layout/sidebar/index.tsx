@@ -5,7 +5,6 @@ import SidebarContainer from "./SidebarContainer";
 import SideLoginMessage from "./SideLoginMessage";
 import SideSubtitle from "./SideSubtitle";
 import SideLine from "./SideLine";
-import { AnimateSharedLayout } from "framer-motion";
 import SideLinks from "./SideLinks";
 
 import { useState } from "react";
@@ -22,25 +21,23 @@ export default function Sidebar() {
 
    return (
       <SidebarContainer>
-         <AnimateSharedLayout>
-            <BrandHamburger />
-            <SideLine />
-            <SideLinks />
-            <SideLine />
-            {user ? (
-               <>
-                  <CreateListButton onClick={openForm} />
-                  <ModalPortal isOpen={showCreateForm}>
-                     <CreateListModal close={closeForm} />
-                  </ModalPortal>
-                  <SideLine />
-                  <SideSubtitle>Lists</SideSubtitle>
-                  <SideLists />
-               </>
-            ) : (
-               <SideLoginMessage />
-            )}
-         </AnimateSharedLayout>
+         <BrandHamburger />
+         <SideLine />
+         <SideLinks />
+         <SideLine />
+         {user ? (
+            <>
+               <CreateListButton onClick={openForm} />
+               <ModalPortal isOpen={showCreateForm}>
+                  <CreateListModal close={closeForm} />
+               </ModalPortal>
+               <SideLine />
+               <SideSubtitle>Lists</SideSubtitle>
+               <SideLists />
+            </>
+         ) : (
+            <SideLoginMessage />
+         )}
       </SidebarContainer>
    );
 }

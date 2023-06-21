@@ -17,22 +17,19 @@ export default function useTransitionPoster() {
    const setTransitionValues = (
       posterPath: string,
       link: string,
-      element: HTMLDivElement,
-      setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
+      element: HTMLElement
    ) => {
       if (window.innerWidth < windowExtraLarge) {
          router.push(link);
          return;
       }
-      setIsSelected(true);
       const img = `https://image.tmdb.org/t/p/w780${posterPath}`;
       setSelectedImg(img);
       setLink(link);
-      const { y, height } = element.getBoundingClientRect();
-      const { offsetLeft } = element;
+      const { x, y, height } = element.getBoundingClientRect();
       setPosition({
          top: y,
-         left: offsetLeft,
+         left: x,
          height: height,
       });
    };
@@ -46,9 +43,9 @@ export default function useTransitionPoster() {
       setShowSpinner(true);
    };
 
-   const [hidePage, setHidePage] = useState<boolean>(false);
-   const leavingPage = () => {
-      setHidePage(true);
+   const [isPageHidden, setIsPageHidden] = useState<boolean>(false);
+   const hidePage = () => {
+      setIsPageHidden(true);
    };
 
    return {
@@ -59,7 +56,7 @@ export default function useTransitionPoster() {
       closePoster,
       showSpinner,
       onPosterAnimationComplete,
+      isPageHidden,
       hidePage,
-      leavingPage,
    };
 }

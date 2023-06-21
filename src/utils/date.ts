@@ -1,4 +1,4 @@
-export const daysToRelease = (date: string): number => {
+export const daysToRelease = (date: Date): number => {
    const now = new Date().getTime();
    const releaseDate = new Date(date).getTime();
    const delta = (releaseDate - now) / 1000;
@@ -6,7 +6,7 @@ export const daysToRelease = (date: string): number => {
    return daysToRelease;
 };
 
-export const changeDateFormat = (date: string, year?: true): string => {
+export const changeDateFormat = (date: Date, year?: true): string => {
    return new Date(date).toLocaleDateString(year ? "en-gb" : "en-US", {
       year: year ? "numeric" : undefined,
       month: "long",
@@ -15,7 +15,7 @@ export const changeDateFormat = (date: string, year?: true): string => {
    });
 };
 
-export const isReleased = (date: string): boolean => {
+export const isReleased = (date: Date): boolean => {
    if (daysToRelease(date) <= 0) return true;
    else return false;
 };

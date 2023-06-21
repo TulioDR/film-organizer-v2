@@ -5,6 +5,9 @@ import HomeSlider from "../components/Home/HomeSlider";
 import MediaDescription from "../components/Home/MediaDescription";
 import { useDispatch } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
+import useTransitionPoster from "@/features/transitionPoster/hooks/useTransitionPoster";
+import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
+import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -49,15 +52,48 @@ export default function Home() {
       if (currentShowcase === "upcoming") setCurrentArray(upcoming);
    }, [currentShowcase, nowPlaying, onAir, upcoming]);
 
+   const {
+      selectedImg,
+      position,
+      setTransitionValues,
+      closePoster,
+      showSpinner,
+      onPosterAnimationComplete,
+      isPageHidden,
+      hidePage,
+   } = useTransitionPoster();
+
+   const [currentElement, setCurrentElement] = useState<HTMLElement | null>(
+      null
+   );
+
+   useEffect(() => {
+      const elements = document.getElementsByClassName("home-card");
+      console.log(elements[activeIndex]);
+      setCurrentElement(elements[activeIndex] as HTMLElement);
+   }, [activeIndex]);
+
+   const handleLearnMoreClick = async () => {
+      const { id, poster_path } = currentMedia;
+      const link = `/movie/${id}`;
+      dispatch(posterAnimationActions.changePosterAnimation(false));
+      setTransitionValues(poster_path, link, currentElement!);
+      hidePage();
+   };
+
    return (
       <div
          style={{ height: "calc(100vh - 96px)" }}
-         className="w-full flex flex-col overflow-hidden pb-10"
+         className="w-full overflow-hidden pb-10"
       >
          {!currentMedia ? (
             <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black"></div>
          ) : (
-            <>
+            <div
+               className={`h-full flex flex-col ${
+                  isPageHidden ? "opacity-0 duration-300" : ""
+               }`}
+            >
                <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
                   <ChangeShowcase
                      currentShowcase={currentShowcase}
@@ -66,6 +102,7 @@ export default function Home() {
                   <MediaDescription
                      currentMedia={currentMedia}
                      currentShowcase={currentShowcase}
+                     handleLearnMoreClick={handleLearnMoreClick}
                   />
                </div>
                <HomeSlider
@@ -73,9 +110,17 @@ export default function Home() {
                   displayedCards={currentArray}
                   setActiveIndex={setActiveIndex}
                   activeIndex={activeIndex}
+                  isPageHidden={isPageHidden}
                />
-            </>
+            </div>
          )}
+         <TransitionPoster
+            position={position}
+            selectedImg={selectedImg}
+            closePoster={closePoster}
+            onAnimationComplete={onPosterAnimationComplete}
+            showSpinner={showSpinner}
+         />
       </div>
    );
 }

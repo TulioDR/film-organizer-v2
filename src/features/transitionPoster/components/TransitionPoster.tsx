@@ -36,14 +36,21 @@ export default function TransitionPoster({
          {selectedImg && (
             <motion.div
                onAnimationComplete={onAnimationComplete}
-               initial={{ top: top, x: left, height }}
-               animate={{ top: 96, x: 40, height: "calc(100vh - 136px)" }}
-               transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}
-               className="fixed top-0 left-0 w-full pr-10 flex"
-               style={{ paddingLeft: sidebarWidth }}
                onClick={closePoster}
+               initial={{
+                  paddingLeft: left,
+                  top: top,
+                  height: height,
+               }}
+               animate={{
+                  paddingLeft: sidebarWidth + 40,
+                  top: 96,
+                  height: "calc(100vh - 136px)",
+               }}
+               transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}
+               className="fixed top-0 left-0 w-full z-50 pr-10 flex"
             >
-               <div className="relative h-full aspect-[2/3] rounded-2xl overflow-hidden">
+               <div className="relative h-full aspect-[2/3] rounded-xl overflow-hidden">
                   <Image
                      alt="selected"
                      src={selectedImg}

@@ -22,16 +22,17 @@ export default function HomeCard({
       swiper.slideTo(index);
    };
    const isActive = activeIndex === index;
+
    return (
       <motion.div
          variants={homeCard}
          onClick={handleClick}
-         className={`aspect-[2/3] w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer origin-bottom-right`}
+         className="aspect-[2/3] w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer origin-bottom-right"
       >
          <div
-            className={`w-full h-full bg-black duration-300 overflow-hidden rounded-lg ${
+            className={`home-card w-full h-full overflow-hidden rounded-lg duration-300 ${
                isActive ? "-translate-y-5" : ""
-            }`}
+            } `}
          >
             <Poster
                alt={movie.title || movie.name}

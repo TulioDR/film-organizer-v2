@@ -67,7 +67,7 @@ export default function Poster({
             <div className="absolute w-full h-full top-0 left-0 bg-primary flex items-center justify-center">
                <SpinnerCircularFixed
                   size={backPoster ? "20%" : "40%"}
-                  thickness={180}
+                  thickness={100}
                   speed={100}
                   color={themeColor}
                   secondaryColor="white"

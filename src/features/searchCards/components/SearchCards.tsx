@@ -49,8 +49,8 @@ export default function SearchCards({ title, mediaType, url }: Props) {
       closePoster,
       showSpinner,
       onPosterAnimationComplete,
+      isPageHidden,
       hidePage,
-      leavingPage,
    } = useTransitionPoster();
 
    return (
@@ -64,7 +64,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
       >
          <div
             className={`px-10 pb-10 ${
-               hidePage ? "opacity-0 duration-300" : ""
+               isPageHidden ? "opacity-0 duration-300" : ""
             }`}
          >
             <PageTitle>{title}</PageTitle>
@@ -85,7 +85,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                      media={media}
                      mediaType={mediaType}
                      setTransitionValues={setTransitionValues}
-                     leavePage={leavingPage}
+                     hidePage={hidePage}
                   />
                ))}
             </motion.div>

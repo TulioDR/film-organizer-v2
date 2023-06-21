@@ -14,8 +14,7 @@ type Props = {
    setTransitionValues: (
       posterPath: string,
       link: string,
-      element: HTMLDivElement,
-      setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
+      element: HTMLDivElement
    ) => void;
    leavingPage: () => void;
 };
@@ -43,7 +42,8 @@ export default function SavedMediaCard({
       dispatch(posterAnimationActions.changePosterAnimation(false));
       const link = `/${media.media_type}/${media.media_id}`;
       const element = transitionCard.current!;
-      setTransitionValues(media.poster_path, link, element, setIsInvisible);
+      setTransitionValues(media.poster_path, link, element);
+      setIsInvisible(true);
       leavingPage();
    };
 

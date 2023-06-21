@@ -1,14 +1,14 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import HomeNavButtonsContainer from "./HomeNavButtonsContainer";
 import HomeCard from "./HomeCard";
-import { AnimatePresence, motion } from "framer-motion";
-import { homeSlider } from "@/animations/homeAnimations";
+import HomeSliderContainer from "./HomeSliderContainer";
 
 type Props = {
    displayedCards: any[];
    activeIndex: number;
    setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
    currentShowcase: string;
+   isPageHidden: boolean;
 };
 
 export default function HomeSlider({
@@ -16,41 +16,31 @@ export default function HomeSlider({
    activeIndex,
    setActiveIndex,
    currentShowcase,
+   isPageHidden,
 }: Props) {
    return (
-      <AnimatePresence mode="wait">
-         <motion.div
-            key={currentShowcase}
-            variants={homeSlider}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="w-full"
-         >
-            <Swiper
-               slidesPerView={"auto"}
-               spaceBetween={12}
-               className="w-full !px-10 !overflow-visible select-none relative"
+      <HomeSliderContainer currentShowcase={currentShowcase}>
+         <HomeNavButtonsContainer
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+         />
+         {displayedCards.map((media, index) => (
+            <SwiperSlide
+               key={media.id}
+               className={`max-w-min flex items-end ${
+                  isPageHidden && activeIndex === index
+                     ? "opacity-0 duration-0"
+                     : ""
+               }`}
             >
-               <HomeNavButtonsContainer
+               <HomeCard
+                  index={index}
                   activeIndex={activeIndex}
                   setActiveIndex={setActiveIndex}
+                  movie={media}
                />
-               {displayedCards.map((media, index) => (
-                  <SwiperSlide
-                     key={media.id}
-                     className="max-w-min flex items-end"
-                  >
-                     <HomeCard
-                        index={index}
-                        activeIndex={activeIndex}
-                        setActiveIndex={setActiveIndex}
-                        movie={media}
-                     />
-                  </SwiperSlide>
-               ))}
-            </Swiper>
-         </motion.div>
-      </AnimatePresence>
+            </SwiperSlide>
+         ))}
+      </HomeSliderContainer>
    );
 }

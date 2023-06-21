@@ -19,12 +19,11 @@ import { MediaModel } from "@/models/MediaModel";
 type Props = {
    media: MediaModel;
    mediaType: "tv" | "movie";
-   leavePage: () => void;
+   hidePage: () => void;
    setTransitionValues: (
       posterPath: string,
       link: string,
-      element: HTMLDivElement,
-      setIsSelected: React.Dispatch<React.SetStateAction<boolean>>
+      element: HTMLDivElement
    ) => void;
 };
 
@@ -32,7 +31,7 @@ export default function MainCard({
    media,
    mediaType,
    setTransitionValues,
-   leavePage,
+   hidePage,
 }: Props) {
    const { transitionCard, isInvisible, setIsInvisible } = useTransitionCard();
 
@@ -44,7 +43,7 @@ export default function MainCard({
 
    const onLearnMoreClick = () => {
       setIsLeaving(true);
-      toggle();
+      setIsOpen(false);
       const background = {
          backgroundImage: media.backdrop_path,
          backgroundKey: media.backdrop_path,
@@ -57,8 +56,9 @@ export default function MainCard({
       if (!isLeaving) return;
       const link = `/${mediaType}/${media.id}`;
       const element = transitionCard.current!;
-      setTransitionValues(media.poster_path, link, element, setIsInvisible);
-      leavePage();
+      setTransitionValues(media.poster_path, link, element);
+      setIsInvisible(true);
+      hidePage();
    };
 
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
