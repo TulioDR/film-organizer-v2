@@ -36,15 +36,15 @@ export default function EpisodeCard({ episode }: Props) {
             <InfoInPoster episode={episode} />
          </div>
          <div className="p-3 space-y-1">
-            <div className="text-xs sm:text-sm text-dark-text-soft font-oswald">
+            <div className="text-xs sm:text-sm text-text-2 font-oswald">
                {changeDateFormat(episode.air_date, true)}
             </div>
-            <div className="uppercase font-oswald font-medium text-white">
+            <div className="uppercase font-oswald font-medium text-text-1">
                {episode.name}
             </div>
             {isHovered && (
                <div className="absolute left-0 w-full pb-3 px-3 bg-accent rounded-b-xl">
-                  <p className="text-xs sm:text-sm leading-snug text-dark-text-normal">
+                  <p className="text-xs sm:text-sm leading-snug text-text-2">
                      {episode.overview ||
                         "No description available for this episode"}
                   </p>

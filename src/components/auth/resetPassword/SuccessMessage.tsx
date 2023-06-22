@@ -24,7 +24,7 @@ export default function SuccessMessage({ successMessage }: Props) {
                className="absolute top-0 left-0 w-full h-full bg-green-700 grid place-content-center"
             >
                <div className="flex flex-col items-center space-y-2">
-                  <div className="font-semibold text-xl text-dark-text-hard">
+                  <div className="font-semibold text-xl text-text-1">
                      Password changed Successfully
                   </div>
                   <motion.button

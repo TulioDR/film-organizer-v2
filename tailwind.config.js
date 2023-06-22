@@ -19,16 +19,10 @@ module.exports = {
             primary: "#0D0D0D",
             secondary: "#404040",
             silver: "#A6A6A6",
-            dark: {
-               text: {
-                  soft: "#9ca3af",
-                  normal: "#d1d5db",
-                  hard: "#f9fafb",
-               },
-               bg: {
-                  primary: "#1A1B20",
-                  secondary: "#2D2F3B",
-               },
+            text: {
+               1: "rgba(255, 255, 255, 0.9)",
+               2: "rgba(255, 255, 255, 0.6)",
+               3: "rgba(255, 255, 255, 0.4)",
             },
          },
       },

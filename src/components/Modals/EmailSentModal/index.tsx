@@ -46,7 +46,7 @@ export default function EmailSentModal({
                </div>
                <ModalButtonsContainer>
                   <button
-                     className="bg-slate-800 text-dark-text-hard rounded-lg px-3 py-2"
+                     className="bg-slate-800 text-text-1 rounded-lg px-3 py-2"
                      onClick={close}
                   >
                      Accept

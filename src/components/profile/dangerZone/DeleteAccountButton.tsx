@@ -16,7 +16,7 @@ export default function DeleteAccountButton({ onClick }: Props) {
          <motion.button
             onTap={onClick}
             whileTap={{ scale: 0.95 }}
-            className="rounded-lg py-2 px-4 max-w-max bg-red-700 text-dark-text-hard"
+            className="rounded-lg py-2 px-4 max-w-max bg-red-700 text-text-1"
          >
             Delete Account
          </motion.button>

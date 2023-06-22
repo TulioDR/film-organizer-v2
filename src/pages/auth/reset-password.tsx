@@ -52,7 +52,7 @@ export default function ResetPassword({}: any) {
 
    if (!showResetPage) {
       return (
-         <div className="h-screen w-full bg-dark-bg-primary text-dark-text-hard grid place-content-center">
+         <div className="h-screen w-full bg-primary text-text-1 grid place-content-center">
             <div>Loading...</div>
          </div>
       );

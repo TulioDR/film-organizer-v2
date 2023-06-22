@@ -51,8 +51,8 @@ export default function SideLink({
       <li
          className={`cursor-pointer relative flex list-none select-none ${
             isSelected
-               ? ""
-               : "text-dark-text-normal hover:text-dark-text-hard duration-100"
+               ? "text-text-1"
+               : "text-text-2 hover:text-text-1 duration-100"
          }`}
       >
          <SelectedMark item={item} isSelected={isSelected} />

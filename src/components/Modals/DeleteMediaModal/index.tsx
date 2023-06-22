@@ -47,7 +47,7 @@ export default function DeleteMediaModal({
             <ModalTitle>
                Delete from <em>{list?.name}</em>
             </ModalTitle>
-            <div className="text-sm text-dark-text-soft">
+            <div className="text-sm text-text-2">
                <div>The next items are going to be deleted:</div>
                <div>
                   Note: Deleting an item from the list is a permanent action and

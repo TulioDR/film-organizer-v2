@@ -30,7 +30,7 @@ export default function DeleteListModal({
       <ModalPortal isOpen={isOpen}>
          <ModalContainer close={close}>
             <ModalTitle>Delete List</ModalTitle>
-            <div className="text-sm leading-relaxed text-dark-text-normal font-normal w-96">
+            <div className="text-sm leading-relaxed text-text-2 font-normal w-96">
                <div>
                   <span>Are you sure you want to delete the list </span>
                   <em className="text-white">

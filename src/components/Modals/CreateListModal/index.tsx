@@ -53,7 +53,7 @@ export default function CreateListModal({ close }: Props) {
                         placeholder="List name"
                         autoComplete="off"
                         maxLength={20}
-                        className="w-full h-9 bg-transparent text-dark-text-normal placeholder:text-dark-text-soft border-b-2 border-dark-text-normal outline-none"
+                        className="w-full h-9 bg-transparent text-text-2 placeholder:text-text-3 border-b-2 border-text-2 outline-none"
                         autoFocus
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}

@@ -15,10 +15,11 @@ import prisma from "../../lib/prisma";
 
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 import SavedMediaCard from "@/components/ListDetails/SavedMediaCard";
 import MediaTypePills from "@/components/ListDetails/MediaTypePills";
+import { backgroundActions } from "@/store/slices/background-slice";
 
 type Props = { listId: string; list: any; initialMedia: SavedMediaModel[] };
 
@@ -87,6 +88,11 @@ export default function ListID({ listId, list, initialMedia }: Props) {
       }
    }, [media, selectedType]);
 
+   const dispatch = useDispatch();
+   useEffect(() => {
+      dispatch(backgroundActions.removeBackground());
+   }, [dispatch]);
+
    const {
       selectedImg,
       position,
@@ -94,8 +100,8 @@ export default function ListID({ listId, list, initialMedia }: Props) {
       showSpinner,
       onPosterAnimationComplete,
       closePoster,
+      isPageHidden,
       hidePage,
-      leavingPage,
    } = useTransitionPoster();
 
    return (
@@ -107,7 +113,7 @@ export default function ListID({ listId, list, initialMedia }: Props) {
          </Head>
          <div
             className={`overflow-hidden ${
-               hidePage ? "opacity-0 duration-300" : ""
+               isPageHidden ? "opacity-0 duration-300" : ""
             }`}
          >
             <div className="w-full flex items-center justify-between">
@@ -136,7 +142,7 @@ export default function ListID({ listId, list, initialMedia }: Props) {
                      mediaToDelete={mediaToDelete}
                      setMediaToDelete={setMediaToDelete}
                      setTransitionValues={setTransitionValues}
-                     leavingPage={leavingPage}
+                     hidePage={hidePage}
                   />
                ))}
             </motion.div>

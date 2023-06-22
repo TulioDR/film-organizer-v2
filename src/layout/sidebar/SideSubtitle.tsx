@@ -5,9 +5,5 @@ type Props = {
 };
 
 export default function SideSubtitle({ children }: Props) {
-   return (
-      <div className="ml-10 text-xs uppercase text-dark-text-soft">
-         {children}
-      </div>
-   );
+   return <div className="ml-10 text-xs uppercase text-text-2">{children}</div>;
 }

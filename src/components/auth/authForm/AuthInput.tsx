@@ -24,7 +24,7 @@ export default function AuthInput({
    return (
       <div>
          <div className="flex items-center relative">
-            <div className="text-dark-bg-secondary w-10 text-center">
+            <div className="text-secondary w-10 text-center">
                <span className="material-icons text-2xl">{icon}</span>
             </div>
             <Field

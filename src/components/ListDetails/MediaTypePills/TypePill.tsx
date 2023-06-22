@@ -20,8 +20,8 @@ export default function TypePill({
          onClick={() => setSelectedType(type)}
          className={`rounded-full py-1 px-4 shadow-lg  text-sm ${
             type === selectedType
-               ? "bg-light-bg-secondary text-light-text-hard"
-               : "bg-dark-bg-secondary text-dark-text-hard"
+               ? "bg-white text-black"
+               : "bg-secondary text-white"
          }`}
       >
          {name}

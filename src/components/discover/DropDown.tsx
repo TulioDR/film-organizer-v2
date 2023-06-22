@@ -26,7 +26,7 @@ export default function DropDown({
    return (
       <motion.div
          variants={staggerItem}
-         className="bg-dark-bg-secondary rounded-xl shadow-lg p-5"
+         className="bg-secondary rounded-xl shadow-lg p-5"
       >
          <div
             className="-mt-10 w-full h-16 rounded-xl grid place-content-center drop-shadow-lg"

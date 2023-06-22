@@ -21,7 +21,7 @@ export default function DeleteFormButton({
                ? `${
                     enableDelete
                        ? "bg-red-700"
-                       : "bg-dark-bg-primary pointer-events-none"
+                       : "bg-primary pointer-events-none"
                  }`
                : "bg-gray-500"
          }`}

@@ -25,7 +25,7 @@ export default function SaveMediaModal() {
       <ModalPortal isOpen={isSaveMediaOpen}>
          <ModalContainer close={closeModal}>
             <ModalTitle>Save to...</ModalTitle>
-            <div className="w-56 border-y border-dark-text-soft">
+            <div className="w-56 border-y border-text-2">
                {lists.length > 0 ? (
                   lists.map((list: any) => (
                      <ListToSave

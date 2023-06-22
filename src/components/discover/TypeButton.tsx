@@ -16,7 +16,7 @@ export default function TypeButton({ onClick, isMovie }: Props) {
          exit={{ x: "-100%", transition: { duration: 0.4 }, opacity: 0 }}
          className="w-60 mt-10 cursor-pointer select-none"
       >
-         <div className="bg-dark-bg-secondary rounded-xl shadow-lg p-5 w-full">
+         <div className="bg-secondary rounded-xl shadow-lg p-5 w-full">
             <div
                className="-mt-10 w-full h-16 rounded-xl grid place-content-center drop-shadow-lg"
                style={{ backgroundColor: themeColor }}

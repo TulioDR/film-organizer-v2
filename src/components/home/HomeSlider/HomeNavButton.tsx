@@ -10,7 +10,7 @@ export default function HomeNavButton({ onClick, disabled, back }: Props) {
          onClick={onClick}
          className={`h-14 rounded-full aspect-square border-2 grid place-content-center ${
             disabled
-               ? "pointer-events-none border-dark-text-soft text-dark-text-soft"
+               ? "pointer-events-none border-text-3 text-text-3"
                : "border-white text-white"
          }`}
       >

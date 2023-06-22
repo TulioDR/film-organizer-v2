@@ -33,10 +33,10 @@ body::-webkit-scrollbar-thumb {
    width: 8px;
 }
 .main-scrollbar::-webkit-scrollbar-track {
-   @apply bg-dark-bg-primary;
+   @apply bg-primary;
 }
 .main-scrollbar::-webkit-scrollbar-thumb {
-   @apply bg-dark-text-hard;
+   @apply bg-white;
 }
 
 .swiper-button-disabled {
@@ -58,7 +58,7 @@ body::-webkit-scrollbar-thumb {
    @apply backdrop-blur-md;
 }
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-   @apply bg-dark-text-soft;
+   @apply bg-text-2;
 }
 .custom-bullet-active {
    @apply bg-white;

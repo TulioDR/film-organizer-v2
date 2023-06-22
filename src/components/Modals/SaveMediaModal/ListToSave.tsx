@@ -64,7 +64,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
    return (
       <li
          onClick={isSaved ? removeFromList : saveToList}
-         className={`h-9 flex items-center hover:bg-secondary text-dark-text-normal ${
+         className={`h-9 flex items-center hover:bg-secondary text-text-2 ${
             isLoading ? "pointer-events-none" : "cursor-pointer"
          }`}
       >

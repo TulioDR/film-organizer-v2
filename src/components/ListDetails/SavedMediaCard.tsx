@@ -16,7 +16,7 @@ type Props = {
       link: string,
       element: HTMLDivElement
    ) => void;
-   leavingPage: () => void;
+   hidePage: () => void;
 };
 
 export default function SavedMediaCard({
@@ -25,7 +25,7 @@ export default function SavedMediaCard({
    mediaToDelete,
    setMediaToDelete,
    setTransitionValues,
-   leavingPage,
+   hidePage,
 }: Props) {
    const isSelected = mediaToDelete.includes(media);
    const onTap = () => {
@@ -44,7 +44,7 @@ export default function SavedMediaCard({
       const element = transitionCard.current!;
       setTransitionValues(media.poster_path, link, element);
       setIsInvisible(true);
-      leavingPage();
+      hidePage();
    };
 
    return (

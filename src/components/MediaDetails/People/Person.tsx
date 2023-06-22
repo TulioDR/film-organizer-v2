@@ -16,7 +16,7 @@ export default function Person({ person }: Props) {
             size="md"
             person
          />
-         <div className="w-full absolute bottom-0 text-xs sm:text-sm p-2 pt-10 text-dark-text-hard bg-gradient-to-t from-black to-transparent">
+         <div className="w-full absolute bottom-0 text-xs sm:text-sm p-2 pt-10 text-text-1 bg-gradient-to-t from-black to-transparent">
             <div className="truncate">{person.name}</div>
             <div className="truncate">{person.character || person.job}</div>
          </div>
