@@ -64,7 +64,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       if (isInvalid) return;
       if (value !== list.name) {
          const updatedList = await updateList(list.id, { name: value });
-         console.log(updatedList);
+         console.log(updatedList?.data);
          refreshLists();
       }
       closeEdit();

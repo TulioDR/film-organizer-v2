@@ -32,7 +32,7 @@ export default function CreateListModal({ close }: Props) {
          name: values.name,
          authorId: user?.id,
       });
-      console.log(createdList);
+      console.log(createdList?.data);
       refreshLists();
       close();
    };

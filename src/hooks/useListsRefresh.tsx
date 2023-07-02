@@ -13,8 +13,11 @@ export default function useListsRefresh() {
          return;
       }
       console.log("refresh lists");
-      const lists = await getLists(user.id);
-      dispatch(listActions.setLists(lists));
+      setTimeout(async () => {
+         const lists = await getLists(user.id);
+         console.log(lists);
+         dispatch(listActions.setLists(lists));
+      }, 100);
    };
 
    return { refreshLists };

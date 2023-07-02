@@ -5,13 +5,11 @@ import DeleteMedia from "@/components/ListDetails/DeleteMedia";
 import PageTitle from "../../components/PageTitle";
 import { SavedMediaModel } from "../../models/MediaModel";
 
-import { getMedia } from "../../api/media";
+import { getListMedia } from "@/api/media";
 
 import Head from "next/head";
 import { staggerContainer } from "../../animations/StaggerCards";
 import { motion } from "framer-motion";
-
-import prisma from "../../lib/prisma";
 
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
@@ -20,29 +18,32 @@ import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 import SavedMediaCard from "@/components/ListDetails/SavedMediaCard";
 import MediaTypePills from "@/components/ListDetails/MediaTypePills";
 import { backgroundActions } from "@/store/slices/background-slice";
+import { query } from "@/config/db";
+import ListModel from "@/models/listModel";
 
-type Props = { listId: string; list: any; initialMedia: SavedMediaModel[] };
+type Props = {
+   list: ListModel;
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-   const { listId } = context.query!;
-   const listData = await prisma.list.findUnique({
-      where: { id: listId as string },
-   });
-   const list = JSON.parse(JSON.stringify(listData));
-
-   const mediaData = await prisma.media.findMany({
-      where: { listId: listId as string },
-   });
-   const media = JSON.parse(JSON.stringify(mediaData));
+   const { list_id } = context.query!;
+   const listData = await query(
+      `
+      SELECT * FROM lists
+      WHERE id = ?
+   `,
+      [list_id]
+   );
+   const list = JSON.parse(JSON.stringify(listData))[0];
    return {
-      props: { listId, list, initialMedia: media },
+      props: { list },
    };
 };
 
-export default function ListID({ listId, list, initialMedia }: Props) {
+export default function ListID({ list }: Props) {
    const { expandSidebar } = useSelector((state: any) => state.sidebar);
 
-   const [media, setMedia] = useState<SavedMediaModel[]>(initialMedia);
+   const [media, setMedia] = useState<SavedMediaModel[]>([]);
    const [mediaToDelete, setMediaToDelete] = useState<SavedMediaModel[]>([]);
 
    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
@@ -63,19 +64,18 @@ export default function ListID({ listId, list, initialMedia }: Props) {
       closeDelete();
    };
 
-   const [filteredMedia, setFilteredMedia] =
-      useState<SavedMediaModel[]>(initialMedia);
+   const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[]>([]);
    const [selectedType, setSelectedType] = useState<"movie" | "tv" | "all">(
       "all"
    );
 
    useEffect(() => {
       const getMediaOnRefresh = async () => {
-         const media = await getMedia(listId);
+         const media = await getListMedia(list.id);
          setMedia(media);
       };
       getMediaOnRefresh();
-   }, [listId]);
+   }, [list.id]);
 
    useEffect(() => {
       if (selectedType === "all") {
@@ -136,7 +136,7 @@ export default function ListID({ listId, list, initialMedia }: Props) {
             >
                {filteredMedia.map((media) => (
                   <SavedMediaCard
-                     key={media.name}
+                     key={media.media_title + media.media_id}
                      media={media}
                      isDeleteOpen={isDeleteOpen}
                      mediaToDelete={mediaToDelete}

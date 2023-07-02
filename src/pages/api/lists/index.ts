@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../lib/prisma";
+import { query } from "@/config/db";
+import { v4 as uuid } from "uuid";
 
 export default async function handler(
    req: NextApiRequest,
@@ -8,10 +9,10 @@ export default async function handler(
    if (req.method === "GET") {
       const { authorId } = req.query;
       try {
-         const lists = await prisma.list.findMany({
-            where: { authorId: authorId as string },
-            orderBy: [{ createdAt: "asc" }],
-         });
+         const lists = await query(`
+            SELECT * FROM lists
+            ORDER BY created_at ASC
+         `);
          res.status(200).json(lists);
       } catch (error: any) {
          res.status(404).json(error);
@@ -20,10 +21,14 @@ export default async function handler(
    if (req.method === "POST") {
       try {
          const { name, authorId } = req.body;
-         const list = await prisma.list.create({
-            data: { name, authorId },
-         });
-         res.status(200).json(list);
+         const result = await query(
+            `
+            INSERT INTO lists (id, name, author_id)
+            VALUES (?, ?, ?)
+         `,
+            [uuid(), name, authorId]
+         );
+         res.status(200).json(result);
       } catch (error: any) {
          res.status(404).json(error);
       }

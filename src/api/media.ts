@@ -1,49 +1,34 @@
 import axios from "axios";
-import { SavedMediaModel } from "../models/MediaModel";
+import { SavedMediaModel } from "@/models/MediaModel";
 const API = axios.create({ baseURL: "/api/media" });
 
-export const getMedia = async (listId: string) => {
+export const getListMedia = async (list_id: string) => {
    try {
-      const { data } = await API.get(`/${listId}`);
+      const { data } = await API.get("/", {
+         params: { list_id },
+      });
       return data;
    } catch (error) {
       console.log(error);
    }
 };
 
-export const getUniqueMedia = async (params: any) => {
+export const getIsMediaInList = async (params: any) => {
    try {
-      const { media_id, media_type, listId } = params;
-      const { data } = await API.get(`/${listId}/${media_id}/${media_type}`);
+      const { list_id, media_id, media_type } = params;
+      const link = `/isMediaInList/${list_id}/${media_id}/${media_type}`;
+      const { data } = await API.get(link);
       return data;
    } catch (error) {
       console.log(error);
    }
 };
 
-export const getFirstMedia = async (params: any) => {
+export const getIsMediaSaved = async (params: any) => {
    try {
       const { media_id, media_type } = params;
-      const { data } = await API.get(`/first/${media_id}/${media_type}`);
-      return data;
-   } catch (error) {
-      console.log(error);
-   }
-};
-
-export const getSeason = async (tvShowId: number, seasonNumber: number) => {
-   try {
-      const { data } = await API.get(`/season/${tvShowId}/${seasonNumber}`);
-      return data;
-   } catch (error) {
-      console.log(error);
-   }
-};
-
-export const deleteUniqueMedia = async (params: any) => {
-   try {
-      const { media_id, media_type, listId } = params;
-      const { data } = await API.delete(`/${listId}/${media_id}/${media_type}`);
+      const link = `/isMediaSaved/${media_id}/${media_type}`;
+      const { data } = await API.get(link);
       return data;
    } catch (error) {
       console.log(error);
@@ -59,9 +44,18 @@ export const createMedia = async (media: SavedMediaModel) => {
    }
 };
 
-export const deleteMedia = async (idsArray: any) => {
+export const deleteMedia = async (values: any) => {
    try {
-      const data = await API.delete("/", { data: idsArray });
+      const { data } = await API.delete("/", { data: values });
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
+export const deleteManyMedia = async (idsArray: any) => {
+   try {
+      const data = await API.delete("/deleteMany", { data: idsArray });
       return data;
    } catch (error) {
       console.log(error);

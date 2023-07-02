@@ -1,4 +1,4 @@
-import { getSeason } from "@/api/media";
+import { getSeason } from "@/api/season";
 
 import React, { useEffect, useState } from "react";
 

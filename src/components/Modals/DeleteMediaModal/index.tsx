@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteMedia } from "../../../api/media";
+import { deleteManyMedia } from "@/api/media";
 import { SavedMediaModel } from "../../../models/MediaModel";
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
@@ -37,8 +37,8 @@ export default function DeleteMediaModal({
    const deleteMediaFunction = async () => {
       const ids = mediaToDelete.map(({ id }) => id);
       close();
-      const deletedMedia = await deleteMedia(ids);
-      console.log(deletedMedia);
+      const deletedMedia = await deleteManyMedia(ids);
+      console.log(deletedMedia?.data);
    };
 
    return (

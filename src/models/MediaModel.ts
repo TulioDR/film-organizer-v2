@@ -19,10 +19,10 @@ export interface MediaModel {
 export interface SavedMediaModel {
    id?: string;
    media_id: number;
-   name: string;
-   poster_path: string;
+   media_title: string;
+   media_poster: string;
    media_type: "movie" | "tv";
-   listId: string;
+   list_id: string;
 }
 
 export interface MediaDetailsModel extends MediaModel {

@@ -1,6 +1,6 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import { getFirstMedia } from "../api/media";
+import { getIsMediaSaved } from "@/api/media";
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 
@@ -15,7 +15,7 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
    );
 
    useEffect(() => {
-      const getIsMediaSaved = async () => {
+      const isMediaIsSavedEffect = async () => {
          if (!user) {
             setIsMediaSaved(false);
             return;
@@ -24,15 +24,16 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
          if (mediaToSave && mediaToSave.media.id !== id) return;
          console.log("checking if media is saved");
          setIsLoading(true);
-         const foundInAList = await getFirstMedia({
+         const foundInAList = await getIsMediaSaved({
             media_id: id,
             media_type: type,
          });
+         console.log(foundInAList);
          setIsLoading(false);
-         if (foundInAList) setIsMediaSaved(true);
+         if (foundInAList?.length > 0) setIsMediaSaved(true);
          else setIsMediaSaved(false);
       };
-      getIsMediaSaved();
+      isMediaIsSavedEffect();
    }, [id, type, user, mediaToSave, isSaveMediaOpen]);
 
    return { isMediaSaved, isLoading };

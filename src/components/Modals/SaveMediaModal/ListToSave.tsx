@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-   createMedia,
-   deleteUniqueMedia,
-   getUniqueMedia,
-} from "../../../api/media";
+import { createMedia, deleteMedia, getIsMediaInList } from "../../../api/media";
 import { SpinnerCircularFixed } from "spinners-react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
@@ -27,10 +23,10 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       setIsLoading(true);
       const createdMedia = await createMedia({
          media_id: media.id,
-         name: media.title || media.name,
-         poster_path: media.poster_path,
+         media_title: media.title || media.name,
+         media_poster: media.poster_path,
          media_type: mediaType,
-         listId: list.id,
+         list_id: list.id,
       });
       console.log(createdMedia);
       refresh();
@@ -38,10 +34,10 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
 
    const removeFromList = async () => {
       setIsLoading(true);
-      const deletedMedia = await deleteUniqueMedia({
+      const deletedMedia = await deleteMedia({
+         list_id: list.id,
          media_id: media.id,
          media_type: mediaType,
-         listId: list.id,
       });
       console.log(deletedMedia);
       refresh();
@@ -49,12 +45,12 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
 
    useEffect(() => {
       const checkIfSaved = async () => {
-         const isMediaSaved = await getUniqueMedia({
+         const isMediaSaved = await getIsMediaInList({
+            list_id: list.id,
             media_id: media.id,
             media_type: mediaType,
-            listId: list.id,
          });
-         if (isMediaSaved) setIsSaved(true);
+         if (isMediaSaved.length > 0) setIsSaved(true);
          else setIsSaved(false);
          setIsLoading(false);
       };

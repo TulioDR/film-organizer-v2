@@ -3,7 +3,7 @@ const API = axios.create({ baseURL: "/api/lists" });
 
 export const getLists = async (authorId: string) => {
    try {
-      const { data } = await API.get(`/`, {
+      const { data } = await API.get("/", {
          params: { authorId },
       });
       return data;
@@ -23,7 +23,7 @@ export const createList = async (listName: any) => {
 
 export const updateList = (id: string, newName: any) => {
    try {
-      const data = API.put(`/${id}`, newName);
+      const data = API.patch(`/${id}`, newName);
       return data;
    } catch (error) {
       console.log(error);

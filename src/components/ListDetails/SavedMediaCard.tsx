@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 
 type Props = {
-   media: any;
+   media: SavedMediaModel;
    isDeleteOpen: boolean;
    mediaToDelete: SavedMediaModel[];
    setMediaToDelete: React.Dispatch<React.SetStateAction<SavedMediaModel[]>>;
@@ -42,7 +42,7 @@ export default function SavedMediaCard({
       dispatch(posterAnimationActions.changePosterAnimation(false));
       const link = `/${media.media_type}/${media.media_id}`;
       const element = transitionCard.current!;
-      setTransitionValues(media.poster_path, link, element);
+      setTransitionValues(media.media_poster, link, element);
       setIsInvisible(true);
       hidePage();
    };
@@ -57,7 +57,11 @@ export default function SavedMediaCard({
          }`}
          onClick={!isDeleteOpen ? handleClick : undefined}
       >
-         <Poster alt={media.name} posterPath={media.poster_path} size="lg" />
+         <Poster
+            alt={media.media_title}
+            posterPath={media.media_poster}
+            size="lg"
+         />
          {isDeleteOpen && (
             <div
                className={`absolute top-0 left-0 w-full h-full rounded-xl cursor-pointer overflow-hidden ${
@@ -90,7 +94,7 @@ export default function SavedMediaCard({
                </div>
             </div>
          )}
-         <div className="absolute w-full h-full">{media.name}</div>
+         <div className="absolute w-full h-full">{media.media_title}</div>
       </motion.article>
    );
 }
