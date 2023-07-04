@@ -8,29 +8,25 @@ export default async function handler(
 ) {
    if (req.method === "GET") {
       const { authorId } = req.query;
-      try {
-         const lists = await query(`
+      const response = await query(
+         `
             SELECT * FROM lists
+            WHERE author_id = ?
             ORDER BY created_at ASC
-         `);
-         res.status(200).json(lists);
-      } catch (error: any) {
-         res.status(404).json(error);
-      }
+         `,
+         [authorId]
+      );
+      res.status(200).json(response);
    }
    if (req.method === "POST") {
-      try {
-         const { name, authorId } = req.body;
-         const result = await query(
-            `
+      const { name, authorId } = req.body;
+      const response = await query(
+         `
             INSERT INTO lists (id, name, author_id)
             VALUES (?, ?, ?)
          `,
-            [uuid(), name, authorId]
-         );
-         res.status(200).json(result);
-      } catch (error: any) {
-         res.status(404).json(error);
-      }
+         [uuid(), name, authorId]
+      );
+      res.status(200).json(response);
    }
 }

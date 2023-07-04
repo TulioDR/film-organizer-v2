@@ -6,19 +6,12 @@ export default async function handler(
    res: NextApiResponse
 ) {
    if (req.method === "DELETE") {
-      try {
-         const array = req.body.map((id: string) => `'${id}'`);
-         const string = array.join(", ");
-         const result = await query(
-            `
-            DELETE FROM media
-            WHERE id IN (${string})
-            `
-         );
-         res.status(200).json(result);
-      } catch (error: any) {
-         res.status(404).json(error);
-         console.log(error);
-      }
+      const array = req.body.map((id: string) => `'${id}'`);
+      const string = array.join(", ");
+      const result = await query(`
+         DELETE FROM media
+         WHERE id IN (${string})
+      `);
+      res.status(200).json(result);
    }
 }

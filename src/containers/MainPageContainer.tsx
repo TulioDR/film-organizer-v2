@@ -12,6 +12,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import BackgroundImage from "@/components/BackgroundImage";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import Notification from "@/components/Notification";
 
 type Props = {
    children: React.ReactNode;
@@ -36,6 +37,7 @@ export default function MainPageContainer({ children }: Props) {
          <BackgroundImage />
          <SaveMediaModal />
          <LoginAdviceModal />
+         <Notification />
          <div className="flex">
             <Sidebar />
             <div

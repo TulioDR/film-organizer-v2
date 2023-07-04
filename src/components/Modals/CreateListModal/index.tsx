@@ -13,6 +13,8 @@ import listNameValidation from "../../../utils/listNameValidation";
 import { createList } from "../../../api/lists";
 import { useSelector } from "react-redux";
 import useListsRefresh from "@/hooks/useListsRefresh";
+import LoadingButton from "../LoadingButton";
+import useNotification from "@/hooks/useNotification";
 
 type Props = {
    close: () => void;
@@ -24,17 +26,37 @@ export default function CreateListModal({ close }: Props) {
    const { themeColor } = useSelector((state: any) => state.theme);
 
    const [isFocused, setIsFocused] = useState<boolean>(false);
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
    const user = useUser();
 
+   const { setAndCloseNotification } = useNotification();
+
    const handleSubmit = async (values: any) => {
+      setIsLoading(true);
       const createdList = await createList({
          name: values.name,
          authorId: user?.id,
       });
-      console.log(createdList?.data);
-      refreshLists();
-      close();
+      let message = "";
+      let success = false;
+      if (createdList.error) {
+         setIsLoading(false);
+         const { code } = createdList.error;
+         if (code === "ER_DUP_ENTRY") {
+            message = "A list with that name already exist";
+         } else if (code === "ER_DATA_TOO_LONG") {
+            message = "Name can't have more than 12 characters";
+         } else {
+            message = "Something went wrong, please try again later";
+         }
+      } else {
+         message = "List created Successfully";
+         success = true;
+         refreshLists();
+         close();
+      }
+      setAndCloseNotification(message, success);
    };
 
    return (
@@ -52,7 +74,7 @@ export default function CreateListModal({ close }: Props) {
                         name="name"
                         placeholder="List name"
                         autoComplete="off"
-                        maxLength={20}
+                        maxLength={12}
                         className="w-full h-9 bg-transparent text-text-2 placeholder:text-text-3 border-b-2 border-text-2 outline-none"
                         autoFocus
                         onFocus={() => setIsFocused(true)}
@@ -76,8 +98,10 @@ export default function CreateListModal({ close }: Props) {
                   )}
                   <ModalButtonsContainer>
                      <ModalButton onClick={close}>Cancel</ModalButton>
-                     <ModalButton submit blue>
-                        Create
+                     <ModalButton submit blue disabled={isLoading}>
+                        <LoadingButton isLoading={isLoading}>
+                           Create
+                        </LoadingButton>
                      </ModalButton>
                   </ModalButtonsContainer>
                </Form>

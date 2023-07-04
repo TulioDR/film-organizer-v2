@@ -8,12 +8,14 @@ import ModalTitle from "../ModalTitle";
 import MediaToDelete from "./MediaToDelete";
 import Subtitle from "./Subtitle";
 import ModalPortal from "../ModalPortal";
+import LoadingButton from "../LoadingButton";
 
 type Props = {
    isOpen: boolean;
    close: () => void;
    mediaToDelete: SavedMediaModel[];
    list: any;
+   refresh: () => void;
 };
 
 export default function DeleteMediaModal({
@@ -21,9 +23,12 @@ export default function DeleteMediaModal({
    close,
    mediaToDelete,
    list,
+   refresh,
 }: Props) {
    const [movies, setMovies] = useState<SavedMediaModel[]>([]);
    const [tvSeries, setTvSeries] = useState<SavedMediaModel[]>([]);
+
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
    useEffect(() => {
       const movie = mediaToDelete.filter(
@@ -35,9 +40,11 @@ export default function DeleteMediaModal({
    }, [mediaToDelete]);
 
    const deleteMediaFunction = async () => {
+      setIsLoading(true);
       const ids = mediaToDelete.map(({ id }) => id);
-      close();
       const deletedMedia = await deleteManyMedia(ids);
+      refresh();
+      close();
       console.log(deletedMedia?.data);
    };
 
@@ -62,8 +69,12 @@ export default function DeleteMediaModal({
             </div>
             <ModalButtonsContainer>
                <ModalButton onClick={close}>Cancel</ModalButton>
-               <ModalButton red onClick={deleteMediaFunction}>
-                  Delete
+               <ModalButton
+                  red
+                  onClick={deleteMediaFunction}
+                  disabled={isLoading}
+               >
+                  <LoadingButton isLoading={isLoading}>Delete</LoadingButton>
                </ModalButton>
             </ModalButtonsContainer>
          </ModalContainer>

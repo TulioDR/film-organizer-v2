@@ -10,6 +10,7 @@ import ErrorMessageForName from "./ErrorMessageForName";
 import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
 import useListsRefresh from "@/hooks/useListsRefresh";
+import useNotification from "@/hooks/useNotification";
 
 type Props = {
    list: any;
@@ -22,6 +23,8 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
    const [showError, setShowError] = useState<string | null>(null);
+
+   const { setAndCloseNotification } = useNotification();
 
    const nameValidation = (value: string): null | string => {
       let error = null;
@@ -64,10 +67,26 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       if (isInvalid) return;
       if (value !== list.name) {
          const updatedList = await updateList(list.id, { name: value });
-         console.log(updatedList?.data);
+         console.log(updatedList);
+         let message = "";
+         let success = false;
+         if (updatedList.error) {
+            const { code } = updatedList.error;
+            if (code === "ER_DUP_ENTRY") {
+               message = "A list with that name already exist";
+            } else if (code === "ER_DATA_TOO_LONG") {
+               message = "Name can't have more than 12 characters";
+            } else {
+               message = "Something went wrong, please try again later";
+            }
+         } else {
+            message = "List updated Successfully";
+            success = true;
+            closeEdit();
+         }
+         setAndCloseNotification(message, success);
          refreshLists();
       }
-      closeEdit();
    };
 
    return (
@@ -81,7 +100,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
                   ref={inputRef}
                   type="text"
                   onFocus={handleFocus}
-                  maxLength={20}
+                  maxLength={12}
                   value={value}
                   autoComplete="off"
                   onKeyDown={handleKeyDown}

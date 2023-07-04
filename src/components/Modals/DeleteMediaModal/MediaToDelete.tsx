@@ -1,7 +1,8 @@
+import { SavedMediaModel } from "@/models/MediaModel";
 import React from "react";
 
 type Props = {
-   media: any[];
+   media: SavedMediaModel[];
    movie?: boolean;
 };
 
@@ -11,7 +12,7 @@ export default function MediaToDelete({ media, movie }: Props) {
          {media.length ? (
             media.map((item) => (
                <li key={item.id} className="h-6 pl-2">
-                  - {item.name}
+                  - {item.media_title}
                </li>
             ))
          ) : (

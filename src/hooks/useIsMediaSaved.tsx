@@ -28,7 +28,6 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
             media_id: id,
             media_type: type,
          });
-         console.log(foundInAList);
          setIsLoading(false);
          if (foundInAList?.length > 0) setIsMediaSaved(true);
          else setIsMediaSaved(false);

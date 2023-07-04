@@ -14,25 +14,25 @@ export const getLists = async (authorId: string) => {
 
 export const createList = async (listName: any) => {
    try {
-      const data = await API.post("/", listName);
+      const { data } = await API.post("/", listName);
+      return data;
+   } catch (error: any) {
+      console.log(error);
+   }
+};
+
+export const updateList = async (id: string, newName: any) => {
+   try {
+      const { data } = await API.patch(`/${id}`, newName);
       return data;
    } catch (error) {
       console.log(error);
    }
 };
 
-export const updateList = (id: string, newName: any) => {
+export const deleteList = async (id: string) => {
    try {
-      const data = API.patch(`/${id}`, newName);
-      return data;
-   } catch (error) {
-      console.log(error);
-   }
-};
-
-export const deleteList = (id: string) => {
-   try {
-      const data = API.delete(`/${id}`);
+      const { data } = await API.delete(`/${id}`);
       return data;
    } catch (error) {
       console.log(error);

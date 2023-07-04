@@ -6,6 +6,7 @@ import listSlice from "./slices/list-slice";
 import bookmarkSlice from "./slices/bookmark-slice";
 import backgroundSlice from "./slices/background-slice";
 import posterAnimationSlice from "./slices/poster-animation-slice";
+import notificationSlice from "./slices/notification-slice";
 
 const store = configureStore({
    reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
       bookmark: bookmarkSlice.reducer,
       background: backgroundSlice.reducer,
       posterAnimation: posterAnimationSlice.reducer,
+      notification: notificationSlice.reducer,
    },
 });
 const makeStore = () => store;

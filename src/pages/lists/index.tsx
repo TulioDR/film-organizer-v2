@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import ListCard from "../../components/Manage/ListCard";
 import PageTitle from "../../components/PageTitle";
 import ListModel from "../../models/listModel";
-import { motion } from "framer-motion";
-import { staggerContainer } from "../../animations/StaggerCards";
 import { useUser } from "@supabase/auth-helpers-react";
 import ListsLoginAdvice from "../../components/Manage/ListsLoginAdvice";
 
@@ -13,10 +11,13 @@ import ListFinder from "../../components/Manage/ListFinder";
 import NoListsMessage from "../../components/Manage/NoListsMessage";
 import { useSelector } from "react-redux";
 import DeleteListModal from "@/components/Modals/DeleteListModal";
+import ListsCardsContainer from "@/components/ListDetails/ListsCardsContainer";
+import StoreModel from "@/models/StoreModel";
+import ModalPortal from "@/components/Modals/ModalPortal";
 
 export default function Lists() {
    const user = useUser();
-   const { lists } = useSelector((state: any) => state.lists);
+   const { lists } = useSelector((state: StoreModel) => state.lists);
 
    const [listToDelete, setListToDelete] = useState<ListModel | null>(null);
 
@@ -32,7 +33,7 @@ export default function Lists() {
    const [inputValue, setInputValue] = useState<string>("");
    const [filteredLists, setFilteredLists] = useState<any[]>([]);
    useEffect(() => {
-      const founded = lists.filter(({ name }: any) =>
+      const founded = lists.filter(({ name }) =>
          name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
       );
       setFilteredLists(founded);
@@ -57,13 +58,7 @@ export default function Lists() {
          {user ? (
             <div>
                {filteredLists.length > 0 ? (
-                  <motion.div
-                     variants={staggerContainer}
-                     initial="initial"
-                     animate="animate"
-                     exit="exit"
-                     className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
-                  >
+                  <ListsCardsContainer>
                      {filteredLists.map((list) => (
                         <ListCard
                            key={list.id}
@@ -71,7 +66,7 @@ export default function Lists() {
                            openDeleteModal={openDeleteModal}
                         />
                      ))}
-                  </motion.div>
+                  </ListsCardsContainer>
                ) : (
                   <NoListsMessage />
                )}
@@ -80,11 +75,12 @@ export default function Lists() {
             <ListsLoginAdvice />
          )}
 
-         <DeleteListModal
-            isOpen={isModalOpen}
-            close={closeDeleteModal}
-            listToDelete={listToDelete}
-         />
+         <ModalPortal isOpen={isModalOpen}>
+            <DeleteListModal
+               close={closeDeleteModal}
+               listToDelete={listToDelete}
+            />
+         </ModalPortal>
       </div>
    );
 }

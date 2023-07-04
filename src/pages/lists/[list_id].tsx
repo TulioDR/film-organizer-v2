@@ -20,6 +20,7 @@ import MediaTypePills from "@/components/ListDetails/MediaTypePills";
 import { backgroundActions } from "@/store/slices/background-slice";
 import { query } from "@/config/db";
 import ListModel from "@/models/listModel";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    list: ListModel;
@@ -31,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       `
       SELECT * FROM lists
       WHERE id = ?
-   `,
+      `,
       [list_id]
    );
    const list = JSON.parse(JSON.stringify(listData))[0];
@@ -41,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function ListID({ list }: Props) {
-   const { expandSidebar } = useSelector((state: any) => state.sidebar);
+   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    const [media, setMedia] = useState<SavedMediaModel[]>([]);
    const [mediaToDelete, setMediaToDelete] = useState<SavedMediaModel[]>([]);
@@ -69,13 +70,16 @@ export default function ListID({ list }: Props) {
       "all"
    );
 
+   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+   const refresh = () => setIsRefreshing((prev) => !prev);
+
    useEffect(() => {
       const getMediaOnRefresh = async () => {
          const media = await getListMedia(list.id);
          setMedia(media);
       };
       getMediaOnRefresh();
-   }, [list.id]);
+   }, [list.id, isRefreshing]);
 
    useEffect(() => {
       if (selectedType === "all") {
@@ -116,7 +120,7 @@ export default function ListID({ list }: Props) {
                isPageHidden ? "opacity-0 duration-300" : ""
             }`}
          >
-            <div className="w-full flex items-center justify-between">
+            <div className="w-full flex items-end justify-between">
                <PageTitle>{list.name}</PageTitle>
                <MediaTypePills
                   selectedType={selectedType}
@@ -165,6 +169,7 @@ export default function ListID({ list }: Props) {
             isOpen={isDeleteModalOpen}
             close={closeDeleteModal}
             mediaToDelete={mediaToDelete}
+            refresh={refresh}
          />
       </div>
    );
