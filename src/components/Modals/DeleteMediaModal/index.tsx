@@ -7,11 +7,10 @@ import ModalContainer from "../ModalContainer";
 import ModalTitle from "../ModalTitle";
 import MediaToDelete from "./MediaToDelete";
 import Subtitle from "./Subtitle";
-import ModalPortal from "../ModalPortal";
 import LoadingButton from "../LoadingButton";
+import useNotification from "@/hooks/useNotification";
 
 type Props = {
-   isOpen: boolean;
    close: () => void;
    mediaToDelete: SavedMediaModel[];
    list: any;
@@ -19,7 +18,6 @@ type Props = {
 };
 
 export default function DeleteMediaModal({
-   isOpen,
    close,
    mediaToDelete,
    list,
@@ -29,6 +27,7 @@ export default function DeleteMediaModal({
    const [tvSeries, setTvSeries] = useState<SavedMediaModel[]>([]);
 
    const [isLoading, setIsLoading] = useState<boolean>(false);
+   const { setAndCloseNotification, getErrorMessage } = useNotification();
 
    useEffect(() => {
       const movie = mediaToDelete.filter(
@@ -43,41 +42,44 @@ export default function DeleteMediaModal({
       setIsLoading(true);
       const ids = mediaToDelete.map(({ id }) => id);
       const deletedMedia = await deleteManyMedia(ids);
-      refresh();
-      close();
-      console.log(deletedMedia?.data);
+      let message = "";
+      let success = false;
+      if (deletedMedia.error) {
+         setIsLoading(false);
+         message = getErrorMessage(deletedMedia.error.code);
+      } else {
+         message = "Media deleted Successfully";
+         success = true;
+         refresh();
+         close();
+      }
+      setAndCloseNotification(message, success);
    };
 
    return (
-      <ModalPortal isOpen={isOpen}>
-         <ModalContainer close={close}>
-            <ModalTitle>
-               Delete from <em>{list?.name}</em>
-            </ModalTitle>
-            <div className="text-sm text-text-2">
-               <div>The next items are going to be deleted:</div>
-               <div>
-                  Note: Deleting an item from the list is a permanent action and
-                  cannot be undone.
-               </div>
-               <div>
-                  <Subtitle>Movies</Subtitle>
-                  <MediaToDelete media={movies} movie />
-                  <Subtitle>TV Series</Subtitle>
-                  <MediaToDelete media={tvSeries} />
-               </div>
+      <ModalContainer close={close}>
+         <ModalTitle>
+            Delete from <em>{list.name}</em>
+         </ModalTitle>
+         <div className="text-xs sm:text-sm text-text-2">
+            <div>The next items are going to be deleted:</div>
+            <div>
+               Note: Deleting an item from the list is a permanent action and
+               cannot be undone.
             </div>
-            <ModalButtonsContainer>
-               <ModalButton onClick={close}>Cancel</ModalButton>
-               <ModalButton
-                  red
-                  onClick={deleteMediaFunction}
-                  disabled={isLoading}
-               >
-                  <LoadingButton isLoading={isLoading}>Delete</LoadingButton>
-               </ModalButton>
-            </ModalButtonsContainer>
-         </ModalContainer>
-      </ModalPortal>
+            <div>
+               <Subtitle>Movies</Subtitle>
+               <MediaToDelete media={movies} movie />
+               <Subtitle>TV Series</Subtitle>
+               <MediaToDelete media={tvSeries} />
+            </div>
+         </div>
+         <ModalButtonsContainer>
+            <ModalButton onClick={close}>Cancel</ModalButton>
+            <ModalButton red onClick={deleteMediaFunction} disabled={isLoading}>
+               <LoadingButton isLoading={isLoading}>Delete</LoadingButton>
+            </ModalButton>
+         </ModalButtonsContainer>
+      </ModalContainer>
    );
 }

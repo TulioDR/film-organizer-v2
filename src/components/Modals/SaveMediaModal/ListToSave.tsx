@@ -3,6 +3,7 @@ import { createMedia, deleteMedia, getIsMediaInList } from "../../../api/media";
 import { SpinnerCircularFixed } from "spinners-react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import useNotification from "@/hooks/useNotification";
 
 interface ListProps {
    list: any;
@@ -15,6 +16,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
 
    const [isSaved, setIsSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(true);
+   const { setAndCloseNotification, getErrorMessage } = useNotification();
 
    const [refreshEffect, setRefreshEffect] = useState<boolean>(true);
    const refresh = () => setRefreshEffect((prev) => !prev);
@@ -28,8 +30,14 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          media_type: mediaType,
          list_id: list.id,
       });
-      console.log(createdMedia);
-      refresh();
+      if (createdMedia.error) {
+         const message = getErrorMessage(createdMedia.error.code);
+         const success = false;
+         setAndCloseNotification(message, success);
+      } else {
+         refresh();
+      }
+      setIsLoading(false);
    };
 
    const removeFromList = async () => {
@@ -39,8 +47,14 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          media_id: media.id,
          media_type: mediaType,
       });
-      console.log(deletedMedia);
-      refresh();
+      if (deletedMedia.error) {
+         const message = getErrorMessage(deletedMedia.error.code);
+         const success = false;
+         setAndCloseNotification(message, success);
+      } else {
+         refresh();
+      }
+      setIsLoading(false);
    };
 
    useEffect(() => {
@@ -50,9 +64,15 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
             media_id: media.id,
             media_type: mediaType,
          });
-         if (isMediaSaved.length > 0) setIsSaved(true);
-         else setIsSaved(false);
-         setIsLoading(false);
+         if (isMediaSaved.error) {
+            const message = getErrorMessage(isMediaSaved.error.code);
+            const success = false;
+            setAndCloseNotification(message, success);
+         } else {
+            if (isMediaSaved.length > 0) setIsSaved(true);
+            else setIsSaved(false);
+            setIsLoading(false);
+         }
       };
       checkIfSaved();
    }, [media.id, list.id, mediaType, refreshEffect]);

@@ -1,7 +1,7 @@
 import { SavedMediaModel } from "@/models/MediaModel";
-import OpenDeleteModal from "./OpenDeleteModal";
 import DeleteMediaMessage from "./DeleteMediaMessage";
 import OpenDeleteMediaButton from "./OpenDeleteMediaButton";
+import OpenDeleteModalButton from "./OpenDeleteModalButton";
 
 type Props = {
    mediaToDelete: SavedMediaModel[];
@@ -10,7 +10,7 @@ type Props = {
    openDeleteModal: () => void;
 };
 
-export default function DeleteMedia({
+export default function DeleteMediaButtons({
    isDeleteOpen,
    onClick,
    mediaToDelete,
@@ -26,7 +26,7 @@ export default function DeleteMedia({
             />
          </div>
          <div className="fixed bottom-10 select-none">
-            <OpenDeleteModal
+            <OpenDeleteModalButton
                isDeleteOpen={isDeleteOpen}
                mediaToDelete={mediaToDelete}
                onClick={openDeleteModal}

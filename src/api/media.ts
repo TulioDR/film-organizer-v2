@@ -37,7 +37,7 @@ export const getIsMediaSaved = async (params: any) => {
 
 export const createMedia = async (media: SavedMediaModel) => {
    try {
-      const data = await API.post("/", media);
+      const { data } = await API.post("/", media);
       return data;
    } catch (error) {
       console.log(error);
@@ -55,7 +55,7 @@ export const deleteMedia = async (values: any) => {
 
 export const deleteManyMedia = async (idsArray: any) => {
    try {
-      const data = await API.delete("/deleteMany", { data: idsArray });
+      const { data } = await API.delete("/deleteMany", { data: idsArray });
       return data;
    } catch (error) {
       console.log(error);

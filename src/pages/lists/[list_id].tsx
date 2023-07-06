@@ -1,6 +1,5 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-import DeleteMedia from "@/components/ListDetails/DeleteMedia";
 
 import PageTitle from "../../components/PageTitle";
 import { SavedMediaModel } from "../../models/MediaModel";
@@ -21,6 +20,8 @@ import { backgroundActions } from "@/store/slices/background-slice";
 import { query } from "@/config/db";
 import ListModel from "@/models/listModel";
 import StoreModel from "@/models/StoreModel";
+import DeleteMediaButtons from "@/components/ListDetails/DeleteMediaButtons";
+import ModalPortal from "@/components/Modals/ModalPortal";
 
 type Props = {
    list: ListModel;
@@ -62,7 +63,6 @@ export default function ListID({ list }: Props) {
    };
    const closeDeleteModal = () => {
       setIsDeleteModalOpen(false);
-      closeDelete();
    };
 
    const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[]>([]);
@@ -158,19 +158,20 @@ export default function ListID({ list }: Props) {
             onAnimationComplete={onPosterAnimationComplete}
             showSpinner={showSpinner}
          />
-         <DeleteMedia
+         <DeleteMediaButtons
             mediaToDelete={mediaToDelete}
             isDeleteOpen={isDeleteOpen}
             onClick={isDeleteOpen ? closeDelete : openDelete}
             openDeleteModal={openDeleteModal}
          />
-         <DeleteMediaModal
-            list={list}
-            isOpen={isDeleteModalOpen}
-            close={closeDeleteModal}
-            mediaToDelete={mediaToDelete}
-            refresh={refresh}
-         />
+         <ModalPortal isOpen={isDeleteModalOpen}>
+            <DeleteMediaModal
+               list={list}
+               close={closeDeleteModal}
+               mediaToDelete={mediaToDelete}
+               refresh={refresh}
+            />
+         </ModalPortal>
       </div>
    );
 }

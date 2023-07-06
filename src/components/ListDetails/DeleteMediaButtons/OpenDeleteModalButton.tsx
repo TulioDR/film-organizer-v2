@@ -6,7 +6,7 @@ type Props = {
    onClick: () => void;
 };
 
-export default function OpenDeleteModal({
+export default function OpenDeleteModalButton({
    isDeleteOpen,
    mediaToDelete,
    onClick,

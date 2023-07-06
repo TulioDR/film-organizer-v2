@@ -30,7 +30,7 @@ export default function CreateListModal({ close }: Props) {
 
    const user = useUser();
 
-   const { setAndCloseNotification } = useNotification();
+   const { setAndCloseNotification, getErrorMessage } = useNotification();
 
    const handleSubmit = async (values: any) => {
       setIsLoading(true);
@@ -42,14 +42,7 @@ export default function CreateListModal({ close }: Props) {
       let success = false;
       if (createdList.error) {
          setIsLoading(false);
-         const { code } = createdList.error;
-         if (code === "ER_DUP_ENTRY") {
-            message = "A list with that name already exist";
-         } else if (code === "ER_DATA_TOO_LONG") {
-            message = "Name can't have more than 12 characters";
-         } else {
-            message = "Something went wrong, please try again later";
-         }
+         message = getErrorMessage(createdList.error.code);
       } else {
          message = "List created Successfully";
          success = true;
