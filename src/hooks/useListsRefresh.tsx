@@ -9,7 +9,7 @@ export default function useListsRefresh() {
 
    const refreshLists = async () => {
       if (!user) {
-         dispatch(listActions.setLists([]));
+         dispatch(listActions.setLists(null));
          return;
       }
       console.log("refresh lists");

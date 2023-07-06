@@ -8,7 +8,7 @@ export interface SidebarModel {
    revealSidebar: boolean;
 }
 export interface ListsModel {
-   lists: any[];
+   lists: any[] | null;
 }
 export interface BookmarkModel {
    isLoginAdviceOpen: boolean;

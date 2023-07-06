@@ -33,6 +33,7 @@ export default function Lists() {
    const [inputValue, setInputValue] = useState<string>("");
    const [filteredLists, setFilteredLists] = useState<any[]>([]);
    useEffect(() => {
+      if (!lists) return;
       const founded = lists.filter(({ name }) =>
          name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
       );
