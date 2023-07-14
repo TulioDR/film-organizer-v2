@@ -8,6 +8,7 @@ import { useState } from "react";
 import MainPageContainer from "../containers/MainPageContainer";
 import wrapper from "@/store";
 import { Provider } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
 function App({
    Component,
@@ -27,13 +28,19 @@ function App({
             supabaseClient={supabaseClient}
             initialSession={pageProps.initialSession}
          >
-            {isAuth ? (
-               <Component {...pageProps} />
-            ) : (
-               <MainPageContainer>
-                  <Component {...pageProps} />
-               </MainPageContainer>
-            )}
+            <AnimatePresence mode="wait">
+               {isAuth ? (
+                  <div key="one">
+                     <Component {...pageProps} />
+                  </div>
+               ) : (
+                  <div key="two">
+                     <MainPageContainer>
+                        <Component {...pageProps} />
+                     </MainPageContainer>
+                  </div>
+               )}
+            </AnimatePresence>
          </SessionContextProvider>
       </Provider>
    );

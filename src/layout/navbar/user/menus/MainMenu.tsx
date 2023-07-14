@@ -69,7 +69,7 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
             Theme Colors
          </DropdownItem>
 
-         {user ? (
+         {false ? (
             <DropdownItem icon={<MainIcon icon="logout" />} onClick={logOut}>
                Log out
             </DropdownItem>

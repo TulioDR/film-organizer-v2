@@ -1,15 +1,17 @@
 type Props = {
    children: React.ReactNode;
-   setError: React.Dispatch<React.SetStateAction<string | null>>;
+   isSignUp?: true;
+   isLogin?: boolean;
 };
 
-export default function AuthContainer({ children, setError }: Props) {
+export default function AuthContainer({ children, isLogin, isSignUp }: Props) {
    return (
-      <div className="absolute top-0 left-0 h-screen w-full flex items-center justify-center sm:p-0 px-5 overflow-y-auto">
-         <div
-            onClick={() => setError(null)}
-            className="shadow-lg rounded-3xl overflow-hidden w-full bg-light-bg-primary px-6 py-12 sm:p-12 relative sm:w-[27rem]"
-         >
+      <div
+         className={`h-full flex items-center justify-center duration-500 ${
+            isSignUp ? "bg-blue-600/80 text-white" : "bg-white/80 text-black"
+         } ${isSignUp ? (isLogin ? "flex-[1]" : "flex-[4]") : "flex-[2]"}`}
+      >
+         <div className="flex flex-col items-center gap-5 w-full max-w-[24rem]">
             {children}
          </div>
       </div>

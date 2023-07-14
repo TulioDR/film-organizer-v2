@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 type Props = {
    children: React.ReactNode;
@@ -9,9 +10,13 @@ export default function SidebarContainer({ children }: Props) {
       (state: any) => state.sidebar
    );
    return (
-      <div
-         className={`fixed top-0 left-0 lg:static z-40 duration-300 ${
-            revealSidebar ? "" : "-translate-x-full lg:translate-x-0"
+      <motion.div
+         initial={{ x: "-100%" }}
+         animate={{ x: 0 }}
+         exit={{ x: "-100%" }}
+         transition={{ duration: 0.4 }}
+         className={`fixed top-0 left-0 lg:static z-40 ${
+            true ? "" : "-translate-x-full lg:translate-x-0"
          }`}
       >
          <div
@@ -24,6 +29,6 @@ export default function SidebarContainer({ children }: Props) {
                {children}
             </div>
          </div>
-      </div>
+      </motion.div>
    );
 }

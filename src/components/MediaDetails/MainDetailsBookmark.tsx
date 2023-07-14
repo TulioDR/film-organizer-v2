@@ -42,7 +42,7 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
             onClick={handleBookmarkClick}
             layout="position"
             className={`h-12 grid place-content-center rounded-full aspect-square z-10 ${
-               isFixed ? "fixed top-24 right-[52px]" : ""
+               isFixed ? "fixed top-24 right-10" : ""
             }`}
          >
             {isLoading ? (
