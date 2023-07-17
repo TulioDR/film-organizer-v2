@@ -22,7 +22,7 @@ export default function AuthFormContainer({ children }: Props) {
             },
          }}
          exit={{ opacity: 0, width: 44, transition: { duration: 0.5 } }}
-         className="overflow-hidden mx-auto"
+         className="overflow-hidden mx-auto flex flex-col items-center"
       >
          {children}
       </motion.div>
