@@ -7,6 +7,7 @@ import ForgotPasswordButton from "../AuthForm/ForgotPasswordButton";
 import GoBackButton from "../AuthForm/GoBackButton";
 import MobileAuthSubmitButton from "./MobileAuthSubmitButton";
 import ChangeAuthTypeButton from "./ChangeAuthTypeButton";
+import MobileSkipButton from "./MobileSkipButton";
 
 type Props = {};
 
@@ -109,6 +110,8 @@ export default function AuthMobile({}: Props) {
                )}
 
                {reset && <GoBackButton onClick={() => setAuthType("login")} />}
+
+               <MobileSkipButton />
             </Form>
          </Formik>
       </div>
