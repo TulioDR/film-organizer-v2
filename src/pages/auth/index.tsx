@@ -11,6 +11,8 @@ import AuthForm from "@/components/Auth/AuthForm";
 import { AnimatePresence } from "framer-motion";
 import ResetPassword from "@/components/Auth/ResetPassword";
 import TranslateContainer from "@/components/Auth/AuthForm/TranslateContainer";
+import SkipButton from "@/components/Auth/SkipButton";
+import AuthMobile from "@/components/Auth/Mobile/AuthMobile";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    console.log(context);
@@ -72,36 +74,42 @@ export default function Auth() {
 
    return (
       <div className="overflow-hidden">
-         <button
-            onClick={signOutFunction}
-            className="bg-red-600 text-white fixed top-0 right-0 py-5 px-8"
-         >
-            Sign Out
-         </button>
-         <AuthAppLogo />
          <AuthHead forgotPassWord={forgotPassWord} isLogin={isLogin} />
-         <ResetPassword toggleForgotPassword={toggleForgotPassword} />
-         <AnimatePresence initial={false}>
-            {!forgotPassWord && (
-               <div className="flex h-screen w-full z-10 over-flow-hidden">
-                  <TranslateContainer isSelected={isLogin}>
-                     <AuthForm
-                        onButtonClick={toggle}
-                        isSelected={isLogin}
-                        toggleForgotPassword={toggleForgotPassword}
-                        type="login"
-                     />
-                  </TranslateContainer>
-                  <TranslateContainer isSelected={!isLogin} register>
-                     <AuthForm
-                        onButtonClick={toggle}
-                        isSelected={!isLogin}
-                        type="register"
-                     />
-                  </TranslateContainer>
-               </div>
-            )}
-         </AnimatePresence>
+         <div className="lg:hidden">
+            <AuthMobile />
+         </div>
+         <div className="hidden lg:block">
+            <button
+               onClick={signOutFunction}
+               className="bg-red-600 text-white fixed top-0 right-0 py-5 px-8 z-10"
+            >
+               Sign Out
+            </button>
+            <AuthAppLogo white={forgotPassWord} />
+            <SkipButton forgotPassWord={forgotPassWord} />
+            <ResetPassword toggleForgotPassword={toggleForgotPassword} />
+            <AnimatePresence initial={false}>
+               {!forgotPassWord && (
+                  <div className="flex h-screen w-full z-10 over-flow-hidden">
+                     <TranslateContainer isSelected={isLogin}>
+                        <AuthForm
+                           onButtonClick={toggle}
+                           isSelected={isLogin}
+                           toggleForgotPassword={toggleForgotPassword}
+                           type="login"
+                        />
+                     </TranslateContainer>
+                     <TranslateContainer isSelected={!isLogin} register>
+                        <AuthForm
+                           onButtonClick={toggle}
+                           isSelected={!isLogin}
+                           type="register"
+                        />
+                     </TranslateContainer>
+                  </div>
+               )}
+            </AnimatePresence>
+         </div>
       </div>
    );
 }

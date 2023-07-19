@@ -6,7 +6,7 @@ export default function ForgotPasswordButton({ onClick }: Props) {
    return (
       <button
          onClick={onClick}
-         className="text-sm hover:underline cursor-pointer"
+         className="hover:underline cursor-pointer text-xs sm:text-sm"
       >
          Forgot your password?
       </button>

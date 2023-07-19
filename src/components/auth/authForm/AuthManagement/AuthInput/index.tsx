@@ -27,7 +27,7 @@ export default function AuthInput({
    const fieldType = password && hidePassword ? "password" : "text";
 
    return (
-      <div className="w-full relative">
+      <div className="w-full relative text-xs sm:text-sm md:text-base">
          <div
             className={`w-full flex items-center relative h-11 border-b ${
                register

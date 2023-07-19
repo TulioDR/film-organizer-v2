@@ -6,7 +6,7 @@ type Props = {
 export default function AuthInputError({ message, register }: Props) {
    return (
       <div
-         className={`absolute left-0 top-full h-5 w-full text-xs sm:text-sm truncate px-3 ${
+         className={`lg:absolute left-0 top-full h-5 w-full text-xs sm:text-sm truncate px-3 ${
             register ? "text-red-400" : "text-red-600"
          }`}
       >

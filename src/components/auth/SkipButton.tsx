@@ -1,16 +1,16 @@
 import Link from "next/link";
 interface Props {
-   reset?: boolean;
+   forgotPassWord: boolean;
 }
-export default function SkipButton({ reset }: Props) {
+export default function SkipButton({ forgotPassWord }: Props) {
    return (
-      <div className="w-full flex justify-end">
-         <Link
-            href={"/"}
-            className="bg-slate-800 text-white py-1 px-4 rounded-full text-sm"
-         >
-            {reset ? "Cancel" : "Skip"}
-         </Link>
-      </div>
+      <Link
+         href={"/"}
+         className={`fixed bottom-10 left-10 z-10 text-sm hover:underline duration-500 ${
+            forgotPassWord ? "text-white" : "text-black"
+         }`}
+      >
+         Continue without Signing in
+      </Link>
    );
 }
