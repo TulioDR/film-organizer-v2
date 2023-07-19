@@ -5,9 +5,11 @@ import AuthTitle from "./AuthTitle";
 import AuthResizeContainer from "./AuthResizeContainer";
 import { Formik } from "formik";
 import ForgotPasswordButton from "./ForgotPasswordButton";
-import AuthFormContainer from "./AuthManagement/AuthFormContainer";
+import AuthFormContainer from "./AuthFormContainer";
 import SocialLogins from "./AuthManagement/SocialLogins";
 import AuthInputs from "./AuthManagement/AuthInputs";
+import AuthManagementContainer from "./AuthManagement/AuthManagementContainer";
+import GoBackButton from "./GoBackButton";
 
 type Props = {
    type: "register" | "login" | "reset";
@@ -51,13 +53,17 @@ export default function AuthForm({
    const login = type === "login";
    const reset = type === "reset";
 
+   const handleClick = () => {
+      console.log("clicking");
+   };
+
    return (
       <Formik
          initialValues={initialValues}
          validate={validation}
          onSubmit={handleSubmit}
       >
-         <div className="flex flex-col items-center gap-6 w-full max-w-[24rem]">
+         <AuthFormContainer>
             <AuthTitle>
                {register && "New Here?"}
                {login && "Login"}
@@ -81,10 +87,10 @@ export default function AuthForm({
                            "Already have an account? Login and start saving your favorite Movies and Series"}
                      </AuthMessage>
                   ) : (
-                     <AuthFormContainer>
+                     <AuthManagementContainer>
                         {!reset && <SocialLogins register={register} />}
                         <AuthInputs type={type} />
-                     </AuthFormContainer>
+                     </AuthManagementContainer>
                   )}
                </AnimatePresence>
             </AuthResizeContainer>
@@ -92,7 +98,7 @@ export default function AuthForm({
             <AuthButton
                onClick={onButtonClick}
                isSelected={isSelected}
-               register={register || false}
+               type={type}
             >
                {register && "Sign Up"}
                {login && "Login"}
@@ -100,7 +106,9 @@ export default function AuthForm({
             </AuthButton>
 
             {login && <ForgotPasswordButton onClick={toggleForgotPassword!} />}
-         </div>
+
+            {reset && <GoBackButton onClick={toggleForgotPassword!} />}
+         </AuthFormContainer>
       </Formik>
    );
 }

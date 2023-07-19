@@ -4,7 +4,7 @@ type Props = {
    children: React.ReactNode;
 };
 
-export default function AuthFormContainer({ children }: Props) {
+export default function AuthManagementContainer({ children }: Props) {
    return (
       <motion.div
          initial={{ opacity: 0, width: 44 }}

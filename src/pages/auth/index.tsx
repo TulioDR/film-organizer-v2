@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 
-import AuthBackground from "../../components/Auth/AuthBackground";
 import AuthHead from "@/components/Auth/AuthHead";
 import AuthAppLogo from "@/components/Auth/AuthAppLogo";
 
@@ -9,11 +8,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import app from "@/firebase/config";
 import { getAuth, signOut } from "firebase/auth";
 import AuthForm from "@/components/Auth/AuthForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ResetPassword from "@/components/Auth/ResetPassword";
 import TranslateContainer from "@/components/Auth/AuthForm/TranslateContainer";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+   console.log(context);
    // const supabase = createServerSupabaseClient(context);
    // const { data } = await supabase.auth.getSession();
    // if (data.session) {
@@ -34,8 +34,8 @@ export default function Auth() {
    const [isLogin, setIsLogin] = useState(true);
    const toggle = () => setIsLogin(!isLogin);
 
-   const [showModal, setShowModal] = useState<boolean>(false);
-   const closeModal = () => setShowModal(false);
+   // const [showModal, setShowModal] = useState<boolean>(false);
+   // const closeModal = () => setShowModal(false);
 
    const [forgotPassWord, setForgotPassword] = useState<boolean>(false);
    const toggleForgotPassword = () => setForgotPassword((prev) => !prev);

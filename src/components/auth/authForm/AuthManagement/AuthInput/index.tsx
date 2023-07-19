@@ -24,7 +24,7 @@ export default function AuthInput({
    const [hidePassword, setHidePassword] = useState<boolean>(true);
    const togglePassword = () => setHidePassword((prev) => !prev);
 
-   const type = password && hidePassword ? "password" : "text";
+   const fieldType = password && hidePassword ? "password" : "text";
 
    return (
       <div className="w-full relative">
@@ -39,7 +39,7 @@ export default function AuthInput({
             <div className="relative flex-1">
                <Field
                   name={name}
-                  type={type}
+                  type={fieldType}
                   placeholder={placeholder}
                   autoComplete="off"
                   className={`w-full bg-transparent h-full outline-none ${
@@ -53,7 +53,7 @@ export default function AuthInput({
                {password && (
                   <ToggleVisibilityButton
                      onClick={togglePassword}
-                     type={type}
+                     type={fieldType}
                   />
                )}
             </div>

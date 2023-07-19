@@ -5,16 +5,20 @@ import { useFormikContext } from "formik";
 type Props = {
    children: React.ReactNode;
    onClick: () => void;
-   register: boolean;
    isSelected: boolean;
+   type: string;
 };
 
 export default function AuthButton({
    children,
    onClick,
-   register,
    isSelected,
+   type,
 }: Props) {
+   const register = type === "register";
+   const login = type === "login";
+   const reset = type === "reset";
+
    const { submitForm, resetForm } = useFormikContext();
    const controls = useAnimationControls();
 
@@ -44,9 +48,11 @@ export default function AuthButton({
             initial={{ width: isSelected ? 160 : 384 }}
             animate={controls}
             type={isSelected ? "submit" : "button"}
-            className={`text-sm font-semibold py-3 ${
-               register ? "bg-white text-black" : "bg-primary text-white"
-            }`}
+            className={`text-sm font-semibold py-3
+               ${register ? "bg-white text-black" : ""}
+               ${login ? "bg-primary text-white" : ""}
+               ${reset ? "bg-secondary text-white" : ""}
+            `}
          >
             {children}
          </motion.button>
