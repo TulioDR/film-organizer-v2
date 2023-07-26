@@ -10,6 +10,7 @@
       "typecheck": "tsc --project tsconfig.json --noEmit"
    },
    "dependencies": {
+      "@clerk/nextjs": "^4.22.1",
       "@prisma/client": "^4.8.1",
       "@reduxjs/toolkit": "^1.9.5",
       "@supabase/auth-helpers-nextjs": "^0.5.2",

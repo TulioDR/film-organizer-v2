@@ -3,22 +3,18 @@ import { GetServerSideProps } from "next";
 
 import AuthHead from "@/components/Auth/AuthHead";
 import AuthAppLogo from "@/components/Auth/AuthAppLogo";
-
-import { useAuthState } from "react-firebase-hooks/auth";
-import app from "@/firebase/config";
-import { getAuth, signOut } from "firebase/auth";
 import AuthForm from "@/components/Auth/AuthForm";
-import { AnimatePresence } from "framer-motion";
+
 import ResetPassword from "@/components/Auth/ResetPassword";
 import TranslateContainer from "@/components/Auth/AuthForm/TranslateContainer";
 import SkipButton from "@/components/Auth/SkipButton";
 import AuthMobile from "@/components/Auth/Mobile/AuthMobile";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-   console.log(context);
-   // const supabase = createServerSupabaseClient(context);
-   // const { data } = await supabase.auth.getSession();
-   // if (data.session) {
+import { AnimatePresence } from "framer-motion";
+
+export const getServerSideProps: GetServerSideProps = async (_context) => {
+   // console.log(context);
+   // if (userExist) {
    //    return {
    //       redirect: {
    //          destination: "/",
@@ -26,12 +22,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    //       },
    //    };
    // }
-
-   return {
-      props: {},
-   };
+   return { props: {} };
 };
 
+import { useClerk } from "@clerk/clerk-react";
+import { useUser } from "@clerk/nextjs";
 export default function Auth() {
    const [isLogin, setIsLogin] = useState(true);
    const toggle = () => setIsLogin(!isLogin);
@@ -42,35 +37,19 @@ export default function Auth() {
    const [forgotPassWord, setForgotPassword] = useState<boolean>(false);
    const toggleForgotPassword = () => setForgotPassword((prev) => !prev);
 
-   const auth = getAuth(app);
-   const [user, loading, error] = useAuthState(auth);
-
-   useEffect(() => {
-      console.log(user);
-      console.log(loading);
-      console.log(error);
-   }, [user, loading, error]);
+   const { isLoaded, isSignedIn, user } = useUser();
+   const { signOut } = useClerk();
 
    const signOutFunction = async () => {
-      signOut(auth)
-         .then((data) => {
-            // Sign-out successful.
-            console.log("you sign Out");
-            console.log(data);
-         })
-         .catch((error) => {
-            // An error happened.
-            console.log("there is an error");
-            console.log(error);
-         });
-      // try {
-      //    const data = await signOut(auth);
-      //    console.log("you sign Out");
-      //    console.log(data);
-      // } catch (e) {
-      //    console.log(e);
-      // }
+      const data = await signOut();
+      console.log(data);
    };
+
+   useEffect(() => {
+      console.log(isLoaded);
+      console.log(isSignedIn);
+      console.log(user);
+   }, [isLoaded, isSignedIn, user]);
 
    return (
       <div className="overflow-hidden">

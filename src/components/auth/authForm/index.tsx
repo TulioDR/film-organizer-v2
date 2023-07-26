@@ -53,10 +53,6 @@ export default function AuthForm({
    const login = type === "login";
    const reset = type === "reset";
 
-   const handleClick = () => {
-      console.log("clicking");
-   };
-
    return (
       <Formik
          initialValues={initialValues}
