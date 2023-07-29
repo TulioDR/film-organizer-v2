@@ -10,7 +10,7 @@ import TranslateContainer from "@/components/Auth/AuthForm/TranslateContainer";
 import SkipButton from "@/components/Auth/SkipButton";
 import AuthMobile from "@/components/Auth/Mobile/AuthMobile";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const getServerSideProps: GetServerSideProps = async (_context) => {
    // console.log(context);
@@ -52,8 +52,15 @@ export default function Auth() {
    }, [isLoaded, isSignedIn, user]);
 
    return (
-      <div className="overflow-hidden">
+      <div className="overflow-hidden bg-primary">
          <AuthHead forgotPassWord={forgotPassWord} isLogin={isLogin} />
+         <motion.div
+            initial={{ width: "100%" }}
+            animate={{ width: 0 }}
+            exit={{ width: "100%" }}
+            transition={{ duration: 0.5 }}
+            className="z-50 h-screen bg-primary fixed right-0 top-0"
+         ></motion.div>
          <div className="lg:hidden">
             <AuthMobile />
          </div>

@@ -25,6 +25,7 @@ export default function SocialLogins({ register }: Props) {
          console.log(error);
       }
    };
+
    const googleAuth = () => handleAuth("oauth_google");
    const githubAuth = () => handleAuth("oauth_github");
    const discordAuth = () => handleAuth("oauth_discord");
