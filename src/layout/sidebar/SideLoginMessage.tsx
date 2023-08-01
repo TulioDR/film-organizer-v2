@@ -13,40 +13,42 @@ export default function SideLoginMessage({}: Props) {
       router.push("/auth");
    };
    return (
-      <div className="pl-10 w-full">
-         <motion.div
-            whileTap={{
-               scale: 0.95,
-            }}
-            animate={{
-               height: expandSidebar ? 80 : 48,
-               transition: { duration: 0.2 },
-            }}
-            onTap={goToAuth}
-            className={`rounded-xl w-full text-center cursor-pointer flex items-center shadow-lg ${
-               expandSidebar ? "px-5" : ""
-            }`}
+      <motion.div
+         whileTap={{
+            scale: expandSidebar ? 0.95 : 1,
+         }}
+         onTap={goToAuth}
+         className="cursor-pointer flex flex-col items-center"
+      >
+         <div
+            className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10"
             style={{ backgroundColor: themeColor }}
          >
-            <AnimatePresence mode="wait">
-               {expandSidebar ? (
-                  <motion.div
-                     key="message"
+            <span className="material-icons">priority_high</span>
+         </div>
+         <AnimatePresence>
+            {expandSidebar && (
+               <motion.div
+                  initial={{ width: 0, height: 0 }}
+                  animate={{ width: 160, height: 160 }}
+                  exit={{ width: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="font-light rounded-xl bg-secondary shadow-lg text-center overflow-hidden flex items-center justify-center"
+               >
+                  <motion.span
                      initial={{ opacity: 0 }}
                      animate={{
                         opacity: 1,
-                        transition: { duration: 0.1, delay: 0.3 },
+                        transition: { duration: 0.3, delay: 0.3 },
                      }}
+                     exit={{ opacity: 0, transition: { duration: 0 } }}
+                     className="px-5"
                   >
                      Login to Create and see your Lists!
-                  </motion.div>
-               ) : (
-                  <motion.div key="exclamation" className="w-full">
-                     <span className="material-icons">priority_high</span>
-                  </motion.div>
-               )}
-            </AnimatePresence>
-         </motion.div>
-      </div>
+                  </motion.span>
+               </motion.div>
+            )}
+         </AnimatePresence>
+      </motion.div>
    );
 }
