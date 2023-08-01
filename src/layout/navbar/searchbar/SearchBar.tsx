@@ -81,17 +81,17 @@ export default function SearchBar({}: Props) {
                showResults ? "shadow-lg" : "rounded-b-lg"
             }`}
          >
+            <ToggleModeButton
+               isMovie={isMovie}
+               onClick={toggleMediaType}
+               showResults={showResults}
+            />
             <SearchInput
                value={inputValue}
                onChange={handleInputChange}
                onFocus={handleInputFocus}
                onBlur={handleInputBlur}
                placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
-            />
-            <ToggleModeButton
-               isMovie={isMovie}
-               onClick={toggleMediaType}
-               showResults={showResults}
             />
          </div>
          {showResults && (

@@ -21,7 +21,7 @@ export default function BackgroundImage() {
    }, [backgroundImage]);
 
    return (
-      <div className="fixed top-0 left-0 h-screen brightness-50 bg-primary -z-10 w-full text-white flex items-center justify-center">
+      <div className="fixed top-0 left-0 h-screen bg-primary -z-10 w-full text-white flex items-center justify-center">
          {!src ? (
             <div className="w-full h-full"></div>
          ) : (
@@ -29,7 +29,7 @@ export default function BackgroundImage() {
                <motion.div
                   key={backgroundKey}
                   initial={{ filter: "brightness(0)" }}
-                  animate={{ filter: "brightness(1)" }}
+                  animate={{ filter: "brightness(0.6)" }}
                   exit={{ filter: "brightness(0)" }}
                   transition={{ duration: 0.3 }}
                   className="relative w-full h-full"

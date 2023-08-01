@@ -10,8 +10,6 @@ import SaveMediaModal from "@/components/Modals/SaveMediaModal";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import { useUser } from "@supabase/auth-helpers-react";
 import BackgroundImage from "@/components/BackgroundImage";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
 import Notification from "@/components/Notification";
 
 type Props = {
@@ -30,7 +28,6 @@ export default function MainPageContainer({ children }: Props) {
       refreshLists();
    }, [user]);
 
-   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
    return (
       <>
          <div id="modals-container"></div>
@@ -40,13 +37,7 @@ export default function MainPageContainer({ children }: Props) {
          <Notification />
          <div className="flex">
             <Sidebar />
-            <div
-               className={`relative duration-200 ${
-                  expandSidebar
-                     ? "w-[calc(100%-240px)]"
-                     : "w-[calc(100%-116px)]"
-               }`}
-            >
+            <div className="relative flex-1 min-w-0 border-l border-secondary">
                <Navbar />
                <AnimatePresence mode="wait">
                   <motion.div key={router.asPath}>{children}</motion.div>

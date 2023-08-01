@@ -90,7 +90,7 @@ export default function Home() {
             <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black"></div>
          ) : (
             <div
-               className={`h-full flex flex-col ${
+               className={`h-full flex flex-col items-stretch ${
                   isPageHidden ? "opacity-0 duration-300" : ""
                }`}
             >

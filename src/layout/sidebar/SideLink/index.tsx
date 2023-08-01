@@ -7,6 +7,7 @@ import SelectedMark from "./SelectedMark";
 import DropdownIcon from "./DropdownIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    link: string;
@@ -29,7 +30,7 @@ export default function SideLink({
 }: Props) {
    const dispatch = useDispatch();
    const hideSidebar = () => dispatch(sidebarActions.closeReveal());
-   const { expandSidebar } = useSelector((state: any) => state.sidebar);
+   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    const { asPath, query } = useRouter();
 
@@ -49,35 +50,35 @@ export default function SideLink({
 
    return (
       <li
-         className={`cursor-pointer relative flex list-none select-none ${
+         className={`cursor-pointer w-full relative flex list-none select-none ${
             isSelected
                ? "text-text-1"
                : "text-text-2 hover:text-text-1 duration-100"
          }`}
       >
          <SelectedMark item={item} isSelected={isSelected} />
-         <div className="flex-1">
+         <div className="w-full overflow-hidden">
             <div
                onClick={dropdown ? toggle : hideSidebar}
-               className="flex w-full justify-between items-center"
+               className="flex w-full items-center flex-shrink-0"
             >
                <Link
                   href={link}
-                  className={`flex items-center gap-5 w-full ${
+                  className={`flex flex-1 items-center gap-3 w-full ${
                      dropdown ? "pointer-events-none" : ""
                   }`}
                >
                   <span className="material-icons !w-9 !text-center !flex-shrink-0">
                      {icon}
                   </span>
-                  {expandSidebar && (
-                     <span className="flex-shrink-0">{text}</span>
-                  )}
+                  <span className="flex-shrink-0">{text}</span>
                </Link>
                {dropdown && <DropdownIcon open={open} />}
             </div>
             <AnimatePresence>
-               {open && <DropdownItems>{children}</DropdownItems>}
+               {open && expandSidebar && (
+                  <DropdownItems>{children}</DropdownItems>
+               )}
             </AnimatePresence>
          </div>
       </li>

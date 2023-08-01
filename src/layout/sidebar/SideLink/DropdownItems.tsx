@@ -1,9 +1,12 @@
+import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 type Props = {
    children: React.ReactNode;
 };
 
 export default function DropdownItems({ children }: Props) {
+   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
    return (
       <motion.ul
          initial={{ height: 0 }}
@@ -12,7 +15,13 @@ export default function DropdownItems({ children }: Props) {
          transition={{ duration: 0.3 }}
          className="overflow-hidden"
       >
-         <div className="space-y-4 pt-4 flex-shrink-0">{children}</div>
+         <div className="pt-4">
+            <div
+               className={`space-y-3 flex-shrink-0 duration-200 pl-4 text-sm`}
+            >
+               {children}
+            </div>
+         </div>
       </motion.ul>
    );
 }

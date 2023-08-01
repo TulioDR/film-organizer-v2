@@ -36,7 +36,7 @@ export default function Sidebar() {
                <SideLists />
             </>
          ) : (
-            <SideLoginMessage />
+            <>{/* <SideLoginMessage /> */}</>
          )}
       </SidebarContainer>
    );

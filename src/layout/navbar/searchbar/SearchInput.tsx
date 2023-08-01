@@ -15,7 +15,7 @@ export default function SearchInput({
 }: Props) {
    return (
       <div
-         className={`flex items-center w-full sm:w-80 gap-5 px-5 h-full text-sm sm:text-base`}
+         className={`flex items-center w-full sm:w-80 gap-5 pl-2 pr-5 h-full text-sm sm:text-base`}
       >
          <input
             value={value}
@@ -23,7 +23,7 @@ export default function SearchInput({
             onFocus={onFocus}
             onBlur={onBlur}
             type="text"
-            className="w-full outline-none bg-transparent text-text-1 placeholder:text-text-2"
+            className="w-full outline-none bg-transparent text-black placeholder:text-gray-600"
             placeholder={placeholder}
          />
          <span className="material-icons !text-text-2">search</span>

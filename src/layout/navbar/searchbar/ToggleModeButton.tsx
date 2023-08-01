@@ -18,9 +18,7 @@ export default function ToggleModeButton({
          onMouseDown={(e) => e.preventDefault()}
          type="button"
          onClick={onClick}
-         className={`h-full px-2 flex items-center gap-1 relative group rounded-tr-lg ${
-            showResults ? "" : "rounded-br-lg"
-         }`}
+         className={`h-full px-2 flex items-center gap-1 relative group rounded-lg -translate-y-2 -ml-2`}
          style={{ backgroundColor: themeColor }}
       >
          <div className="overflow-hidden relative">
@@ -35,7 +33,7 @@ export default function ToggleModeButton({
                </span>
             </div>
          </div>
-         <div className="hidden absolute md:group-hover:flex items-center left-full">
+         <div className="hidden absolute md:group-hover:flex items-center left-0 top-full translate-y-2">
             <div
                className="h-2 w-2 rotate-45"
                style={{ backgroundColor: themeColor }}
@@ -44,7 +42,7 @@ export default function ToggleModeButton({
                className="rounded-md text-xs py-1 px-2 w-max -translate-x-1"
                style={{ backgroundColor: themeColor }}
             >
-               Switch to {isMovie ? "Series" : "Movies"}
+               What are you looking for?
             </div>
          </div>
       </button>

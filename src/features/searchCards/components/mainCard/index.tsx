@@ -78,13 +78,17 @@ export default function MainCard({
 
    return (
       <motion.article
+         layout
          ref={transitionCard}
          variants={cards}
-         style={{
-            background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
-         }}
-         className={`relative rounded-xl overflow-hidden p-[2px] origin-bottom ${
-            isInvisible ? "invisible" : "shadow-xl"
+         style={
+            {
+               // background: `linear-gradient(to top right, #26272c 50%, ${themeColor} 100%)`,
+               // boxShadow: `0px 0px 4px 0px ${themeColor}`,
+            }
+         }
+         className={`relative rounded-xl overflow-hidden p-[0px] origin-bottom ${
+            isInvisible ? "invisible" : ""
          }`}
       >
          <div

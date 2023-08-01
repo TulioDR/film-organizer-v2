@@ -10,14 +10,14 @@ export default function BrandHamburger({}: Props) {
    const toggleExpand = () => dispatch(sidebarActions.toggleExpanded());
 
    return (
-      <div className="flex items-center pl-10 h-9">
+      <div className="flex items-center h-9 overflow-hidden">
          <div className="hidden lg:block">
             <ToggleSidebar onClick={toggleExpand} />
          </div>
          <div className="lg:hidden">
             <ToggleSidebar onClick={toggleReveal} />
          </div>
-         <span className="text-4xl font-bold truncate ml-3">GII</span>
+         <span className="text-4xl font-bold ml-3 flex-shrink-0">GII</span>
       </div>
    );
 }
