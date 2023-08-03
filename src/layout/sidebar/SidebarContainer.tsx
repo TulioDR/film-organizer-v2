@@ -22,9 +22,9 @@ export default function SidebarContainer({ children }: Props) {
             exit={{ width: 0 }}
             transition={{ duration: 0.4 }}
             id="sidebar"
-            className="font-semibold backdrop-blur-md h-full bg-primary/60 "
+            className="font-semibold  h-full"
          >
-            <div className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll sidebar-scrollbar space-y-5">
+            <div className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll sidebar-scrollbar space-y-3">
                {children}
             </div>
          </motion.div>

@@ -10,6 +10,8 @@ export default function BackgroundImage() {
       (state: StoreModel) => state.background
    );
 
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+
    const [src, setSrc] = useState<string | StaticImageData | null>(null);
 
    useEffect(() => {
@@ -21,20 +23,26 @@ export default function BackgroundImage() {
    }, [backgroundImage]);
 
    return (
-      <div className="fixed top-0 left-0 h-screen bg-primary -z-10 w-full text-white flex items-center justify-center">
+      <div
+         // style={{
+         //    background: `linear-gradient(to bottom right, #141214 60%, ${themeColor} 100%)`,
+         // }}
+         className="fixed top-0 left-0 h-screen bg-primary -z-10 w-full text-white flex items-center justify-center"
+      >
          {!src ? (
             <div className="w-full h-full"></div>
          ) : (
             <AnimatePresence mode="wait">
                <motion.div
                   key={backgroundKey}
-                  initial={{ filter: "brightness(0)" }}
-                  animate={{ filter: "brightness(0.6)" }}
-                  exit={{ filter: "brightness(0)" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   className="relative w-full h-full"
                >
                   <Backdrop src={src} backgroundKey={backgroundKey} />
+                  <div className="absolute top-0 left-0 w-full h-full bg-primary/70"></div>
                </motion.div>
             </AnimatePresence>
          )}

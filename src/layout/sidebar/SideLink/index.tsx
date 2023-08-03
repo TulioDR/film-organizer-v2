@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import DropdownItems from "./DropdownItems";
 import SelectedMark from "./SelectedMark";
 import DropdownIcon from "./DropdownIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
 import StoreModel from "@/models/StoreModel";
+import InnerSideLink from "./InnerSideLink";
+import SideTag from "./SideTag";
 
 type Props = {
    link: string;
@@ -48,39 +50,60 @@ export default function SideLink({
    const [open, setOpen] = useState<boolean>(false);
    const toggle = () => setOpen((prev) => !prev);
 
+   const [showTag, setShowTag] = useState<boolean>(false);
+   const [tagPosition, setTagPosition] = useState<any>(null);
+
+   const handleHoverStart = () => {
+      if (expandSidebar) return;
+      const rect = elementRef.current!.getBoundingClientRect();
+      setTagPosition({
+         top: rect.top,
+         bottom: rect.bottom,
+         left: rect.left,
+         right: rect.right,
+      });
+      setShowTag(true);
+   };
+
+   const handleHoverEnd = () => {
+      setShowTag(false);
+   };
+
+   const elementRef = useRef<HTMLDivElement>(null);
    return (
-      <li
-         className={`cursor-pointer w-full relative flex list-none select-none ${
+      <motion.li
+         onHoverStart={handleHoverStart}
+         onHoverEnd={handleHoverEnd}
+         className={`cursor-pointer w-full relative flex list-none select-none font-light ${
             isSelected
-               ? "text-text-1"
-               : "text-text-2 hover:text-text-1 duration-100"
+               ? "text-white"
+               : "text-text-2 hover:text-white duration-100"
          }`}
       >
          <SelectedMark item={item} isSelected={isSelected} />
-         <div className="w-full overflow-hidden">
-            <div
-               onClick={dropdown ? toggle : hideSidebar}
-               className="flex w-full items-center flex-shrink-0"
-            >
-               <Link
-                  href={link}
-                  className={`flex flex-1 items-center gap-3 w-full ${
-                     dropdown ? "pointer-events-none" : ""
-                  }`}
+         <motion.div ref={elementRef} className="w-full overflow-hidden">
+            {dropdown ? (
+               <button
+                  onClick={toggle}
+                  className="flex items-center justify-between w-full "
                >
-                  <span className="material-icons !w-9 !text-center !flex-shrink-0">
-                     {icon}
-                  </span>
-                  <span className="flex-shrink-0">{text}</span>
+                  <InnerSideLink icon={icon} text={text} />
+                  <DropdownIcon open={open} />
+               </button>
+            ) : (
+               <Link href={link} onClick={hideSidebar}>
+                  <InnerSideLink icon={icon} text={text} />
                </Link>
-               {dropdown && <DropdownIcon open={open} />}
-            </div>
+            )}
             <AnimatePresence>
                {open && expandSidebar && (
                   <DropdownItems>{children}</DropdownItems>
                )}
             </AnimatePresence>
-         </div>
-      </li>
+         </motion.div>
+         <AnimatePresence>
+            {showTag && <SideTag text={text} tagPosition={tagPosition} />}
+         </AnimatePresence>
+      </motion.li>
    );
 }

@@ -17,7 +17,8 @@ module.exports = {
          },
          colors: {
             primary: "#1a1b1f",
-            secondary: "#4B5563",
+            secondary: "#2a282a",
+            // secondary: "#4B5563",
             silver: "#A6A6A6",
             text: {
                1: "rgba(255, 255, 255, 0.9)",
