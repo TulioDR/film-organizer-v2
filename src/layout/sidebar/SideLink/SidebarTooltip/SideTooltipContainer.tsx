@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 
 type Props = {
-   text: string;
+   children: React.ReactNode;
    tagPosition: any;
 };
 
-export default function SideTag({ text, tagPosition }: Props) {
+export default function SideTooltipContainer({ children, tagPosition }: Props) {
    return (
       <motion.div
          initial={{
@@ -23,9 +23,9 @@ export default function SideTag({ text, tagPosition }: Props) {
             opacity: 0,
          }}
          transition={{ duration: 0.1 }}
-         className="origin-left fixed z-10 px-5 w-max bg-secondary text-white shadow-xl rounded-lg"
+         className="origin-left fixed z-10 px-10 w-max bg-secondary text-white shadow-xl rounded-lg"
       >
-         <div className="flex items-center h-9">{text}</div>
+         {children}
       </motion.div>
    );
 }

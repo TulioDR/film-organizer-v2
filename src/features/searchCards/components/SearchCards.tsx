@@ -35,7 +35,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
 
    const cardsContainer = {
       initial: {},
-      animate: { transition: { staggerChildren: 0.12 } },
+      animate: { transition: { staggerChildren: 0.2 } },
       exit: {
          opacity: 0,
          transition: { duration: 0.4 },

@@ -1,24 +1,30 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import DropdownItems from "./DropdownItems";
-import SelectedMark from "./SelectedMark";
-import DropdownIcon from "./DropdownIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
 import StoreModel from "@/models/StoreModel";
 import InnerSideLink from "./InnerSideLink";
-import SideTag from "./SideTag";
+import SideActiveMark from "./SideActiveMark";
+import useSidebarActiveMark from "@/hooks/useSidebarActiveMark";
+
+import SideLinkContainer from "./SideLinkContainer";
+import SidebarDropdown from "./SidebarDropdown";
+import SidebarTooltip from "./SidebarTooltip";
+
+interface DropdownItem {
+   link: string;
+   icon: string;
+   text: string;
+}
 
 type Props = {
    link: string;
    icon: string;
    text: string;
    dropdown?: boolean;
-   children?: React.ReactNode;
-   item?: boolean;
    mediaType?: "movie" | "tv";
+   items?: DropdownItem[];
 };
 
 export default function SideLink({
@@ -26,32 +32,18 @@ export default function SideLink({
    icon,
    text,
    dropdown,
-   children,
-   item,
    mediaType,
+   items,
 }: Props) {
    const dispatch = useDispatch();
    const hideSidebar = () => dispatch(sidebarActions.closeReveal());
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
-   const { asPath, query } = useRouter();
-
-   const [isSelected, setIsSelected] = useState<boolean>(false);
-   useEffect(() => {
-      if (mediaType) {
-         if (query.mediaType === mediaType) setIsSelected(true);
-         else setIsSelected(false);
-         return;
-      }
-      if (asPath === link) setIsSelected(true);
-      else setIsSelected(false);
-   }, [asPath, link, mediaType, query.mediaType]);
-
-   const [open, setOpen] = useState<boolean>(false);
-   const toggle = () => setOpen((prev) => !prev);
-
    const [showTag, setShowTag] = useState<boolean>(false);
    const [tagPosition, setTagPosition] = useState<any>(null);
+
+   const elementRef = useRef<HTMLDivElement>(null);
+   const { isSelected } = useSidebarActiveMark({ mediaType, link });
 
    const handleHoverStart = () => {
       if (expandSidebar) return;
@@ -69,41 +61,33 @@ export default function SideLink({
       setShowTag(false);
    };
 
-   const elementRef = useRef<HTMLDivElement>(null);
    return (
-      <motion.li
+      <SideLinkContainer
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
-         className={`cursor-pointer w-full relative flex list-none select-none font-light ${
-            isSelected
-               ? "text-white"
-               : "text-text-2 hover:text-white duration-100"
-         }`}
+         isSelected={isSelected}
       >
-         <SelectedMark item={item} isSelected={isSelected} />
+         <SideActiveMark isSelected={isSelected} />
+
          <motion.div ref={elementRef} className="w-full overflow-hidden">
             {dropdown ? (
-               <button
-                  onClick={toggle}
-                  className="flex items-center justify-between w-full "
-               >
-                  <InnerSideLink icon={icon} text={text} />
-                  <DropdownIcon open={open} />
-               </button>
+               <SidebarDropdown items={items} icon={icon} text={text} />
             ) : (
                <Link href={link} onClick={hideSidebar}>
                   <InnerSideLink icon={icon} text={text} />
                </Link>
             )}
-            <AnimatePresence>
-               {open && expandSidebar && (
-                  <DropdownItems>{children}</DropdownItems>
-               )}
-            </AnimatePresence>
          </motion.div>
+
          <AnimatePresence>
-            {showTag && <SideTag text={text} tagPosition={tagPosition} />}
+            {showTag && (
+               <SidebarTooltip
+                  items={items}
+                  text={text}
+                  tagPosition={tagPosition}
+               />
+            )}
          </AnimatePresence>
-      </motion.li>
+      </SideLinkContainer>
    );
 }

@@ -1,15 +1,19 @@
+import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
-type Props = { item?: boolean; isSelected: boolean };
+type Props = {
+   item?: true;
+   isSelected: boolean;
+};
 
-export default function SelectedMark({ isSelected, item }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
-   const { expandSidebar } = useSelector((state: any) => state.sidebar);
+export default function SideActiveMark({ item, isSelected }: Props) {
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+
    return (
       <div
          className={`flex-shrink-0 absolute right-full top-0 h-full ${
-            item ? `${expandSidebar ? "w-5" : "w-0"} duration-300` : "w-10"
+            item ? "w-3" : "w-10"
          }`}
       >
          <div className="h-full ml-auto">

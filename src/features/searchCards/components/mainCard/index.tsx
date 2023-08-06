@@ -7,8 +7,7 @@ import LearnMore from "./LearnMore";
 import MainCardBookmark from "./MainCardBookmark";
 import BackInfo from "./BackInfo";
 import useTransitionCard from "../../../transitionPoster/hooks/useTransitionCard";
-import { useDispatch, useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
+import { useDispatch } from "react-redux";
 import { backgroundActions } from "@/store/slices/background-slice";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 import useBookmark from "@/hooks/useBookmark";
@@ -61,17 +60,15 @@ export default function MainCard({
       hidePage();
    };
 
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
-
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    const { handleBookmarkClick } = useBookmark(media, mediaType);
 
    const cards = {
-      initial: { opacity: 0, scale: 0.7 },
+      initial: { opacity: 0, scale: 0.5 },
       animate: {
          opacity: 1,
          scale: 1,
-         transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] },
+         transition: { duration: 0.8 },
       },
       exit: {},
    };
@@ -81,13 +78,7 @@ export default function MainCard({
          layout
          ref={transitionCard}
          variants={cards}
-         style={
-            {
-               // background: `linear-gradient(to top right, #26272c 50%, ${themeColor} 100%)`,
-               // boxShadow: `0px 0px 4px 0px ${themeColor}`,
-            }
-         }
-         className={`relative rounded-xl overflow-hidden p-[0px] origin-bottom ${
+         className={`relative rounded-xl overflow-hidden origin-bottom ${
             isInvisible ? "invisible" : ""
          }`}
       >
