@@ -8,7 +8,7 @@ export default function Person({ person }: Props) {
    return (
       <motion.div
          onClick={() => personWiki(person.name)}
-         className="cursor-pointer relative rounded-xl overflow-hidden w-32"
+         className="cursor-pointer relative rounded-xl overflow-hidden"
       >
          <Poster
             alt={person.name}

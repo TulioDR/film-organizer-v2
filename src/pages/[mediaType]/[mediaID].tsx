@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
-// import BackgroundImage from "@/components/BackgroundImage";
+import { backgroundActions } from "@/store/slices/background-slice";
+import { MediaDetailsModel } from "@/models/MediaModel";
+import { useDispatch } from "react-redux";
 
 import People from "@/components/MediaDetails/People";
 import Seasons from "@/components/MediaDetails/Seasons";
@@ -11,9 +13,8 @@ import MainInfo from "@/components/MediaDetails/MainInfo";
 import Overview from "@/components/MediaDetails/Overview";
 import ScrollDownIcon from "@/components/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/MediaDetails/MainPoster";
-import { useDispatch } from "react-redux";
-import { backgroundActions } from "@/store/slices/background-slice";
-import { MediaDetailsModel } from "@/models/MediaModel";
+import SimilarContainer from "@/components/MediaDetails/Similar/SimilarContainer";
+import BottomInfoContainer from "@/components/MediaDetails/BottomInfoContainer";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, mediaID } = context.query!;
@@ -65,26 +66,24 @@ export default function Details({ mediaType, media }: Props) {
             <MainInfo media={media} mediaType={mediaType} />
             <ScrollDownIcon />
          </div>
-         <div className="backdrop-blur-md p-10 xl:flex gap-10">
+         <BottomInfoContainer>
             <div className="flex-1 space-y-10 overflow-hidden">
                <Overview
                   media={media}
                   crew={media.created_by || media.credits.crew}
                   isMovie={mediaType === "movie"}
                />
-               {/* <People type="Cast" people={media.credits?.cast} />
-               <People type="Crew" people={media.credits?.crew} /> */}
+               <People type="Cast" people={media.credits?.cast} />
+               <People type="Crew" people={media.credits?.crew} />
                {mediaType === "tv" && (
                   <Seasons seasons={media.seasons} seriesID={media.id} />
                )}
                <Trailers trailers={media.videos.results} />
             </div>
-            <div className="">
-               <div className="mt-10 xl:mt-0 xl:border-l border-white xl:pl-10 w-full xl:w-80 2xl:w-96">
-                  <Similar media={media} mediaType={mediaType} />
-               </div>
-            </div>
-         </div>
+            <SimilarContainer>
+               <Similar media={media} mediaType={mediaType} />
+            </SimilarContainer>
+         </BottomInfoContainer>
       </div>
    );
 }
