@@ -34,7 +34,7 @@ export default function AuthButton({
             transition: { duration: 0.5, delay: 1 },
          });
       }
-   }, [isSelected]);
+   }, [isSelected, controls]);
 
    const handleClick = () => {
       onClick();

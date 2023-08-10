@@ -33,7 +33,7 @@ export default function SideLoginMessage({}: Props) {
                   animate={{ width: 160, height: 160 }}
                   exit={{ width: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="font-light rounded-xl bg-secondary shadow-lg text-center overflow-hidden flex items-center justify-center"
+                  className="rounded-xl bg-secondary shadow-lg text-center overflow-hidden flex items-center justify-center"
                >
                   <motion.span
                      initial={{ opacity: 0 }}

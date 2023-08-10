@@ -17,7 +17,7 @@ export default function SideLinkContainer({
       <motion.li
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
-         className={`cursor-pointer w-full relative flex list-none select-none font-light ${
+         className={`cursor-pointer w-full relative flex list-none select-none ${
             isSelected
                ? "text-white"
                : "text-text-2 hover:text-white duration-100"

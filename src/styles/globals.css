@@ -6,7 +6,7 @@ html,
 body {
    padding: 0;
    margin: 0;
-   @apply font-roboto text-white;
+   @apply font-roboto text-white font-light;
 }
 
 a {

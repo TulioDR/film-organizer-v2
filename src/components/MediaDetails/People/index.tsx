@@ -22,26 +22,23 @@ export default function People({ people, type }: Props) {
       const start = (page - 1) * itemsPerPage;
       const end = start + itemsPerPage;
       setDisplayedPeople(people.slice(start, end));
-   }, [page, itemsPerPage]);
+   }, [page, itemsPerPage, people]);
 
    useEffect(() => {
       const w = windowWidth;
-      if (w < 640) setItemsPerPage(3);
-      else if (w < 768) setItemsPerPage(3);
-      else if (w < 1024) setItemsPerPage(3);
-      else if (w < 1280) setItemsPerPage(4);
-      else if (w < 1536) setItemsPerPage(4);
-      else setItemsPerPage(5);
-      console.log("window size changed");
+      if (w > 1536) setItemsPerPage(5);
+      else if (w > 1280) setItemsPerPage(4);
+      else if (w > 1024) setItemsPerPage(4);
+      else if (w > 768) setItemsPerPage(5);
+      else if (w > 640) setItemsPerPage(4);
+      else setItemsPerPage(3);
    }, [windowWidth]);
 
    return (
-      <div className="">
+      <div>
          <InfoSubtitle>{type}</InfoSubtitle>
          {displayedPeople.length ? (
-            <div
-               className={`w-full grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-5`}
-            >
+            <div className="w-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
                {displayedPeople.map((person, index) => (
                   <Person person={person} key={index + person.id} />
                ))}
@@ -49,11 +46,21 @@ export default function People({ people, type }: Props) {
          ) : (
             <div>No information available about the {type}</div>
          )}
-         <PeoplePagination
-            people={people}
-            itemsPerPage={itemsPerPage}
-            onPaginationChange={(page: number) => setPage(page)}
-         />
+         <div className="sm:hidden">
+            <PeoplePagination
+               sm
+               people={people}
+               itemsPerPage={itemsPerPage}
+               onPaginationChange={(page: number) => setPage(page)}
+            />
+         </div>
+         <div className="hidden sm:block">
+            <PeoplePagination
+               people={people}
+               itemsPerPage={itemsPerPage}
+               onPaginationChange={(page: number) => setPage(page)}
+            />
+         </div>
       </div>
    );
 }

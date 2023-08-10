@@ -12,7 +12,7 @@ export default function SidebarContainer({ children }: Props) {
    );
    return (
       <div
-         className={`sticky top-0 z-40 self-start h-screen duration-300 ${
+         className={`fixed lg:sticky top-0 z-40 self-start h-screen duration-300 ${
             expandSidebar ? "w-60" : "w-[116px]"
          } ${revealSidebar ? "" : "-translate-x-full lg:translate-x-0"}`}
       >
@@ -22,18 +22,12 @@ export default function SidebarContainer({ children }: Props) {
             exit={{ width: 0 }}
             transition={{ duration: 0.4 }}
             id="sidebar"
-            className="font-semibold  h-full"
+            className="h-full bg-primary lg:bg-transparent"
          >
             <div className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll sidebar-scrollbar space-y-3">
                {children}
             </div>
          </motion.div>
-         {/* <div
-            id="sidebar"
-            className={`h-screen duration-300 flex-shrink-0 font-semibold backdrop-blur-md bg-primary/40 ${
-               expandSidebar ? "w-60" : "w-[116px]"
-            }`}
-         > */}
       </div>
    );
 }

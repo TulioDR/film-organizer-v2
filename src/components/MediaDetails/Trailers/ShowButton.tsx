@@ -2,18 +2,19 @@ import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 
 type Props = {
+   children: React.ReactNode;
    onClick: () => void;
 };
 
-export default function ToggleSidebar({ onClick }: Props) {
+export default function ShowButton({ children, onClick }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
    return (
       <button
-         style={{ backgroundColor: themeColor }}
          onClick={onClick}
-         className="h-9 aspect-square flex-shrink-0 rounded-lg grid place-content-center"
+         style={{ backgroundColor: themeColor }}
+         className="py-2 px-5 rounded-lg shadow-lg"
       >
-         <span className="material-icons">menu</span>
+         {children}
       </button>
    );
 }

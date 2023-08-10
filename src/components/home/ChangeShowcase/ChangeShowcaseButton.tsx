@@ -20,7 +20,7 @@ export default function ChangeShowcaseButton({
       <button className="relative">
          <span
             onClick={onClick}
-            className={`font-semibold cursor-pointer duration-300 text-xl 2xl:text-2xl font-light ${
+            className={`cursor-pointer duration-300 text-xl 2xl:text-2xl ${
                showcase === currentShowcase ? "text-white" : "text-gray-300"
             }`}
          >
