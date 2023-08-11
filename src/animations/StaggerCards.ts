@@ -8,11 +8,10 @@ export const staggerContainer = {
 };
 
 export const staggerItem = {
-   initial: { opacity: 0, scale: 0.8, transformOrigin: "bottom" },
+   initial: { scale: 0 },
    animate: {
-      opacity: 1,
       scale: 1,
-      transition: { duration: 0.4, ease: "easeInOut" },
+      transition: { duration: 0.5, ease: "easeInOut" },
    },
    exit: {},
 };

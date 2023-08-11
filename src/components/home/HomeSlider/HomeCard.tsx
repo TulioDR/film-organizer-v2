@@ -1,7 +1,7 @@
 import { useSwiper } from "swiper/react";
 import Poster from "../../Poster";
 import { motion } from "framer-motion";
-import { homeCard } from "@/animations/homeAnimations";
+import { staggerItem } from "@/animations/StaggerCards";
 
 type Props = {
    movie: any;
@@ -25,9 +25,9 @@ export default function HomeCard({
 
    return (
       <motion.div
-         variants={homeCard}
+         variants={staggerItem}
          onClick={handleClick}
-         className="aspect-[2/3] w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer origin-bottom-right"
+         className="aspect-[2/3] w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer"
       >
          <div
             className={`home-card w-full h-full overflow-hidden rounded-lg duration-300 ${

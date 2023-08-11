@@ -8,6 +8,7 @@ import { backgroundActions } from "@/store/slices/background-slice";
 import useTransitionPoster from "@/features/transitionPoster/hooks/useTransitionPoster";
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
+import { motion } from "framer-motion";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -82,12 +83,14 @@ export default function Home() {
    };
 
    return (
-      <div
+      <motion.div
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.4 }}
          style={{ height: "calc(100vh - 96px)" }}
          className="w-full overflow-hidden pb-10"
       >
          {!currentMedia ? (
-            <div className="fixed top-0 left-0 h-screen -z-10 w-full bg-black"></div>
+            <div className="fixed top-0 left-0 h-screen -z-10 w-full"></div>
          ) : (
             <div
                className={`h-full flex flex-col items-stretch ${
@@ -121,6 +124,6 @@ export default function Home() {
             onAnimationComplete={onPosterAnimationComplete}
             showSpinner={showSpinner}
          />
-      </div>
+      </motion.div>
    );
 }

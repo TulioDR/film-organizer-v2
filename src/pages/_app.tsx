@@ -28,9 +28,11 @@ function App({ Component, ...rest }: AppProps) {
                      <Component {...pageProps} />
                   </div>
                ) : (
-                  <MainPageContainer key="two">
-                     <Component {...pageProps} />
-                  </MainPageContainer>
+                  <div key="two">
+                     <MainPageContainer>
+                        <Component {...pageProps} />
+                     </MainPageContainer>
+                  </div>
                )}
             </AnimatePresence>
          </Provider>

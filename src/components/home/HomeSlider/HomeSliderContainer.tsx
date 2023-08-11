@@ -1,4 +1,4 @@
-import { homeSlider } from "@/animations/homeAnimations";
+import { staggerContainer } from "@/animations/StaggerCards";
 import { AnimatePresence, motion } from "framer-motion";
 import { Swiper } from "swiper/react";
 
@@ -15,7 +15,7 @@ export default function HomeSliderContainer({
       <AnimatePresence mode="wait">
          <motion.div
             key={currentShowcase}
-            variants={homeSlider}
+            variants={staggerContainer}
             initial="initial"
             animate="animate"
             exit="exit"

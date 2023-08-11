@@ -11,6 +11,7 @@ import useSidebarActiveMark from "@/hooks/useSidebarActiveMark";
 import SideLinkContainer from "./SideLinkContainer";
 import SidebarDropdown from "./SidebarDropdown";
 import SidebarTooltip from "./SidebarTooltip";
+import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 
 interface DropdownItem {
    link: string;
@@ -69,7 +70,11 @@ export default function SideLink({
       >
          <SideActiveMark isSelected={isSelected} />
 
-         <motion.div ref={elementRef} className="w-full overflow-hidden">
+         <motion.div
+            variants={sideLinkAnimation}
+            ref={elementRef}
+            className="w-full overflow-hidden origin-right"
+         >
             {dropdown ? (
                <SidebarDropdown items={items} icon={icon} text={text} />
             ) : (
