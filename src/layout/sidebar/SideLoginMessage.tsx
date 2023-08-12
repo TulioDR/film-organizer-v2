@@ -1,3 +1,4 @@
+import { popUpAnimation } from "@/animations/PopUpAnimation";
 import StoreModel from "@/models/StoreModel";
 import { motion, useAnimationControls } from "framer-motion";
 import { useRouter } from "next/router";
@@ -64,9 +65,9 @@ export default function SideLoginMessage({}: Props) {
          className="cursor-pointer flex flex-col items-center"
       >
          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            variants={popUpAnimation}
+            initial="initial"
+            animate="animate"
             className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10"
             style={{ backgroundColor: themeColor }}
          >

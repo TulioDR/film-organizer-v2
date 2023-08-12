@@ -1,5 +1,7 @@
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { popUpAnimation } from "@/animations/PopUpAnimation";
 
 type Props = {
    onClick: () => void;
@@ -7,13 +9,15 @@ type Props = {
 
 export default function ToggleSidebar({ onClick }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
+
    return (
-      <button
+      <motion.button
+         variants={popUpAnimation}
          style={{ backgroundColor: themeColor }}
          onClick={onClick}
          className="h-9 aspect-square flex-shrink-0 rounded-lg grid place-content-center"
       >
          <span className="material-icons">menu</span>
-      </button>
+      </motion.button>
    );
 }

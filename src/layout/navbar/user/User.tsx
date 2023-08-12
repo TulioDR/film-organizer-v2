@@ -8,6 +8,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import UserImage from "./UserImage";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import { popUpAnimation } from "@/animations/PopUpAnimation";
 
 export default function User() {
    const user = useUser();
@@ -33,7 +34,8 @@ export default function User() {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
    return (
-      <div
+      <motion.div
+         variants={popUpAnimation}
          tabIndex={0}
          onBlur={handleBlur}
          className="relative p-[2px] rounded-full h-9 aspect-square"
@@ -41,7 +43,7 @@ export default function User() {
             background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
          }}
       >
-         <motion.button
+         <button
             onClick={toggle}
             className="h-full w-full rounded-full overflow-hidden shadow-lg relative"
          >
@@ -50,7 +52,7 @@ export default function User() {
             ) : (
                <span className="material-icons">user</span>
             )}
-         </motion.button>
+         </button>
          {isOpen && (
             <DropdownMenu divKey={menu} elRef={dropdownRef} height={menuHeight}>
                {menu === "main" && (
@@ -59,6 +61,6 @@ export default function User() {
                {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
             </DropdownMenu>
          )}
-      </div>
+      </motion.div>
    );
 }

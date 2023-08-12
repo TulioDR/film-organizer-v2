@@ -76,11 +76,7 @@ export default function SearchBar({}: Props) {
 
    return (
       <form onSubmit={handleSubmit} className={`h-full relative`}>
-         <div
-            className={`flex h-full shadow-lg rounded-t-lg bg-secondary ${
-               showResults ? "shadow-lg" : "rounded-b-lg"
-            }`}
-         >
+         <div className={`flex items-center h-9`}>
             <ToggleModeButton
                isMovie={isMovie}
                onClick={toggleMediaType}
