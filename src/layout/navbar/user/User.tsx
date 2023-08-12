@@ -39,9 +39,7 @@ export default function User() {
          tabIndex={0}
          onBlur={handleBlur}
          className="relative p-[2px] rounded-full h-9 aspect-square"
-         style={{
-            background: `linear-gradient(to top right, #a6a6a6 20%, ${themeColor} 100%)`,
-         }}
+         style={{ backgroundColor: themeColor }}
       >
          <button
             onClick={toggle}
