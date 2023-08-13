@@ -21,7 +21,9 @@ export default function ChangeShowcaseButton({
          <span
             onClick={onClick}
             className={`cursor-pointer duration-300 text-xl 2xl:text-2xl ${
-               showcase === currentShowcase ? "text-white" : "text-gray-300"
+               showcase === currentShowcase
+                  ? "text-black dark:text-white"
+                  : "text-gray-800 dark:text-gray-300"
             }`}
          >
             {children}

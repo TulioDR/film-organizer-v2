@@ -31,7 +31,7 @@ export default function MediaDescription({
                currentShowcase={currentShowcase}
             />
             <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
-            <div className="hidden sm:flex items-center text-text-1 h-10 2xl:h-14 space-x-3 2xl:space-x-4">
+            <div className="hidden sm:flex items-center h-10 2xl:h-14 space-x-3 2xl:space-x-4">
                <HomeBookmark movie={currentMedia} />
                <LearnMoreButton onClick={handleLearnMoreClick} />
             </div>

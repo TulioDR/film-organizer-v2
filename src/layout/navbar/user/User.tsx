@@ -48,7 +48,9 @@ export default function User() {
             {user ? (
                <UserImage />
             ) : (
-               <span className="material-icons">user</span>
+               <div className="w-full h-full flex items-center justify-center text-white">
+                  <span className="material-icons">person</span>
+               </div>
             )}
          </button>
          {isOpen && (

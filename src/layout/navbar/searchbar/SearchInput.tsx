@@ -35,7 +35,7 @@ export default function SearchInput({
       <div className="w-full sm:w-80 h-9">
          <motion.div
             variants={inputAnimations}
-            className="text-sm sm:text-base bg-secondary rounded-lg overflow-hidden shadow-lg"
+            className="text-sm sm:text-base bg-secondary-light dark:bg-secondary-dark rounded-lg overflow-hidden shadow-lg"
          >
             <div className="flex items-center gap-5 pl-7 pr-5 w-80 h-9 flex-shrink-0">
                <input

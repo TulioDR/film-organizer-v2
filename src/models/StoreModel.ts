@@ -2,6 +2,8 @@ import { StaticImageData } from "next/image";
 
 export interface ThemeModel {
    themeColor: string;
+   themeColorName: string;
+   isDarkMode: boolean;
 }
 export interface SidebarModel {
    expandSidebar: boolean;

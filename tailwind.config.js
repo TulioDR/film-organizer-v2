@@ -16,9 +16,14 @@ module.exports = {
             roboto: "'Roboto', sans-serif",
          },
          colors: {
-            primary: "#1a1b1f",
-            secondary: "#2a282a",
-            // secondary: "#4B5563",
+            primary: {
+               light: "#e5e7eb",
+               dark: "#1a1b1f",
+            },
+            secondary: {
+               light: "#FFFFFF",
+               dark: "#2a282a",
+            },
             silver: "#A6A6A6",
             text: {
                1: "rgba(255, 255, 255, 0.9)",

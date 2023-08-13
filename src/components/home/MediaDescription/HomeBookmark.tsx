@@ -12,7 +12,7 @@ export default function HomeBookmark({ movie }: Props) {
    return (
       <button
          onClick={handleBookmarkClick}
-         className="h-full grid place-content-center aspect-square bg-white text-black"
+         className="h-full grid place-content-center aspect-square bg-black dark:bg-white text-white dark:text-black"
       >
          <span className="material-icons !text-3xl !2xl:text-5xl">
             {isMediaSaved ? "bookmark" : "bookmark_border"}

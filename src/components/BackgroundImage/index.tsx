@@ -26,10 +26,10 @@ export default function BackgroundImage() {
          //    background: `linear-gradient(to bottom right, #141214 60%, ${themeColor} 100%)`,
          // }}
 
-         className="fixed top-0 left-0 h-screen bg-primary -z-10 w-full text-white flex items-center justify-center"
+         className="fixed top-0 left-0 h-screen bg-primary-dark -z-10 w-full flex items-center justify-center"
       >
          {!src ? (
-            <div className="w-full h-full"></div>
+            <div className="w-full h-full bg-primary-light dark:bg-primary-dark"></div>
          ) : (
             <motion.div
                exit={{ opacity: 0 }}
@@ -46,7 +46,7 @@ export default function BackgroundImage() {
                      className="relative w-full h-full"
                   >
                      <Backdrop src={src} backgroundKey={backgroundKey} />
-                     <div className="absolute top-0 left-0 w-full h-full bg-primary/75"></div>
+                     <div className="absolute top-0 left-0 w-full h-full bg-gray-300/40 dark:bg-primary-dark/75"></div>
                   </motion.div>
                </AnimatePresence>
             </motion.div>

@@ -2,10 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const themeSlice = createSlice({
    name: "theme",
-   initialState: { themeColor: "#3b82f6" },
+   initialState: {
+      themeColor: "#5d9cec",
+      themeColorName: "blue",
+      isDarkMode: true,
+   },
    reducers: {
       changeThemeColor(state, action) {
-         state.themeColor = action.payload;
+         state.themeColor = action.payload.color;
+         state.themeColorName = action.payload.name;
+      },
+      toggleDarkMode(state) {
+         state.isDarkMode = !state.isDarkMode;
       },
    },
 });

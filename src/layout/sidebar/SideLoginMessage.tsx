@@ -78,7 +78,7 @@ export default function SideLoginMessage({}: Props) {
             animate={messageContainerControls}
             exit={{ width: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="rounded-xl bg-secondary shadow-lg text-center overflow-hidden flex items-center justify-center"
+            className="rounded-xl bg-secondary-light dark:bg-secondary-dark shadow-lg text-center overflow-hidden flex items-center justify-center"
          >
             <motion.span
                initial={{ opacity: 0 }}

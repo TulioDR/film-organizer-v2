@@ -5,7 +5,12 @@ import DropdownItem from "./../DropdownItem";
 // import ToggleDarkMode from "./../ToggleDarkMode";
 import { useRouter } from "next/router";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ToggleDarkMode from "../ToggleDarkMode";
+import StoreModel from "@/models/StoreModel";
+import { themeActions } from "@/store/slices/theme-slice";
+import { useEffect } from "react";
+import { darkThemeColors, lightThemeColors } from "@/data/themeColors";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -13,7 +18,10 @@ type Props = {
 };
 
 export default function MainMenu({ setMenu, setIsOpen }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor, isDarkMode, themeColorName } = useSelector(
+      (state: StoreModel) => state.theme
+   );
+   const dispatch = useDispatch();
 
    const supabaseClient = useSupabaseClient();
    const user = useUser();
@@ -33,6 +41,24 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
       setIsOpen(false);
    };
 
+   const toggle = () => {
+      dispatch(themeActions.toggleDarkMode());
+   };
+
+   useEffect(() => {
+      if (isDarkMode) {
+         const newColor = darkThemeColors.find(
+            ({ name }) => name === themeColorName
+         );
+         dispatch(themeActions.changeThemeColor(newColor));
+      } else {
+         const newColor = lightThemeColors.find(
+            ({ name }) => name === themeColorName
+         );
+         dispatch(themeActions.changeThemeColor(newColor));
+      }
+   }, [isDarkMode]);
+
    return (
       <motion.ul
          key="main"
@@ -51,14 +77,10 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
                Profile
             </DropdownItem>
          )}
-         <DropdownItem
-            icon={<MainIcon icon="dark_mode" />}
-            // onClick={toggleDarkMode}
-            onClick={() => {}}
-         >
+         <DropdownItem icon={<MainIcon icon="dark_mode" />} onClick={toggle}>
             <div className="flex items-center justify-between h-full w-full">
                <span>Dark Mode</span>
-               {/* <ToggleDarkMode isOn={isDark} /> */}
+               <ToggleDarkMode />
             </div>
          </DropdownItem>
          <DropdownItem

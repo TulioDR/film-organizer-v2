@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import ColorIcon from "../ColorIcon";
 import DropdownItem from "../DropdownItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { themeActions } from "@/store/slices/theme-slice";
+import { useState, useEffect } from "react";
+import { darkThemeColors, lightThemeColors } from "@/data/themeColors";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -13,21 +16,23 @@ interface ThemeColorsModel {
    color: string;
 }
 
-const themeColors: ThemeColorsModel[] = [
-   { name: "amber", color: "#d97706" },
-   { name: "orange", color: "#ea580c" },
-   { name: "lime", color: "#4d7c0f" },
-   { name: "sky", color: "#0ea5e9" },
-   { name: "blue", color: "#3b82f6" },
-   { name: "purple", color: "#a855f7" },
-   { name: "pink", color: "#ec4899" },
-];
-
 export default function ThemeColorsMenu({ setMenu }: Props) {
    const dispatch = useDispatch();
-   const setNewColor = (color: string) => {
-      dispatch(themeActions.changeThemeColor(color));
+   const setNewColor = (color: string, colorName: string) => {
+      const object = {
+         color: color,
+         name: colorName,
+      };
+      dispatch(themeActions.changeThemeColor(object));
    };
+   const { isDarkMode } = useSelector((state: StoreModel) => state.theme);
+   const [currentColors, setCurrentColors] =
+      useState<ThemeColorsModel[]>(darkThemeColors);
+
+   useEffect(() => {
+      if (isDarkMode) setCurrentColors(darkThemeColors);
+      else setCurrentColors(lightThemeColors);
+   }, [isDarkMode]);
 
    return (
       <motion.ul
@@ -51,11 +56,11 @@ export default function ThemeColorsMenu({ setMenu }: Props) {
             </button>
             <span>Theme Colors</span>
          </div>
-         {themeColors.map(({ name, color }) => (
+         {currentColors.map(({ name, color }) => (
             <DropdownItem
                key={name}
                icon={<ColorIcon color={color} />}
-               onClick={() => setNewColor(color)}
+               onClick={() => setNewColor(color, name)}
             >
                {name}
             </DropdownItem>

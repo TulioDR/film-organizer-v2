@@ -21,7 +21,9 @@ export default function SideDdItem({ item, isTooltip }: Props) {
       <Link
          href={item.link}
          className={`flex items-center gap-2  relative h-6 ${
-            isSelected ? "text-white" : "text-text-2 hover:text-white"
+            isSelected
+               ? "text-black dark:text-white"
+               : "text-gray-800 hover:text-black dark:text-text-2 dark:hover:text-white"
          }`}
       >
          <SideActiveMark item isSelected={isSelected} />

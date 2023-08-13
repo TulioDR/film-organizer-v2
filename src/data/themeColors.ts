@@ -3,13 +3,22 @@ interface ThemeColorsModel {
    color: string;
 }
 
-const themeColors: ThemeColorsModel[] = [
-   { name: "amber", color: "#f59e0b" },
-   { name: "orange", color: "#d97706" },
-   { name: "lime", color: "#65a30d" },
-   { name: "sky", color: "#0ea5e9" },
-   { name: "blue", color: "#3b82f6" },
-   { name: "purple", color: "#a855f7" },
-   { name: "pink", color: "#ec4899" },
+export const lightThemeColors: ThemeColorsModel[] = [
+   { name: "grapefruit", color: "#d94555" },
+   { name: "sunflower", color: "#f8ba43" },
+   { name: "mint", color: "#36bc9b" },
+   { name: "blue", color: "#4b89dc" },
+   { name: "pink rose", color: "#d96fad" },
+   { name: "lavender", color: "#967bdc" },
+   { name: "grass", color: "#8ec148" },
 ];
-export default themeColors;
+
+export const darkThemeColors: ThemeColorsModel[] = [
+   { name: "grapefruit", color: "#ed5564" },
+   { name: "sunflower", color: "#ffce55" },
+   { name: "mint", color: "#48cfae" },
+   { name: "blue", color: "#5d9cec" },
+   { name: "pink rose", color: "#ec87bf" },
+   { name: "lavender", color: "#ac92ed" },
+   { name: "grass", color: "#a0d468" },
+];

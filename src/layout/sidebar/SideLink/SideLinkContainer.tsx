@@ -19,8 +19,8 @@ export default function SideLinkContainer({
          onHoverEnd={onHoverEnd}
          className={`cursor-pointer w-full relative flex list-none select-none ${
             isSelected
-               ? "text-white"
-               : "text-text-2 hover:text-white duration-100"
+               ? "text-black dark:text-white"
+               : "text-gray-800 hover:text-black dark:text-text-2 dark:hover:text-white"
          }`}
       >
          {children}
