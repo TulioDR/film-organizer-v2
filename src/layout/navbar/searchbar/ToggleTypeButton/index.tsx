@@ -3,14 +3,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { popUpAnimation } from "@/animations/PopUpAnimation";
 import StoreModel from "@/models/StoreModel";
 import { useState } from "react";
-import ToggleModeTooltip from "./ToggleModeTooltip";
+import ToggleTypeTooltip from "./ToggleTypeTooltip";
+import ToggleTypeIcon from "./ToggleTypeIcon";
 
 type Props = {
    isMovie: boolean;
    onClick: () => void;
 };
 
-export default function ToggleModeButton({ isMovie, onClick }: Props) {
+export default function ToggleTypeButton({ isMovie, onClick }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
    const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
@@ -28,20 +29,9 @@ export default function ToggleModeButton({ isMovie, onClick }: Props) {
          className="h-full w-9 flex items-center gap-1 relative group rounded-lg -mr-5 z-10 text-white"
          style={{ backgroundColor: themeColor, y: -8 }}
       >
-         <div className="overflow-hidden">
-            <div
-               className={`flex items-center h-full duration-300 relative ${
-                  isMovie ? "" : "-translate-x-full"
-               }`}
-            >
-               <span className="material-icons !w-9">movie</span>
-               <span className="material-icons absolute left-full !w-9">
-                  smart_display
-               </span>
-            </div>
-         </div>
+         <ToggleTypeIcon isMovie={isMovie} />
          <AnimatePresence>
-            {showTooltip && <ToggleModeTooltip isMovie={isMovie} />}
+            {showTooltip && <ToggleTypeTooltip isMovie={isMovie} />}
          </AnimatePresence>
       </motion.button>
    );

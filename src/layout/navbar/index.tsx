@@ -1,5 +1,5 @@
 import LoginButton from "./LoginButton";
-import SearchBar from "./searchbar/SearchBar";
+import SearchBar from "./SearchBar";
 import User from "./user/User";
 import ToggleSidebar from "../../components/ToggleSidebar";
 import { useDispatch } from "react-redux";

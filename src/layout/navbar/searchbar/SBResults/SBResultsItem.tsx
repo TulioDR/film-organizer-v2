@@ -1,7 +1,7 @@
 import React from "react";
 
 import { motion } from "framer-motion";
-import Poster from "../../../components/Poster";
+import Poster from "@/components/Poster";
 
 type Props = {
    media: any;
@@ -11,7 +11,7 @@ type Props = {
    getDetails: (index: number) => void;
 };
 
-export default function QuickResult({
+export default function SBResultsItem({
    media,
    index,
    currentIndex,

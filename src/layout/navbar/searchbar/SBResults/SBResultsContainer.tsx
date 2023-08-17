@@ -2,20 +2,17 @@ import React, { useEffect } from "react";
 
 type Props = {
    children: React.ReactNode;
-   showResults: boolean;
-   results: any[];
+   resultsLength: number;
    setCurrentIndex: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-export default function ResultsContainer({
+export default function SBResultsContainer({
    children,
-   showResults,
-   results,
+   resultsLength,
    setCurrentIndex,
 }: Props) {
    const handleKey = (e: KeyboardEvent) => {
-      if (!showResults) return;
-      if (!results.length) return;
+      if (!resultsLength) return;
       const arrowUp = e.key === "ArrowUp";
       const arrowDown = e.key === "ArrowDown";
       if (!arrowUp && !arrowDown) return;
@@ -24,13 +21,13 @@ export default function ResultsContainer({
       if (arrowUp) {
          setCurrentIndex((current) => {
             if (current === 0) return null;
-            if (current === null) return results.length - 1;
+            if (current === null) return resultsLength - 1;
             return current - 1;
          });
       }
       if (arrowDown) {
          setCurrentIndex((current) => {
-            if (current === results.length - 1) return null;
+            if (current === resultsLength - 1) return null;
             if (current === null) return 0;
             return current + 1;
          });

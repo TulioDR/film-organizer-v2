@@ -6,7 +6,7 @@ type Props = {
    isMovie: boolean;
 };
 
-export default function ToggleModeTooltip({ isMovie }: Props) {
+export default function ToggleTypeTooltip({ isMovie }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
    return (
       <div className="hidden md:block absolute top-full left-0 translate-y-1">

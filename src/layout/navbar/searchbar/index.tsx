@@ -1,19 +1,12 @@
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
-import QuickResult from "./QuickResult";
-import ResultsContainer from "./ResultsContainer";
 import SearchInput from "./SearchInput";
-
-import { SpinnerCircularFixed } from "spinners-react";
-
-import { useSelector } from "react-redux";
-import ToggleModeButton from "./ToggleModeButton";
+import ToggleTypeButton from "./ToggleTypeButton";
+import SBResults from "./SBResults";
 
 type Props = {};
 
 export default function SearchBar({}: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
-
    const router = useRouter();
 
    const [isMovie, setIsMovie] = useState<boolean>(false);
@@ -78,7 +71,7 @@ export default function SearchBar({}: Props) {
    return (
       <form onSubmit={handleSubmit} className={`h-full relative`}>
          <div className={`flex items-center h-9`}>
-            <ToggleModeButton isMovie={isMovie} onClick={toggleMediaType} />
+            <ToggleTypeButton isMovie={isMovie} onClick={toggleMediaType} />
             <SearchInput
                value={inputValue}
                onChange={handleInputChange}
@@ -89,38 +82,13 @@ export default function SearchBar({}: Props) {
             />
          </div>
          {showResults && (
-            <ResultsContainer
-               showResults={showResults}
+            <SBResults
+               isLoading={isLoading}
                results={results}
+               currentIndex={currentIndex}
                setCurrentIndex={setCurrentIndex}
-            >
-               {isLoading ? (
-                  <div className="w-full grid place-content-center h-40">
-                     <SpinnerCircularFixed
-                        size={50}
-                        thickness={100}
-                        speed={100}
-                        color={themeColor}
-                        secondaryColor="rgba(0, 0, 0, 0.44)"
-                     />
-                  </div>
-               ) : results.length ? (
-                  results.map((media, index) => (
-                     <QuickResult
-                        key={media.id}
-                        media={media}
-                        index={index}
-                        currentIndex={currentIndex}
-                        setCurrentIndex={setCurrentIndex}
-                        getDetails={getDetails}
-                     />
-                  ))
-               ) : (
-                  <div className="w-full px-5 h-10 grid place-content-center">
-                     Nothing was found
-                  </div>
-               )}
-            </ResultsContainer>
+               getDetails={getDetails}
+            />
          )}
       </form>
    );
