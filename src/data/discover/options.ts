@@ -3,7 +3,6 @@ import GenreModel from "../../models/genresModel";
 import movieGenres from "../genres/movieGenres";
 import tvGenres from "../genres/tvGenres";
 
-console.log("hello");
 const getGenresOptions = (array: GenreModel[]) => {
    let options: OptionModel[] = [];
    options.push({ value: "", label: "All genres" });
@@ -51,4 +50,9 @@ export const sortByTv: OptionModel[] = [
    { label: "First Air Date Ascending", value: "first_air_date.asc" },
    { label: "Rating Descending", value: "vote_average.desc" },
    { label: "Rating Ascending", value: "vote_average.asc" },
+];
+
+export const searchTypes: OptionModel[] = [
+   { label: "Movies", value: "movie" },
+   { label: "Series", value: "tv" },
 ];

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import { staggerContainer } from "../../animations/StaggerCards";
 import DropDown from "../../components/Discover/DropDown";
-import TypeButton from "../../components/Discover/TypeButton";
 import PageTitle from "../../components/PageTitle";
 import {
    ratings,
@@ -12,6 +11,7 @@ import {
    movieGenresOptions,
    tvGenresOptions,
    releaseYears,
+   searchTypes,
 } from "../../data/discover/options";
 import useDropDownValues from "../../hooks/useDropDownValues";
 import useLanguages from "../../hooks/useLanguages";
@@ -24,8 +24,6 @@ import StoreModel from "@/models/StoreModel";
 export default function Discover() {
    const router = useRouter();
    const {
-      isMovie,
-      toggle,
       language,
       setLanguage,
       genre,
@@ -36,8 +34,11 @@ export default function Discover() {
       setRating,
       sortBy,
       setSortBy,
+      searchType,
+      setSearchType,
    } = useDropDownValues();
 
+   const isMovie = searchType.value === "movie";
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
       const mediaType = isMovie ? "movie" : "tv";
@@ -71,7 +72,6 @@ export default function Discover() {
          </Head>
          <PageTitle>Discover</PageTitle>
          <form onSubmit={handleSubmit}>
-            <TypeButton onClick={toggle} isMovie={isMovie} />
             <motion.div
                variants={staggerContainer}
                initial="initial"
@@ -79,6 +79,13 @@ export default function Discover() {
                exit="exit"
                className="grid gap-x-5 gap-y-10 mt-10 sm:grid-cols-2 xl:grid-cols-3 2xl:px-20"
             >
+               <DropDown
+                  title="Type of Search"
+                  options={searchTypes}
+                  value={searchType}
+                  setValue={setSearchType}
+                  icon={isMovie ? "movie" : "smart_display"}
+               />
                <DropDown
                   title="Languages"
                   options={languagesOptions}

@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { OptionModel } from "../models/DiscoverModel";
 
 export default function useDropDownValues() {
-   const [isMovie, setIsMovie] = useState<boolean>(true);
-   const toggle = () => {
-      setIsMovie(!isMovie);
+   const [searchType, setSearchType] = useState<OptionModel>({
+      value: "movie",
+      label: "Movies",
+   });
+
+   useEffect(() => {
       setGenre({ value: "", label: "All genres" });
       setSortBy({
          value: "popularity.desc",
          label: "Popularity Descending",
       });
-   };
+   }, [searchType]);
 
    const [language, setLanguage] = useState<OptionModel>({
       value: "en",
@@ -34,8 +37,6 @@ export default function useDropDownValues() {
    });
 
    return {
-      isMovie,
-      toggle,
       language,
       setLanguage,
       genre,
@@ -46,5 +47,7 @@ export default function useDropDownValues() {
       setRating,
       sortBy,
       setSortBy,
+      searchType,
+      setSearchType,
    };
 }
