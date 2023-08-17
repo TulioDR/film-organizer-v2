@@ -15,7 +15,9 @@ export default function PeoplePagination({
    itemsPerPage,
    onPaginationChange,
 }: Props) {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+   const { themeColor, isDarkMode } = useSelector(
+      (state: StoreModel) => state.theme
+   );
    return (
       <div className="w-full flex justify-center mt-5">
          <Pagination
@@ -23,6 +25,7 @@ export default function PeoplePagination({
             total={Math.ceil(people.length / itemsPerPage)}
             styles={{
                control: {
+                  color: isDarkMode ? "white" : "black",
                   "&[data-active]": { backgroundColor: themeColor },
                   "&[data-active]:not([data-disabled]):hover": {
                      backgroundColor: "white",

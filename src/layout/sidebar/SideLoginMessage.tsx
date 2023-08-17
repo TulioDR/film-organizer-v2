@@ -68,7 +68,7 @@ export default function SideLoginMessage({}: Props) {
             variants={popUpAnimation}
             initial="initial"
             animate="animate"
-            className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10"
+            className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10 text-white"
             style={{ backgroundColor: themeColor }}
          >
             <span className="material-icons">priority_high</span>

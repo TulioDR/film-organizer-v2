@@ -2,8 +2,8 @@ import Select from "react-select";
 import { staggerItem } from "../../animations/StaggerCards";
 import { OptionModel } from "../../models/DiscoverModel";
 import { motion } from "framer-motion";
-import tailwindColors from "../../data/tailwindColors";
 import { useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    title: string;
@@ -20,21 +20,44 @@ export default function DropDown({
    setValue,
    icon,
 }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor, isDarkMode } = useSelector(
+      (state: StoreModel) => state.theme
+   );
 
-   const { dark } = tailwindColors;
+   const colors = {
+      primary: {
+         light: "#e5e7eb",
+         dark: "#1a1b1f",
+      },
+      secondary: {
+         light: "#FFFFFF",
+         dark: "#2a282a",
+      },
+
+      light: {
+         1: "#000000",
+         2: "#616161",
+      },
+      dark: {
+         1: "#FFFFFF",
+         2: "#9AA1AD",
+      },
+   };
+   const { primary, secondary, dark, light } = colors;
    return (
       <motion.div
          variants={staggerItem}
-         className="bg-secondary rounded-xl shadow-lg p-5"
+         className="bg-secondary-light dark:bg-secondary-dark rounded-xl shadow-lg p-5"
       >
          <div
-            className="-mt-10 w-full h-16 rounded-xl grid place-content-center drop-shadow-lg"
+            className="-mt-10 w-full h-16 rounded-xl grid place-content-center shadow-lg"
             style={{ backgroundColor: themeColor }}
          >
             <span className="material-icons text-5xl">{icon}</span>
          </div>
-         <div className="font-semibold mb-1 text-xl">{title}</div>
+         <div className="font-semibold my-1 text-lg text-light-2 dark:text-dark-2">
+            {title}
+         </div>
          <Select
             options={options}
             value={value}
@@ -42,23 +65,26 @@ export default function DropDown({
             styles={{
                control: (styles) => ({
                   ...styles,
-                  backgroundColor: dark.bg.secondary,
-                  borderColor: dark.text.soft,
+                  backgroundColor: "transparent",
+                  borderColor: isDarkMode ? dark[2] : light[2],
                }),
                singleValue: (styles) => ({
                   ...styles,
-                  color: dark.text.normal,
+                  color: isDarkMode ? dark[1] : light[1],
                }),
                menu: (styles) => ({
                   ...styles,
-                  backgroundColor: dark.bg.secondary,
+                  backgroundColor: isDarkMode
+                     ? secondary.dark
+                     : secondary.light,
                }),
                option: (styles, state) => ({
                   ...styles,
                   backgroundColor: state.isSelected ? themeColor : "",
                   "&:hover": {
                      ...styles,
-                     backgroundColor: dark.bg.primary,
+                     color: isDarkMode ? dark[1] : light[1],
+                     backgroundColor: isDarkMode ? primary.dark : primary.light,
                   },
                }),
             }}

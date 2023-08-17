@@ -7,7 +7,7 @@ export default function NoListsMessage() {
          animate={{ opacity: 1 }}
          exit={{ opacity: 0 }}
          transition={{ duration: 0.6 }}
-         className="text-text-2"
+         className="text-light-1 dark:text-dark-1"
       >
          This is so empty...
       </motion.div>

@@ -31,7 +31,7 @@ export default function QuickResult({
          onMouseEnter={() => setCurrentIndex(index)}
          onMouseLeave={() => setCurrentIndex(null)}
          className={`h-20 cursor-pointer flex py-2 px-5 ${
-            selected ? "bg-primary" : ""
+            selected ? "bg-primary-light dark:bg-primary-dark" : ""
          }`}
       >
          <Poster

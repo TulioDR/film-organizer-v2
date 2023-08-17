@@ -36,7 +36,7 @@ export default function MainInfo({ media, mediaType }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full h-full flex flex-col items-end md:items-start gap-5 justify-center overflow-hidden"
+            className="w-full h-full flex flex-col items-end md:items-start gap-5 text-white justify-center overflow-hidden"
          >
             <RevealHorizontal stagger>
                <MainTitle>{media.title || media.name}</MainTitle>

@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 import MainCard from "./MainCard";
 
 import useSearchCards from "../hooks/useSearchCards";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { backgroundActions } from "@/store/slices/background-slice";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import LoadingMore from "./LoadingMore";
 import useTransitionPoster from "@/features/transitionPoster/hooks/useTransitionPoster";
 import PageAnimationContainer from "@/containers/PageAnimationContainer";
 import PageTitle from "@/components/PageTitle";
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
+import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 
 type Props = {
    title: string;
@@ -28,10 +28,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
 
    const { media, page, setPage } = useSearchCards(url, setIsLoading);
 
-   const dispatch = useDispatch();
-   useEffect(() => {
-      dispatch(backgroundActions.removeBackground());
-   }, [dispatch]);
+   useRemoveBackgroundImage();
 
    const cardsContainer = {
       initial: {},

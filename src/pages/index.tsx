@@ -87,7 +87,7 @@ export default function Home() {
          exit={{ opacity: 0 }}
          transition={{ duration: 0.4 }}
          style={{ height: "calc(100vh - 96px)" }}
-         className="w-full overflow-hidden pb-10"
+         className="w-full overflow-hidden pb-10 text-white"
       >
          {!currentMedia ? (
             <div className="fixed top-0 left-0 h-screen -z-10 w-full"></div>

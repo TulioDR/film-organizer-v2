@@ -25,7 +25,7 @@ body::-webkit-scrollbar-track {
    @apply bg-primary-light;
 }
 body::-webkit-scrollbar-thumb {
-   @apply bg-silver;
+   @apply bg-secondary-dark;
 }
 
 .dark body::-webkit-scrollbar {
@@ -35,7 +35,7 @@ body::-webkit-scrollbar-thumb {
    @apply bg-primary-dark;
 }
 .dark body::-webkit-scrollbar-thumb {
-   @apply bg-silver;
+   @apply bg-white;
 }
 
 /* Other Scroll bars */
@@ -75,10 +75,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .sidebar-scrollbar::-webkit-scrollbar-track {
-   @apply backdrop-blur-md;
+   @apply bg-transparent;
 }
 .sidebar-scrollbar::-webkit-scrollbar-thumb {
-   @apply bg-text-2;
+   @apply bg-black;
 }
 .custom-bullet-active {
    @apply bg-white;

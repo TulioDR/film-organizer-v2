@@ -13,7 +13,7 @@ export default function SideDdContainer({ children }: Props) {
          transition={{ duration: 0.3 }}
          className="overflow-hidden"
       >
-         <div className={`pl-5 text-sm space-y-1`}>{children}</div>
+         <div className={`pl-5 mt-1 text-sm space-y-2`}>{children}</div>
       </motion.ul>
    );
 }

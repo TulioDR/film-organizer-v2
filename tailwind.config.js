@@ -24,12 +24,16 @@ module.exports = {
                light: "#FFFFFF",
                dark: "#2a282a",
             },
-            silver: "#A6A6A6",
-            text: {
-               1: "rgba(255, 255, 255, 0.9)",
-               2: "rgba(255, 255, 255, 0.6)",
-               3: "rgba(255, 255, 255, 0.4)",
+
+            light: {
+               1: "#000000",
+               2: "#616161",
             },
+            dark: {
+               1: "#FFFFFF",
+               2: "#9AA1AD",
+            },
+            disabled: "#D0D8DC",
          },
       },
    },

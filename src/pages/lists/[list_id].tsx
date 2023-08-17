@@ -12,16 +12,16 @@ import { motion } from "framer-motion";
 
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
 import useTransitionPoster from "../../features/transitionPoster/hooks/useTransitionPoster";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 import SavedMediaCard from "@/components/ListDetails/SavedMediaCard";
 import MediaTypePills from "@/components/ListDetails/MediaTypePills";
-import { backgroundActions } from "@/store/slices/background-slice";
 import { query } from "@/config/db";
 import ListModel from "@/models/listModel";
 import StoreModel from "@/models/StoreModel";
 import DeleteMediaButtons from "@/components/ListDetails/DeleteMediaButtons";
 import ModalPortal from "@/components/Modals/ModalPortal";
+import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 
 type Props = {
    list: ListModel;
@@ -92,11 +92,7 @@ export default function ListID({ list }: Props) {
       }
    }, [media, selectedType]);
 
-   const dispatch = useDispatch();
-   useEffect(() => {
-      dispatch(backgroundActions.removeBackground());
-   }, [dispatch]);
-
+   useRemoveBackgroundImage();
    const {
       selectedImg,
       position,

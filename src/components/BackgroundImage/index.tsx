@@ -46,7 +46,7 @@ export default function BackgroundImage() {
                      className="relative w-full h-full"
                   >
                      <Backdrop src={src} backgroundKey={backgroundKey} />
-                     <div className="absolute top-0 left-0 w-full h-full bg-gray-300/40 dark:bg-primary-dark/75"></div>
+                     <div className="absolute top-0 left-0 w-full h-full bg-primary-dark/60"></div>
                   </motion.div>
                </AnimatePresence>
             </motion.div>

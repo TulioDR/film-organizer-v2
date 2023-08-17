@@ -23,7 +23,7 @@ export default function SideTooltipContainer({ children, tagPosition }: Props) {
             opacity: 0,
          }}
          transition={{ duration: 0.1 }}
-         className="origin-left fixed z-10 px-10 w-max bg-secondary text-white shadow-xl rounded-lg"
+         className="origin-left fixed z-10 px-10 w-max bg-secondary-light text-black dark:bg-secondary-dark dark:text-white shadow-xl rounded-lg"
       >
          {children}
       </motion.div>

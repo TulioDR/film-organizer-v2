@@ -17,7 +17,10 @@ export default function SidebarContainer({ children }: Props) {
             expandSidebar ? "w-60" : "w-[116px]"
          } ${revealSidebar ? "" : "-translate-x-full lg:translate-x-0"}`}
       >
-         <div id="sidebar" className="h-full bg-primary lg:bg-transparent">
+         <div
+            id="sidebar"
+            className="h-full bg-primary-light dark:bg-primary-dark"
+         >
             <motion.div
                variants={staggerContainer}
                initial="initial"

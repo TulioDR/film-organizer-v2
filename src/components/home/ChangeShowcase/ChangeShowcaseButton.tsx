@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    showcase: "movies" | "series" | "upcoming";
@@ -14,34 +14,18 @@ export default function ChangeShowcaseButton({
    children,
    onClick,
 }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
+   const isSelected = showcase === currentShowcase;
    return (
-      <button className="relative">
-         <span
-            onClick={onClick}
-            className={`cursor-pointer duration-300 text-xl 2xl:text-2xl ${
-               showcase === currentShowcase
-                  ? "text-black dark:text-white"
-                  : "text-gray-800 dark:text-gray-300"
-            }`}
-         >
-            {children}
-         </span>
-         <AnimatePresence>
-            {showcase === currentShowcase && (
-               <div className="absolute h-[2px] w-full flex justify-center">
-                  <motion.div
-                     initial={{ width: 0 }}
-                     animate={{ width: "100%" }}
-                     exit={{ width: 0 }}
-                     transition={{ duration: 0.3 }}
-                     style={{ backgroundColor: themeColor }}
-                     className="h-full top-full"
-                  ></motion.div>
-               </div>
-            )}
-         </AnimatePresence>
+      <button
+         onClick={onClick}
+         style={{ backgroundColor: isSelected ? themeColor : "white" }}
+         className={`relative rounded-lg py-1 px-4 text-sm 2xl:text-base duration-100 ${
+            isSelected ? "text-dark-1" : "text-light-1"
+         }`}
+      >
+         {children}
       </button>
    );
 }

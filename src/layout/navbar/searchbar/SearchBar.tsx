@@ -3,10 +3,11 @@ import { FormEvent, useEffect, useState } from "react";
 import QuickResult from "./QuickResult";
 import ResultsContainer from "./ResultsContainer";
 import SearchInput from "./SearchInput";
-import ToggleModeButton from "./ToggleModeButton";
+
 import { SpinnerCircularFixed } from "spinners-react";
 
 import { useSelector } from "react-redux";
+import ToggleModeButton from "./ToggleModeButton";
 
 type Props = {};
 
@@ -77,17 +78,14 @@ export default function SearchBar({}: Props) {
    return (
       <form onSubmit={handleSubmit} className={`h-full relative`}>
          <div className={`flex items-center h-9`}>
-            <ToggleModeButton
-               isMovie={isMovie}
-               onClick={toggleMediaType}
-               showResults={showResults}
-            />
+            <ToggleModeButton isMovie={isMovie} onClick={toggleMediaType} />
             <SearchInput
                value={inputValue}
                onChange={handleInputChange}
                onFocus={handleInputFocus}
                onBlur={handleInputBlur}
                placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
+               showResults={showResults}
             />
          </div>
          {showResults && (

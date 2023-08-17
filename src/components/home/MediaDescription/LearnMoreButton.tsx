@@ -11,7 +11,7 @@ export default function LearnMoreButton({ onClick }: Props) {
    return (
       <button
          onClick={onClick}
-         className="group backdrop-blur drop-shadow-lg px-3 2xl:px-5 border border-black dark:border-white h-full text-sm font-medium relative overflow-hidden flex items-center"
+         className="group backdrop-blur drop-shadow-lg px-3 2xl:px-5 border border-white h-full text-sm font-medium relative overflow-hidden flex items-center"
       >
          <div
             style={{ backgroundColor: themeColor }}

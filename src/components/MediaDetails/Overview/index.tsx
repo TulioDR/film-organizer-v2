@@ -39,7 +39,7 @@ export default function Overview({ media, isMovie, crew }: Props) {
       >
          <InfoSubtitle>Overview</InfoSubtitle>
          {media.tagline && (
-            <div className="italic font-bold mb-1 text-text-1">
+            <div className="italic font-bold mb-1 text-light-2 dark:text-dark-2">
                {media.tagline}
             </div>
          )}

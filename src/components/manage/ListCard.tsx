@@ -105,7 +105,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
                   autoComplete="off"
                   onKeyDown={handleKeyDown}
                   onChange={(e) => setValue(e.currentTarget.value)}
-                  className={`h-9 w-full outline-none bg-transparent text-text-1 ${
+                  className={`h-9 w-full outline-none bg-transparent text-light-1 dark:text-dark-1 ${
                      isOnFocus ? "" : "pointer-events-none"
                   }`}
                />

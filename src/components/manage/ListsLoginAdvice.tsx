@@ -10,8 +10,8 @@ export default function ListsLoginAdvice() {
       router.push("/auth");
    };
    return (
-      <div className="flex flex-col items-center justify-center text-text-2 mt-5">
-         <div className="text-text-1">
+      <div className="flex flex-col items-center justify-center mt-5">
+         <div className="text-dark-1">
             <span className="material-icons !text-7xl sm:!text-9xl">
                format_list_bulleted
             </span>

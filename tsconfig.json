@@ -20,6 +20,11 @@
          "@/*": ["./src/*"]
       }
    },
-   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+   "include": [
+      "next-env.d.ts",
+      "**/*.ts",
+      "**/*.tsx",
+      "src/layout/Navbar/searchbar/ToogleModeButton"
+   ],
    "exclude": ["node_modules"]
 }

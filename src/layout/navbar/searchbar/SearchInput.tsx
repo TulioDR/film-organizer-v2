@@ -6,6 +6,7 @@ type Props = {
    onFocus: () => void;
    onBlur: () => void;
    placeholder: string;
+   showResults: boolean;
 };
 
 const inputAnimations = {
@@ -30,12 +31,15 @@ export default function SearchInput({
    onFocus,
    onBlur,
    placeholder,
+   showResults,
 }: Props) {
    return (
       <div className="w-full sm:w-80 h-9">
          <motion.div
             variants={inputAnimations}
-            className="text-sm sm:text-base bg-secondary-light dark:bg-secondary-dark rounded-lg overflow-hidden shadow-lg"
+            className={`text-sm sm:text-base bg-secondary-light dark:bg-secondary-dark overflow-hidden shadow-lg rounded-t-lg ${
+               showResults ? "" : "rounded-b-lg"
+            }`}
          >
             <div className="flex items-center gap-5 pl-7 pr-5 w-80 h-9 flex-shrink-0">
                <input
@@ -44,10 +48,12 @@ export default function SearchInput({
                   onFocus={onFocus}
                   onBlur={onBlur}
                   type="text"
-                  className="w-full outline-none bg-transparent text-text-1 placeholder:text-text-2"
+                  className="w-full outline-none bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2"
                   placeholder={placeholder}
                />
-               <span className="material-icons !text-text-2">search</span>
+               <span className="material-icons !text-text-2 !text-light-2 dark:!text-dark-2">
+                  search
+               </span>
             </div>
          </motion.div>
       </div>

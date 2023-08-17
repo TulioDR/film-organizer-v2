@@ -20,7 +20,7 @@ export default function LoadingMore({ page, setPage }: Props) {
       <div className="mb-10 w-full">
          <div
             ref={loadingRef}
-            className="bg-secondary mx-auto w-max px-20 py-5 rounded-xl"
+            className="bg-secondary-light dark:bg-secondary-dark mx-auto w-max px-20 py-5 rounded-xl"
          >
             <SpinnerCircularFixed
                size={40}
