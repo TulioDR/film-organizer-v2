@@ -8,7 +8,7 @@ export default function PageTitle({ children }: Props) {
    return (
       <div className="overflow-hidden">
          <RevealHorizontal>
-            <div className="text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-bold font-oswald mb-5">
+            <div className="text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-bold font-oswald mb-5 text-light-1 dark:text-dark-1">
                {children}
             </div>
          </RevealHorizontal>

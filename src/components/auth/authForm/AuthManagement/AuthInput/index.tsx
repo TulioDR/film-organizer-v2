@@ -9,7 +9,7 @@ type Props = {
    name: string;
    icon: string;
    password?: true;
-   register: boolean;
+   login: boolean;
 };
 
 export default function AuthInput({
@@ -17,7 +17,7 @@ export default function AuthInput({
    name,
    icon,
    password,
-   register,
+   login,
 }: Props) {
    const { errors, touched } = useFormikContext<any>();
 
@@ -30,9 +30,9 @@ export default function AuthInput({
       <div className="w-full relative text-xs sm:text-sm md:text-base">
          <div
             className={`w-full flex items-center relative h-11 border-b ${
-               register
-                  ? "border-gray-400 text-white"
-                  : "border-gray-500 text-gray-400"
+               login
+                  ? "border-light-2 text-light-2"
+                  : "border-dark-2 text-dark-2"
             }`}
          >
             <AuthInputIcon icon={icon} />
@@ -45,9 +45,9 @@ export default function AuthInput({
                   className={`w-full bg-transparent h-full outline-none ${
                      password ? "pr-10" : "pr-3"
                   } ${
-                     register
-                        ? "placeholder:text-gray-400 text-white"
-                        : "placeholder:text-gray-500 text-black"
+                     login
+                        ? "placeholder:text-light-2 text-light-1"
+                        : "placeholder:text-dark-2 text-dark-1"
                   }`}
                />
                {password && (
@@ -59,10 +59,7 @@ export default function AuthInput({
             </div>
          </div>
          {touched[name] && errors[name] && (
-            <AuthInputError
-               message={errors[name] as string}
-               register={register}
-            />
+            <AuthInputError message={errors[name] as string} login={login} />
          )}
       </div>
    );

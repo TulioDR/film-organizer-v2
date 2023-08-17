@@ -8,10 +8,10 @@ import { OAuthStrategy } from "@clerk/types";
 import { useSignIn } from "@clerk/nextjs";
 
 type Props = {
-   register: boolean;
+   login: boolean;
 };
 
-export default function SocialLogins({ register }: Props) {
+export default function SocialLogins({ login }: Props) {
    const { signIn } = useSignIn();
 
    const handleAuth = (strategy: OAuthStrategy) => {
@@ -49,7 +49,7 @@ export default function SocialLogins({ register }: Props) {
                onClick={discordAuth}
             />
          </div>
-         <FormSeparation register={register} />
+         <FormSeparation login={login} />
       </div>
    );
 }

@@ -84,7 +84,7 @@ export default function AuthForm({
                      </AuthMessage>
                   ) : (
                      <AuthManagementContainer>
-                        {!reset && <SocialLogins register={register} />}
+                        {!reset && <SocialLogins login={login} />}
                         <AuthInputs type={type} />
                      </AuthManagementContainer>
                   )}

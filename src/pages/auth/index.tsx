@@ -59,7 +59,7 @@ export default function Auth() {
             animate={{ width: 0 }}
             exit={{ width: "100%" }}
             transition={{ duration: 0.5 }}
-            className="z-50 h-screen bg-primary fixed right-0 top-0"
+            className="z-50 h-screen bg-primary-dark fixed right-0 top-0"
          ></motion.div>
          <div className="lg:hidden">
             <AuthMobile />

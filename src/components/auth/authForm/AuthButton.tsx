@@ -49,9 +49,9 @@ export default function AuthButton({
             animate={controls}
             type={isSelected ? "submit" : "button"}
             className={`text-sm font-semibold py-3
-               ${register ? "bg-white text-black" : ""}
-               ${login ? "bg-primary text-white" : ""}
-               ${reset ? "bg-secondary text-white" : ""}
+               ${login ? "bg-secondary-dark text-dark-1" : ""}
+               ${register ? "bg-primary-light text-light-1" : ""}
+               ${reset ? "bg-primary-light text-light-1" : ""}
             `}
          >
             {children}

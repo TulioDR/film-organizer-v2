@@ -23,7 +23,9 @@ export default function TranslateContainer({
             exit={{ x: register ? "100%" : "-100%" }}
             transition={{ duration: 0.5 }}
             className={`w-full h-full ${
-               register ? "bg-secondary text-white" : "bg-gray-200 text-black"
+               register
+                  ? "bg-secondary-dark text-dark-1"
+                  : "bg-primary-light text-light-1"
             }`}
          >
             <div className={`h-full flex items-center justify-center `}>
