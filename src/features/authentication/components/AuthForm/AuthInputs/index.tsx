@@ -17,12 +17,22 @@ export default function AuthInputs({ login, register, reset }: Props) {
                login={login}
             />
          )}
-         <AuthInput
-            icon="mail"
-            name="email"
-            placeholder="Email Address"
-            login={login}
-         />
+         {login && (
+            <AuthInput
+               icon="person"
+               name="email"
+               placeholder="Email or username"
+               login={login}
+            />
+         )}
+         {(register || reset) && (
+            <AuthInput
+               icon="mail"
+               name="email"
+               placeholder="Email Address"
+               login={login}
+            />
+         )}
          {!reset && (
             <>
                <AuthInput
