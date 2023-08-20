@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-   login: boolean;
+   login?: true;
 };
 
 export default function FormSeparation({ login }: Props) {

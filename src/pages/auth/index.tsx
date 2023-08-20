@@ -1,17 +1,6 @@
 import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 
-import AuthHead from "@/components/Auth/AuthHead";
-import AuthAppLogo from "@/components/Auth/AuthAppLogo";
-import AuthForm from "@/components/Auth/AuthForm";
-
-import ResetPassword from "@/components/Auth/ResetPassword";
-import TranslateContainer from "@/components/Auth/AuthForm/TranslateContainer";
-import SkipButton from "@/components/Auth/SkipButton";
-import AuthMobile from "@/components/Auth/Mobile/AuthMobile";
-
-import { AnimatePresence, motion } from "framer-motion";
-
 export const getServerSideProps: GetServerSideProps = async (_context) => {
    // console.log(context);
    // if (userExist) {
@@ -25,77 +14,62 @@ export const getServerSideProps: GetServerSideProps = async (_context) => {
    return { props: {} };
 };
 
-import { useClerk } from "@clerk/clerk-react";
 import { useUser } from "@clerk/nextjs";
+import { AnimatePresence } from "framer-motion";
+import AuthSidebar from "@/features/authentication/components/AuthSidebar";
+import AuthFormContainer from "@/features/authentication/components/AuthForm/AuthFormContainer";
+import AuthForm from "@/features/authentication/components/AuthForm";
+import PendingForm from "@/features/authentication/components/PendingForm";
+import useRegistration from "@/features/authentication/hooks/useRegistration";
+import useLogin from "@/features/authentication/hooks/useLogin";
+
 export default function Auth() {
-   const [isLogin, setIsLogin] = useState(true);
-   const toggle = () => setIsLogin(!isLogin);
-
-   // const [showModal, setShowModal] = useState<boolean>(false);
-   // const closeModal = () => setShowModal(false);
-
-   const [forgotPassWord, setForgotPassword] = useState<boolean>(false);
-   const toggleForgotPassword = () => setForgotPassword((prev) => !prev);
-
-   const { isLoaded, isSignedIn, user } = useUser();
-   const { signOut } = useClerk();
-
-   const signOutFunction = async () => {
-      const data = await signOut();
-      console.log(data);
-   };
-
+   const { isLoaded: isUserLoaded, isSignedIn, user } = useUser();
    useEffect(() => {
-      console.log(isLoaded);
+      console.log(isUserLoaded);
       console.log(isSignedIn);
       console.log(user);
-   }, [isLoaded, isSignedIn, user]);
+   }, [isUserLoaded, isSignedIn, user]);
+
+   type AuthType = "login" | "register" | "reset";
+   const [authType, setAuthType] = useState<AuthType>("login");
+   const switchToReset = () => setAuthType("reset");
+
+   const login = authType === "login";
+   const register = authType === "register";
+   const reset = authType === "reset";
+
+   const { handleLogin } = useLogin();
+   const { handleRegister, pendingVerification } = useRegistration();
 
    return (
-      <div className="overflow-hidden bg-primary">
-         <AuthHead forgotPassWord={forgotPassWord} isLogin={isLogin} />
-         <motion.div
-            initial={{ width: "100%" }}
-            animate={{ width: 0 }}
-            exit={{ width: "100%" }}
-            transition={{ duration: 0.5 }}
-            className="z-50 h-screen bg-primary-dark fixed right-0 top-0"
-         ></motion.div>
-         <div className="lg:hidden">
-            <AuthMobile />
-         </div>
-         <div className="hidden lg:block">
-            <button
-               onClick={signOutFunction}
-               className="bg-red-600 text-white fixed top-0 right-0 py-5 px-8 z-10"
-            >
-               Sign Out
-            </button>
-            <AuthAppLogo white={forgotPassWord} />
-            <SkipButton forgotPassWord={forgotPassWord} />
-            <ResetPassword toggleForgotPassword={toggleForgotPassword} />
-            <AnimatePresence initial={false}>
-               {!forgotPassWord && (
-                  <div className="flex h-screen w-full z-10 over-flow-hidden">
-                     <TranslateContainer isSelected={isLogin}>
-                        <AuthForm
-                           onButtonClick={toggle}
-                           isSelected={isLogin}
-                           toggleForgotPassword={toggleForgotPassword}
-                           type="login"
-                        />
-                     </TranslateContainer>
-                     <TranslateContainer isSelected={!isLogin} register>
-                        <AuthForm
-                           onButtonClick={toggle}
-                           isSelected={!isLogin}
-                           type="register"
-                        />
-                     </TranslateContainer>
-                  </div>
-               )}
-            </AnimatePresence>
-         </div>
+      <div className="h-screen relative overflow-auto">
+         <AuthSidebar setAuthType={setAuthType} />
+         <AnimatePresence initial={false}>
+            {login && (
+               <AuthFormContainer key="login" login>
+                  <AuthForm
+                     onSubmit={handleLogin}
+                     switchToReset={switchToReset}
+                     login
+                  />
+               </AuthFormContainer>
+            )}
+            {register && (
+               <AuthFormContainer key="register" register>
+                  {pendingVerification ? (
+                     <PendingForm />
+                  ) : (
+                     <AuthForm onSubmit={handleRegister} register />
+                  )}
+               </AuthFormContainer>
+            )}
+            {reset && (
+               <AuthFormContainer key="reset" reset>
+                  <AuthForm onSubmit={handleLogin} reset />
+               </AuthFormContainer>
+            )}
+         </AnimatePresence>
       </div>
    );
 }

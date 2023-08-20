@@ -1,11 +1,14 @@
 import { popUpAnimation } from "@/animations/PopUpAnimation";
 import StoreModel from "@/models/StoreModel";
 import { motion, useAnimationControls } from "framer-motion";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-type Props = {};
+type Props = {
+   children: React.ReactNode;
+   icon: string;
+   onClick: () => void;
+};
 
 export const sideLoginAnimation = {
    initial: { opacity: 0 },
@@ -16,14 +19,9 @@ export const sideLoginAnimation = {
    exit: {},
 };
 
-export default function SideLoginMessage({}: Props) {
+export default function SideMessage({ children, icon, onClick }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
-
-   const router = useRouter();
-   const goToAuth = () => {
-      router.push("/auth");
-   };
 
    const messageContainerControls = useAnimationControls();
    const messageControls = useAnimationControls();
@@ -61,7 +59,10 @@ export default function SideLoginMessage({}: Props) {
          whileTap={{
             scale: expandSidebar ? 0.95 : 1,
          }}
-         onTap={goToAuth}
+         whileHover={{
+            scale: 1.05,
+         }}
+         onTap={onClick}
          className="cursor-pointer flex flex-col items-center"
       >
          <motion.div
@@ -71,7 +72,7 @@ export default function SideLoginMessage({}: Props) {
             className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10 text-white"
             style={{ backgroundColor: themeColor }}
          >
-            <span className="material-icons">priority_high</span>
+            <span className="material-icons">{icon}</span>
          </motion.div>
          <motion.div
             initial={{ width: 0, height: 0 }}
@@ -86,7 +87,7 @@ export default function SideLoginMessage({}: Props) {
                exit={{ opacity: 0, transition: { duration: 0 } }}
                className="px-5"
             >
-               Login to Create and see your Lists!
+               {children}
             </motion.span>
          </motion.div>
       </motion.div>

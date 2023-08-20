@@ -8,9 +8,9 @@ import { useEffect } from "react";
 import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
 import SaveMediaModal from "@/components/Modals/SaveMediaModal";
 import useListsRefresh from "@/hooks/useListsRefresh";
-import { useUser } from "@supabase/auth-helpers-react";
 import BackgroundImage from "@/components/BackgroundImage";
 import Notification from "@/components/Notification";
+import { useUser } from "@clerk/nextjs";
 
 type Props = {
    children: React.ReactNode;
@@ -22,7 +22,7 @@ export default function MainPageContainer({ children }: Props) {
 
    const { refreshLists } = useListsRefresh();
 
-   const user = useUser();
+   const { user } = useUser();
    useEffect(() => {
       console.log("running for the first time");
       refreshLists();

@@ -1,17 +1,22 @@
-import { Form } from "formik";
-import React from "react";
 import AuthInput from "./AuthInput";
 
 type Props = {
-   type: "register" | "login" | "reset";
+   login?: true;
+   register?: true;
+   reset?: true;
 };
 
-export default function AuthInputs({ type }: Props) {
-   const register = type === "register";
-   const reset = type === "reset";
-   const login = type === "login";
+export default function AuthInputs({ login, register, reset }: Props) {
    return (
-      <Form className="flex flex-col gap-6 w-full max-w-[24rem]">
+      <>
+         {register && (
+            <AuthInput
+               icon="person"
+               name="username"
+               placeholder="Username"
+               login={login}
+            />
+         )}
          <AuthInput
             icon="mail"
             name="email"
@@ -38,6 +43,6 @@ export default function AuthInputs({ type }: Props) {
                )}
             </>
          )}
-      </Form>
+      </>
    );
 }

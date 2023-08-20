@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
-import { useUser } from "@supabase/auth-helpers-react";
 import UserImage from "./UserImage";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import { popUpAnimation } from "@/animations/PopUpAnimation";
+import { useUser } from "@clerk/nextjs";
 
 export default function User() {
-   const user = useUser();
+   const { user } = useUser();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => {

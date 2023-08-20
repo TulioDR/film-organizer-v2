@@ -10,7 +10,7 @@ export default function AuthMessage({ children }: Props) {
          initial={{ opacity: 0 }}
          animate={{ opacity: 1, transition: { duration: 0.5 } }}
          exit={{ opacity: 0, transition: { duration: 0.5 } }}
-         className="text-center w-80 mx-auto"
+         className="text-center w-80 mx-auto text-xs sm:text-sm md:text-base"
       >
          {children}
       </motion.div>

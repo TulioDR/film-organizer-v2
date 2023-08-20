@@ -1,14 +1,14 @@
-import { useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { getIsMediaSaved } from "@/api/media";
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
+import { useUser } from "@clerk/nextjs";
 
 export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-   const user = useUser();
+   const { user } = useUser();
 
    const { mediaToSave, isSaveMediaOpen } = useSelector(
       (state: StoreModel) => state.bookmark

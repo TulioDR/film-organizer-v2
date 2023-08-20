@@ -1,11 +1,11 @@
-import { useUser } from "@supabase/auth-helpers-react";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 
 export default function UserImage() {
-   const user = useUser()!;
+   const { user } = useUser();
    return (
       <div className="relative h-full w-full rounded-full overflow-hidden">
-         {user.user_metadata?.avatar_url ? (
+         {/* {user.user_metadata?.avatar_url ? (
             <Image
                src={user.user_metadata.avatar_url}
                alt={user.email || user.user_metadata.full_name}
@@ -16,7 +16,7 @@ export default function UserImage() {
             />
          ) : (
             <span className="uppercase text-xl">{user.email?.charAt(0)}</span>
-         )}
+         )} */}
       </div>
    );
 }

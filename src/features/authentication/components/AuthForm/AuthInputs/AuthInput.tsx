@@ -9,7 +9,7 @@ type Props = {
    name: string;
    icon: string;
    password?: true;
-   login: boolean;
+   login?: true;
 };
 
 export default function AuthInput({

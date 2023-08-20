@@ -1,9 +1,10 @@
 import { bookmarkActions } from "@/store/slices/bookmark-slice";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useUser } from "@clerk/nextjs";
+
 import { useDispatch } from "react-redux";
 
 export default function useBookmark(media: any, mediaType: "tv" | "movie") {
-   const user = useUser();
+   const { user } = useUser();
    const dispatch = useDispatch();
 
    const handleBookmarkClick = () => {

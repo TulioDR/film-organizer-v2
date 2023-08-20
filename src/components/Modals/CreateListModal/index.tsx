@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useUser } from "@supabase/auth-helpers-react";
-
 import ModalContainer from "../ModalContainer";
 import ModalTitle from "../ModalTitle";
 import ModalButtonsContainer from "../ModalButtonsContainer";
@@ -15,6 +13,7 @@ import { useSelector } from "react-redux";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import LoadingButton from "../LoadingButton";
 import useNotification from "@/hooks/useNotification";
+import { useUser } from "@clerk/nextjs";
 
 type Props = {
    close: () => void;
@@ -28,7 +27,7 @@ export default function CreateListModal({ close }: Props) {
    const [isFocused, setIsFocused] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-   const user = useUser();
+   const { user } = useUser();
 
    const { setAndCloseNotification, getErrorMessage } = useNotification();
 

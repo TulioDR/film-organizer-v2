@@ -8,7 +8,7 @@ import { OAuthStrategy } from "@clerk/types";
 import { useSignIn } from "@clerk/nextjs";
 
 type Props = {
-   login: boolean;
+   login?: true;
 };
 
 export default function SocialLogins({ login }: Props) {
@@ -31,7 +31,7 @@ export default function SocialLogins({ login }: Props) {
    const discordAuth = () => handleAuth("oauth_discord");
 
    return (
-      <div className="w-40 flex-shrink-0">
+      <div className="w-40 -mb-2">
          <div className="flex justify-between w-full">
             <SocialLogin
                logo={googleLogo}

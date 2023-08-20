@@ -1,17 +1,15 @@
+import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import SideLink from "./SideLink";
-import SideNoListsMessage from "./SideNoListsMessage";
-import StoreModel from "@/models/StoreModel";
-import SideLoadingLists from "./SideLoadingLists";
 
-export default function SideLists() {
+type Props = {};
+
+export default function SideLists({}: Props) {
    const { lists } = useSelector((state: StoreModel) => state.lists);
 
-   if (lists === null) return <SideLoadingLists />;
-   if (lists.length <= 0) return <SideNoListsMessage />;
    return (
       <>
-         {lists.map((list: any) => (
+         {lists!.map((list: any) => (
             <SideLink
                key={list.id}
                link={`/lists/${list.id}`}

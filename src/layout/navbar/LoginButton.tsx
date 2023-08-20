@@ -1,10 +1,10 @@
-import { useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { popUpAnimation } from "@/animations/PopUpAnimation";
+import { useUser } from "@clerk/nextjs";
 
 export default function LoginButton() {
-   const user = useUser();
+   const { user } = useUser();
    if (user) return <></>;
    return (
       <motion.button variants={popUpAnimation}>
