@@ -22,6 +22,7 @@ import AuthForm from "@/features/authentication/components/AuthForm";
 import PendingForm from "@/features/authentication/components/PendingForm";
 import useRegistration from "@/features/authentication/hooks/useRegistration";
 import useLogin from "@/features/authentication/hooks/useLogin";
+import SkipAuthButton from "@/features/authentication/components/SkipAuthButton";
 
 export default function Auth() {
    const { isLoaded: isUserLoaded, isSignedIn, user } = useUser();
@@ -44,6 +45,7 @@ export default function Auth() {
 
    return (
       <div className="h-screen relative overflow-auto">
+         <SkipAuthButton login={login} />
          <AuthSidebar setAuthType={setAuthType} />
          <AnimatePresence initial={false}>
             {login && (
