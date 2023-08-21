@@ -7,13 +7,11 @@ import wrapper from "@/store";
 import { Provider } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Fragment } from "react";
 
 function App({ Component, ...rest }: AppProps) {
    const { route } = useRouter();
-   const isAuth =
-      route === "/auth" ||
-      route === "/auth/reset-password" ||
-      route === "/auth/sso-callback";
+   const isAuth = route === "/auth" || route === "/auth/sso-callback";
 
    const { store, props } = wrapper.useWrappedStore(rest);
    const { pageProps } = props;
@@ -24,15 +22,13 @@ function App({ Component, ...rest }: AppProps) {
          <Provider store={store}>
             <AnimatePresence mode="wait">
                {isAuth ? (
-                  <div key="one">
+                  <Fragment key="one">
                      <Component {...pageProps} />
-                  </div>
+                  </Fragment>
                ) : (
-                  <div key="two">
-                     <MainPageContainer>
-                        <Component {...pageProps} />
-                     </MainPageContainer>
-                  </div>
+                  <MainPageContainer key="two">
+                     <Component {...pageProps} />
+                  </MainPageContainer>
                )}
             </AnimatePresence>
          </Provider>

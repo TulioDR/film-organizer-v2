@@ -1,21 +1,21 @@
 import React from "react";
 
 type Props = {
-   login?: true;
+   dark?: true;
 };
 
-export default function FormSeparation({ login }: Props) {
+export default function FormSeparation({ dark }: Props) {
    return (
       <div className="flex w-full items-center gap-1 mt-2">
          <div
             className={`h-[1px] flex-1 ${
-               login ? "bg-secondary-dark" : "bg-primary-light"
+               dark ? "bg-primary-light" : " bg-secondary-dark"
             }`}
          />
          <div className="truncate text-xs sm:text-sm">OR</div>
          <div
             className={`h-[1px] flex-1 ${
-               login ? "bg-secondary-dark" : "bg-primary-light"
+               dark ? "bg-primary-light" : " bg-secondary-dark"
             }`}
          />
       </div>
