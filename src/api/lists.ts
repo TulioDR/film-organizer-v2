@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = axios.create({ baseURL: "/api/lists" });
+const API = axios.create({ baseURL: "/api/database/lists" });
 
 export const getLists = async (authorId: string) => {
    try {

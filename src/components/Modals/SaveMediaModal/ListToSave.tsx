@@ -4,6 +4,7 @@ import { SpinnerCircularFixed } from "spinners-react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import useNotification from "@/hooks/useNotification";
+import { v4 as uuid } from "uuid";
 
 interface ListProps {
    list: any;
@@ -24,6 +25,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
    const saveToList = async () => {
       setIsLoading(true);
       const createdMedia = await createMedia({
+         id: uuid(),
          media_id: media.id,
          media_title: media.title || media.name,
          media_poster: media.poster_path,
@@ -80,7 +82,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
    return (
       <li
          onClick={isSaved ? removeFromList : saveToList}
-         className={`h-9 flex items-center hover:bg-secondary text-text-2 ${
+         className={`h-9 flex items-center hover:bg-secondary-light dark:hover:bg-secondary-dark text-text-2 ${
             isLoading ? "pointer-events-none" : "cursor-pointer"
          }`}
       >

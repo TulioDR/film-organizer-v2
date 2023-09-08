@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SavedMediaModel } from "@/models/MediaModel";
-const API = axios.create({ baseURL: "/api/media" });
+const API = axios.create({ baseURL: "/api/database/media" });
 
 export const getListMedia = async (list_id: string) => {
    try {

@@ -40,7 +40,7 @@ export default function ModalContainer({ children, closeModal }: Props) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
-                  className="p-10 h-full flex items-center"
+                  className="p-10 h-full flex flex-col items-center justify-center"
                >
                   {children}
                </motion.div>
