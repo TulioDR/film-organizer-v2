@@ -22,7 +22,7 @@ interface Props {
 export default function GenrePage({ mediaType, genreID, title }: Props) {
    return (
       <SearchCards
-         url={`/api/genres/${mediaType}/${genreID}`}
+         url={`/genres/${mediaType}/${genreID}`}
          title={title}
          mediaType={mediaType}
       />

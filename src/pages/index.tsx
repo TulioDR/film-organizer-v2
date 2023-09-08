@@ -9,6 +9,7 @@ import useTransitionPoster from "@/features/transitionPoster/hooks/useTransition
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 import { motion } from "framer-motion";
+import API_PUBLIC from "@/api/public";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -17,8 +18,7 @@ export default function Home() {
 
    useEffect(() => {
       const getData = async () => {
-         const res = await fetch("/api/home");
-         const data = await res.json();
+         const { data } = await API_PUBLIC.get("/home");
          setNowPlaying(data[0].results);
          setOnAir(data[1].results);
          setUpcoming(data[2].results);

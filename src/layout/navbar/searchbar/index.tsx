@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
 import ToggleTypeButton from "./ToggleTypeButton";
 import SBResults from "./SBResults";
+import API_PUBLIC from "@/api/public";
 
 type Props = {};
 
@@ -25,8 +26,8 @@ export default function SearchBar({}: Props) {
          if (inputValue.length > 0) {
             setIsLoading(true);
             const type = isMovie ? "movie" : "tv";
-            const res = await fetch(`/api/results/${type}/${inputValue}/1`);
-            const data = await res.json();
+            const url = `/searchbar_results/${type}/${inputValue}/1`;
+            const { data } = await API_PUBLIC.get(url);
             setResults(data.results.slice(0, 5));
             setShowResults(true);
             setIsLoading(false);

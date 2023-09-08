@@ -20,7 +20,7 @@ export default function DiscoveredMedia({ mediaType, filters }: Props) {
    const type = mediaType === "movie" ? "Movies" : "TV Shows";
    return (
       <SearchCards
-         url={`/api/discover/${mediaType}/${filters}`}
+         url={`/discover/${mediaType}/${filters}`}
          title={`Founded ${type}`}
          mediaType={mediaType}
       />

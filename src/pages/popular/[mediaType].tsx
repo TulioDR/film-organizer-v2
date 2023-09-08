@@ -16,7 +16,7 @@ export default function Popular({ mediaType }: Props) {
    const type = mediaType === "movie" ? "Movies" : "TV Shows";
    return (
       <SearchCards
-         url={`/api/popular/${mediaType}`}
+         url={`/popular/${mediaType}`}
          title={`Popular ${type}`}
          mediaType={mediaType}
       />

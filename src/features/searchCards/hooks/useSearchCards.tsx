@@ -1,3 +1,4 @@
+import API_PUBLIC from "@/api/public";
 import { useEffect, useState } from "react";
 
 export default function useSearchCards(
@@ -10,8 +11,7 @@ export default function useSearchCards(
    useEffect(() => {
       const getData = async () => {
          console.log("fetching cards");
-         const res = await fetch(`${url}/${page}`);
-         const data = await res.json();
+         const { data } = await API_PUBLIC.get(url);
          if (page === 1) {
             setMedia(data.results);
          } else {

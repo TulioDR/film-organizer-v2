@@ -1,5 +1,3 @@
-import { getSeason } from "@/api/season";
-
 import React, { useEffect, useState } from "react";
 
 import Poster from "@/components/Poster";
@@ -12,6 +10,7 @@ import SeasonOverview from "./SeasonOverview";
 import SeasonSubtitle from "./SeasonSubtitle";
 import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonModalContainer from "./SeasonModalContainer";
+import API_PUBLIC from "@/api/public";
 
 type Props = {
    close: () => void;
@@ -27,9 +26,14 @@ export default function SeasonModal({ close, seriesID, seasonNumber }: Props) {
 
    useEffect(() => {
       const getSeasonData = async () => {
-         const seasonData = await getSeason(seriesID, seasonNumber);
-         console.log(seasonData);
-         setSeason(seasonData);
+         try {
+            const url = `/season/${seriesID}/${seasonNumber}`;
+            const { data } = await API_PUBLIC.get(url);
+            console.log(data);
+            setSeason(data);
+         } catch (error) {
+            console.log(error);
+         }
       };
       getSeasonData();
    }, [seriesID, seasonNumber]);
