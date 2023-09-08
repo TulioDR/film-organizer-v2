@@ -14,7 +14,7 @@ import useListsRefresh from "@/hooks/useListsRefresh";
 import LoadingButton from "../LoadingButton";
 import useNotification from "@/hooks/useNotification";
 import { useUser } from "@clerk/nextjs";
-
+import { v4 as uuid } from "uuid";
 type Props = {
    close: () => void;
 };
@@ -33,10 +33,13 @@ export default function CreateListModal({ close }: Props) {
 
    const handleSubmit = async (values: any) => {
       setIsLoading(true);
-      const createdList = await createList({
+      const newListData = {
+         id: uuid(),
          name: values.name,
          authorId: user?.id,
-      });
+      };
+      const createdList = await createList(newListData);
+      console.log(createdList);
       let message = "";
       let success = false;
       if (createdList.error) {
@@ -52,7 +55,7 @@ export default function CreateListModal({ close }: Props) {
    };
 
    return (
-      <ModalContainer close={close}>
+      <ModalContainer closeModal={close}>
          <Formik
             initialValues={{ name: "" }}
             validate={listNameValidation}
@@ -67,7 +70,7 @@ export default function CreateListModal({ close }: Props) {
                         placeholder="List name"
                         autoComplete="off"
                         maxLength={12}
-                        className="w-full h-9 bg-transparent text-text-2 placeholder:text-text-3 border-b-2 border-text-2 outline-none"
+                        className="w-full h-9 bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2 border-b-2 border-light-2 dark:border-dark-2 outline-none"
                         autoFocus
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}

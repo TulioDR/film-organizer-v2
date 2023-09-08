@@ -1,39 +1,17 @@
-import { useState } from "react";
-import { GetServerSideProps } from "next";
-
-export const getServerSideProps: GetServerSideProps = async (_context) => {
-   // console.log(context);
-   // if (userExist) {
-   //    return {
-   //       redirect: {
-   //          destination: "/",
-   //          permanent: false,
-   //       },
-   //    };
-   // }
-   return { props: {} };
-};
-
-// import { useUser } from "@clerk/nextjs";
-import { AnimatePresence } from "framer-motion";
 import AuthSidebar from "@/features/authentication/components/AuthSidebar";
 import SkipAuthButton from "@/features/authentication/components/SkipAuthButton";
 
-import RegisterForm from "@/features/authentication/components/AuthForms/RegisterForm";
-
-import LoginForm from "@/features/authentication/components/AuthForms/LoginForm";
-import ResetForm from "@/features/authentication/components/AuthForms/ResetForm";
 import RenderingAnimation from "@/features/authentication/components/RenderingAnimation";
-import { useClerk } from "@clerk/nextjs";
+import LoginForm from "@/features/authentication/components/AuthForms/LoginForm";
+import RegisterForm from "@/features/authentication/components/AuthForms/RegisterForm";
+import ResetForm from "@/features/authentication/components/AuthForms/ResetForm";
+
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { useClerk, useUser } from "@clerk/nextjs";
+import { useRouter } from "next/router";
 
 export default function Auth() {
-   // const { isLoaded: isUserLoaded, isSignedIn, user } = useUser();
-   // useEffect(() => {
-   //    console.log(isUserLoaded);
-   //    console.log(isSignedIn);
-   //    console.log(user);
-   // }, [isUserLoaded, isSignedIn, user]);
-
    type AuthType = "login" | "register" | "reset";
    const [authType, setAuthType] = useState<AuthType>("login");
    const switchToReset = () => setAuthType("reset");
@@ -46,6 +24,15 @@ export default function Auth() {
    const logOut = async () => {
       signOut();
    };
+
+   const { isLoaded, isSignedIn } = useUser();
+   const router = useRouter();
+   if (isLoaded && isSignedIn) router.push("/");
+   if (!isLoaded || (isLoaded && isSignedIn))
+      return (
+         <div className="h-screen w-full bg-primary-light dark:bg-primary-dark"></div>
+      );
+
    return (
       <div className="h-screen relative overflow-auto">
          <button

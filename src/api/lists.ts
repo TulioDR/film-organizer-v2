@@ -12,9 +12,9 @@ export const getLists = async (authorId: string) => {
    }
 };
 
-export const createList = async (listName: any) => {
+export const createList = async (newListData: any) => {
    try {
-      const { data } = await API.post("/", listName);
+      const { data } = await API.post("/", newListData);
       return data;
    } catch (error: any) {
       console.log(error);

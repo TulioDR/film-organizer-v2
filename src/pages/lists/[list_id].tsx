@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 import SavedMediaCard from "@/components/ListDetails/SavedMediaCard";
 import MediaTypePills from "@/components/ListDetails/MediaTypePills";
-import { query } from "@/config/db";
+// import { query } from "@/config/db";
 import ListModel from "@/models/listModel";
 import StoreModel from "@/models/StoreModel";
 import DeleteMediaButtons from "@/components/ListDetails/DeleteMediaButtons";
@@ -29,14 +29,15 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;
-   const listData = await query(
-      `
-      SELECT * FROM lists
-      WHERE id = ?
-      `,
-      [list_id]
-   );
-   const list = JSON.parse(JSON.stringify(listData))[0];
+   // const listData = await query(
+   //    `
+   //    SELECT * FROM lists
+   //    WHERE id = ?
+   //    `,
+   //    [list_id]
+   // );
+   // const list = JSON.parse(JSON.stringify(listData))[0];
+   const list: any[] = [];
    return {
       props: { list },
    };

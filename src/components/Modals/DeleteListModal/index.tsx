@@ -39,7 +39,7 @@ export default function DeleteListModal({ listToDelete, close }: Props) {
    };
 
    return (
-      <ModalContainer close={close}>
+      <ModalContainer closeModal={close}>
          <ModalTitle>Delete List</ModalTitle>
          <div className="text-sm leading-relaxed text-text-2 font-normal w-96">
             <div>

@@ -24,6 +24,7 @@ export default function CreateListButton({ onClick }: Props) {
                      transition: { duration: 0.1, delay: 0.1 },
                   }}
                   key="text"
+                  className="text-white"
                >
                   Create List
                </motion.span>

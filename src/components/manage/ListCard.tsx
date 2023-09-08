@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { staggerItem } from "../../animations/StaggerCards";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import useNotification from "@/hooks/useNotification";
+import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 
 type Props = {
    list: any;
@@ -23,6 +24,8 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
    const [showError, setShowError] = useState<string | null>(null);
+
+   useRemoveBackgroundImage();
 
    const { setAndCloseNotification } = useNotification();
 
@@ -92,7 +95,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    return (
       <motion.li
          variants={staggerItem}
-         className="relative px-5 shadow-xl bg-secondary rounded-lg list-none"
+         className="relative px-5 shadow-xl bg-secondary-light dark:bg-secondary-dark rounded-lg list-none"
       >
          <form onSubmit={handleSubmit} className="flex w-full h-full space-x-5">
             <div className="flex-1 py-3 relative overflow-hidden flex">

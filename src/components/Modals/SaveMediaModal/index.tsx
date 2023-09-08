@@ -23,11 +23,11 @@ export default function SaveMediaModal() {
    if (!mediaToSave) return <></>;
    return (
       <ModalPortal isOpen={isSaveMediaOpen}>
-         <ModalContainer close={closeModal}>
+         <ModalContainer closeModal={closeModal}>
             <ModalTitle>Save to...</ModalTitle>
             <div className="w-56 border-y border-text-2">
-               {lists.length > 0 ? (
-                  lists.map((list: any) => (
+               {lists!.length > 0 ? (
+                  lists!.map((list: any) => (
                      <ListToSave
                         key={list.id}
                         list={list}

@@ -40,6 +40,7 @@ export default function Sidebar() {
                <ModalPortal isOpen={showCreateForm}>
                   <CreateListModal close={closeForm} />
                </ModalPortal>
+               <SideLine />
                <SideSubtitle>Lists</SideSubtitle>
                {!lists && <SideLoadingLists />}
                {lists && lists.length > 0 && <SideLists />}

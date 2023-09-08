@@ -26,6 +26,7 @@ type Props = {
    dropdown?: boolean;
    mediaType?: "movie" | "tv";
    items?: DropdownItem[];
+   list?: true;
 };
 
 export default function SideLink({
@@ -35,6 +36,7 @@ export default function SideLink({
    dropdown,
    mediaType,
    items,
+   list,
 }: Props) {
    const dispatch = useDispatch();
    const hideSidebar = () => dispatch(sidebarActions.closeReveal());
@@ -71,7 +73,7 @@ export default function SideLink({
          <SideActiveMark isSelected={isSelected} />
 
          <motion.div
-            variants={sideLinkAnimation}
+            variants={list ? undefined : sideLinkAnimation}
             ref={elementRef}
             className="w-full overflow-hidden origin-right"
          >

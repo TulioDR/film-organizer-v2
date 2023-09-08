@@ -14,7 +14,7 @@ export default function EmailSentModal({
    forgotPassWord,
 }: Props) {
    return (
-      <ModalContainer close={close}>
+      <ModalContainer closeModal={close}>
          <div className="w-96 text-white">
             <div className="mx-auto w-max text-center">
                <div className="font-semibold">

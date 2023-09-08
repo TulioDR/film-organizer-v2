@@ -9,12 +9,13 @@ export default function SideLists({}: Props) {
 
    return (
       <>
-         {lists!.map((list: any) => (
+         {lists!.map((list) => (
             <SideLink
                key={list.id}
                link={`/lists/${list.id}`}
                icon="featured_play_list"
                text={list.name}
+               list
             />
          ))}
       </>

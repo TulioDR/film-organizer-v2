@@ -17,7 +17,7 @@ export default function EditButtonsContainer({
                animate={{ y: 0 }}
                exit={{ y: "-100%" }}
                transition={{ duration: 0.2 }}
-               className="absolute top-0 left-0 w-full h-full bg-secondary"
+               className="absolute top-0 left-0 w-full h-full bg-secondary-light dark:bg-secondary-dark"
             >
                {children}
             </motion.div>

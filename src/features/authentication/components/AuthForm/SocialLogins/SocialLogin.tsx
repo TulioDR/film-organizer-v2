@@ -9,6 +9,7 @@ type Props = {
 export default function SocialLogin({ onClick, logo, provider }: Props) {
    return (
       <button
+         type="button"
          onClick={onClick}
          className="rounded-full bg-white h-11 aspect-square p-2 relative group"
       >

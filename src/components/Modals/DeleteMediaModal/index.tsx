@@ -57,7 +57,7 @@ export default function DeleteMediaModal({
    };
 
    return (
-      <ModalContainer close={close}>
+      <ModalContainer closeModal={close}>
          <ModalTitle>
             Delete from <em>{list.name}</em>
          </ModalTitle>

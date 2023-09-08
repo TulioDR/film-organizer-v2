@@ -1,20 +1,16 @@
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { motion } from "framer-motion";
 import DeleteFormButton from "./DeleteFormButton";
 import DeleteInput from "./DeleteInput";
 import { deleteFormAnimation } from "./deleteFormAnimation";
 import { useState } from "react";
-import { deleteUser } from "../../../api/user";
 type Props = { close: () => void };
 
 export default function DeleteForm({ close }: Props) {
-   const user = useUser()!;
-   const supabaseClient = useSupabaseClient();
    const deleteAccount = async () => {
-      const { error, lists } = await deleteUser(user.id);
-      console.log(lists);
-      if (error) console.log(error.message);
-      else supabaseClient.auth.signOut();
+      // const { error, lists } = await deleteUser(user.id);
+      // console.log(lists);
+      // if (error) console.log(error.message);
+      // else supabaseClient.auth.signOut();
    };
 
    const [enableDelete, setEnableDelete] = useState<boolean>(false);

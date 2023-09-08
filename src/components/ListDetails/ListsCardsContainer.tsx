@@ -12,7 +12,7 @@ export default function ListsCardsContainer({ children }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="grid grid-cols-1 lg:grid-cols-2 gap-5 2xl:px-20"
+         className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-10 2xl:px-20"
       >
          {children}
       </motion.div>

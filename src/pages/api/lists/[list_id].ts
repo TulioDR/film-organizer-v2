@@ -1,32 +1,35 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { query } from "@/config/db";
+import supabase from "@/config/supabaseClient";
 
 export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse
 ) {
    if (req.method === "PATCH") {
-      const { name } = req.body;
-      const { list_id } = req.query;
-      const response = await query(
-         `
-            UPDATE lists
-            SET name = ?
-            WHERE id = ?
-         `,
-         [name, list_id]
-      );
-      res.status(200).json(response);
+      try {
+         const { name } = req.body;
+         const { list_id } = req.query;
+         const { status } = await supabase
+            .from("List")
+            .update({ name })
+            .match({ id: list_id });
+         res.status(200).json(status);
+      } catch (error) {
+         console.log(error);
+         res.json(error);
+      }
    }
    if (req.method === "DELETE") {
-      const { list_id } = req.query;
-      const response = query(
-         `
-            DELETE FROM lists
-            WHERE id = ?
-         `,
-         [list_id]
-      );
-      res.status(200).json(response);
+      try {
+         const { list_id } = req.query;
+         const { status } = await supabase
+            .from("List")
+            .delete()
+            .match({ id: list_id });
+         res.status(200).json(status);
+      } catch (error) {
+         console.log(error);
+         res.json(error);
+      }
    }
 }
