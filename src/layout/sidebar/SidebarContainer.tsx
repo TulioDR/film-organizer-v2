@@ -26,7 +26,7 @@ export default function SidebarContainer({ children }: Props) {
                initial="initial"
                animate="animate"
                exit="exit"
-               className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll sidebar-scrollbar space-y-3"
+               className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll main-scrollbar space-y-3"
             >
                {children}
             </motion.div>

@@ -15,7 +15,7 @@ export default function ExitDetails({ children }: Props) {
                  }
                : {}
          }
-         className="w-full details-height"
+         className="w-full xl:h-[calc(100vh - 96px)]"
       >
          {children}
       </motion.div>

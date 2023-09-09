@@ -11,7 +11,7 @@ export default function useSearchCards(
    useEffect(() => {
       const getData = async () => {
          console.log("fetching cards");
-         const { data } = await API_PUBLIC.get(url);
+         const { data } = await API_PUBLIC.get(`${url}/${page}`);
          if (page === 1) {
             setMedia(data.results);
          } else {
