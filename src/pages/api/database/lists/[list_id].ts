@@ -5,6 +5,15 @@ export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse
 ) {
+   if (req.method === "GET") {
+      const { list_id } = req.query;
+      const response = await supabase
+         .from("List")
+         .select()
+         .match({ id: list_id })
+         .single();
+      res.status(200).json(response);
+   }
    if (req.method === "PATCH") {
       try {
          const { name } = req.body;

@@ -1,17 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { query } from "@/config/db";
+import supabase from "@/config/supabaseClient";
 
 export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse
 ) {
    if (req.method === "DELETE") {
-      const array = req.body.map((id: string) => `'${id}'`);
-      const string = array.join(", ");
-      const result = await query(`
-         DELETE FROM media
-         WHERE id IN (${string})
-      `);
-      res.status(200).json(result);
+      try {
+         const idsArray = req.body;
+         const { status } = await supabase
+            .from("Media")
+            .delete()
+            .in("id", idsArray);
+         res.status(200).json(status);
+      } catch (err) {
+         console.log(err);
+      }
    }
 }

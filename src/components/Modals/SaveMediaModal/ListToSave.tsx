@@ -61,17 +61,19 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
 
    useEffect(() => {
       const checkIfSaved = async () => {
-         const isMediaSaved = await getIsMediaInList({
+         const { error, data } = await getIsMediaInList({
             list_id: list.id,
             media_id: media.id,
             media_type: mediaType,
          });
-         if (isMediaSaved.error) {
-            const message = getErrorMessage(isMediaSaved.error.code);
+         console.log(data);
+         setIsLoading(false);
+         if (error) {
+            const message = getErrorMessage(error.code);
             const success = false;
             setAndCloseNotification(message, success);
          } else {
-            if (isMediaSaved.length > 0) setIsSaved(true);
+            if (data.length) setIsSaved(true);
             else setIsSaved(false);
             setIsLoading(false);
          }

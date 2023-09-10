@@ -64,7 +64,7 @@ export default function Poster({
             className="object-cover"
          />
          {!isLoaded && (
-            <div className="absolute w-full h-full top-0 left-0 bg-primary flex items-center justify-center">
+            <div className="absolute w-full h-full top-0 left-0 bg-secondary-light dark:bg-secondary-dark flex items-center justify-center">
                <SpinnerCircularFixed
                   size={backPoster ? "20%" : "40%"}
                   thickness={100}

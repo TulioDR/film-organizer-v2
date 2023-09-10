@@ -2,11 +2,9 @@ import axios from "axios";
 import { SavedMediaModel } from "@/models/MediaModel";
 const API = axios.create({ baseURL: "/api/database/media" });
 
-export const getListMedia = async (list_id: string) => {
+export const getSavedMedia = async (listId: String) => {
    try {
-      const { data } = await API.get("/", {
-         params: { list_id },
-      });
+      const { data } = await API.get(`/${listId}`);
       return data;
    } catch (error) {
       console.log(error);
