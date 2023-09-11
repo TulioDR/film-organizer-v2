@@ -1,19 +1,20 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import ListCard from "../../components/Manage/ListCard";
+import ListCard from "../../components/Lists/ListCard";
 import PageTitle from "../../components/PageTitle";
 import ListModel from "../../models/listModel";
-import ListsLoginAdvice from "../../components/Manage/ListsLoginAdvice";
+import ListsLoginAdvice from "../../components/Lists/ListsLoginAdvice";
 
-import ListFinder from "../../components/Manage/ListFinder";
-import NoListsMessage from "../../components/Manage/NoListsMessage";
+import ListFinder from "../../components/Lists/ListFinder";
+import NoListsMessage from "../../components/Lists/NoListsMessage";
 import { useSelector } from "react-redux";
 import DeleteListModal from "@/components/Modals/DeleteListModal";
-import ListsCardsContainer from "@/components/ListDetails/ListsCardsContainer";
+import ListsCardsContainer from "@/components/Lists/ListsCardsContainer";
 import StoreModel from "@/models/StoreModel";
 import ModalPortal from "@/components/Modals/ModalPortal";
 import { useUser } from "@clerk/nextjs";
+import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 
 export default function Lists() {
    const { user } = useUser();
@@ -40,6 +41,7 @@ export default function Lists() {
       setFilteredLists(founded);
    }, [inputValue, lists]);
 
+   useRemoveBackgroundImage();
    return (
       <div className="px-10 pb-10 overflow-hidden">
          <Head>
@@ -49,12 +51,10 @@ export default function Lists() {
          </Head>
          <div className="sm:flex w-full justify-between items-end">
             <PageTitle>Manage</PageTitle>
-            <div className="mb-5">
-               <ListFinder
-                  onChange={(e) => setInputValue(e.currentTarget.value)}
-                  value={inputValue}
-               />
-            </div>
+            <ListFinder
+               onChange={(e) => setInputValue(e.currentTarget.value)}
+               value={inputValue}
+            />
          </div>
          {user ? (
             <div>
