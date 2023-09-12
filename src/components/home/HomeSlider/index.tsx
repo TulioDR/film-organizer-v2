@@ -7,8 +7,7 @@ type Props = {
    displayedCards: any[];
    activeIndex: number;
    setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
-   currentShowcase: string;
-   isPageHidden: boolean;
+   currentShowcase: "movies" | "series" | "upcoming";
 };
 
 export default function HomeSlider({
@@ -16,7 +15,6 @@ export default function HomeSlider({
    activeIndex,
    setActiveIndex,
    currentShowcase,
-   isPageHidden,
 }: Props) {
    return (
       <HomeSliderContainer currentShowcase={currentShowcase}>
@@ -25,19 +23,13 @@ export default function HomeSlider({
             setActiveIndex={setActiveIndex}
          />
          {displayedCards.map((media, index) => (
-            <SwiperSlide
-               key={media.id}
-               className={`max-w-min flex items-end ${
-                  isPageHidden && activeIndex === index
-                     ? "opacity-0 duration-0"
-                     : ""
-               }`}
-            >
+            <SwiperSlide key={media.id} className="max-w-min flex items-end">
                <HomeCard
+                  currentShowcase={currentShowcase}
                   index={index}
                   activeIndex={activeIndex}
                   setActiveIndex={setActiveIndex}
-                  movie={media}
+                  media={media}
                />
             </SwiperSlide>
          ))}

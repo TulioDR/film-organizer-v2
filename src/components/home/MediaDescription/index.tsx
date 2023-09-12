@@ -4,18 +4,23 @@ import HomeBookmark from "./HomeBookmark";
 import { AnimatePresence, motion } from "framer-motion";
 import { mediaDescription } from "@/animations/homeAnimations";
 import HomeDate from "./HomeDate";
+import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
 
 type Props = {
    currentMedia: any;
    currentShowcase: string;
-   handleLearnMoreClick: () => void;
 };
 
 export default function MediaDescription({
    currentMedia,
    currentShowcase,
-   handleLearnMoreClick,
 }: Props) {
+   const { startPosterAnimation } = useTransitionPosterContext();
+   const handleLearnMoreClick = async () => {
+      const isMovie = currentShowcase !== "series";
+      const mediaType = isMovie ? "movie" : "tv";
+      startPosterAnimation(mediaType, currentMedia);
+   };
    return (
       <AnimatePresence mode="wait">
          <motion.div

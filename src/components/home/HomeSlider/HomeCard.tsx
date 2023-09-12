@@ -4,17 +4,19 @@ import { motion } from "framer-motion";
 import { staggerItem } from "@/animations/StaggerCards";
 
 type Props = {
-   movie: any;
+   media: any;
    index: number;
    activeIndex: number;
    setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+   currentShowcase: "movies" | "series" | "upcoming";
 };
 
 export default function HomeCard({
-   movie,
+   media,
    index,
    activeIndex,
    setActiveIndex,
+   currentShowcase,
 }: Props) {
    const swiper = useSwiper();
    const handleClick = () => {
@@ -22,6 +24,8 @@ export default function HomeCard({
       swiper.slideTo(index);
    };
    const isActive = activeIndex === index;
+   const isMovie = currentShowcase !== "series";
+   const mediaType = isMovie ? "movie" : "tv";
 
    return (
       <motion.div
@@ -30,14 +34,15 @@ export default function HomeCard({
          className="aspect-[2/3] w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer"
       >
          <div
-            className={`home-card w-full h-full overflow-hidden rounded-lg duration-300 ${
+            id={`${mediaType}-${media.id}`}
+            className={`w-full h-full overflow-hidden rounded-lg duration-300 ${
                isActive ? "-translate-y-5" : ""
             } `}
          >
             <Poster
-               alt={movie.title || movie.name}
-               posterPath={movie.poster_path}
-               size="md"
+               alt={media.title || media.name}
+               posterPath={media.poster_path}
+               size="lg"
             />
          </div>
       </motion.div>
