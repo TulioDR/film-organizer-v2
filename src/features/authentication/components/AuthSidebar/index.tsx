@@ -12,7 +12,7 @@ export default function AuthSidebar({ setAuthType }: Props) {
    const switchToReset = () => setAuthType("reset");
 
    return (
-      <div className="fixed top-0 left-0 flex flex-col justify-center z-10 w-36 h-screen">
+      <div className="fixed top-0 left-0 flex lg:flex-col w-full lg:w-36 h-16 lg:h-screen lg:justify-center z-10 ">
          <ChangeAuthType
             onClick={switchToLogin}
             icon="login"

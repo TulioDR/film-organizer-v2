@@ -4,6 +4,7 @@ import AuthTitle from "../../AuthForm/AuthTitle";
 import SocialLogins from "../../AuthForm/SocialLogins";
 import ForgotPasswordButton from "../../AuthForm/ForgotPasswordButton";
 import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
+import SkipAuthButton from "../../SkipAuthButton";
 
 type Props = {
    switchToReset: () => void;
@@ -48,6 +49,7 @@ export default function MainLoginForm({ switchToReset, onSubmit }: Props) {
          />
          <AuthSubmitButton>Login</AuthSubmitButton>
          <ForgotPasswordButton onClick={switchToReset} />
+         <SkipAuthButton login mobile />
       </AuthFormikContainer>
    );
 }

@@ -3,6 +3,7 @@ import AuthInput from "../../AuthForm/AuthInput";
 import AuthMessage from "../../AuthForm/AuthMessage";
 import AuthTitle from "../../AuthForm/AuthTitle";
 import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
+import SkipAuthButton from "../../SkipAuthButton";
 
 type Props = {
    onSubmit: (values: any) => void;
@@ -37,6 +38,7 @@ export default function MainResetForm({ onSubmit }: Props) {
          </AuthMessage>
          <AuthInput icon="mail" name="email" placeholder="Email Address" dark />
          <AuthSubmitButton dark>Send Reset Email</AuthSubmitButton>
+         <SkipAuthButton login={false} mobile />
       </AuthFormikContainer>
    );
 }

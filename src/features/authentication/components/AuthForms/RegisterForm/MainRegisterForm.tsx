@@ -3,6 +3,7 @@ import AuthInput from "../../AuthForm/AuthInput";
 import AuthTitle from "../../AuthForm/AuthTitle";
 import SocialLogins from "../../AuthForm/SocialLogins";
 import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
+import SkipAuthButton from "../../SkipAuthButton";
 
 type Props = {
    onSubmit: (values: any) => void;
@@ -65,6 +66,7 @@ export default function MainRegisterForm({ onSubmit }: Props) {
             dark
          />
          <AuthSubmitButton dark>Sign Up</AuthSubmitButton>
+         <SkipAuthButton login={false} mobile />
       </AuthFormikContainer>
    );
 }

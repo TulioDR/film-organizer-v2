@@ -23,7 +23,7 @@ export default function AuthFormContainer({
             ${reset ? "bg-primary-dark text-dark-1" : ""}
          `}
       >
-         <div className="pl-36 h-full w-screen flex items-center justify-center text-xl">
+         <div className="lg:pl-36 pt-28 lg:pt-10 px-10 pb-20 lg:pb-10 h-full w-screen flex items-center justify-center text-xl">
             {children}
          </div>
       </motion.div>
