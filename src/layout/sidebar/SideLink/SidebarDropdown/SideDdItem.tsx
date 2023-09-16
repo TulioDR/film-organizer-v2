@@ -20,7 +20,7 @@ export default function SideDdItem({ item, isTooltip }: Props) {
    return (
       <Link
          href={item.link}
-         className={`flex items-center gap-2  relative h-6 ${
+         className={`flex items-center gap-1 relative h-6 ${
             isSelected
                ? "text-light-1 dark:text-dark-1"
                : "text-light-2 hover:text-light-1 dark:text-dark-2 dark:hover:text-dark-1"

@@ -9,6 +9,7 @@ import TransitionPoster from "@/features/transitionPoster/components/TransitionP
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
+import PageHead from "@/components/PageHead";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -54,6 +55,7 @@ export default function Home() {
 
    return (
       <TransitionPosterProvider>
+         <PageHead title="Film Organizer" />
          <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}

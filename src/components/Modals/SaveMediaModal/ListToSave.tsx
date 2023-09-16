@@ -39,7 +39,6 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       } else {
          refresh();
       }
-      setIsLoading(false);
    };
 
    const removeFromList = async () => {
@@ -56,7 +55,6 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       } else {
          refresh();
       }
-      setIsLoading(false);
    };
 
    useEffect(() => {
@@ -67,7 +65,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
             media_type: mediaType,
          });
          console.log(data);
-         setIsLoading(false);
+
          if (error) {
             const message = getErrorMessage(error.code);
             const success = false;
@@ -75,8 +73,8 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          } else {
             if (data.length) setIsSaved(true);
             else setIsSaved(false);
-            setIsLoading(false);
          }
+         setIsLoading(false);
       };
       checkIfSaved();
    }, [media.id, list.id, mediaType, refreshEffect]);

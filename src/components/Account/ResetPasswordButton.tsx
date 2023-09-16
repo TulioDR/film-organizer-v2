@@ -1,4 +1,3 @@
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
@@ -7,19 +6,12 @@ type Props = { openModal: () => void };
 export default function ResetPasswordButton({ openModal }: Props) {
    const { themeColor } = useSelector((state: any) => state.theme);
 
-   const supabaseClient = useSupabaseClient();
-   const user = useUser()!;
    const forgotPasswordHandler = async () => {
-      const { error } = await supabaseClient.auth.resetPasswordForEmail(
-         user.email!,
-         {
-            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
-         }
-      );
-      if (error) alert(error.message);
-      else {
-         openModal();
-      }
+      // c
+      // if (error) alert(error.message);
+      // else {
+      //    openModal();
+      // }
    };
    return (
       <motion.button

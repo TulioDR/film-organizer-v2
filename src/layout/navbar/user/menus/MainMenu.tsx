@@ -36,7 +36,7 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
    };
 
    const profile = () => {
-      router.push("/profile");
+      router.push("/account");
       setIsOpen(false);
    };
 

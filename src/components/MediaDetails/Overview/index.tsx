@@ -3,7 +3,7 @@ import { addCommasToNumber, separateByCommas } from "@/utils/commas";
 import Directors from "./Directors";
 import Genres from "./Genres";
 import Row from "./Row";
-import InfoSubtitle from "@/components/MediaDetails/InfoSubtitle";
+import Subtitle from "@/components/Subtitle";
 
 type Props = {
    media: any;
@@ -37,7 +37,7 @@ export default function Overview({ media, isMovie, crew }: Props) {
          transition={{ duration: 0.4, ease: "easeInOut" }}
          className=""
       >
-         <InfoSubtitle>Overview</InfoSubtitle>
+         <Subtitle>Overview</Subtitle>
          {media.tagline && (
             <div className="italic font-bold mb-1 text-light-2 dark:text-dark-2">
                {media.tagline}

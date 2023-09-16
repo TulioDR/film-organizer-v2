@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import InfoSubtitle from "../InfoSubtitle";
+
 import Person from "./Person";
 import PeoplePagination from "./PeoplePagination";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import Subtitle from "@/components/Subtitle";
 
 type Props = {
    people: any[];
@@ -36,7 +37,7 @@ export default function People({ people, type }: Props) {
 
    return (
       <div>
-         <InfoSubtitle>{type}</InfoSubtitle>
+         <Subtitle>{type}</Subtitle>
          {displayedPeople.length ? (
             <div className="w-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
                {displayedPeople.map((person, index) => (

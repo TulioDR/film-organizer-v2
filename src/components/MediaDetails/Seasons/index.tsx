@@ -1,8 +1,9 @@
 import ModalPortal from "@/components/Modals/ModalPortal";
-import InfoSubtitle from "../InfoSubtitle";
+
 import SeasonCard from "./SeasonCard";
 import { useState } from "react";
 import SeasonModal from "@/components/Modals/SeasonModal";
+import Subtitle from "@/components/Subtitle";
 
 type Props = {
    seasons: any[];
@@ -21,7 +22,7 @@ export default function Seasons({ seasons, seriesID }: Props) {
                seasonNumber={selectedSeason!}
             />
          </ModalPortal>
-         <InfoSubtitle>Seasons</InfoSubtitle>
+         <Subtitle>Seasons</Subtitle>
          <div className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-5">
             {seasons.map((season) => (
                <SeasonCard

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import InfoSubtitle from "../InfoSubtitle";
 import Trailer from "./Trailer";
 import ShowButton from "./ShowButton";
+import Subtitle from "@/components/Subtitle";
 
 type Props = {
    trailers: any[];
@@ -22,7 +22,7 @@ export default function Trailers({ trailers }: Props) {
 
    return (
       <div className="w-full">
-         <InfoSubtitle>Trailers</InfoSubtitle>
+         <Subtitle>Trailers</Subtitle>
          {trailers.length > 0 ? (
             <>
                <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-5">

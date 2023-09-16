@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Poster from "@/components/Poster";
 import Date from "@/components/MediaDetails/MainInfo/Date";
-import InfoSubtitle from "@/components/MediaDetails/InfoSubtitle";
+
 import EpisodeCard from "./EpisodeCard";
 import CloseSeasonButton from "./CloseSeasonButton";
 import SeasonTitle from "./SeasonTitle";
@@ -11,6 +11,7 @@ import SeasonSubtitle from "./SeasonSubtitle";
 import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonModalContainer from "./SeasonModalContainer";
 import API_PUBLIC from "@/api/public";
+import Subtitle from "@/components/Subtitle";
 
 type Props = {
    close: () => void;
@@ -61,7 +62,7 @@ export default function SeasonModal({ close, seriesID, seasonNumber }: Props) {
                            </div>
                         </div>
                         <div className="w-[600px] mx-auto mt-5">
-                           <InfoSubtitle>Overview</InfoSubtitle>
+                           <Subtitle>Overview</Subtitle>
                            <SeasonOverview overview={season.overview} />
                         </div>
                      </div>
