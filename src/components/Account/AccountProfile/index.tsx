@@ -3,6 +3,7 @@ import ProfileCardsGrid from "../ProfileCardsGrid";
 import AccountCard from "../AccountCard";
 import ProfileCardInner from "../AccountCard/ProfileCardInner";
 import { useUser } from "@clerk/nextjs";
+import ConnectedAccount from "./ConnectedAccount";
 
 type Props = {};
 
@@ -17,11 +18,11 @@ export default function AccountProfile({}: Props) {
             </AccountCard>
 
             <AccountCard title="Connected accounts" row>
-               {user!.externalAccounts.map((acc, index) => (
-                  <ProfileCardInner key={index}>
-                     {acc.provider}
-                  </ProfileCardInner>
-               ))}
+               <div className="space-y-3 pl-5">
+                  {user!.externalAccounts.map((acc, index) => (
+                     <ConnectedAccount key={index} provider={acc.provider} />
+                  ))}
+               </div>
             </AccountCard>
 
             <AccountCard title="Email addresses">
