@@ -1,12 +1,11 @@
-import React from "react";
 import GenreCard from "./GenreCard";
 
 type Props = {
    genres: any[];
-   mediaType: "tv" | "movie";
 };
 
-export default function MovieLayout({ genres, mediaType }: Props) {
+export default function MovieLayout({ genres }: Props) {
+   const mediaType = "movie";
    return (
       <>
          <div className="flex h-full space-x-5">

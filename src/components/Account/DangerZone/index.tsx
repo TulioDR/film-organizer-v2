@@ -3,10 +3,15 @@ import React from "react";
 import ProfileCardsGrid from "../ProfileCardsGrid";
 import ProfileCard from "../AccountCard";
 import AccountButton from "../AccountButton";
+import { useUser } from "@clerk/nextjs";
 
 type Props = {};
 
 export default function DangerZone({}: Props) {
+   const { user } = useUser();
+   const deleteUser = () => {
+      user?.delete();
+   };
    return (
       <>
          <Subtitle>Danger Zone</Subtitle>
@@ -19,7 +24,7 @@ export default function DangerZone({}: Props) {
                      </div>
                      <div>This action cannot be undone.</div>
                   </div>
-                  <AccountButton dangerZone onClick={() => {}}>
+                  <AccountButton dangerZone onClick={deleteUser}>
                      Delete account
                   </AccountButton>
                </div>

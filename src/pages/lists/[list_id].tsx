@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import PageTitle from "../../components/PageTitle";
 import { SavedMediaModel } from "../../models/MediaModel";
 
 import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
@@ -19,6 +18,7 @@ import MediaFilterModel from "@/models/MediaFilterModel";
 import SavedMedia from "@/components/ListDetails/SavedMedia";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
+import Title from "@/components/Title";
 type Props = {
    list: ListModel;
 };
@@ -96,13 +96,12 @@ export default function ListID({}: Props) {
          <div className="px-10 pb-10 relative">
             <PageHead title={list?.name || "Film Organizer"} />
             {list && (
-               <div className="w-full flex items-end justify-between mb-5">
-                  <PageTitle>{list.name}</PageTitle>
+               <Title title={list.name}>
                   <MediaTypePills
                      selectedType={selectedType}
                      setSelectedType={setSelectedType}
                   />
-               </div>
+               </Title>
             )}
             {filteredMedia.length > 0 && (
                <SavedMedia

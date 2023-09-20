@@ -13,7 +13,7 @@ export default function SideActiveMark({ item, isSelected }: Props) {
    return (
       <div
          className={`flex-shrink-0 absolute right-full top-0 h-full ${
-            item ? "w-3" : "w-10"
+            item ? "w-5" : "w-10"
          }`}
       >
          <div className="h-full ml-auto">

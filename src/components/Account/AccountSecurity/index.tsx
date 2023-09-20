@@ -15,6 +15,7 @@ export default function AccountSecurity({}: Props) {
          <ProfileCardsGrid>
             <AccountCard title="Update password" expand>
                <div className="flex justify-between items-center">
+                  {/* {user.} */}
                   <ProfileCardInner>
                      Change the account's password.
                   </ProfileCardInner>

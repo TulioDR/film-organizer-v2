@@ -1,7 +1,6 @@
-import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
+import { AuthenticateWithRedirectCallback } from "@clerk/nextjs";
 
-type Props = {};
-
-export default function SSOCallback({}: Props) {
-   return <AuthenticateWithRedirectCallback />;
+export default function SSOCallback() {
+   console.log("you are in SSOCallback");
+   return <AuthenticateWithRedirectCallback redirectUrl="/" />;
 }

@@ -40,3 +40,8 @@ body::-webkit-scrollbar-track {
 .dark .main-scrollbar::-webkit-scrollbar-thumb {
    @apply bg-dark-2;
 }
+
+@font-face {
+   font-family: "Elianto";
+   src: url("../fonts/Elianto-Regular.ttf");
+}

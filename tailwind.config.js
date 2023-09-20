@@ -12,13 +12,15 @@ module.exports = {
    theme: {
       extend: {
          fontFamily: {
-            oswald: "'Oswald', sans-serif",
             roboto: "'Roboto', sans-serif",
+            elianto: "Elianto",
          },
          colors: {
             primary: {
                light: "#e5e7eb",
-               dark: "#1a1b1f",
+               dark: "#040603",
+               // dark: "#01000D",
+               // dark: "#1a1b1f",
             },
             secondary: {
                light: "#FFFFFF",

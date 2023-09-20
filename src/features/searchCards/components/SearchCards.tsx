@@ -7,10 +7,10 @@ import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import LoadingMore from "./LoadingMore";
 import PageAnimationContainer from "@/containers/PageAnimationContainer";
-import PageTitle from "@/components/PageTitle";
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
+import Title from "@/components/Title";
 
 type Props = {
    title: string;
@@ -50,7 +50,7 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             setShowLoadingAnimation={setShowLoadingAnimation}
          >
             <div className="px-10 pb-10">
-               <PageTitle>{title}</PageTitle>
+               <Title title={title} />
                <motion.div
                   variants={cardsContainer}
                   initial="initial"

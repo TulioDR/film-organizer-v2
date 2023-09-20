@@ -19,7 +19,7 @@ export default function SocialLogins({ dark }: Props) {
          signIn!.authenticateWithRedirect({
             strategy: strategy,
             redirectUrl: "/auth/sso-callback",
-            redirectUrlComplete: "/auth",
+            redirectUrlComplete: "/",
          });
       } catch (error) {
          console.log(error);
@@ -37,16 +37,19 @@ export default function SocialLogins({ dark }: Props) {
                logo={googleLogo}
                provider="google"
                onClick={googleAuth}
+               dark={dark}
             />
             <SocialLogin
                logo={githubLogo}
                provider="github"
                onClick={githubAuth}
+               dark={dark}
             />
             <SocialLogin
                logo={discordLogo}
                provider="discord"
                onClick={discordAuth}
+               dark={dark}
             />
          </div>
          <FormSeparation dark={dark} />
