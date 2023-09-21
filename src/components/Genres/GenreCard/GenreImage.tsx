@@ -8,15 +8,14 @@ type Props = {
 
 export default function GenreImage({ alt, src }: Props) {
    return (
-      <div className="h-full relative">
-         <Image
-            alt={alt}
-            src={src}
-            fill
-            sizes="100%"
-            priority
-            className="object-cover"
-         />
-      </div>
+      <Image
+         alt={alt}
+         src={src}
+         fill
+         sizes="100%"
+         quality={100}
+         priority
+         className="object-cover"
+      />
    );
 }

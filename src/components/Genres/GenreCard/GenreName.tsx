@@ -6,8 +6,8 @@ type Props = {
 export default function GenreName({ children, vertical }: Props) {
    return (
       <span
-         className={`text-lg uppercase font-elianto text-white text-center font-black ${
-            vertical ? "h-min" : "tracking-widest"
+         className={`text-lg uppercase font-elianto text-white font-black ${
+            vertical ? "h-min text-center" : "tracking-widest truncate"
          }`}
          style={
             vertical && {

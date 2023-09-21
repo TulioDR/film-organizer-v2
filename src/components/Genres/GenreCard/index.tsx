@@ -50,14 +50,14 @@ export default function GenreCard({ genre, mediaType }: Props) {
          }`}
       >
          <motion.div variants={item} className="overflow-hidden">
-            <div className="h-[400px] 2xl:h-[600px] relative">
+            <div className="h-[400px] 2xl:h-[600px] relative flex items-end">
                <GenreImage alt={genre.name} src={genre.image} />
                <AnimatePresence mode="wait" initial={false}>
                   {isOpen ? (
                      <GenreCardOpen
-                        href={`/genres/${mediaType}/${genre.id}`}
                         key="isOpen"
                         name={genre.name}
+                        href={`/genres/${mediaType}/${genre.id}`}
                      />
                   ) : (
                      <GenreCardClosed key="isClosed" name={genre.name} />
