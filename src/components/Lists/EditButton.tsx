@@ -18,7 +18,7 @@ export default function EditButton({ icon, onClick, red, submit }: Props) {
                : "text-blue-500 hover:bg-blue-500"
          }`}
       >
-         <span className="material-icons text-3xl">{icon}</span>
+         <span className="material-symbols-outlined text-3xl">{icon}</span>
       </button>
    );
 }

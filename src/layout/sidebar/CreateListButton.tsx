@@ -29,7 +29,7 @@ export default function CreateListButton({ onClick }: Props) {
                   Create List
                </motion.span>
             ) : (
-               <span key="icon" className="material-icons">
+               <span key="icon" className="material-symbols-outlined">
                   add
                </span>
             )}

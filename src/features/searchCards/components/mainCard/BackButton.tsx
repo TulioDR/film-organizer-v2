@@ -10,7 +10,7 @@ export default function BackButton({ onClick }: Props) {
          className="absolute z-10 top-4 left-4 bg-secondary grid place-content-center rounded-lg h-9 w-9 shadow-lg"
          onClick={onClick}
       >
-         <span className="material-icons">chevron_left</span>
+         <span className="material-symbols-outlined">chevron_left</span>
       </button>
    );
 }

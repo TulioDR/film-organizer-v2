@@ -78,10 +78,19 @@ export default function SideLink({
             className="w-full overflow-hidden origin-right"
          >
             {dropdown ? (
-               <SidebarDropdown items={items} icon={icon} text={text} />
+               <SidebarDropdown
+                  isSelected={isSelected}
+                  items={items}
+                  icon={icon}
+                  text={text}
+               />
             ) : (
                <Link href={link} onClick={hideSidebar}>
-                  <InnerSideLink icon={icon} text={text} />
+                  <InnerSideLink
+                     icon={icon}
+                     text={text}
+                     isSelected={isSelected}
+                  />
                </Link>
             )}
          </motion.div>

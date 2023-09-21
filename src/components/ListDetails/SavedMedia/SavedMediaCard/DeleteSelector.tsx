@@ -29,7 +29,7 @@ export default function DeleteSelector({ isSelected, onTap }: Props) {
                transition={{ duration: 0.2 }}
                className="h-full w-full grid place-content-center select-none"
             >
-               <span className="material-icons text-9xl text-red-700 ">
+               <span className="material-symbols-outlined text-9xl text-red-700 ">
                   delete
                </span>
             </motion.div>

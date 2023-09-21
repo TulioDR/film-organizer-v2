@@ -17,7 +17,9 @@ export default function ListFinder({ onChange, value }: Props) {
                onChange={onChange}
                value={value}
             />
-            <span className="material-icons text-text-3">search</span>
+            <span className="material-symbols-outlined text-text-3">
+               search
+            </span>
          </div>
       </RevealHorizontal>
    );

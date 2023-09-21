@@ -5,7 +5,7 @@ type Props = {
 export default function MainIcon({ icon }: Props) {
    return (
       <div className="h-full aspect-square rounded-full bg-primary grid place-content-center">
-         <span className="material-icons">{icon}</span>
+         <span className="material-symbols-outlined">{icon}</span>
       </div>
    );
 }

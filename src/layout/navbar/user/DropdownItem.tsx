@@ -22,7 +22,9 @@ export default function DropdownItem({
                {children}
             </span>
          </div>
-         {expand && <span className="material-icons">chevron_right</span>}
+         {expand && (
+            <span className="material-symbols-outlined">chevron_right</span>
+         )}
       </li>
    );
 }

@@ -15,7 +15,7 @@ export default function Score({ score }: Props) {
    return (
       <div className="flex items-center space-x-2 font-oswald">
          <div className="rounded-full border border-white grid place-content-center aspect-square w-8">
-            <span className="material-icons text-yellow-600 !text-2xl">
+            <span className="material-symbols-outlined text-yellow-600 !text-2xl">
                star_rate
             </span>
          </div>

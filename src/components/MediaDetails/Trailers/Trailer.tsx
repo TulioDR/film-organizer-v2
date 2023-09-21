@@ -24,7 +24,7 @@ export default function Trailer({ trailer }: Props) {
 
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/50 to-transparent"></div>
             <div className="absolute bottom-2 left-2 rounded-full aspect-square w-8 border-gray-400 border-[3px] grid place-content-center">
-               <span className="material-icons">play_arrow</span>
+               <span className="material-symbols-outlined">play_arrow</span>
             </div>
          </div>
          <div className="text-xs lg:text-sm pt-1">{trailer.name}</div>

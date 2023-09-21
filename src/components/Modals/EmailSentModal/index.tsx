@@ -24,7 +24,7 @@ export default function EmailSentModal({
                         : "Verify your account"}
                   </ModalTitle>
                </div>
-               <span className="material-icons text-7xl">send</span>
+               <span className="material-symbols-outlined text-7xl">send</span>
             </div>
             <div className="text-center text-sm">
                {forgotPassWord ? (

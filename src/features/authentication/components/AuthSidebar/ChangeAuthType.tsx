@@ -25,7 +25,9 @@ export default function ChangeAuthType({
          `}
       >
          <div className="flex flex-col gap-1 group-hover:scale-110 duration-200">
-            <span className="material-icons lg:!text-4xl">{icon}</span>
+            <span className="material-symbols-outlined lg:!text-4xl">
+               {icon}
+            </span>
             <span className="text-xs md:text-sm">{text}</span>
          </div>
       </button>

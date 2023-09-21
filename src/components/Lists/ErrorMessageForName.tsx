@@ -11,7 +11,7 @@ export default function ErrorMessageForName({ error, setShowError }: Props) {
             onClick={() => setShowError(null)}
             className="h-full grid place-content-center w-12"
          >
-            <span className="material-icons">close</span>
+            <span className="material-symbols-outlined">close</span>
          </button>
       </div>
    );

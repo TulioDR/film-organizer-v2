@@ -53,7 +53,7 @@ export default function DropDown({
             className="-mt-10 w-full h-16 rounded-xl grid place-content-center shadow-lg"
             style={{ backgroundColor: themeColor }}
          >
-            <span className="material-icons text-5xl">{icon}</span>
+            <span className="material-symbols-outlined text-5xl">{icon}</span>
          </div>
          <div className="font-semibold my-1 text-lg text-light-2 dark:text-dark-2">
             {title}

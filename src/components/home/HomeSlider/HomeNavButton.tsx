@@ -14,7 +14,7 @@ export default function HomeNavButton({ onClick, disabled, back }: Props) {
                : "border-white text-white"
          }`}
       >
-         <span className="material-icons">
+         <span className="material-symbols-outlined">
             {back ? "navigate_before" : "navigate_next"}
          </span>
       </button>

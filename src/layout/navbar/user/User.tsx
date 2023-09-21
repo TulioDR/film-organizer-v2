@@ -49,7 +49,7 @@ export default function User() {
                <UserImage />
             ) : (
                <div className="w-full h-full flex items-center justify-center text-white">
-                  <span className="material-icons">person</span>
+                  <span className="material-symbols-outlined">person</span>
                </div>
             )}
          </button>

@@ -32,7 +32,7 @@ export default function Notification({}: Props) {
                      onClick={closeNotification}
                      className="grid place-content-center"
                   >
-                     <span className="material-icons">close</span>
+                     <span className="material-symbols-outlined">close</span>
                   </button>
                </div>
             </motion.div>

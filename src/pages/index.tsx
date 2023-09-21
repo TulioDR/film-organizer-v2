@@ -34,9 +34,10 @@ export default function Home() {
       const current = currentArray[activeIndex];
       if (!current) return;
       setCurrentMedia(current);
-   }, [activeIndex, currentArray, changeBackground, currentMedia]);
+   }, [activeIndex, currentArray, currentMedia]);
 
    useEffect(() => {
+      if (!currentMedia) return;
       changeBackground(currentMedia);
    }, [currentMedia, changeBackground]);
 

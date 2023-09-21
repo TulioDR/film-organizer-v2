@@ -5,13 +5,17 @@ import { AnimatePresence, motion } from "framer-motion";
 type Props = {
    icon: string;
    text: string;
+   isSelected: boolean;
 };
 
-export default function InnerSideLink({ icon, text }: Props) {
+export default function InnerSideLink({ icon, text, isSelected }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
    return (
       <div className="flex items-center gap-3 h-9">
-         <span className="material-icons !w-9 !text-center !flex-shrink-0">
+         <span
+            style={isSelected ? { fontVariationSettings: `"FILL" 1` } : {}}
+            className="material-symbols-outlined !w-9 !text-center !flex-shrink-0"
+         >
             {icon}
          </span>
          <AnimatePresence>

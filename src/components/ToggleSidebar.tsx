@@ -17,7 +17,7 @@ export default function ToggleSidebar({ onClick }: Props) {
          onClick={onClick}
          className="h-9 aspect-square flex-shrink-0 rounded-lg grid place-content-center text-white"
       >
-         <span className="material-icons">menu</span>
+         <span className="material-symbols-outlined">menu</span>
       </motion.button>
    );
 }

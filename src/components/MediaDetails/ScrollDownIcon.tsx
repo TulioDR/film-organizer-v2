@@ -4,7 +4,7 @@ export default function ScrollDownIcon() {
          <div className="border border-white h-14 w-8 rounded-xl pt-3">
             <div className="mx-auto animate-bounce bg-white w-1 h-4 rounded-full"></div>
          </div>
-         <span className="material-icons">keyboard_arrow_down</span>
+         <span className="material-symbols-outlined">keyboard_arrow_down</span>
       </div>
    );
 }

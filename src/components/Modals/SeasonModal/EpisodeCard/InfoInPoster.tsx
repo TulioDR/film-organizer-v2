@@ -10,7 +10,7 @@ export default function InfoInPoster({ episode }: Props) {
             <div>
                {episode.vote_count ? episode.vote_average.toFixed(1) : "N/A"}
             </div>
-            <div className="material-icons text-yellow-600 text-lg grid place-items-center">
+            <div className="material-symbols-outlined text-yellow-600 text-lg grid place-items-center">
                star_rate
             </div>
          </div>

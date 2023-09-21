@@ -10,8 +10,8 @@ export default function ToggleTypeIcon({ isMovie }: Props) {
                isMovie ? "" : "-translate-x-full"
             }`}
          >
-            <span className="material-icons !w-9">movie</span>
-            <span className="material-icons absolute left-full !w-9">
+            <span className="material-symbols-outlined !w-9">movie</span>
+            <span className="material-symbols-outlined absolute left-full !w-9">
                smart_display
             </span>
          </div>

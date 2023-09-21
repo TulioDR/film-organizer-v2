@@ -103,7 +103,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
                   secondaryColor="gray"
                />
             ) : (
-               <span className="material-icons">
+               <span className="material-symbols-outlined">
                   {isSaved ? "check_box" : "check_box_outline_blank"}
                </span>
             )}

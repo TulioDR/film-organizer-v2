@@ -52,7 +52,7 @@ export default function ThemeColorsMenu({ setMenu }: Props) {
                onClick={() => setMenu("main")}
                className="rounded-full aspect-square w-9 hover:bg-primary-light dark:hover:bg-primary-dark grid place-content-center"
             >
-               <span className="material-icons ">west</span>
+               <span className="material-symbols-outlined ">west</span>
             </button>
             <span>Theme Colors</span>
          </div>

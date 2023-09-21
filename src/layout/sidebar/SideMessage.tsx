@@ -72,7 +72,7 @@ export default function SideMessage({ children, icon, onClick }: Props) {
             className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10 text-white"
             style={{ backgroundColor: themeColor }}
          >
-            <span className="material-icons">{icon}</span>
+            <span className="material-symbols-outlined">{icon}</span>
          </motion.div>
          <motion.div
             initial={{ width: 0, height: 0 }}

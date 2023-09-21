@@ -12,7 +12,7 @@ export default function OpenDeleteMediaButton({
          onClick={onClick}
          className="aspect-square h-12 grid place-content-center"
       >
-         <span className="material-icons text-3xl">
+         <span className="material-symbols-outlined text-3xl">
             {isDeleteOpen ? "close" : "delete"}
          </span>
       </button>

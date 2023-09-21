@@ -10,7 +10,7 @@ export default function CloseSeasonButton({ onClick }: Props) {
                onClick={onClick}
                className="w-10 h-10 rounded-md bg-secondary text-white grid place-content-center shadow-lg"
             >
-               <span className="material-icons">close</span>
+               <span className="material-symbols-outlined">close</span>
             </button>
          </RevealHorizontal>
       </div>

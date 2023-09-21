@@ -12,7 +12,7 @@ export default function ListsLoginAdvice() {
    return (
       <div className="flex flex-col items-center justify-center mt-5">
          <div className="text-dark-1">
-            <span className="material-icons !text-7xl sm:!text-9xl">
+            <span className="material-symbols-outlined !text-7xl sm:!text-9xl">
                format_list_bulleted
             </span>
          </div>
@@ -29,7 +29,7 @@ export default function ListsLoginAdvice() {
             className="flex space-x-3 rounded-lg shadow-lg py-2 px-4 text-text-1 mt-5"
             style={{ backgroundColor: themeColor }}
          >
-            <span className="material-icons">login</span>
+            <span className="material-symbols-outlined">login</span>
             <span>LOG IN</span>
          </motion.button>
       </div>

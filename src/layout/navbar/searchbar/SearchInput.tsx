@@ -51,7 +51,7 @@ export default function SearchInput({
                   className="w-full outline-none bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2"
                   placeholder={placeholder}
                />
-               <span className="material-icons !text-text-2 !text-light-2 dark:!text-dark-2">
+               <span className="material-symbols-outlined !text-text-2 !text-light-2 dark:!text-dark-2">
                   search
                </span>
             </div>

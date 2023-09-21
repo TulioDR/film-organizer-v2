@@ -2,13 +2,17 @@ import SideLink from "./SideLink";
 
 export default function SideLinks() {
    const movieItems = [
-      { link: "/popular/movie", icon: "whatshot", text: "Popular" },
+      {
+         link: "/popular/movie",
+         icon: "local_fire_department",
+         text: "Popular",
+      },
       { link: "/genres/movie", icon: "theater_comedy", text: "Genres" },
       { link: "/trending/movie", icon: "trending_up", text: "Trending" },
    ];
 
    const tvItems = [
-      { link: "/popular/tv", icon: "whatshot", text: "Popular" },
+      { link: "/popular/tv", icon: "local_fire_department", text: "Popular" },
       { link: "/genres/tv", icon: "theater_comedy", text: "Genres" },
       { link: "/trending/tv", icon: "trending_up", text: "Trending" },
    ];

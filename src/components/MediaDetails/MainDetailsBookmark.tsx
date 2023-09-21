@@ -56,7 +56,7 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
                   />
                </div>
             ) : (
-               <span className="material-icons !text-4xl">
+               <span className="material-symbols-outlined !text-4xl">
                   {isMediaSaved ? "bookmark" : "bookmark_border"}
                </span>
             )}

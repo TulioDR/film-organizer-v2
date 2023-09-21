@@ -24,7 +24,7 @@ export default function BackInfo({
             </div>
             <div className="flex items-start gap-[1px] h-7">
                <span className="text-xl font-bold">{voteAverage || "N/A"}</span>
-               <span className="material-icons-round text-yellow-600 !text-lg grid place-content-center -translate-y-[2px]">
+               <span className="material-symbols-outlined text-yellow-600 !text-lg grid place-content-center -translate-y-[2px]">
                   star
                </span>
             </div>

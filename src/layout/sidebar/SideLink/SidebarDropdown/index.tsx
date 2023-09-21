@@ -11,9 +11,15 @@ type Props = {
    items?: any[];
    icon: string;
    text: string;
+   isSelected: boolean;
 };
 
-export default function SidebarDropdown({ items, icon, text }: Props) {
+export default function SidebarDropdown({
+   items,
+   icon,
+   text,
+   isSelected,
+}: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    const [open, setOpen] = useState<boolean>(false);
@@ -25,7 +31,7 @@ export default function SidebarDropdown({ items, icon, text }: Props) {
             onClick={toggle}
             className="flex items-center justify-between w-full "
          >
-            <InnerSideLink icon={icon} text={text} />
+            <InnerSideLink icon={icon} text={text} isSelected={isSelected} />
             <DropdownIcon open={open} />
          </button>
          <AnimatePresence>

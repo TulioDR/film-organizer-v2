@@ -28,7 +28,9 @@ export default function SideDdItem({ item, isTooltip }: Props) {
       >
          <SideActiveMark item isSelected={isSelected} />
          {!isTooltip && (
-            <span className="material-icons !text-xl">{item.icon}</span>
+            <span className="material-symbols-outlined !text-xl">
+               {item.icon}
+            </span>
          )}
          <span className="">{item.text}</span>
       </Link>
