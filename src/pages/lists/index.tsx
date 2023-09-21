@@ -1,20 +1,21 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-
-import ListCard from "../../components/Lists/ListCard";
-import ListModel from "../../models/listModel";
-import ListsLoginAdvice from "../../components/Lists/ListsLoginAdvice";
-
-import ListFinder from "../../components/Lists/ListFinder";
-import NoListsMessage from "../../components/Lists/NoListsMessage";
 import { useSelector } from "react-redux";
-import DeleteListModal from "@/components/Modals/DeleteListModal";
-import ListsCardsContainer from "@/components/Lists/ListsCardsContainer";
-import StoreModel from "@/models/StoreModel";
-import ModalPortal from "@/components/Modals/ModalPortal";
 import { useUser } from "@clerk/nextjs";
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
+import ListModel from "@/models/listModel";
+import StoreModel from "@/models/StoreModel";
+
+import ListCard from "@/components/Pages/Lists/ListCard";
+import ListsLoginAdvice from "@/components/Pages/Lists/ListsLoginAdvice";
+import ListFinder from "../../components/Pages/Lists/ListFinder";
+import NoListsMessage from "../../components/Pages/Lists/NoListsMessage";
+import ListsCardsContainer from "@/components/Pages/Lists/ListsCardsContainer";
+
+import ModalPortal from "@/components/Modals/ModalPortal";
+import DeleteListModal from "@/components/Modals/DeleteListModal";
 import Title from "@/components/Title";
+
+import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 
 export default function Lists() {
    const { user } = useUser();

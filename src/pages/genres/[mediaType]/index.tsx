@@ -1,12 +1,15 @@
 import { GetServerSideProps } from "next";
-import Head from "next/head";
-import movieGenres from "../../../data/genres/movieGenres";
-import tvGenres from "../../../data/genres/tvGenres";
-import GenreModel from "../../../models/genresModel";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import MovieLayout from "../../../components/Genres/MovieLayout";
-import TvLayout from "../../../components/Genres/TvLayout";
+import Head from "next/head";
+import { motion } from "framer-motion";
+
+import movieGenres from "@/data/genres/movieGenres";
+import tvGenres from "@/data/genres/tvGenres";
+
+import GenreModel from "@/models/genresModel";
+
+import MovieLayout from "@/components/Pages/Genres/MovieLayout";
+import TvLayout from "@/components/Pages/Genres/TvLayout";
 import Title from "@/components/Title";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

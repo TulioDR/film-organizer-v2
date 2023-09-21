@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import PageHead from "@/components/PageHead";
-import DangerZone from "@/components/Account/DangerZone";
-import AccountSecurity from "@/components/Account/AccountSecurity";
-import AccountProfile from "@/components/Account/AccountProfile";
+import DangerZone from "@/components/Pages/Account/DangerZone";
+import AccountSecurity from "@/components/Pages/Account/AccountSecurity";
+import AccountProfile from "@/components/Pages/Account/AccountProfile";
 import Title from "@/components/Title";
 
 export default function Account() {

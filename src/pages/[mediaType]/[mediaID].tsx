@@ -3,16 +3,16 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import { MediaDetailsModel } from "@/models/MediaModel";
 
-import People from "@/components/MediaDetails/People";
-import Seasons from "@/components/MediaDetails/Seasons";
-import Similar from "@/components/MediaDetails/Similar";
-import Trailers from "@/components/MediaDetails/Trailers";
-import MainInfo from "@/components/MediaDetails/MainInfo";
-import Overview from "@/components/MediaDetails/Overview";
-import ScrollDownIcon from "@/components/MediaDetails/ScrollDownIcon";
-import MainPoster from "@/components/MediaDetails/MainPoster";
-import SimilarContainer from "@/components/MediaDetails/Similar/SimilarContainer";
-import BottomInfoContainer from "@/components/MediaDetails/BottomInfoContainer";
+import People from "@/components/Pages/MediaDetails/People";
+import Seasons from "@/components/Pages/MediaDetails/Seasons";
+import Similar from "@/components/Pages/MediaDetails/Similar";
+import Trailers from "@/components/Pages/MediaDetails/Trailers";
+import MainInfo from "@/components/Pages/MediaDetails/MainInfo";
+import Overview from "@/components/Pages/MediaDetails/Overview";
+import ScrollDownIcon from "@/components/Pages/MediaDetails/ScrollDownIcon";
+import MainPoster from "@/components/Pages/MediaDetails/MainPoster";
+import SimilarContainer from "@/components/Pages/MediaDetails/Similar/SimilarContainer";
+import BottomInfoContainer from "@/components/Pages/MediaDetails/BottomInfoContainer";
 import useBackground from "@/hooks/useBackground";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

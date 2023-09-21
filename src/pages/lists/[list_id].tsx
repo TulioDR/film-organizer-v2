@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 
-import { SavedMediaModel } from "../../models/MediaModel";
+import { SavedMediaModel } from "@/models/MediaModel";
 
-import TransitionPoster from "../../features/transitionPoster/components/TransitionPoster";
+import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 
+import ListModel from "@/models/listModel";
+import ModalPortal from "@/components/Modals/ModalPortal";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 
-import MediaTypePills from "@/components/ListDetails/MediaTypePills";
-import ListModel from "@/models/listModel";
-import DeleteMediaButtons from "@/components/ListDetails/DeleteMediaButtons";
-import ModalPortal from "@/components/Modals/ModalPortal";
+import SavedMedia from "@/components/Pages/ListDetails/SavedMedia";
+import MediaTypePills from "@/components/Pages/ListDetails/MediaTypePills";
+import DeleteMediaButtons from "@/components/Pages/ListDetails/DeleteMediaButtons";
+
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import { getSpecificList } from "@/api/lists";
 import { useRouter } from "next/router";
 import { getSavedMedia } from "@/api/media";
 import MediaFilterModel from "@/models/MediaFilterModel";
-import SavedMedia from "@/components/ListDetails/SavedMedia";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
 import Title from "@/components/Title";

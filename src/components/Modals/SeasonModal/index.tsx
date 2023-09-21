@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Poster from "@/components/Poster";
-import Date from "@/components/MediaDetails/MainInfo/Date";
+import Date from "@/components/Pages/MediaDetails/MainInfo/Date";
 
 import EpisodeCard from "./EpisodeCard";
 import CloseSeasonButton from "./CloseSeasonButton";

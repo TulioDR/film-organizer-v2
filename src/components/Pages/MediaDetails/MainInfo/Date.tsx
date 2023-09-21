@@ -1,8 +1,4 @@
-import {
-   changeDateFormat,
-   daysToRelease,
-   isReleased,
-} from "../../../utils/date";
+import { changeDateFormat, daysToRelease, isReleased } from "@/utils/date";
 
 type Props = {
    date: Date;

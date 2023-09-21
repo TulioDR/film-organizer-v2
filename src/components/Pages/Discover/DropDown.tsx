@@ -1,6 +1,6 @@
 import Select from "react-select";
-import { staggerItem } from "../../animations/StaggerCards";
-import { OptionModel } from "../../models/DiscoverModel";
+import { staggerItem } from "../../../animations/StaggerCards";
+import { OptionModel } from "../../../models/DiscoverModel";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";

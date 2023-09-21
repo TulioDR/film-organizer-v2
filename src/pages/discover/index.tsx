@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent } from "react";
 import { staggerContainer } from "../../animations/StaggerCards";
-import DropDown from "../../components/Discover/DropDown";
+import DropDown from "@/components/Pages/Discover/DropDown";
 import {
    ratings,
    sortByMovie,

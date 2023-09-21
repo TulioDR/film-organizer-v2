@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-import ChangeShowcase from "../components/Home/ChangeShowcase";
-import HomeSlider from "../components/Home/HomeSlider";
-import MediaDescription from "../components/Home/MediaDescription";
+import ChangeShowcase from "@/components/Pages/Home/ChangeShowcase";
+import HomeSlider from "@/components/Pages/Home/HomeSlider";
+import MediaDescription from "@/components/Pages/Home/MediaDescription";
+
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";

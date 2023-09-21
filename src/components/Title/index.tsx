@@ -10,13 +10,11 @@ type Props = {
 export default function Title({ title, children }: Props) {
    return (
       <TitleContainer>
-         <div className="overflow-hidden">
-            <RevealHorizontal>
-               <div className="text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-bold font-elianto tracking-wider text-light-1 dark:text-dark-1">
-                  {title}
-               </div>
-            </RevealHorizontal>
-         </div>
+         <RevealHorizontal>
+            <div className="text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-bold font-elianto tracking-wider text-light-1 dark:text-dark-1">
+               {title}
+            </div>
+         </RevealHorizontal>
          {children}
       </TitleContainer>
    );

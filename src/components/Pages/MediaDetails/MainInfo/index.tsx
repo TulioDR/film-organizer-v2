@@ -1,4 +1,3 @@
-import React from "react";
 import MainTitle from "./MainTitle";
 import Date from "./Date";
 import Rating from "./Rating";

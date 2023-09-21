@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
-import { updateList } from "../../api/lists";
+import { updateList } from "@/api/lists";
 
-import { onlyLettersNumbersSpaces } from "../../utils/listNameValidation";
+import { onlyLettersNumbersSpaces } from "@/utils/listNameValidation";
 import BottomBorder from "./BottomBorder";
 
 import EditButton from "./EditButton";
 import EditButtonsContainer from "./EditButtonsContainer";
 import ErrorMessageForName from "./ErrorMessageForName";
 import { motion } from "framer-motion";
-import { staggerItem } from "../../animations/StaggerCards";
+import { staggerItem } from "@/animations/StaggerCards";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import useNotification from "@/hooks/useNotification";
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";

@@ -1,5 +1,5 @@
 import React from "react";
-import RevealHorizontal from "../../animations/RevealHorizontal";
+import RevealHorizontal from "@/animations/RevealHorizontal";
 
 type Props = {
    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
