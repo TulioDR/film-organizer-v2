@@ -1,8 +1,8 @@
-import { useUser } from "@clerk/nextjs";
-import Image from "next/image";
+// import { useUser } from "@clerk/nextjs";
+// import Image from "next/image";
 
 export default function UserImage() {
-   const { user } = useUser();
+   // const { user } = useUser();
    return (
       <div className="relative h-full w-full rounded-full overflow-hidden">
          {/* {user.user_metadata?.avatar_url ? (

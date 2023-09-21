@@ -8,8 +8,9 @@ const backgroundSlice = createSlice({
    },
    reducers: {
       setBackground(state, action) {
-         state.backgroundImage = action.payload.backgroundImage;
-         state.backgroundKey = action.payload.backgroundKey;
+         const { backgroundImage, backgroundKey } = action.payload;
+         state.backgroundImage = backgroundImage;
+         state.backgroundKey = backgroundKey + backgroundImage;
       },
       removeBackground(state) {
          state.backgroundImage = null;

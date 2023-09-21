@@ -34,7 +34,9 @@ export default function MainResetForm({ onSubmit }: Props) {
       >
          <AuthTitle>Reset your password</AuthTitle>
          <AuthMessage>
-            Type in your email and we'll send you a link to reset your password
+            {
+               "Type in your email and we'll send you a link to reset your password"
+            }
          </AuthMessage>
          <AuthInput icon="mail" name="email" placeholder="Email Address" dark />
          <AuthSubmitButton dark>Send Reset Email</AuthSubmitButton>

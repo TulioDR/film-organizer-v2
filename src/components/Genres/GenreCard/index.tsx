@@ -1,12 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import GenreModel from "../../../models/genresModel";
-import { useDispatch } from "react-redux";
-import { backgroundActions } from "@/store/slices/background-slice";
 import { useState } from "react";
 
 import GenreImage from "./GenreImage";
 import GenreCardOpen from "./GenreCardOpen";
 import GenreCardClosed from "./GenreCardClosed";
+import useBackground from "@/hooks/useBackground";
 
 type Props = {
    genre: GenreModel;
@@ -28,22 +27,17 @@ const item = {
 };
 
 export default function GenreCard({ genre, mediaType }: Props) {
-   const dispatch = useDispatch();
-
+   const { changeBackground, removeBackground } = useBackground();
    const [isOpen, setIsOpen] = useState<boolean>(false);
 
    const handleFocus = () => {
       setIsOpen(true);
-      const background = {
-         backgroundImage: genre.image,
-         backgroundKey: genre.id,
-      };
-      dispatch(backgroundActions.setBackground(background));
+      changeBackground(genre);
    };
 
    const handleBlur = () => {
       setIsOpen(false);
-      dispatch(backgroundActions.removeBackground());
+      removeBackground();
    };
 
    return (
@@ -51,7 +45,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
          tabIndex={0}
          onFocus={handleFocus}
          onBlur={handleBlur}
-         className={`h-[400px] 2xl:h-[600px] duration-500 rounded-3xl overflow-hidden ${
+         className={`h-[400px] 2xl:h-[600px] duration-500 rounded-3xl overflow-hidden focus:border-none ${
             isOpen ? "flex-[5]" : "flex-1 cursor-pointer"
          }`}
       >

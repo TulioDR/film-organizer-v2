@@ -77,7 +77,14 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          setIsLoading(false);
       };
       checkIfSaved();
-   }, [media.id, list.id, mediaType, refreshEffect]);
+   }, [
+      media.id,
+      list.id,
+      mediaType,
+      refreshEffect,
+      getErrorMessage,
+      setAndCloseNotification,
+   ]);
 
    return (
       <li

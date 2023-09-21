@@ -38,7 +38,7 @@ export default function SideMessage({ children, icon, onClick }: Props) {
             height: 0,
          });
       }
-   }, [expandSidebar]);
+   }, [expandSidebar, messageContainerControls]);
 
    useEffect(() => {
       if (expandSidebar) {
@@ -52,7 +52,7 @@ export default function SideMessage({ children, icon, onClick }: Props) {
             transition: { duration: 0 },
          });
       }
-   }, [expandSidebar]);
+   }, [expandSidebar, messageControls]);
 
    return (
       <motion.div

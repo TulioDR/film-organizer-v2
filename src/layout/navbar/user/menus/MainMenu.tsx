@@ -56,7 +56,7 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
          );
          dispatch(themeActions.changeThemeColor(newColor));
       }
-   }, [isDarkMode]);
+   }, [isDarkMode, dispatch, themeColorName]);
 
    return (
       <motion.ul

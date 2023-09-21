@@ -1,9 +1,7 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
-import { backgroundActions } from "@/store/slices/background-slice";
 import { MediaDetailsModel } from "@/models/MediaModel";
-import { useDispatch } from "react-redux";
 
 import People from "@/components/MediaDetails/People";
 import Seasons from "@/components/MediaDetails/Seasons";
@@ -15,6 +13,7 @@ import ScrollDownIcon from "@/components/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/MediaDetails/MainPoster";
 import SimilarContainer from "@/components/MediaDetails/Similar/SimilarContainer";
 import BottomInfoContainer from "@/components/MediaDetails/BottomInfoContainer";
+import useBackground from "@/hooks/useBackground";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, mediaID } = context.query!;
@@ -39,17 +38,12 @@ type Props = {
 };
 
 export default function Details({ mediaType, media }: Props) {
-   const dispatch = useDispatch();
+   const { changeBackground } = useBackground();
 
    useEffect(() => {
-      const container = document.body;
-      container.scrollTo({ top: 0 });
-      const background = {
-         backgroundImage: media.backdrop_path,
-         backgroundKey: media.backdrop_path,
-      };
-      dispatch(backgroundActions.setBackground(background));
-   }, [media, dispatch]);
+      document.body.scrollTo({ top: 0 });
+      changeBackground(media);
+   }, [media, changeBackground]);
 
    return (
       <div className="w-full">

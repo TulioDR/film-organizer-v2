@@ -1,11 +1,10 @@
-import { backgroundActions } from "@/store/slices/background-slice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import useBackground from "./useBackground";
 
 export default function useRemoveBackgroundImage() {
-   const dispatch = useDispatch();
+   const { removeBackground } = useBackground();
 
    useEffect(() => {
-      dispatch(backgroundActions.removeBackground());
-   }, [dispatch]);
+      removeBackground();
+   }, [removeBackground]);
 }

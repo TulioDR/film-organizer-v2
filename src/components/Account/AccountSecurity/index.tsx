@@ -9,6 +9,7 @@ type Props = {};
 
 export default function AccountSecurity({}: Props) {
    const { user } = useUser();
+   console.log(user);
    return (
       <>
          <Subtitle>Security</Subtitle>
@@ -17,7 +18,7 @@ export default function AccountSecurity({}: Props) {
                <div className="flex justify-between items-center">
                   {/* {user.} */}
                   <ProfileCardInner>
-                     Change the account's password.
+                     {" Change the account's password."}
                   </ProfileCardInner>
                   <AccountButton onClick={() => {}}>
                      Update Password

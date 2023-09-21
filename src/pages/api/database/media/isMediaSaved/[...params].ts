@@ -6,7 +6,7 @@ export default async function handler(
    res: NextApiResponse
 ) {
    if (req.method === "GET") {
-      const [media_id, media_type] = req.query.params!;
+      // const [media_id, media_type] = req.query.params!;
       // const media = await query(
       //    `
       //       SELECT * FROM media

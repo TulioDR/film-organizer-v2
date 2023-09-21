@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 type Props = { openModal: () => void };
 
-export default function ResetPasswordButton({ openModal }: Props) {
+export default function ResetPasswordButton({}: Props) {
    const { themeColor } = useSelector((state: any) => state.theme);
 
    const forgotPasswordHandler = async () => {

@@ -10,7 +10,11 @@ export default function Document() {
                href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round"
                rel="stylesheet"
             ></link>
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link
+               rel="preconnect"
+               href="https://fonts.googleapis.com"
+               crossOrigin="anonymous"
+            />
             <link
                rel="preconnect"
                href="https://fonts.gstatic.com"

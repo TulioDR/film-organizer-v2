@@ -6,12 +6,11 @@ import BackButton from "./BackButton";
 import LearnMore from "./LearnMore";
 import MainCardBookmark from "./MainCardBookmark";
 import BackInfo from "./BackInfo";
-import { useDispatch } from "react-redux";
-import { backgroundActions } from "@/store/slices/background-slice";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 import useBookmark from "@/hooks/useBookmark";
 import { MediaModel } from "@/models/MediaModel";
 import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
+import useBackground from "@/hooks/useBackground";
 
 type Props = {
    media: MediaModel;
@@ -23,16 +22,12 @@ export default function MainCard({ media, mediaType }: Props) {
    const toggle = () => setIsOpen((prev) => !prev);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
-   const dispatch = useDispatch();
 
+   const { changeBackground } = useBackground();
    const onLearnMoreClick = () => {
       setIsLeaving(true);
       setIsOpen(false);
-      const background = {
-         backgroundImage: media.backdrop_path,
-         backgroundKey: media.backdrop_path,
-      };
-      dispatch(backgroundActions.setBackground(background));
+      changeBackground(media);
    };
 
    const { startPosterAnimation } = useTransitionPosterContext();

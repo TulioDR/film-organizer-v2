@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import DeleteFormButton from "./DeleteFormButton";
 import DeleteInput from "./DeleteInput";
-import { deleteFormAnimation } from "./deleteFormAnimation";
+
 import { useState } from "react";
 type Props = { close: () => void };
 
@@ -15,13 +15,7 @@ export default function DeleteForm({ close }: Props) {
 
    const [enableDelete, setEnableDelete] = useState<boolean>(false);
    return (
-      <motion.div
-         variants={deleteFormAnimation}
-         initial="initial"
-         animate="animate"
-         exit="exit"
-         className="overflow-hidden space-y-3"
-      >
+      <motion.div className="overflow-hidden space-y-3">
          <div className="text-sm">
             <div>Are you sure you want to delete your account?.</div>
             <div>{"This can't be undone."}</div>

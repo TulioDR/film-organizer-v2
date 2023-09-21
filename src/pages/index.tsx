@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import ChangeShowcase from "../components/Home/ChangeShowcase";
 import HomeSlider from "../components/Home/HomeSlider";
 import MediaDescription from "../components/Home/MediaDescription";
-import { useDispatch } from "react-redux";
-import { backgroundActions } from "@/store/slices/background-slice";
 import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
+import useBackground from "@/hooks/useBackground";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);
@@ -30,17 +29,16 @@ export default function Home() {
    const [currentMedia, setCurrentMedia] = useState<any>(nowPlaying[0]);
    const [currentArray, setCurrentArray] = useState<any[]>(nowPlaying);
 
-   const dispatch = useDispatch();
+   const { changeBackground } = useBackground();
    useEffect(() => {
       const current = currentArray[activeIndex];
       if (!current) return;
-      const background = {
-         backgroundImage: current.backdrop_path,
-         backgroundKey: current.id,
-      };
-      dispatch(backgroundActions.setBackground(background));
       setCurrentMedia(current);
-   }, [activeIndex, currentArray, dispatch]);
+   }, [activeIndex, currentArray, changeBackground, currentMedia]);
+
+   useEffect(() => {
+      changeBackground(currentMedia);
+   }, [currentMedia, changeBackground]);
 
    const [currentShowcase, setCurrentShowcase] = useState<
       "movies" | "series" | "upcoming"
