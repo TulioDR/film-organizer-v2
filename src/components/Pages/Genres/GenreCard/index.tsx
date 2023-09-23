@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import GenreModel from "../../../models/genresModel";
+import GenreModel from "@/models/genresModel";
 import { useState } from "react";
 
 import GenreImage from "./GenreImage";

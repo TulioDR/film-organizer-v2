@@ -11,7 +11,7 @@ export default function Title({ title, children }: Props) {
    return (
       <TitleContainer>
          <RevealHorizontal>
-            <div className="text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-bold font-elianto tracking-wider text-light-1 dark:text-dark-1">
+            <div className="text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-title tracking-wider text-light-1 dark:text-dark-1">
                {title}
             </div>
          </RevealHorizontal>

@@ -1,5 +1,5 @@
 import { useSwiper } from "swiper/react";
-import Poster from "../../Poster";
+import Poster from "@/components/Poster";
 import { motion } from "framer-motion";
 import { staggerItem } from "@/animations/StaggerCards";
 

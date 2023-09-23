@@ -45,3 +45,7 @@ body::-webkit-scrollbar-track {
    font-family: "Elianto";
    src: url("../fonts/Elianto-Regular.ttf");
 }
+@font-face {
+   font-family: "Octosquares";
+   src: url("../fonts//TT\ Octosquares\ Trial\ Bold.ttf");
+}

@@ -1,5 +1,5 @@
 import useBookmark from "@/hooks/useBookmark";
-import useIsMediaSaved from "../../../hooks/useIsMediaSaved";
+import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 
 type Props = {
    movie: any;

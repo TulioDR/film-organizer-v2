@@ -1,16 +1,13 @@
-import { AnimatePresence, motion } from "framer-motion";
-import Poster from "../../../../components/Poster";
 import { useState } from "react";
-import CardBack from "./CardBack";
-import BackButton from "./BackButton";
-import LearnMore from "./LearnMore";
-import MainCardBookmark from "./MainCardBookmark";
-import BackInfo from "./BackInfo";
-import useIsMediaSaved from "@/hooks/useIsMediaSaved";
-import useBookmark from "@/hooks/useBookmark";
 import { MediaModel } from "@/models/MediaModel";
+import useIsMediaSaved from "@/hooks/useIsMediaSaved";
+
 import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
+import useBookmark from "@/hooks/useBookmark";
 import useBackground from "@/hooks/useBackground";
+import MainCardFront from "./MainCardFront";
+import MainCardBack from "./MainCardBack";
+import MainCardContainer from "./MainCardContainer";
 
 type Props = {
    media: MediaModel;
@@ -19,7 +16,8 @@ type Props = {
 
 export default function MainCard({ media, mediaType }: Props) {
    const [isOpen, setIsOpen] = useState<boolean>(false);
-   const toggle = () => setIsOpen((prev) => !prev);
+   const openCard = () => setIsOpen(true);
+   const closeCard = () => setIsOpen(false);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
 
@@ -34,67 +32,25 @@ export default function MainCard({ media, mediaType }: Props) {
 
    const onExitComplete = () => {
       if (!isLeaving) return;
-      startPosterAnimation(mediaType, media);
+      // startPosterAnimation(mediaType, media);
+      console.log("Exit complete");
    };
 
    const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
    const { handleBookmarkClick } = useBookmark(media, mediaType);
 
-   const cards = {
-      initial: { opacity: 0, scale: 0.5 },
-      animate: {
-         opacity: 1,
-         scale: 1,
-         transition: { duration: 0.8 },
-      },
-      exit: {},
-   };
-
    return (
-      <motion.article
-         layout
-         variants={cards}
-         className="relative rounded-xl overflow-hidden origin-bottom"
+      <MainCardContainer
+         id={`${mediaType}-${media.id}`}
+         onFocus={openCard}
+         onBlur={closeCard}
+         isOpen={isOpen}
       >
-         <div
-            id={`${mediaType}-${media.id}`}
-            onClick={toggle}
-            className="cursor-pointer rounded-xl overflow-hidden"
-         >
-            <Poster
-               alt={media.title || media.name}
-               posterPath={media.poster_path}
-               size="lg"
-            />
-         </div>
-         <AnimatePresence onExitComplete={onExitComplete}>
-            {isOpen && (
-               <CardBack>
-                  <BackButton onClick={toggle} />
-                  <Poster
-                     alt={media.title || media.name}
-                     posterPath={media.backdrop_path}
-                     size="lg"
-                     backPoster
-                  />
-                  <div className="bg-secondary-light dark:bg-secondary-dark rounded-t-xl w-full flex-1 flex flex-col -mt-5 z-10 p-4 overflow-hidden">
-                     <BackInfo
-                        title={media.title || media.name}
-                        voteAverage={media.vote_average}
-                        year={media.release_date || media.first_air_date}
-                        overview={media.overview || "N/A"}
-                     />
-                     <div className="flex justify-between items-center h-9 w-full">
-                        <LearnMore onClick={onLearnMoreClick} />
-                        <MainCardBookmark
-                           onClick={handleBookmarkClick}
-                           isMediaSaved={isMediaSaved}
-                        />
-                     </div>
-                  </div>
-               </CardBack>
-            )}
-         </AnimatePresence>
-      </motion.article>
+         <MainCardFront
+            title={media.title || media.name}
+            posterPath={media.poster_path}
+         />
+         <MainCardBack media={media} closeCard={closeCard} />
+      </MainCardContainer>
    );
 }

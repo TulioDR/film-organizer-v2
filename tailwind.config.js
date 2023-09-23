@@ -13,7 +13,7 @@ module.exports = {
       extend: {
          fontFamily: {
             roboto: "'Roboto', sans-serif",
-            elianto: "Elianto",
+            title: "Octosquares",
          },
          colors: {
             primary: {
