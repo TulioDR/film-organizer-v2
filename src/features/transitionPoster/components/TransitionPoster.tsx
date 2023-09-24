@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { SpinnerCircular } from "spinners-react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
@@ -9,22 +8,13 @@ import useTransitionPosterContext from "../context/TransitionPosterContext";
 type Props = {};
 
 export default function TransitionPoster({}: Props) {
-   const [sidebarWidth, setSidebarWidth] = useState<number>(0);
-   useEffect(() => {
-      const sidebar = document.getElementById("sidebar")!;
-      setSidebarWidth(sidebar.clientWidth);
-   }, []);
-
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
-   const { setShowSpinner, position, selectedImg, showSpinner } =
+   const { position, selectedImg, showSpinner, sidebarWidth } =
       useTransitionPosterContext();
-
-   const onAnimationComplete = () => setShowSpinner(true);
 
    if (!selectedImg || !position) return <></>;
    return (
       <motion.div
-         onAnimationComplete={onAnimationComplete}
          initial={{
             paddingLeft: position.left,
             top: position.top,
@@ -38,7 +28,7 @@ export default function TransitionPoster({}: Props) {
          transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}
          className="fixed top-0 left-0 w-full z-50 pr-10 flex"
       >
-         <div className="relative h-full aspect-[2/3] rounded-xl overflow-hidden">
+         <div className="relative h-full aspect-[2/3] rounded-3xl overflow-hidden">
             <Image
                alt="selected"
                src={selectedImg}

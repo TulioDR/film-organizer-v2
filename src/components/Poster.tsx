@@ -51,7 +51,7 @@ export default function Poster({
    return (
       <div
          className={`overflow-hidden  relative ${
-            rounded ? (size === "sm" ? "rounded-lg" : "rounded-xl") : ""
+            rounded ? (size === "sm" ? "rounded-lg" : "rounded-3xl") : ""
          } ${backPoster ? "aspect-video w-full" : "aspect-[2/3] h-full"}`}
       >
          <Image

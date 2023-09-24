@@ -29,7 +29,7 @@ export default function MainPoster({ alt, posterPath }: Props) {
                fill
                sizes="100%"
                priority
-               className="rounded-xl"
+               className="rounded-3xl"
             />
          </motion.div>
       </div>

@@ -4,7 +4,6 @@ import ChangeShowcase from "@/components/Pages/Home/ChangeShowcase";
 import HomeSlider from "@/components/Pages/Home/HomeSlider";
 import MediaDescription from "@/components/Pages/Home/MediaDescription";
 
-import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
@@ -85,7 +84,6 @@ export default function Home() {
                </div>
             )}
          </motion.div>
-         <TransitionPoster />
       </TransitionPosterProvider>
    );
 }

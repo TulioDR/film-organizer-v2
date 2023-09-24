@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 
 import { SavedMediaModel } from "@/models/MediaModel";
 
-import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
-
 import ListModel from "@/models/listModel";
 import ModalPortal from "@/components/Modals/ModalPortal";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
@@ -112,7 +110,6 @@ export default function ListID({}: Props) {
                   onCardTap={onCardTap}
                />
             )}
-            <TransitionPoster />
             <DeleteMediaButtons
                mediaToDelete={mediaToDelete}
                isDeleteOpen={isDeleteOpen}

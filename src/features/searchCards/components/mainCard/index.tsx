@@ -1,10 +1,5 @@
 import { useState } from "react";
 import { MediaModel } from "@/models/MediaModel";
-import useIsMediaSaved from "@/hooks/useIsMediaSaved";
-
-import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
-import useBookmark from "@/hooks/useBookmark";
-import useBackground from "@/hooks/useBackground";
 import MainCardFront from "./MainCardFront";
 import MainCardBack from "./MainCardBack";
 import MainCardContainer from "./MainCardContainer";
@@ -20,24 +15,7 @@ export default function MainCard({ media, mediaType }: Props) {
    const closeCard = () => setIsOpen(false);
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
-
-   const { changeBackground } = useBackground();
-   const onLearnMoreClick = () => {
-      setIsLeaving(true);
-      setIsOpen(false);
-      changeBackground(media);
-   };
-
-   const { startPosterAnimation } = useTransitionPosterContext();
-
-   const onExitComplete = () => {
-      if (!isLeaving) return;
-      // startPosterAnimation(mediaType, media);
-      console.log("Exit complete");
-   };
-
-   const { isMediaSaved } = useIsMediaSaved(media.id, mediaType);
-   const { handleBookmarkClick } = useBookmark(media, mediaType);
+   const leave = () => setIsLeaving(true);
 
    return (
       <MainCardContainer
@@ -47,10 +25,16 @@ export default function MainCard({ media, mediaType }: Props) {
          isOpen={isOpen}
       >
          <MainCardFront
+            isLeaving={isLeaving}
             title={media.title || media.name}
             posterPath={media.poster_path}
          />
-         <MainCardBack media={media} closeCard={closeCard} />
+         <MainCardBack
+            mediaType={mediaType}
+            media={media}
+            closeCard={closeCard}
+            leave={leave}
+         />
       </MainCardContainer>
    );
 }

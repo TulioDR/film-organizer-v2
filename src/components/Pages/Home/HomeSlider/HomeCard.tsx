@@ -36,7 +36,7 @@ export default function HomeCard({
          <div
             id={`${mediaType}-${media.id}`}
             className={`w-full h-full overflow-hidden rounded-lg duration-300 ${
-               isActive ? "-translate-y-5" : ""
+               isActive ? "-translate-y-5" : "hover:-translate-y-5"
             } `}
          >
             <Poster

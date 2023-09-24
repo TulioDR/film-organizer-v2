@@ -27,13 +27,14 @@ export default function SavedMediaCard({
          layout
          variants={staggerItem}
          id={`${media.media_type}-${media.id}`}
-         className="relative rounded-xl overflow-hidden shadow-xl cursor-pointer"
+         className="relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
          onClick={!isDeleteOpen ? handleClick : undefined}
       >
          <Poster
             alt={media.media_title}
             posterPath={media.media_poster}
             size="lg"
+            rounded
          />
          {isDeleteOpen && (
             <DeleteSelector isSelected={isSelected} onTap={onTap} />

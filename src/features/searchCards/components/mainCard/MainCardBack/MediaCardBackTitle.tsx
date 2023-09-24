@@ -6,7 +6,7 @@ type Props = {
 
 export default function MediaCardBackTitle({ children }: Props) {
    return (
-      <div className="uppercase font-semibold font-title text-center leading-tight">
+      <div className="uppercase font-semibold font-title text-center leading-tight text-sm sm:text-base">
          {children}
       </div>
    );

@@ -4,6 +4,7 @@ import { windowExtraLarge } from "@/data/constants/windowWidth";
 import { useDispatch } from "react-redux";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 import { useRouter } from "next/router";
+import TransitionPoster from "../components/TransitionPoster";
 
 interface TransitionPosterInterface {
    selectedImg: string | null;
@@ -11,6 +12,7 @@ interface TransitionPosterInterface {
    startPosterAnimation: (mediaType: "movie" | "tv", media: any) => void;
    showSpinner: boolean;
    setShowSpinner: React.Dispatch<React.SetStateAction<boolean>>;
+   sidebarWidth: number;
 }
 
 const TransitionPosterContext = createContext({} as TransitionPosterInterface);
@@ -26,6 +28,7 @@ export function TransitionPosterProvider({ children }: Props) {
    const [selectedImg, setSelectedImg] = useState<string | null>(null);
    const [position, setPosition] = useState<PositionModel | null>(null);
    const [showSpinner, setShowSpinner] = useState<boolean>(false);
+   const [sidebarWidth, setSidebarWidth] = useState<number>(0);
 
    const dispatch = useDispatch();
    const router = useRouter();
@@ -34,6 +37,11 @@ export function TransitionPosterProvider({ children }: Props) {
       if (window.innerWidth < windowExtraLarge) {
          return;
       }
+
+      const sidebar = document.getElementById("sidebar")!;
+      setSidebarWidth(sidebar.clientWidth);
+      setSidebarWidth;
+
       const posterPath = media.poster_path || media.media_poster;
       const img = `https://image.tmdb.org/t/p/w${780}${posterPath}`;
       setSelectedImg(img);
@@ -55,11 +63,13 @@ export function TransitionPosterProvider({ children }: Props) {
       startPosterAnimation,
       showSpinner,
       setShowSpinner,
+      sidebarWidth,
    };
 
    return (
       <TransitionPosterContext.Provider value={value}>
          {children}
+         <TransitionPoster />
       </TransitionPosterContext.Provider>
    );
 }
