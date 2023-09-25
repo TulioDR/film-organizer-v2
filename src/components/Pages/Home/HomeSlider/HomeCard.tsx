@@ -43,6 +43,7 @@ export default function HomeCard({
                alt={media.title || media.name}
                posterPath={media.poster_path}
                size="lg"
+               roundedSmall
             />
          </div>
       </motion.div>

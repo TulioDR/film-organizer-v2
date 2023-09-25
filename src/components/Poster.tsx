@@ -21,7 +21,7 @@ type Props = {
    backPoster?: boolean;
    trailer?: boolean;
    person?: boolean;
-   rounded?: boolean;
+   roundedSmall?: boolean;
 };
 
 export default function Poster({
@@ -31,7 +31,7 @@ export default function Poster({
    backPoster,
    trailer,
    person,
-   rounded,
+   roundedSmall,
 }: Props) {
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -51,7 +51,7 @@ export default function Poster({
    return (
       <div
          className={`overflow-hidden  relative ${
-            rounded ? (size === "sm" ? "rounded-lg" : "rounded-3xl") : ""
+            roundedSmall ? "rounded-lg" : "rounded-3xl"
          } ${backPoster ? "aspect-video w-full" : "aspect-[2/3] h-full"}`}
       >
          <Image

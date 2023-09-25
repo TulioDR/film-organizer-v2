@@ -30,7 +30,6 @@ export default function MainCardBack({
                   posterPath={media.backdrop_path}
                   size="lg"
                   backPoster
-                  rounded
                />
                <div className="absolute bottom-0 left-0 w-full h-full flex items-end justify-end bg-gradient-to-t from-black/80 to-transparent z-10 px-2 pb-1 text-dark-1">
                   <MainCardDate

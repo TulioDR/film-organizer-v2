@@ -17,9 +17,15 @@ import useLanguages from "../../hooks/useLanguages";
 
 import { motion } from "framer-motion";
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
 import Title from "@/components/Title";
+
+import search from "@/data/discover/images/search.jpg";
+import languages from "@/data/discover/images/languages.jpg";
+import genres from "@/data/discover/images/genres.jpg";
+import yearImage from "@/data/discover/images/year.jpg";
+import ratingImage from "@/data/discover/images/rating.jpg";
+import sortImage from "@/data/discover/images/sort.jpeg";
+import DiscoverSubmitButton from "@/components/Pages/Discover/DiscoverSubmitButton";
 
 export default function Discover() {
    const router = useRouter();
@@ -61,8 +67,6 @@ export default function Discover() {
 
    useRemoveBackgroundImage();
 
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
-
    return (
       <div className="px-10 pb-10">
          <Head>
@@ -85,6 +89,7 @@ export default function Discover() {
                   value={searchType}
                   setValue={setSearchType}
                   icon={isMovie ? "movie" : "smart_display"}
+                  image={search}
                />
                <DropDown
                   title="Languages"
@@ -92,6 +97,7 @@ export default function Discover() {
                   value={language}
                   setValue={setLanguage}
                   icon="translate"
+                  image={languages}
                />
                <DropDown
                   title="Genres"
@@ -99,6 +105,7 @@ export default function Discover() {
                   value={genre}
                   setValue={setGenre}
                   icon="theater_comedy"
+                  image={genres}
                />
                <DropDown
                   title="Year of Release"
@@ -106,6 +113,7 @@ export default function Discover() {
                   value={year}
                   setValue={setYear}
                   icon="event"
+                  image={yearImage}
                />
                <DropDown
                   title="Rating"
@@ -113,6 +121,7 @@ export default function Discover() {
                   value={rating}
                   setValue={setRating}
                   icon="star_rate"
+                  image={ratingImage}
                />
                <DropDown
                   title="Sort By"
@@ -120,15 +129,10 @@ export default function Discover() {
                   value={sortBy}
                   setValue={setSortBy}
                   icon="sort"
+                  image={sortImage}
                />
             </motion.div>
-            <button
-               type="submit"
-               style={{ backgroundColor: themeColor }}
-               className="px-5 py-3 rounded-xl mx-auto block shadow-lg mt-5 text-white uppercase"
-            >
-               Search
-            </button>
+            <DiscoverSubmitButton />
          </form>
       </div>
    );

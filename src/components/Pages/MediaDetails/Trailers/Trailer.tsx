@@ -20,6 +20,7 @@ export default function Trailer({ trailer }: Props) {
                size="md"
                backPoster
                trailer
+               roundedSmall
             />
 
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/50 to-transparent"></div>

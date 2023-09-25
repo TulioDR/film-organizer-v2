@@ -4,6 +4,7 @@ import { OptionModel } from "../../../models/DiscoverModel";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import Image, { StaticImageData } from "next/image";
 
 type Props = {
    title: string;
@@ -11,6 +12,7 @@ type Props = {
    value: OptionModel;
    setValue: any;
    icon: string;
+   image: StaticImageData;
 };
 
 export default function DropDown({
@@ -19,6 +21,7 @@ export default function DropDown({
    value,
    setValue,
    icon,
+   image,
 }: Props) {
    const { themeColor, isDarkMode } = useSelector(
       (state: StoreModel) => state.theme
@@ -27,7 +30,7 @@ export default function DropDown({
    const colors = {
       primary: {
          light: "#e5e7eb",
-         dark: "#1a1b1f",
+         dark: "#040603",
       },
       secondary: {
          light: "#FFFFFF",
@@ -47,17 +50,26 @@ export default function DropDown({
    return (
       <motion.div
          variants={staggerItem}
-         className="bg-secondary-light dark:bg-secondary-dark rounded-xl shadow-lg p-5"
+         className="bg-secondary-light dark:bg-secondary-dark rounded-xl shadow-lg p-5 space-y-5"
       >
-         <div
-            className="-mt-10 w-full h-16 rounded-xl grid place-content-center shadow-lg"
-            style={{ backgroundColor: themeColor }}
-         >
-            <span className="material-symbols-outlined text-5xl">{icon}</span>
+         <div className="-mt-10 rounded-xl shadow-lg relative overflow-hidden">
+            <Image
+               src={image}
+               alt={title}
+               fill
+               sizes="100%"
+               className="object-cover"
+            />
+            <div className="relative w-full flex flex-col items-center bg-black/80 p-5 text-dark-1">
+               <span className="material-symbols-outlined !text-4xl">
+                  {icon}
+               </span>
+               <span className="font-semibold font-title text-lg truncate">
+                  {title}
+               </span>
+            </div>
          </div>
-         <div className="font-semibold my-1 text-lg text-light-2 dark:text-dark-2">
-            {title}
-         </div>
+
          <Select
             options={options}
             value={value}

@@ -15,6 +15,7 @@ export default function Person({ person }: Props) {
             posterPath={person.profile_path}
             size="md"
             person
+            roundedSmall
          />
          <div className="w-full absolute bottom-0 text-xs lg:text-sm p-2 pt-10 text-dark-1 bg-gradient-to-t from-black to-transparent">
             <div className="truncate">{person.name}</div>

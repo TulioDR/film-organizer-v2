@@ -27,6 +27,7 @@ export default function SimilarCard({ similar, href }: Props) {
                alt={similar.title || similar.name}
                posterPath={similar.poster_path}
                size="md"
+               roundedSmall
             />
          </div>
          <div className="w-full text-xs sm:text-sm text-center">

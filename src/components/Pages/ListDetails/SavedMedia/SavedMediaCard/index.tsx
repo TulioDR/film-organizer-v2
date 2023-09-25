@@ -34,7 +34,6 @@ export default function SavedMediaCard({
             alt={media.media_title}
             posterPath={media.media_poster}
             size="lg"
-            rounded
          />
          {isDeleteOpen && (
             <DeleteSelector isSelected={isSelected} onTap={onTap} />
