@@ -21,7 +21,7 @@ export default function MainCardBack({
    leave,
 }: Props) {
    return (
-      <div className="absolute top-0 left-0 p-4 gap-2 w-full h-full flex flex-col bg-secondary-light dark:bg-secondary-dark [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden rounded-3xl">
+      <div className="absolute top-0 left-0 p-3 gap-2 w-full h-full flex flex-col bg-secondary-light dark:bg-secondary-dark [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden rounded-3xl">
          <div className="relative">
             <BackButton onClick={closeCard} />
             <div className="rounded-xl overflow-hidden shadow-xl relative">
@@ -40,7 +40,7 @@ export default function MainCardBack({
          </div>
          <MediaCardBackTitle>{media.title || media.name}</MediaCardBackTitle>
          <MainCardOverview overview={media.overview || "N/A"} />
-         <div className="flex justify-between items-center gap-4 w-full h-10">
+         <div className="flex justify-between items-center gap-3 w-full h-10">
             <LearnMore
                mediaType={mediaType}
                media={media}

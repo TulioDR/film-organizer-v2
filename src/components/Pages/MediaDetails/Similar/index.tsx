@@ -9,7 +9,7 @@ type Props = {
 
 export default function Similar({ media, mediaType }: Props) {
    return (
-      <div>
+      <div className="">
          <Subtitle>
             Similar {mediaType === "movie" ? "Movies" : "Series"}
          </Subtitle>

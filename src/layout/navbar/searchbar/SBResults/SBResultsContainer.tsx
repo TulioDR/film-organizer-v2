@@ -42,7 +42,7 @@ export default function SBResultsContainer({
    });
 
    return (
-      <ul className="absolute top-full left-0 w-full pl-4">
+      <ul className="absolute top-full left-0 w-full">
          <div className="relative py-3 bg-secondary-light dark:bg-secondary-dark shadow-lg rounded-b-lg overflow-hidden">
             {children}
          </div>

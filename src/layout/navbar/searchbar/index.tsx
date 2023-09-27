@@ -71,7 +71,11 @@ export default function SearchBar({}: Props) {
 
    return (
       <form onSubmit={handleSubmit} className={`h-full relative`}>
-         <div className={`flex items-center h-9`}>
+         <div
+            className={`flex h-10 bg-secondary-light dark:bg-secondary-dark shadow-lg rounded-t-lg overflow-hidden relative w-full sm:w-96 ${
+               showResults ? "" : "rounded-b-lg"
+            }`}
+         >
             <ToggleTypeButton isMovie={isMovie} onClick={toggleMediaType} />
             <SearchInput
                value={inputValue}
@@ -79,7 +83,6 @@ export default function SearchBar({}: Props) {
                onFocus={handleInputFocus}
                onBlur={handleInputBlur}
                placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
-               showResults={showResults}
             />
          </div>
          {showResults && (

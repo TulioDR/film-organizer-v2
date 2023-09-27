@@ -8,8 +8,9 @@ type Props = {
 
 export default function ToggleTypeTooltip({ isMovie }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
+   console.log("show Tooltip");
    return (
-      <div className="hidden md:block absolute top-full left-0 translate-y-1">
+      <div className="hidden md:block absolute top-full right-full translate-y-1 z-50">
          <div className="w-9 flex justify-center">
             <div
                className="h-2 w-2 rotate-45 translate-y-1"

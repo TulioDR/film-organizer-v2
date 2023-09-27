@@ -33,14 +33,15 @@ export function TransitionPosterProvider({ children }: Props) {
    const dispatch = useDispatch();
    const router = useRouter();
    const startPosterAnimation = (mediaType: "movie" | "tv", media: any) => {
-      router.push(`/${mediaType}/${media.media_id || media.id}`);
+      router.push(`/${mediaType}/${media.media_id || media.id}`, undefined, {
+         scroll: false,
+      });
       if (window.innerWidth < windowExtraLarge) {
          return;
       }
 
       const sidebar = document.getElementById("sidebar")!;
       setSidebarWidth(sidebar.clientWidth);
-      setSidebarWidth;
 
       const posterPath = media.poster_path || media.media_poster;
       const img = `https://image.tmdb.org/t/p/w${780}${posterPath}`;

@@ -41,9 +41,11 @@ export default function Details({ mediaType, media }: Props) {
    const { changeBackground } = useBackground();
 
    useEffect(() => {
-      document.body.scrollTo({ top: 0 });
       changeBackground(media);
    }, [media, changeBackground]);
+   useEffect(() => {
+      document.body.scrollTo({ top: 0 });
+   }, []);
 
    return (
       <div className="w-full">

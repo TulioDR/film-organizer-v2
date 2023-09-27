@@ -26,8 +26,8 @@ export default function ToggleTypeButton({ isMovie, onClick }: Props) {
          onMouseDown={(e) => e.preventDefault()}
          type="button"
          onClick={onClick}
-         className="h-full w-9 flex items-center gap-1 relative group rounded-lg -mr-5 z-10 text-white"
-         style={{ backgroundColor: themeColor, y: -8 }}
+         className="h-full w-10 flex items-center gap-1 group rounded-r-lg z-10 text-white relative"
+         style={{ backgroundColor: themeColor }}
       >
          <ToggleTypeIcon isMovie={isMovie} />
          <AnimatePresence>
