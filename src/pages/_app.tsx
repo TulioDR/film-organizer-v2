@@ -2,12 +2,13 @@ import "../styles/globals.css";
 import "swiper/css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import MainPageContainer from "../containers/MainPageContainer";
+
 import wrapper from "@/store";
 import { Provider } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Fragment } from "react";
+import MainPageContainer from "@/components/MainPageContainer";
 
 function App({ Component, ...rest }: AppProps) {
    const { route } = useRouter();
@@ -22,11 +23,11 @@ function App({ Component, ...rest }: AppProps) {
          <Provider store={store}>
             <AnimatePresence mode="wait">
                {isAuth ? (
-                  <Fragment key="one">
+                  <Fragment key="auth">
                      <Component {...pageProps} />
                   </Fragment>
                ) : (
-                  <MainPageContainer key="two">
+                  <MainPageContainer key="main">
                      <Component {...pageProps} />
                   </MainPageContainer>
                )}

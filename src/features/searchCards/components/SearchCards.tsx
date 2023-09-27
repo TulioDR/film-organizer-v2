@@ -6,11 +6,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import LoadingMore from "./LoadingMore";
-import PageAnimationContainer from "@/containers/PageAnimationContainer";
-import TransitionPoster from "@/features/transitionPoster/components/TransitionPoster";
+
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import Title from "@/components/Title";
+import PageAnimationContainer from "./PageAnimationContainer";
 
 type Props = {
    title: string;
@@ -73,7 +73,6 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             </div>
             <LoadingMore page={page} setPage={setPage} />
          </PageAnimationContainer>
-         <TransitionPoster />
       </TransitionPosterProvider>
    );
 }

@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import LoadingPage from "../animations/LoadingPage";
+import LoadingPage from "@/animations/LoadingPage";
 import Head from "next/head";
 
 interface Props {

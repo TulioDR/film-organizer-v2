@@ -10,7 +10,7 @@ import StoreModel from "@/models/StoreModel";
 import { popUpAnimation } from "@/animations/PopUpAnimation";
 import { useUser } from "@clerk/nextjs";
 
-export default function User() {
+export default function NavDropdown() {
    const { user } = useUser();
 
    const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -1,11 +1,11 @@
 import LoginButton from "./LoginButton";
-import SearchBar from "./SearchBar";
-import User from "./user/User";
+import SearchBar from "./Searchbar";
 import ToggleSidebar from "../../components/ToggleSidebar";
 import { useDispatch } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
 import { motion } from "framer-motion";
 import { staggerContainer } from "@/animations/StaggerCards";
+import NavDropdown from "./NavDropdown";
 
 export default function Navbar() {
    const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function Navbar() {
                <SearchBar />
             </div>
             <div className="flex gap-5 pointer-events-auto">
-               <User />
+               <NavDropdown />
                <LoginButton />
             </div>
          </motion.div>

@@ -1,8 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import Navbar from "../layout/Navbar";
 import useInitialThemeColor from "@/hooks/useInitialThemeColor";
-import Sidebar from "@/layout/Sidebar";
+
 import { useEffect } from "react";
 
 import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
@@ -11,6 +10,9 @@ import useListsRefresh from "@/hooks/useListsRefresh";
 import BackgroundImage from "@/components/BackgroundImage";
 import Notification from "@/components/Notification";
 import { useUser } from "@clerk/nextjs";
+
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 
 type Props = {
    children: React.ReactNode;
