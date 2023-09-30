@@ -38,7 +38,7 @@ export default function NavDropdown() {
          variants={popUpAnimation}
          tabIndex={0}
          onBlur={handleBlur}
-         className="relative p-[2px] rounded-full h-9 aspect-square"
+         className="relative p-[2px] rounded-full h-10 aspect-square"
          style={{ backgroundColor: themeColor }}
       >
          <button

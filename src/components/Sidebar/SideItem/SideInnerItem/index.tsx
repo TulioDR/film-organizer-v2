@@ -24,7 +24,7 @@ export default function SideInnerItem({
    open,
 }: Props) {
    return (
-      <SideInnerItemContainer isSelected={isSelected}>
+      <SideInnerItemContainer isSelected={isSelected} isMainLink={isMainLink}>
          <div
             className={`flex items-center ${
                isMainLink ? "gap-4 h-10" : "gap-2"

@@ -5,16 +5,18 @@ import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 type Props = {
    isSelected: boolean;
    children: React.ReactNode;
+   isMainLink?: true;
 };
 
 export default function SideInnerItemContainer({
    isSelected,
    children,
+   isMainLink,
 }: Props) {
    return (
       <>
          <motion.div
-            variants={sideLinkAnimation}
+            variants={isMainLink ? sideLinkAnimation : undefined}
             className={`flex items-center justify-between w-full overflow-hidden ${
                isSelected
                   ? "text-light-1 dark:text-dark-1"
