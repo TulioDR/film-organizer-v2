@@ -2,6 +2,7 @@ import React from "react";
 import SideItemIcon from "./SideItemIcon";
 import SideItemText from "./SideItemText";
 import DropdownIcon from "./DropdownIcon";
+import SideInnerItemContainer from "./SideInnerItemContainer";
 
 type Props = {
    icon: string;
@@ -23,13 +24,7 @@ export default function SideInnerItem({
    open,
 }: Props) {
    return (
-      <div
-         className={`flex items-center justify-between w-full overflow-hidden ${
-            isSelected
-               ? "text-light-1 dark:text-dark-1"
-               : "text-light-2 hover:text-light-1 dark:text-dark-2 dark:hover:text-dark-1"
-         }`}
-      >
+      <SideInnerItemContainer isSelected={isSelected}>
          <div
             className={`flex items-center ${
                isMainLink ? "gap-4 h-10" : "gap-2"
@@ -45,6 +40,6 @@ export default function SideInnerItem({
             <SideItemText text={text} isMainLink={isMainLink} />
          </div>
          {dropdown && <DropdownIcon open={open || false} />}
-      </div>
+      </SideInnerItemContainer>
    );
 }

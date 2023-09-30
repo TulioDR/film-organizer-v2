@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 
-import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 import SideTooltip from "./SideTooltip";
 import SideLink from "./SideLink";
 import SideDropdown from "./SideDropdown";
@@ -21,7 +20,6 @@ interface Props {
    dropdown?: true;
    mediaType?: "movie" | "tv";
    items?: DropdownItem[];
-   list?: true;
 }
 
 export default function SideItem({
@@ -31,7 +29,6 @@ export default function SideItem({
    dropdown,
    mediaType,
    items,
-   list,
 }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
@@ -55,7 +52,6 @@ export default function SideItem({
       <motion.li
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
-         variants={list ? undefined : sideLinkAnimation}
          ref={elementRef}
          className="w-full origin-right cursor-pointer relative list-none select-none"
       >

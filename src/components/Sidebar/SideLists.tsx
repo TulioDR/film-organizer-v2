@@ -15,7 +15,6 @@ export default function SideLists({}: Props) {
                link={`/lists/${list.id}`}
                icon="featured_play_list"
                text={list.name}
-               list
             />
          ))}
       </div>
