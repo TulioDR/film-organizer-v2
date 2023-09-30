@@ -26,7 +26,7 @@ export default function ListsLoginAdvice() {
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
             onTap={goToLogin}
-            className="flex space-x-3 rounded-lg shadow-lg py-2 px-4 text-text-1 mt-5"
+            className="flex items-center space-x-3 rounded-lg shadow-lg h-10 px-4 text-text-1 mt-5"
             style={{ backgroundColor: themeColor }}
          >
             <span className="material-symbols-outlined">login</span>
