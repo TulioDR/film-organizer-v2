@@ -13,7 +13,7 @@ export default function CreateListButton({ onClick }: Props) {
       <button
          onClick={onClick}
          style={{ backgroundColor: themeColor }}
-         className="h-9 grid place-content-center w-full truncate rounded-lg"
+         className="h-10 grid place-content-center w-full truncate rounded-lg"
       >
          <AnimatePresence mode="wait">
             {expandSidebar ? (

@@ -1,8 +1,7 @@
-import BrandHamburger from "./BrandHamburger";
 import CreateListButton from "./CreateListButton";
 import SidebarContainer from "./SidebarContainer";
 import SideSubtitle from "./SideSubtitle";
-import SideLine from "./SideLine";
+
 import SideLinks from "./SideLinks";
 
 import { useState } from "react";
@@ -15,6 +14,7 @@ import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import SideLoadingLists from "./SideLoadingLists";
 import SideLists from "./SideLists";
+import SideHeader from "./SideHeader";
 
 export default function Sidebar() {
    const { isLoaded, user } = useUser();
@@ -30,17 +30,14 @@ export default function Sidebar() {
 
    return (
       <SidebarContainer>
-         <BrandHamburger />
-         <SideLine />
+         <SideHeader />
          <SideLinks />
-         <SideLine />
          {isLoaded && user && (
             <>
                <CreateListButton onClick={openForm} />
                <ModalPortal isOpen={showCreateForm}>
                   <CreateListModal close={closeForm} />
                </ModalPortal>
-               <SideLine />
                <SideSubtitle>Lists</SideSubtitle>
                {!lists && <SideLoadingLists />}
                {lists && lists.length > 0 && <SideLists />}

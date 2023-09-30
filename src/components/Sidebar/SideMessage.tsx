@@ -69,7 +69,7 @@ export default function SideMessage({ children, icon, onClick }: Props) {
             variants={popUpAnimation}
             initial="initial"
             animate="animate"
-            className="w-9 h-9 grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10 text-white"
+            className="w-10 aspect-square grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10 text-white"
             style={{ backgroundColor: themeColor }}
          >
             <span className="material-symbols-outlined">{icon}</span>

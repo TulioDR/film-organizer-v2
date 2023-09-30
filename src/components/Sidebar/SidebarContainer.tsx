@@ -14,7 +14,7 @@ export default function SidebarContainer({ children }: Props) {
    return (
       <div
          className={`fixed lg:sticky top-0 z-40 self-start h-screen duration-300 ${
-            expandSidebar ? "w-60" : "w-[116px]"
+            expandSidebar ? "w-60" : "w-[120px]"
          } ${revealSidebar ? "" : "-translate-x-full lg:translate-x-0"}`}
       >
          <div
@@ -26,7 +26,7 @@ export default function SidebarContainer({ children }: Props) {
                initial="initial"
                animate="animate"
                exit="exit"
-               className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll main-scrollbar space-y-3"
+               className="w-full h-full p-10 hover:pr-8 overflow-y-hidden overflow-x-hidden hover:overflow-y-scroll main-scrollbar space-y-5"
             >
                {children}
             </motion.div>

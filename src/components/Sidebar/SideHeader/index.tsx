@@ -1,18 +1,16 @@
-import { useDispatch } from "react-redux";
-import ToggleSidebar from "../../components/ToggleSidebar";
+import ToggleSidebar from "@/components/ToggleSidebar";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 
-type Props = {};
-
-export default function BrandHamburger({}: Props) {
+export default function SideHeader() {
    const dispatch = useDispatch();
    const toggleReveal = () => dispatch(sidebarActions.toggleReveal());
    const toggleExpand = () => dispatch(sidebarActions.toggleExpanded());
-
    return (
-      <div className="flex items-center h-9 overflow-hidden">
+      <div className="flex items-center overflow-hidden">
          <div className="hidden lg:block">
             <ToggleSidebar onClick={toggleExpand} />
          </div>

@@ -23,6 +23,7 @@ export default function LoginAdviceModal() {
       dispatch(bookmarkActions.closeLoginAdviceModal());
    };
 
+   return <></>;
    return (
       <ModalPortal isOpen={isLoginAdviceOpen}>
          <ModalContainer closeModal={closeModal}>

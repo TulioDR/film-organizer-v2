@@ -32,7 +32,9 @@ export default function MainPageContainer({ children }: Props) {
 
    return (
       <>
-         <div id="modals-container"></div>
+         <AnimatePresence>
+            <div id="modals-container"></div>
+         </AnimatePresence>
          <BackgroundImage />
          <SaveMediaModal />
          <LoginAdviceModal />

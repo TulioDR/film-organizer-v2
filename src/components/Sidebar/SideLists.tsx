@@ -1,6 +1,6 @@
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
-import SideLink from "./SideLink";
+import SideItem from "./SideItem";
 
 type Props = {};
 
@@ -8,9 +8,9 @@ export default function SideLists({}: Props) {
    const { lists } = useSelector((state: StoreModel) => state.lists);
 
    return (
-      <>
+      <div className="space-y-2">
          {lists!.map((list) => (
-            <SideLink
+            <SideItem
                key={list.id}
                link={`/lists/${list.id}`}
                icon="featured_play_list"
@@ -18,6 +18,6 @@ export default function SideLists({}: Props) {
                list
             />
          ))}
-      </>
+      </div>
    );
 }

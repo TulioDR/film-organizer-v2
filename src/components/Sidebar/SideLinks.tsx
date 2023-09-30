@@ -1,4 +1,4 @@
-import SideLink from "./SideLink";
+import SideItem from "./SideItem";
 
 export default function SideLinks() {
    const movieItems = [
@@ -18,9 +18,9 @@ export default function SideLinks() {
    ];
 
    return (
-      <>
-         <SideLink link="/" icon="home" text="Home" />
-         <SideLink
+      <div className="space-y-2">
+         <SideItem link="/" icon="home" text="Home" />
+         <SideItem
             link="#"
             icon="movie"
             text="Movies"
@@ -28,7 +28,7 @@ export default function SideLinks() {
             dropdown
             items={movieItems}
          />
-         <SideLink
+         <SideItem
             link="#"
             icon="smart_display"
             text="Series"
@@ -36,12 +36,12 @@ export default function SideLinks() {
             dropdown
             items={tvItems}
          />
-         <SideLink link="/discover" icon="travel_explore" text="Discover" />
-         <SideLink
+         <SideItem link="/discover" icon="travel_explore" text="Discover" />
+         <SideItem
             link="/lists"
             icon="format_list_bulleted"
             text="Manage Lists"
          />
-      </>
+      </div>
    );
 }

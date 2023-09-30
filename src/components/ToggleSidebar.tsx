@@ -15,7 +15,7 @@ export default function ToggleSidebar({ onClick }: Props) {
          variants={popUpAnimation}
          style={{ backgroundColor: themeColor }}
          onClick={onClick}
-         className="h-9 aspect-square flex-shrink-0 rounded-lg grid place-content-center text-white"
+         className="h-10 aspect-square flex-shrink-0 rounded-lg grid place-content-center text-white"
       >
          <span className="material-symbols-outlined">menu</span>
       </motion.button>
