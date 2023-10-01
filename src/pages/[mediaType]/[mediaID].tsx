@@ -54,7 +54,7 @@ export default function Details({ mediaType, media }: Props) {
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="md:flex overflow-hidden md:h-[calc(100vh-96px)] pb-10 px-10 relative">
+         <div className="md:flex overflow-hidden md:h-[calc(100vh-140px)] relative mb-10">
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}
