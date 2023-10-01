@@ -64,7 +64,7 @@ export default function DropDown({
                <span className="material-symbols-outlined !text-4xl">
                   {icon}
                </span>
-               <span className="font-semibold font-title text-lg truncate">
+               <span className="font-semibold font-title truncate uppercase">
                   {title}
                </span>
             </div>

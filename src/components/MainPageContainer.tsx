@@ -41,10 +41,12 @@ export default function MainPageContainer({ children }: Props) {
          <Notification />
          <div className="flex">
             <Sidebar />
-            <div className="relative flex-1 min-w-0">
+            <div className="relative flex-1 min-w-0 px-10 pb-10 overflow-hidden">
                <Navbar />
                <AnimatePresence mode="wait">
-                  <motion.div key={router.asPath}>{children}</motion.div>
+                  <motion.div key={router.asPath} className="">
+                     {children}
+                  </motion.div>
                </AnimatePresence>
             </div>
          </div>

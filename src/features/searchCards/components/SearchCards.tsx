@@ -49,14 +49,14 @@ export default function SearchCards({ title, mediaType, url }: Props) {
             showLoadingAnimation={showLoadingAnimation}
             setShowLoadingAnimation={setShowLoadingAnimation}
          >
-            <div className="px-10 pb-10">
+            <div className="">
                <Title title={title} />
                <motion.div
                   variants={cardsContainer}
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className={`gap-5 grid grid-cols-2 md:grid-cols-3 ${
+                  className={`gap-5 mb-10 grid grid-cols-2 md:grid-cols-3 ${
                      expandSidebar
                         ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
                         : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"

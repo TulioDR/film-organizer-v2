@@ -17,19 +17,17 @@ export default function LoadingMore({ page, setPage }: Props) {
 
    if (page >= 4) return <></>;
    return (
-      <div className="mb-10 w-full">
-         <div
-            ref={loadingRef}
-            className="bg-secondary-light dark:bg-secondary-dark mx-auto w-max px-20 py-5 rounded-xl"
-         >
-            <SpinnerCircularFixed
-               size={40}
-               thickness={180}
-               speed={100}
-               color="white"
-               secondaryColor="transparent"
-            />
-         </div>
+      <div
+         ref={loadingRef}
+         className="bg-secondary-light dark:bg-secondary-dark mx-auto w-max px-20 py-5 rounded-xl"
+      >
+         <SpinnerCircularFixed
+            size={40}
+            thickness={180}
+            speed={100}
+            color="white"
+            secondaryColor="transparent"
+         />
       </div>
    );
 }

@@ -23,7 +23,7 @@ export default function SidebarContainer({ children }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="h-full bg-primary-light dark:bg-primary-dark p-10 hover:pr-8 overflow-y-hidden hover:overflow-y-scroll main-scrollbar"
+            className="h-full bg-primary-light dark:bg-primary-dark p-10 hover:pr-8 overflow-x-hidden overflow-y-hidden hover:overflow-y-scroll main-scrollbar"
          >
             <div
                className={`duration-300 space-y-5 ${

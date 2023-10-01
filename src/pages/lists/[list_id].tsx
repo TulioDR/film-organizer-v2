@@ -92,7 +92,7 @@ export default function ListID({}: Props) {
    };
    return (
       <TransitionPosterProvider>
-         <div className="px-10 pb-10 relative">
+         <div className="relative">
             <PageHead title={list?.name || "Film Organizer"} />
             {list && (
                <Title title={list.name}>

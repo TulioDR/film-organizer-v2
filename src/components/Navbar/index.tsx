@@ -12,13 +12,16 @@ export default function Navbar() {
    const handleClick = () => dispatch(sidebarActions.toggleReveal());
 
    return (
-      <div className="w-full z-20 sticky top-0 pt-10 pb-5 px-10 flex items-center pointer-events-none">
+      <div
+         id="navbar"
+         className="w-full z-20 sticky top-0 pt-10 pb-5 flex items-center pointer-events-none"
+      >
          <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="h-9 flex items-center justify-between space-x-3 lg:space-x-0 w-full"
+            className="h-10 flex items-center justify-between space-x-3 lg:space-x-0 w-full"
          >
             <div className="lg:hidden pointer-events-auto">
                <ToggleSidebar onClick={handleClick} />

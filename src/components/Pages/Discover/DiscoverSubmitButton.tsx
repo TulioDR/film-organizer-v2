@@ -7,7 +7,7 @@ export default function DiscoverSubmitButton() {
       <button
          type="submit"
          style={{ backgroundColor: themeColor }}
-         className="px-5 rounded-xl mx-auto block shadow-lg mt-5 text-white font-medium uppercase h-10"
+         className="px-5 rounded-lg mx-auto block shadow-lg text-white font-medium uppercase h-10"
       >
          Search
       </button>

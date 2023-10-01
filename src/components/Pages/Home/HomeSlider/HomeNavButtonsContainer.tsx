@@ -22,7 +22,7 @@ export default function HomeNavButtonsContainer({
    };
 
    return (
-      <div className="absolute bottom-full right-0 pr-10 pb-10 flex gap-5">
+      <div className="absolute bottom-full right-0 pb-10 flex gap-5">
          <HomeNavButton onClick={back} disabled={activeIndex <= 0} back />
          <HomeNavButton onClick={next} disabled={activeIndex >= 19} />
       </div>

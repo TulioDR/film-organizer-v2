@@ -48,7 +48,7 @@ export default function Genres({ isMovie, mediaType }: Props) {
    }, [mediaType]);
 
    return (
-      <div className="flex flex-col px-10">
+      <div className="">
          <Head>
             <title>{title}</title>
             <meta name="description" content="Which is your favorite genre?" />
@@ -60,7 +60,7 @@ export default function Genres({ isMovie, mediaType }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full flex flex-col gap-5 pb-10"
+            className="w-full flex flex-col gap-5"
          >
             {mediaType === "movie" ? (
                <MovieLayout genres={genresData} />

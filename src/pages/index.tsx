@@ -52,20 +52,26 @@ export default function Home() {
       if (currentShowcase === "upcoming") setCurrentArray(upcoming);
    }, [currentShowcase, nowPlaying, onAir, upcoming]);
 
+   const [navbarHeight, setNavbarHeight] = useState<number>(0);
+   useEffect(() => {
+      const navbar = document.getElementById("navbar");
+      setNavbarHeight(navbar!.clientHeight);
+   }, []);
+
    return (
       <TransitionPosterProvider>
          <PageHead title="Film Organizer" />
          <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            style={{ height: "calc(100vh - 96px)" }}
-            className="w-full overflow-hidden pb-10 text-white"
+            style={{ height: `calc(100vh - ${navbarHeight + 40}px)` }}
+            className="w-full text-white"
          >
             {!currentMedia ? (
                <div className="fixed top-0 left-0 h-screen -z-10 w-full"></div>
             ) : (
                <div className="h-full flex flex-col items-stretch">
-                  <div className="flex-1 w-full px-10 pb-10 flex flex-col justify-between">
+                  <div className="flex-1 w-full pb-10 flex flex-col justify-between">
                      <ChangeShowcase
                         currentShowcase={currentShowcase}
                         setCurrentShowcase={setCurrentShowcase}
