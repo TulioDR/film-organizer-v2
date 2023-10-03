@@ -13,6 +13,7 @@ import ScrollDownIcon from "@/components/Pages/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/Pages/MediaDetails/MainPoster";
 import BottomInfoContainer from "@/components/Pages/MediaDetails/BottomInfoContainer";
 import useBackground from "@/hooks/useBackground";
+import useScrollToTop from "@/hooks/useScrollToTop";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType, mediaID } = context.query!;
@@ -39,12 +40,11 @@ type Props = {
 export default function Details({ mediaType, media }: Props) {
    const { changeBackground } = useBackground();
 
+   useScrollToTop();
+
    useEffect(() => {
       changeBackground(media);
    }, [media, changeBackground]);
-   useEffect(() => {
-      document.body.scrollTo({ top: 0 });
-   }, []);
 
    return (
       <div className="w-full">
@@ -53,7 +53,7 @@ export default function Details({ mediaType, media }: Props) {
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="md:flex md:h-[calc(100vh-140px)] relative mb-10">
+         <div className="md:flex md:h-[calc(100vh-140px)] relative mb-10 overflow-hidden">
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}

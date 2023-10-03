@@ -11,6 +11,7 @@ import GenreModel from "@/models/genresModel";
 import MovieLayout from "@/components/Pages/Genres/MovieLayout";
 import TvLayout from "@/components/Pages/Genres/TvLayout";
 import Title from "@/components/Title";
+import useScrollToTop from "@/hooks/useScrollToTop";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { mediaType } = context.query;
@@ -35,10 +36,7 @@ const container = {
 
 export default function Genres({ isMovie, mediaType }: Props) {
    const title = `${isMovie ? "Movie" : "TV"} Genres`;
-   useEffect(() => {
-      const container = document.body;
-      container.scrollTo({ top: 0 });
-   }, []);
+   useScrollToTop();
 
    const [genresData, setGenresData] = useState<any[]>(movieGenres);
 
