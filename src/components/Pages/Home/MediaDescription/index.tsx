@@ -29,14 +29,14 @@ export default function MediaDescription({
             initial="initial"
             animate="animate"
             exit="exit"
-            className="space-y-2 2xl:space-y-3 font-oswald"
+            className="space-y-2 2xl:space-y-3"
          >
             <HomeDate
                currentMedia={currentMedia}
                currentShowcase={currentShowcase}
             />
             <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
-            <div className="hidden sm:flex items-center h-10 2xl:h-14 space-x-3 2xl:space-x-4">
+            <div className="flex items-center h-10 gap-4">
                <HomeBookmark movie={currentMedia} />
                <LearnMoreButton onClick={handleLearnMoreClick} />
             </div>

@@ -30,6 +30,8 @@ body::-webkit-scrollbar-track {
 /* Main scrollbar */
 .main-scrollbar::-webkit-scrollbar {
    width: 8px;
+   height: 8px;
+   scrollbar-width: thin;
 }
 .main-scrollbar::-webkit-scrollbar-track {
    @apply bg-transparent;

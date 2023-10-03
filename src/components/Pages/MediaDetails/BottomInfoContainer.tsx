@@ -6,12 +6,10 @@ type Props = {
 
 export default function BottomInfoContainer({ children }: Props) {
    return (
-      <div className="">
-         <div className="bg-primary-light dark:bg-primary-dark p-5 sm:p-10 rounded-3xl xl:flex gap-10 shadow-2xl">
-            <MantineProvider theme={{ colorScheme: "dark" }}>
-               {children}
-            </MantineProvider>
+      <MantineProvider theme={{ colorScheme: "dark" }}>
+         <div className="bg-primary-light dark:bg-primary-dark px-5 sm:px-10 rounded-3xl xl:flex gap-5 2xl:gap-10 shadow-2xl sticky top-0">
+            {children}
          </div>
-      </div>
+      </MantineProvider>
    );
 }

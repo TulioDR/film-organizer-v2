@@ -22,8 +22,8 @@ export default function TransitionPoster({}: Props) {
          }}
          exit={{
             left: sidebarWidth + 40,
-            top: 96,
-            height: "calc(100vh - 136px)",
+            top: 100,
+            height: "calc(100vh - 140px)",
             borderRadius: 24,
          }}
          transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}

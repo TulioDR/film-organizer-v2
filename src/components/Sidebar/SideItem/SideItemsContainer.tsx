@@ -39,7 +39,7 @@ export default function SideItemsContainer({
                animate="animate"
                exit="exit"
                className={`${
-                  tooltip ? "origin-left fixed z-10 " : "overflow-hidden"
+                  tooltip ? "origin-left fixed z-50" : "overflow-hidden"
                }`}
             >
                <div

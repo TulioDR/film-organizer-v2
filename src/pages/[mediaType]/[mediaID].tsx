@@ -11,7 +11,6 @@ import MainInfo from "@/components/Pages/MediaDetails/MainInfo";
 import Overview from "@/components/Pages/MediaDetails/Overview";
 import ScrollDownIcon from "@/components/Pages/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/Pages/MediaDetails/MainPoster";
-import SimilarContainer from "@/components/Pages/MediaDetails/Similar/SimilarContainer";
 import BottomInfoContainer from "@/components/Pages/MediaDetails/BottomInfoContainer";
 import useBackground from "@/hooks/useBackground";
 
@@ -54,7 +53,7 @@ export default function Details({ mediaType, media }: Props) {
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="md:flex overflow-hidden md:h-[calc(100vh-140px)] relative mb-10">
+         <div className="md:flex md:h-[calc(100vh-140px)] relative mb-10">
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}
@@ -63,7 +62,7 @@ export default function Details({ mediaType, media }: Props) {
             <ScrollDownIcon />
          </div>
          <BottomInfoContainer>
-            <div className="flex-1 space-y-10 overflow-hidden">
+            <div className="flex-1 space-y-10 py-10">
                <Overview
                   media={media}
                   crew={media.created_by || media.credits.crew}
@@ -76,9 +75,7 @@ export default function Details({ mediaType, media }: Props) {
                )}
                <Trailers trailers={media.videos.results} />
             </div>
-            <SimilarContainer>
-               <Similar media={media} mediaType={mediaType} />
-            </SimilarContainer>
+            <Similar media={media} mediaType={mediaType} />
          </BottomInfoContainer>
       </div>
    );

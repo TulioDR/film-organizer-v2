@@ -1,6 +1,7 @@
 import { MediaDetailsModel } from "@/models/MediaModel";
 import SimilarCard from "./SimilarCard";
 import Subtitle from "@/components/Subtitle";
+import SimilarContainer from "./SimilarContainer";
 
 type Props = {
    media: MediaDetailsModel;
@@ -9,11 +10,11 @@ type Props = {
 
 export default function Similar({ media, mediaType }: Props) {
    return (
-      <div className="">
+      <SimilarContainer>
          <Subtitle>
             Similar {mediaType === "movie" ? "Movies" : "Series"}
          </Subtitle>
-         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-5">
+         <div className="flex xl:grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-5 w-full overflow-x-auto main-scrollbar">
             {media.similar.results.map((similar) => (
                <SimilarCard
                   key={similar.id}
@@ -22,6 +23,6 @@ export default function Similar({ media, mediaType }: Props) {
                />
             ))}
          </div>
-      </div>
+      </SimilarContainer>
    );
 }

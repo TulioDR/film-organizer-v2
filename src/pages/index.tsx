@@ -63,8 +63,8 @@ export default function Home() {
             {!currentMedia ? (
                <div className="fixed top-0 left-0 h-screen -z-10 w-full"></div>
             ) : (
-               <div className="h-full flex flex-col items-stretch">
-                  <div className="flex-1 w-full pb-10 flex flex-col justify-between">
+               <div className="h-full flex flex-col items-stretch -mx-10 overflow-hidden">
+                  <div className="flex-1 w-full pb-10 flex flex-col justify-between px-10">
                      <ChangeShowcase
                         currentShowcase={currentShowcase}
                         setCurrentShowcase={setCurrentShowcase}

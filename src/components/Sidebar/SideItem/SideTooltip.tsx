@@ -1,5 +1,6 @@
 import SideLink from "./SideLink";
 import SideItemsContainer from "./SideItemsContainer";
+import ModalPortal from "@/components/Modals/ModalPortal";
 
 type Props = {
    open: boolean;
@@ -15,21 +16,23 @@ export default function SideTooltip({
    text,
 }: Props) {
    return (
-      <SideItemsContainer open={open} tooltip tagPosition={tooltipPosition}>
-         <div className="text-base h-10 flex items-center w-max">{text}</div>
-         {items && (
-            <ul className="space-y-2 py-2">
-               {items.map((item, index) => (
-                  <SideLink
-                     key={index}
-                     link={item.link}
-                     icon={item.icon}
-                     text={item.text}
-                     hideIcon
-                  />
-               ))}
-            </ul>
-         )}
-      </SideItemsContainer>
+      <ModalPortal isOpen={open}>
+         <SideItemsContainer open={open} tooltip tagPosition={tooltipPosition}>
+            <div className="text-base h-10 flex items-center w-max">{text}</div>
+            {items && (
+               <ul className="space-y-2 py-2">
+                  {items.map((item, index) => (
+                     <SideLink
+                        key={index}
+                        link={item.link}
+                        icon={item.icon}
+                        text={item.text}
+                        hideIcon
+                     />
+                  ))}
+               </ul>
+            )}
+         </SideItemsContainer>
+      </ModalPortal>
    );
 }

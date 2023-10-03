@@ -20,7 +20,7 @@ export default function SimilarCard({ similar, href }: Props) {
       <Link
          href={href}
          onClick={handleClick}
-         className="cursor-pointer w-full flex flex-col gap-1"
+         className="cursor-pointer flex-shrink-0 w-28 xl:w-full flex flex-col gap-1"
       >
          <div className="w-full">
             <Poster
@@ -30,7 +30,7 @@ export default function SimilarCard({ similar, href }: Props) {
                roundedSmall
             />
          </div>
-         <div className="w-full text-xs sm:text-sm text-center">
+         <div className="w-full text-xs md:text-sm text-center">
             {similar.title || similar.name}
          </div>
       </Link>
