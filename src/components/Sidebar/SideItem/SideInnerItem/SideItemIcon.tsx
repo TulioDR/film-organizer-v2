@@ -1,17 +1,15 @@
 type Props = {
    isFilled: boolean;
    icon: string;
-   isMainLink?: true;
+   smallIcon?: true;
 };
 
-export default function SideItemIcon({ isFilled, icon, isMainLink }: Props) {
+export default function SideItemIcon({ isFilled, icon, smallIcon }: Props) {
    return (
       <span
          style={isFilled ? { fontVariationSettings: `"FILL" 1` } : {}}
-         className={`material-symbols-outlined  ${
-            isMainLink
-               ? " !w-10 !text-center !flex-shrink-0 !text-2xl"
-               : "!text-xl"
+         className={`material-symbols-outlined !w-10 !text-center ${
+            smallIcon ? "!text-xl mr-2" : "!flex-shrink-0 !text-2xl"
          }`}
       >
          {icon}

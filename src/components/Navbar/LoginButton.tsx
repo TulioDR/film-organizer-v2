@@ -10,7 +10,7 @@ export default function LoginButton() {
       <motion.button variants={popUpAnimation} className="hidden sm:block h-10">
          <Link
             href="/auth"
-            className="h-full px-4 flex items-center bg-secondary-light dark:bg-secondary-dark shadow-lg cursor-pointer"
+            className="h-full px-4 flex items-center bg-secondary-light dark:bg-secondary-dark"
          >
             Log in
          </Link>

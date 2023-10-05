@@ -6,6 +6,8 @@ import StoreModel from "@/models/StoreModel";
 import SideTooltip from "./SideTooltip";
 import SideLink from "./SideLink";
 import SideDropdown from "./SideDropdown";
+import useSidebarActiveMark from "@/hooks/useSidebarActiveMark";
+import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 
 interface DropdownItem {
    link: string;
@@ -33,11 +35,13 @@ export default function SideItem({
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    const [showTooltip, setShowTooltip] = useState<boolean>(false);
+   const [isHovering, setIsHovering] = useState<boolean>(false);
    const [tagPosition, setTagPosition] = useState<any>(null);
 
    const elementRef = useRef<HTMLLIElement>(null);
 
    const handleHoverStart = () => {
+      setIsHovering(true);
       if (expandSidebar) return;
       const rect = elementRef.current!.getBoundingClientRect();
       setTagPosition({ top: rect.top, right: rect.right });
@@ -45,15 +49,27 @@ export default function SideItem({
    };
 
    const handleHoverEnd = () => {
+      setIsHovering(false);
       setShowTooltip(false);
    };
+
+   const { isSelected } = useSidebarActiveMark({ mediaType, link });
 
    return (
       <motion.li
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
+         variants={sideLinkAnimation}
          ref={elementRef}
-         className="w-full origin-right cursor-pointer relative list-none select-none"
+         className={`w-full origin-right list-none select-none rounded-l-lg 
+         ${showTooltip ? "" : "rounded-r-lg"}
+         ${
+            isSelected
+               ? "bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
+               : isHovering
+               ? "text-light-1 bg-secondary-light dark:text-dark-1 dark:bg-secondary-dark"
+               : "text-light-2 dark:text-dark-2"
+         }`}
       >
          {dropdown ? (
             <SideDropdown
@@ -64,13 +80,17 @@ export default function SideItem({
                items={items!}
             />
          ) : (
-            <SideLink link={link} icon={icon} text={text} isMainLink />
+            <SideLink link={link} icon={icon} text={text} />
          )}
          <SideTooltip
+            isSelected={isSelected}
+            onHoverStart={handleHoverStart}
+            onHoverEnd={handleHoverEnd}
             open={showTooltip}
             tooltipPosition={tagPosition}
             items={items}
             text={text}
+            link={link}
          />
       </motion.li>
    );

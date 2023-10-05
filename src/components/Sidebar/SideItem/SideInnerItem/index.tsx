@@ -1,45 +1,25 @@
-import React from "react";
+import StoreModel from "@/models/StoreModel";
+import { useSelector } from "react-redux";
 import SideItemIcon from "./SideItemIcon";
-import SideItemText from "./SideItemText";
-import DropdownIcon from "./DropdownIcon";
-import SideInnerItemContainer from "./SideInnerItemContainer";
 
 type Props = {
+   isSelected: boolean;
    icon: string;
    text: string;
-   isSelected: boolean;
-   hideIcon?: true;
-   isMainLink?: true;
-   dropdown?: true;
-   open?: boolean;
 };
 
-export default function SideInnerItem({
-   icon,
-   text,
-   isSelected,
-   hideIcon,
-   isMainLink,
-   dropdown,
-   open,
-}: Props) {
+export default function SideInnerItem({ isSelected, icon, text }: Props) {
+   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
    return (
-      <SideInnerItemContainer isSelected={isSelected} isMainLink={isMainLink}>
-         <div
-            className={`flex items-center ${
-               isMainLink ? "gap-4 h-10" : "gap-2"
-            } `}
+      <div className="flex items-center gap-2 h-10">
+         <SideItemIcon isFilled={isSelected} icon={icon} />
+         <span
+            className={`flex-shrink-0 duration-300 text-base ${
+               expandSidebar ? "opacity-100" : "opacity-0"
+            }`}
          >
-            {!hideIcon && (
-               <SideItemIcon
-                  isFilled={isSelected}
-                  icon={icon}
-                  isMainLink={isMainLink}
-               />
-            )}
-            <SideItemText text={text} isMainLink={isMainLink} />
-         </div>
-         {dropdown && <DropdownIcon open={open || false} />}
-      </SideInnerItemContainer>
+            {text}
+         </span>
+      </div>
    );
 }

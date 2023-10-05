@@ -50,7 +50,7 @@ export default function DropDown({
    return (
       <motion.div
          variants={staggerItem}
-         className="bg-secondary-light dark:bg-secondary-dark rounded-xl shadow-lg p-5 space-y-5"
+         className="bg-secondary-light dark:bg-secondary-dark rounded-xl p-5 space-y-5"
       >
          <div className="-mt-10 rounded-xl shadow-lg relative overflow-hidden">
             <Image

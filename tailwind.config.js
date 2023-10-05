@@ -17,11 +17,13 @@ module.exports = {
          },
          colors: {
             primary: {
-               light: "#e5e7eb",
+               // light: "#e5e7eb",
+               light: "#ffffff",
                dark: "#040603",
             },
             secondary: {
-               light: "#FFFFFF",
+               // light: "#FFFFFF",
+               light: "#e5e7eb",
                dark: "#2a282a",
             },
 

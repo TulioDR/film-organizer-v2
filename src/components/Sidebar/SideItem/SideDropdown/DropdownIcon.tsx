@@ -5,7 +5,7 @@ type Props = { open: boolean };
 export default function DropdownIcon({ open }: Props) {
    return (
       <span
-         className={`material-symbols-outlined duration-300 !text-center w-9 ${
+         className={`material-symbols-outlined duration-300 !text-center !w-10 ${
             open ? "rotate-180" : ""
          }`}
       >

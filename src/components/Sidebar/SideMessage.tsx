@@ -69,7 +69,7 @@ export default function SideMessage({ children, icon, onClick }: Props) {
             variants={popUpAnimation}
             initial="initial"
             animate="animate"
-            className="w-10 aspect-square grid place-content-center rounded-lg -mb-[18px] shadow-lg z-10 text-white"
+            className="w-10 aspect-square grid place-content-center rounded-lg -mb-[18px] z-10 text-white"
             style={{ backgroundColor: themeColor }}
          >
             <span className="material-symbols-outlined">{icon}</span>
@@ -79,7 +79,7 @@ export default function SideMessage({ children, icon, onClick }: Props) {
             animate={messageContainerControls}
             exit={{ width: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="rounded-xl bg-secondary-light dark:bg-secondary-dark shadow-lg text-center overflow-hidden flex items-center justify-center"
+            className="rounded-xl bg-secondary-light dark:bg-secondary-dark text-center overflow-hidden flex items-center justify-center"
          >
             <motion.span
                initial={{ opacity: 0 }}
