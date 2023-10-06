@@ -14,11 +14,11 @@ export default function SidebarContainer({ children }: Props) {
    return (
       <div
          id="sidebar"
-         className={`fixed lg:sticky top-0 self-start h-screen duration-300 overflow-x-visible overflow-y-hidden hover:overflow-y-hidden main-scrollbar 
+         className={`fixed lg:sticky top-0 self-start h-screen duration-300  
             ${revealSidebar ? "" : "-translate-x-full lg:translate-x-0"} 
             ${expandSidebar ? "w-60" : "w-[120px]"}`}
       >
-         <div className="w-full p-10 bg-primary-light dark:bg-primary-dark">
+         <div className="h-full p-10 bg-primary-light dark:bg-primary-dark overflow-x-hidden overflow-y-hidden hover:overflow-y-auto main-scrollbar">
             <div className={`duration-300 ${expandSidebar ? "w-40" : "w-10"}`}>
                <motion.div
                   variants={staggerContainer}

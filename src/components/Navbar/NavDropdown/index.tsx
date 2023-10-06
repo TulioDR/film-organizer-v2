@@ -43,7 +43,7 @@ export default function NavDropdown() {
       >
          <button
             onClick={toggle}
-            className="h-full w-full rounded-full overflow-hidden shadow-lg relative"
+            className="h-full w-full rounded-full overflow-hidden relative"
          >
             {user ? (
                <UserImage />
