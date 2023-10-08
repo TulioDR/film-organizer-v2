@@ -22,18 +22,17 @@ export default function BackgroundImage() {
    }, [backgroundImage]);
 
    return (
-      <div className="fixed top-0 left-0 h-screen bg-primary-dark -z-10 w-screen flex items-center justify-center">
+      <div
+         className={`fixed top-0 left-0 h-screen  -z-10 w-screen flex items-center justify-center ${
+            src ? "bg-primary-dark" : "bg-primary-light dark:bg-primary-dark"
+         }`}
+      >
          <AnimatePresence mode="wait">
-            {!src ? (
-               <div
-                  key="noBackground"
-                  className="w-full h-full bg-primary-light dark:bg-primary-dark"
-               />
-            ) : (
+            {src && (
                <motion.div
                   key="background"
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                   className="w-full h-full"
                >
                   <AnimatePresence mode="wait">
@@ -42,11 +41,10 @@ export default function BackgroundImage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.4 }}
                         className="relative w-full h-full"
                      >
                         <Backdrop src={src} backgroundKey={backgroundKey} />
-                        <div className="absolute top-0 left-0 w-full h-full bg-primary-dark/80"></div>
                      </motion.div>
                   </AnimatePresence>
                </motion.div>
