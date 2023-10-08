@@ -25,6 +25,7 @@ export default function GenrePage({ mediaType, genreID, title }: Props) {
          url={`/genres/${mediaType}/${genreID}`}
          title={title}
          mediaType={mediaType}
+         noRemoveBackground
       />
    );
 }

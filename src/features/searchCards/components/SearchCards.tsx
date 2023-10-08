@@ -1,26 +1,30 @@
-import { motion } from "framer-motion";
 import MainCard from "./MainCard";
-
 import useSearchCards from "../hooks/useSearchCards";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
+
 import LoadingMore from "./LoadingMore";
 
 import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import Title from "@/components/Title";
-import PageAnimationContainer from "./PageAnimationContainer";
+import SearchCardsContainer from "./SearchCardsContainer";
+import PageHead from "@/components/PageHead";
+import { AnimatePresence } from "framer-motion";
+import LoadingPage from "@/animations/LoadingPage";
 
 type Props = {
    title: string;
    mediaType: "tv" | "movie";
    url: string;
+   noRemoveBackground?: true;
 };
 
-export default function SearchCards({ title, mediaType, url }: Props) {
-   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
-
+export default function SearchCards({
+   title,
+   mediaType,
+   url,
+   noRemoveBackground,
+}: Props) {
    const [showLoadingAnimation, setShowLoadingAnimation] =
       useState<boolean>(true);
    const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -28,40 +32,17 @@ export default function SearchCards({ title, mediaType, url }: Props) {
 
    const { media, page, setPage } = useSearchCards(url, setIsLoading);
 
-   useRemoveBackgroundImage();
-
-   const cardsContainer = {
-      initial: {},
-      animate: { transition: { staggerChildren: 0.2 } },
-      exit: {
-         opacity: 0,
-         transition: { duration: 0.4 },
-      },
+   useRemoveBackgroundImage(noRemoveBackground);
+   const onAnimationComplete = () => {
+      if (!isLoading) setShowLoadingAnimation(false);
    };
-
    return (
       <TransitionPosterProvider>
-         <PageAnimationContainer
-            title={title}
-            showPage={showPage}
-            setShowPage={setShowPage}
-            isLoading={isLoading}
-            showLoadingAnimation={showLoadingAnimation}
-            setShowLoadingAnimation={setShowLoadingAnimation}
-         >
-            <div className="">
+         <PageHead title={title} />
+         {showPage && (
+            <>
                <Title title={title} />
-               <motion.div
-                  variants={cardsContainer}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  className={`gap-5 mb-10 grid grid-cols-2 md:grid-cols-3 ${
-                     expandSidebar
-                        ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-                        : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-                  }`}
-               >
+               <SearchCardsContainer>
                   {media.map((media) => (
                      <MainCard
                         key={media.id}
@@ -69,10 +50,18 @@ export default function SearchCards({ title, mediaType, url }: Props) {
                         mediaType={mediaType}
                      />
                   ))}
-               </motion.div>
-            </div>
-            <LoadingMore page={page} setPage={setPage} />
-         </PageAnimationContainer>
+               </SearchCardsContainer>
+               <LoadingMore page={page} setPage={setPage} />
+            </>
+         )}
+         <AnimatePresence onExitComplete={() => setShowPage(true)}>
+            {showLoadingAnimation && (
+               <LoadingPage
+                  isLoading={isLoading}
+                  onAnimationComplete={onAnimationComplete}
+               />
+            )}
+         </AnimatePresence>
       </TransitionPosterProvider>
    );
 }
