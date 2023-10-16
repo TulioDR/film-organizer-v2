@@ -6,9 +6,9 @@ export default async function handler(
    res: NextApiResponse
 ) {
    if (req.method === "GET") {
-      const [tvShowId, seasonNumber] = req.query.seasonParams!;
+      const { show_id, season_number } = req.query;
       try {
-         const url = `https://api.themoviedb.org/3/tv/${tvShowId}/season/${seasonNumber}?api_key=${apiKey}&language=en-US`;
+         const url = `https://api.themoviedb.org/3/tv/${show_id}/season/${season_number}?api_key=${apiKey}&language=en-US`;
          const response = await fetch(url);
          const data = await response.json();
          res.status(200).json(data);

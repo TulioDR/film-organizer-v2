@@ -3,18 +3,18 @@ import SideItem from "./SideItem";
 export default function SideLinks() {
    const movieItems = [
       {
-         link: "/popular/movie",
+         link: "/movie/popular",
          icon: "local_fire_department",
          text: "Popular",
       },
-      { link: "/genres/movie", icon: "theater_comedy", text: "Genres" },
-      { link: "/trending/movie", icon: "trending_up", text: "Trending" },
+      { link: "/movie/genres", icon: "theater_comedy", text: "Genres" },
+      { link: "/movie/trending", icon: "trending_up", text: "Trending" },
    ];
 
    const tvItems = [
-      { link: "/popular/tv", icon: "local_fire_department", text: "Popular" },
-      { link: "/genres/tv", icon: "theater_comedy", text: "Genres" },
-      { link: "/trending/tv", icon: "trending_up", text: "Trending" },
+      { link: "/tv/popular", icon: "local_fire_department", text: "Popular" },
+      { link: "/tv/genres", icon: "theater_comedy", text: "Genres" },
+      { link: "/tv/trending", icon: "trending_up", text: "Trending" },
    ];
 
    return (

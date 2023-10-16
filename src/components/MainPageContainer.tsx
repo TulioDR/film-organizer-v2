@@ -45,7 +45,7 @@ export default function MainPageContainer({ children }: Props) {
             <div className="flex-1 min-w-0 px-5 sm:px-10 pb-5 sm:pb-10">
                <Navbar />
                <AnimatePresence mode="wait">
-                  <motion.div key={router.asPath} className="">
+                  <motion.div key={router.pathname} className="">
                      {children}
                   </motion.div>
                </AnimatePresence>

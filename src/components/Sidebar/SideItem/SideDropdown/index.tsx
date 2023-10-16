@@ -25,8 +25,8 @@ export default function SideDropdown({
 }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
-   const [open, setOpen] = useState<boolean>(false);
-   const toggle = () => setOpen((prev) => !prev);
+   const [isOpen, setIsOpen] = useState<boolean>(false);
+   const toggle = () => setIsOpen((prev) => !prev);
 
    const { isSelected } = useSidebarActiveMark({ mediaType, link });
    return (
@@ -36,9 +36,9 @@ export default function SideDropdown({
             className="w-full flex items-center justify-between overflow-hidden"
          >
             <SideInnerItem isSelected={isSelected} icon={icon} text={text} />
-            <DropdownIcon open={open || false} />
+            <DropdownIcon open={isOpen || false} />
          </button>
-         <SideDropdownContainer open={open && expandSidebar}>
+         <SideDropdownContainer open={isOpen && expandSidebar}>
             {items.map((item, index) => (
                <SideDropdownItem
                   key={index}

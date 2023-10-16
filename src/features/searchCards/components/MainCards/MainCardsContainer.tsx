@@ -7,14 +7,14 @@ type Props = {
    children: React.ReactNode;
 };
 
-export default function SearchCardsContainer({ children }: Props) {
+export default function MainCardsContainer({ children }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
    const cardsContainer = {
       initial: {},
       animate: { transition: { staggerChildren: 0.2 } },
       exit: {
          opacity: 0,
-         transition: { duration: 0.4 },
+         transition: { duration: 0.5 },
       },
    };
    useRemoveBackgroundImage();

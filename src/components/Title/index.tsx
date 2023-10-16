@@ -15,17 +15,19 @@ export default function Title({ title, children }: Props) {
    );
    return (
       <TitleContainer>
-         <RevealHorizontal>
-            <div
-               className={`text-xl md:text-4xl lg:text-6xl 2xl:text-7xl font-title tracking-wider ${
-                  backgroundKey
-                     ? "text-dark-1"
-                     : "text-light-1 dark:text-dark-1"
-               }`}
-            >
-               {title}
-            </div>
-         </RevealHorizontal>
+         <div className="overflow-hidden">
+            <RevealHorizontal>
+               <div
+                  className={`text-xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-title tracking-wide uppercase ${
+                     backgroundKey
+                        ? "text-dark-1"
+                        : "text-light-1 dark:text-dark-1"
+                  }`}
+               >
+                  {title}
+               </div>
+            </RevealHorizontal>
+         </div>
          {children}
       </TitleContainer>
    );

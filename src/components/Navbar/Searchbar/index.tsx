@@ -20,13 +20,19 @@ export default function SearchBar({}: Props) {
    const [currentIndex, setCurrentIndex] = useState<number | null>(null);
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
+   const { search_query } = router.query;
+   useEffect(() => {
+      const query = search_query as string | undefined;
+      setInputValue(query || "");
+   }, [search_query]);
+
    useEffect(() => {
       const timeoutId = setTimeout(async () => {
          if (!isOnFocus) return;
          if (inputValue.length > 0) {
             setIsLoading(true);
-            const type = isMovie ? "movie" : "tv";
-            const url = `/searchbar_results/${type}/${inputValue}/1`;
+            const media_type = isMovie ? "movie" : "tv";
+            const url = `/${media_type}/search/${inputValue}/1`;
             const { data } = await API_PUBLIC.get(url);
             setResults(data.results.slice(0, 5));
             setShowResults(true);
@@ -63,7 +69,7 @@ export default function SearchBar({}: Props) {
       if (currentIndex === null) {
          const type = isMovie ? "movie" : "tv";
          const value = inputValue.toLowerCase();
-         router.push(`/results/${type}?search_query=${value}`);
+         router.push(`/${type}/search?search_query=${value}`);
       } else {
          getDetails(currentIndex);
       }

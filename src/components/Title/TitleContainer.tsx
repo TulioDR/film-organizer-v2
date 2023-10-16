@@ -3,9 +3,5 @@ type Props = {
 };
 
 export default function TitleContainer({ children }: Props) {
-   return (
-      <div className="flex justify-between items-end pb-5 overflow-hidden">
-         {children}
-      </div>
-   );
+   return <div className="flex justify-between items-end mb-5">{children}</div>;
 }

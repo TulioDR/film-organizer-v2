@@ -25,7 +25,7 @@ export default function SidebarContainer({ children }: Props) {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="space-y-5"
+                  className="space-y-10"
                >
                   {children}
                </motion.div>

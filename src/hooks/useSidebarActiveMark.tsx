@@ -9,7 +9,7 @@ type Props = {
 export default function useSidebarActiveMark({ mediaType, link }: Props) {
    const [isSelected, setIsSelected] = useState<boolean>(false);
    const { asPath, query } = useRouter();
-   const { mediaType: queryMediaType } = query;
+   const { media_type: queryMediaType } = query;
 
    useEffect(() => {
       if (mediaType) {

@@ -8,21 +8,20 @@ import tvGenres from "@/data/genres/tvGenres";
 import GenreModel from "@/models/genresModel";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-   const { mediaType, genreID } = context.query;
-   const isMovie = mediaType === "movie";
+   const { media_type, genre_id } = context.query;
+   const isMovie = media_type === "movie";
    const genres = isMovie ? movieGenres : tvGenres;
-   const genre = genres.find((g) => g.id === +genreID!);
+   const genre = genres.find((g) => g.id === +genre_id!);
    return {
-      props: { mediaType, genreID, genre },
+      props: { genre },
    };
 };
 
 interface Props {
-   mediaType: "tv" | "movie";
    genre: GenreModel;
 }
 
-export default function GenrePage({ mediaType, genre }: Props) {
+export default function GenrePage({ genre }: Props) {
    const { changeBackground } = useBackground();
    useEffect(() => {
       changeBackground(genre);
@@ -30,9 +29,8 @@ export default function GenrePage({ mediaType, genre }: Props) {
 
    return (
       <SearchCards
-         url={`/genres/${mediaType}/${genre.id}`}
+         apiUrl={`/genres/${genre.id}`}
          title={genre.name}
-         mediaType={mediaType}
          noRemoveBackground
       />
    );

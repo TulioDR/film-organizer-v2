@@ -8,16 +8,6 @@ type Props = {
    isOpen: boolean;
 };
 
-const cards = {
-   initial: { opacity: 0, scale: 0.5 },
-   animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8 },
-   },
-   exit: {},
-};
-
 export default function MainCardContainer({
    children,
    onFocus,
@@ -25,6 +15,15 @@ export default function MainCardContainer({
    id,
    isOpen,
 }: Props) {
+   const cards = {
+      initial: { opacity: 0, scale: 0.5 },
+      animate: {
+         opacity: 1,
+         scale: 1,
+         transition: { duration: 0.8 },
+      },
+      exit: {},
+   };
    return (
       <motion.article
          tabIndex={0}
@@ -32,7 +31,7 @@ export default function MainCardContainer({
          onBlur={onBlur}
          layout
          variants={cards}
-         whileHover="hover"
+         // whileHover="hover"
          className="origin-bottom group"
       >
          <div

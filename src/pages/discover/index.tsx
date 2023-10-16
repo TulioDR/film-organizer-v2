@@ -84,7 +84,7 @@ export default function Discover() {
                className="grid gap-x-5 gap-y-10 my-10 sm:grid-cols-2 xl:grid-cols-3 2xl:px-20"
             >
                <DropDown
-                  title="Type of Search"
+                  title="Type of Media"
                   options={searchTypes}
                   value={searchType}
                   setValue={setSearchType}

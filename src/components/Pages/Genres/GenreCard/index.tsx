@@ -57,7 +57,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
                      <GenreCardOpen
                         key="isOpen"
                         name={genre.name}
-                        href={`/genres/${mediaType}/${genre.id}`}
+                        href={`/${mediaType}/genres/${genre.id}`}
                      />
                   ) : (
                      <GenreCardClosed key="isClosed" name={genre.name} />

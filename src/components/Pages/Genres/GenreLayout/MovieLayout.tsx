@@ -1,15 +1,15 @@
-import GenreCard from "./GenreCard";
+import GenreCard from "../GenreCard";
 
 type Props = {
    genres: any[];
 };
 
-export default function TvLayout({ genres }: Props) {
-   const mediaType = "tv";
+export default function MovieLayout({ genres }: Props) {
+   const mediaType = "movie";
    return (
       <>
          <div className="flex h-full space-x-5">
-            {genres.slice(0, 5).map((genre) => (
+            {genres.slice(0, 6).map((genre) => (
                <GenreCard
                   key={genre.id + mediaType}
                   genre={genre}
@@ -18,7 +18,7 @@ export default function TvLayout({ genres }: Props) {
             ))}
          </div>
          <div className="flex h-full gap-5">
-            {genres.slice(5, 11).map((genre) => (
+            {genres.slice(6, 13).map((genre) => (
                <GenreCard
                   key={genre.id + mediaType}
                   genre={genre}
@@ -27,7 +27,7 @@ export default function TvLayout({ genres }: Props) {
             ))}
          </div>
          <div className="flex h-full gap-5">
-            {genres.slice(11, 16).map((genre) => (
+            {genres.slice(13, 19).map((genre) => (
                <GenreCard
                   key={genre.id + mediaType}
                   genre={genre}

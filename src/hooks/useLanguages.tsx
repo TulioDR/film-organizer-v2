@@ -7,7 +7,7 @@ export default function useLanguages() {
 
    useEffect(() => {
       const getLanguages = async () => {
-         const { data } = await API_PUBLIC.get("/languages");
+         const { data } = await API_PUBLIC.get("/discover/languages");
          let lan: OptionModel[] = [];
          data.forEach((lang: any) => {
             lan.push({ value: lang.iso_639_1, label: lang.english_name });

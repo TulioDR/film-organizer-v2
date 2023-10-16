@@ -14,7 +14,7 @@ export default function Navbar() {
    return (
       <div
          id="navbar"
-         className="w-full z-20 sticky top-0 pt-5 sm:pt-10 pb-5 flex items-center pointer-events-none"
+         className="w-full z-20 sticky top-0 py-5 sm:py-10 flex items-center pointer-events-none"
       >
          <motion.div
             variants={staggerContainer}

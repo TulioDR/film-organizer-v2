@@ -58,7 +58,7 @@ export default function Home() {
          <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="w-full text-white h-[calc(100vh-140px)]"
+            className="w-full text-white h-[calc(100vh-160px)]"
          >
             {!currentMedia ? (
                <div className="fixed top-0 left-0 h-screen -z-10 w-full"></div>
