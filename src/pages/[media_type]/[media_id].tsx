@@ -16,10 +16,10 @@ import useBackground from "@/hooks/useBackground";
 import useScrollToTop from "@/hooks/useScrollToTop";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-   const { mediaType, mediaID } = context.query!;
+   const { media_type, media_id } = context.query!;
    const certifications =
-      mediaType === "movie" ? "release_dates" : "content_ratings";
-   const url = `https://api.themoviedb.org/3/${mediaType}/${mediaID}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos,credits,similar,${certifications}`;
+      media_type === "movie" ? "release_dates" : "content_ratings";
+   const url = `https://api.themoviedb.org/3/${media_type}/${media_id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos,credits,similar,${certifications}`;
    const res = await fetch(url);
    const media = await res.json();
 
@@ -28,16 +28,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    }
 
    return {
-      props: { mediaType, media },
+      props: { media_type, media },
    };
 };
 
 type Props = {
-   mediaType: "tv" | "movie";
+   media_type: "tv" | "movie";
    media: MediaDetailsModel;
 };
 
-export default function Details({ mediaType, media }: Props) {
+export default function Details({ media_type, media }: Props) {
    const { changeBackground } = useBackground();
 
    useScrollToTop();
@@ -58,7 +58,7 @@ export default function Details({ mediaType, media }: Props) {
                alt={media.name || media.title}
                posterPath={media.poster_path}
             />
-            <MainInfo media={media} mediaType={mediaType} />
+            <MainInfo media={media} mediaType={media_type} />
             <ScrollDownIcon />
          </div>
          <BottomInfoContainer>
@@ -66,16 +66,16 @@ export default function Details({ mediaType, media }: Props) {
                <Overview
                   media={media}
                   crew={media.created_by || media.credits.crew}
-                  isMovie={mediaType === "movie"}
+                  isMovie={media_type === "movie"}
                />
                <People type="Cast" people={media.credits?.cast} />
                <People type="Crew" people={media.credits?.crew} />
-               {mediaType === "tv" && (
+               {media_type === "tv" && (
                   <Seasons seasons={media.seasons} seriesID={media.id} />
                )}
                <Trailers trailers={media.videos.results} />
             </div>
-            <Similar media={media} mediaType={mediaType} />
+            <Similar media={media} mediaType={media_type} />
          </BottomInfoContainer>
       </div>
    );
