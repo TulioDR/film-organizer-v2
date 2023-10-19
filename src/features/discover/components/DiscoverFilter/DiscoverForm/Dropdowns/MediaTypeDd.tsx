@@ -1,7 +1,8 @@
 import DropDown from "../Dropdown";
-import { OptionModel } from "@/models/DiscoverModel";
-import search from "@/data/discover/images/search.jpg";
+
+import search from "../../../../images/search.jpg";
 import { useEffect } from "react";
+import { OptionModel } from "@/features/discover/models/DiscoverModel";
 
 type Props = {
    isMovie: boolean;
@@ -24,7 +25,7 @@ export default function MediaTypeDd({ isMovie, setFieldValue }: Props) {
          label: "Popularity Descending",
          value: "popularity.desc",
       });
-   }, [isMovie]);
+   }, [isMovie, setFieldValue]);
 
    return (
       <DropDown

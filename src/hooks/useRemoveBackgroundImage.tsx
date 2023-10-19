@@ -7,5 +7,5 @@ export default function useRemoveBackgroundImage(noRemoveBackground?: true) {
    useEffect(() => {
       if (noRemoveBackground) return;
       removeBackground();
-   }, [removeBackground]);
+   }, [removeBackground, noRemoveBackground]);
 }

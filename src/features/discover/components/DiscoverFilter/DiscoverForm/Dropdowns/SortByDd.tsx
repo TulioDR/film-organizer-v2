@@ -1,6 +1,6 @@
-import { OptionModel } from "@/models/DiscoverModel";
 import DropDown from "../Dropdown";
-import sortImage from "@/data/discover/images/sort.jpeg";
+import sortImage from "../../../../images/sort.jpeg";
+import { OptionModel } from "@/features/discover/models/DiscoverModel";
 
 type Props = {
    isMovie: boolean;

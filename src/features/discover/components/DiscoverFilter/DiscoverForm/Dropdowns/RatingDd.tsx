@@ -1,6 +1,6 @@
-import { OptionModel } from "@/models/DiscoverModel";
 import DropDown from "../Dropdown";
-import ratingImage from "@/data/discover/images/rating.jpg";
+import ratingImage from "../../../../images/rating.jpg";
+import { OptionModel } from "@/features/discover/models/DiscoverModel";
 
 export default function RatingDd() {
    const ratings: OptionModel[] = [

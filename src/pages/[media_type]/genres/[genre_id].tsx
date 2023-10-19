@@ -25,7 +25,7 @@ export default function GenrePage({ genre }: Props) {
    const { changeBackground } = useBackground();
    useEffect(() => {
       changeBackground(genre);
-   }, []);
+   }, [changeBackground, genre]);
 
    return (
       <SearchCards

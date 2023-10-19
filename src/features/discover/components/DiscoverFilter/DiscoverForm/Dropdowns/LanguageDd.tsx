@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import DropDown from "../Dropdown";
 
-import { OptionModel } from "@/models/DiscoverModel";
 import API_PUBLIC from "@/api/public";
-import languages from "@/data/discover/images/languages.jpg";
+import languages from "../../../../images/languages.jpg";
+import { OptionModel } from "@/features/discover/models/DiscoverModel";
 
 type Props = {};
 

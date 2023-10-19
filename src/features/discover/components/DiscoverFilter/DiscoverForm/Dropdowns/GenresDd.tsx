@@ -1,13 +1,13 @@
 import React from "react";
 import DropDown from "../Dropdown";
-import { OptionModel } from "@/models/DiscoverModel";
 import GenreModel from "@/models/genresModel";
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
-import genres from "@/data/discover/images/genres.jpg";
+import genres from "../../../../images/genres.jpg";
+import { OptionModel } from "@/features/discover/models/DiscoverModel";
 
 type Props = {
-   isMovie: React.ReactNode;
+   isMovie: boolean;
 };
 
 export default function GenresDd({ isMovie }: Props) {

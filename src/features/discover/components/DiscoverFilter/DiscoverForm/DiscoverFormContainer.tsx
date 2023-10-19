@@ -21,7 +21,7 @@ export default function DiscoverFormContainer({ children }: Props) {
             padding: 0,
             transition: { duration: 0.5, delay: 0.2 },
          }}
-         className="absolute top-full bg-secondary-light dark:bg-secondary-dark right-0 overflow-hidden rounded-lg rounded-tr-none"
+         className="absolute z-10 top-full bg-secondary-light dark:bg-secondary-dark right-0 rounded-lg rounded-tr-none"
       >
          <motion.div
             initial={{ opacity: 0 }}
