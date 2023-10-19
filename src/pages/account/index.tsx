@@ -13,6 +13,7 @@ export default function Account() {
    const { user } = useUser();
    useEffect(() => {
       if (!user) return;
+      if (!user) return;
       console.log(user);
       console.log(user.passwordEnabled);
    }, [user]);
