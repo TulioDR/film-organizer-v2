@@ -14,7 +14,7 @@ export default function SidebarContainer({ children }: Props) {
    return (
       <div
          id="sidebar"
-         className={`fixed lg:sticky top-0 self-start h-screen duration-300  
+         className={`z-40 fixed lg:sticky top-0 self-start h-screen duration-300  
             ${revealSidebar ? "" : "-translate-x-full lg:translate-x-0"} 
             ${expandSidebar ? "w-60" : "w-[120px]"}`}
       >

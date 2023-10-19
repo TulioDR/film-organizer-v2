@@ -1,5 +1,5 @@
 import { staggerItem } from "@/animations/StaggerCards";
-import { OptionModel } from "@/models/DiscoverModel";
+
 import { motion } from "framer-motion";
 import { StaticImageData } from "next/image";
 import { Field, FieldProps } from "formik";
@@ -7,6 +7,7 @@ import CustomSelect from "./CustomSelect";
 import DdHeader from "./DdHeader";
 import DdHeaderContainer from "./DdHeaderContainer";
 import DdHeaderBackground from "./DdHeaderBackground";
+import { OptionModel } from "@/features/discover/models/DiscoverModel";
 
 type Props = {
    title: string;
