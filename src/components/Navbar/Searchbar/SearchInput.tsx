@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimationControls, motion } from "framer-motion";
 
 type Props = {
    value: string;
@@ -6,22 +6,9 @@ type Props = {
    onFocus: () => void;
    onBlur: () => void;
    placeholder: string;
-};
-
-const inputAnimations = {
-   initial: { width: 0, height: 0, opacity: 0 },
-   animate: {
-      width: "100%",
-      height: "100%",
-      opacity: 1,
-      transition: { duration: 0.5, delay: 0.4 },
-   },
-   exit: {
-      width: 0,
-      height: 0,
-      opacity: 0,
-      transition: { duration: 0.5 },
-   },
+   showResults: boolean;
+   inputControls: AnimationControls;
+   innerInputAnimation: AnimationControls;
 };
 
 export default function SearchInput({
@@ -30,24 +17,38 @@ export default function SearchInput({
    onFocus,
    onBlur,
    placeholder,
+   showResults,
+   inputControls,
+   innerInputAnimation,
 }: Props) {
    return (
       <motion.div
-         // variants={inputAnimations}
-         className={`text-sm sm:text-base h-full flex-1 flex items-center gap-4 px-4`}
+         initial={{ width: 0 }}
+         animate={inputControls}
+         exit={{ width: 0, transition: { duration: 0.3, delay: 0.2 } }}
+         className={`bg-secondary-light dark:bg-secondary-dark rounded-t-lg overflow-hidden ${
+            showResults ? "" : "rounded-b-lg"
+         }`}
       >
-         <input
-            value={value}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            type="text"
-            className="w-full outline-none bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2"
-            placeholder={placeholder}
-         />
-         <span className="material-symbols-outlined !text-text-2 !text-light-2 dark:!text-dark-2">
-            search
-         </span>
+         <motion.div
+            initial={{ opacity: 0 }}
+            animate={innerInputAnimation}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            className="h-full flex-1 flex items-center gap-4 pl-14 pr-4"
+         >
+            <input
+               value={value}
+               onChange={onChange}
+               onFocus={onFocus}
+               onBlur={onBlur}
+               type="text"
+               className="text-xs sm:text-sm md:text-base w-full outline-none bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2"
+               placeholder={placeholder}
+            />
+            <span className="material-symbols-outlined !text-text-2 !text-light-2 dark:!text-dark-2">
+               search
+            </span>
+         </motion.div>
       </motion.div>
    );
 }

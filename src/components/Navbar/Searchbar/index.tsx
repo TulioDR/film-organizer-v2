@@ -4,10 +4,11 @@ import SearchInput from "./SearchInput";
 import ToggleTypeButton from "./ToggleTypeButton";
 import SBResults from "./SBResults";
 import API_PUBLIC from "@/api/public";
+import { useAnimationControls } from "framer-motion";
 
 type Props = {};
 
-export default function SearchBar({}: Props) {
+export default function Searchbar({}: Props) {
    const router = useRouter();
 
    const [isMovie, setIsMovie] = useState<boolean>(false);
@@ -75,31 +76,40 @@ export default function SearchBar({}: Props) {
       }
    };
 
+   const inputControls = useAnimationControls();
+   const innerInputAnimation = useAnimationControls();
+
    return (
-      <form onSubmit={handleSubmit} className={`h-full relative`}>
-         <div
-            className={`flex h-10 bg-secondary-light dark:bg-secondary-dark rounded-t-lg overflow-hidden relative w-full sm:w-96 ${
-               showResults ? "" : "rounded-b-lg"
-            }`}
-         >
-            <ToggleTypeButton isMovie={isMovie} onClick={toggleMediaType} />
-            <SearchInput
-               value={inputValue}
-               onChange={handleInputChange}
-               onFocus={handleInputFocus}
-               onBlur={handleInputBlur}
-               placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
-            />
-         </div>
-         {showResults && (
-            <SBResults
-               isLoading={isLoading}
-               results={results}
-               currentIndex={currentIndex}
-               setCurrentIndex={setCurrentIndex}
-               getDetails={getDetails}
-            />
-         )}
-      </form>
+      <div className="h-full pointer-events-auto flex-1 sm:flex-initial">
+         <form onSubmit={handleSubmit} className={`h-full relative`}>
+            <div className="flex h-10 relative w-full sm:w-96">
+               <ToggleTypeButton
+                  isMovie={isMovie}
+                  onClick={toggleMediaType}
+                  inputControls={inputControls}
+                  innerInputAnimation={innerInputAnimation}
+               />
+               <SearchInput
+                  value={inputValue}
+                  showResults={showResults}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
+                  inputControls={inputControls}
+                  innerInputAnimation={innerInputAnimation}
+               />
+            </div>
+            {showResults && (
+               <SBResults
+                  isLoading={isLoading}
+                  results={results}
+                  currentIndex={currentIndex}
+                  setCurrentIndex={setCurrentIndex}
+                  getDetails={getDetails}
+               />
+            )}
+         </form>
+      </div>
    );
 }

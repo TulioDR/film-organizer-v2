@@ -1,4 +1,4 @@
-import { PositionModel } from "@/models/TransitionPosterModels";
+import { PositionModel } from "../models/TransitionPosterModels";
 import { useContext, createContext, useState } from "react";
 import { windowExtraLarge } from "@/data/constants/windowWidth";
 import { useDispatch } from "react-redux";

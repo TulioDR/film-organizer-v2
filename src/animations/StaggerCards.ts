@@ -3,7 +3,7 @@ export const staggerContainer = {
    animate: { transition: { staggerChildren: 0.18 } },
    exit: {
       opacity: 0,
-      transition: { duration: 0.4 },
+      transition: { duration: 0.5 },
    },
 };
 

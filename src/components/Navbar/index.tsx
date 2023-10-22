@@ -1,15 +1,20 @@
 import LoginButton from "./LoginButton";
-import SearchBar from "./Searchbar";
+import Searchbar from "./Searchbar";
 import ToggleSidebar from "../../components/ToggleSidebar";
 import { useDispatch } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
 import { motion } from "framer-motion";
-import { staggerContainer } from "@/animations/StaggerCards";
 import NavDropdown from "./NavDropdown";
 
 export default function Navbar() {
    const dispatch = useDispatch();
    const handleClick = () => dispatch(sidebarActions.toggleReveal());
+
+   const staggerContainer = {
+      initial: {},
+      animate: { transition: { staggerChildren: 0.3 } },
+      exit: { opacity: 0, transition: { duration: 0.5 } },
+   };
 
    return (
       <div
@@ -26,9 +31,7 @@ export default function Navbar() {
             <div className="lg:hidden pointer-events-auto">
                <ToggleSidebar onClick={handleClick} />
             </div>
-            <div className="h-full pointer-events-auto flex-1 sm:flex-initial">
-               <SearchBar />
-            </div>
+            <Searchbar />
             <div className="flex gap-5 pointer-events-auto">
                <NavDropdown />
                <LoginButton />

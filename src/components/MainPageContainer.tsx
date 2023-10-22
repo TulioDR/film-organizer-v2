@@ -20,6 +20,7 @@ type Props = {
 
 export default function MainPageContainer({ children }: Props) {
    const router = useRouter();
+   console.log(router.pathname);
    useInitialThemeColor();
 
    const { refreshLists } = useListsRefresh();
@@ -32,22 +33,19 @@ export default function MainPageContainer({ children }: Props) {
 
    return (
       <>
-         <AnimatePresence>
-            <div id="modals-container"></div>
-         </AnimatePresence>
+         <div id="modals-container"></div>
          <BackgroundImage />
          <SaveMediaModal />
          <LoginAdviceModal />
          <Notification />
          <div className="flex">
             <Sidebar />
-            {/* This DIV can't have overflow-hidden because then the navbar and others won't stick properly */}
             <div className="flex-1 min-w-0 px-5 sm:px-10 pb-5 sm:pb-10">
                <Navbar />
                <AnimatePresence mode="wait">
-                  <motion.div key={router.pathname} className="">
-                     {children}
-                  </motion.div>
+                  {router.pathname !== "/auth" && (
+                     <motion.div key={router.pathname}>{children}</motion.div>
+                  )}
                </AnimatePresence>
             </div>
          </div>
