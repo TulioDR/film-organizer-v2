@@ -22,7 +22,7 @@ export default function Backdrop({ backgroundKey, src }: Props) {
             fill
             sizes="100%"
             onLoadingComplete={onLoadingComplete}
-            className={`object-cover duration-300 brightness-50 ${
+            className={`object-cover duration-300  ${
                isLoaded ? "opacity-100" : "opacity-0"
             }`}
          />

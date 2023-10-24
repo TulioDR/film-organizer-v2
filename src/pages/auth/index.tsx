@@ -33,6 +33,7 @@ export default function Auth() {
 
    return (
       <div className="md:h-screen pt-20 md:pt-0 w-full relative overflow-hidden bg-primary-light flex">
+         <RenderingAnimation />
          <PageHead title="Authentication" />
          <AuthAppLogo />
          <SkipAuthButton />
