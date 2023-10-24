@@ -3,17 +3,20 @@ import AuthFormContainer from "../../AuthForm/AuthFormContainer";
 import MainRegisterForm from "./MainRegisterForm";
 import RegisterVerificationForm from "./RegisterVerificationForm";
 
-export default function RegisterForm() {
+interface Props {
+   showForm: boolean;
+   openLogin: () => void;
+}
+
+export default function RegisterForm({ showForm, openLogin }: Props) {
    const { handleRegister, pendingVerification, handleRegisterVerification } =
       useRegistration();
 
+   if (pendingVerification)
+      return <RegisterVerificationForm onSubmit={handleRegisterVerification} />;
    return (
-      <AuthFormContainer register>
-         {pendingVerification ? (
-            <RegisterVerificationForm onSubmit={handleRegisterVerification} />
-         ) : (
-            <MainRegisterForm onSubmit={handleRegister} />
-         )}
+      <AuthFormContainer showForm={showForm}>
+         <MainRegisterForm onSubmit={handleRegister} openLogin={openLogin} />;
       </AuthFormContainer>
    );
 }

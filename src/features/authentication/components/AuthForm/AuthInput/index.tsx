@@ -29,11 +29,9 @@ export default function AuthInput({
    return (
       <div className="w-full relative text-xs sm:text-sm md:text-base">
          <div
-            className={`w-full flex items-center relative h-11 border-b ${
-               dark
-                  ? "border-dark-2 text-dark-2"
-                  : "border-light-2 text-light-2"
-            }`}
+            className={`w-full flex items-center relative h-10 rounded-lg ${
+               dark ? "bg-secondary-dark" : "bg-secondary-light"
+            } `}
          >
             <AuthInputIcon icon={icon} />
             <div className="relative flex-1">
@@ -42,7 +40,7 @@ export default function AuthInput({
                   type={fieldType}
                   placeholder={placeholder}
                   autoComplete="off"
-                  className={`w-full bg-transparent h-full outline-none ${
+                  className={`w-full bg-transparent h-full outline-none  ${
                      password ? "pr-10" : "pr-3"
                   } ${
                      dark

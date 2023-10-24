@@ -1,15 +1,16 @@
+import AuthButton from "../../AuthButton";
 import AuthFormikContainer from "../../AuthForm/AuthFormikContainer";
 import AuthInput from "../../AuthForm/AuthInput";
 import AuthMessage from "../../AuthForm/AuthMessage";
 import AuthTitle from "../../AuthForm/AuthTitle";
-import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
-import SkipAuthButton from "../../SkipAuthButton";
+import UnderlineButton from "../../AuthForm/UnderlineButton";
 
 type Props = {
    onSubmit: (values: any) => void;
+   closeReset: () => void;
 };
 
-export default function MainResetForm({ onSubmit }: Props) {
+export default function MainResetForm({ onSubmit, closeReset }: Props) {
    const checkEmailValidity = (email: string): boolean => {
       return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email);
    };
@@ -39,8 +40,10 @@ export default function MainResetForm({ onSubmit }: Props) {
             }
          </AuthMessage>
          <AuthInput icon="mail" name="email" placeholder="Email Address" dark />
-         <AuthSubmitButton dark>Send Reset Email</AuthSubmitButton>
-         <SkipAuthButton login={false} mobile />
+         <AuthButton submit>Send Reset Email</AuthButton>
+         <UnderlineButton onClick={closeReset}>
+            Go back to Log in
+         </UnderlineButton>
       </AuthFormikContainer>
    );
 }

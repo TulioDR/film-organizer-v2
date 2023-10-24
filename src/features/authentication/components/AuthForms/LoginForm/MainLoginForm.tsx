@@ -2,16 +2,20 @@ import AuthFormikContainer from "../../AuthForm/AuthFormikContainer";
 import AuthInput from "../../AuthForm/AuthInput";
 import AuthTitle from "../../AuthForm/AuthTitle";
 import SocialLogins from "../../AuthForm/SocialLogins";
-import ForgotPasswordButton from "../../AuthForm/ForgotPasswordButton";
-import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
-import SkipAuthButton from "../../SkipAuthButton";
+import AuthButton from "../../AuthButton";
+import UnderlineButton from "../../AuthForm/UnderlineButton";
 
 type Props = {
-   switchToReset: () => void;
    onSubmit: (values: any) => void;
+   openReset: () => void;
+   openRegister: () => void;
 };
 
-export default function MainLoginForm({ switchToReset, onSubmit }: Props) {
+export default function MainLoginForm({
+   onSubmit,
+   openReset,
+   openRegister,
+}: Props) {
    const loginValidation = (values: any) => {
       const { email, password } = values;
       let error: any = {};
@@ -34,7 +38,7 @@ export default function MainLoginForm({ switchToReset, onSubmit }: Props) {
          initialValues={initialValues}
          onSubmit={onSubmit}
       >
-         <AuthTitle>Login to your Account</AuthTitle>
+         <AuthTitle>Log in</AuthTitle>
          <SocialLogins />
          <AuthInput
             icon="person"
@@ -47,9 +51,17 @@ export default function MainLoginForm({ switchToReset, onSubmit }: Props) {
             placeholder="Password"
             password
          />
-         <AuthSubmitButton>Login</AuthSubmitButton>
-         <ForgotPasswordButton onClick={switchToReset} />
-         <SkipAuthButton login mobile />
+         <AuthButton submit>Login</AuthButton>
+
+         <div className="md:hidden">
+            <UnderlineButton onClick={openRegister}>
+               New here? Sign Up!
+            </UnderlineButton>
+         </div>
+
+         <UnderlineButton onClick={openReset}>
+            Forgot your password?
+         </UnderlineButton>
       </AuthFormikContainer>
    );
 }

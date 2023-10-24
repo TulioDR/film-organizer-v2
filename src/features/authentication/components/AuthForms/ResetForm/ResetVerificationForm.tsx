@@ -1,7 +1,7 @@
+import AuthButton from "../../AuthButton";
 import AuthFormikContainer from "../../AuthForm/AuthFormikContainer";
 import AuthInput from "../../AuthForm/AuthInput";
 import AuthMessage from "../../AuthForm/AuthMessage";
-import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
 import AuthTitle from "../../AuthForm/AuthTitle";
 
 type Props = {
@@ -50,7 +50,7 @@ export default function ResetVerificationForm({ onSubmit }: Props) {
             password
             dark
          />
-         <AuthSubmitButton dark>Verify and Change Password</AuthSubmitButton>
+         <AuthButton>Verify and Change Password</AuthButton>
       </AuthFormikContainer>
    );
 }

@@ -18,7 +18,7 @@ export default function AuthFormikContainer({
          validate={validation}
          onSubmit={onSubmit}
       >
-         <Form className="w-full sm:w-96 flex flex-col items-center gap-6">
+         <Form className="w-full sm:w-96 p-5 sm:p-0 flex flex-col items-center gap-5">
             {children}
          </Form>
       </Formik>

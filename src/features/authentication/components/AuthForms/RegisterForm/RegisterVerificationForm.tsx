@@ -1,7 +1,8 @@
+import AuthButton from "../../AuthButton";
 import AuthFormikContainer from "../../AuthForm/AuthFormikContainer";
 import AuthInput from "../../AuthForm/AuthInput";
 import AuthMessage from "../../AuthForm/AuthMessage";
-import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
+
 import AuthTitle from "../../AuthForm/AuthTitle";
 
 type Props = {
@@ -37,7 +38,7 @@ export default function RegisterVerificationForm({ onSubmit }: Props) {
             placeholder="Verification code"
             dark
          />
-         <AuthSubmitButton dark>Verify</AuthSubmitButton>
+         <AuthButton>Verify</AuthButton>
       </AuthFormikContainer>
    );
 }

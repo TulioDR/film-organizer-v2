@@ -1,31 +1,30 @@
 import { motion } from "framer-motion";
 type Props = {
-   login?: true;
-   register?: true;
-   reset?: true;
    children: React.ReactNode;
+   showForm: boolean;
+   isLoginForm?: true;
 };
 
 export default function AuthFormContainer({
-   login,
-   register,
-   reset,
    children,
+   showForm,
+   isLoginForm,
 }: Props) {
    return (
-      <motion.div
-         initial={{ width: 0 }}
-         animate={{ width: "100%", transition: { duration: 0.5 } }}
-         exit={{ opacity: 0, transition: { duration: 0, delay: 0.5 } }}
-         className={`h-full absolute top-0 left-0 overflow-hidden
-            ${login ? "bg-primary-light text-light-1" : ""}
-            ${register ? "bg-secondary-dark text-dark-1" : ""}
-            ${reset ? "bg-primary-dark text-dark-1" : ""}
-         `}
-      >
-         <div className="lg:pl-36 pt-28 lg:pt-10 px-10 pb-20 lg:pb-10 h-full w-screen flex items-center justify-center text-xl">
+      <div className="w-1/2 h-full overflow-hidden flex-shrink-0">
+         <motion.div
+            className={`h-full w-full flex justify-center items-center duration-1000 ${
+               isLoginForm
+                  ? showForm
+                     ? ""
+                     : "md:translate-x-full"
+                  : showForm
+                  ? "md:-translate-x-full"
+                  : ""
+            }`}
+         >
             {children}
-         </div>
-      </motion.div>
+         </motion.div>
+      </div>
    );
 }

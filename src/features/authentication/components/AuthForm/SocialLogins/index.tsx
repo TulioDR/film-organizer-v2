@@ -1,4 +1,3 @@
-import FormSeparation from "./FormSeparation";
 import SocialLogin from "./SocialLogin";
 import googleLogo from "@/data/images/logos/google.png";
 import githubLogo from "@/data/images/logos/github.png";
@@ -7,11 +6,9 @@ import { OAuthStrategy } from "@clerk/types";
 
 import { useSignIn } from "@clerk/nextjs";
 
-type Props = {
-   dark?: true;
-};
+type Props = {};
 
-export default function SocialLogins({ dark }: Props) {
+export default function SocialLogins({}: Props) {
    const { signIn } = useSignIn();
 
    const handleAuth = (strategy: OAuthStrategy) => {
@@ -31,28 +28,22 @@ export default function SocialLogins({ dark }: Props) {
    const discordAuth = () => handleAuth("oauth_discord");
 
    return (
-      <div className="w-40 -mb-2">
-         <div className="flex justify-between w-full">
-            <SocialLogin
-               logo={googleLogo}
-               provider="google"
-               onClick={googleAuth}
-               dark={dark}
-            />
-            <SocialLogin
-               logo={githubLogo}
-               provider="github"
-               onClick={githubAuth}
-               dark={dark}
-            />
-            <SocialLogin
-               logo={discordLogo}
-               provider="discord"
-               onClick={discordAuth}
-               dark={dark}
-            />
-         </div>
-         <FormSeparation dark={dark} />
+      <div className="flex justify-between gap-5">
+         <SocialLogin
+            logo={googleLogo}
+            provider="google"
+            onClick={googleAuth}
+         />
+         <SocialLogin
+            logo={githubLogo}
+            provider="github"
+            onClick={githubAuth}
+         />
+         <SocialLogin
+            logo={discordLogo}
+            provider="discord"
+            onClick={discordAuth}
+         />
       </div>
    );
 }

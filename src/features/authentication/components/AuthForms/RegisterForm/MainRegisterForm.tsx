@@ -2,14 +2,16 @@ import AuthFormikContainer from "../../AuthForm/AuthFormikContainer";
 import AuthInput from "../../AuthForm/AuthInput";
 import AuthTitle from "../../AuthForm/AuthTitle";
 import SocialLogins from "../../AuthForm/SocialLogins";
-import AuthSubmitButton from "../../AuthForm/AuthSubmitButton";
-import SkipAuthButton from "../../SkipAuthButton";
+
+import AuthButton from "../../AuthButton";
+import UnderlineButton from "../../AuthForm/UnderlineButton";
 
 type Props = {
    onSubmit: (values: any) => void;
+   openLogin: () => void;
 };
 
-export default function MainRegisterForm({ onSubmit }: Props) {
+export default function MainRegisterForm({ onSubmit, openLogin }: Props) {
    const checkEmailValidity = (email: string): boolean => {
       return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email);
    };
@@ -47,26 +49,28 @@ export default function MainRegisterForm({ onSubmit }: Props) {
          initialValues={initialValues}
          onSubmit={onSubmit}
       >
-         <AuthTitle>New Here? Sign Up!</AuthTitle>
-         <SocialLogins dark />
-         <AuthInput icon="person" name="username" placeholder="Username" dark />
-         <AuthInput icon="mail" name="email" placeholder="Email Address" dark />
+         <AuthTitle>Sing Up</AuthTitle>
+         <SocialLogins />
+         <AuthInput icon="person" name="username" placeholder="Username" />
+         <AuthInput icon="mail" name="email" placeholder="Email Address" />
          <AuthInput
             icon="lock"
             name="password"
             placeholder="Password"
             password
-            dark
          />
          <AuthInput
             icon="lock"
             name="confirmPassword"
             placeholder="Confirm Password"
             password
-            dark
          />
-         <AuthSubmitButton dark>Sign Up</AuthSubmitButton>
-         <SkipAuthButton login={false} mobile />
+         <AuthButton submit>Sign Up</AuthButton>
+         <div className="md:hidden">
+            <UnderlineButton onClick={openLogin}>
+               Already, have an account? Log in!
+            </UnderlineButton>
+         </div>
       </AuthFormikContainer>
    );
 }
