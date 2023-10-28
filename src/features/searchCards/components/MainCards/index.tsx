@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import CustomPagination from "@/components/CustomPagination";
 import PaginationContainer from "../PaginationContainer";
 import { useRouter } from "next/router";
-import LoadingCardsSpinner from "../LoadingCardsSpinner";
+import SearchCardsSpinners from "../SearchCardsSpinners";
 
 type Props = {
    mediaType: "tv" | "movie";
@@ -25,8 +25,6 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
       router.push({ query: { ...router.query, page: page } });
    };
 
-   const pageNumber = (router.query.page as string | undefined) || "1";
-   console.log(`page number is ${pageNumber}`);
    return (
       <>
          <AnimatePresence onExitComplete={() => setShowPage(true)}>
@@ -42,23 +40,27 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                </PaginationContainer>
                <AnimatePresence mode="wait">
                   {isLoading ? (
-                     <LoadingCardsSpinner />
+                     <SearchCardsSpinners />
                   ) : (
-                     <MainCardsContainer key={media![0].id}>
-                        {media!.map((media) => (
-                           <MainCard
-                              key={media.id}
-                              media={media}
-                              mediaType={mediaType}
+                     <>
+                        <MainCardsContainer key={media![0].id}>
+                           {media!.map((media) => (
+                              <MainCard
+                                 key={media.id}
+                                 media={media}
+                                 mediaType={mediaType}
+                              />
+                           ))}
+                        </MainCardsContainer>
+                        <PaginationContainer>
+                           <CustomPagination
+                              total={totalPages}
+                              onPaginationChange={(page) => handleChange(page)}
                            />
-                        ))}
-                     </MainCardsContainer>
+                        </PaginationContainer>
+                     </>
                   )}
                </AnimatePresence>
-               {/* <CustomPagination
-                  total={totalPages}
-                  onPaginationChange={(page: number) => setPage(page)}
-               /> */}
             </motion.div>
          )}
       </>

@@ -1,9 +1,7 @@
 import { useState } from "react";
-import StoreModel from "@/models/StoreModel";
 import Image, { StaticImageData } from "next/image";
-import { useSelector } from "react-redux";
-import { SpinnerCircularFixed } from "spinners-react";
 import { AnimatePresence } from "framer-motion";
+import LoadingSpinner from "../LoadingSpinner";
 
 type Props = {
    backgroundKey: string;
@@ -11,7 +9,6 @@ type Props = {
 };
 
 export default function Backdrop({ backgroundKey, src }: Props) {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
    const onLoadingComplete = () => setIsLoaded(true);
    return (
@@ -29,13 +26,9 @@ export default function Backdrop({ backgroundKey, src }: Props) {
          <AnimatePresence>
             {!isLoaded && (
                <div className="absolute w-full h-full top-0 left-0 flex items-center justify-center">
-                  <SpinnerCircularFixed
-                     size={"20%"}
-                     thickness={100}
-                     speed={100}
-                     color={themeColor}
-                     secondaryColor="transparent"
-                  />
+                  <div className="w-1/5">
+                     <LoadingSpinner />
+                  </div>
                </div>
             )}
          </AnimatePresence>

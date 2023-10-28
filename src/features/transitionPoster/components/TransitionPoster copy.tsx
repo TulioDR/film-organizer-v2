@@ -1,15 +1,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { SpinnerCircular } from "spinners-react";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
 import useTransitionPosterContext from "../context/TransitionPosterContext";
 import { useRouter } from "next/router";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type Props = {};
 
 export default function TransitionPoster({}: Props) {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
    const { position, selectedImg, showSpinner, sidebarWidth } =
       useTransitionPosterContext();
 
@@ -43,15 +40,7 @@ export default function TransitionPoster({}: Props) {
             />
          </div>
          <div className="flex-1 h-full flex items-center justify-center">
-            {showSpinner && (
-               <SpinnerCircular
-                  size={"20%"}
-                  thickness={100}
-                  speed={150}
-                  color={themeColor}
-                  secondaryColor="transparent"
-               />
-            )}
+            {showSpinner && <LoadingSpinner />}
          </div>
       </motion.div>
    );

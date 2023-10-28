@@ -1,4 +1,4 @@
-import { SpinnerCircularFixed } from "spinners-react";
+import LoadingSpinner from "../LoadingSpinner";
 
 type Props = {
    isLoading: boolean;
@@ -9,13 +9,9 @@ export default function LoadingButton({ isLoading, children }: Props) {
    return (
       <div className="w-20 flex items-center justify-center">
          {isLoading ? (
-            <SpinnerCircularFixed
-               size={24}
-               thickness={150}
-               speed={100}
-               color="white"
-               secondaryColor="rgba(0, 0, 0, 0.44)"
-            />
+            <div className="w-6">
+               <LoadingSpinner white />
+            </div>
          ) : (
             <span>{children}</span>
          )}

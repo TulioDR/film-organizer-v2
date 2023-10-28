@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { createMedia, deleteMedia, getIsMediaInList } from "../../../api/media";
-import { SpinnerCircularFixed } from "spinners-react";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
 import useNotification from "@/hooks/useNotification";
 import { v4 as uuid } from "uuid";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 interface ListProps {
    list: any;
@@ -13,8 +11,6 @@ interface ListProps {
 }
 
 export default function ListToSave({ list, media, mediaType }: ListProps) {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
-
    const [isSaved, setIsSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(true);
    const { setAndCloseNotification, getErrorMessage } = useNotification();
@@ -95,13 +91,7 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
       >
          <div className="h-full aspect-square grid place-content-center">
             {isLoading ? (
-               <SpinnerCircularFixed
-                  size={24}
-                  thickness={100}
-                  speed={100}
-                  color={themeColor}
-                  secondaryColor="gray"
-               />
+               <LoadingSpinner />
             ) : (
                <span className="material-symbols-outlined">
                   {isSaved ? "check_box" : "check_box_outline_blank"}

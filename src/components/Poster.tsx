@@ -1,11 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
-import { SpinnerCircularFixed } from "spinners-react";
 import posterNotFound from "../data/images/not-found/poster-not-found.jpg";
 import backPosterNotFound from "../data/images/not-found/back-poster-not-found.jpg";
 import personNotFound from "../data/images/not-found/person-not-found.jpg";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
+import LoadingSpinner from "./LoadingSpinner";
 
 const width = {
    sm: 92,
@@ -48,8 +46,6 @@ export default function Poster({
    };
 
    const image = getPoster();
-
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
    return (
       <div
          className={`overflow-hidden  relative 
@@ -67,13 +63,9 @@ export default function Poster({
          />
          {!isLoaded && (
             <div className="absolute w-full h-full top-0 left-0 bg-secondary-light dark:bg-secondary-dark flex items-center justify-center">
-               <SpinnerCircularFixed
-                  size={backPoster ? "20%" : "40%"}
-                  thickness={100}
-                  speed={100}
-                  color={themeColor}
-                  secondaryColor="white"
-               />
+               <div className={`${backPoster ? "w-1/5" : "w-2/5"}`}>
+                  <LoadingSpinner />
+               </div>
             </div>
          )}
       </div>

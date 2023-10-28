@@ -1,10 +1,11 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import useBookmark from "@/hooks/useBookmark";
 import useIsMediaSaved from "@/hooks/useIsMediaSaved";
 import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { SpinnerCircularFixed } from "spinners-react";
+
 type Props = {
    media: any;
    mediaType: "movie" | "tv";
@@ -47,13 +48,9 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
          >
             {isLoading ? (
                <div className="w-full h-full flex items-center justify-center">
-                  <SpinnerCircularFixed
-                     size={"75%"}
-                     thickness={100}
-                     speed={100}
-                     color={"white"}
-                     secondaryColor="gray"
-                  />
+                  <div className="w-3/4">
+                     <LoadingSpinner white />
+                  </div>
                </div>
             ) : (
                <span className="material-symbols-outlined !text-4xl">
