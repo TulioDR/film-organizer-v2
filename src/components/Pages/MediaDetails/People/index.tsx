@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import Person from "./Person";
-import PeoplePagination from "./PeoplePagination";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Subtitle from "@/components/Subtitle";
+import CustomPagination from "@/components/CustomPagination";
 
 type Props = {
    people: any[];
@@ -48,17 +48,15 @@ export default function People({ people, type }: Props) {
             <div>No information available about the {type}</div>
          )}
          <div className="sm:hidden">
-            <PeoplePagination
+            <CustomPagination
                sm
-               people={people}
-               itemsPerPage={itemsPerPage}
+               total={Math.ceil(people.length / itemsPerPage)}
                onPaginationChange={(page: number) => setPage(page)}
             />
          </div>
          <div className="hidden sm:block">
-            <PeoplePagination
-               people={people}
-               itemsPerPage={itemsPerPage}
+            <CustomPagination
+               total={Math.ceil(people.length / itemsPerPage)}
                onPaginationChange={(page: number) => setPage(page)}
             />
          </div>

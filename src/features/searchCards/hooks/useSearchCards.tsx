@@ -1,22 +1,28 @@
 import API_PUBLIC from "@/api/public";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function useSearchCards(url: string) {
    const [media, setMedia] = useState<any[] | null>(null);
-   const [page, setPage] = useState<number>(1);
+   const [totalPages, setTotalPages] = useState<number>(0);
+   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+   const { query } = useRouter();
+
+   const { page } = query;
 
    useEffect(() => {
       const getData = async () => {
-         console.log("fetching card");
-         const { data } = await API_PUBLIC.get(`${url}/${page}`);
-         if (page === 1) {
-            setMedia(data.results);
-         } else {
-            setMedia((oldArray) => oldArray!.concat(data.results));
-         }
+         setIsLoading(true);
+         const { data } = await API_PUBLIC.get(`${url}/${page || 1}`);
+         console.log(data);
+         setMedia(data.results);
+         if (data.total_pages > 20) setTotalPages(20);
+         else setTotalPages(data.total_pages);
+         setIsLoading(false);
       };
       getData();
    }, [url, page]);
 
-   return { media, page, setPage };
+   return { media, totalPages, isLoading };
 }

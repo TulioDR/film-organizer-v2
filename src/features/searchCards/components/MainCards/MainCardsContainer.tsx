@@ -2,6 +2,7 @@ import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { cardsContainer } from "../../animations/cardsAnimation";
 
 type Props = {
    children: React.ReactNode;
@@ -9,14 +10,7 @@ type Props = {
 
 export default function MainCardsContainer({ children }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
-   const cardsContainer = {
-      initial: {},
-      animate: { transition: { staggerChildren: 0.2 } },
-      exit: {
-         opacity: 0,
-         transition: { duration: 0.5 },
-      },
-   };
+
    useRemoveBackgroundImage();
    return (
       <motion.div

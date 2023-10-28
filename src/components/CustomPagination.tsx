@@ -4,32 +4,36 @@ import { useSelector } from "react-redux";
 
 type Props = {
    sm?: true;
-   people: any[];
-   itemsPerPage: number;
+   total: number;
    onPaginationChange: (page: number) => void;
 };
 
-export default function PeoplePagination({
+export default function CustomPagination({
    sm,
-   people,
-   itemsPerPage,
+   total,
    onPaginationChange,
 }: Props) {
    const { themeColor, isDarkMode } = useSelector(
       (state: StoreModel) => state.theme
    );
    return (
-      <div className="w-full flex justify-center mt-5">
+      <div className="w-full flex justify-center">
          <Pagination
             size={sm ? "xs" : "md"}
-            total={Math.ceil(people.length / itemsPerPage)}
+            total={total}
             styles={{
                control: {
+                  border: "none",
                   color: isDarkMode ? "white" : "black",
-                  "&[data-active]": { backgroundColor: themeColor },
-                  "&[data-active]:not([data-disabled]):hover": {
-                     backgroundColor: "white",
-                     color: "black",
+                  "&:hover": {
+                     color: isDarkMode ? "black" : "white",
+                  },
+                  "&[data-active]": {
+                     backgroundColor: themeColor,
+                     color: "white",
+                  },
+                  "&:not([data-disabled]):hover": {
+                     backgroundColor: isDarkMode ? "white" : "black",
                   },
                },
             }}

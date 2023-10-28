@@ -6,13 +6,15 @@ export default function SideLoadingLists() {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
    return (
       <div className="w-full flex justify-center">
-         <SpinnerCircularFixed
-            size={36}
-            thickness={100}
-            speed={100}
-            color={themeColor}
-            secondaryColor="white"
-         />
+         <div className="w-10">
+            <SpinnerCircularFixed
+               size="100%"
+               thickness={100}
+               speed={100}
+               color={themeColor}
+               secondaryColor="white"
+            />
+         </div>
       </div>
    );
 }
