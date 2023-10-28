@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 type Props = {
    children: React.ReactNode;
@@ -7,14 +7,13 @@ type Props = {
 };
 
 export default function ModalContainer({ children, closeModal }: Props) {
-   const [showInnerModal, setShowInnerModal] = useState<boolean>(false);
-
    const modalControls = useAnimationControls();
+   const innerModalControls = useAnimationControls();
    useEffect(() => {
       const execute = async () => {
          await modalControls.start({ width: "100%", opacity: 1 });
-         await modalControls.start({ height: 300 });
-         setShowInnerModal(true);
+         await modalControls.start({ height: "auto" });
+         innerModalControls.start({ opacity: 1 });
       };
       execute();
    }, [modalControls]);
@@ -32,19 +31,17 @@ export default function ModalContainer({ children, closeModal }: Props) {
             initial={{ height: 10, width: 100, opacity: 0 }}
             animate={modalControls}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full mx-auto flex justify-center bg-primary-light dark:bg-primary-dark z-50"
          >
-            {showInnerModal && (
-               <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className="p-10 h-full flex flex-col items-center justify-center"
-               >
-                  {children}
-               </motion.div>
-            )}
+            <motion.div
+               initial={{ opacity: 0 }}
+               animate={innerModalControls}
+               transition={{ duration: 0.2 }}
+               className="p-10 h-full flex flex-col items-center justify-center"
+            >
+               {children}
+            </motion.div>
          </motion.div>
       </>
    );
