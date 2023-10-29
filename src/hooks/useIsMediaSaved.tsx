@@ -22,14 +22,15 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
          }
          if (isSaveMediaOpen) return;
          if (mediaToSave && mediaToSave.media.id !== id) return;
-         console.log("checking if media is saved");
          setIsLoading(true);
-         const foundInAList = await getIsMediaSaved({
+         const { data } = await getIsMediaSaved({
             media_id: id,
             media_type: type,
          });
+         console.log("The media saved is:");
+         console.log(data);
          setIsLoading(false);
-         if (foundInAList?.length > 0) setIsMediaSaved(true);
+         if (data) setIsMediaSaved(true);
          else setIsMediaSaved(false);
       };
       isMediaIsSavedEffect();

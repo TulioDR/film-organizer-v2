@@ -20,7 +20,6 @@ type Props = {
 
 export default function MainPageContainer({ children }: Props) {
    const router = useRouter();
-   console.log(router.pathname);
    useInitialThemeColor();
 
    const { refreshLists } = useListsRefresh();

@@ -1,20 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-// import { query } from "@/config/db";
+import supabase from "@/config/supabaseClient";
 
 export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse
 ) {
    if (req.method === "GET") {
-      // const [media_id, media_type] = req.query.params!;
-      // const media = await query(
-      //    `
-      //       SELECT * FROM media
-      //       WHERE media_id = ? AND media_type = ? LIMIT 1
-      //    `,
-      //    [media_id, media_type]
-      // );
-      const media: any = {};
-      res.status(200).json(media);
+      const [media_id, media_type] = req.query.params!;
+      const response = await supabase
+         .from("Media")
+         .select()
+         .match({ media_id, media_type })
+         .limit(1)
+         .single();
+      res.status(200).json(response);
    }
 }
