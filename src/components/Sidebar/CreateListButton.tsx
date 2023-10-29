@@ -13,7 +13,7 @@ export default function CreateListButton({ onClick }: Props) {
       <button
          onClick={onClick}
          style={{ backgroundColor: themeColor }}
-         className="h-10 grid place-content-center w-full truncate rounded-lg"
+         className="h-10 grid place-content-center w-full truncate rounded-lg text-white"
       >
          <AnimatePresence mode="wait">
             {expandSidebar ? (
@@ -24,7 +24,6 @@ export default function CreateListButton({ onClick }: Props) {
                      transition: { duration: 0.1, delay: 0.1 },
                   }}
                   key="text"
-                  className="text-white"
                >
                   Create List
                </motion.span>
