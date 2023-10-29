@@ -6,7 +6,7 @@ import { useUser } from "@clerk/nextjs";
 
 export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
-   const [isLoading, setIsLoading] = useState<boolean>(true);
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
    const { user } = useUser();
 

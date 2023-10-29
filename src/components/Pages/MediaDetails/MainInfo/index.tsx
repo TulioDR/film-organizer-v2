@@ -3,7 +3,7 @@ import Date from "./Date";
 import Rating from "./Rating";
 import Runtime from "./Runtime";
 import Score from "./Score";
-import MainDetailsBookmark from "../MainDetailsBookmark";
+import MainDetailsBookmark from "./MainDetailsBookmark";
 import { motion } from "framer-motion";
 
 import RevealHorizontal from "@/animations/RevealHorizontal";
