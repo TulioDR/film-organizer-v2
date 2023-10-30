@@ -1,7 +1,8 @@
 import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
-import useBackground from "@/hooks/useBackground";
+
 import { MediaModel } from "@/models/MediaModel";
 import StoreModel from "@/models/StoreModel";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -19,23 +20,24 @@ export default function LearnMore({
 }: Props) {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
    const { startPosterAnimation } = useTransitionPosterContext();
-   const { changeBackground } = useBackground();
 
    const handleClick = () => {
       closeCard();
-      changeBackground(media);
       leave();
       setTimeout(() => {
          startPosterAnimation(mediaType, media);
       }, 500);
    };
    return (
-      <button
+      <Link
+         href={`/${mediaType}/${media.id}`}
+         scroll={false}
          onClick={handleClick}
-         className="rounded-xl h-10 text-sm flex-1 font-medium font-oswald uppercase text-white"
+         onMouseDown={(e) => e.preventDefault()}
+         className="rounded-xl h-10 text-sm flex-1 flex items-center justify-center font-medium font-oswald uppercase text-white"
          style={{ backgroundColor: themeColor }}
       >
          Learn More
-      </button>
+      </Link>
    );
 }

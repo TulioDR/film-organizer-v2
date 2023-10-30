@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { AnimatePresence } from "framer-motion";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type Props = {
    backgroundKey: string;

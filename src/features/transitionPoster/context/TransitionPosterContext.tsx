@@ -3,7 +3,6 @@ import { useContext, createContext, useState } from "react";
 import { windowExtraLarge } from "@/data/constants/windowWidth";
 import { useDispatch } from "react-redux";
 import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
-import { useRouter } from "next/router";
 import TransitionPoster from "../components/TransitionPoster";
 
 interface TransitionPosterInterface {
@@ -30,12 +29,12 @@ export function TransitionPosterProvider({ children }: Props) {
    const [showSpinner, setShowSpinner] = useState<boolean>(false);
    const [sidebarWidth, setSidebarWidth] = useState<number>(0);
 
+   const onAnimationComplete = () => {
+      setShowSpinner(true);
+   };
+
    const dispatch = useDispatch();
-   const router = useRouter();
    const startPosterAnimation = (mediaType: "movie" | "tv", media: any) => {
-      router.push(`/${mediaType}/${media.media_id || media.id}`, undefined, {
-         scroll: false,
-      });
       if (window.innerWidth < windowExtraLarge) {
          return;
       }
@@ -69,8 +68,10 @@ export function TransitionPosterProvider({ children }: Props) {
 
    return (
       <TransitionPosterContext.Provider value={value}>
-         {children}
-         <TransitionPoster />
+         <div className={`duration-300 ${selectedImg ? "" : ""}`}>
+            {children}
+         </div>
+         <TransitionPoster onAnimationComplete={onAnimationComplete} />
       </TransitionPosterContext.Provider>
    );
 }

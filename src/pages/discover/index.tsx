@@ -1,6 +1,5 @@
 import Head from "next/head";
 
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import Title from "@/components/Title";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,8 +10,6 @@ import DiscoverFilter from "@/features/discover/components/DiscoverFilter";
 import DiscoverInitialText from "@/features/discover/components/DiscoverInitialText";
 
 export default function Discover() {
-   useRemoveBackgroundImage();
-
    const [apiUrl, setApiUrl] = useState<string | null>(null);
 
    const router = useRouter();

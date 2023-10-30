@@ -7,12 +7,13 @@ import { useEffect } from "react";
 import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
 import SaveMediaModal from "@/components/Modals/SaveMediaModal";
 import useListsRefresh from "@/hooks/useListsRefresh";
-import BackgroundImage from "@/components/BackgroundImage";
+
 import Notification from "@/components/Notification";
 import { useUser } from "@clerk/nextjs";
 
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import Background from "@/features/background/components/Background";
 
 type Props = {
    children: React.ReactNode;
@@ -33,7 +34,7 @@ export default function MainPageContainer({ children }: Props) {
    return (
       <>
          <div id="modals-container"></div>
-         <BackgroundImage />
+         <Background />
          <SaveMediaModal />
          <LoginAdviceModal />
          <Notification />

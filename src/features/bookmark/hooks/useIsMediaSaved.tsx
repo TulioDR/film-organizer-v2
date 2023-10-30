@@ -27,8 +27,6 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
             media_id: id,
             media_type: type,
          });
-         console.log("The media saved is:");
-         console.log(data);
          setIsLoading(false);
          if (data) setIsMediaSaved(true);
          else setIsMediaSaved(false);

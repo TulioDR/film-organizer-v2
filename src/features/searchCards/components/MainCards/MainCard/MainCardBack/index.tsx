@@ -12,6 +12,7 @@ type Props = {
    mediaType: "tv" | "movie";
    closeCard: () => void;
    leave: () => void;
+   closeWithoutRemove: () => void;
 };
 
 export default function MainCardBack({
@@ -19,6 +20,7 @@ export default function MainCardBack({
    closeCard,
    mediaType,
    leave,
+   closeWithoutRemove,
 }: Props) {
    return (
       <div className="absolute top-0 left-0 w-full h-full flex flex-col [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden rounded-3xl">
@@ -46,7 +48,7 @@ export default function MainCardBack({
                <LearnMore
                   mediaType={mediaType}
                   media={media}
-                  closeCard={closeCard}
+                  closeCard={closeWithoutRemove}
                   leave={leave}
                />
                <div className="overflow-hidden rounded-lg">

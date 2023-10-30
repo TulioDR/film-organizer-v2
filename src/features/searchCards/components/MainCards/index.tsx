@@ -3,7 +3,7 @@ import useSearchCards from "../../hooks/useSearchCards";
 
 import MainCardsContainer from "./MainCardsContainer";
 import LoadingPage from "../LoadingPage";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CustomPagination from "@/components/CustomPagination";
 import PaginationContainer from "../PaginationContainer";
@@ -42,8 +42,8 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                   {isLoading ? (
                      <SearchCardsSpinners />
                   ) : (
-                     <>
-                        <MainCardsContainer key={media![0].id}>
+                     <Fragment key={media![0].id}>
+                        <MainCardsContainer>
                            {media!.map((media) => (
                               <MainCard
                                  key={media.id}
@@ -58,7 +58,7 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                               onPaginationChange={(page) => handleChange(page)}
                            />
                         </PaginationContainer>
-                     </>
+                     </Fragment>
                   )}
                </AnimatePresence>
             </motion.div>

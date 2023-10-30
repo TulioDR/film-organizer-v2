@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 
 import Title from "@/components/Title";
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
+
 import GenreLayout from "@/components/Pages/Genres/GenreLayout";
 
 import PageHead from "@/components/PageHead";
@@ -9,7 +9,6 @@ import ChangeMediaType from "@/components/ChangeMediaType";
 import { useRouter } from "next/router";
 
 export default function Genres() {
-   useRemoveBackgroundImage();
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
 

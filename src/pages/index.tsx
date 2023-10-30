@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
-import useBackground from "@/hooks/useBackground";
+import useBackground from "@/features/background/hooks/useBackground";
 
 export default function Home() {
    const [nowPlaying, setNowPlaying] = useState<any[]>([]);

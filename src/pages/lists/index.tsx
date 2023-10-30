@@ -15,8 +15,6 @@ import ModalPortal from "@/components/Modals/ModalPortal";
 import DeleteListModal from "@/components/Modals/DeleteListModal";
 import Title from "@/components/Title";
 
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
-
 export default function Lists() {
    const { user } = useUser();
    const { lists } = useSelector((state: StoreModel) => state.lists);
@@ -42,7 +40,6 @@ export default function Lists() {
       setFilteredLists(founded);
    }, [inputValue, lists]);
 
-   useRemoveBackgroundImage();
    return (
       <div className="">
          <Head>

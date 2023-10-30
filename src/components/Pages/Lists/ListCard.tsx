@@ -11,7 +11,6 @@ import { motion } from "framer-motion";
 import { staggerItem } from "@/animations/StaggerCards";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import useNotification from "@/hooks/useNotification";
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 
 type Props = {
    list: any;
@@ -24,8 +23,6 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
    const [showError, setShowError] = useState<string | null>(null);
-
-   useRemoveBackgroundImage();
 
    const { setAndCloseNotification } = useNotification();
 

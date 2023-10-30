@@ -2,10 +2,11 @@ import { GetServerSideProps } from "next";
 import SearchCards from "@/features/searchCards/components/SearchCards";
 
 import { useEffect } from "react";
-import useBackground from "@/hooks/useBackground";
+
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import GenreModel from "@/models/genresModel";
+import useBackground from "@/features/background/hooks/useBackground";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, genre_id } = context.query;
@@ -27,11 +28,5 @@ export default function GenrePage({ genre }: Props) {
       changeBackground(genre);
    }, [changeBackground, genre]);
 
-   return (
-      <SearchCards
-         apiUrl={`/genres/${genre.id}`}
-         title={genre.name}
-         noRemoveBackground
-      />
-   );
+   return <SearchCards apiUrl={`/genres/${genre.id}`} title={genre.name} />;
 }

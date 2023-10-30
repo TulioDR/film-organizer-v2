@@ -12,8 +12,9 @@ import Overview from "@/components/Pages/MediaDetails/Overview";
 import ScrollDownIcon from "@/components/Pages/MediaDetails/ScrollDownIcon";
 import MainPoster from "@/components/Pages/MediaDetails/MainPoster";
 import BottomInfoContainer from "@/components/Pages/MediaDetails/BottomInfoContainer";
-import useBackground from "@/hooks/useBackground";
+
 import useScrollToTop from "@/hooks/useScrollToTop";
+import useBackground from "@/features/background/hooks/useBackground";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;

@@ -10,7 +10,6 @@ import SavedMedia from "@/components/Pages/ListDetails/SavedMedia";
 import MediaTypePills from "@/components/Pages/ListDetails/MediaTypePills";
 import DeleteMediaButtons from "@/components/Pages/ListDetails/DeleteMediaButtons";
 
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import { getSpecificList } from "@/api/lists";
 import { useRouter } from "next/router";
 import { getSavedMedia } from "@/api/media";
@@ -79,8 +78,6 @@ export default function ListID({}: Props) {
          setFilteredMedia(filtered);
       }
    }, [media, selectedType]);
-
-   useRemoveBackgroundImage();
 
    const onCardTap = (media: SavedMediaModel) => {
       const isSelected = mediaToDelete.includes(media);

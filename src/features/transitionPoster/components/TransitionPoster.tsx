@@ -1,43 +1,28 @@
-import { motion } from "framer-motion";
-import Image from "next/image";
 import useTransitionPosterContext from "../context/TransitionPosterContext";
-import { useRouter } from "next/router";
+import TransitionPosterImage from "./TransitionPosterImage";
+import TransitionPosterSpinner from "./TransitionPosterSpinner";
 
-type Props = {};
+type Props = {
+   onAnimationComplete: () => void;
+};
 
-export default function TransitionPoster({}: Props) {
-   const { position, selectedImg, sidebarWidth } = useTransitionPosterContext();
-
-   const router = useRouter();
-   const isHome = router.asPath === "/";
+export default function TransitionPoster({ onAnimationComplete }: Props) {
+   const { position, selectedImg, sidebarWidth, showSpinner } =
+      useTransitionPosterContext();
 
    if (!selectedImg || !position) return <></>;
    return (
-      <motion.div
-         initial={{
-            left: position.left,
-            top: position.top,
-            height: position.height,
-            borderRadius: isHome ? 8 : 24,
-         }}
-         exit={{
-            left: sidebarWidth + 40,
-            top: 120,
-            height: "calc(100vh - 120px - 40px)",
-            borderRadius: 24,
-         }}
-         transition={{ duration: 1, ease: [0.645, 0.045, 0.355, 1] }}
-         className="fixed z-50 overflow-hidden"
-      >
-         <div className="relative h-full aspect-[2/3]">
-            <Image
-               alt="selected"
+      <div className="fixed top-0 left-0 z-50 overflow-hidden flex gap-10 w-screen h-screen">
+         <div style={{ width: sidebarWidth }} className="h-full" />
+         <div className="flex-1 h-full flex">
+            <TransitionPosterImage
                src={selectedImg}
-               fill
-               sizes="100%"
-               priority
+               position={position}
+               sidebarWidth={sidebarWidth}
+               onAnimationComplete={onAnimationComplete}
             />
+            <TransitionPosterSpinner showSpinner={showSpinner} />
          </div>
-      </motion.div>
+      </div>
    );
 }

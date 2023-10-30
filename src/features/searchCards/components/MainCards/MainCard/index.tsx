@@ -3,7 +3,7 @@ import { MediaModel } from "@/models/MediaModel";
 import MainCardFront from "./MainCardFront";
 import MainCardBack from "./MainCardBack";
 import MainCardContainer from "./MainCardContainer";
-import useBackground from "@/hooks/useBackground";
+import useBackground from "@/features/background/hooks/useBackground";
 
 type Props = {
    media: MediaModel;
@@ -14,12 +14,16 @@ export default function MainCard({ media, mediaType }: Props) {
    const { changeBackground, removeBackground } = useBackground();
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const openCard = () => {
-      changeBackground(media);
       setIsOpen(true);
+      changeBackground(media);
    };
    const closeCard = () => {
       setIsOpen(false);
       removeBackground();
+   };
+
+   const closeWithoutRemove = () => {
+      setIsOpen(false);
    };
 
    const [isLeaving, setIsLeaving] = useState<boolean>(false);
@@ -41,6 +45,7 @@ export default function MainCard({ media, mediaType }: Props) {
             mediaType={mediaType}
             media={media}
             closeCard={closeCard}
+            closeWithoutRemove={closeWithoutRemove}
             leave={leave}
          />
       </MainCardContainer>

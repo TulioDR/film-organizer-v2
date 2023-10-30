@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import Backdrop from "./Backdrop";
 
-export default function BackgroundImage() {
+export default function Background() {
    const { backgroundImage, backgroundKey } = useSelector(
       (state: StoreModel) => state.background
    );
@@ -20,6 +20,9 @@ export default function BackgroundImage() {
       else if (type === "string") setSrc(link);
       else setSrc(backgroundImage);
    }, [backgroundImage]);
+
+   // console.log("the background key is");
+   // console.log(backgroundKey);
 
    return (
       <div className="fixed top-0 left-0 h-screen -z-10 w-screen bg-primary-light dark:bg-primary-dark">

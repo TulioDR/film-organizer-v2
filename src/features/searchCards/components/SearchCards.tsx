@@ -1,4 +1,3 @@
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import Title from "@/components/Title";
 import PageHead from "@/components/PageHead";
@@ -11,16 +10,9 @@ import { useRouter } from "next/router";
 type Props = {
    title: string;
    apiUrl: string;
-   noRemoveBackground?: true;
 };
 
-export default function SearchCards({
-   title,
-   apiUrl,
-   noRemoveBackground,
-}: Props) {
-   useRemoveBackgroundImage(noRemoveBackground);
-
+export default function SearchCards({ title, apiUrl }: Props) {
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
 

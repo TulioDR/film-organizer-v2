@@ -1,4 +1,3 @@
-import useRemoveBackgroundImage from "@/hooks/useRemoveBackgroundImage";
 import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
@@ -11,7 +10,6 @@ type Props = {
 export default function MainCardsContainer({ children }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
-   useRemoveBackgroundImage();
    return (
       <motion.div
          variants={cardsContainer}
