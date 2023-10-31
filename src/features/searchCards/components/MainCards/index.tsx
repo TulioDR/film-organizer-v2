@@ -1,9 +1,10 @@
+import { Fragment, useState, useEffect } from "react";
+
 import MainCard from "./MainCard";
 import useSearchCards from "../../hooks/useSearchCards";
 
 import MainCardsContainer from "./MainCardsContainer";
 import LoadingPage from "../LoadingPage";
-import { Fragment, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CustomPagination from "@/components/CustomPagination";
 import PaginationContainer from "../PaginationContainer";
@@ -25,6 +26,14 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
       router.push({ query: { ...router.query, page: page } });
    };
 
+   const [currentPage, setCurrentPage] = useState<number>(1);
+
+   const { query } = useRouter();
+   const { page } = query;
+   useEffect(() => {
+      setCurrentPage(Number(page || 1));
+   }, [page]);
+
    return (
       <>
          <AnimatePresence onExitComplete={() => setShowPage(true)}>
@@ -34,6 +43,7 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
             <motion.div exit={{ opacity: 0.3 }} className="space-y-5">
                <PaginationContainer>
                   <CustomPagination
+                     value={currentPage}
                      total={totalPages}
                      onPaginationChange={(page) => handleChange(page)}
                   />
@@ -54,6 +64,7 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                         </MainCardsContainer>
                         <PaginationContainer>
                            <CustomPagination
+                              value={currentPage}
                               total={totalPages}
                               onPaginationChange={(page) => handleChange(page)}
                            />

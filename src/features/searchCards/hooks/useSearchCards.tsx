@@ -8,7 +8,6 @@ export default function useSearchCards(url: string) {
    const [isLoading, setIsLoading] = useState<boolean>(true);
 
    const { query } = useRouter();
-
    const { page } = query;
 
    useEffect(() => {
