@@ -16,7 +16,7 @@ export default function ModalContainer({ children, closeModal }: Props) {
          innerModalControls.start({ opacity: 1 });
       };
       execute();
-   }, [modalControls]);
+   }, [modalControls, innerModalControls]);
    return (
       <>
          <motion.div

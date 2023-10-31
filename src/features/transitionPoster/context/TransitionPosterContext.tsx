@@ -49,10 +49,8 @@ export function TransitionPosterProvider({ children }: Props) {
       const element = document.getElementById(id)!;
       const { x, y, height } = element.getBoundingClientRect();
       setPosition({ top: y, left: x, height: height });
-      setTimeout(() => {
-         element.style.transitionDuration = "0ms";
-         element.style.visibility = "hidden";
-      }, 100);
+      element.style.transitionDuration = "0ms";
+      element.style.visibility = "hidden";
 
       dispatch(posterAnimationActions.changePosterAnimation(false));
    };
@@ -68,7 +66,7 @@ export function TransitionPosterProvider({ children }: Props) {
 
    return (
       <TransitionPosterContext.Provider value={value}>
-         <div className={`duration-300 ${selectedImg ? "" : ""}`}>
+         <div className={`duration-300 ${selectedImg ? "opacity-0" : ""}`}>
             {children}
          </div>
          <TransitionPoster onAnimationComplete={onAnimationComplete} />

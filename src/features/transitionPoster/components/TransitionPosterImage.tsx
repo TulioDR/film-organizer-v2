@@ -37,7 +37,7 @@ export default function TransitionPosterImage({
          initial={initial}
          animate={animation}
          exit={animation}
-         transition={{ duration: 3, ease: [0.645, 0.045, 0.355, 1] }}
+         transition={{ duration: 0.5, ease: [0.645, 0.045, 0.355, 1] }}
          className="relative h-full aspect-[2/3] overflow-hidden"
          onAnimationComplete={onAnimationComplete}
       >

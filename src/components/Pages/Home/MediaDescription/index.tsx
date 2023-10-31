@@ -39,7 +39,10 @@ export default function MediaDescription({
             <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
             <div className="flex items-center h-10 gap-4">
                <BookmarkButton media={currentMedia} mediaType={mediaType} />
-               <LearnMoreButton onClick={handleLearnMoreClick} />
+               <LearnMoreButton
+                  href={`/${mediaType}/${currentMedia.id}`}
+                  onClick={handleLearnMoreClick}
+               />
             </div>
          </motion.div>
       </AnimatePresence>

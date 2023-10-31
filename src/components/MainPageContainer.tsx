@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import useInitialThemeColor from "@/hooks/useInitialThemeColor";
 
@@ -14,6 +14,8 @@ import { useUser } from "@clerk/nextjs";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import Background from "@/features/background/components/Background";
+
+import useBackground from "@/features/background/hooks/useBackground";
 
 type Props = {
    children: React.ReactNode;
@@ -31,6 +33,13 @@ export default function MainPageContainer({ children }: Props) {
       refreshLists();
    }, [user]);
 
+   const { pathname } = useRouter();
+   const { removeBackground } = useBackground();
+   useEffect(() => {
+      if (pathname === "/[media_type]/[media_id]") return;
+      removeBackground();
+   }, [pathname, removeBackground]);
+
    return (
       <>
          <div id="modals-container"></div>
@@ -44,7 +53,7 @@ export default function MainPageContainer({ children }: Props) {
                <Navbar />
                <AnimatePresence mode="wait">
                   {router.pathname !== "/auth" && (
-                     <motion.div key={router.pathname}>{children}</motion.div>
+                     <div key={router.pathname}>{children}</div>
                   )}
                </AnimatePresence>
             </div>
