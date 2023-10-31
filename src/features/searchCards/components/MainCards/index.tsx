@@ -22,7 +22,7 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
    const [showPage, setShowPage] = useState<boolean>(false);
 
    const router = useRouter();
-   const handleChange = (page: number) => {
+   const changePage = (page: number) => {
       router.push({ query: { ...router.query, page: page } });
    };
 
@@ -45,7 +45,7 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                   <CustomPagination
                      value={currentPage}
                      total={totalPages}
-                     onPaginationChange={(page) => handleChange(page)}
+                     onChange={(page) => changePage(page)}
                   />
                </PaginationContainer>
                <AnimatePresence mode="wait">
@@ -66,7 +66,7 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                            <CustomPagination
                               value={currentPage}
                               total={totalPages}
-                              onPaginationChange={(page) => handleChange(page)}
+                              onChange={(page) => changePage(page)}
                            />
                         </PaginationContainer>
                      </Fragment>

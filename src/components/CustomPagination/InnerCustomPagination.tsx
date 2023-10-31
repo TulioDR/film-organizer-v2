@@ -5,13 +5,15 @@ import { useSelector } from "react-redux";
 type Props = {
    sm?: true;
    total: number;
-   onPaginationChange: (page: number) => void;
+   value: number;
+   onChange: (page: number) => void;
 };
 
-export default function CustomPagination({
+export default function InnerCustomPagination({
    sm,
    total,
-   onPaginationChange,
+   onChange,
+   value,
 }: Props) {
    const { themeColor, isDarkMode } = useSelector(
       (state: StoreModel) => state.theme
@@ -26,7 +28,8 @@ export default function CustomPagination({
       <div className="w-full flex justify-center">
          <Pagination
             total={total}
-            onChange={onPaginationChange}
+            value={value}
+            onChange={onChange}
             size={sm ? "xs" : "md"}
             styles={{
                control: {

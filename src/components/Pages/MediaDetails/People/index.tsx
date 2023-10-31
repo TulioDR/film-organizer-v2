@@ -47,19 +47,11 @@ export default function People({ people, type }: Props) {
          ) : (
             <div>No information available about the {type}</div>
          )}
-         <div className="sm:hidden">
-            <CustomPagination
-               sm
-               total={Math.ceil(people.length / itemsPerPage)}
-               onPaginationChange={(page: number) => setPage(page)}
-            />
-         </div>
-         <div className="hidden sm:block">
-            <CustomPagination
-               total={Math.ceil(people.length / itemsPerPage)}
-               onPaginationChange={(page: number) => setPage(page)}
-            />
-         </div>
+         <CustomPagination
+            value={page}
+            total={Math.ceil(people.length / itemsPerPage)}
+            onChange={(page: number) => setPage(page)}
+         />
       </div>
    );
 }
