@@ -51,7 +51,7 @@ export default function SideTooltip({
             )}
 
             {items && (
-               <div className="pb-2">
+               <div className="pb-2 px-2">
                   {items.map((item, index) => (
                      <SideDropdownItem
                         key={index}

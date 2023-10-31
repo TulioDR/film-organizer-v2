@@ -16,7 +16,7 @@ export default function SideDropdownContainer({ children, open }: Props) {
                transition={{ duration: 0.3 }}
                className="overflow-hidden"
             >
-               <div className="pb-2">{children}</div>
+               <div className="pb-[10px] px-[10px]">{children}</div>
             </motion.div>
          )}
       </AnimatePresence>

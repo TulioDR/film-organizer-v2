@@ -31,7 +31,7 @@ export default function SideDropdownItem({
       <Link
          href={link}
          onClick={hideSidebar}
-         className={`flex items-center h-9 hover:text-light-1 dark:hover:text-dark-1 ${
+         className={`flex items-center h-9 hover:text-light-1 dark:hover:text-dark-1 rounded-lg ${
             hideIcon ? "pl-5" : ""
          } ${
             isDropdownSelected
