@@ -9,12 +9,14 @@ export default function SideLinks() {
       },
       { link: "/movie/genres", icon: "theater_comedy", text: "Genres" },
       { link: "/movie/trending", icon: "trending_up", text: "Trending" },
+      { link: "/movie/top-rated", icon: "star", text: "Top Rated" },
    ];
 
    const tvItems = [
       { link: "/tv/popular", icon: "local_fire_department", text: "Popular" },
       { link: "/tv/genres", icon: "theater_comedy", text: "Genres" },
       { link: "/tv/trending", icon: "trending_up", text: "Trending" },
+      { link: "/tv/top-rated", icon: "star", text: "Top Rated" },
    ];
 
    return (
