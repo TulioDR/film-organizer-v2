@@ -10,7 +10,7 @@ export default function DeleteMediaMessage({ isDeleteOpen }: Props) {
          }`}
       >
          <div className="shrink-0 h-full w-72 flex items-center justify-center float-right">
-            Which ones you want to remove?
+            Select the media to be deleted
          </div>
       </div>
    );

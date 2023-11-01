@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
 import SaveMediaModal from "@/components/Modals/SaveMediaModal";
-import useListsRefresh from "@/hooks/useListsRefresh";
 
 import Notification from "@/components/Notification";
 import { useUser } from "@clerk/nextjs";
@@ -16,22 +15,30 @@ import Navbar from "./Navbar";
 import Background from "@/features/background/components/Background";
 
 import useBackground from "@/features/background/hooks/useBackground";
+import { getLists } from "@/api/lists";
+import { listActions } from "@/store/slices/list-slice";
+import { useDispatch } from "react-redux";
 
 type Props = {
    children: React.ReactNode;
 };
 
 export default function MainPageContainer({ children }: Props) {
-   const router = useRouter();
    useInitialThemeColor();
 
-   const { refreshLists } = useListsRefresh();
-
+   const dispatch = useDispatch();
    const { user } = useUser();
    useEffect(() => {
-      console.log("running for the first time");
-      refreshLists();
-   }, [user]);
+      const getInitialLists = async () => {
+         if (!user) {
+            dispatch(listActions.setLists(null));
+            return;
+         }
+         const lists = await getLists(user.id);
+         dispatch(listActions.setLists(lists));
+      };
+      getInitialLists();
+   }, [user, dispatch]);
 
    const { pathname } = useRouter();
    const { removeBackground } = useBackground();
@@ -52,9 +59,7 @@ export default function MainPageContainer({ children }: Props) {
             <div className="flex-1 min-w-0 px-5 sm:px-10 pb-5 sm:pb-10">
                <Navbar />
                <AnimatePresence mode="wait">
-                  {router.pathname !== "/auth" && (
-                     <div key={router.pathname}>{children}</div>
-                  )}
+                  {pathname !== "/auth" && <div key={pathname}>{children}</div>}
                </AnimatePresence>
             </div>
          </div>

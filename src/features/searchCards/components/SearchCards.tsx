@@ -15,9 +15,9 @@ type Props = {
 export default function SearchCards({ title, apiUrl }: Props) {
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
-
    const fullApiUrl = `/${mediaType}${apiUrl}`;
 
+   if (!mediaType) return <></>;
    return (
       <TransitionPosterProvider>
          <PageHead title={title} />

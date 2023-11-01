@@ -8,7 +8,7 @@ type Props = {
 export default function DeleteSelector({ isSelected, onTap }: Props) {
    return (
       <div
-         className={`absolute top-0 left-0 w-full h-full rounded-xl cursor-pointer overflow-hidden ${
+         className={`absolute top-0 left-0 w-full h-full rounded-3xl cursor-pointer overflow-hidden ${
             isSelected ? "border-4 border-red-700" : ""
          }`}
       >

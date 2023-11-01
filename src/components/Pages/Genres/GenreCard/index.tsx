@@ -5,7 +5,7 @@ import { useState } from "react";
 import GenreImage from "./GenreImage";
 import GenreCardOpen from "./GenreCardOpen";
 import GenreCardClosed from "./GenreCardClosed";
-import useBackground from "@/hooks/useBackground";
+import useBackground from "@/features/background/hooks/useBackground";
 
 type Props = {
    genre: GenreModel;
