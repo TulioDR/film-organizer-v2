@@ -12,7 +12,7 @@ type Props = {
    leave?: () => void;
 };
 
-export default function LearnMore({
+export default function LearnMoreMobile({
    mediaType,
    media,
    closeCard,
@@ -34,7 +34,7 @@ export default function LearnMore({
          scroll={false}
          onClick={handleClick}
          onMouseDown={(e) => e.preventDefault()}
-         className="rounded-xl h-10 text-sm flex-1 flex items-center justify-center font-medium font-oswald uppercase text-white"
+         className="rounded-xl h-10 text-sm flex items-center justify-center font-medium font-oswald uppercase text-white"
          style={{ backgroundColor: themeColor }}
       >
          Learn More

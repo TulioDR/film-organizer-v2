@@ -8,7 +8,7 @@ type Props = {
 export default function MainCardDate({ date }: Props) {
    if (!date) return <div>N/A</div>;
    return (
-      <div className="text-sm">
+      <div className="text-xs sm:text-sm text-center sm:text-left">
          <span>{changeDateFormat(date, true)}</span>
          {!isReleased(date) && (
             <span className="ml-1">(in {daysToRelease(date)} days)</span>

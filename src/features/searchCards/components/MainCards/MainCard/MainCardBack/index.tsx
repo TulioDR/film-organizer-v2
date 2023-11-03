@@ -23,7 +23,7 @@ export default function MainCardBack({
    closeWithoutRemove,
 }: Props) {
    return (
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden rounded-3xl">
+      <div className="hidden sm:flex absolute top-0 left-0 w-full h-full flex-col [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden rounded-3xl">
          <div className="relative">
             <BackButton onClick={closeCard} />
             <div className="overflow-hidden shadow-xl relative">

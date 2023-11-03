@@ -4,6 +4,7 @@ import MainCardFront from "./MainCardFront";
 import MainCardBack from "./MainCardBack";
 import MainCardContainer from "./MainCardContainer";
 import useBackground from "@/features/background/hooks/useBackground";
+import MainCardBackMobile from "./MainCardBack/MainCardBackMobile";
 
 type Props = {
    media: MediaModel;
@@ -47,6 +48,12 @@ export default function MainCard({ media, mediaType }: Props) {
             closeCard={closeCard}
             closeWithoutRemove={closeWithoutRemove}
             leave={leave}
+         />
+         <MainCardBackMobile
+            mediaType={mediaType}
+            media={media}
+            closeCard={closeCard}
+            closeWithoutRemove={closeWithoutRemove}
          />
       </MainCardContainer>
    );

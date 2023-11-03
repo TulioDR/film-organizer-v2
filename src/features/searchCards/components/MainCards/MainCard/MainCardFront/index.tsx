@@ -12,7 +12,7 @@ export default function MainCardFront({ title, posterPath, isLeaving }: Props) {
          <Poster alt={title} posterPath={posterPath} size="lg" />
          {!isLeaving && (
             <>
-               <div className="w-full h-full bg-black/70 absolute top-0 left-0 opacity-0 group-hover:opacity-100 duration-500" />
+               <div className="hidden sm:block w-full h-full bg-black/70 absolute top-0 left-0 opacity-0 group-hover:opacity-100 duration-500" />
                <MainCardTitle>{title}</MainCardTitle>
             </>
          )}
