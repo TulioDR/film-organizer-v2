@@ -1,20 +1,24 @@
 import SavedMediaContainer from "./SavedMediaContainer";
 import SavedMediaCard from "./SavedMediaCard";
 import { SavedMediaModel } from "@/models/MediaModel";
+import NoSavedMediaMessage from "./NoSavedMediaMessage";
 
 type Props = {
    filteredMedia: SavedMediaModel[];
    mediaToDelete: SavedMediaModel[];
-   isDeleteOpen: boolean;
+   isDeleteModeActive: boolean;
    onCardTap: (media: SavedMediaModel) => void;
 };
 
 export default function SavedMedia({
    filteredMedia,
    mediaToDelete,
-   isDeleteOpen,
+   isDeleteModeActive,
    onCardTap,
 }: Props) {
+   const noMedia = filteredMedia.length === 0;
+
+   if (noMedia) return <NoSavedMediaMessage />;
    return (
       <SavedMediaContainer>
          {filteredMedia.map((media) => (
@@ -23,7 +27,7 @@ export default function SavedMedia({
                media={media}
                isSelected={mediaToDelete.includes(media)}
                onTap={() => onCardTap(media)}
-               isDeleteOpen={isDeleteOpen}
+               isDeleteModeActive={isDeleteModeActive}
             />
          ))}
       </SavedMediaContainer>

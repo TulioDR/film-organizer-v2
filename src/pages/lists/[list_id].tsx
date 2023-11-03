@@ -1,127 +1,81 @@
-import { useEffect, useState } from "react";
-
-import { SavedMediaModel } from "@/models/MediaModel";
-
-import ListModel from "@/models/listModel";
 import ModalPortal from "@/components/Modals/ModalPortal";
 import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 
-import SavedMedia from "@/components/Pages/ListDetails/SavedMedia";
-import MediaTypePills from "@/components/Pages/ListDetails/MediaTypePills";
-import DeleteMediaButtons from "@/components/Pages/ListDetails/DeleteMediaButtons";
-
-import { getSpecificList } from "@/api/lists";
-import { useRouter } from "next/router";
-import { getSavedMedia } from "@/api/media";
-import MediaFilterModel from "@/models/MediaFilterModel";
+import { GetServerSideProps } from "next";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
-import PageHead from "@/components/PageHead";
+
 import Title from "@/components/Title";
-type Props = {
-   list: ListModel;
+import PageHead from "@/components/PageHead";
+
+import MediaTypePills from "@/features/listDetails/components/MediaTypePills";
+import SavedMedia from "@/features/listDetails/components/SavedMedia";
+import DeleteMediaButtons from "@/features/listDetails/components/DeleteMediaButtons";
+
+import useDeleteMode from "@/features/listDetails/hooks/useDeleteMode";
+import useSavedMediaFilter from "@/features/listDetails/hooks/useSavedMediaFilter";
+import useListData from "@/features/listDetails/hooks/useListData";
+import useMediaData from "@/features/listDetails/hooks/useMediaData";
+import useModalState from "@/hooks/useModalState";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+   const { list_id } = context.query!;
+   return {
+      props: { list_id },
+   };
 };
 
-export default function ListID({}: Props) {
-   const [list, setList] = useState<ListModel | null>(null);
-   const [media, setMedia] = useState<SavedMediaModel[] | null>(null);
+type Props = {
+   list_id: string;
+};
 
-   const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[]>([]);
-   const [selectedType, setSelectedType] = useState<MediaFilterModel>("all");
-   const [mediaToDelete, setMediaToDelete] = useState<SavedMediaModel[]>([]);
+export default function ListID({ list_id }: Props) {
+   const { media, refresh } = useMediaData(list_id);
+   const { list } = useListData(list_id);
 
-   const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
-   const openDelete = () => {
-      setIsDeleteOpen(true);
-   };
-   const closeDelete = () => {
-      setIsDeleteOpen(false);
-      setMediaToDelete([]);
-   };
+   const { filteredMedia, selectedType, setSelectedType } =
+      useSavedMediaFilter(media);
 
-   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
-   const openDeleteModal = () => {
-      setIsDeleteModalOpen(true);
-   };
-   const closeDeleteModal = () => {
-      setIsDeleteModalOpen(false);
-   };
+   const {
+      mediaToDelete,
+      onCardTap,
+      isDeleteModeActive,
+      startDeleteMode,
+      stopDeleteMode,
+   } = useDeleteMode();
 
-   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-   const refresh = () => setIsRefreshing((prev) => !prev);
+   const { isModalOpen, openModal, closeModal } = useModalState();
 
-   const { query } = useRouter();
-   const { list_id } = query;
-   useEffect(() => {
-      const getMediaListData = async () => {
-         const { data: listData } = await getSpecificList(list_id as string);
-         setList(listData);
-      };
-      getMediaListData();
-   }, [list_id]);
-
-   useEffect(() => {
-      const getMediaOnRefresh = async () => {
-         const { data: mediaData } = await getSavedMedia(list_id as string);
-         setMedia(mediaData);
-      };
-      getMediaOnRefresh();
-   }, [list_id, isRefreshing]);
-
-   useEffect(() => {
-      if (!media) return;
-      if (selectedType === "all") {
-         setFilteredMedia(media);
-      } else {
-         const filtered = media.filter(
-            ({ media_type }) => media_type === selectedType
-         );
-         setFilteredMedia(filtered);
-      }
-   }, [media, selectedType]);
-
-   const onCardTap = (media: SavedMediaModel) => {
-      const isSelected = mediaToDelete.includes(media);
-      if (isSelected) {
-         setMediaToDelete((old) => old.filter(({ id }) => id !== media.id));
-      } else {
-         setMediaToDelete((old) => [...old, media]);
-      }
-   };
    return (
       <TransitionPosterProvider>
-         <div className="relative">
-            <PageHead title={list?.name || "Film Organizer"} />
-            {list && (
-               <Title title={list.name}>
-                  <MediaTypePills
-                     selectedType={selectedType}
-                     setSelectedType={setSelectedType}
-                  />
-               </Title>
-            )}
-            {filteredMedia.length > 0 && (
-               <SavedMedia
-                  filteredMedia={filteredMedia}
-                  mediaToDelete={mediaToDelete}
-                  isDeleteOpen={isDeleteOpen}
-                  onCardTap={onCardTap}
+         <PageHead title={list?.name || ""} />
+         {list && (
+            <Title title={list.name}>
+               <MediaTypePills
+                  selectedType={selectedType}
+                  setSelectedType={setSelectedType}
                />
-            )}
-            <DeleteMediaButtons
+            </Title>
+         )}
+         <SavedMedia
+            filteredMedia={filteredMedia}
+            mediaToDelete={mediaToDelete}
+            isDeleteModeActive={isDeleteModeActive}
+            onCardTap={onCardTap}
+         />
+         <DeleteMediaButtons
+            mediaToDelete={mediaToDelete}
+            startDeleteMode={startDeleteMode}
+            stopDeleteMode={stopDeleteMode}
+            openDeleteModal={openModal}
+         />
+         <ModalPortal isOpen={isModalOpen}>
+            <DeleteMediaModal
+               list={list}
+               close={closeModal}
                mediaToDelete={mediaToDelete}
-               isDeleteOpen={isDeleteOpen}
-               onClick={isDeleteOpen ? closeDelete : openDelete}
-               openDeleteModal={openDeleteModal}
+               refresh={refresh}
             />
-            <ModalPortal isOpen={isDeleteModalOpen}>
-               <DeleteMediaModal
-                  list={list}
-                  close={closeDeleteModal}
-                  mediaToDelete={mediaToDelete}
-                  refresh={refresh}
-               />
-            </ModalPortal>
-         </div>
+         </ModalPortal>
       </TransitionPosterProvider>
    );
 }

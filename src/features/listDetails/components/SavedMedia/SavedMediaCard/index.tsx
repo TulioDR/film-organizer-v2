@@ -9,13 +9,13 @@ import useTransitionPosterContext from "@/features/transitionPoster/context/Tran
 type Props = {
    media: SavedMediaModel;
    isSelected: boolean;
-   isDeleteOpen: boolean;
+   isDeleteModeActive: boolean;
    onTap: () => void;
 };
 
 export default function SavedMediaCard({
    media,
-   isDeleteOpen,
+   isDeleteModeActive,
    isSelected,
    onTap,
 }: Props) {
@@ -28,14 +28,14 @@ export default function SavedMediaCard({
          variants={staggerItem}
          id={`${media.media_type}-${media.id}`}
          className="relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
-         onClick={!isDeleteOpen ? handleClick : undefined}
+         onClick={!isDeleteModeActive ? handleClick : undefined}
       >
          <Poster
             alt={media.media_title}
             posterPath={media.media_poster}
             size="lg"
          />
-         {isDeleteOpen && (
+         {isDeleteModeActive && (
             <DeleteSelector isSelected={isSelected} onTap={onTap} />
          )}
          <div className="absolute w-full h-full">{media.media_title}</div>

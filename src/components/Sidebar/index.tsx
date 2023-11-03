@@ -38,9 +38,11 @@ export default function Sidebar() {
                <ModalPortal isOpen={showCreateForm}>
                   <CreateListModal close={closeForm} />
                </ModalPortal>
-               <SideSubtitle>Lists</SideSubtitle>
-               {!lists && <SideLoadingLists />}
-               {lists && lists.length > 0 && <SideLists />}
+               <div className="space-y-5">
+                  <SideSubtitle>Lists</SideSubtitle>
+                  {!lists && <SideLoadingLists />}
+                  {lists && lists.length > 0 && <SideLists />}
+               </div>
                {lists && lists.length <= 0 && (
                   <SideMessage icon="add" onClick={openForm}>
                      Create a list to start saving your favorite Movies and TV
