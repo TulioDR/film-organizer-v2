@@ -13,13 +13,14 @@ export default function TypePill({
    name,
    setSelectedType,
 }: Props) {
+   const isSelected = type === selectedType;
    return (
       <button
          onClick={() => setSelectedType(type)}
-         className={`rounded-full py-1 px-4 shadow-xl text-sm ${
-            type === selectedType
-               ? "bg-secondary-dark text-dark-1 dark:text-light-1 dark:bg-secondary-light"
-               : "bg-secondary-light dark:bg-secondary-dark text-light-1 dark:text-dark-1"
+         className={`rounded-lg h-10 px-4 text-xs sm:text-sm font-title ${
+            isSelected
+               ? "bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
+               : "border-light-1 text-light-1 hover:bg-secondary-light dark:border-dark-1 dark:text-dark-1 dark:hover:bg-secondary-dark border"
          }`}
       >
          {name}

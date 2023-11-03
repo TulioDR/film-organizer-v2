@@ -27,7 +27,7 @@ export default function MediaTypePills({
             setSelectedType={setSelectedType}
          />
          <TypePill
-            name="TV Shows"
+            name="Series"
             type="tv"
             selectedType={selectedType}
             setSelectedType={setSelectedType}
