@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { staggerItem } from "@/animations/StaggerCards";
 import { SavedMediaModel } from "@/models/MediaModel";
 
 import Poster from "@/components/Poster";
@@ -25,7 +24,10 @@ export default function SavedMediaCard({
    return (
       <motion.article
          layout
-         variants={staggerItem}
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.3, ease: "easeInOut" }}
          id={`${media.media_type}-${media.id}`}
          className="relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
          onClick={!isDeleteModeActive ? handleClick : undefined}

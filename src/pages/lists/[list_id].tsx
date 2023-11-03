@@ -9,7 +9,7 @@ import PageHead from "@/components/PageHead";
 
 import MediaTypePills from "@/features/listDetails/components/MediaTypePills";
 import SavedMedia from "@/features/listDetails/components/SavedMedia";
-import DeleteMediaButtons from "@/features/listDetails/components/DeleteMediaButtons";
+import DeleteMode from "@/features/listDetails/components/DeleteMode";
 
 import useModalState from "@/hooks/useModalState";
 import useDeleteMode from "@/features/listDetails/hooks/useDeleteMode";
@@ -43,21 +43,22 @@ export default function ListID({ list_id }: Props) {
       isDeleteModeActive,
       startDeleteMode,
       stopDeleteMode,
+      showButtons,
+      textControls,
    } = useDeleteMode();
 
    const { isModalOpen, openModal, closeModal } = useModalState();
 
+   if (!list || !filteredMedia) return <></>;
    return (
       <TransitionPosterProvider>
          <PageHead title={list?.name || ""} />
-         {list && (
-            <Title title={list.name}>
-               <MediaTypePills
-                  selectedType={selectedType}
-                  setSelectedType={setSelectedType}
-               />
-            </Title>
-         )}
+         <Title title={list.name}>
+            <MediaTypePills
+               selectedType={selectedType}
+               setSelectedType={setSelectedType}
+            />
+         </Title>
          <SavedMedia
             selectedType={selectedType}
             filteredMedia={filteredMedia}
@@ -65,11 +66,13 @@ export default function ListID({ list_id }: Props) {
             isDeleteModeActive={isDeleteModeActive}
             onCardTap={onCardTap}
          />
-         <DeleteMediaButtons
+         <DeleteMode
+            showButtons={showButtons}
             mediaToDelete={mediaToDelete}
             startDeleteMode={startDeleteMode}
             stopDeleteMode={stopDeleteMode}
             openDeleteModal={openModal}
+            textControls={textControls}
          />
          <ModalPortal isOpen={isModalOpen}>
             <DeleteMediaModal
@@ -77,6 +80,7 @@ export default function ListID({ list_id }: Props) {
                close={closeModal}
                mediaToDelete={mediaToDelete}
                refresh={refresh}
+               stopDeleteMode={stopDeleteMode}
             />
          </ModalPortal>
       </TransitionPosterProvider>

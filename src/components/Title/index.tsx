@@ -34,7 +34,7 @@ export default function Title({ title, children }: Props) {
                initial="initial"
                animate="animate"
                exit="exit"
-               className={`text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-title tracking-wide uppercase ${
+               className={`text-center sm:text-left text-4xl sm:text-6xl 2xl:text-7xl font-title tracking-wide uppercase ${
                   backgroundKey
                      ? "text-dark-1"
                      : "text-light-1 dark:text-dark-1"
@@ -43,7 +43,14 @@ export default function Title({ title, children }: Props) {
                {title}
             </motion.div>
          </div>
-         {children}
+         <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+         >
+            {children}
+         </motion.div>
       </TitleContainer>
    );
 }

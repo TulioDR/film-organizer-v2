@@ -6,7 +6,9 @@ export default function useSavedMediaFilter(
    media: SavedMediaModel[] | null,
    list_id: string
 ) {
-   const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[]>([]);
+   const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[] | null>(
+      null
+   );
    const [selectedType, setSelectedType] = useState<MediaFilterModel>("all");
 
    useEffect(() => {

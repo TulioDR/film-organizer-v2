@@ -15,6 +15,7 @@ type Props = {
    mediaToDelete: SavedMediaModel[];
    list: any;
    refresh: () => void;
+   stopDeleteMode: () => void;
 };
 
 export default function DeleteMediaModal({
@@ -22,6 +23,7 @@ export default function DeleteMediaModal({
    mediaToDelete,
    list,
    refresh,
+   stopDeleteMode,
 }: Props) {
    const [movies, setMovies] = useState<SavedMediaModel[]>([]);
    const [tvSeries, setTvSeries] = useState<SavedMediaModel[]>([]);
@@ -51,6 +53,7 @@ export default function DeleteMediaModal({
          message = "Media deleted Successfully";
          success = true;
          refresh();
+         stopDeleteMode();
          close();
       }
       setAndCloseNotification(message, success);

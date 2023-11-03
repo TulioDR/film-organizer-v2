@@ -1,13 +1,23 @@
 import { SavedMediaModel } from "@/models/MediaModel";
+import { useAnimationControls } from "framer-motion";
 import { useState } from "react";
 
 export default function useDeleteMode() {
    const [mediaToDelete, setMediaToDelete] = useState<SavedMediaModel[]>([]);
    const [isDeleteModeActive, setIsDeleteModeActive] = useState<boolean>(false);
-   const startDeleteMode = () => {
+   const [showButtons, setShowButtons] = useState<boolean>(false);
+   const textControls = useAnimationControls();
+
+   const startDeleteMode = async () => {
       setIsDeleteModeActive(true);
+      await textControls.start({
+         width: "auto",
+         transition: { duration: 0.3 },
+      });
+      setShowButtons(true);
    };
    const stopDeleteMode = () => {
+      setShowButtons(false);
       setIsDeleteModeActive(false);
       setMediaToDelete([]);
    };
@@ -27,5 +37,7 @@ export default function useDeleteMode() {
       isDeleteModeActive,
       startDeleteMode,
       stopDeleteMode,
+      showButtons,
+      textControls,
    };
 }

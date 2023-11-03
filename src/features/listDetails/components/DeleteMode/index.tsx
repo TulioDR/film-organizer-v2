@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { SavedMediaModel } from "@/models/MediaModel";
-import { AnimatePresence, useAnimationControls } from "framer-motion";
+import { AnimatePresence, AnimationControls } from "framer-motion";
 
 import DeleteFormIcon from "./DeleteFormIcon";
 import DeleteFormMessage from "./DeleteFormMessage";
@@ -12,30 +11,18 @@ type Props = {
    startDeleteMode: () => void;
    stopDeleteMode: () => void;
    openDeleteModal: () => void;
+   showButtons: boolean;
+   textControls: AnimationControls;
 };
 
-export default function DeleteMediaButtons({
+export default function DeleteMode({
    mediaToDelete,
    startDeleteMode,
    stopDeleteMode,
    openDeleteModal,
+   showButtons,
+   textControls,
 }: Props) {
-   const textControls = useAnimationControls();
-   const [showButtons, setShowButtons] = useState<boolean>(false);
-
-   const openDeleteForm = async () => {
-      startDeleteMode();
-      await textControls.start({
-         width: "auto",
-         transition: { duration: 0.3 },
-      });
-      setShowButtons(true);
-   };
-   const closeDeleteForm = () => {
-      stopDeleteMode();
-      setShowButtons(false);
-   };
-
    const onButtonsRemoval = () => {
       textControls.start({
          width: 0,
@@ -44,15 +31,15 @@ export default function DeleteMediaButtons({
    };
 
    return (
-      <div className="fixed bottom-10 right-10 rounded-lg bg-red-700">
+      <div className="fixed bottom-5 right-5 sm:bottom-10 sm:right-10 rounded-lg bg-red-700">
          <div className="flex h-12 text-white">
-            <DeleteFormIcon onClick={openDeleteForm} />
+            <DeleteFormIcon onClick={startDeleteMode} />
             <DeleteFormMessage textControls={textControls} />
          </div>
          <AnimatePresence onExitComplete={onButtonsRemoval}>
             {showButtons && (
                <DeleteFormButtonsContainer>
-                  <DeleteFormButton onClick={closeDeleteForm}>
+                  <DeleteFormButton onClick={stopDeleteMode}>
                      Close
                   </DeleteFormButton>
                   <DeleteFormButton

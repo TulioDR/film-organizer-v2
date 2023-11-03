@@ -3,6 +3,7 @@ import SavedMediaCard from "./SavedMediaCard";
 import { SavedMediaModel } from "@/models/MediaModel";
 import NoSavedMediaMessage from "./NoSavedMediaMessage";
 import MediaFilterModel from "../../models/MediaFilterModel";
+import { AnimatePresence } from "framer-motion";
 
 type Props = {
    filteredMedia: SavedMediaModel[];
@@ -24,15 +25,17 @@ export default function SavedMedia({
    if (noMedia) return <NoSavedMediaMessage selectedType={selectedType} />;
    return (
       <SavedMediaContainer>
-         {filteredMedia.map((media) => (
-            <SavedMediaCard
-               key={media.id}
-               media={media}
-               isSelected={mediaToDelete.includes(media)}
-               onTap={() => onCardTap(media)}
-               isDeleteModeActive={isDeleteModeActive}
-            />
-         ))}
+         <AnimatePresence>
+            {filteredMedia.map((media) => (
+               <SavedMediaCard
+                  key={media.id}
+                  media={media}
+                  isSelected={mediaToDelete.includes(media)}
+                  onTap={() => onCardTap(media)}
+                  isDeleteModeActive={isDeleteModeActive}
+               />
+            ))}
+         </AnimatePresence>
       </SavedMediaContainer>
    );
 }
