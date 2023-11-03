@@ -17,10 +17,10 @@ export default function TypePill({
    return (
       <button
          onClick={() => setSelectedType(type)}
-         className={`rounded-lg h-10 px-4 text-xs sm:text-sm font-title ${
+         className={`h-10 rounded-lg px-4 text-xs sm:text-sm font-title ${
             isSelected
                ? "bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
-               : "border-light-1 text-light-1 hover:bg-secondary-light dark:border-dark-1 dark:text-dark-1 dark:hover:bg-secondary-dark border"
+               : "border border-light-1 dark:border-dark-1 text-light-1 hover:bg-secondary-light  dark:text-dark-1 dark:hover:bg-secondary-dark"
          }`}
       >
          {name}

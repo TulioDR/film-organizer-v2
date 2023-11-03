@@ -13,7 +13,7 @@ export default function MediaTypePills({
    setSelectedType,
 }: Props) {
    return (
-      <div className="flex items-center gap-3">
+      <div className="flex gap-3">
          <TypePill
             name="All"
             type="all"

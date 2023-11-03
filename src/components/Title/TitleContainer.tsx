@@ -3,5 +3,7 @@ type Props = {
 };
 
 export default function TitleContainer({ children }: Props) {
-   return <div className="flex justify-between items-end mb-5">{children}</div>;
+   return (
+      <div className="sm:flex justify-between items-end mb-5">{children}</div>
+   );
 }

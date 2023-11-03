@@ -34,7 +34,7 @@ export default function Title({ title, children }: Props) {
                initial="initial"
                animate="animate"
                exit="exit"
-               className={`text-xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-title tracking-wide uppercase ${
+               className={`text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-title tracking-wide uppercase ${
                   backgroundKey
                      ? "text-dark-1"
                      : "text-light-1 dark:text-dark-1"
