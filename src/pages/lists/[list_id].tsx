@@ -11,11 +11,11 @@ import MediaTypePills from "@/features/listDetails/components/MediaTypePills";
 import SavedMedia from "@/features/listDetails/components/SavedMedia";
 import DeleteMediaButtons from "@/features/listDetails/components/DeleteMediaButtons";
 
+import useModalState from "@/hooks/useModalState";
 import useDeleteMode from "@/features/listDetails/hooks/useDeleteMode";
 import useSavedMediaFilter from "@/features/listDetails/hooks/useSavedMediaFilter";
 import useListData from "@/features/listDetails/hooks/useListData";
 import useMediaData from "@/features/listDetails/hooks/useMediaData";
-import useModalState from "@/hooks/useModalState";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;
@@ -32,8 +32,10 @@ export default function ListID({ list_id }: Props) {
    const { media, refresh } = useMediaData(list_id);
    const { list } = useListData(list_id);
 
-   const { filteredMedia, selectedType, setSelectedType } =
-      useSavedMediaFilter(media);
+   const { filteredMedia, selectedType, setSelectedType } = useSavedMediaFilter(
+      media,
+      list_id
+   );
 
    const {
       mediaToDelete,
@@ -57,6 +59,7 @@ export default function ListID({ list_id }: Props) {
             </Title>
          )}
          <SavedMedia
+            selectedType={selectedType}
             filteredMedia={filteredMedia}
             mediaToDelete={mediaToDelete}
             isDeleteModeActive={isDeleteModeActive}

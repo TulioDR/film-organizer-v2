@@ -2,9 +2,16 @@ import { useState, useEffect } from "react";
 import { SavedMediaModel } from "@/models/MediaModel";
 import MediaFilterModel from "../models/MediaFilterModel";
 
-export default function useSavedMediaFilter(media: SavedMediaModel[] | null) {
+export default function useSavedMediaFilter(
+   media: SavedMediaModel[] | null,
+   list_id: string
+) {
    const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[]>([]);
    const [selectedType, setSelectedType] = useState<MediaFilterModel>("all");
+
+   useEffect(() => {
+      setSelectedType("all");
+   }, [list_id]);
 
    useEffect(() => {
       if (!media) return;
