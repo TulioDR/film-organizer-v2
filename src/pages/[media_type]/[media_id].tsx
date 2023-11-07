@@ -63,7 +63,7 @@ export default function Details({ media_type, media }: Props) {
             <ScrollDownIcon />
          </div>
          <BottomInfoContainer>
-            <div className="flex-1 space-y-10 py-10">
+            <div className="flex-1 space-y-10 py-5 sm:py-10">
                <Overview
                   media={media}
                   crew={media.created_by || media.credits.crew}

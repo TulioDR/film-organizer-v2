@@ -18,7 +18,7 @@ export default function SidebarContainer({ children }: Props) {
             ${revealSidebar ? "" : "-translate-x-full lg:translate-x-0"} 
             ${expandSidebar ? "w-60" : "w-[120px]"}`}
       >
-         <div className="h-full p-10 bg-primary-light dark:bg-primary-dark overflow-x-hidden overflow-y-hidden hover:overflow-y-auto main-scrollbar">
+         <div className="h-full p-10 bg-primary-light dark:bg-primary-dark overflow-x-hidden lg:overflow-y-hidden hover:overflow-y-auto main-scrollbar">
             <div className={`duration-300 ${expandSidebar ? "w-40" : "w-10"}`}>
                <motion.div
                   variants={staggerContainer}

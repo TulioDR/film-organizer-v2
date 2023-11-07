@@ -1,5 +1,5 @@
-import SearchCards from "@/features/searchCards/components/SearchCards";
+import SearchMedia from "@/features/searchMedia/components/SearchMedia";
 
 export default function Popular() {
-   return <SearchCards apiUrl="/popular" title="Popular" />;
+   return <SearchMedia apiUrl="/popular" title="Popular" />;
 }

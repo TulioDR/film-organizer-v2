@@ -3,16 +3,16 @@ import Title from "@/components/Title";
 import PageHead from "@/components/PageHead";
 import { motion, AnimatePresence } from "framer-motion";
 
-import MainCards from "./MainCards";
 import ChangeMediaType from "@/components/ChangeMediaType";
 import { useRouter } from "next/router";
+import SearchMediaHandler from "./SearchMediaHandler";
 
 type Props = {
    title: string;
    apiUrl: string;
 };
 
-export default function SearchCards({ title, apiUrl }: Props) {
+export default function SearchMedia({ title, apiUrl }: Props) {
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
    const fullApiUrl = `/${mediaType}${apiUrl}`;
@@ -27,7 +27,7 @@ export default function SearchCards({ title, apiUrl }: Props) {
 
          <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
             <AnimatePresence mode="wait">
-               <MainCards
+               <SearchMediaHandler
                   key={mediaType}
                   mediaType={mediaType}
                   apiUrl={fullApiUrl}

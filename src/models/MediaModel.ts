@@ -21,6 +21,9 @@ export interface SavedMediaModel {
    media_id: number;
    media_title: string;
    media_poster: string;
+   media_backdrop: string;
+   media_overview: string;
+   media_release_date: Date;
    media_type: "movie" | "tv";
    list_id: string;
 }

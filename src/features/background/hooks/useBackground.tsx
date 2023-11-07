@@ -1,20 +1,17 @@
-import { MediaModel } from "@/models/MediaModel";
-import GenreModel from "@/models/genresModel";
 import { backgroundActions } from "@/store/slices/background-slice";
+import { StaticImageData } from "next/image";
 import { useDispatch } from "react-redux";
 
 export default function useBackground() {
    const dispatch = useDispatch();
 
-   const getImage = (media: GenreModel | MediaModel) => {
-      if ("image" in media) return media.image;
-      else return media.backdrop_path;
-   };
-
-   const changeBackground = (media: GenreModel | MediaModel) => {
+   const changeBackground = (
+      mediaId: number,
+      image: string | StaticImageData
+   ) => {
       const background = {
-         backgroundKey: media.id,
-         backgroundImage: getImage(media),
+         backgroundKey: mediaId,
+         backgroundImage: image,
       };
       dispatch(backgroundActions.setBackground(background));
    };

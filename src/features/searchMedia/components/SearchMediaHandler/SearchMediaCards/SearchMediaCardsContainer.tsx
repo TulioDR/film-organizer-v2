@@ -1,13 +1,13 @@
 import StoreModel from "@/models/StoreModel";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { cardsContainer } from "../../animations/cardsAnimation";
+import { cardsContainer } from "../../../animations/cardsAnimation";
 
 type Props = {
    children: React.ReactNode;
 };
 
-export default function MainCardsContainer({ children }: Props) {
+export default function SearchMediaCardsContainer({ children }: Props) {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    return (

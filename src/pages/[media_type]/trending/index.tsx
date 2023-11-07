@@ -1,5 +1,5 @@
-import SearchCards from "@/features/searchCards/components/SearchCards";
+import SearchMedia from "@/features/searchMedia/components/SearchMedia";
 
 export default function Trending() {
-   return <SearchCards apiUrl="/trending" title="Trending" />;
+   return <SearchMedia apiUrl="/trending" title="Trending" />;
 }

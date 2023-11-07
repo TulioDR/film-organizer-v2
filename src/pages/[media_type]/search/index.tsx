@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import SearchCards from "@/features/searchCards/components/SearchCards";
+import SearchMedia from "@/features/searchMedia/components/SearchMedia";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { search_query } = context.query;
@@ -14,6 +14,6 @@ type Props = {
 
 export default function Search({ searchQuery }: Props) {
    return (
-      <SearchCards apiUrl={`/search/${searchQuery}`} title={`Search results`} />
+      <SearchMedia apiUrl={`/search/${searchQuery}`} title={`Search results`} />
    );
 }

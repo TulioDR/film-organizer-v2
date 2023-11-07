@@ -1,9 +1,13 @@
+import { MediaModel } from "@/models/MediaModel";
 import { bookmarkActions } from "@/store/slices/bookmark-slice";
 import { useUser } from "@clerk/nextjs";
 
 import { useDispatch } from "react-redux";
 
-export default function useBookmark(media: any, mediaType: "tv" | "movie") {
+export default function useBookmark(
+   media: MediaModel,
+   mediaType: "tv" | "movie"
+) {
    const { user } = useUser();
    const dispatch = useDispatch();
 

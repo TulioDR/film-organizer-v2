@@ -1,23 +1,21 @@
-import { Fragment, useState, useEffect } from "react";
-
-import MainCard from "./MainCard";
-import useSearchCards from "../../hooks/useSearchCards";
-
-import MainCardsContainer from "./MainCardsContainer";
-import LoadingPage from "../LoadingPage";
-import { AnimatePresence, motion } from "framer-motion";
-import CustomPagination from "@/components/CustomPagination";
-import PaginationContainer from "../PaginationContainer";
 import { useRouter } from "next/router";
-import SearchCardsSpinners from "../SearchCardsSpinners";
+import { Fragment, useState, useEffect } from "react";
+import useSearchMedia from "../../hooks/useSearchMedia";
+import CustomPagination from "@/components/CustomPagination";
+import { AnimatePresence, motion } from "framer-motion";
+
+import LoadingPage from "./LoadingPage";
+import PaginationContainer from "./PaginationContainer";
+import SearchMediaCards from "./SearchMediaCards";
+import SearchMediaSpinner from "./SearchMediaSpinner";
 
 type Props = {
    mediaType: "tv" | "movie";
    apiUrl: string;
 };
 
-export default function MainCards({ mediaType, apiUrl }: Props) {
-   const { media, totalPages, isLoading } = useSearchCards(apiUrl);
+export default function SearchMediaHandler({ mediaType, apiUrl }: Props) {
+   const { media, totalPages, isLoading } = useSearchMedia(apiUrl);
 
    const [showPage, setShowPage] = useState<boolean>(false);
 
@@ -50,18 +48,10 @@ export default function MainCards({ mediaType, apiUrl }: Props) {
                </PaginationContainer>
                <AnimatePresence mode="wait">
                   {isLoading ? (
-                     <SearchCardsSpinners />
+                     <SearchMediaSpinner />
                   ) : (
                      <Fragment key={media![0].id}>
-                        <MainCardsContainer>
-                           {media!.map((media) => (
-                              <MainCard
-                                 key={media.id}
-                                 media={media}
-                                 mediaType={mediaType}
-                              />
-                           ))}
-                        </MainCardsContainer>
+                        <SearchMediaCards media={media!} type={mediaType} />
                         <PaginationContainer>
                            <CustomPagination
                               value={currentPage}

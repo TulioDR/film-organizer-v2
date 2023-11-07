@@ -8,7 +8,11 @@ import TransitionPoster from "../components/TransitionPoster";
 interface TransitionPosterInterface {
    selectedImg: string | null;
    position: PositionModel | null;
-   startPosterAnimation: (mediaType: "movie" | "tv", media: any) => void;
+   startPosterAnimation: (
+      mediaType: "movie" | "tv",
+      mediaId: number,
+      poster: string
+   ) => void;
    showSpinner: boolean;
    setShowSpinner: React.Dispatch<React.SetStateAction<boolean>>;
    sidebarWidth: number;
@@ -34,7 +38,11 @@ export function TransitionPosterProvider({ children }: Props) {
    };
 
    const dispatch = useDispatch();
-   const startPosterAnimation = (mediaType: "movie" | "tv", media: any) => {
+   const startPosterAnimation = (
+      mediaType: "movie" | "tv",
+      mediaId: number,
+      poster: string
+   ) => {
       if (window.innerWidth < windowExtraLarge) {
          return;
       }
@@ -42,10 +50,10 @@ export function TransitionPosterProvider({ children }: Props) {
       const sidebar = document.getElementById("sidebar")!;
       setSidebarWidth(sidebar.clientWidth);
 
-      const posterPath = media.poster_path || media.media_poster;
+      const posterPath = poster;
       const img = `https://image.tmdb.org/t/p/w${780}${posterPath}`;
       setSelectedImg(img);
-      const id = `${mediaType}-${media.id}`;
+      const id = `${mediaType}-${mediaId}`;
       const element = document.getElementById(id)!;
       const { x, y, height } = element.getBoundingClientRect();
       setPosition({ top: y, left: x, height: height });

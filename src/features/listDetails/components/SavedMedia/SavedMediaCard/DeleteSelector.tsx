@@ -19,6 +19,7 @@ export default function DeleteSelector({ isSelected, onTap }: Props) {
          >
             <motion.div
                onTap={onTap}
+               onMouseDown={(e) => e.preventDefault()}
                initial={{ opacity: 0 }}
                animate={{
                   opacity: isSelected ? 1 : 0,

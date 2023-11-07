@@ -35,7 +35,7 @@ export default function Overview({ media, isMovie, crew }: Props) {
          animate={{ y: 0, opacity: 1 }}
          exit={{ y: 100, opacity: 0 }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
-         className=""
+         className="text-xs sm:text-sm"
       >
          <Subtitle>Overview</Subtitle>
          {media.tagline && (
@@ -43,11 +43,9 @@ export default function Overview({ media, isMovie, crew }: Props) {
                {media.tagline}
             </div>
          )}
-         <div className="text-sm text-text-2">
-            {media.overview || "No overview available"}
-         </div>
+         <div>{media.overview || "No overview available"}</div>
 
-         <table className="text-sm mt-5">
+         <table className="mt-5">
             <tbody>
                <Row
                   name="Genres"

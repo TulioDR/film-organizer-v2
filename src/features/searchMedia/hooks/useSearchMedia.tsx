@@ -2,7 +2,7 @@ import API_PUBLIC from "@/api/public";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function useSearchCards(url: string) {
+export default function useSearchMedia(url: string) {
    const [media, setMedia] = useState<any[] | null>(null);
    const [totalPages, setTotalPages] = useState<number>(0);
    const [isLoading, setIsLoading] = useState<boolean>(true);

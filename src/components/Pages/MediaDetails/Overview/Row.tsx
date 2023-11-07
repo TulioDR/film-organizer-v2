@@ -7,7 +7,7 @@ export default function Row({ name, value }: Props) {
    return (
       <tr>
          <td className="pr-4 text-light-2 dark:text-dark-2 py-2">{name}</td>
-         <td className="text-text-2">{value}</td>
+         <td>{value}</td>
       </tr>
    );
 }

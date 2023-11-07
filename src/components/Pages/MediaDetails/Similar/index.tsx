@@ -14,7 +14,7 @@ export default function Similar({ media, mediaType }: Props) {
          <Subtitle>
             Similar {mediaType === "movie" ? "Movies" : "Series"}
          </Subtitle>
-         <div className="flex xl:grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-5 w-full overflow-x-auto main-scrollbar">
+         <div className="flex xl:grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-1 sm:gap-5 w-full overflow-x-auto main-scrollbar">
             {media.similar.results.map((similar) => (
                <SimilarCard
                   key={similar.id}

@@ -9,7 +9,7 @@ export const daysToRelease = (date: Date): number => {
 export const changeDateFormat = (date: Date, year?: true): string => {
    return new Date(date).toLocaleDateString(year ? "en-gb" : "en-US", {
       year: year ? "numeric" : undefined,
-      month: "long",
+      month: "short",
       day: "numeric",
       timeZone: "utc",
    });

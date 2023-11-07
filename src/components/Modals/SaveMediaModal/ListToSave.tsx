@@ -3,10 +3,11 @@ import { createMedia, deleteMedia, getIsMediaInList } from "../../../api/media";
 import useNotification from "@/hooks/useNotification";
 import { v4 as uuid } from "uuid";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { MediaModel } from "@/models/MediaModel";
 
 interface ListProps {
    list: any;
-   media: any;
+   media: MediaModel;
    mediaType: "movie" | "tv";
 }
 
@@ -25,6 +26,9 @@ export default function ListToSave({ list, media, mediaType }: ListProps) {
          media_id: media.id,
          media_title: media.title || media.name,
          media_poster: media.poster_path,
+         media_backdrop: media.backdrop_path,
+         media_overview: media.overview,
+         media_release_date: media.first_air_date || media.release_date,
          media_type: mediaType,
          list_id: list.id,
       });
