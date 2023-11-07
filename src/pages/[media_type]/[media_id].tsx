@@ -1,20 +1,19 @@
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
-import { MediaDetailsModel } from "@/models/MediaModel";
-
-import People from "@/components/Pages/MediaDetails/People";
-import Seasons from "@/components/Pages/MediaDetails/Seasons";
-import Similar from "@/components/Pages/MediaDetails/Similar";
-import Trailers from "@/components/Pages/MediaDetails/Trailers";
-import MainInfo from "@/components/Pages/MediaDetails/MainInfo";
-import Overview from "@/components/Pages/MediaDetails/Overview";
-import ScrollDownIcon from "@/components/Pages/MediaDetails/ScrollDownIcon";
-import MainPoster from "@/components/Pages/MediaDetails/MainPoster";
-import BottomInfoContainer from "@/components/Pages/MediaDetails/BottomInfoContainer";
 
 import useScrollToTop from "@/hooks/useScrollToTop";
-import useBackground from "@/features/background/hooks/useBackground";
+import { MediaDetailsModel } from "@/features/pages/mediaDetails/models/MediaDetailsModel";
+import MainPoster from "@/features/pages/mediaDetails/components/MainPoster";
+import MainInfo from "@/features/pages/mediaDetails/components/MainInfo";
+import ScrollDownIcon from "@/features/pages/mediaDetails/components/ScrollDownIcon";
+import BottomInfoContainer from "@/features/pages/mediaDetails/components/BottomInfoContainer";
+import Overview from "@/features/pages/mediaDetails/components/Overview";
+import People from "@/features/pages/mediaDetails/components/People";
+import Seasons from "@/features/pages/mediaDetails/components/Seasons";
+import Trailers from "@/features/pages/mediaDetails/components/Trailers";
+import Similar from "@/features/pages/mediaDetails/components/Similar";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -44,7 +43,7 @@ export default function Details({ media_type, media }: Props) {
    useScrollToTop();
 
    useEffect(() => {
-      changeBackground(media);
+      changeBackground(media.id, media.poster_path);
    }, [media, changeBackground]);
 
    return (

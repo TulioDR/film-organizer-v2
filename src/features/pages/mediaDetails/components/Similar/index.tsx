@@ -1,7 +1,7 @@
-import { MediaDetailsModel } from "@/models/MediaModel";
 import SimilarCard from "./SimilarCard";
 import Subtitle from "@/components/Subtitle";
 import SimilarContainer from "./SimilarContainer";
+import { MediaDetailsModel } from "../../models/MediaDetailsModel";
 
 type Props = {
    media: MediaDetailsModel;

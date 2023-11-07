@@ -1,4 +1,4 @@
-import useBackground from "@/features/background/hooks/useBackground";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
 import { useState } from "react";
 

@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
-import GenreModel from "@/models/genresModel";
+
 import { useState } from "react";
 
 import GenreImage from "./GenreImage";
 import GenreCardOpen from "./GenreCardOpen";
 import GenreCardClosed from "./GenreCardClosed";
-import useBackground from "@/features/background/hooks/useBackground";
+
+import GenreModel from "../../models/GenreModel";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 
 type Props = {
    genre: GenreModel;
@@ -32,7 +34,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
 
    const handleFocus = () => {
       setIsOpen(true);
-      changeBackground(genre);
+      changeBackground(genre.id, genre.image);
    };
 
    const handleBlur = () => {

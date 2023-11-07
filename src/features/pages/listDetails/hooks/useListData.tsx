@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSpecificList } from "@/api/lists";
-import ListModel from "@/models/listModel";
+import ListModel from "@/models/ListModel";
 
 export default function useListData(list_id: string) {
    const [list, setList] = useState<ListModel | null>(null);

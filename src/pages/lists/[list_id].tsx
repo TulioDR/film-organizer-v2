@@ -7,15 +7,14 @@ import { TransitionPosterProvider } from "@/features/transitionPoster/context/Tr
 import Title from "@/components/Title";
 import PageHead from "@/components/PageHead";
 
-import MediaTypePills from "@/features/listDetails/components/MediaTypePills";
-import SavedMedia from "@/features/listDetails/components/SavedMedia";
-import DeleteMode from "@/features/listDetails/components/DeleteMode";
-
 import useModalState from "@/hooks/useModalState";
-import useDeleteMode from "@/features/listDetails/hooks/useDeleteMode";
-import useSavedMediaFilter from "@/features/listDetails/hooks/useSavedMediaFilter";
-import useListData from "@/features/listDetails/hooks/useListData";
-import useMediaData from "@/features/listDetails/hooks/useMediaData";
+import useListData from "@/features/pages/listDetails/hooks/useListData";
+import useMediaData from "@/features/pages/listDetails/hooks/useMediaData";
+import useSavedMediaFilter from "@/features/pages/listDetails/hooks/useSavedMediaFilter";
+import useDeleteMode from "@/features/pages/listDetails/hooks/useDeleteMode";
+import MediaTypePills from "@/features/pages/listDetails/components/MediaTypePills";
+import SavedMedia from "@/features/pages/listDetails/components/SavedMedia";
+import DeleteMode from "@/features/pages/listDetails/components/DeleteMode";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;

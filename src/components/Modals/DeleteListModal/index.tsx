@@ -1,6 +1,6 @@
 import useListsRefresh from "@/hooks/useListsRefresh";
 import { deleteList } from "../../../api/lists";
-import ListModel from "../../../models/listModel";
+
 import ModalButton from "../ModalButton";
 import ModalButtonsContainer from "../ModalButtonsContainer";
 import ModalContainer from "../ModalContainer";
@@ -8,6 +8,7 @@ import ModalTitle from "../ModalTitle";
 import { useState } from "react";
 import LoadingButton from "../LoadingButton";
 import useNotification from "@/hooks/useNotification";
+import ListModel from "@/models/ListModel";
 
 type Props = {
    listToDelete: ListModel | null;

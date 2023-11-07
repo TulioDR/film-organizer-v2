@@ -10,14 +10,14 @@ import SaveMediaModal from "@/components/Modals/SaveMediaModal";
 import Notification from "@/components/Notification";
 import { useUser } from "@clerk/nextjs";
 
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
-import Background from "@/features/background/components/Background";
+import Sidebar from "@/features/layout/sidebar/components/Sidebar";
+import Navbar from "@/features/layout/navbar/components/Navbar";
+import Background from "@/features/layout/background/components/Background";
 
-import useBackground from "@/features/background/hooks/useBackground";
 import { getLists } from "@/api/lists";
 import { listActions } from "@/store/slices/list-slice";
 import { useDispatch } from "react-redux";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 
 type Props = {
    children: React.ReactNode;

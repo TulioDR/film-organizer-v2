@@ -6,7 +6,7 @@ import StoreModel from "@/models/StoreModel";
 import SideTooltip from "./SideTooltip";
 import SideLink from "./SideLink";
 import SideDropdown from "./SideDropdown";
-import useSidebarActiveMark from "@/hooks/useSidebarActiveMark";
+import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
 import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 
 interface DropdownItem {

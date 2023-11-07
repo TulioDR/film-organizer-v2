@@ -1,12 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 import Title from "@/components/Title";
 
-import GenreLayout from "@/components/Pages/Genres/GenreLayout";
-
 import PageHead from "@/components/PageHead";
 import ChangeMediaType from "@/components/ChangeMediaType";
-import { useRouter } from "next/router";
+import GenreLayout from "@/features/pages/genres/components/GenreLayout";
 
 export default function Genres() {
    const router = useRouter();

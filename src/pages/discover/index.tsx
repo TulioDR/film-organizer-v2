@@ -1,34 +1,17 @@
 import Head from "next/head";
-
 import Title from "@/components/Title";
 
 import { AnimatePresence, motion } from "framer-motion";
-import MainCards from "@/features/searchCards/components/MainCards";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import DiscoverFilter from "@/features/discover/components/DiscoverFilter";
-import DiscoverInitialText from "@/features/discover/components/DiscoverInitialText";
+
+import SearchMediaHandler from "@/features/searchMedia/components/SearchMediaHandler";
+import DiscoverFilter from "@/features/pages/discover/components/DiscoverFilter";
+import DiscoverInitialText from "@/features/pages/discover/components/DiscoverInitialText";
+import useDiscoverSearch from "@/features/pages/discover/hooks/useDiscoverSearch";
 
 export default function Discover() {
-   const [apiUrl, setApiUrl] = useState<string | null>(null);
-
-   const router = useRouter();
-   const { asPath, query } = router;
-
-   useEffect(() => {
-      const { media_type } = query;
-      if (media_type) {
-         let filters = "";
-         Object.keys(query).forEach((key) => {
-            if (query[key] && key !== "media_type") {
-               filters += `&${key}=${query[key]}`;
-            }
-         });
-         setApiUrl(`/discover/${media_type}/${filters}`);
-      } else {
-         setApiUrl(null);
-      }
-   }, [asPath, query]);
+   const { asPath, query } = useRouter();
+   const { apiUrl } = useDiscoverSearch();
    return (
       <div className="">
          <Head>
@@ -44,7 +27,7 @@ export default function Discover() {
          <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
             <AnimatePresence mode="wait">
                {apiUrl ? (
-                  <MainCards
+                  <SearchMediaHandler
                      key={asPath}
                      mediaType={query.media_type as "tv" | "movie"}
                      apiUrl={apiUrl}

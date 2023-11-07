@@ -2,18 +2,17 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
-import ListModel from "@/models/listModel";
+import ListModel from "@/models/ListModel";
 import StoreModel from "@/models/StoreModel";
-
-import ListCard from "@/components/Pages/Lists/ListCard";
-import ListsLoginAdvice from "@/components/Pages/Lists/ListsLoginAdvice";
-import ListFinder from "../../components/Pages/Lists/ListFinder";
-import NoListsMessage from "../../components/Pages/Lists/NoListsMessage";
-import ListsCardsContainer from "@/components/Pages/Lists/ListsCardsContainer";
 
 import ModalPortal from "@/components/Modals/ModalPortal";
 import DeleteListModal from "@/components/Modals/DeleteListModal";
 import Title from "@/components/Title";
+import ListFinder from "@/features/pages/manageLists/ListFinder";
+import ListsCardsContainer from "@/features/pages/manageLists/ListsCardsContainer";
+import ListCard from "@/features/pages/manageLists/ListCard";
+import NoListsMessage from "@/features/pages/manageLists/NoListsMessage";
+import ListsLoginAdvice from "@/features/pages/manageLists/ListsLoginAdvice";
 
 export default function Lists() {
    const { user } = useUser();

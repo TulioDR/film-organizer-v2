@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import PageHead from "@/components/PageHead";
-import DangerZone from "@/components/Pages/Account/DangerZone";
-import AccountSecurity from "@/components/Pages/Account/AccountSecurity";
-import AccountProfile from "@/components/Pages/Account/AccountProfile";
+
 import Title from "@/components/Title";
+import AccountProfile from "@/features/pages/account/components/AccountProfile";
+import AccountSecurity from "@/features/pages/account/components/AccountSecurity";
+import DangerZone from "@/features/pages/account/components/DangerZone";
 
 export default function Account() {
    const { user } = useUser();

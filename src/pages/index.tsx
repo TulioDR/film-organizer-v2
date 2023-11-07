@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 
-import ChangeShowcase from "@/components/Pages/Home/ChangeShowcase";
-import HomeSlider from "@/components/Pages/Home/HomeSlider";
-import MediaDescription from "@/components/Pages/Home/MediaDescription";
-
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
-import useBackground from "@/features/background/hooks/useBackground";
+
+import { MediaModel } from "@/models/MediaModel";
+import ChangeShowcase from "@/features/pages/home/ChangeShowcase";
+import MediaDescription from "@/features/pages/home/MediaDescription";
+import HomeSlider from "@/features/pages/home/HomeSlider";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 
 export default function Home() {
-   const [nowPlaying, setNowPlaying] = useState<any[]>([]);
-   const [onAir, setOnAir] = useState<any[]>([]);
-   const [upcoming, setUpcoming] = useState<any[]>([]);
+   const [nowPlaying, setNowPlaying] = useState<MediaModel[]>([]);
+   const [onAir, setOnAir] = useState<MediaModel[]>([]);
+   const [upcoming, setUpcoming] = useState<MediaModel[]>([]);
 
    useEffect(() => {
       const getData = async () => {
@@ -26,8 +27,8 @@ export default function Home() {
    }, []);
 
    const [activeIndex, setActiveIndex] = useState<number>(0);
-   const [currentMedia, setCurrentMedia] = useState<any>(nowPlaying[0]);
-   const [currentArray, setCurrentArray] = useState<any[]>(nowPlaying);
+   const [currentMedia, setCurrentMedia] = useState<MediaModel>(nowPlaying[0]);
+   const [currentArray, setCurrentArray] = useState<MediaModel[]>(nowPlaying);
 
    const { changeBackground } = useBackground();
    useEffect(() => {
@@ -38,7 +39,7 @@ export default function Home() {
 
    useEffect(() => {
       if (!currentMedia) return;
-      changeBackground(currentMedia);
+      changeBackground(currentMedia.id, currentMedia.poster_path);
    }, [currentMedia, changeBackground]);
 
    const [currentShowcase, setCurrentShowcase] = useState<

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
-import useSidebarActiveMark from "@/hooks/useSidebarActiveMark";
+import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
 import SideInnerItem from "./SideInnerItem";
 
 type Props = {

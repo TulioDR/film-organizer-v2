@@ -1,10 +1,11 @@
 import LoginButton from "./LoginButton";
 import Searchbar from "./Searchbar";
-import ToggleSidebar from "../../components/ToggleSidebar";
+
 import { useDispatch } from "react-redux";
 import { sidebarActions } from "@/store/slices/sidebar-slice";
 import { motion } from "framer-motion";
 import NavDropdown from "./NavDropdown";
+import ToggleSidebar from "@/components/ToggleSidebar";
 
 export default function Navbar() {
    const dispatch = useDispatch();

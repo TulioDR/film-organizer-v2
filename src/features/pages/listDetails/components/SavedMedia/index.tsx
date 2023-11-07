@@ -25,16 +25,6 @@ export default function SavedMedia({
 }: Props) {
    const noMedia = filteredMedia.length === 0;
 
-   const CardFront = ({ media }: { media: SavedMediaModel }) => {
-      if (!isDeleteModeActive) return <FrontTitle title={media.media_title} />;
-      return (
-         <DeleteSelector
-            isSelected={mediaToDelete.includes(media)}
-            onTap={() => onCardTap(media)}
-         />
-      );
-   };
-
    if (noMedia) return <NoSavedMediaMessage selectedType={selectedType} />;
    return (
       <SavedMediaContainer>
@@ -51,7 +41,16 @@ export default function SavedMedia({
                   releaseDate={media.media_release_date}
                   overview={media.media_overview || "N/A"}
                   backButton={<DeleteButton />}
-                  cardFront={<CardFront media={media} />}
+                  cardFront={
+                     isDeleteModeActive ? (
+                        <DeleteSelector
+                           isSelected={mediaToDelete.includes(media)}
+                           onTap={() => onCardTap(media)}
+                        />
+                     ) : (
+                        <FrontTitle title={media.media_title} />
+                     )
+                  }
                />
             ))}
          </AnimatePresence>

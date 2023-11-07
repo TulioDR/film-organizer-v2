@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
-import useSidebarActiveMark from "@/hooks/useSidebarActiveMark";
+import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
 import SideDropdownContainer from "./SideDropdownContainer";
 import SideDropdownItem from "./SideDropdownItem";
 

@@ -3,10 +3,10 @@ import { GetServerSideProps } from "next";
 
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
-import GenreModel from "@/models/genresModel";
 
 import SearchMedia from "@/features/searchMedia/components/SearchMedia";
-import useBackground from "@/features/background/hooks/useBackground";
+import GenreModel from "@/features/pages/genres/models/GenreModel";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, genre_id } = context.query;
