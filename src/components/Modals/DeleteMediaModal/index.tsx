@@ -8,7 +8,7 @@ import ModalTitle from "../ModalTitle";
 import MediaToDelete from "./MediaToDelete";
 import Subtitle from "./Subtitle";
 import LoadingButton from "../LoadingButton";
-import useNotification from "@/hooks/useNotification";
+import useNotification from "@/features/notification/hooks/useNotification";
 
 type Props = {
    close: () => void;

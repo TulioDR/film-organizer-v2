@@ -10,7 +10,7 @@ import listNameValidation from "../../../utils/listNameValidation";
 import { createList } from "../../../api/lists";
 import useListsRefresh from "@/hooks/useListsRefresh";
 import LoadingButton from "../LoadingButton";
-import useNotification from "@/hooks/useNotification";
+import useNotification from "@/features/notification/hooks/useNotification";
 import { useUser } from "@clerk/nextjs";
 import { v4 as uuid } from "uuid";
 import InputUnderline from "./InputUnderline";

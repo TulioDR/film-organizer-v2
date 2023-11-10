@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createMedia, deleteMedia, getIsMediaSavedInList } from "@/api/media";
-import useNotification from "@/hooks/useNotification";
+import useNotification from "@/features/notification/hooks/useNotification";
 import ListModel from "@/models/ListModel";
 import { MediaModel } from "@/models/MediaModel";
 import { MediaTypeModel } from "@/models/MediaTypeModel";

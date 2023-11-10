@@ -7,7 +7,7 @@ import ModalContainer from "../ModalContainer";
 import ModalTitle from "../ModalTitle";
 import { useState } from "react";
 import LoadingButton from "../LoadingButton";
-import useNotification from "@/hooks/useNotification";
+import useNotification from "@/features/notification/hooks/useNotification";
 import ListModel from "@/models/ListModel";
 
 type Props = {

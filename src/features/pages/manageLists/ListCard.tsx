@@ -10,7 +10,7 @@ import ErrorMessageForName from "./ErrorMessageForName";
 import { motion } from "framer-motion";
 import { staggerItem } from "@/animations/StaggerCards";
 import useListsRefresh from "@/hooks/useListsRefresh";
-import useNotification from "@/hooks/useNotification";
+import useNotification from "@/features/notification/hooks/useNotification";
 
 type Props = {
    list: any;
