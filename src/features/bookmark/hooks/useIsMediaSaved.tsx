@@ -23,10 +23,13 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
          if (isSaveMediaOpen) return;
          if (mediaToSave && mediaToSave.media.id !== id) return;
          setIsLoading(true);
-         const { data } = await getIsMediaSaved({
+         const { data, error } = await getIsMediaSaved({
             media_id: id,
             media_type: type,
          });
+         if (error) {
+            console.log("massive error man");
+         }
          setIsLoading(false);
          if (data) setIsMediaSaved(true);
          else setIsMediaSaved(false);

@@ -12,7 +12,7 @@ export const getLists = async (authorId: string) => {
    }
 };
 
-export const getSpecificList = async (listId: String) => {
+export const getListById = async (listId: String) => {
    try {
       const { data } = await API.get(`/${listId}`);
       return data;

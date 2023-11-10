@@ -11,10 +11,10 @@ export const getSavedMedia = async (listId: String) => {
    }
 };
 
-export const getIsMediaInList = async (params: any) => {
+export const getIsMediaSavedInList = async (params: any) => {
    try {
       const { list_id, media_id, media_type } = params;
-      const link = `/isMediaInList/${list_id}/${media_id}/${media_type}`;
+      const link = `/isMediaSavedInList/${list_id}/${media_id}/${media_type}`;
       const { data } = await API.get(link);
       return data;
    } catch (error) {

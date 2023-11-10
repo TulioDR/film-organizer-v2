@@ -1,18 +1,16 @@
 import { StaticImageData } from "next/image";
+import ListModel from "./ListModel";
 
-export interface ThemeModel {
+interface ThemeModel {
    themeColor: string;
    themeColorName: string;
    isDarkMode: boolean;
 }
-export interface SidebarModel {
+interface SidebarModel {
    expandSidebar: boolean;
    revealSidebar: boolean;
 }
-export interface ListsModel {
-   lists: any[] | null;
-}
-export interface BookmarkModel {
+interface BookmarkModel {
    isLoginAdviceOpen: boolean;
    isSaveMediaOpen: boolean;
    mediaToSave: null | {
@@ -20,14 +18,14 @@ export interface BookmarkModel {
       mediaType: "tv" | "movie";
    };
 }
-export interface BackgroundModel {
+interface BackgroundModel {
    backgroundImage: string | StaticImageData | null;
    backgroundKey: string;
 }
-export interface PosterAnimationModel {
+interface PosterAnimationModel {
    animatePoster: boolean;
 }
-export interface NotificationModel {
+interface NotificationModel {
    notification: string | null;
    success: boolean;
 }
@@ -35,7 +33,9 @@ export interface NotificationModel {
 export default interface StoreModel {
    theme: ThemeModel;
    sidebar: SidebarModel;
-   lists: ListsModel;
+   lists: {
+      lists: ListModel[] | null;
+   };
    bookmark: BookmarkModel;
    background: BackgroundModel;
    posterAnimation: PosterAnimationModel;

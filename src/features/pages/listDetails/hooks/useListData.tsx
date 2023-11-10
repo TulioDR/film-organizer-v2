@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSpecificList } from "@/api/lists";
+import { getListById } from "@/api/lists";
 import ListModel from "@/models/ListModel";
 
 export default function useListData(list_id: string) {
@@ -7,7 +7,7 @@ export default function useListData(list_id: string) {
 
    useEffect(() => {
       const getMediaListData = async () => {
-         const { data } = await getSpecificList(list_id);
+         const { data } = await getListById(list_id);
          setList(data);
       };
       getMediaListData();

@@ -17,6 +17,12 @@ export default function useNotification() {
       setTimeout(() => closeNotification(), 3000);
    };
 
+   const handleError = (error: any) => {
+      const message = getErrorMessage(error.code);
+      const success = false;
+      setAndCloseNotification(message, success);
+   };
+
    const getErrorMessage = (code: string) => {
       if (code === "ER_DUP_ENTRY") {
          return "A list with that name already exist";
@@ -32,5 +38,6 @@ export default function useNotification() {
       closeNotification,
       setAndCloseNotification,
       getErrorMessage,
+      handleError,
    };
 }
