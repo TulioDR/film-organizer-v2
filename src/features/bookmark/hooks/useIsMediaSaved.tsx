@@ -3,10 +3,20 @@ import { getIsMediaSaved } from "@/api/media";
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
+import useNotification from "@/hooks/useNotification";
 
 export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+   const { handleError } = useNotification();
+
+   const [errorData, setErrorData] = useState<any>(null);
+
+   useEffect(() => {
+      if (!errorData) return;
+      handleError(errorData);
+   }, [errorData, handleError]);
 
    const { user } = useUser();
 
@@ -27,12 +37,13 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
             media_id: id,
             media_type: type,
          });
-         if (error) {
-            console.log("massive error man");
-         }
          setIsLoading(false);
-         if (data) setIsMediaSaved(true);
-         else setIsMediaSaved(false);
+         if (error) {
+            setErrorData(error);
+         } else {
+            if (data.length) setIsMediaSaved(true);
+            else setIsMediaSaved(false);
+         }
       };
       isMediaIsSavedEffect();
    }, [id, type, user, mediaToSave, isSaveMediaOpen]);

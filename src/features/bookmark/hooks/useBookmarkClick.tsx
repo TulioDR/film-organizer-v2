@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 
 import { useDispatch } from "react-redux";
 
-export default function useBookmark(
+export default function useBookmarkClick(
    media: MediaModel,
    mediaType: "tv" | "movie"
 ) {

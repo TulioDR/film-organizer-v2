@@ -3,8 +3,8 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { MediaModel } from "@/models/MediaModel";
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
-import useBookmark from "../hooks/useBookmark";
 import useIsMediaSaved from "../hooks/useIsMediaSaved";
+import useBookmarkClick from "../hooks/useBookmarkClick";
 
 type Props = {
    type: "tv" | "movie";
@@ -21,7 +21,7 @@ export default function BookmarkButton({
    big,
    rounded,
 }: Props) {
-   const { handleBookmarkClick } = useBookmark(media, type);
+   const { handleBookmarkClick } = useBookmarkClick(media, type);
    const { isMediaSaved, isLoading } = useIsMediaSaved(media.id, type);
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
