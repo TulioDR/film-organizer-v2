@@ -4,8 +4,9 @@ import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
 import useNotification from "@/features/notification/hooks/useNotification";
+import { MediaTypeModel } from "@/models/MediaTypeModel";
 
-export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
+export default function useIsMediaSaved(id: number, mediaType: MediaTypeModel) {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -33,10 +34,7 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
          if (isSaveMediaOpen) return;
          if (mediaToSave && mediaToSave.media.id !== id) return;
          setIsLoading(true);
-         const { data, error } = await getIsMediaSaved({
-            media_id: id,
-            media_type: type,
-         });
+         const { data, error } = await getIsMediaSaved(id, mediaType);
          setIsLoading(false);
          if (error) {
             setErrorData(error);
@@ -46,7 +44,7 @@ export default function useIsMediaSaved(id: number, type: "movie" | "tv") {
          }
       };
       isMediaIsSavedEffect();
-   }, [id, type, user, mediaToSave, isSaveMediaOpen]);
+   }, [id, mediaType, user, mediaToSave, isSaveMediaOpen]);
 
    return { isMediaSaved, isLoading };
 }

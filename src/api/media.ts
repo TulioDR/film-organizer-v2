@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SavedMediaModel } from "@/models/MediaModel";
+import { MediaTypeModel } from "@/models/MediaTypeModel";
 const API = axios.create({ baseURL: "/api/database/media" });
 
 export const getSavedMedia = async (listId: String) => {
@@ -22,9 +23,11 @@ export const getIsMediaSavedInList = async (params: any) => {
    }
 };
 
-export const getIsMediaSaved = async (params: any) => {
+export const getIsMediaSaved = async (
+   media_id: number,
+   media_type: MediaTypeModel
+) => {
    try {
-      const { media_id, media_type } = params;
       const link = `/isMediaSaved/${media_id}/${media_type}`;
       const { data } = await API.get(link);
       return data;

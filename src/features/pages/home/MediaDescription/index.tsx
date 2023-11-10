@@ -5,9 +5,10 @@ import { mediaDescription } from "@/animations/homeAnimations";
 import HomeDate from "./HomeDate";
 import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
 import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
+import { MediaModel } from "@/models/MediaModel";
 
 type Props = {
-   currentMedia: any;
+   currentMedia: MediaModel;
    currentShowcase: string;
 };
 
@@ -20,7 +21,11 @@ export default function MediaDescription({
    const isMovie = currentShowcase !== "series";
    const mediaType = isMovie ? "movie" : "tv";
    const handleLearnMoreClick = async () => {
-      startPosterAnimation(mediaType, currentMedia);
+      startPosterAnimation(
+         mediaType,
+         currentMedia.id,
+         currentMedia.poster_path
+      );
    };
    return (
       <AnimatePresence mode="wait">
@@ -38,7 +43,7 @@ export default function MediaDescription({
             />
             <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
             <div className="flex items-center h-10 gap-4">
-               <BookmarkButton media={currentMedia} mediaType={mediaType} />
+               <BookmarkButton media={currentMedia} type={mediaType} />
                <LearnMoreButton
                   href={`/${mediaType}/${currentMedia.id}`}
                   onClick={handleLearnMoreClick}

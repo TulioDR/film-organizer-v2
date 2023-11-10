@@ -26,13 +26,15 @@ export default function ModalContainer({ children, closeModal }: Props) {
             transition={{ duration: 0.3 }}
             onClick={closeModal}
             className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-60 grid place-content-center z-50"
-         ></motion.div>
+            onMouseDown={(e) => e.preventDefault()}
+         />
          <motion.div
             initial={{ height: 10, width: 100, opacity: 0 }}
             animate={modalControls}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full mx-auto flex justify-center bg-primary-light dark:bg-primary-dark z-50"
+            onMouseDown={(e) => e.preventDefault()}
          >
             <motion.div
                initial={{ opacity: 0 }}

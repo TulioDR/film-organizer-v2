@@ -12,15 +12,6 @@ export const getLists = async (authorId: string) => {
    }
 };
 
-export const getListById = async (listId: String) => {
-   try {
-      const { data } = await API.get(`/${listId}`);
-      return data;
-   } catch (error) {
-      console.log(error);
-   }
-};
-
 export const createList = async (newListData: any) => {
    try {
       const { data } = await API.post("/", newListData);

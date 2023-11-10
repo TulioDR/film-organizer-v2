@@ -22,8 +22,6 @@ export default function LoginAdviceModal() {
    const closeModal = () => {
       dispatch(bookmarkActions.closeLoginAdviceModal());
    };
-
-   return <></>;
    return (
       <ModalPortal isOpen={isLoginAdviceOpen}>
          <ModalContainer closeModal={closeModal}>
