@@ -3,10 +3,9 @@ import { SavedMediaModel } from "@/models/MediaModel";
 import NoSavedMediaMessage from "./NoSavedMediaMessage";
 import MediaFilterModel from "../../models/MediaFilterModel";
 import { AnimatePresence } from "framer-motion";
-import DeleteSelector from "./SavedMediaCard/DeleteSelector";
-import DeleteButton from "./SavedMediaCard/DeleteButton";
-import FrontTitle from "@/features/mediaCard/components/MediaCardFront/FrontTitle";
+import DeleteButton from "./SavedMediaCardFront/DeleteButton";
 import MediaCard from "@/features/mediaCard/components/MediaCard";
+import SavedMediaCardFront from "./SavedMediaCardFront";
 
 type Props = {
    filteredMedia: SavedMediaModel[];
@@ -42,14 +41,12 @@ export default function SavedMedia({
                   overview={media.media_overview || "N/A"}
                   backButton={<DeleteButton />}
                   cardFront={
-                     isDeleteModeActive ? (
-                        <DeleteSelector
-                           isSelected={mediaToDelete.includes(media)}
-                           onTap={() => onCardTap(media)}
-                        />
-                     ) : (
-                        <FrontTitle title={media.media_title} />
-                     )
+                     <SavedMediaCardFront
+                        isDeleteModeActive={isDeleteModeActive}
+                        media={media}
+                        markToDelete={() => onCardTap(media)}
+                        mediaToDelete={mediaToDelete}
+                     />
                   }
                />
             ))}

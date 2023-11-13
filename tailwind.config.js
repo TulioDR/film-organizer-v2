@@ -17,16 +17,13 @@ module.exports = {
          },
          colors: {
             primary: {
-               // light: "#e5e7eb",
                light: "#ffffff",
                dark: "#040603",
             },
             secondary: {
-               // light: "#FFFFFF",
                light: "#e5e7eb",
                dark: "#2a282a",
             },
-
             light: {
                1: "#000000",
                2: "#616161",
@@ -35,7 +32,6 @@ module.exports = {
                1: "#FFFFFF",
                2: "#9AA1AD",
             },
-            disabled: "#D0D8DC",
          },
       },
    },
