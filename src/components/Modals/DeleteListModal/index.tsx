@@ -20,22 +20,18 @@ export default function DeleteListModal({ listToDelete, close }: Props) {
 
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-   const { setAndCloseNotification, getErrorMessage } = useNotification();
+   const { showErrorNotification, showSuccessNotification } = useNotification();
 
    const deleteListFinally = async () => {
       setIsLoading(true);
-      const deletedList = await deleteList(listToDelete!.id);
-      let message = "";
-      let success = false;
-      if (deletedList.error) {
+      const { error } = await deleteList(listToDelete!.id);
+      if (error) {
+         showErrorNotification(error);
          setIsLoading(false);
-         message = getErrorMessage(deletedList.error.code);
       } else {
-         message = "List deleted Successfully";
-         success = true;
+         showSuccessNotification("List deleted Successfully");
+         refreshLists();
       }
-      setAndCloseNotification(message, success);
-      refreshLists();
       close();
    };
 

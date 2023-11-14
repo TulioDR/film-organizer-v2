@@ -24,7 +24,7 @@ export default function ListCard({ list, openDeleteModal }: Props) {
    const [showEditButtons, setShowEditButtons] = useState<boolean>(false);
    const [showError, setShowError] = useState<string | null>(null);
 
-   const { setAndCloseNotification } = useNotification();
+   const { showErrorNotification, showSuccessNotification } = useNotification();
 
    const nameValidation = (value: string): null | string => {
       let error = null;
@@ -65,27 +65,14 @@ export default function ListCard({ list, openDeleteModal }: Props) {
       e.preventDefault();
       const isInvalid = nameValidation(value);
       if (isInvalid) return;
-      if (value !== list.name) {
-         const updatedList = await updateList(list.id, { name: value });
-         console.log(updatedList);
-         let message = "";
-         let success = false;
-         if (updatedList.error) {
-            const { code } = updatedList.error;
-            if (code === "ER_DUP_ENTRY") {
-               message = "A list with that name already exist";
-            } else if (code === "ER_DATA_TOO_LONG") {
-               message = "Name can't have more than 12 characters";
-            } else {
-               message = "Something went wrong, please try again later";
-            }
-         } else {
-            message = "List updated Successfully";
-            success = true;
-            closeEdit();
-         }
-         setAndCloseNotification(message, success);
+      if (value === list.name) return;
+      const { error } = await updateList(list.id, { name: value });
+      if (error) {
+         showErrorNotification(error);
+      } else {
+         showSuccessNotification("List updated Successfully");
          refreshLists();
+         closeEdit();
       }
    };
 

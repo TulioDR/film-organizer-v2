@@ -27,7 +27,7 @@ export default function CreateListModal({ close }: Props) {
 
    const { user } = useUser();
 
-   const { setAndCloseNotification, getErrorMessage } = useNotification();
+   const { showSuccessNotification, showErrorNotification } = useNotification();
 
    const handleSubmit = async (values: any) => {
       setIsLoading(true);
@@ -38,18 +38,14 @@ export default function CreateListModal({ close }: Props) {
       };
       const createdList = await createList(newListData);
       console.log(createdList);
-      let message = "";
-      let success = false;
       if (createdList.error) {
+         showErrorNotification(createdList.error);
          setIsLoading(false);
-         message = getErrorMessage(createdList.error.code);
       } else {
-         message = "List created Successfully";
-         success = true;
+         showSuccessNotification("List created Successfully");
          refreshLists();
          close();
       }
-      setAndCloseNotification(message, success);
    };
 
    return (

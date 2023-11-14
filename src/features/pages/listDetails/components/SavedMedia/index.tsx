@@ -13,6 +13,8 @@ type Props = {
    isDeleteModeActive: boolean;
    onCardTap: (media: SavedMediaModel) => void;
    selectedType: MediaFilterModel;
+   listId: string;
+   refresh: () => void;
 };
 
 export default function SavedMedia({
@@ -21,6 +23,8 @@ export default function SavedMedia({
    isDeleteModeActive,
    onCardTap,
    selectedType,
+   listId,
+   refresh,
 }: Props) {
    const noMedia = filteredMedia.length === 0;
 
@@ -39,7 +43,13 @@ export default function SavedMedia({
                   backdrop={media.media_backdrop}
                   releaseDate={media.media_release_date}
                   overview={media.media_overview || "N/A"}
-                  backButton={<DeleteButton />}
+                  backButton={
+                     <DeleteButton
+                        listId={listId}
+                        media={media}
+                        refresh={refresh}
+                     />
+                  }
                   cardFront={
                      <SavedMediaCardFront
                         isDeleteModeActive={isDeleteModeActive}

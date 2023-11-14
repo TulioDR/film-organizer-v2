@@ -11,15 +11,15 @@ export default function useListToSaveBookmark(
    media: MediaModel,
    mediaType: MediaTypeModel
 ) {
-   const { handleError } = useNotification();
+   const { showErrorNotification } = useNotification();
    const [isSaved, setIsSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(true);
    const [errorData, setErrorData] = useState<any>(null);
 
    useEffect(() => {
       if (!errorData) return;
-      handleError(errorData);
-   }, [errorData, handleError]);
+      showErrorNotification(errorData);
+   }, [errorData, showErrorNotification]);
 
    useEffect(() => {
       const checkIfSavedInList = async () => {
@@ -53,7 +53,7 @@ export default function useListToSaveBookmark(
          list_id: list.id,
       });
       setIsLoading(false);
-      if (error) handleError(error);
+      if (error) showErrorNotification(error);
       else setIsSaved(true);
    };
 
@@ -65,7 +65,7 @@ export default function useListToSaveBookmark(
          media_type: mediaType,
       });
       setIsLoading(false);
-      if (error) handleError(error);
+      if (error) showErrorNotification(error);
       else setIsSaved(false);
    };
 

@@ -17,9 +17,14 @@ export default function useNotification() {
       setTimeout(() => closeNotification(), 3000);
    };
 
-   const handleError = (error: any) => {
+   const showErrorNotification = (error: any) => {
       const message = getErrorMessage(error.code);
       const success = false;
+      setAndCloseNotification(message, success);
+   };
+
+   const showSuccessNotification = (message: string) => {
+      const success = true;
       setAndCloseNotification(message, success);
    };
 
@@ -34,10 +39,8 @@ export default function useNotification() {
    };
 
    return {
-      setNotification,
       closeNotification,
-      setAndCloseNotification,
-      getErrorMessage,
-      handleError,
+      showSuccessNotification,
+      showErrorNotification,
    };
 }

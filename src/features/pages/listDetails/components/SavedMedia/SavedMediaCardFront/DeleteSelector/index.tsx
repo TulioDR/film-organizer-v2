@@ -18,7 +18,7 @@ export default function DeleteSelector({ isSelected, markToDelete }: Props) {
             <div
                className={`h-full w-full grid place-content-center duration-200 ${
                   isSelected
-                     ? "scale-125 lg:group-hover:scale-150"
+                     ? "scale-125"
                      : "scale-75 active:scale-75 lg:group-hover:scale-100 opacity-0 lg:group-hover:opacity-100"
                }`}
             >

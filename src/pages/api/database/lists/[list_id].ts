@@ -18,11 +18,11 @@ export default async function handler(
       try {
          const { name } = req.body;
          const { list_id } = req.query;
-         const { status } = await supabase
+         const response = await supabase
             .from("List")
             .update({ name })
             .match({ id: list_id });
-         res.status(200).json(status);
+         res.status(200).json(response);
       } catch (error) {
          console.log(error);
          res.json(error);

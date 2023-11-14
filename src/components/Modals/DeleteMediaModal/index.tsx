@@ -29,7 +29,7 @@ export default function DeleteMediaModal({
    const [tvSeries, setTvSeries] = useState<SavedMediaModel[]>([]);
 
    const [isLoading, setIsLoading] = useState<boolean>(false);
-   const { setAndCloseNotification, getErrorMessage } = useNotification();
+   const { showSuccessNotification, showErrorNotification } = useNotification();
 
    useEffect(() => {
       const movie = mediaToDelete.filter(
@@ -43,20 +43,16 @@ export default function DeleteMediaModal({
    const deleteMediaFunction = async () => {
       setIsLoading(true);
       const ids = mediaToDelete.map(({ id }) => id);
-      const deletedMedia = await deleteManyMedia(ids);
-      let message = "";
-      let success = false;
-      if (deletedMedia.error) {
+      const { error } = await deleteManyMedia(ids);
+      if (error) {
          setIsLoading(false);
-         message = getErrorMessage(deletedMedia.error.code);
+         showErrorNotification(error);
       } else {
-         message = "Media deleted Successfully";
-         success = true;
+         showSuccessNotification("Media deleted Successfully");
          refresh();
          stopDeleteMode();
          close();
       }
-      setAndCloseNotification(message, success);
    };
 
    return (

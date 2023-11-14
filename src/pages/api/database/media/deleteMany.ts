@@ -8,11 +8,11 @@ export default async function handler(
    if (req.method === "DELETE") {
       try {
          const idsArray = req.body;
-         const { status } = await supabase
+         const response = await supabase
             .from("Media")
             .delete()
             .in("id", idsArray);
-         res.status(200).json(status);
+         res.status(200).json(response);
       } catch (err) {
          console.log(err);
       }

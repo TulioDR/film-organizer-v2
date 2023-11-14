@@ -10,14 +10,14 @@ export default function useIsMediaSaved(id: number, mediaType: MediaTypeModel) {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-   const { handleError } = useNotification();
+   const { showErrorNotification } = useNotification();
 
    const [errorData, setErrorData] = useState<any>(null);
 
    useEffect(() => {
       if (!errorData) return;
-      handleError(errorData);
-   }, [errorData, handleError]);
+      showErrorNotification(errorData);
+   }, [errorData, showErrorNotification]);
 
    const { user } = useUser();
 

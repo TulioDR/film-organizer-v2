@@ -64,6 +64,8 @@ export default function ListID({ list_id }: Props) {
             mediaToDelete={mediaToDelete}
             isDeleteModeActive={isDeleteModeActive}
             onCardTap={onCardTap}
+            listId={list_id}
+            refresh={refresh}
          />
          <DeleteMode
             showButtons={showButtons}
