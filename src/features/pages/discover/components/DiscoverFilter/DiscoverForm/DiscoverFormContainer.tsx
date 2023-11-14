@@ -27,6 +27,7 @@ export default function DiscoverFormContainer({ children }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.2, delay: 0.5 } }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            className="overflow-x-hidden overflow-y-auto w-full"
          >
             {children}
          </motion.div>

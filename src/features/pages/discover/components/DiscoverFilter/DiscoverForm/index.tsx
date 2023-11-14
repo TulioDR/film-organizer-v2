@@ -17,19 +17,17 @@ type Props = {
    ) => void;
 };
 export default function DiscoverForm({ values, setFieldValue }: Props) {
+   const isMovie = values.media_type.value === "movie";
    return (
       <DiscoverFormContainer>
          <Form className="space-y-5 p-10">
             <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 w-full h-full">
-               <MediaTypeDd
-                  isMovie={values.media_type.value === "movie"}
-                  setFieldValue={setFieldValue}
-               />
+               <MediaTypeDd isMovie={isMovie} setFieldValue={setFieldValue} />
                <LanguageDd />
-               <GenresDd isMovie={values.media_type.value === "movie"} />
+               <GenresDd isMovie={isMovie} />
                <YearDd />
                <RatingDd />
-               <SortByDd isMovie={values.media_type.value === "movie"} />
+               <SortByDd isMovie={isMovie} />
             </div>
             <DiscoverSubmitButton />
          </Form>
