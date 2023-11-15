@@ -1,2 +1,2 @@
-type MediaFilterModel = "movie" | "tv" | "all";
-export default MediaFilterModel;
+export type TypeFilterModel = "movie" | "tv" | "all";
+export type OrderFilterModel = "newest" | "oldest";

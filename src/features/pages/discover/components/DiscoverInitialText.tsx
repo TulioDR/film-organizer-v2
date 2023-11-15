@@ -10,7 +10,12 @@ export default function DiscoverInitialText({}: Props) {
             You can open them by clicking the button
          </div>
          <button className="bg-secondary-light dark:bg-secondary-dark rounded-lg h-10 aspect-square grid place-content-center">
-            <span className="material-symbols-outlined">filter_list</span>
+            <span
+               style={{ fontVariationSettings: `"FILL" 1` }}
+               className="material-symbols-outlined"
+            >
+               filter_alt
+            </span>
          </button>
       </div>
    );

@@ -12,9 +12,9 @@ import useListData from "@/features/pages/listDetails/hooks/useListData";
 import useMediaData from "@/features/pages/listDetails/hooks/useMediaData";
 import useSavedMediaFilter from "@/features/pages/listDetails/hooks/useSavedMediaFilter";
 import useDeleteMode from "@/features/pages/listDetails/hooks/useDeleteMode";
-import MediaTypePills from "@/features/pages/listDetails/components/MediaTypePills";
 import SavedMedia from "@/features/pages/listDetails/components/SavedMedia";
 import DeleteMode from "@/features/pages/listDetails/components/DeleteMode";
+import MediaFilter from "@/features/pages/listDetails/components/MediaFilter";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;
@@ -31,10 +31,8 @@ export default function ListID({ list_id }: Props) {
    const { media, refresh } = useMediaData(list_id);
    const { list } = useListData(list_id);
 
-   const { filteredMedia, selectedType, setSelectedType } = useSavedMediaFilter(
-      media,
-      list_id
-   );
+   const { filteredMedia, selectedType, setSelectedType, sortBy, setSortBy } =
+      useSavedMediaFilter(media, list_id);
 
    const {
       mediaToDelete,
@@ -53,9 +51,11 @@ export default function ListID({ list_id }: Props) {
       <TransitionPosterProvider>
          <PageHead title={list?.name || ""} />
          <Title title={list.name}>
-            <MediaTypePills
+            <MediaFilter
                selectedType={selectedType}
                setSelectedType={setSelectedType}
+               sortBy={sortBy}
+               setSortBy={setSortBy}
             />
          </Title>
          <SavedMedia
