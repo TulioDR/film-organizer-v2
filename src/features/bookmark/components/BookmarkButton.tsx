@@ -11,7 +11,6 @@ type Props = {
    media: MediaModel;
    useLoading?: true;
    big?: true;
-   rounded?: true;
 };
 
 export default function BookmarkButton({
@@ -19,7 +18,6 @@ export default function BookmarkButton({
    type,
    useLoading,
    big,
-   rounded,
 }: Props) {
    const { handleBookmarkClick } = useBookmarkClick(media, type);
    const { isMediaSaved, isLoading } = useIsMediaSaved(media.id, type);
@@ -29,9 +27,8 @@ export default function BookmarkButton({
       <button
          onClick={handleBookmarkClick}
          style={{ backgroundColor: themeColor }}
-         className={`aspect-square flex items-center justify-center text-white 
-         ${big ? "h-12" : "h-10"}
-         ${rounded ? "rounded-lg" : ""}`}
+         className={`aspect-square flex items-center justify-center text-white rounded-lg
+         ${big ? "h-12" : "h-10"}`}
       >
          {useLoading && isLoading ? (
             <div className="w-3/4">

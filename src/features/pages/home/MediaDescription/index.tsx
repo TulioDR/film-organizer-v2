@@ -43,7 +43,7 @@ export default function MediaDescription({
             />
             <HomeTitle>{currentMedia.title || currentMedia.name}</HomeTitle>
             <div className="flex items-center h-10 gap-4">
-               <BookmarkButton media={currentMedia} type={mediaType} />
+               <BookmarkButton media={currentMedia} type={mediaType} big />
                <LearnMoreButton
                   href={`/${mediaType}/${currentMedia.id}`}
                   onClick={handleLearnMoreClick}

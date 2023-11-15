@@ -25,7 +25,7 @@ export default function SearchMediaCards({ media, type }: Props) {
                overview={media.overview || "N/A"}
                releaseDate={media.release_date || media.first_air_date}
                cardFront={<FrontTitle title={media.name || media.title} />}
-               backButton={<BookmarkButton type={type} media={media} rounded />}
+               backButton={<BookmarkButton type={type} media={media} />}
             />
          ))}
       </SearchMediaCardsContainer>

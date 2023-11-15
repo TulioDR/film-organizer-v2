@@ -36,12 +36,7 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
                isFixed ? "fixed top-20 sm:top-24 right-5 sm:right-10" : ""
             }`}
          >
-            <BookmarkButton
-               useLoading
-               media={media}
-               mediaType={mediaType}
-               big
-            />
+            <BookmarkButton useLoading media={media} type={mediaType} big />
          </motion.div>
       </div>
    );
