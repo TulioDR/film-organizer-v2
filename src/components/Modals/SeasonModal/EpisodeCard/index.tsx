@@ -37,7 +37,7 @@ export default function EpisodeCard({ episode }: Props) {
          </div>
          <div className="p-3 space-y-1">
             <div className="text-xs sm:text-sm text-text-2 font-oswald">
-               {changeDateFormat(episode.air_date, true)}
+               {changeDateFormat(episode.air_date)}
             </div>
             <div className="uppercase font-oswald font-medium text-text-1">
                {episode.name}

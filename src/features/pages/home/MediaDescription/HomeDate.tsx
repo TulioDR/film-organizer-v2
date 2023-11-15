@@ -10,7 +10,7 @@ export default function HomeDate({ currentMedia, currentShowcase }: Props) {
    const date = currentMedia.release_date || currentMedia.first_air_date;
    return (
       <div className="font-extrabold tracking-wide uppercase flex gap-1">
-         <span>{changeDateFormat(date, true)}</span>
+         <span>{changeDateFormat(date)}</span>
          {currentShowcase === "upcoming" && (
             <span>
                {isReleased(currentMedia.release_date) ? (

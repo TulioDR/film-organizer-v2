@@ -28,7 +28,7 @@ export default function SeasonCard({ season, onClick }: Props) {
                {season.name}
             </div>
             <div className="flex items-center text-light-2 dark:text-dark-2 my-1">
-               <div>{changeDateFormat(season.air_date, true) || "N/A"}</div>
+               <div>{changeDateFormat(season.air_date) || "N/A"}</div>
                <div className="mx-2">○</div>
                <div>{season.episode_count} Episodes</div>
             </div>

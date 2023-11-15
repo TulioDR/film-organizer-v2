@@ -13,7 +13,7 @@ export default function CardDate({ date }: Props) {
                <span>Release N/A</span>
             ) : (
                <>
-                  <span>{changeDateFormat(date, true)}</span>
+                  <span>{changeDateFormat(date)}</span>
                   {!isReleased(date) && (
                      <span className="ml-1">
                         (in {daysToRelease(date)} days)

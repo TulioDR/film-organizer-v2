@@ -6,9 +6,9 @@ export const daysToRelease = (date: Date): number => {
    return daysToRelease;
 };
 
-export const changeDateFormat = (date: Date, year?: true): string => {
-   return new Date(date).toLocaleDateString(year ? "en-gb" : "en-US", {
-      year: year ? "numeric" : undefined,
+export const changeDateFormat = (date: Date): string => {
+   return new Date(date).toLocaleDateString("en-gb", {
+      year: "numeric",
       month: "short",
       day: "numeric",
       timeZone: "utc",
