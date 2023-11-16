@@ -14,6 +14,7 @@ import Seasons from "@/features/pages/mediaDetails/components/Seasons";
 import Trailers from "@/features/pages/mediaDetails/components/Trailers";
 import Similar from "@/features/pages/mediaDetails/components/Similar";
 import useBackground from "@/features/layout/background/hooks/useBackground";
+import MainInfoMobile from "@/features/pages/mediaDetails/components/MainInfoMobile";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -53,7 +54,7 @@ export default function Details({ media_type, media }: Props) {
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="md:flex md:h-[calc(100vh-160px)] relative mb-10 overflow-hidden">
+         <div className="sm:h-[calc(100vh-160px)] flex relative mb-5 sm:mb-10 overflow-hidden">
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}
@@ -61,6 +62,7 @@ export default function Details({ media_type, media }: Props) {
             <MainInfo media={media} mediaType={media_type} />
             <ScrollDownIcon />
          </div>
+         <MainInfoMobile media={media} mediaType={media_type} />
          <BottomInfoContainer>
             <div className="flex-1 space-y-10 py-5 sm:py-10">
                <Overview

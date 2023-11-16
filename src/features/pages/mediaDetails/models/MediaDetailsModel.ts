@@ -12,6 +12,7 @@ export interface MediaDetailsModel extends MediaModel {
    production_companies: ProductionCompany[];
    production_countries: ProductionCountry[];
    release_dates: any;
+   content_ratings: any;
    revenue: number;
    runtime: number;
    similar: Similar;

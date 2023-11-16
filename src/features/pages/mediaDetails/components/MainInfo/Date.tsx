@@ -6,7 +6,7 @@ type Props = {
 
 export default function Date({ date }: Props) {
    return (
-      <div className="font-oswald font-bold text-lg">
+      <div className="font-title font-bold text-sm sm:text-lg">
          <span>{changeDateFormat(date)}</span>
          {!isReleased(date) && (
             <span className="ml-1">(in {daysToRelease(date)} days)</span>

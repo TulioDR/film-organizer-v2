@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import Poster from "@/components/Poster";
-import Date from "@/components/Pages/MediaDetails/MainInfo/Date";
 
 import EpisodeCard from "./EpisodeCard";
 import CloseSeasonButton from "./CloseSeasonButton";
@@ -12,6 +11,7 @@ import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonModalContainer from "./SeasonModalContainer";
 import API_PUBLIC from "@/api/public";
 import Subtitle from "@/components/Subtitle";
+import Date from "@/features/pages/mediaDetails/components/MainInfo/Date";
 
 type Props = {
    close: () => void;

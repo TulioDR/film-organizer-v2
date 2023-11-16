@@ -20,7 +20,7 @@ export default function Genres({ genres, isMovie }: Props) {
                key={genre.id}
                onClick={() => goToGenre(genre.id)}
                style={{ backgroundColor: themeColor }}
-               className="text-white text-sm rounded-md px-2 py-1 cursor-pointer mr-2 float-left my-1"
+               className="text-white text-xs sm:text-sm rounded-md px-2 py-1 cursor-pointer mr-2 float-left my-1"
             >
                {genre.name}
             </span>

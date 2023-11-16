@@ -15,6 +15,7 @@ import useDeleteMode from "@/features/pages/listDetails/hooks/useDeleteMode";
 import SavedMedia from "@/features/pages/listDetails/components/SavedMedia";
 import DeleteMode from "@/features/pages/listDetails/components/DeleteMode";
 import MediaFilter from "@/features/pages/listDetails/components/MediaFilter";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;
@@ -46,7 +47,12 @@ export default function ListID({ list_id }: Props) {
 
    const { isModalOpen, openModal, closeModal } = useModalState();
 
-   if (!list || !filteredMedia) return <></>;
+   if (!list || !filteredMedia)
+      return (
+         <div className="w-40 mx-auto mt-20">
+            <LoadingSpinner />
+         </div>
+      );
    return (
       <TransitionPosterProvider>
          <PageHead title={list?.name || ""} />

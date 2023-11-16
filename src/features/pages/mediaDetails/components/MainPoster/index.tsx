@@ -19,7 +19,7 @@ export default function MainPoster({ alt, posterPath }: Props) {
          animate={{ x: 0 }}
          exit={{ x: "-100%" }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="aspect-[2/3] h-full relative w-2/3 sm:w-1/2 md:w-auto"
+         className="aspect-[2/3] relative w-full sm:w-auto sm:h-full"
       >
          <Image
             alt={alt}
