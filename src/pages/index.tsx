@@ -59,13 +59,13 @@ export default function Home() {
          <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="w-full text-white h-[calc(100vh-160px)]"
+            className="w-full text-white h-[calc(100vh-120px)] sm:h-[calc(100vh-160px)]"
          >
             {!currentMedia ? (
                <div className="fixed top-0 left-0 h-screen -z-10 w-full"></div>
             ) : (
-               <div className="h-full flex flex-col items-stretch -mx-10 overflow-hidden">
-                  <div className="flex-1 w-full pb-10 flex flex-col justify-between px-10">
+               <div className="h-full flex flex-col items-stretch -mx-5 sm:-mx-10 overflow-hidden">
+                  <div className="flex-1 w-full pb-10 flex flex-col justify-between px-5 sm:px-10">
                      <ChangeShowcase
                         currentShowcase={currentShowcase}
                         setCurrentShowcase={setCurrentShowcase}

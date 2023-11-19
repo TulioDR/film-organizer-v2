@@ -24,7 +24,7 @@ export default function HomeSliderContainer({
             <Swiper
                slidesPerView={"auto"}
                spaceBetween={12}
-               className="w-full !overflow-visible select-none !px-10"
+               className="w-full !overflow-visible select-none !px-5 sm:!px-10"
             >
                {children}
             </Swiper>

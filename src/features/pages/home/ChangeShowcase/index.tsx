@@ -12,7 +12,7 @@ export default function ChangeShowcase({
    setCurrentShowcase,
 }: Props) {
    return (
-      <div className="flex space-x-5">
+      <div className="flex space-x-5 overflow-x-auto">
          <ChangeShowcaseButton
             showcase="movies"
             currentShowcase={currentShowcase}

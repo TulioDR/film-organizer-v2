@@ -29,7 +29,7 @@ export default function ChangeShowcaseButton({
                ? "#2a282a"
                : "#ffffff",
          }}
-         className={`relative rounded-lg py-1 px-4 text-sm 2xl:text-base duration-100 ${
+         className={`relative rounded-lg min-w-max py-1 px-4 text-sm 2xl:text-base duration-100 ${
             isSelected ? "text-dark-1" : "text-light-1 dark:text-dark-1"
          }`}
       >

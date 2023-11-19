@@ -28,7 +28,7 @@ export default function BookmarkButton({
          onClick={handleBookmarkClick}
          style={{ backgroundColor: themeColor }}
          className={`aspect-square flex items-center justify-center text-white rounded-lg
-         ${big ? "h-12" : "h-10"}`}
+         ${big ? "h-10 sm:h-12" : "h-10"}`}
       >
          {useLoading && isLoading ? (
             <div className="w-3/4">
@@ -38,7 +38,7 @@ export default function BookmarkButton({
             <span
                style={{ fontVariationSettings: isMediaSaved ? `"FILL" 1` : "" }}
                className={`material-symbols-outlined ${
-                  big ? "!text-4xl" : "!text-3xl"
+                  big ? "!text-3xl sm:!text-4xl" : "!text-3xl"
                }`}
             >
                bookmark
