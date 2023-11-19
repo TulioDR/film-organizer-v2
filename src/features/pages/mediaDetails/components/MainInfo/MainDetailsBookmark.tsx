@@ -27,7 +27,7 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
    }, [isFixed]);
 
    return (
-      <div ref={buttonRef} className="w-12">
+      <div ref={buttonRef} className="w-10 sm:w-12">
          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.4 } }}
