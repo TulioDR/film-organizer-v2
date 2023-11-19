@@ -1,8 +1,7 @@
 import { PositionModel } from "../models/TransitionPosterModels";
 import { useContext, createContext, useState } from "react";
 import { windowExtraLarge } from "@/data/constants/windowWidth";
-import { useDispatch } from "react-redux";
-import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
+
 import TransitionPoster from "../components/TransitionPoster";
 
 interface TransitionPosterInterface {
@@ -16,6 +15,8 @@ interface TransitionPosterInterface {
    showSpinner: boolean;
    setShowSpinner: React.Dispatch<React.SetStateAction<boolean>>;
    sidebarWidth: number;
+   navbarHeight: number;
+   isMobile: boolean;
 }
 
 const TransitionPosterContext = createContext({} as TransitionPosterInterface);
@@ -31,36 +32,36 @@ export function TransitionPosterProvider({ children }: Props) {
    const [selectedImg, setSelectedImg] = useState<string | null>(null);
    const [position, setPosition] = useState<PositionModel | null>(null);
    const [showSpinner, setShowSpinner] = useState<boolean>(false);
+   const [navbarHeight, setNavbarHeight] = useState<number>(0);
    const [sidebarWidth, setSidebarWidth] = useState<number>(0);
+
+   const [isMobile, setIsMobile] = useState<boolean>(false);
 
    const onAnimationComplete = () => {
       setShowSpinner(true);
    };
-
-   const dispatch = useDispatch();
    const startPosterAnimation = (
       mediaType: "movie" | "tv",
       mediaId: number,
       poster: string
    ) => {
-      if (window.innerWidth < windowExtraLarge) {
-         return;
+      if (window.innerWidth < 640) setIsMobile(true);
+      if (window.innerWidth >= 1024) {
+         const sidebar = document.getElementById("sidebar")!;
+         setSidebarWidth(sidebar.clientWidth);
       }
 
-      const sidebar = document.getElementById("sidebar")!;
-      setSidebarWidth(sidebar.clientWidth);
+      const navbar = document.getElementById("navbar")!;
+      setNavbarHeight(navbar.clientHeight);
 
-      const posterPath = poster;
-      const img = `https://image.tmdb.org/t/p/w${780}${posterPath}`;
+      const img = `https://image.tmdb.org/t/p/w${780}${poster}`;
       setSelectedImg(img);
       const id = `${mediaType}-${mediaId}`;
       const element = document.getElementById(id)!;
-      const { x, y, height } = element.getBoundingClientRect();
-      setPosition({ top: y, left: x, height: height });
+      const { x, y, height, width } = element.getBoundingClientRect();
+      setPosition({ top: y, left: x, height, width });
       element.style.transitionDuration = "0ms";
       element.style.visibility = "hidden";
-
-      dispatch(posterAnimationActions.changePosterAnimation(false));
    };
 
    const value: TransitionPosterInterface = {
@@ -70,6 +71,8 @@ export function TransitionPosterProvider({ children }: Props) {
       showSpinner,
       setShowSpinner,
       sidebarWidth,
+      navbarHeight,
+      isMobile,
    };
 
    return (

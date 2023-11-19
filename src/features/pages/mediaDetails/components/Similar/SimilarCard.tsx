@@ -1,8 +1,6 @@
 import Poster from "@/components/Poster";
 import { MediaModel } from "@/models/MediaModel";
-import { posterAnimationActions } from "@/store/slices/poster-animation-slice";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
 
 type Props = {
    similar: MediaModel;
@@ -10,10 +8,8 @@ type Props = {
 };
 
 export default function SimilarCard({ similar, href }: Props) {
-   const dispatch = useDispatch();
    const handleClick = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      dispatch(posterAnimationActions.changePosterAnimation(true));
    };
 
    return (
@@ -27,7 +23,6 @@ export default function SimilarCard({ similar, href }: Props) {
                alt={similar.title || similar.name}
                posterPath={similar.poster_path}
                size="md"
-               roundedSmall
             />
          </div>
          <div className="w-full text-xs md:text-sm text-center">

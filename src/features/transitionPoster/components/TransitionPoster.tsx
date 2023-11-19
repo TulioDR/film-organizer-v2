@@ -7,21 +7,29 @@ type Props = {
 };
 
 export default function TransitionPoster({ onAnimationComplete }: Props) {
-   const { position, selectedImg, sidebarWidth, showSpinner } =
+   const { position, selectedImg, navbarHeight, sidebarWidth, showSpinner } =
       useTransitionPosterContext();
 
    if (!selectedImg || !position) return <></>;
    return (
-      <div className="fixed top-0 left-0 z-50 overflow-hidden flex gap-10 w-screen h-screen">
-         <div style={{ width: sidebarWidth }} className="h-full" />
-         <div className="flex-1 h-full flex">
-            <TransitionPosterImage
-               src={selectedImg}
-               position={position}
-               sidebarWidth={sidebarWidth}
-               onAnimationComplete={onAnimationComplete}
+      <div
+         onMouseDown={(e) => e.preventDefault()}
+         className="fixed top-0 left-0 z-50 w-full sm:h-screen flex flex-col"
+      >
+         <div style={{ height: navbarHeight }} className="w-full" />
+         <div className="sm:flex sm:flex-1 sm:pb-10">
+            <div
+               style={{ width: sidebarWidth }}
+               className="h-full hidden lg:block"
             />
-            <TransitionPosterSpinner showSpinner={showSpinner} />
+            <div className="flex-1 h-full sm:flex px-5 sm:px-10 relative">
+               <TransitionPosterImage
+                  src={selectedImg}
+                  position={position}
+                  onAnimationComplete={onAnimationComplete}
+               />
+               <TransitionPosterSpinner showSpinner={showSpinner} />
+            </div>
          </div>
       </div>
    );
