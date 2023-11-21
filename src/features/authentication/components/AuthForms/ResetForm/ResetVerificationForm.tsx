@@ -50,7 +50,7 @@ export default function ResetVerificationForm({ onSubmit }: Props) {
             password
             dark
          />
-         <AuthButton>Verify and Change Password</AuthButton>
+         <AuthButton submit>Verify and Change Password</AuthButton>
       </AuthFormikContainer>
    );
 }

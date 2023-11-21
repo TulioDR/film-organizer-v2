@@ -38,7 +38,7 @@ export default function RegisterVerificationForm({ onSubmit }: Props) {
             placeholder="Verification code"
             dark
          />
-         <AuthButton>Verify</AuthButton>
+         <AuthButton submit>Verify</AuthButton>
       </AuthFormikContainer>
    );
 }

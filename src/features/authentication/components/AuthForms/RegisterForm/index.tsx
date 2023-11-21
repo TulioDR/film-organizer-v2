@@ -11,12 +11,13 @@ interface Props {
 export default function RegisterForm({ showForm, openLogin }: Props) {
    const { handleRegister, pendingVerification, handleRegisterVerification } =
       useRegistration();
-
-   if (pendingVerification)
-      return <RegisterVerificationForm onSubmit={handleRegisterVerification} />;
    return (
       <AuthFormContainer showForm={showForm}>
-         <MainRegisterForm onSubmit={handleRegister} openLogin={openLogin} />;
+         {pendingVerification ? (
+            <RegisterVerificationForm onSubmit={handleRegisterVerification} />
+         ) : (
+            <MainRegisterForm onSubmit={handleRegister} openLogin={openLogin} />
+         )}
       </AuthFormContainer>
    );
 }

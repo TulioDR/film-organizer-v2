@@ -27,6 +27,7 @@ export default function Sidebar() {
    const goToAuth = () => router.push("/auth");
 
    const { lists } = useSelector((state: StoreModel) => state.lists);
+   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    return (
       <SidebarContainer>
@@ -39,7 +40,11 @@ export default function Sidebar() {
                   <CreateListModal close={closeForm} />
                </ModalPortal>
                <div className="space-y-5">
-                  <SideSubtitle>Lists</SideSubtitle>
+                  {expandSidebar ? (
+                     <SideSubtitle>Lists</SideSubtitle>
+                  ) : (
+                     <div className="h-[1px] w-full bg-light-1 dark:bg-dark-1"></div>
+                  )}
                   {!lists && <SideLoadingLists />}
                   {lists && lists.length > 0 && <SideLists />}
                </div>

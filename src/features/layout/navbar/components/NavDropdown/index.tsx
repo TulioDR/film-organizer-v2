@@ -33,6 +33,8 @@ export default function NavDropdown() {
 
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
+   console.log(user);
+
    return (
       <motion.div
          variants={popUpAnimation}

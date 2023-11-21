@@ -6,7 +6,7 @@ type Props = {
 
 export default function SideSubtitle({ children }: Props) {
    return (
-      <div className="text-xs uppercase text-text-2 w-10 text-center">
+      <div className="text-sm uppercase w-full text-text-2 font-title tracking-widest truncate">
          {children}
       </div>
    );
