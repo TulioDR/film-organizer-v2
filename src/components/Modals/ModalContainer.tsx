@@ -34,7 +34,6 @@ export default function ModalContainer({ children, closeModal }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full mx-auto flex justify-center bg-primary-light dark:bg-primary-dark z-50"
-            onMouseDown={(e) => e.preventDefault()}
          >
             <motion.div
                initial={{ opacity: 0 }}

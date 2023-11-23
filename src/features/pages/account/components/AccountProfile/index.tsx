@@ -1,35 +1,32 @@
 import Subtitle from "@/components/Subtitle";
 import ProfileCardsGrid from "../ProfileCardsGrid";
 import AccountCard from "../AccountCard";
-import ProfileCardInner from "../AccountCard/ProfileCardInner";
+
 import { useUser } from "@clerk/nextjs";
-import ConnectedAccount from "./ConnectedAccount";
+import AccountUsername from "./AccountUsername";
+import ConnectAccounts from "./ConnectAccounts";
 
 type Props = {};
 
 export default function AccountProfile({}: Props) {
    const { user } = useUser();
+
+   if (!user) return <></>;
    return (
       <>
          <Subtitle>Profile</Subtitle>
          <ProfileCardsGrid>
             <AccountCard title="Username">
-               <ProfileCardInner>{user!.username}</ProfileCardInner>
+               <AccountUsername />
             </AccountCard>
 
             <AccountCard title="Connected accounts" row>
-               <div className="space-y-3 pl-5">
-                  {user!.externalAccounts.map((acc, index) => (
-                     <ConnectedAccount key={index} provider={acc.provider} />
-                  ))}
-               </div>
+               <ConnectAccounts />
             </AccountCard>
 
             <AccountCard title="Email addresses">
-               {user!.emailAddresses.map((email, index) => (
-                  <ProfileCardInner key={index}>
-                     {email.emailAddress}
-                  </ProfileCardInner>
+               {user.emailAddresses.map((email, index) => (
+                  <div key={index}>{email.emailAddress}</div>
                ))}
             </AccountCard>
          </ProfileCardsGrid>

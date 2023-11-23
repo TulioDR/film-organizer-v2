@@ -20,9 +20,7 @@ export default function DangerZone({}: Props) {
                <div className="flex justify-between items-center">
                   <div className="text-light-1 dark:text-dark-1">
                      <div>
-                        {
-                           "This will also delete all the lists that you've created."
-                        }
+                        This will also delete all the lists that you've created.
                      </div>
                      <div>This action cannot be undone.</div>
                   </div>

@@ -33,6 +33,8 @@ export default function useNotification() {
          return "A list with that name already exist";
       } else if (code === "ER_DATA_TOO_LONG") {
          return "Name can't have more than 12 characters";
+      } else if (code === "password_required") {
+         return "Incorrect password";
       } else {
          return "Something went wrong, please try again later";
       }
