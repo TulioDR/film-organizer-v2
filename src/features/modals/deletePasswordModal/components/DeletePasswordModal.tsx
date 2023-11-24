@@ -1,7 +1,7 @@
 import ModalContainer from "@/components/Modals/ModalContainer";
 import { useUser } from "@clerk/nextjs";
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import ModalTitle from "@/components/Modals/ModalTitle";
 import useNotification from "@/features/notification/hooks/useNotification";
 import ModalButtonsContainer from "@/components/Modals/ModalButtonsContainer";
@@ -15,6 +15,8 @@ type Props = {
 export default function DeletePasswordModal({ close }: Props) {
    const { user } = useUser();
    const { showSuccessNotification, showErrorNotification } = useNotification();
+
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
    const initialValues = {
       currentPassword: "",
@@ -31,14 +33,16 @@ export default function DeletePasswordModal({ close }: Props) {
 
    const handleSubmit = async (values: any) => {
       const { currentPassword } = values;
-      console.log(currentPassword);
+      setIsLoading(true);
       try {
          await user!.removePassword({ currentPassword });
          showSuccessNotification("Password deleted successfully");
+         close();
       } catch (error: any) {
          console.log(error.errors[0]);
          showErrorNotification(error.errors[0]);
       }
+      setIsLoading(false);
    };
 
    return (
@@ -56,7 +60,7 @@ export default function DeletePasswordModal({ close }: Props) {
                />
                <ModalButtonsContainer>
                   <ModalButton onClick={close}>Cancel</ModalButton>
-                  <ModalButton red submit>
+                  <ModalButton red submit isLoading={isLoading}>
                      Delete
                   </ModalButton>
                </ModalButtonsContainer>

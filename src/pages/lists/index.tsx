@@ -5,7 +5,7 @@ import ListModel from "@/models/ListModel";
 import StoreModel from "@/models/StoreModel";
 
 import ModalPortal from "@/components/Modals/ModalPortal";
-import DeleteListModal from "@/components/Modals/DeleteListModal";
+
 import Title from "@/components/Title";
 import ListFinder from "@/features/pages/manageLists/ListFinder";
 import ListsCardsContainer from "@/features/pages/manageLists/ListsCardsContainer";
@@ -13,6 +13,7 @@ import ListCard from "@/features/pages/manageLists/ListCard";
 import NoListsMessage from "@/features/pages/manageLists/NoListsMessage";
 import ListsLoginAdvice from "@/features/pages/manageLists/ListsLoginAdvice";
 import PageHead from "@/components/PageHead";
+import DeleteListModal from "@/features/modals/deleteListModal/components/DeleteListModal";
 
 export default function Lists() {
    const { user } = useUser();

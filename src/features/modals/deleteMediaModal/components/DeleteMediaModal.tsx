@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { deleteManyMedia } from "@/api/media";
-import { SavedMediaModel } from "../../../models/MediaModel";
-import ModalButton from "../ModalButton";
-import ModalButtonsContainer from "../ModalButtonsContainer";
-import ModalContainer from "../ModalContainer";
-import ModalTitle from "../ModalTitle";
+
 import MediaToDelete from "./MediaToDelete";
 import Subtitle from "./Subtitle";
-import LoadingButton from "../LoadingButton";
+
 import useNotification from "@/features/notification/hooks/useNotification";
+import { SavedMediaModel } from "@/models/MediaModel";
+import ModalContainer from "@/components/Modals/ModalContainer";
+import ModalTitle from "@/components/Modals/ModalTitle";
+import ModalButtonsContainer from "@/components/Modals/ModalButtonsContainer";
+import ModalButton from "@/components/Modals/ModalButton";
 
 type Props = {
    close: () => void;
@@ -75,8 +76,12 @@ export default function DeleteMediaModal({
          </div>
          <ModalButtonsContainer>
             <ModalButton onClick={close}>Cancel</ModalButton>
-            <ModalButton red onClick={deleteMediaFunction} disabled={isLoading}>
-               <LoadingButton isLoading={isLoading}>Delete</LoadingButton>
+            <ModalButton
+               red
+               onClick={deleteMediaFunction}
+               isLoading={isLoading}
+            >
+               Delete
             </ModalButton>
          </ModalButtonsContainer>
       </ModalContainer>

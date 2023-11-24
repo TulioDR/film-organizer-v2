@@ -1,7 +1,7 @@
 import ModalContainer from "@/components/Modals/ModalContainer";
 import { useUser } from "@clerk/nextjs";
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import UpdateInput from "./UpdateInput";
 import ModalTitle from "@/components/Modals/ModalTitle";
 import useNotification from "@/features/notification/hooks/useNotification";
@@ -23,12 +23,14 @@ export default function UpdatePasswordModal({ close }: Props) {
       confirmNewPassword: "",
    };
 
+   const [isLoading, setIsLoading] = useState<boolean>(false);
+
    const validation = (values: any) => {
       const { currentPassword, newPassword, confirmNewPassword } = values;
       let error: any = {};
-      // if (!currentPassword) {
-      //    error.currentPassword = "Current password required";
-      // }
+      if (user!.passwordEnabled && !currentPassword) {
+         error.currentPassword = "Current password required";
+      }
       if (!newPassword) {
          error.newPassword = "New password required";
       }
@@ -41,18 +43,22 @@ export default function UpdatePasswordModal({ close }: Props) {
    };
 
    const handleSubmit = async (values: any) => {
+      setIsLoading(true);
       const { currentPassword, newPassword } = values;
       try {
-         const response = await user!.updatePassword({
+         await user!.updatePassword({
             newPassword: newPassword,
-            currentPassword: currentPassword,
+            currentPassword: user!.passwordEnabled
+               ? currentPassword
+               : undefined,
          });
-         console.log(response);
          showSuccessNotification("Password updated successfully");
-      } catch (error) {
-         console.log(error);
-         showErrorNotification(error);
+         close();
+      } catch (error: any) {
+         console.log(error.errors[0]);
+         showErrorNotification(error.errors[0]);
       }
+      setIsLoading(false);
    };
 
    return (
@@ -65,10 +71,12 @@ export default function UpdatePasswordModal({ close }: Props) {
          >
             <Form className="w-full sm:w-96">
                <div className="space-y-5">
-                  <UpdateInput
-                     name="currentPassword"
-                     placeholder="Current password"
-                  />
+                  {user!.passwordEnabled && (
+                     <UpdateInput
+                        name="currentPassword"
+                        placeholder="Current password"
+                     />
+                  )}
                   <UpdateInput name="newPassword" placeholder="New password" />
                   <UpdateInput
                      name="confirmNewPassword"
@@ -77,7 +85,7 @@ export default function UpdatePasswordModal({ close }: Props) {
                </div>
                <ModalButtonsContainer>
                   <ModalButton onClick={close}>Cancel</ModalButton>
-                  <ModalButton blue submit>
+                  <ModalButton blue submit isLoading={isLoading}>
                      Update
                   </ModalButton>
                </ModalButtonsContainer>

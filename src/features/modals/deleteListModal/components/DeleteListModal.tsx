@@ -1,14 +1,14 @@
 import useListsRefresh from "@/hooks/useListsRefresh";
-import { deleteList } from "../../../api/lists";
 
-import ModalButton from "../ModalButton";
-import ModalButtonsContainer from "../ModalButtonsContainer";
-import ModalContainer from "../ModalContainer";
-import ModalTitle from "../ModalTitle";
 import { useState } from "react";
-import LoadingButton from "../LoadingButton";
+
 import useNotification from "@/features/notification/hooks/useNotification";
 import ListModel from "@/models/ListModel";
+import { deleteList } from "@/api/lists";
+import ModalContainer from "@/components/Modals/ModalContainer";
+import ModalTitle from "@/components/Modals/ModalTitle";
+import ModalButtonsContainer from "@/components/Modals/ModalButtonsContainer";
+import ModalButton from "@/components/Modals/ModalButton";
 
 type Props = {
    listToDelete: ListModel | null;
@@ -53,8 +53,8 @@ export default function DeleteListModal({ listToDelete, close }: Props) {
          </div>
          <ModalButtonsContainer>
             <ModalButton onClick={close}>Cancel</ModalButton>
-            <ModalButton onClick={deleteListFinally} red disabled={isLoading}>
-               <LoadingButton isLoading={isLoading}>Delete</LoadingButton>
+            <ModalButton onClick={deleteListFinally} isLoading={isLoading} red>
+               Delete
             </ModalButton>
          </ModalButtonsContainer>
       </ModalContainer>

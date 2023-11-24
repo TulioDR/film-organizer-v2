@@ -1,10 +1,12 @@
+import LoadingSpinner from "../LoadingSpinner";
+
 type Props = {
    submit?: boolean;
    red?: boolean;
    blue?: boolean;
    onClick?: () => void;
    children: React.ReactNode;
-   disabled?: boolean;
+   isLoading?: boolean;
 };
 
 export default function ModalButton({
@@ -13,7 +15,7 @@ export default function ModalButton({
    blue,
    onClick,
    children,
-   disabled,
+   isLoading,
 }: Props) {
    return (
       <button
@@ -25,9 +27,20 @@ export default function ModalButton({
                : blue
                ? "bg-blue-600 text-white"
                : "bg-secondary-light dark:bg-secondary-dark text-light-1 dark:text-dark-1"
-         } ${disabled ? "pointer-events-none" : ""}`}
+         } ${isLoading ? "pointer-events-none" : ""}`}
       >
-         {children}
+         <div className="w-20 flex items-center justify-center relative">
+            {isLoading && (
+               <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center">
+                  <div className="w-6">
+                     <LoadingSpinner white />
+                  </div>
+               </div>
+            )}
+            <span className={`${isLoading ? "opacity-0" : ""}`}>
+               {children}
+            </span>
+         </div>
       </button>
    );
 }

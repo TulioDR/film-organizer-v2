@@ -2,19 +2,20 @@ import { useState } from "react";
 
 import { Formik, Form } from "formik";
 
-import ModalContainer from "../ModalContainer";
-import ModalTitle from "../ModalTitle";
-import ModalButtonsContainer from "../ModalButtonsContainer";
-import ModalButton from "../ModalButton";
-import listNameValidation from "../../../utils/listNameValidation";
-import { createList } from "../../../api/lists";
+import listNameValidation from "../../../../utils/listNameValidation";
+import { createList } from "../../../../api/lists";
 import useListsRefresh from "@/hooks/useListsRefresh";
-import LoadingButton from "../LoadingButton";
+
 import useNotification from "@/features/notification/hooks/useNotification";
 import { useUser } from "@clerk/nextjs";
 import { v4 as uuid } from "uuid";
 import InputUnderline from "./InputUnderline";
 import CreateListInput from "./CreateListInput";
+import ModalContainer from "@/components/Modals/ModalContainer";
+import ModalTitle from "@/components/Modals/ModalTitle";
+import ModalButtonsContainer from "@/components/Modals/ModalButtonsContainer";
+import ModalButton from "@/components/Modals/ModalButton";
+
 type Props = {
    close: () => void;
 };
@@ -67,10 +68,8 @@ export default function CreateListModal({ close }: Props) {
                   )}
                   <ModalButtonsContainer>
                      <ModalButton onClick={close}>Cancel</ModalButton>
-                     <ModalButton submit blue disabled={isLoading}>
-                        <LoadingButton isLoading={isLoading}>
-                           Create
-                        </LoadingButton>
+                     <ModalButton submit blue isLoading={isLoading}>
+                        Create
                      </ModalButton>
                   </ModalButtonsContainer>
                </Form>

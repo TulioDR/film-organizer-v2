@@ -1,5 +1,4 @@
 import { deleteAllLists } from "@/api/lists";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import ModalButton from "@/components/Modals/ModalButton";
 import ModalButtonsContainer from "@/components/Modals/ModalButtonsContainer";
 import ModalContainer from "@/components/Modals/ModalContainer";
@@ -37,6 +36,7 @@ export default function DeleteUserModal({ close }: Props) {
       try {
          await user?.delete();
          showSuccessNotification("Account deleted successfully");
+         close();
          router.push("/");
       } catch (error: any) {
          showErrorNotification(error.errors[0].message);
@@ -54,16 +54,8 @@ export default function DeleteUserModal({ close }: Props) {
                </div>
                <ModalButtonsContainer>
                   <ModalButton onClick={close}>Cancel</ModalButton>
-                  <ModalButton red submit disabled={isLoading}>
-                     {isLoading ? (
-                        <div className="h-10 flex items-center">
-                           <div className="h-2/3 aspect-square">
-                              <LoadingSpinner white />
-                           </div>
-                        </div>
-                     ) : (
-                        <span>Delete</span>
-                     )}
+                  <ModalButton red submit isLoading={isLoading}>
+                     Delete
                   </ModalButton>
                </ModalButtonsContainer>
             </Form>

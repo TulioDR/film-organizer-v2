@@ -4,7 +4,6 @@ import useInitialThemeColor from "@/hooks/useInitialThemeColor";
 
 import { useEffect } from "react";
 
-import LoginAdviceModal from "@/components/Modals/LoginAdviceModal";
 import { useUser } from "@clerk/nextjs";
 
 import Sidebar from "@/features/layout/sidebar/components/Sidebar";
@@ -17,6 +16,7 @@ import { useDispatch } from "react-redux";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import SaveMediaModal from "@/features/modals/saveMediaModal/components/SaveMediaModal";
 import Notification from "@/features/notification/components/Notification";
+import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/LoginAdviceModal";
 
 type Props = {
    children: React.ReactNode;

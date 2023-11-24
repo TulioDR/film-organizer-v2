@@ -2,8 +2,9 @@ import ModalPortal from "@/components/Modals/ModalPortal";
 
 import SeasonCard from "./SeasonCard";
 import { useState } from "react";
-import SeasonModal from "@/components/Modals/SeasonModal";
+
 import Subtitle from "@/components/Subtitle";
+import SeasonModal from "@/features/modals/seasonModal/components/SeasonModal";
 
 type Props = {
    seasons: any[];

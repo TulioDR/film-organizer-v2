@@ -6,7 +6,7 @@ import SideLinks from "./SideLinks";
 
 import { useState } from "react";
 import ModalPortal from "@/components/Modals/ModalPortal";
-import CreateListModal from "@/components/Modals/CreateListModal";
+
 import { useUser } from "@clerk/nextjs";
 import SideMessage from "./SideMessage";
 import { useRouter } from "next/router";
@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import SideLoadingLists from "./SideLoadingLists";
 import SideLists from "./SideLists";
 import SideHeader from "./SideHeader";
+import CreateListModal from "@/features/modals/createListModal/components/CreateListModal";
 
 export default function Sidebar() {
    const { isLoaded, user } = useUser();

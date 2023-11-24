@@ -1,17 +1,18 @@
 import { useRouter } from "next/router";
-import ModalButton from "../ModalButton";
-import ModalButtonsContainer from "../ModalButtonsContainer";
-import ModalContainer from "../ModalContainer";
-import ModalTitle from "../ModalTitle";
-import ModalPortal from "../ModalPortal";
+
 import { useDispatch, useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import { bookmarkActions } from "@/store/slices/bookmark-slice";
+import ModalPortal from "@/components/Modals/ModalPortal";
+import ModalContainer from "@/components/Modals/ModalContainer";
+import ModalTitle from "@/components/Modals/ModalTitle";
+import ModalButtonsContainer from "@/components/Modals/ModalButtonsContainer";
+import ModalButton from "@/components/Modals/ModalButton";
 
 export default function LoginAdviceModal() {
    const router = useRouter();
    const goToLogin = () => {
-      router.push("/login");
+      router.push("/auth");
    };
 
    const { isLoginAdviceOpen } = useSelector(

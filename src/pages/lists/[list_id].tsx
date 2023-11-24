@@ -1,5 +1,4 @@
 import ModalPortal from "@/components/Modals/ModalPortal";
-import DeleteMediaModal from "@/components/Modals/DeleteMediaModal";
 
 import { GetServerSideProps } from "next";
 import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
@@ -16,6 +15,7 @@ import SavedMedia from "@/features/pages/listDetails/components/SavedMedia";
 import DeleteMode from "@/features/pages/listDetails/components/DeleteMode";
 import MediaFilter from "@/features/pages/listDetails/components/MediaFilter";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import DeleteMediaModal from "@/features/modals/deleteMediaModal/components/DeleteMediaModal";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;
