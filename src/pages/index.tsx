@@ -39,7 +39,6 @@ export default function Home() {
 
    useEffect(() => {
       if (!currentMedia) return;
-      console.log(currentMedia);
       changeBackground(
          currentMedia.id,
          currentMedia.backdrop_path || currentMedia.poster_path

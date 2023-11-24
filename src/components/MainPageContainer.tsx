@@ -42,7 +42,7 @@ export default function MainPageContainer({ children }: Props) {
    const { pathname } = useRouter();
    const { removeBackground } = useBackground();
    useEffect(() => {
-      if (pathname === "/[media_type]/[media_id]") return;
+      if (pathname === "/[media_type]/[media_id]" || pathname === "/") return;
       removeBackground();
    }, [pathname, removeBackground]);
 

@@ -21,9 +21,6 @@ export default function Background() {
       else setSrc(backgroundImage);
    }, [backgroundImage]);
 
-   // console.log("the background key is");
-   // console.log(backgroundKey);
-
    return (
       <div className="fixed top-0 left-0 h-screen -z-10 w-screen bg-primary-light dark:bg-primary-dark">
          <motion.div
