@@ -15,7 +15,10 @@ export default function AccountSecurity({}: Props) {
       <>
          <Subtitle>Security</Subtitle>
          <ProfileCardsGrid>
-            <AccountCard title="Update password" expand>
+            <AccountCard
+               title={user.passwordEnabled ? "Update password" : "Add password"}
+               expand
+            >
                <UpdatePassword />
             </AccountCard>
 

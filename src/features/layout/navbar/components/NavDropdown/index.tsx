@@ -4,15 +4,11 @@ import { motion } from "framer-motion";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
-import UserImage from "./UserImage";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 import { popUpAnimation } from "@/animations/PopUpAnimation";
-import { useUser } from "@clerk/nextjs";
 
 export default function NavDropdown() {
-   const { user } = useUser();
-
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const toggle = () => {
       setIsOpen(!isOpen);
@@ -45,13 +41,16 @@ export default function NavDropdown() {
             onClick={toggle}
             className="h-full w-full rounded-full overflow-hidden relative"
          >
-            {user ? (
+            <div className="w-full h-full flex items-center justify-center text-white">
+               <span className="material-symbols-outlined">person</span>
+            </div>
+            {/* {user ? (
                <UserImage />
             ) : (
                <div className="w-full h-full flex items-center justify-center text-white">
                   <span className="material-symbols-outlined">person</span>
                </div>
-            )}
+            )} */}
          </button>
          {isOpen && (
             <DropdownMenu divKey={menu} elRef={dropdownRef} height={menuHeight}>

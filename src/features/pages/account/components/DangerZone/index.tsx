@@ -3,15 +3,15 @@ import React from "react";
 import ProfileCardsGrid from "../ProfileCardsGrid";
 import ProfileCard from "../AccountCard";
 import AccountButton from "../AccountButton";
-import { useUser } from "@clerk/nextjs";
+import useModalState from "@/hooks/useModalState";
+import ModalPortal from "@/components/Modals/ModalPortal";
+import DeleteUserModal from "@/features/modals/deleteUserModal/components/DeleteUserModal";
 
 type Props = {};
 
 export default function DangerZone({}: Props) {
-   const { user } = useUser();
-   const deleteUser = () => {
-      user?.delete();
-   };
+   const { isModalOpen, openModal, closeModal } = useModalState();
+
    return (
       <>
          <Subtitle>Danger Zone</Subtitle>
@@ -24,12 +24,15 @@ export default function DangerZone({}: Props) {
                      </div>
                      <div>This action cannot be undone.</div>
                   </div>
-                  <AccountButton dangerZone onClick={deleteUser}>
+                  <AccountButton dangerZone onClick={openModal}>
                      Delete account
                   </AccountButton>
                </div>
             </ProfileCard>
          </ProfileCardsGrid>
+         <ModalPortal isOpen={isModalOpen}>
+            <DeleteUserModal close={closeModal} />
+         </ModalPortal>
       </>
    );
 }

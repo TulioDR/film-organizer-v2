@@ -31,4 +31,17 @@ export default async function handler(
          res.json(error);
       }
    }
+   if (req.method === "DELETE") {
+      try {
+         const authorId = req.body;
+         const response = await supabase
+            .from("List")
+            .delete()
+            .match({ authorId: authorId });
+         res.status(200).json(response);
+      } catch (error) {
+         console.log(error);
+         res.json(error);
+      }
+   }
 }

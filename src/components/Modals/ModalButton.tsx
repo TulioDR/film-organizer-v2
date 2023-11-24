@@ -19,7 +19,7 @@ export default function ModalButton({
       <button
          onClick={onClick || undefined}
          type={submit ? "submit" : "button"}
-         className={`px-3 py-2 rounded-lg shadow-xl ${
+         className={`px-3 h-10 rounded-lg shadow-xl ${
             red
                ? "bg-red-600 text-white"
                : blue

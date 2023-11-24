@@ -12,6 +12,15 @@ export const getLists = async (authorId: string) => {
    }
 };
 
+export const deleteAllLists = async (authorId: string) => {
+   try {
+      const { data } = await API.delete(`/`, { data: authorId });
+      return data;
+   } catch (error) {
+      console.log(error);
+   }
+};
+
 export const createList = async (newListData: any) => {
    try {
       const { data } = await API.post("/", newListData);
