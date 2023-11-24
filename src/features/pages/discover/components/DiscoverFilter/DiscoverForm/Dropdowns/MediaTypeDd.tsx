@@ -2,7 +2,7 @@ import DropDown from "../Dropdown";
 
 import search from "../../../../images/search.jpg";
 import { useEffect } from "react";
-import { OptionModel } from "@/features/discover/models/DiscoverModel";
+import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 type Props = {
    isMovie: boolean;

@@ -3,7 +3,7 @@ import DropDown from "../Dropdown";
 
 import API_PUBLIC from "@/api/public";
 import languages from "../../../../images/languages.jpg";
-import { OptionModel } from "@/features/discover/models/DiscoverModel";
+import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 type Props = {};
 

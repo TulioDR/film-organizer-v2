@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DropDown from "../Dropdown";
 import yearImage from "../../../../images/year.jpg";
-import { OptionModel } from "@/features/discover/models/DiscoverModel";
+import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 export default function YearDd() {
    const [releaseYears, setReleaseYears] = useState<OptionModel[]>([]);

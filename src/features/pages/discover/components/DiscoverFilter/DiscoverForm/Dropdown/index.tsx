@@ -6,8 +6,7 @@ import { Field, FieldProps } from "formik";
 import CustomSelect from "./CustomSelect";
 import DdHeader from "./DdHeader";
 import DdHeaderContainer from "./DdHeaderContainer";
-import DdHeaderBackground from "./DdHeaderBackground";
-import { OptionModel } from "@/features/discover/models/DiscoverModel";
+import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 type Props = {
    title: string;
@@ -17,14 +16,13 @@ type Props = {
    name: string;
 };
 
-export default function DropDown({ title, options, icon, image, name }: Props) {
+export default function DropDown({ title, options, icon, name }: Props) {
    return (
       <motion.div
          variants={staggerItem}
          className="bg-primary-light dark:bg-primary-dark rounded-xl p-5 space-y-5"
       >
          <DdHeaderContainer>
-            {/* <DdHeaderBackground src={image} alt={title} /> */}
             <DdHeader icon={icon} title={title} />
          </DdHeaderContainer>
          <Field

@@ -1,8 +1,8 @@
 import React from "react";
-import MediaFilterModel from "../../models/MediaFilterModel";
+import { TypeFilterModel } from "../../models/MediaFilterModel";
 
 type Props = {
-   selectedType: MediaFilterModel;
+   selectedType: TypeFilterModel;
 };
 
 export default function NoSavedMediaMessage({ selectedType }: Props) {

@@ -1,18 +1,19 @@
 import SavedMediaContainer from "./SavedMediaContainer";
 import { SavedMediaModel } from "@/models/MediaModel";
 import NoSavedMediaMessage from "./NoSavedMediaMessage";
-import MediaFilterModel from "../../models/MediaFilterModel";
+
 import { AnimatePresence } from "framer-motion";
 import DeleteButton from "./SavedMediaCardFront/DeleteButton";
 import MediaCard from "@/features/mediaCard/components/MediaCard";
 import SavedMediaCardFront from "./SavedMediaCardFront";
+import { TypeFilterModel } from "../../models/MediaFilterModel";
 
 type Props = {
    filteredMedia: SavedMediaModel[];
    mediaToDelete: SavedMediaModel[];
    isDeleteModeActive: boolean;
    onCardTap: (media: SavedMediaModel) => void;
-   selectedType: MediaFilterModel;
+   selectedType: TypeFilterModel;
    listId: string;
    refresh: () => void;
 };

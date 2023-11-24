@@ -17,8 +17,7 @@ import tvMovie from "./movie/tv-movie.png";
 import thriller from "./movie/thriller.jpeg";
 import war from "./movie/war.jpg";
 import western from "./movie/western.jpg";
-
-import GenreModel from "../../models/genresModel";
+import GenreModel from "@/features/pages/genres/models/GenreModel";
 
 const movieGenres: GenreModel[] = [
    {

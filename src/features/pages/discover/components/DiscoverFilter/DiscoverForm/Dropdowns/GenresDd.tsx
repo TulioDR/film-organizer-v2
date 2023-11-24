@@ -1,10 +1,11 @@
 import React from "react";
 import DropDown from "../Dropdown";
-import GenreModel from "@/models/genresModel";
+
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import genres from "../../../../images/genres.jpg";
-import { OptionModel } from "@/features/discover/models/DiscoverModel";
+import GenreModel from "@/features/pages/genres/models/GenreModel";
+import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 type Props = {
    isMovie: boolean;

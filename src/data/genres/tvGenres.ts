@@ -1,3 +1,4 @@
+import GenreModel from "@/features/pages/genres/models/GenreModel";
 import actionAdventure from "./tv/action-adventure.jpg";
 import animation from "./tv/animation.jpg";
 import comedy from "./tv/comedy.jpeg";
@@ -14,8 +15,6 @@ import soap from "./tv/soap.jpg";
 import talk from "./tv/talk.jpg";
 import warPolitics from "./tv/war-politics.jpg";
 import western from "./tv/western.jpg";
-
-import GenreModel from "../../models/genresModel";
 
 const tvGenres: GenreModel[] = [
    {

@@ -3,7 +3,7 @@ import Select from "react-select";
 import { FieldInputProps, FormikProps } from "formik";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
-import { OptionModel } from "@/models/DiscoverModel";
+import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 interface Props {
    options: OptionModel[];

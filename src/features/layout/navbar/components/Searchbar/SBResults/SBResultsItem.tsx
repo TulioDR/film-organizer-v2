@@ -38,7 +38,6 @@ export default function SBResultsItem({
             alt={media.title || media.name}
             size="sm"
             posterPath={media.poster_path}
-            roundedSmall
          />
          <div className="pl-2">
             <div className="text-text-1 text-sm">

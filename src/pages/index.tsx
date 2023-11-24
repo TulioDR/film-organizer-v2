@@ -39,7 +39,11 @@ export default function Home() {
 
    useEffect(() => {
       if (!currentMedia) return;
-      changeBackground(currentMedia.id, currentMedia.poster_path);
+      console.log(currentMedia);
+      changeBackground(
+         currentMedia.id,
+         currentMedia.backdrop_path || currentMedia.poster_path
+      );
    }, [currentMedia, changeBackground]);
 
    const [currentShowcase, setCurrentShowcase] = useState<

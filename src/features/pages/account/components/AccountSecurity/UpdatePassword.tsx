@@ -17,7 +17,7 @@ export default function UpdatePassword() {
          </ModalPortal>
          <div className="flex justify-between items-center">
             {user.passwordEnabled ? (
-               <span>Change the account's password.</span>
+               <span>{"Change the account's password."}</span>
             ) : (
                <div>
                   <div>
