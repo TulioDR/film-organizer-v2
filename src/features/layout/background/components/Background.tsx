@@ -40,9 +40,10 @@ export default function Background() {
                      animate={{ opacity: 1 }}
                      exit={{ opacity: 0 }}
                      transition={{ duration: 0.4 }}
-                     className="relative w-full h-full brightness-50"
+                     className="relative w-full h-full brightness-75"
                   >
                      <Backdrop src={src} backgroundKey={backgroundKey} />
+                     <div className="absolute bottom-0 left-0 h-[50vh] w-full bg-gradient-to-t from-black/50 to-transparent z-10" />
                   </motion.div>
                )}
             </AnimatePresence>

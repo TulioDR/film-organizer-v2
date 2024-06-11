@@ -31,7 +31,7 @@ export default function HomeCard({
       <motion.div
          variants={staggerItem}
          onClick={handleClick}
-         className="aspect-[2/3] w-24 lg:w-28 xl:w-32 2xl:w-52 cursor-pointer"
+         className="aspect-[2/3] w-20 lg:w-24 xl:w-28 2xl:w-32 cursor-pointer"
       >
          <div
             id={`${mediaType}-${media.id}`}
