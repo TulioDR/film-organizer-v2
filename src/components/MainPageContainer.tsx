@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import Sidebar from "@/features/layout/sidebar/components/Sidebar";
+// import Sidebar from "@/features/layout/sidebar copy/components/Sidebar";
 import Navbar from "@/features/layout/navbar/components/Navbar";
 import Background from "@/features/layout/background/components/Background";
 
@@ -17,6 +18,7 @@ import useBackground from "@/features/layout/background/hooks/useBackground";
 import SaveMediaModal from "@/features/modals/saveMediaModal/components/SaveMediaModal";
 import Notification from "@/features/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/LoginAdviceModal";
+import Searchbar from "@/features/layout/navbar/components/Searchbar";
 
 type Props = {
    children: React.ReactNode;
@@ -53,15 +55,16 @@ export default function MainPageContainer({ children }: Props) {
          <SaveMediaModal />
          <LoginAdviceModal />
          <Notification />
-         <div className="flex">
-            <Sidebar />
-            <div className="flex-1 min-w-0 px-5 sm:px-10 pb-5 sm:pb-10">
-               <Navbar />
-               <AnimatePresence mode="wait">
-                  {pathname !== "/auth" && <div key={pathname}>{children}</div>}
-               </AnimatePresence>
-            </div>
-         </div>
+         <Sidebar />
+         <Navbar />
+         <Searchbar />
+         <AnimatePresence mode="wait">
+            {pathname !== "/auth" && (
+               <div key={pathname} className="w-full px-32">
+                  {children}
+               </div>
+            )}
+         </AnimatePresence>
       </>
    );
 }

@@ -1,8 +1,8 @@
-import { sidebarActions } from "@/store/slices/sidebar-slice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import SideItemIcon from "../SideInnerItem/SideItemIcon";
+import { sidebarActions } from "@/store/slices/sidebar-slice";
 import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
+import SideInnerItem from "./SideInnerItem";
 
 type Props = {
    link: string;
@@ -10,7 +10,7 @@ type Props = {
    text: string;
 };
 
-export default function SideDropdownItem({ link, icon, text }: Props) {
+export default function SideLink({ link, icon, text }: Props) {
    const dispatch = useDispatch();
    const hideSidebar = () => dispatch(sidebarActions.closeReveal());
 
@@ -23,14 +23,9 @@ export default function SideDropdownItem({ link, icon, text }: Props) {
       <Link
          href={link}
          onClick={hideSidebar}
-         className={`flex items-center h-12 gap-2 px-4 ${
-            isSelected
-               ? "bg-blue-500 text-white"
-               : "text-black hover:bg-black hover:text-white"
-         }`}
+         className="relative block overflow-hidden"
       >
-         <SideItemIcon isFilled={isSelected} icon={icon} smallIcon />
-         <span className="text-sm">{text}</span>
+         <SideInnerItem isSelected={isSelected} icon={icon} text={text} />
       </Link>
    );
 }

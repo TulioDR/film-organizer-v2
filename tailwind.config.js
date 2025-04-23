@@ -32,6 +32,7 @@ module.exports = {
                1: "#FFFFFF",
                2: "#9AA1AD",
             },
+            border: "#71717a",
          },
       },
    },

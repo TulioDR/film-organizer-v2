@@ -20,18 +20,22 @@ export default function SideLinks() {
    ];
 
    return (
-      <>
+      <div className="space-y-2">
          <SideItem link="/" icon="home" text="Home" />
          <SideItem
+            link="#"
             icon="movie"
             text="Movies"
             mediaType="movie"
+            dropdown
             items={movieItems}
          />
          <SideItem
+            link="#"
             icon="smart_display"
             text="Series"
             mediaType="tv"
+            dropdown
             items={tvItems}
          />
          <SideItem link="/discover" icon="travel_explore" text="Discover" />
@@ -40,6 +44,6 @@ export default function SideLinks() {
             icon="format_list_bulleted"
             text="Manage Lists"
          />
-      </>
+      </div>
    );
 }

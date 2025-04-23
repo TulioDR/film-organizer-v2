@@ -1,5 +1,3 @@
-import { AnimationControls, motion } from "framer-motion";
-
 type Props = {
    value: string;
    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -7,8 +5,6 @@ type Props = {
    onBlur: () => void;
    placeholder: string;
    showResults: boolean;
-   inputControls: AnimationControls;
-   innerInputAnimation: AnimationControls;
 };
 
 export default function SearchInput({
@@ -18,37 +14,23 @@ export default function SearchInput({
    onBlur,
    placeholder,
    showResults,
-   inputControls,
-   innerInputAnimation,
 }: Props) {
    return (
-      <motion.div
-         initial={{ width: 0 }}
-         animate={inputControls}
-         exit={{ width: 0, transition: { duration: 0.3, delay: 0.2 } }}
-         className={`bg-secondary-light dark:bg-secondary-dark rounded-t-lg overflow-hidden ${
-            showResults ? "" : "rounded-b-lg"
-         }`}
-      >
-         <motion.div
-            initial={{ opacity: 0 }}
-            animate={innerInputAnimation}
-            exit={{ opacity: 0, transition: { duration: 0.2 } }}
-            className="h-full flex-1 flex items-center gap-4 pl-14 pr-4"
-         >
-            <input
-               value={value}
-               onChange={onChange}
-               onFocus={onFocus}
-               onBlur={onBlur}
-               type="text"
-               className="text-xs sm:text-sm md:text-base w-full outline-none bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2"
-               placeholder={placeholder}
-            />
+      <div className="overflow-hidden w-96 h-full flex-shrink-0 flex items-center pr-4">
+         <div className="h-full aspect-square flex items-center justify-center">
             <span className="material-symbols-outlined !text-text-2 !text-light-2 dark:!text-dark-2">
                search
             </span>
-         </motion.div>
-      </motion.div>
+         </div>
+         <input
+            value={value}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            type="text"
+            className="text-xs sm:text-sm md:text-base flex-1 outline-none bg-transparent text-light-1 dark:text-dark-1 placeholder:text-light-2 dark:placeholder:text-dark-2"
+            placeholder={placeholder}
+         />
+      </div>
    );
 }

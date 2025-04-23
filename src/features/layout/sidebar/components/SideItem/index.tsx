@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
 
 import SideTooltip from "./SideTooltip";
-import SideLink from "./SideLink";
-import SideDropdown from "./SideDropdown";
 import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
 import { sideLinkAnimation } from "@/animations/SidebarAnimations";
+import Link from "next/link";
 
 interface DropdownItem {
    link: string;
@@ -16,40 +15,31 @@ interface DropdownItem {
 }
 
 interface Props {
-   link: string;
+   link?: string;
    icon: string;
    text: string;
-   dropdown?: true;
    mediaType?: "movie" | "tv";
    items?: DropdownItem[];
 }
 
 export default function SideItem({
-   link,
+   link = "#",
    icon,
    text,
-   dropdown,
    mediaType,
    items,
 }: Props) {
-   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
    const [showTooltip, setShowTooltip] = useState<boolean>(false);
-   const [isHovering, setIsHovering] = useState<boolean>(false);
-   const [tagPosition, setTagPosition] = useState<any>(null);
 
    const elementRef = useRef<HTMLLIElement>(null);
 
    const handleHoverStart = () => {
-      setIsHovering(true);
-      if (expandSidebar) return;
-      const rect = elementRef.current!.getBoundingClientRect();
-      setTagPosition({ top: rect.top, right: rect.right });
       setShowTooltip(true);
    };
 
    const handleHoverEnd = () => {
-      setIsHovering(false);
       setShowTooltip(false);
    };
 
@@ -61,37 +51,36 @@ export default function SideItem({
          onHoverEnd={handleHoverEnd}
          variants={sideLinkAnimation}
          ref={elementRef}
-         className={`w-full origin-right list-none select-none rounded-l-lg 
-         ${showTooltip ? "" : "rounded-r-lg"}
-         ${
-            isSelected
-               ? "bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
-               : isHovering
-               ? "text-light-1 bg-secondary-light dark:text-dark-1 dark:bg-secondary-dark"
-               : "text-light-2 dark:text-dark-2"
-         }`}
+         className={`h-16 aspect-square list-none select-none relative hover:bg-white
+            ${isSelected ? " text-white" : "hover:text-black"}
+         `}
       >
-         {dropdown ? (
-            <SideDropdown
-               link={link}
-               icon={icon}
-               text={text}
-               mediaType={mediaType!}
-               items={items!}
-            />
-         ) : (
-            <SideLink link={link} icon={icon} text={text} />
+         {isSelected && (
+            <motion.div
+               layoutId="activeMark"
+               className="absolute top-0 left-0 w-full h-full p-2"
+               transition={{ duration: 0.6, type: "spring" }}
+            >
+               <div
+                  style={{ backgroundColor: themeColor }}
+                  className="rounded-md w-full h-full"
+               />
+            </motion.div>
          )}
-         <SideTooltip
-            isSelected={isSelected}
-            onHoverStart={handleHoverStart}
-            onHoverEnd={handleHoverEnd}
-            open={showTooltip}
-            tooltipPosition={tagPosition}
-            items={items}
-            text={text}
-            link={link}
-         />
+         {items ? (
+            <div className="w-full h-full flex items-center justify-center relative">
+               <span className="material-symbols-outlined">{icon}</span>
+            </div>
+         ) : (
+            <Link
+               href={link}
+               scroll={false}
+               className="w-full h-full flex items-center justify-center relative"
+            >
+               <span className="material-symbols-outlined">{icon}</span>
+            </Link>
+         )}
+         {showTooltip && <SideTooltip items={items} text={text} link={link} />}
       </motion.li>
    );
 }

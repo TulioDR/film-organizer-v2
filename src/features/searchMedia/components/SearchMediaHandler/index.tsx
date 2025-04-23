@@ -39,26 +39,26 @@ export default function SearchMediaHandler({ mediaType, apiUrl }: Props) {
          </AnimatePresence>
          {showPage && (
             <motion.div exit={{ opacity: 0.3 }} className="space-y-5">
-               <PaginationContainer>
+               {/* <PaginationContainer>
                   <CustomPagination
                      value={currentPage}
                      total={totalPages}
                      onChange={(page) => changePage(page)}
                   />
-               </PaginationContainer>
+               </PaginationContainer> */}
                <AnimatePresence mode="wait">
                   {isLoading ? (
                      <SearchMediaSpinner />
                   ) : (
                      <Fragment key={media![0].id}>
                         <SearchMediaCards media={media!} type={mediaType} />
-                        <PaginationContainer>
+                        {/* <PaginationContainer>
                            <CustomPagination
                               value={currentPage}
                               total={totalPages}
                               onChange={(page) => changePage(page)}
                            />
-                        </PaginationContainer>
+                        </PaginationContainer> */}
                      </Fragment>
                   )}
                </AnimatePresence>

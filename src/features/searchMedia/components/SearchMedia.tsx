@@ -21,9 +21,7 @@ export default function SearchMedia({ title, apiUrl }: Props) {
    return (
       <TransitionPosterProvider>
          <PageHead title={title} />
-         <Title title={title}>
-            <ChangeMediaType />
-         </Title>
+         <Title title={title}></Title>
 
          <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
             <AnimatePresence mode="wait">

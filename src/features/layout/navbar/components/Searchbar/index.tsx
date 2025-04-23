@@ -4,7 +4,7 @@ import SearchInput from "./SearchInput";
 import ToggleTypeButton from "./ToggleTypeButton";
 import SBResults from "./SBResults";
 import API_PUBLIC from "@/api/public";
-import { useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 type Props = {};
 
@@ -12,7 +12,6 @@ export default function Searchbar({}: Props) {
    const router = useRouter();
 
    const [isMovie, setIsMovie] = useState<boolean>(false);
-   const toggleMediaType = () => setIsMovie((prev) => !prev);
 
    const [results, setResults] = useState<any[]>([]);
    const [inputValue, setInputValue] = useState<string>("");
@@ -76,19 +75,24 @@ export default function Searchbar({}: Props) {
       }
    };
 
-   const inputControls = useAnimationControls();
-   const innerInputAnimation = useAnimationControls();
+   const [isHome, setIsHome] = useState<boolean>(false);
+   useEffect(() => {
+      if (router.pathname === "/") setIsHome(true);
+      else setIsHome(false);
+   }, [router.pathname]);
 
    return (
-      <div className="h-full pointer-events-auto flex-1 sm:flex-initial">
-         <form onSubmit={handleSubmit} className={`h-full relative`}>
-            <div className="flex h-10 relative w-full sm:w-96">
-               <ToggleTypeButton
-                  isMovie={isMovie}
-                  onClick={toggleMediaType}
-                  inputControls={inputControls}
-                  innerInputAnimation={innerInputAnimation}
-               />
+      <motion.div
+         initial={false}
+         animate={{ top: isHome ? "50%" : 0, y: isHome ? "-50%" : 0 }}
+         transition={{ duration: 0.6, ease: "easeInOut" }}
+         className="pointer-events-none flex justify-center items-center fixed w-screen h-32 z-50"
+      >
+         <form
+            onSubmit={handleSubmit}
+            className="h-16 relative pointer-events-auto"
+         >
+            <div className="h-full border border-border bg-black/20 backdrop-blur-lg rounded-md overflow-hidden flex">
                <SearchInput
                   value={inputValue}
                   showResults={showResults}
@@ -96,9 +100,8 @@ export default function Searchbar({}: Props) {
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}
                   placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
-                  inputControls={inputControls}
-                  innerInputAnimation={innerInputAnimation}
                />
+               <ToggleTypeButton isMovie={isMovie} setIsMovie={setIsMovie} />
             </div>
             {showResults && (
                <SBResults
@@ -110,6 +113,6 @@ export default function Searchbar({}: Props) {
                />
             )}
          </form>
-      </div>
+      </motion.div>
    );
 }

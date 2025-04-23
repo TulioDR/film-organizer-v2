@@ -18,7 +18,7 @@ import SideHeader from "./SideHeader";
 import CreateListModal from "@/features/modals/createListModal/components/CreateListModal";
 
 export default function Sidebar() {
-   // const { isLoaded, user } = useUser();
+   const { isLoaded, user } = useUser();
 
    const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
    const openForm = () => setShowCreateForm(true);
@@ -32,7 +32,37 @@ export default function Sidebar() {
 
    return (
       <SidebarContainer>
+         <SideHeader />
          <SideLinks />
+         {isLoaded && user && (
+            <>
+               <CreateListButton onClick={openForm} />
+               <ModalPortal isOpen={showCreateForm}>
+                  <CreateListModal close={closeForm} />
+               </ModalPortal>
+               <div className="space-y-5">
+                  {expandSidebar ? (
+                     <SideSubtitle>Lists</SideSubtitle>
+                  ) : (
+                     <div className="h-[1px] w-full bg-light-1 dark:bg-dark-1"></div>
+                  )}
+                  {!lists && <SideLoadingLists />}
+                  {lists && lists.length > 0 && <SideLists />}
+               </div>
+               {lists && lists.length <= 0 && (
+                  <SideMessage icon="add" onClick={openForm}>
+                     Create a list to start saving your favorite Movies and TV
+                     Series.
+                  </SideMessage>
+               )}
+            </>
+         )}
+         {isLoaded && !user && (
+            <SideMessage icon="priority_high" onClick={goToAuth}>
+               Login to Create and see your Lists!
+            </SideMessage>
+         )}
       </SidebarContainer>
    );
 }
+``;
