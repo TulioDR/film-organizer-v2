@@ -48,13 +48,13 @@ export default function Details({ media_type, media }: Props) {
    }, [media, changeBackground]);
 
    return (
-      <div className="w-full">
+      <div className="w-full pb-32">
          <Head>
             <title>{media.title || media.name}</title>
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="sm:h-[calc(100vh-160px)] flex relative mb-5 sm:mb-10 overflow-hidden">
+         <div className="sm:h-[100svh] py-32 flex relative overflow-hidden">
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}

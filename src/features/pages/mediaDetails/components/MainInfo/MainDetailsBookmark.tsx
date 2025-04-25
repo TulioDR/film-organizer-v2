@@ -15,7 +15,7 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
    useEffect(() => {
       const handleScroll = () => {
          const buttonTop = buttonRef.current!.getBoundingClientRect().top;
-         if (buttonTop < 70) {
+         if (buttonTop < 128) {
             if (!isFixed) setIsFixed(true);
          } else {
             if (isFixed) setIsFixed(false);
@@ -27,13 +27,13 @@ export default function MainDetailsBookmark({ mediaType, media }: Props) {
    }, [isFixed]);
 
    return (
-      <div ref={buttonRef} className="w-10 sm:w-12">
+      <div ref={buttonRef} className="w-10 sm:w-16">
          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.4 } }}
             layout="position"
             className={`rounded-full overflow-hidden z-10 ${
-               isFixed ? "fixed top-20 sm:top-24 right-5 sm:right-10" : ""
+               isFixed ? "fixed top-1/2 -translate-y-1/2 right-8" : ""
             }`}
          >
             <BookmarkButton useLoading media={media} type={mediaType} big />
