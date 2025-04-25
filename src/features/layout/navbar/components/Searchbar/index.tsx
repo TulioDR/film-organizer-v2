@@ -92,7 +92,7 @@ export default function Searchbar({}: Props) {
             onSubmit={handleSubmit}
             className="h-16 relative pointer-events-auto"
          >
-            <div className="h-full border border-border bg-black/20 backdrop-blur-lg rounded-md overflow-hidden flex">
+            <div className="h-full border border-border bg-black/70 backdrop-blur-sm rounded-md overflow-hidden flex">
                <SearchInput
                   value={inputValue}
                   showResults={showResults}

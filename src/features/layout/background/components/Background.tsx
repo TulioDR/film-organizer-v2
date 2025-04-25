@@ -14,7 +14,7 @@ export default function Background() {
 
    useEffect(() => {
       const type = typeof backgroundImage;
-      const link = `https://image.tmdb.org/t/p/w1280${backgroundImage}`;
+      const link = `https://image.tmdb.org/t/p/original${backgroundImage}`;
 
       if (!backgroundImage) setSrc(null);
       else if (type === "string") setSrc(link);
@@ -43,7 +43,6 @@ export default function Background() {
                      className="relative w-full h-full brightness-75"
                   >
                      <Backdrop src={src} backgroundKey={backgroundKey} />
-                     <div className="absolute bottom-0 left-0 h-[50vh] w-full bg-gradient-to-t from-black/50 to-transparent z-10" />
                   </motion.div>
                )}
             </AnimatePresence>

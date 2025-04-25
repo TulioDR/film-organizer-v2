@@ -12,7 +12,7 @@ export default function Navbar() {
    return (
       <div
          id="navbar"
-         className="w-full px-8 z-20 sticky top-0 h-32 py-8 flex justify-between items-center pointer-events-none"
+         className="w-full px-8 z-20 fixed top-0 h-32 py-8 flex justify-between items-center pointer-events-none"
       >
          <div className="text-5xl font-black uppercase h-full flex items-center">
             Agrios
