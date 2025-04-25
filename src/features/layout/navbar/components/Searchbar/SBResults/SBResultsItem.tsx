@@ -30,7 +30,7 @@ export default function SBResultsItem({
          onMouseDown={(e: any) => e.preventDefault()}
          onMouseEnter={() => setCurrentIndex(index)}
          onMouseLeave={() => setCurrentIndex(null)}
-         className={`h-16 cursor-pointer flex items-center px-8 ${
+         className={`h-16 cursor-pointer flex items-center px-4 ${
             selected ? "bg-white text-black" : "text-white"
          }`}
       >
