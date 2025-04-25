@@ -36,7 +36,7 @@ export default function SBResults({
                />
             ))
          ) : (
-            <div className="w-full px-5 h-10 grid place-content-center">
+            <div className="w-full px-8 h-16 grid place-content-center">
                Nothing was found
             </div>
          )}

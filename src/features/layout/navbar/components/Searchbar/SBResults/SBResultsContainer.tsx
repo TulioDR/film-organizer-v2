@@ -1,3 +1,4 @@
+import GlassContainer from "@/components/GlassContainer";
 import React, { useEffect } from "react";
 
 type Props = {
@@ -43,9 +44,9 @@ export default function SBResultsContainer({
 
    return (
       <ul className="absolute top-full left-0 w-full">
-         <div className="relative py-3 bg-secondary-light dark:bg-secondary-dark shadow-lg rounded-b-lg overflow-hidden">
+         <GlassContainer className="relative py-4 border-t-0 rounded-t-none overflow-hidden flex flex-col gap-1">
             {children}
-         </div>
+         </GlassContainer>
       </ul>
    );
 }

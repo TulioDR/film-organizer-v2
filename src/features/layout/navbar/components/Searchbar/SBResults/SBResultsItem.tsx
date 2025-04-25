@@ -27,11 +27,11 @@ export default function SBResultsItem({
    return (
       <motion.li
          onClick={() => getDetails(index)}
-         onMouseDown={(e) => e.preventDefault()}
+         onMouseDown={(e: any) => e.preventDefault()}
          onMouseEnter={() => setCurrentIndex(index)}
          onMouseLeave={() => setCurrentIndex(null)}
-         className={`h-20 cursor-pointer flex py-2 px-5 ${
-            selected ? "bg-primary-light dark:bg-primary-dark" : ""
+         className={`h-16 cursor-pointer flex items-center px-8 ${
+            selected ? "bg-white text-black" : "text-white"
          }`}
       >
          <Poster

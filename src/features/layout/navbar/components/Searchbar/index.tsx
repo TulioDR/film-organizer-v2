@@ -5,6 +5,7 @@ import ToggleTypeButton from "./ToggleTypeButton";
 import SBResults from "./SBResults";
 import API_PUBLIC from "@/api/public";
 import { motion } from "framer-motion";
+import GlassContainer from "@/components/GlassContainer";
 
 type Props = {};
 
@@ -92,17 +93,20 @@ export default function Searchbar({}: Props) {
             onSubmit={handleSubmit}
             className="h-16 relative pointer-events-auto"
          >
-            <div className="h-full border border-border bg-black/70 backdrop-blur-sm rounded-md overflow-hidden flex">
+            <GlassContainer
+               className={`h-full overflow-hidden flex 
+                  ${showResults ? "rounded-b-none" : ""}
+               `}
+            >
                <SearchInput
                   value={inputValue}
-                  showResults={showResults}
                   onChange={handleInputChange}
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}
                   placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
                />
                <ToggleTypeButton isMovie={isMovie} setIsMovie={setIsMovie} />
-            </div>
+            </GlassContainer>
             {showResults && (
                <SBResults
                   isLoading={isLoading}

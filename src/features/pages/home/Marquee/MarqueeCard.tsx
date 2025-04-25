@@ -31,7 +31,7 @@ export default function MarqueeCard({ media }: Props) {
             className="w-full flex-shrink-0 aspect-[2/3] rounded-lg overflow-hidden relative"
          >
             <motion.div
-               animate={{ scale: isHovered ? 1.05 : 1 }}
+               animate={{ scale: isHovered ? 1.1 : 1 }}
                transition={{ duration: 0.4, ease: "easeOut" }}
                className="w-full h-full relative"
             >
