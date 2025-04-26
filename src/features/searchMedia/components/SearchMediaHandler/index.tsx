@@ -8,6 +8,7 @@ import LoadingPage from "./LoadingPage";
 import PaginationContainer from "./PaginationContainer";
 import SearchMediaCards from "./SearchMediaCards";
 import SearchMediaSpinner from "./SearchMediaSpinner";
+import Pagination from "./Pagination";
 
 type Props = {
    mediaType: "tv" | "movie";
@@ -38,7 +39,8 @@ export default function SearchMediaHandler({ mediaType, apiUrl }: Props) {
             {!media && <LoadingPage />}
          </AnimatePresence>
          {showPage && (
-            <motion.div exit={{ opacity: 0.3 }} className="space-y-5">
+            <motion.div exit={{ opacity: 0.3 }} className="">
+               <Pagination total={totalPages} />
                {/* <PaginationContainer>
                   <CustomPagination
                      value={currentPage}

@@ -20,18 +20,20 @@ export default function SearchMedia({ title, apiUrl }: Props) {
    if (!mediaType) return <></>;
    return (
       <TransitionPosterProvider>
-         <PageHead title={title} />
-         <Title title={title}></Title>
+         <div className="pt-32 pb-8">
+            <PageHead title={title} />
+            <Title title={title}></Title>
 
-         <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
-            <AnimatePresence mode="wait">
-               <SearchMediaHandler
-                  key={mediaType}
-                  mediaType={mediaType}
-                  apiUrl={fullApiUrl}
-               />
-            </AnimatePresence>
-         </motion.div>
+            <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
+               <AnimatePresence mode="wait">
+                  <SearchMediaHandler
+                     key={mediaType}
+                     mediaType={mediaType}
+                     apiUrl={fullApiUrl}
+                  />
+               </AnimatePresence>
+            </motion.div>
+         </div>
       </TransitionPosterProvider>
    );
 }

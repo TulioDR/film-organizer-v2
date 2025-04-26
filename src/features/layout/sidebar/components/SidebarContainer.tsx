@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
 import GlassContainer from "@/components/GlassContainer";
 
 type Props = {
@@ -7,7 +5,6 @@ type Props = {
 };
 
 export default function SidebarContainer({ children }: Props) {
-   const { revealSidebar } = useSelector((state: StoreModel) => state.sidebar);
    return (
       <div
          id="sidebar"
