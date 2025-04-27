@@ -20,7 +20,7 @@ export default function Navbar() {
          <div className="lg:hidden pointer-events-auto">
             <ToggleSidebar onClick={handleClick} />
          </div>
-         <div className="flex gap-5 pointer-events-auto">
+         <div className="flex gap-5 pointer-events-auto h-full">
             <NavDropdown />
             <LoginButton />
          </div>

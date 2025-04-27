@@ -7,10 +7,13 @@ export default function LoginButton() {
    const { user } = useUser();
    if (user) return <></>;
    return (
-      <motion.button variants={popUpAnimation} className="hidden sm:block h-10">
+      <motion.button
+         variants={popUpAnimation}
+         className="hidden sm:block h-full"
+      >
          <Link
             href="/auth"
-            className="h-full px-4 flex items-center bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
+            className="h-full px-8 flex items-center bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
          >
             Log in
          </Link>

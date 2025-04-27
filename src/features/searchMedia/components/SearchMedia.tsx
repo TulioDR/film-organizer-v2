@@ -20,7 +20,7 @@ export default function SearchMedia({ title, apiUrl }: Props) {
    if (!mediaType) return <></>;
    return (
       <TransitionPosterProvider>
-         <div className="pt-32 pb-8">
+         <div className="p-32">
             <PageHead title={title} />
             <Title title={title}></Title>
 

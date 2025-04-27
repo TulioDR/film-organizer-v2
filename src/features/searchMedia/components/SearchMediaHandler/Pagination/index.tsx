@@ -3,6 +3,8 @@ import React from "react";
 import PaginationButton from "./PaginationButton";
 import { usePagination } from "@mantine/hooks";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+
 type Props = {
    total: number;
 };
@@ -20,10 +22,13 @@ export default function Pagination({ total }: Props) {
    });
 
    return (
-      <div className="w-32 fixed top-0 right-0 h-[100svh] flex items-end justify-center pb-8">
-         <GlassContainer className="w-16 flex flex-col py-4">
+      <motion.div
+         layoutRoot
+         className="h-32 fixed bottom-0 left-0 w-screen flex items-center justify-center z-40"
+      >
+         <GlassContainer className="h-16 flex px-4">
             <PaginationButton
-               top
+               left
                onClick={previous}
                disabled={active === 1}
                grayText={active === 1}
@@ -38,12 +43,12 @@ export default function Pagination({ total }: Props) {
                />
             ))}
             <PaginationButton
-               bottom
+               right
                onClick={next}
                disabled={active === total}
                grayText={active === total}
             />
          </GlassContainer>
-      </div>
+      </motion.div>
    );
 }

@@ -6,10 +6,9 @@ import { motion } from "framer-motion";
 
 type Props = {
    title: string;
-   children?: React.ReactNode;
 };
 
-export default function Title({ title, children }: Props) {
+export default function Title({ title }: Props) {
    const { backgroundKey } = useSelector(
       (state: StoreModel) => state.background
    );
@@ -27,30 +26,16 @@ export default function Title({ title, children }: Props) {
       },
    };
    return (
-      <TitleContainer>
-         <div className="overflow-hidden">
-            <motion.div
-               variants={item}
-               initial="initial"
-               animate="animate"
-               exit="exit"
-               className={`text-center sm:text-left text-4xl sm:text-6xl 2xl:text-7xl font-title tracking-wide uppercase ${
-                  backgroundKey
-                     ? "text-dark-1"
-                     : "text-light-1 dark:text-dark-1"
-               }`}
-            >
-               {title}
-            </motion.div>
-         </div>
+      <div className="overflow-hidden mb-8">
          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            variants={item}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className={`text-4xl font-title tracking-wide uppercase text-white`}
          >
-            {children}
+            {title}
          </motion.div>
-      </TitleContainer>
+      </div>
    );
 }

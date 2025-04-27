@@ -48,7 +48,7 @@ export default function Details({ media_type, media }: Props) {
    }, [media, changeBackground]);
 
    return (
-      <div className="w-full pb-32">
+      <div className="w-full pb-8 px-32">
          <Head>
             <title>{media.title || media.name}</title>
             <meta name="description" content={media.overview} />

@@ -59,11 +59,7 @@ export default function MainPageContainer({ children }: Props) {
          <Navbar />
          <Searchbar />
          <AnimatePresence mode="wait">
-            {pathname !== "/auth" && (
-               <div key={pathname} className="w-full px-32">
-                  {children}
-               </div>
-            )}
+            {pathname !== "/auth" && <div key={pathname}>{children}</div>}
          </AnimatePresence>
       </>
    );

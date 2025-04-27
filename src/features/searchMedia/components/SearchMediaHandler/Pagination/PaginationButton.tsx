@@ -5,8 +5,8 @@ import PaginationContent from "./PaginationContent";
 type Props = {
    onClick?: () => void;
    page?: string | number;
-   top?: true;
-   bottom?: true;
+   left?: true;
+   right?: true;
    isActive?: boolean;
    disabled?: boolean;
    grayText?: boolean;
@@ -15,8 +15,8 @@ type Props = {
 export default function PaginationButton({
    onClick,
    page,
-   top,
-   bottom,
+   left,
+   right,
    isActive = false,
    disabled = false,
    grayText = false,
@@ -32,6 +32,7 @@ export default function PaginationButton({
          {isActive && (
             <motion.div
                layoutId="active-pagination"
+               // layout="position"
                className="absolute top-0 left-0 w-full h-full p-2"
                transition={{ duration: 0.6, type: "spring" }}
             >
@@ -39,7 +40,7 @@ export default function PaginationButton({
             </motion.div>
          )}
          <div className="relative h-full w-full flex items-center justify-center">
-            <PaginationContent top={top} bottom={bottom} page={page} />
+            <PaginationContent left={left} right={right} page={page} />
          </div>
       </button>
    );

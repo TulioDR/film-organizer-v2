@@ -15,25 +15,14 @@ export default function ScrollDownIcon() {
    };
 
    return (
-      <>
-         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute bottom-0 right-0 hidden sm:block"
-         >
-            <ScrollIcon />
-         </motion.div>
-         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="sm:hidden absolute top-5 left-1/2 -translate-x-1/2 bg-primary-light dark:bg-primary-dark rounded-2xl p-3 pb-1"
-         >
-            <ScrollIcon />
-         </motion.div>
-      </>
+      <motion.div
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.3 }}
+         className="absolute bottom-0 left-0 w-full flex justify-center items-center"
+      >
+         <ScrollIcon />
+      </motion.div>
    );
 }

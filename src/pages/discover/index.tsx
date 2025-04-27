@@ -20,11 +20,13 @@ export default function Discover() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <div className="relative w-full">
-            <Title title="Discover">
-               <DiscoverFilter />
-            </Title>
+            <Title title="Discover"></Title>
+            <DiscoverFilter />
          </div>
-         <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
+         <motion.div
+            exit={{ opacity: 0, transition: { duration: 0.4 } }}
+            className="px-32"
+         >
             <AnimatePresence mode="wait">
                {apiUrl ? (
                   <SearchMediaHandler
