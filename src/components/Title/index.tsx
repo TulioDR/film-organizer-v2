@@ -1,7 +1,4 @@
 import React from "react";
-import TitleContainer from "./TitleContainer";
-import StoreModel from "@/models/StoreModel";
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 type Props = {
@@ -9,9 +6,6 @@ type Props = {
 };
 
 export default function Title({ title }: Props) {
-   const { backgroundKey } = useSelector(
-      (state: StoreModel) => state.background
-   );
    const item = {
       initial: { x: "-100%", opacity: 0 },
       animate: {
@@ -26,7 +20,7 @@ export default function Title({ title }: Props) {
       },
    };
    return (
-      <div className="overflow-hidden mb-8">
+      <div className="overflow-hidden mb-8 ">
          <motion.div
             variants={item}
             initial="initial"

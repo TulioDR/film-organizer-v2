@@ -24,31 +24,39 @@ export default function Pagination({ total }: Props) {
    return (
       <motion.div
          layoutRoot
-         className="h-32 fixed bottom-0 left-0 w-screen flex items-center justify-center z-40"
+         className="h-32 fixed bottom-0 left-0 w-screen flex items-center justify-center z-40 pointer-events-none"
       >
-         <GlassContainer className="h-16 flex px-4">
-            <PaginationButton
-               left
-               onClick={previous}
-               disabled={active === 1}
-               grayText={active === 1}
-            />
-            {range.map((value, index) => (
+         <div className="h-16 flex gap-4">
+            <GlassContainer className="h-full overflow-hidden">
                <PaginationButton
-                  key={index}
-                  onClick={value === "dots" ? undefined : () => setPage(value)}
-                  page={value === "dots" ? "..." : value}
-                  isActive={active === value}
-                  disabled={value === "dots"}
+                  left
+                  onClick={previous}
+                  disabled={active === 1}
+                  grayText={active === 1}
                />
-            ))}
-            <PaginationButton
-               right
-               onClick={next}
-               disabled={active === total}
-               grayText={active === total}
-            />
-         </GlassContainer>
+            </GlassContainer>
+            <GlassContainer className="h-full flex px-4">
+               {range.map((value, index) => (
+                  <PaginationButton
+                     key={index}
+                     onClick={
+                        value === "dots" ? undefined : () => setPage(value)
+                     }
+                     page={value === "dots" ? "..." : value}
+                     isActive={active === value}
+                     disabled={value === "dots"}
+                  />
+               ))}
+            </GlassContainer>
+            <GlassContainer className="h-full overflow-hidden">
+               <PaginationButton
+                  right
+                  onClick={next}
+                  disabled={active === total}
+                  grayText={active === total}
+               />
+            </GlassContainer>
+         </div>
       </motion.div>
    );
 }

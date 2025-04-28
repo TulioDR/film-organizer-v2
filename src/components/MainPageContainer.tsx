@@ -19,6 +19,8 @@ import SaveMediaModal from "@/features/modals/saveMediaModal/components/SaveMedi
 import Notification from "@/features/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/LoginAdviceModal";
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
+import GlassContainer from "./GlassContainer";
+import TutorialButton from "@/features/layout/tutorialButton/components/TutorialButton";
 
 type Props = {
    children: React.ReactNode;
@@ -58,6 +60,7 @@ export default function MainPageContainer({ children }: Props) {
          <Sidebar />
          <Navbar />
          <Searchbar />
+         <TutorialButton />
          <AnimatePresence mode="wait">
             {pathname !== "/auth" && <div key={pathname}>{children}</div>}
          </AnimatePresence>

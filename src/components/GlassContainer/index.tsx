@@ -8,7 +8,7 @@ type Props = {
 export default function GlassContainer({ children, className = "" }: Props) {
    return (
       <div
-         className={`backdrop-blur-md bg-black/20 rounded-md border border-border ${className}`}
+         className={`backdrop-blur-md bg-black/40 rounded-md border border-border pointer-events-auto ${className}`}
       >
          {children}
       </div>

@@ -6,7 +6,7 @@ import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
-import { popUpAnimation } from "@/animations/PopUpAnimation";
+import GlassContainer from "@/components/GlassContainer";
 
 export default function NavDropdown() {
    const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -30,16 +30,13 @@ export default function NavDropdown() {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
    return (
-      <motion.div
-         variants={popUpAnimation}
-         tabIndex={0}
-         onBlur={handleBlur}
-         className="relative p-[2px] rounded-full h-10 aspect-square"
-         style={{ backgroundColor: themeColor }}
-      >
-         <button
+      <GlassContainer className="h-full relative p-2">
+         <motion.button
+            tabIndex={0}
+            onBlur={handleBlur}
             onClick={toggle}
-            className="h-full w-full rounded-full overflow-hidden relative"
+            className="rounded-full h-full aspect-square overflow-hidden"
+            style={{ backgroundColor: themeColor }}
          >
             <div className="w-full h-full flex items-center justify-center text-white">
                <span className="material-symbols-outlined">person</span>
@@ -51,7 +48,7 @@ export default function NavDropdown() {
                   <span className="material-symbols-outlined">person</span>
                </div>
             )} */}
-         </button>
+         </motion.button>
          {isOpen && (
             <DropdownMenu divKey={menu} elRef={dropdownRef} height={menuHeight}>
                {menu === "main" && (
@@ -60,6 +57,6 @@ export default function NavDropdown() {
                {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
             </DropdownMenu>
          )}
-      </motion.div>
+      </GlassContainer>
    );
 }

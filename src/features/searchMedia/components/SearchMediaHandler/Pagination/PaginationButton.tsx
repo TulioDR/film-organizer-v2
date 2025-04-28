@@ -24,7 +24,7 @@ export default function PaginationButton({
    return (
       <button
          onClick={onClick}
-         className={`w-full aspect-square select-none relative hover:bg-white text-white hover:text-black 
+         className={`h-full aspect-square select-none relative hover:bg-white text-white hover:text-black 
             ${disabled ? "pointer-events-none" : ""}
             ${grayText ? "text-border" : ""}
          `}
