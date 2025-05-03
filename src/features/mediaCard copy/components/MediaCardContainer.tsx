@@ -2,47 +2,42 @@ import { motion } from "framer-motion";
 
 type Props = {
    children: React.ReactNode;
+   onFocus: () => void;
    onBlur: () => void;
    id: string;
    isOpen: boolean;
    onHoverStart: () => void;
    onHoverEnd: () => void;
-   hideCard: boolean;
+   isCardTransparent: boolean;
 };
 
 export default function MediaCardContainer({
    children,
+   onFocus,
    onBlur,
    id,
    isOpen,
    onHoverStart,
    onHoverEnd,
-   hideCard,
+   isCardTransparent,
 }: Props) {
    return (
       <motion.article
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
          tabIndex={0}
+         onFocus={onFocus}
          onBlur={onBlur}
-         animate={{
-            opacity: hideCard ? 0 : 1,
-            transition: { duration: 0.2 },
-         }}
-         exit={{ pointerEvents: "none" }}
-         className="outline-none"
+         className={`duration-200 ${isCardTransparent ? "opacity-10" : ""}`}
       >
-         <motion.div
+         <div
             id={id}
-            animate={{
-               rotateY: isOpen ? -180 : 0,
-               transition: { duration: 0.4, ease: "linear" },
-            }}
-            style={{ transformStyle: "preserve-3d" }}
-            className="relative"
+            className={`relative duration-500 [transform-style:preserve-3d] ${
+               isOpen ? "[transform:rotateY(-180deg)] " : ""
+            }`}
          >
             {children}
-         </motion.div>
+         </div>
       </motion.article>
    );
 }

@@ -36,21 +36,8 @@ export default function SavedMedia({
             {filteredMedia.map((media) => (
                <MediaCard
                   key={media.id}
-                  savedMedia
                   mediaType={media.media_type}
-                  mediaId={media.media_id}
-                  poster={media.media_poster}
-                  title={media.media_title}
-                  backdrop={media.media_backdrop}
-                  releaseDate={media.media_release_date}
-                  overview={media.media_overview || "N/A"}
-                  backButton={
-                     <DeleteButton
-                        listId={listId}
-                        media={media}
-                        refresh={refresh}
-                     />
-                  }
+                  media={media}
                   cardFront={
                      <SavedMediaCardFront
                         isDeleteModeActive={isDeleteModeActive}

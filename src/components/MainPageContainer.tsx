@@ -19,7 +19,6 @@ import SaveMediaModal from "@/features/modals/saveMediaModal/components/SaveMedi
 import Notification from "@/features/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/LoginAdviceModal";
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
-import GlassContainer from "./GlassContainer";
 import TutorialButton from "@/features/layout/tutorialButton/components/TutorialButton";
 
 type Props = {

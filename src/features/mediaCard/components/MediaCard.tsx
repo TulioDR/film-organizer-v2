@@ -5,65 +5,103 @@ import BackFooter from "./MediaCardBack/BackFooter";
 import FrontContainer from "./MediaCardFront/FrontContainer";
 import Poster from "@/components/Poster";
 import MediaCardContainer from "./MediaCardContainer";
-import useMediaCard from "../hooks/useMediaCard";
+import { useEffect, useState } from "react";
+import { MediaModel } from "@/models/MediaModel";
+import useBackground from "@/features/layout/background/hooks/useBackground";
 
 type Props = {
    mediaType: "tv" | "movie";
-   mediaId: number;
-   title: string;
-   backdrop: string;
-   releaseDate: Date;
-   overview: string;
-   poster: string;
-   backButton: React.ReactNode;
+   media: MediaModel;
    cardFront: React.ReactNode;
-   savedMedia?: true;
+   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
+   setHoveredId: React.Dispatch<React.SetStateAction<number | null>>;
+   selectedId: number | null;
+   hoveredId: number | null;
 };
 
 export default function MediaCard({
    mediaType,
-   mediaId,
-   title,
-   poster,
-   backdrop,
-   releaseDate,
-   backButton,
-   overview,
+   media,
    cardFront,
-   savedMedia,
+   setHoveredId,
+   selectedId,
+   setSelectedId,
+   hoveredId,
 }: Props) {
-   const { isOpen, openCard, closeCard, onLearnMoreClick } = useMediaCard(
-      mediaType,
-      mediaId,
-      poster
-   );
+   const mediaId = media.id;
+   const title = media.name || media.title;
+
+   // const { isOpen, openCard, closeCard, onLearnMoreClick } = useMediaCard(
+   //    mediaType,
+   //    mediaId,
+   //    media.poster_path
+   // );
+
+   const [isSelected, setIsSelected] = useState<boolean>(false);
+   useEffect(() => {
+      if (selectedId === mediaId) setIsSelected(true);
+      else setIsSelected(false);
+   }, [mediaId, selectedId]);
+
+   const [hideCard, setHideCard] = useState<boolean>(false);
+   useEffect(() => {
+      const hide = hoveredId === selectedId && selectedId && !isSelected;
+      setHideCard(!!hide);
+   }, [selectedId, isSelected, hoveredId]);
+
+   const { changeBackground, removeBackground } = useBackground();
+
+   const onHoverStart = () => {
+      setHoveredId(mediaId);
+   };
+   const onHoverEnd = () => {
+      setHoveredId(null);
+   };
+   const openCard = () => {
+      setSelectedId(mediaId);
+      changeBackground(mediaId, media.backdrop_path || media.poster_path);
+   };
+   const closeCard = () => {
+      setSelectedId(null);
+      removeBackground();
+   };
+
+   const closeWithoutRemoveBackground = () => {
+      setSelectedId(null);
+   };
 
    return (
       <MediaCardContainer
          id={`${mediaType}-${mediaId}`}
-         onFocus={openCard}
+         onHoverStart={onHoverStart}
+         onHoverEnd={onHoverEnd}
          onBlur={closeCard}
-         isOpen={isOpen}
-         savedMedia={savedMedia}
+         isOpen={isSelected}
+         hideCard={hideCard}
       >
-         <FrontContainer>
-            <Poster alt={title} posterPath={poster} size="lg" />
+         <FrontContainer onClick={openCard}>
+            <Poster alt={title} posterPath={media.poster_path} size="lg" />
             {cardFront}
          </FrontContainer>
          <BackContainer>
             <BackHeader
                alt={title}
-               backdrop={backdrop}
-               date={releaseDate}
-               button={backButton}
-            />
-            <BackBody title={title} overview={overview} />
-            <BackFooter
+               backdrop={media.backdrop_path}
                closeCard={closeCard}
-               mediaType={mediaType}
-               mediaId={mediaId}
-               onLearnMoreClick={onLearnMoreClick}
             />
+            <div className="w-full flex flex-col gap-2 flex-1 p-4 pt-6 overflow-hidden">
+               <BackBody
+                  title={title}
+                  overview={media.overview || "N/A"}
+                  releaseDate={media.release_date || media.first_air_date}
+               />
+               <BackFooter
+                  mediaType={mediaType}
+                  mediaId={mediaId}
+                  media={media}
+                  onLearnMoreClick={() => {}}
+               />
+            </div>
          </BackContainer>
       </MediaCardContainer>
    );

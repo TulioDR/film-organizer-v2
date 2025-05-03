@@ -6,7 +6,7 @@ type Props = {
 
 export default function BackContainer({ children }: Props) {
    return (
-      <div className="bg-secondary-light dark:bg-secondary-dark p-2 sm:p-3 flex absolute top-0 left-0 w-full h-full flex-col [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden rounded-lg sm:rounded-3xl">
+      <div className="bg-black rounded-xl border-8 border-black absolute top-0 left-0 flex flex-col w-full h-full [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden">
          {children}
       </div>
    );

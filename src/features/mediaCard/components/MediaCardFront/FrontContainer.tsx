@@ -2,11 +2,15 @@ import React from "react";
 
 type Props = {
    children: React.ReactNode;
+   onClick: () => void;
 };
 
-export default function FrontContainer({ children }: Props) {
+export default function FrontContainer({ children, onClick }: Props) {
    return (
-      <div className="cursor-pointer relative [backface-visibility:hidden] overflow-hidden rounded-lg sm:rounded-3xl">
+      <div
+         onClick={onClick}
+         className="cursor-pointer relative [backface-visibility:hidden] overflow-hidden rounded-xl"
+      >
          {children}
       </div>
    );

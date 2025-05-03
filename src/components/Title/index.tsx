@@ -7,29 +7,29 @@ type Props = {
 
 export default function Title({ title }: Props) {
    const item = {
-      initial: { x: "-100%", opacity: 0 },
+      initial: { y: "100%", opacity: 0 },
       animate: {
          x: 0,
          opacity: 1,
          transition: { duration: 0.4, ease: "easeInOut" },
       },
       exit: {
-         x: "-100%",
+         y: "-100%",
          opacity: 0,
          transition: { duration: 0.4, ease: "easeInOut" },
       },
    };
    return (
       <div className="overflow-hidden mb-8 ">
-         <motion.div
+         <motion.h2
             variants={item}
             initial="initial"
             animate="animate"
             exit="exit"
-            className={`text-4xl font-title tracking-wide uppercase text-white`}
+            className={`text-4xl font-title text-center tracking-wide uppercase text-white`}
          >
             {title}
-         </motion.div>
+         </motion.h2>
       </div>
    );
 }
