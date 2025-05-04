@@ -1,15 +1,14 @@
 import Link from "next/link";
 
 type Props = {
-   mediaType: "tv" | "movie";
-   mediaId: number;
+   href: string;
    onClick: () => void;
 };
 
-export default function LearnMore({ mediaType, mediaId, onClick }: Props) {
+export default function LearnMore({ href, onClick }: Props) {
    return (
       <Link
-         href={`/${mediaType}/${mediaId}`}
+         href={href}
          scroll={false}
          onClick={onClick}
          onMouseDown={(e) => e.preventDefault()}

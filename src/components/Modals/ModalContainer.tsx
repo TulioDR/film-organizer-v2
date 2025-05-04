@@ -26,7 +26,7 @@ export default function ModalContainer({ children, closeModal }: Props) {
             transition={{ duration: 0.3 }}
             onClick={closeModal}
             className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-60 grid place-content-center z-50"
-            onMouseDown={(e) => e.preventDefault()}
+            onMouseDown={(e: any) => e.preventDefault()}
          />
          <motion.div
             initial={{ height: 10, width: 100, opacity: 0 }}

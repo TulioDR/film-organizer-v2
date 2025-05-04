@@ -20,8 +20,8 @@ export default function Backdrop({ backgroundKey, src }: Props) {
             sizes="100%"
             quality={100}
             onLoadingComplete={onLoadingComplete}
-            className={`object-cover duration-300  ${
-               isLoaded ? "opacity-100" : "opacity-0"
+            className={`object-cover duration-300 ${
+               true ? "opacity-100" : "opacity-0"
             }`}
          />
          <AnimatePresence>

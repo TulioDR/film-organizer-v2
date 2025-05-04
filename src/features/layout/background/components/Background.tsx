@@ -23,15 +23,15 @@ export default function Background() {
 
    return (
       <div className="fixed top-0 left-0 h-[100svh] -z-10 w-screen bg-black">
-         <AnimatePresence mode="wait">
+         <AnimatePresence>
             {src && (
                <motion.div
                   key={backgroundKey}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full h-full brightness-75"
+                  transition={{ duration: 0.3 }}
+                  className="absolute top-0 left-0 w-full h-full"
                >
                   <Backdrop src={src} backgroundKey={backgroundKey} />
                </motion.div>
