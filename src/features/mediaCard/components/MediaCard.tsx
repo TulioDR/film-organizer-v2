@@ -8,6 +8,8 @@ import MediaCardContainer from "./MediaCardContainer";
 import { useEffect, useState } from "react";
 import { MediaModel } from "@/models/MediaModel";
 import useBackground from "@/features/layout/background/hooks/useBackground";
+import { useDispatch } from "react-redux";
+import { layoutActions } from "@/store/slices/layout-slice";
 
 type Props = {
    mediaType: "tv" | "movie";
@@ -37,13 +39,15 @@ export default function MediaCard({
    //    media.poster_path
    // );
 
+   const dispatch = useDispatch();
+
+   const [isHovered, setIsHovered] = useState<boolean>(false);
    const [isSelected, setIsSelected] = useState<boolean>(false);
+   const [hideCard, setHideCard] = useState<boolean>(false);
    useEffect(() => {
       if (selectedId === mediaId) setIsSelected(true);
       else setIsSelected(false);
    }, [mediaId, selectedId]);
-
-   const [hideCard, setHideCard] = useState<boolean>(false);
    useEffect(() => {
       const hide = hoveredId === selectedId && selectedId && !isSelected;
       setHideCard(!!hide);
@@ -53,9 +57,11 @@ export default function MediaCard({
 
    const onHoverStart = () => {
       setHoveredId(mediaId);
+      setIsHovered(true);
    };
    const onHoverEnd = () => {
       setHoveredId(null);
+      setIsHovered(false);
    };
    const openCard = () => {
       setSelectedId(mediaId);
@@ -69,6 +75,14 @@ export default function MediaCard({
    const closeWithoutRemoveBackground = () => {
       setSelectedId(null);
    };
+
+   useEffect(() => {
+      if (isHovered && isSelected) {
+         dispatch(layoutActions.hideLayout());
+      } else {
+         dispatch(layoutActions.revealLayout());
+      }
+   }, [isSelected, isHovered]);
 
    return (
       <MediaCardContainer

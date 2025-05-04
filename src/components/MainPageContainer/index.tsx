@@ -20,6 +20,7 @@ import Notification from "@/features/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/LoginAdviceModal";
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import TutorialButton from "@/features/layout/tutorialButton/components/TutorialButton";
+import FixedContainer from "./FixedContainer";
 
 type Props = {
    children: React.ReactNode;
@@ -52,14 +53,17 @@ export default function MainPageContainer({ children }: Props) {
    return (
       <>
          <div id="modals-container"></div>
+         <FixedContainer>
+            <Navbar />
+            <Searchbar />
+            <Sidebar />
+            <TutorialButton />
+         </FixedContainer>
          <Background />
          <SaveMediaModal />
          <LoginAdviceModal />
          <Notification />
-         <Sidebar />
-         <Navbar />
-         <Searchbar />
-         <TutorialButton />
+
          <AnimatePresence mode="wait">
             {pathname !== "/auth" && <div key={pathname}>{children}</div>}
          </AnimatePresence>

@@ -6,6 +6,7 @@ import listSlice from "./slices/list-slice";
 import bookmarkSlice from "./slices/bookmark-slice";
 import backgroundSlice from "./slices/background-slice";
 import notificationSlice from "./slices/notification-slice";
+import layoutSlice from "./slices/layout-slice";
 
 const store = configureStore({
    reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
       bookmark: bookmarkSlice.reducer,
       background: backgroundSlice.reducer,
       notification: notificationSlice.reducer,
+      layout: layoutSlice.reducer,
    },
 });
 const makeStore = () => store;

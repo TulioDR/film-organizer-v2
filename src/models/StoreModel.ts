@@ -27,6 +27,9 @@ interface NotificationModel {
    notification: string | null;
    success: boolean;
 }
+interface LayoutModel {
+   isHidden: boolean;
+}
 
 export default interface StoreModel {
    theme: ThemeModel;
@@ -37,4 +40,5 @@ export default interface StoreModel {
    bookmark: BookmarkModel;
    background: BackgroundModel;
    notification: NotificationModel;
+   layout: LayoutModel;
 }
