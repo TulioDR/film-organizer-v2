@@ -20,7 +20,6 @@ export default function MainPoster({ alt, posterPath }: Props) {
             fill
             sizes="100%"
             priority
-            className="rounded-3xl"
          />
       </motion.div>
    );

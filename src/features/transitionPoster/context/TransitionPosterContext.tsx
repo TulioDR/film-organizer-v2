@@ -76,10 +76,7 @@ export function TransitionPosterProvider({ children }: Props) {
 
    return (
       <TransitionPosterContext.Provider value={value}>
-         <div className={`duration-300 ${selectedImg ? "opacity-0" : ""}`}>
-            {children}
-         </div>
-         <TransitionPoster onAnimationComplete={onAnimationComplete} />
+         {children}
       </TransitionPosterContext.Provider>
    );
 }

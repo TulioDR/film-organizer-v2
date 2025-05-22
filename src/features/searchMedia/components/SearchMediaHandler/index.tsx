@@ -1,43 +1,37 @@
-import { useState } from "react";
+import MediaCard from "@/features/mediaCard/components/MediaCard";
 import useSearchMedia from "../../hooks/useSearchMedia";
-import { AnimatePresence, motion } from "framer-motion";
 
-import LoadingPage from "./LoadingPage";
-import SearchMediaCards from "./SearchMediaCards";
-import SearchMediaSpinner from "./SearchMediaSpinner";
-import Pagination from "./Pagination";
+import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 type Props = {
-   mediaType: "tv" | "movie";
    apiUrl: string;
+   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SearchMediaHandler({ mediaType, apiUrl }: Props) {
-   const { media, totalPages, isLoading } = useSearchMedia(apiUrl);
+export default function SearchMediaHandler({
+   apiUrl,
+   setTotalPages,
+   setIsLoading,
+}: Props) {
+   const { media } = useSearchMedia(apiUrl, setTotalPages, setIsLoading);
+   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-   const [showPage, setShowPage] = useState<boolean>(false);
-
+   const router = useRouter();
+   const mediaType = router.query.media_type as "tv" | "movie";
    return (
-      <>
-         <AnimatePresence onExitComplete={() => setShowPage(true)}>
-            {!media && <LoadingPage />}
-         </AnimatePresence>
-         {showPage && (
-            <motion.div exit={{ opacity: 0.3 }} className="">
-               <Pagination total={totalPages} />
-               <AnimatePresence mode="wait">
-                  {isLoading ? (
-                     <SearchMediaSpinner />
-                  ) : (
-                     <SearchMediaCards
-                        key={media![0].id}
-                        media={media!}
-                        type={mediaType}
-                     />
-                  )}
-               </AnimatePresence>
-            </motion.div>
-         )}
-      </>
+      <SearchMediaCardsContainer>
+         {media!.map((media) => (
+            <MediaCard
+               key={media.id}
+               media={media}
+               mediaType={mediaType}
+               selectedId={selectedId}
+               setSelectedId={setSelectedId}
+            />
+         ))}
+      </SearchMediaCardsContainer>
    );
 }

@@ -31,7 +31,7 @@ export default function Background() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute top-0 left-0 w-full h-full"
+                  className="absolute top-0 left-0 w-full h-full brightness-75"
                >
                   <Backdrop src={src} backgroundKey={backgroundKey} />
                </motion.div>

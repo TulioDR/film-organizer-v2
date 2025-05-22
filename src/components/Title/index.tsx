@@ -2,14 +2,14 @@ import React from "react";
 import { motion } from "framer-motion";
 
 type Props = {
-   title: string;
+   title?: string;
 };
 
 export default function Title({ title }: Props) {
    const item = {
       initial: { y: "100%", opacity: 0 },
       animate: {
-         x: 0,
+         y: 0,
          opacity: 1,
          transition: { duration: 0.4, ease: "easeInOut" },
       },
@@ -19,8 +19,10 @@ export default function Title({ title }: Props) {
          transition: { duration: 0.4, ease: "easeInOut" },
       },
    };
+
+   if (!title) return <></>;
    return (
-      <div className="overflow-hidden mb-8 ">
+      <div className="overflow-hidden mb-8">
          <motion.h2
             variants={item}
             initial="initial"

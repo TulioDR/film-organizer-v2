@@ -12,7 +12,6 @@ type Props = {
    cardRef: React.RefObject<HTMLDivElement>;
    scaleControls: AnimationControls;
    exitStyle: React.CSSProperties;
-   hideCardContainer: boolean;
 };
 
 export default function Container({
@@ -24,13 +23,18 @@ export default function Container({
    cardRef,
    scaleControls,
    exitStyle,
-   hideCardContainer,
 }: Props) {
    const { backgroundImage } = useSelector(
       (state: StoreModel) => state.background
    );
    const hideCard = !!backgroundImage && !isHovered;
    const controls = useAnimationControls();
+   useEffect(() => {
+      const transition = { duration: 0.2 };
+      if (hideCard) controls.start({ opacity: 0, transition });
+      else controls.start({ opacity: 1, transition });
+   }, [hideCard]);
+
    useEffect(() => {
       const transition = { duration: 0.4 };
       if (isHovered) controls.start({ rotateY: 180, transition });
@@ -42,32 +46,24 @@ export default function Container({
          controls.set({ rotateY: 0, transition: { duration: 0 } });
       }
    };
-   const transition = { duration: 0.4 };
+   const MAIN_DURATION = 0.4;
 
    return (
-      <motion.div
-         // animate={{ opacity: hideCard || hideCardContainer ? 0 : 1 }}
-         // exit={{ opacity: 1, transition: { duration: 0 } }}
-         transition={{ duration: 0.2 }}
-         id={id}
-         ref={cardRef}
-         className="aspect-[2/3]"
-      >
+      <motion.div id={id} ref={cardRef} className="aspect-[2/3]">
          <motion.div
             layout
             onHoverStart={onHoverStart}
             onHoverEnd={onHoverEnd}
             style={exitStyle}
-            transition={transition}
-            className="aspect-[2/3]"
+            transition={{ duration: MAIN_DURATION }}
+            className="aspect-[2/3] "
          >
             <motion.div
                animate={scaleControls}
-               transition={transition}
+               transition={{ duration: MAIN_DURATION }}
                className="origin-top-left [perspective:2000px] aspect-[2/3]"
             >
                <motion.div
-                  initial={{ rotateY: 0 }}
                   animate={controls}
                   onUpdate={handleUpdate}
                   className="relative [transform-style:preserve-3d]"

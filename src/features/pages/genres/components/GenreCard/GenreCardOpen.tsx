@@ -10,13 +10,13 @@ type Props = {
 export default function GenreCardOpen({ name, href }: Props) {
    return (
       <div className="relative w-full">
-         <motion.div
+         {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-black/90 to-transparent"
-         />
+         /> */}
          <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -29,7 +29,7 @@ export default function GenreCardOpen({ name, href }: Props) {
                href={href}
                scroll={false}
                onMouseDown={(e) => e.preventDefault()}
-               className="border border-white text-dark-1 hover:bg-white hover:text-black py-1 px-5 font-medium tracking-wider  uppercase rounded-full"
+               className="border border-white text-dark-1 hover:bg-white hover:text-black py-1 px-5 font-medium tracking-wider  uppercase rounded-full z-10"
             >
                Open
             </Link>

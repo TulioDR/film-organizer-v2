@@ -33,7 +33,7 @@ export default function Searchbar({}: Props) {
          if (inputValue.length > 0) {
             setIsLoading(true);
             const media_type = isMovie ? "movie" : "tv";
-            const url = `/${media_type}/search/${inputValue}/1`;
+            const url = `/${media_type}/results/${inputValue}/1`;
             const { data } = await API_PUBLIC.get(url);
             setResults(data.results.slice(0, 5));
             setShowResults(true);
@@ -70,7 +70,7 @@ export default function Searchbar({}: Props) {
       if (currentIndex === null) {
          const type = isMovie ? "movie" : "tv";
          const value = inputValue.toLowerCase();
-         router.push(`/${type}/search?search_query=${value}`);
+         router.push(`/${type}/results?search_query=${value}`);
       } else {
          getDetails(currentIndex);
       }

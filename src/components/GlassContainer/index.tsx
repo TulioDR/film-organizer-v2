@@ -23,7 +23,7 @@ export default function GlassContainer({
          {...rest}
          style={{ backdropFilter: "blur(10px)" }}
          animate={{ opacity: isHidden ? 0 : 1, transition: { duration: 0.2 } }}
-         className={`bg-black/40 rounded-md border border-border ${className}`}
+         className={`bg-black/40 rounded-md border border-border pointer-events-auto ${className}`}
       >
          {children}
       </MotionWrapper>

@@ -44,7 +44,7 @@ export default function Details({ media_type, media }: Props) {
    useScrollToTop();
 
    useEffect(() => {
-      changeBackground(media.id, media.poster_path);
+      changeBackground(media.id, media.backdrop_path || media.poster_path);
    }, [media, changeBackground]);
 
    return (

@@ -7,28 +7,24 @@ import Overview from "./Overview";
 import Title from "./Title";
 import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
 import LearnMore from "./LearnMore";
-import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
 
 type Props = {
    media: MediaModel;
    mediaType: "movie" | "tv";
    isHovered: boolean;
+   onLearnMore: () => void;
 };
 
-export default function Back({ media, mediaType, isHovered }: Props) {
+export default function Back({
+   media,
+   mediaType,
+   isHovered,
+   onLearnMore,
+}: Props) {
    const title = media.name || media.title;
-   const mediaId = media.id;
    const backdrop = media.backdrop_path;
    const releaseDate = media.release_date || media.first_air_date;
    const overview = media.overview || "N/A";
-   const href = `/${mediaType}/${mediaId}`;
-
-   const { startPosterAnimation } = useTransitionPosterContext();
-   const learnMore = () => {
-      setTimeout(() => {
-         startPosterAnimation(mediaType, mediaId, media.poster_path);
-      }, 500);
-   };
 
    return (
       <Container>
@@ -43,7 +39,7 @@ export default function Back({ media, mediaType, isHovered }: Props) {
             </div>
             <div className="flex gap-2 h-12 w-full">
                <BookmarkButton type={mediaType} media={media} />
-               <LearnMore href={href} onClick={learnMore} />
+               <LearnMore onClick={onLearnMore} />
             </div>
          </div>
       </Container>
