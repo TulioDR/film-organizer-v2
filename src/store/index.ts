@@ -7,6 +7,7 @@ import bookmarkSlice from "./slices/bookmark-slice";
 import backgroundSlice from "./slices/background-slice";
 import notificationSlice from "./slices/notification-slice";
 import layoutSlice from "./slices/layout-slice";
+import selectedMediaSlice from "./slices/selected-media-slice";
 
 const store = configureStore({
    reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
       background: backgroundSlice.reducer,
       notification: notificationSlice.reducer,
       layout: layoutSlice.reducer,
+      selectedMedia: selectedMediaSlice.reducer,
    },
 });
 const makeStore = () => store;

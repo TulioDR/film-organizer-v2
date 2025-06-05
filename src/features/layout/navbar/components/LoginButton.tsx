@@ -13,7 +13,7 @@ export default function LoginButton() {
       >
          <Link
             href="/auth"
-            className="h-full px-8 flex items-center bg-light-1 text-dark-1 dark:bg-dark-1 dark:text-light-1"
+            className="h-full w-24 flex items-center justify-center bg-white text-black"
          >
             Log in
          </Link>

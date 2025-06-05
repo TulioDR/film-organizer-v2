@@ -2,8 +2,12 @@ import MediaCard from "@/features/mediaCard/components/MediaCard";
 import useSearchMedia from "../../hooks/useSearchMedia";
 
 import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
-import { useState } from "react";
 import { useRouter } from "next/router";
+
+import { useDispatch, useSelector } from "react-redux";
+import StoreModel from "@/models/StoreModel";
+import { useEffect } from "react";
+import { selectedMediaActions } from "@/store/slices/selected-media-slice";
 
 type Props = {
    apiUrl: string;
@@ -17,19 +21,32 @@ export default function SearchMediaHandler({
    setIsLoading,
 }: Props) {
    const { media } = useSearchMedia(apiUrl, setTotalPages, setIsLoading);
-   const [selectedId, setSelectedId] = useState<number | null>(null);
 
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
+
+   // const [selectedMedia, setSelectedMedia] = useState<MediaModel | null>(null);
+
+   const { selectedMedia } = useSelector(
+      (state: StoreModel) => state.selectedMedia
+   );
+
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      if (media.length === 0) return;
+      console.log(media.length);
+      dispatch(selectedMediaActions.resetSelectedMedia());
+   }, [media.length]);
+
    return (
       <SearchMediaCardsContainer>
          {media!.map((media) => (
             <MediaCard
-               key={media.id}
+               key={media.id + mediaType}
                media={media}
                mediaType={mediaType}
-               selectedId={selectedId}
-               setSelectedId={setSelectedId}
+               isSelected={selectedMedia?.id === media.id}
             />
          ))}
       </SearchMediaCardsContainer>

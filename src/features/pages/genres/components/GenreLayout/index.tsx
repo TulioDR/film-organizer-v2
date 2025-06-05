@@ -1,33 +1,20 @@
-import { motion } from "framer-motion";
-import MovieLayout from "./MovieLayout";
-import TvLayout from "./TvLayout";
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
+import GenreCard from "../GenreCard";
 
 type Props = {
    mediaType: "movie" | "tv";
 };
 
-const container = {
-   initial: {},
-   animate: { transition: { staggerChildren: 0.1 } },
-   exit: {},
-};
-
 export default function GenreLayout({ mediaType }: Props) {
+   const isMovie = mediaType === "movie";
+   const genresArray = isMovie ? movieGenres : tvGenres;
+
    return (
-      <motion.div
-         variants={container}
-         initial="initial"
-         animate="animate"
-         exit="exit"
-         className="w-full flex flex-col gap-5"
-      >
-         {mediaType === "movie" ? (
-            <MovieLayout genres={movieGenres} />
-         ) : (
-            <TvLayout genres={tvGenres} />
-         )}
-      </motion.div>
+      <div className="w-full grid grid-cols-3 2xl:grid-cols-4 gap-8">
+         {genresArray.map((genre) => (
+            <GenreCard key={genre.id} genre={genre} mediaType={mediaType} />
+         ))}
+      </div>
    );
 }

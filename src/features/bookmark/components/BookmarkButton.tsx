@@ -36,7 +36,7 @@ export default function BookmarkButton({
             </div>
          ) : (
             <span
-               style={{ fontVariationSettings: isMediaSaved ? `"FILL" 1` : "" }}
+               // style={{ fontVariationSettings: isMediaSaved ? `"FILL" 1` : "" }}
                className={`material-symbols-outlined ${
                   big ? "!text-3xl sm:!text-4xl" : "!text-3xl"
                }`}

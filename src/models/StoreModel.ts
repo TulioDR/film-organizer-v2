@@ -1,5 +1,6 @@
 import { StaticImageData } from "next/image";
 import ListModel from "./ListModel";
+import { MediaModel } from "./MediaModel";
 
 interface ThemeModel {
    themeColor: string;
@@ -30,6 +31,11 @@ interface NotificationModel {
 interface LayoutModel {
    isHidden: boolean;
 }
+interface SelectedMediaModel {
+   selectedMedia: MediaModel | null;
+   cardHeight: number | null;
+   isFixed: boolean;
+}
 
 export default interface StoreModel {
    theme: ThemeModel;
@@ -41,4 +47,5 @@ export default interface StoreModel {
    background: BackgroundModel;
    notification: NotificationModel;
    layout: LayoutModel;
+   selectedMedia: SelectedMediaModel;
 }

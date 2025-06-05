@@ -25,7 +25,10 @@ export default function Pagination({ total }: Props) {
    if (total === 0) return <></>;
    return (
       <PaginationContainer>
-         <motion.div className="h-32 fixed bottom-0 left-0 w-screen flex items-center justify-center z-40 pointer-events-none">
+         <motion.div
+            layout
+            className="h-32 absolute bottom-0 left-0 w-full flex items-center justify-center z-40 pointer-events-none"
+         >
             <div className="h-16 flex gap-4">
                <GlassContainer className="h-full overflow-hidden">
                   <PaginationButton

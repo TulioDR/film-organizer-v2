@@ -58,6 +58,7 @@ export default function SideItem({
          {isSelected && (
             <motion.div
                layoutId="activeMark"
+               // style={{ originX: "0px" }}
                className="absolute top-0 left-0 w-full h-full p-2"
                transition={{ duration: 0.6, type: "spring" }}
             >

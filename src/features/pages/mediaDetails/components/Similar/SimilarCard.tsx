@@ -8,14 +8,9 @@ type Props = {
 };
 
 export default function SimilarCard({ similar, href }: Props) {
-   const handleClick = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-   };
-
    return (
       <Link
          href={href}
-         onClick={handleClick}
          className="cursor-pointer flex-shrink-0 w-28 xl:w-full flex flex-col gap-1"
       >
          <div className="w-full">

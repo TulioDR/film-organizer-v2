@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Fragment } from "react";
 import MainPageContainer from "@/components/MainPageContainer";
+import { ReactLenis } from "lenis/react";
 
 function App({ Component, ...rest }: AppProps) {
    const { route } = useRouter();
@@ -18,9 +19,11 @@ function App({ Component, ...rest }: AppProps) {
    const { pageProps } = props;
 
    const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
    return (
       <ClerkProvider publishableKey={publishableKey}>
          <Provider store={store}>
+            <ReactLenis root />
             <AnimatePresence mode="wait">
                {isAuth ? (
                   <Fragment key="auth">

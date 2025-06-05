@@ -1,43 +1,42 @@
-import { useState } from "react";
+import MediaCard from "@/features/mediaCard/components/MediaCard";
 import useSearchMedia from "../../hooks/useSearchMedia";
-import { AnimatePresence } from "framer-motion";
 
-import LoadingPage from "./LoadingPage";
-import SearchMediaCards from "./SearchMediaCards";
-import SearchMediaSpinner from "./SearchMediaSpinner";
-import Pagination from "./Pagination";
+import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 type Props = {
-   mediaType: "tv" | "movie";
    apiUrl: string;
+   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SearchMediaHandler({ mediaType, apiUrl }: Props) {
-   const { media, totalPages, isLoading } = useSearchMedia(apiUrl);
+export default function SearchMediaHandler({
+   apiUrl,
+   setTotalPages,
+   setIsLoading,
+}: Props) {
+   const { media } = useSearchMedia(apiUrl, setTotalPages, setIsLoading);
 
-   const [showPage, setShowPage] = useState<boolean>(false);
+   const router = useRouter();
+   const mediaType = router.query.media_type as "tv" | "movie";
 
+   const [isExiting, setIsExiting] = useState<boolean>(false);
+
+   const [layoutId, setLayoutId] = useState<string | null>(null);
    return (
       <>
-         <AnimatePresence onExitComplete={() => setShowPage(true)}>
-            {!media && <LoadingPage />}
-         </AnimatePresence>
-         {showPage && (
-            <>
-               <Pagination total={totalPages} />
-               <AnimatePresence mode="wait">
-                  {isLoading ? (
-                     <SearchMediaSpinner />
-                  ) : (
-                     <SearchMediaCards
-                        key={media![0].id}
-                        media={media!}
-                        type={mediaType}
-                     />
-                  )}
-               </AnimatePresence>
-            </>
-         )}
+         <SearchMediaCardsContainer>
+            {media!.map((media) => (
+               <MediaCard
+                  key={media.id}
+                  media={media}
+                  mediaType={mediaType}
+                  isExiting={isExiting}
+                  setIsExiting={setIsExiting}
+               />
+            ))}
+         </SearchMediaCardsContainer>
       </>
    );
 }

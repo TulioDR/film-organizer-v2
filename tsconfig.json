@@ -17,7 +17,8 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "paths": {
-         "@/*": ["./src/*"]
+         "@/*": ["./src/*"],
+         "lenis/react": ["./node_modules/lenis/dist/lenis-react.d.ts"]
       }
    },
    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

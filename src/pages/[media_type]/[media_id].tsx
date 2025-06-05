@@ -15,6 +15,11 @@ import Trailers from "@/features/pages/mediaDetails/components/Trailers";
 import Similar from "@/features/pages/mediaDetails/components/Similar";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import MainInfoMobile from "@/features/pages/mediaDetails/components/MainInfoMobile";
+import { useLenis } from "lenis/react";
+import { useDispatch } from "react-redux";
+import { selectedMediaActions } from "@/store/slices/selected-media-slice";
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -41,27 +46,58 @@ type Props = {
 export default function Details({ media_type, media }: Props) {
    const { changeBackground } = useBackground();
 
-   useScrollToTop();
+   const EXIT_DURATION = 0.8;
 
    useEffect(() => {
       changeBackground(media.id, media.backdrop_path || media.poster_path);
    }, [media, changeBackground]);
 
+   const dispatch = useDispatch();
+
+   useScrollToTop();
+   const lenis = useLenis();
+   useEffect(() => {
+      if (!lenis) return;
+      lenis.start();
+      dispatch(selectedMediaActions.removedFixed());
+   }, [lenis]);
+
+   const router = useRouter();
+
+   useEffect(() => {
+      const handleRouteChange = async () => {
+         if (!lenis) return;
+         lenis.scrollTo(0, {
+            duration: EXIT_DURATION,
+            onComplete: () => console.log("ok, you can exit now"),
+         });
+      };
+
+      router.events.on("routeChangeStart", handleRouteChange);
+      return () => router.events.off("routeChangeStart", handleRouteChange);
+   }, [router, lenis, EXIT_DURATION]);
+
    return (
-      <div className="w-full pb-8 px-32">
+      <motion.div
+         exit={{
+            opacity: 0,
+            transition: { duration: 0.2, delay: EXIT_DURATION },
+         }}
+         className="w-full pb-8 px-32"
+      >
          <Head>
             <title>{media.title || media.name}</title>
             <meta name="description" content={media.overview} />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="sm:h-[100svh] py-32 flex relative overflow-hidden">
+         <motion.div className="sm:h-[100svh] py-32 flex relative overflow-hidden">
             <MainPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}
             />
             <MainInfo media={media} mediaType={media_type} />
             <ScrollDownIcon />
-         </div>
+         </motion.div>
          <MainInfoMobile media={media} mediaType={media_type} />
          <BottomInfoContainer>
             <div className="flex-1 space-y-10 py-5 sm:py-10">
@@ -79,6 +115,6 @@ export default function Details({ media_type, media }: Props) {
             </div>
             <Similar media={media} mediaType={media_type} />
          </BottomInfoContainer>
-      </div>
+      </motion.div>
    );
 }

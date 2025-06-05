@@ -41,7 +41,7 @@ export default function People({ people, type }: Props) {
          {displayedPeople.length ? (
             <div className="w-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-1 sm:gap-5">
                {displayedPeople.map((person, index) => (
-                  <Person person={person} key={index + person.id} />
+                  <Person person={person} key={index + "-" + person.id} />
                ))}
             </div>
          ) : (

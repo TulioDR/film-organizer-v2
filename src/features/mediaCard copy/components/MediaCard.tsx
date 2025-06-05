@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MediaModel } from "@/models/MediaModel";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,34 +6,37 @@ import { layoutActions } from "@/store/slices/layout-slice";
 import Front from "./Front";
 import Back from "./Back";
 import Container from "./Container";
+import { useRouter } from "next/router";
 import { useAnimationControls } from "framer-motion";
 import StoreModel from "@/models/StoreModel";
-import { selectedMediaActions } from "@/store/slices/selected-media-slice";
-import { useLenis } from "lenis/react";
 
 type Props = {
    mediaType: "tv" | "movie";
    media: MediaModel;
-   // setSelectedMedia: React.Dispatch<React.SetStateAction<MediaModel | null>>;
-   // setFixedHeight: React.Dispatch<React.SetStateAction<number>>;
-   isSelected: boolean;
+   isExiting: boolean;
+   setIsExiting: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function MediaCard({ mediaType, media, isSelected }: Props) {
+export default function MediaCard({
+   mediaType,
+   media,
+   isExiting,
+   setIsExiting,
+}: Props) {
    const { removeBackground, changeBackground } = useBackground();
    const dispatch = useDispatch();
 
-   const { selectedMedia } = useSelector(
-      (state: StoreModel) => state.selectedMedia
-   );
+   const router = useRouter();
    const ID = `${mediaType}-${media.id}`;
-   const selectedID = `${mediaType}-${selectedMedia?.id}`;
+   const containerRef = useRef<HTMLDivElement>(null);
 
+   const [isSelected, setIsSelected] = useState(false);
    const [isHovered, setIsHovered] = useState<boolean>(false);
-
-   const cardControls = useAnimationControls();
+   const [exitStyle, setExitStyle] = useState<React.CSSProperties>({});
 
    const containerControls = useAnimationControls();
+   const rotateControls = useAnimationControls();
+   const scaleControls = useAnimationControls();
    const loaderControls = useAnimationControls();
 
    const { isHidden } = useSelector((state: StoreModel) => state.layout);
@@ -41,7 +44,7 @@ export default function MediaCard({ mediaType, media, isSelected }: Props) {
    const onHoverStart = async () => {
       const transition = { duration: 0.4 };
       setIsHovered(true);
-      cardControls.start({ rotateY: 180, transition });
+      rotateControls.start({ rotateY: 180, transition });
       await loaderControls.start({
          width: "100%",
          transition: { duration: 2 },
@@ -52,7 +55,7 @@ export default function MediaCard({ mediaType, media, isSelected }: Props) {
    const onHoverEnd = () => {
       const transition = { duration: 0.4 };
       setIsHovered(false);
-      cardControls.start({ rotateY: 360, transition });
+      rotateControls.start({ rotateY: 360, transition });
       loaderControls.start({
          width: "0%",
          transition: { duration: 0.4 },
@@ -63,50 +66,53 @@ export default function MediaCard({ mediaType, media, isSelected }: Props) {
 
    const onCardMotionUpdate = (e: any) => {
       const transition = { duration: 0 };
-      if (e.rotateY === 360) cardControls.set({ rotateY: 0, transition });
+      if (e.rotateY === 360) rotateControls.set({ rotateY: 0, transition });
    };
 
-   const lenis = useLenis();
    const onLearnMore = async () => {
-      // setSelectedMedia(media);
-      if (lenis) lenis.stop();
-      const element = document.getElementById(ID)!;
-      const { height } = element.getBoundingClientRect();
-      dispatch(
-         selectedMediaActions.changeSelectedMedia({
-            selectedMedia: media,
-            cardHeight: height,
-         })
-      );
-
-      // setFixedHeight(height);
+      setIsExiting(true);
+      setIsSelected(true);
+      const { height } = containerRef.current!.getBoundingClientRect();
+      const exitScale = (window.innerHeight - 256) / height;
+      setExitStyle({
+         height: height,
+         position: "fixed",
+         top: 128,
+         left: 128,
+         zIndex: 50,
+      });
+      await scaleControls.start({ scale: exitScale });
+      router.push(`/${mediaType}/${media.id}`);
    };
 
-   // useEffect(() => {
-   //    if (selectedMedia?.id && !isSelected) {
-   //       containerControls.start({ opacity: 0 });
-   //    }
-   // }, [isSelected, selectedMedia?.id]);
+   useEffect(() => {
+      if (isExiting && !isSelected) {
+         containerControls.start({ opacity: 0 });
+      }
+   }, [isExiting, isSelected]);
 
-   // useEffect(() => {
-   //    if (isHidden && !isHovered) {
-   //       containerControls.start({ opacity: 0 });
-   //       return;
-   //    } else {
-   //       if (selectedMedia?.id) return;
-   //       containerControls.start({ opacity: 1 });
-   //    }
-   // }, [isHidden, isHovered, containerControls, selectedMedia?.id]);
+   useEffect(() => {
+      if (isHidden && !isHovered) {
+         containerControls.start({ opacity: 0 });
+         return;
+      } else {
+         if (isExiting) return;
+         containerControls.start({ opacity: 1 });
+      }
+   }, [isHidden, isHovered, containerControls, isExiting]);
 
    return (
       <Container
          id={ID}
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
+         cardRef={containerRef}
+         scaleControls={scaleControls}
+         exitStyle={exitStyle}
          handleUpdate={onCardMotionUpdate}
+         rotateControls={rotateControls}
          containerControls={containerControls}
-         cardControls={cardControls}
-         selectedID={selectedID}
+         isSelected={isSelected}
       >
          <Front media={media} />
          <Back

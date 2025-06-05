@@ -1,18 +1,14 @@
-import StoreModel from "@/models/StoreModel";
-import { AnimationControls, motion, useAnimationControls } from "framer-motion";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { AnimationControls, motion } from "framer-motion";
 
 type Props = {
    children: React.ReactNode;
    id: string;
    onHoverStart: () => void;
    onHoverEnd: () => void;
-   isHovered: boolean;
-   cardRef: React.RefObject<HTMLDivElement>;
-   scaleControls: AnimationControls;
-   exitStyle: React.CSSProperties;
-   hideCardContainer: boolean;
+   handleUpdate: (e: any) => void;
+   containerControls: AnimationControls;
+   cardControls: AnimationControls;
+   selectedID: string;
 };
 
 export default function Container({
@@ -20,62 +16,31 @@ export default function Container({
    id,
    onHoverStart,
    onHoverEnd,
-   isHovered,
-   cardRef,
-   scaleControls,
-   exitStyle,
-   hideCardContainer,
+   handleUpdate,
+   containerControls,
+   cardControls,
+   selectedID,
 }: Props) {
-   const { backgroundImage } = useSelector(
-      (state: StoreModel) => state.background
-   );
-   const hideCard = !!backgroundImage && !isHovered;
-   const controls = useAnimationControls();
-   useEffect(() => {
-      const transition = { duration: 0.4 };
-      if (isHovered) controls.start({ rotateY: 180, transition });
-      else controls.start({ rotateY: 360, transition });
-   }, [isHovered, controls]);
-
-   const handleUpdate = (e: any) => {
-      if (e.rotateY === 360) {
-         controls.set({ rotateY: 0, transition: { duration: 0 } });
-      }
-   };
-   const transition = { duration: 0.4 };
-
    return (
-      <motion.div
-         // animate={{ opacity: hideCard || hideCardContainer ? 0 : 1 }}
-         // exit={{ opacity: 1, transition: { duration: 0 } }}
-         transition={{ duration: 0.2 }}
-         id={id}
-         ref={cardRef}
-         className="aspect-[2/3]"
-      >
-         <motion.div
-            layout
-            onHoverStart={onHoverStart}
-            onHoverEnd={onHoverEnd}
-            style={exitStyle}
-            transition={transition}
-            className="aspect-[2/3]"
-         >
+      <div id={id} className="aspect-[2/3] w-full">
+         {selectedID !== id && (
             <motion.div
-               animate={scaleControls}
-               transition={transition}
-               className="origin-top-left [perspective:2000px] aspect-[2/3]"
+               layoutId={id}
+               transition={{ layout: { duration: 0.4 } }}
+               onHoverStart={onHoverStart}
+               onHoverEnd={onHoverEnd}
+               animate={containerControls}
+               className="aspect-[2/3] [perspective:2000px]"
             >
                <motion.div
-                  initial={{ rotateY: 0 }}
-                  animate={controls}
+                  animate={cardControls}
                   onUpdate={handleUpdate}
-                  className="relative [transform-style:preserve-3d]"
+                  className="relative [transform-style:preserve-3d] w-full h-full"
                >
                   {children}
                </motion.div>
             </motion.div>
-         </motion.div>
-      </motion.div>
+         )}
+      </div>
    );
 }

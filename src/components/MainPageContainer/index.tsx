@@ -13,7 +13,7 @@ import Background from "@/features/layout/background/components/Background";
 
 import { getLists } from "@/api/lists";
 import { listActions } from "@/store/slices/list-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import SaveMediaModal from "@/features/modals/saveMediaModal/components/SaveMediaModal";
 import Notification from "@/features/notification/components/Notification";
@@ -21,6 +21,8 @@ import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/Logi
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import TutorialButton from "@/features/layout/tutorialButton/components/TutorialButton";
 import FixedContainer from "./FixedContainer";
+import FixedCard from "@/features/searchMedia/components/SearchMediaHandler/FixedCard";
+import StoreModel from "@/models/StoreModel";
 
 type Props = {
    children: React.ReactNode;
@@ -50,6 +52,10 @@ export default function MainPageContainer({ children }: Props) {
       removeBackground();
    }, [pathname, removeBackground]);
 
+   const { selectedMedia, cardHeight } = useSelector(
+      (state: StoreModel) => state.selectedMedia
+   );
+
    return (
       <>
          <div id="modals-container"></div>
@@ -59,6 +65,13 @@ export default function MainPageContainer({ children }: Props) {
             <Sidebar />
             <TutorialButton />
          </FixedContainer>
+         {selectedMedia && cardHeight && (
+            <FixedCard
+               mediaType={"movie"}
+               fixedHeight={cardHeight}
+               selectedMedia={selectedMedia}
+            />
+         )}
          <Background />
          <SaveMediaModal />
          <LoginAdviceModal />
