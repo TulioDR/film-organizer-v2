@@ -7,21 +7,14 @@ import Overview from "./Overview";
 import Title from "./Title";
 import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
 import LearnMore from "./LearnMore";
-import { AnimationControls } from "framer-motion";
 
 type Props = {
    media: MediaModel;
    mediaType: "movie" | "tv";
    onLearnMore: () => void;
-   loaderControls: AnimationControls;
 };
 
-export default function Back({
-   media,
-   mediaType,
-   onLearnMore,
-   loaderControls,
-}: Props) {
+export default function Back({ media, mediaType, onLearnMore }: Props) {
    const title = media.name || media.title;
    const backdrop = media.backdrop_path;
    const releaseDate = media.release_date || media.first_air_date;
@@ -31,7 +24,7 @@ export default function Back({
       <Container>
          <div className="relative">
             <Poster alt={title} posterPath={backdrop} size="lg" backPoster />
-            <Loader loaderControls={loaderControls} />
+            <Loader />
          </div>
          <div className="w-full flex flex-col gap-2 flex-1 p-4 pt-6 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">

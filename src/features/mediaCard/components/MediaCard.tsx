@@ -6,115 +6,95 @@ import { layoutActions } from "@/store/slices/layout-slice";
 import Front from "./Front";
 import Back from "./Back";
 import Container from "./Container";
-import { useAnimationControls } from "framer-motion";
+import { useAnimate } from "framer-motion";
 import StoreModel from "@/models/StoreModel";
-import { selectedMediaActions } from "@/store/slices/selected-media-slice";
-import { useLenis } from "lenis/react";
+import { useRouter } from "next/router";
 
+interface FixedValues {
+   minHeight: number;
+   scale: number;
+   selectedMedia: MediaModel;
+}
 type Props = {
    mediaType: "tv" | "movie";
    media: MediaModel;
-   // setSelectedMedia: React.Dispatch<React.SetStateAction<MediaModel | null>>;
-   // setFixedHeight: React.Dispatch<React.SetStateAction<number>>;
    isSelected: boolean;
+   id: string;
+   setFixedValues: React.Dispatch<React.SetStateAction<FixedValues | null>>;
 };
 
-export default function MediaCard({ mediaType, media, isSelected }: Props) {
+export default function MediaCard({
+   mediaType,
+   media,
+   isSelected,
+   id,
+   setFixedValues,
+}: Props) {
    const { removeBackground, changeBackground } = useBackground();
-   const dispatch = useDispatch();
-
-   const { selectedMedia } = useSelector(
-      (state: StoreModel) => state.selectedMedia
-   );
-   const ID = `${mediaType}-${media.id}`;
-   const selectedID = `${mediaType}-${selectedMedia?.id}`;
-
    const [isHovered, setIsHovered] = useState<boolean>(false);
-
-   const cardControls = useAnimationControls();
-
-   const containerControls = useAnimationControls();
-   const loaderControls = useAnimationControls();
+   const [scope, animate] = useAnimate();
+   const dispatch = useDispatch();
+   const router = useRouter();
 
    const { isHidden } = useSelector((state: StoreModel) => state.layout);
 
+   const OPACITY_DURATION = 0.2;
+   const ROTATE_DURATION = 0.4;
+
+   useEffect(() => {
+      if (isHidden && !isHovered) {
+         animate(scope.current, { opacity: 0 }, { duration: OPACITY_DURATION });
+      } else {
+         animate(scope.current, { opacity: 1 }, { duration: OPACITY_DURATION });
+      }
+   }, [isHidden, isHovered, OPACITY_DURATION]);
+
    const onHoverStart = async () => {
-      const transition = { duration: 0.4 };
       setIsHovered(true);
-      cardControls.start({ rotateY: 180, transition });
-      await loaderControls.start({
-         width: "100%",
-         transition: { duration: 2 },
-      });
+      animate(".rotate-card", { rotateY: 180 }, { duration: ROTATE_DURATION });
+      await animate(".loader-animation", { width: "100%" }, { duration: 2 });
       changeBackground(media.id, media.backdrop_path);
       dispatch(layoutActions.hideLayout());
    };
-   const onHoverEnd = () => {
-      const transition = { duration: 0.4 };
+   const onHoverEnd = async () => {
       setIsHovered(false);
-      cardControls.start({ rotateY: 360, transition });
-      loaderControls.start({
-         width: "0%",
-         transition: { duration: 0.4 },
-      });
+      animate(".loader-animation", { width: "0%" }, { duration: 1 });
       removeBackground();
       dispatch(layoutActions.revealLayout());
-   };
-
-   const onCardMotionUpdate = (e: any) => {
-      const transition = { duration: 0 };
-      if (e.rotateY === 360) cardControls.set({ rotateY: 0, transition });
-   };
-
-   const lenis = useLenis();
-   const onLearnMore = async () => {
-      // setSelectedMedia(media);
-      if (lenis) lenis.stop();
-      const element = document.getElementById(ID)!;
-      const { height } = element.getBoundingClientRect();
-      dispatch(
-         selectedMediaActions.changeSelectedMedia({
-            selectedMedia: media,
-            cardHeight: height,
-         })
+      await animate(
+         ".rotate-card",
+         { rotateY: 360 },
+         { duration: ROTATE_DURATION }
       );
-
-      // setFixedHeight(height);
+      animate(".rotate-card", { rotateY: 0 }, { duration: 0 });
    };
 
-   // useEffect(() => {
-   //    if (selectedMedia?.id && !isSelected) {
-   //       containerControls.start({ opacity: 0 });
-   //    }
-   // }, [isSelected, selectedMedia?.id]);
+   const onLearnMore = async () => {
+      const minHeight = document.getElementById(id)!.clientHeight;
+      const containerID = `SELECTED-MEDIA-CONTAINER`;
+      const maxHeight = document.getElementById(containerID)!.clientHeight;
+      const scale = maxHeight / minHeight;
 
-   // useEffect(() => {
-   //    if (isHidden && !isHovered) {
-   //       containerControls.start({ opacity: 0 });
-   //       return;
-   //    } else {
-   //       if (selectedMedia?.id) return;
-   //       containerControls.start({ opacity: 1 });
-   //    }
-   // }, [isHidden, isHovered, containerControls, selectedMedia?.id]);
+      setFixedValues({
+         minHeight: minHeight,
+         scale: scale,
+         selectedMedia: media,
+      });
+
+      const link = `/${mediaType}/${media.id}`;
+      router.push(link, undefined, { scroll: false });
+   };
 
    return (
       <Container
-         id={ID}
+         id={id}
+         scope={scope}
+         isSelected={isSelected}
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
-         handleUpdate={onCardMotionUpdate}
-         containerControls={containerControls}
-         cardControls={cardControls}
-         selectedID={selectedID}
       >
          <Front media={media} />
-         <Back
-            loaderControls={loaderControls}
-            media={media}
-            mediaType={mediaType}
-            onLearnMore={onLearnMore}
-         />
+         <Back media={media} mediaType={mediaType} onLearnMore={onLearnMore} />
       </Container>
    );
 }

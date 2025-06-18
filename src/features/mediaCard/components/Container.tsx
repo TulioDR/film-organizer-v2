@@ -1,46 +1,37 @@
-import { AnimationControls, motion } from "framer-motion";
+import { AnimationScope, motion } from "framer-motion";
 
 type Props = {
    children: React.ReactNode;
    id: string;
    onHoverStart: () => void;
    onHoverEnd: () => void;
-   handleUpdate: (e: any) => void;
-   containerControls: AnimationControls;
-   cardControls: AnimationControls;
-   selectedID: string;
+   isSelected: boolean;
+   scope: AnimationScope<any>;
 };
 
 export default function Container({
+   isSelected,
    children,
    id,
    onHoverStart,
    onHoverEnd,
-   handleUpdate,
-   containerControls,
-   cardControls,
-   selectedID,
+   scope,
 }: Props) {
    return (
-      <div id={id} className="aspect-[2/3] w-full">
-         {selectedID !== id && (
+      <motion.div id={id} className="aspect-[2/3] w-full">
+         {!isSelected && (
             <motion.div
                layoutId={id}
-               transition={{ layout: { duration: 0.4 } }}
                onHoverStart={onHoverStart}
                onHoverEnd={onHoverEnd}
-               animate={containerControls}
+               ref={scope}
                className="aspect-[2/3] [perspective:2000px]"
             >
-               <motion.div
-                  animate={cardControls}
-                  onUpdate={handleUpdate}
-                  className="relative [transform-style:preserve-3d] w-full h-full"
-               >
+               <motion.div className="relative [transform-style:preserve-3d] w-full h-full rotate-card">
                   {children}
                </motion.div>
             </motion.div>
          )}
-      </div>
+      </motion.div>
    );
 }

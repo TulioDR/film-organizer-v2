@@ -4,10 +4,9 @@ import useSearchMedia from "../../hooks/useSearchMedia";
 import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
 import { useRouter } from "next/router";
 
-import { useDispatch, useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
-import { useEffect } from "react";
-import { selectedMediaActions } from "@/store/slices/selected-media-slice";
+import FixedCard from "./FixedCard";
+import { useState } from "react";
+import { MediaModel } from "@/models/MediaModel";
 
 type Props = {
    apiUrl: string;
@@ -25,30 +24,30 @@ export default function SearchMediaHandler({
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
 
-   // const [selectedMedia, setSelectedMedia] = useState<MediaModel | null>(null);
+   interface FixedValues {
+      minHeight: number;
+      scale: number;
+      selectedMedia: MediaModel;
+   }
 
-   const { selectedMedia } = useSelector(
-      (state: StoreModel) => state.selectedMedia
-   );
-
-   const dispatch = useDispatch();
-
-   useEffect(() => {
-      if (media.length === 0) return;
-      console.log(media.length);
-      dispatch(selectedMediaActions.resetSelectedMedia());
-   }, [media.length]);
+   const [fixedValues, setFixedValues] = useState<FixedValues | null>(null);
+   const selectedID = `${mediaType}-${fixedValues?.selectedMedia?.id}`;
 
    return (
-      <SearchMediaCardsContainer>
-         {media!.map((media) => (
-            <MediaCard
-               key={media.id + mediaType}
-               media={media}
-               mediaType={mediaType}
-               isSelected={selectedMedia?.id === media.id}
-            />
-         ))}
-      </SearchMediaCardsContainer>
+      <>
+         <SearchMediaCardsContainer isExiting={!!fixedValues}>
+            {media!.map((media) => (
+               <MediaCard
+                  key={`${mediaType}-${media.id}`}
+                  media={media}
+                  mediaType={mediaType}
+                  id={`${mediaType}-${media.id}`}
+                  isSelected={selectedID === `${mediaType}-${media.id}`}
+                  setFixedValues={setFixedValues}
+               />
+            ))}
+         </SearchMediaCardsContainer>
+         <FixedCard fixedValues={fixedValues} setFixedValues={setFixedValues} />
+      </>
    );
 }

@@ -15,11 +15,10 @@ import Trailers from "@/features/pages/mediaDetails/components/Trailers";
 import Similar from "@/features/pages/mediaDetails/components/Similar";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import MainInfoMobile from "@/features/pages/mediaDetails/components/MainInfoMobile";
-import { useLenis } from "lenis/react";
-import { useDispatch } from "react-redux";
-import { selectedMediaActions } from "@/store/slices/selected-media-slice";
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { layoutActions } from "@/store/slices/layout-slice";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -45,44 +44,28 @@ type Props = {
 
 export default function Details({ media_type, media }: Props) {
    const { changeBackground } = useBackground();
-
-   const EXIT_DURATION = 0.8;
+   const dispatch = useDispatch();
+   const router = useRouter();
+   useScrollToTop();
 
    useEffect(() => {
       changeBackground(media.id, media.backdrop_path || media.poster_path);
    }, [media, changeBackground]);
 
-   const dispatch = useDispatch();
-
-   useScrollToTop();
-   const lenis = useLenis();
    useEffect(() => {
-      if (!lenis) return;
-      lenis.start();
-      dispatch(selectedMediaActions.removedFixed());
-   }, [lenis]);
-
-   const router = useRouter();
+      dispatch(layoutActions.revealLayout());
+   }, []);
 
    useEffect(() => {
-      const handleRouteChange = async () => {
-         if (!lenis) return;
-         lenis.scrollTo(0, {
-            duration: EXIT_DURATION,
-            onComplete: () => console.log("ok, you can exit now"),
-         });
-      };
-
-      router.events.on("routeChangeStart", handleRouteChange);
-      return () => router.events.off("routeChangeStart", handleRouteChange);
-   }, [router, lenis, EXIT_DURATION]);
+      router.beforePopState((state) => {
+         state.options.scroll = false;
+         return true;
+      });
+   }, [router]);
 
    return (
       <motion.div
-         exit={{
-            opacity: 0,
-            transition: { duration: 0.2, delay: EXIT_DURATION },
-         }}
+         exit={{ opacity: 0, transition: { duration: 0.2 } }}
          className="w-full pb-8 px-32"
       >
          <Head>

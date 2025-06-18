@@ -9,8 +9,6 @@ import Pagination from "./SearchMediaHandler/Pagination";
 import SEARCH_PAGES, { PageInfoModel } from "../constants/SEARCH_PAGES";
 import SearchMediaSpinner from "./SearchMediaHandler/SearchMediaSpinner";
 import useApiUrl from "../hooks/useApiUrl";
-import { useDispatch } from "react-redux";
-import { selectedMediaActions } from "@/store/slices/selected-media-slice";
 
 type Props = {};
 
@@ -76,11 +74,6 @@ export default function SearchMedia({}: Props) {
       else if (isGenres) setGenresApi();
       else setNormalApi();
    }, [router.query, router.pathname, pageInfo]);
-
-   const dispatch = useDispatch();
-   useEffect(() => {
-      dispatch(selectedMediaActions.setToFixed());
-   }, []);
 
    return (
       <div className="p-32">

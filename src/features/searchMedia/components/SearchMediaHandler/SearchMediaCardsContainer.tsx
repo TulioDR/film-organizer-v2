@@ -1,10 +1,19 @@
+import { motion } from "framer-motion";
+
 type Props = {
    children: React.ReactNode;
+   isExiting: boolean;
 };
 
-export default function SearchMediaCardsContainer({ children }: Props) {
+export default function SearchMediaCardsContainer({
+   children,
+   isExiting,
+}: Props) {
    return (
-      <div
+      <motion.div
+         animate={isExiting && { opacity: 0 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.4 }}
          className={`gap-8 grid grid-cols-2 md:grid-cols-3  ${
             true
                ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
@@ -12,6 +21,6 @@ export default function SearchMediaCardsContainer({ children }: Props) {
          }`}
       >
          {children}
-      </div>
+      </motion.div>
    );
 }
