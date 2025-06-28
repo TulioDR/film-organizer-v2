@@ -1,7 +1,6 @@
 import SimilarCard from "./SimilarCard";
-import Subtitle from "@/components/Subtitle";
-import SimilarContainer from "./SimilarContainer";
 import { MediaDetailsModel } from "../../models/MediaDetailsModel";
+import InfoContainer from "../InfoContainer";
 
 type Props = {
    media: MediaDetailsModel;
@@ -9,20 +8,21 @@ type Props = {
 };
 
 export default function Similar({ media, mediaType }: Props) {
+   const similarMedia = media.similar.results;
+
    return (
-      <SimilarContainer>
-         <Subtitle>
-            Similar {mediaType === "movie" ? "Movies" : "Series"}
-         </Subtitle>
-         <div className="flex xl:grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-2 gap-1 sm:gap-5 w-full overflow-x-auto main-scrollbar">
-            {media.similar.results.map((similar) => (
-               <SimilarCard
-                  key={similar.id}
-                  href={`/${mediaType}/${similar.id}`}
-                  similar={similar}
-               />
-            ))}
-         </div>
-      </SimilarContainer>
+      <InfoContainer
+         itemsPerPage={5}
+         numberOfRows={1}
+         columnLength={2}
+         subtitle={`Similar ${mediaType === "movie" ? "Movies" : "Series"}`}
+         media={similarMedia}
+         renderItem={(similar) => (
+            <SimilarCard
+               href={`/${mediaType}/${similar.id}`}
+               similar={similar}
+            />
+         )}
+      />
    );
 }

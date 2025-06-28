@@ -9,15 +9,12 @@ type Props = {
 
 export default function SimilarCard({ similar, href }: Props) {
    return (
-      <Link
-         href={href}
-         className="cursor-pointer flex-shrink-0 w-28 xl:w-full flex flex-col gap-1"
-      >
-         <div className="w-full">
+      <Link href={href} scroll={false} className="w-full flex flex-col gap-1">
+         <div className="w-full aspect-[2/3] rounded-xl overflow-hidden">
             <Poster
                alt={similar.title || similar.name}
                posterPath={similar.poster_path}
-               size="md"
+               size="lg"
             />
          </div>
          <div className="w-full text-xs md:text-sm text-center">

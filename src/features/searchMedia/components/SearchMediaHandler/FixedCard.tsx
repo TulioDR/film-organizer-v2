@@ -2,33 +2,22 @@ import React from "react";
 import { motion } from "framer-motion";
 import Front from "@/features/mediaCard/components/Front";
 import Back from "@/features/mediaCard/components/Back";
-import { MediaModel } from "@/models/MediaModel";
-
-interface FixedValues {
-   minHeight: number;
-   scale: number;
-   selectedMedia: MediaModel;
-}
+import TransitionPosterModel from "@/features/mediaCard/models/TransitionPosterModel";
 
 type Props = {
-   fixedValues: FixedValues | null;
-   setFixedValues: React.Dispatch<React.SetStateAction<FixedValues | null>>;
+   fixedValues: TransitionPosterModel | null;
 };
 
-export default function FixedCard({ fixedValues, setFixedValues }: Props) {
+export default function FixedCard({ fixedValues }: Props) {
    const mediaType = "movie";
    const selectedID = `${mediaType}-${fixedValues?.selectedMedia?.id}`;
 
    const DURATION = 0.4;
-   const handleClose = () => {
-      setFixedValues(null);
-   };
 
    return (
       <motion.div
          layout
          layoutRoot
-         onClick={handleClose}
          exit={{ opacity: 1 }}
          transition={{ delay: DURATION }}
          className={`top-0 left-0 p-32 h-[100svh] z-10 fixed ${

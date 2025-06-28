@@ -21,12 +21,16 @@ export default function Background() {
       else setSrc(backgroundImage);
    }, [backgroundImage]);
 
+   useEffect(() => {
+      console.log(src);
+   }, [src]);
+
    return (
       <div className="fixed top-0 left-0 h-[100svh] -z-10 w-screen bg-[#24282F]">
          <AnimatePresence>
             {src && (
                <motion.div
-                  key={backgroundKey}
+                  key={src as string}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}

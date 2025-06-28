@@ -20,7 +20,7 @@ export interface MediaDetailsModel extends MediaModel {
    status: string;
    tagline: string;
    videos: {
-      results: Videos[];
+      results: Video[];
    };
 }
 
@@ -67,7 +67,7 @@ interface Genre {
    id: number;
    name: string;
 }
-interface Videos {
+export interface Video {
    id: string;
    iso_3166_1: any;
    iso_639_1: string;

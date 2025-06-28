@@ -2,23 +2,22 @@ import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
-import useScrollToTop from "@/hooks/useScrollToTop";
 import { MediaDetailsModel } from "@/features/pages/mediaDetails/models/MediaDetailsModel";
 import MainPoster from "@/features/pages/mediaDetails/components/MainPoster";
 import MainInfo from "@/features/pages/mediaDetails/components/MainInfo";
 import ScrollDownIcon from "@/features/pages/mediaDetails/components/ScrollDownIcon";
-import BottomInfoContainer from "@/features/pages/mediaDetails/components/BottomInfoContainer";
 import Overview from "@/features/pages/mediaDetails/components/Overview";
 import People from "@/features/pages/mediaDetails/components/People";
 import Seasons from "@/features/pages/mediaDetails/components/Seasons";
 import Trailers from "@/features/pages/mediaDetails/components/Trailers";
 import Similar from "@/features/pages/mediaDetails/components/Similar";
-import useBackground from "@/features/layout/background/hooks/useBackground";
 import MainInfoMobile from "@/features/pages/mediaDetails/components/MainInfoMobile";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { layoutActions } from "@/store/slices/layout-slice";
+import Container from "@/features/pages/mediaDetails/components/Container";
+import MediaData from "@/features/pages/mediaDetails/components/MediaData";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -43,14 +42,8 @@ type Props = {
 };
 
 export default function Details({ media_type, media }: Props) {
-   const { changeBackground } = useBackground();
    const dispatch = useDispatch();
    const router = useRouter();
-   useScrollToTop();
-
-   useEffect(() => {
-      changeBackground(media.id, media.backdrop_path || media.poster_path);
-   }, [media, changeBackground]);
 
    useEffect(() => {
       dispatch(layoutActions.revealLayout());
@@ -63,41 +56,47 @@ export default function Details({ media_type, media }: Props) {
       });
    }, [router]);
 
+   useEffect(() => {
+      console.log("first render");
+   }, []);
+
+   // useEffect(() => {
+   //    console.log(media);
+   // }, [media]);
+
    return (
-      <motion.div
-         exit={{ opacity: 0, transition: { duration: 0.2 } }}
-         className="w-full pb-8 px-32"
-      >
-         <Head>
-            <title>{media.title || media.name}</title>
-            <meta name="description" content={media.overview} />
-            <link rel="icon" href="/favicon.ico" />
-         </Head>
-         <motion.div className="sm:h-[100svh] py-32 flex relative overflow-hidden">
-            <MainPoster
-               alt={media.name || media.title}
-               posterPath={media.poster_path}
-            />
-            <MainInfo media={media} mediaType={media_type} />
-            <ScrollDownIcon />
-         </motion.div>
-         <MainInfoMobile media={media} mediaType={media_type} />
-         <BottomInfoContainer>
-            <div className="flex-1 space-y-10 py-5 sm:py-10">
-               <Overview
+      <AnimatePresence mode="wait">
+         <Container key={router.asPath} media={media}>
+            <Head>
+               <title>{media.title || media.name}</title>
+               <meta name="description" content={media.overview} />
+               <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <motion.div className="sm:h-[100svh] py-32 flex relative overflow-hidden">
+               <MainPoster
+                  alt={media.name || media.title}
+                  posterPath={media.poster_path}
+               />
+               <MainInfo media={media} mediaType={media_type} />
+               <ScrollDownIcon />
+            </motion.div>
+            <MainInfoMobile media={media} mediaType={media_type} />
+            <div className="-mt-24 gap-8 grid grid-cols-2">
+               <Overview media={media} />
+               <MediaData
                   media={media}
                   crew={media.created_by || media.credits.crew}
                   isMovie={media_type === "movie"}
                />
-               <People type="Cast" people={media.credits?.cast} />
-               <People type="Crew" people={media.credits?.crew} />
                {media_type === "tv" && (
                   <Seasons seasons={media.seasons} seriesID={media.id} />
                )}
                <Trailers trailers={media.videos.results} />
+               <People type="Cast" people={media.credits?.cast} />
+               <People type="Crew" people={media.credits?.crew} />
+               <Similar media={media} mediaType={media_type} />
             </div>
-            <Similar media={media} mediaType={media_type} />
-         </BottomInfoContainer>
-      </motion.div>
+         </Container>
+      </AnimatePresence>
    );
 }

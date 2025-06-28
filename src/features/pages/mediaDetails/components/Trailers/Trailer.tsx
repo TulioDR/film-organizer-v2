@@ -1,33 +1,58 @@
 import Poster from "@/components/Poster";
-import React from "react";
+import React, { useState } from "react";
+import { Video } from "../../models/MediaDetailsModel";
+import { motion } from "framer-motion";
 
 type Props = {
-   trailer: any;
+   trailer: Video;
 };
 
 export default function Trailer({ trailer }: Props) {
+   const [showPlay, setShowPlay] = useState<boolean>(false);
+
+   const onHoverStart = () => {
+      setShowPlay(true);
+   };
+   const onHoverEnd = () => {
+      setShowPlay(false);
+   };
+
    return (
-      <a
+      <motion.a
          href={`https://www.youtube.com/watch?v=${trailer.key}`}
          target="_blank"
          rel="noreferrer"
-         className="cursor-pointer flex flex-col"
+         onMouseEnter={onHoverStart}
+         onMouseLeave={onHoverEnd}
+         className="flex flex-col"
       >
-         <div className="relative">
-            <Poster
-               alt={trailer.name}
-               posterPath={trailer.key}
-               size="md"
-               backPoster
-               trailer
-            />
-
-            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/50 to-transparent"></div>
-            <div className="absolute bottom-2 left-2 rounded-full aspect-square w-8 border-gray-400 border-[3px] grid place-content-center">
-               <span className="material-symbols-outlined">play_arrow</span>
-            </div>
+         <div className="relative aspect-video flex-shrink-0 rounded-xl overflow-hidden">
+            <motion.div
+               animate={{ scale: showPlay ? 1.1 : 1 }}
+               transition={{ duration: 0.2, ease: "easeInOut" }}
+               className="w-full h-full"
+            >
+               <Poster
+                  alt={trailer.name}
+                  posterPath={trailer.key}
+                  size="md"
+                  backPoster
+                  trailer
+               />
+            </motion.div>
+            <motion.div
+               animate={{ opacity: showPlay ? 1 : 0 }}
+               transition={{ duration: 0.2 }}
+               className="absolute inset-0 bg-black/60 flex items-center justify-center"
+            >
+               <div className="rounded-full aspect-square w-8 border-gray-400 border-[3px] grid place-content-center">
+                  <span className="material-symbols-outlined">play_arrow</span>
+               </div>
+            </motion.div>
          </div>
-         <div className="text-xs lg:text-sm pt-1">{trailer.name}</div>
-      </a>
+         <div className="w-full text-xs lg:text-sm truncate pt-2">
+            {trailer.name}
+         </div>
+      </motion.a>
    );
 }

@@ -1,8 +1,11 @@
+import { useLenis } from "lenis/react";
 import { useEffect } from "react";
 
 export default function useScrollToTop() {
+   const lenis = useLenis();
+
    useEffect(() => {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-   }, []);
+      if (!lenis) return;
+      lenis.scrollTo("top", { immediate: true });
+   }, [lenis]);
 }

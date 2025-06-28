@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 import FixedCard from "./FixedCard";
 import { useState } from "react";
-import { MediaModel } from "@/models/MediaModel";
+import TransitionPosterModel from "@/features/mediaCard/models/TransitionPosterModel";
 
 type Props = {
    apiUrl: string;
@@ -24,13 +24,9 @@ export default function SearchMediaHandler({
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
 
-   interface FixedValues {
-      minHeight: number;
-      scale: number;
-      selectedMedia: MediaModel;
-   }
-
-   const [fixedValues, setFixedValues] = useState<FixedValues | null>(null);
+   const [fixedValues, setFixedValues] = useState<TransitionPosterModel | null>(
+      null
+   );
    const selectedID = `${mediaType}-${fixedValues?.selectedMedia?.id}`;
 
    return (
@@ -47,7 +43,7 @@ export default function SearchMediaHandler({
                />
             ))}
          </SearchMediaCardsContainer>
-         <FixedCard fixedValues={fixedValues} setFixedValues={setFixedValues} />
+         <FixedCard fixedValues={fixedValues} />
       </>
    );
 }

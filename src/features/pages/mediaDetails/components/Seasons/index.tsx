@@ -3,8 +3,8 @@ import ModalPortal from "@/components/Modals/ModalPortal";
 import SeasonCard from "./SeasonCard";
 import { useState } from "react";
 
-import Subtitle from "@/components/Subtitle";
 import SeasonModal from "@/features/modals/seasonModal/components/SeasonModal";
+import InfoContainer from "../InfoContainer";
 
 type Props = {
    seasons: any[];
@@ -15,7 +15,7 @@ export default function Seasons({ seasons, seriesID }: Props) {
    const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
 
    return (
-      <div>
+      <>
          <ModalPortal isOpen={selectedSeason !== null}>
             <SeasonModal
                close={() => setSelectedSeason(null)}
@@ -23,16 +23,19 @@ export default function Seasons({ seasons, seriesID }: Props) {
                seasonNumber={selectedSeason!}
             />
          </ModalPortal>
-         <Subtitle>Seasons</Subtitle>
-         <div className="grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-5">
-            {seasons.map((season) => (
+         <InfoContainer
+            itemsPerPage={4}
+            numberOfRows={2}
+            columnLength={2}
+            subtitle="Seasons"
+            media={seasons}
+            renderItem={(season) => (
                <SeasonCard
-                  key={season.id}
                   season={season}
                   onClick={() => setSelectedSeason(season.season_number)}
                />
-            ))}
-         </div>
-      </div>
+            )}
+         />
+      </>
    );
 }

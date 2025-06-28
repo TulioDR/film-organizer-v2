@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 type Props = {
@@ -8,10 +7,7 @@ type Props = {
 
 export default function MainPoster({ alt, posterPath }: Props) {
    return (
-      <motion.div
-         transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="aspect-[2/3] relative w-full sm:w-auto sm:h-full"
-      >
+      <div className="aspect-[2/3] relative w-full sm:w-auto sm:h-full">
          <Image
             alt={alt}
             src={`https://image.tmdb.org/t/p/w${780}${posterPath}`}
@@ -20,6 +16,6 @@ export default function MainPoster({ alt, posterPath }: Props) {
             sizes="100%"
             priority
          />
-      </motion.div>
+      </div>
    );
 }
