@@ -38,7 +38,7 @@ export default function InfoContainer<T>({
             gridColumn: `span ${columnLength} / span ${columnLength}`,
             backdropFilter: "blur(20px)",
          }}
-         className="w-full flex flex-col gap-4 p-8 rounded-2xl bg-black/40"
+         className="w-full flex flex-col gap-4 p-8 rounded-2xl bg-black/50"
       >
          <Subtitle>{subtitle}</Subtitle>
          {displayedMedia.length > 0 ? (
@@ -49,10 +49,10 @@ export default function InfoContainer<T>({
                   }, minmax(0, 1fr))`,
                   gridTemplateRows: `repeat(${numberOfRows}, minmax(0, 1fr))`,
                }}
-               className="w-full grid gap-4 overflow-hidden"
+               className="w-full grid gap-4"
             >
                {displayedMedia.map((item, index) => (
-                  <React.Fragment key={(item as any).id || index}>
+                  <React.Fragment key={`${(item as any).id}-${index}`}>
                      {renderItem(item)}
                   </React.Fragment>
                ))}

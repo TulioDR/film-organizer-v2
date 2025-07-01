@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function Container({ children, media }: Props) {
-   // useScrollToTop();
+   useScrollToTop();
 
    const { changeBackground } = useBackground();
 

@@ -31,7 +31,7 @@ export default function MediaData({ media, crew, isMovie }: Props) {
    return (
       <div
          style={{ backdropFilter: "blur(20px)" }}
-         className="text-xs sm:text-sm p-8 rounded-2xl bg-black/40"
+         className="text-xs sm:text-sm p-8 rounded-2xl bg-black/50"
       >
          <table className="">
             <tbody>

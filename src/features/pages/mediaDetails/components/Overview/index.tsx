@@ -8,7 +8,7 @@ export default function Overview({ media }: Props) {
    return (
       <div
          style={{ backdropFilter: "blur(20px)" }}
-         className="text-xs sm:text-sm p-8 rounded-2xl bg-black/40 flex flex-col gap-4"
+         className="text-xs sm:text-sm p-8 rounded-2xl bg-black/50 flex flex-col gap-4"
       >
          <Subtitle>Overview</Subtitle>
          <div>

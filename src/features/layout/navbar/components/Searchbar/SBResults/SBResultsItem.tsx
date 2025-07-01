@@ -34,11 +34,13 @@ export default function SBResultsItem({
             selected ? "bg-white text-black" : "text-white"
          }`}
       >
-         <Poster
-            alt={media.title || media.name}
-            size="sm"
-            posterPath={media.poster_path}
-         />
+         <div className="aspect-[2/3] h-full">
+            <Poster
+               alt={media.title || media.name}
+               size="sm"
+               posterPath={media.poster_path}
+            />
+         </div>
          <div className="pl-2">
             <div className="text-text-1 text-sm">
                {media.title || media.name}

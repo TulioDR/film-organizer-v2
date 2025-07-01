@@ -1,6 +1,7 @@
-import SimilarCard from "./SimilarCard";
 import { MediaDetailsModel } from "../../models/MediaDetailsModel";
 import InfoContainer from "../InfoContainer";
+import React from "react";
+import MediaCard from "@/features/mediaCard/components/MediaCard";
 
 type Props = {
    media: MediaDetailsModel;
@@ -18,9 +19,12 @@ export default function Similar({ media, mediaType }: Props) {
          subtitle={`Similar ${mediaType === "movie" ? "Movies" : "Series"}`}
          media={similarMedia}
          renderItem={(similar) => (
-            <SimilarCard
-               href={`/${mediaType}/${similar.id}`}
-               similar={similar}
+            <MediaCard
+               mediaType={mediaType}
+               media={similar}
+               isSelected={false}
+               id={similar.id.toString()}
+               setFixedValues={() => {}}
             />
          )}
       />

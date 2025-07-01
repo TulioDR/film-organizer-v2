@@ -44,8 +44,9 @@ export default function Poster({
    const image = getPoster();
    return (
       <div
-         className={`relative
-         ${backPoster ? "aspect-video w-full" : "aspect-[2/3] h-full"}`}
+         className={`relative w-full ${
+            backPoster ? "aspect-video" : "aspect-[2/3]"
+         }`}
       >
          <Image
             alt={alt}
