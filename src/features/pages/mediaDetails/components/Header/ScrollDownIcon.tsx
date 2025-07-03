@@ -19,7 +19,7 @@ export default function ScrollDownIcon() {
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          transition={{ duration: 0.3 }}
-         className="absolute bottom-32 left-0 w-full flex justify-end"
+         className="absolute bottom-32 left-0 w-full flex justify-end pointer-events-none"
       >
          <ScrollIcon />
       </motion.div>

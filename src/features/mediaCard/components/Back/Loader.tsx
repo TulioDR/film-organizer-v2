@@ -5,11 +5,9 @@ type Props = {};
 
 export default function Loader({}: Props) {
    return (
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-white ">
-         <motion.div
-            initial={{ width: 0 }}
-            className="h-full bg-blue-500 loader-animation"
-         />
-      </div>
+      <motion.div
+         initial={{ width: 0 }}
+         className="absolute top-full left-0 bg-blue-500 loader-animation h-1"
+      />
    );
 }

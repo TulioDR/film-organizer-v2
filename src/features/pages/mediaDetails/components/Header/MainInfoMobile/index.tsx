@@ -1,12 +1,12 @@
 import React from "react";
 import MainInfoMobileContainer from "./MainInfoMobileContainer";
-import { MediaDetailsModel } from "../../models/MediaDetailsModel";
+import { MediaDetailsModel } from "../../../models/MediaDetailsModel";
 import MainTitle from "../MainInfo/MainTitle";
 import Date from "../MainInfo/Date";
 import Rating from "../MainInfo/Rating";
 import { MediaTypeModel } from "@/models/MediaTypeModel";
 import Runtime from "../MainInfo/Runtime";
-import { separateArray } from "../../utils/separateFunctions";
+import { separateArray } from "../../../utils/separateFunctions";
 import Score from "../MainInfo/Score";
 import MainDetailsBookmark from "../MainInfo/MainDetailsBookmark";
 

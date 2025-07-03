@@ -1,4 +1,5 @@
 import Subtitle from "@/components/Subtitle";
+import Container from "../InfoContainer/Container";
 
 type Props = {
    media: any;
@@ -6,19 +7,18 @@ type Props = {
 
 export default function Overview({ media }: Props) {
    return (
-      <div
-         style={{ backdropFilter: "blur(20px)" }}
-         className="text-xs sm:text-sm p-8 rounded-2xl bg-black/50 flex flex-col gap-4"
-      >
+      <Container>
          <Subtitle>Overview</Subtitle>
          <div>
             {media.tagline && (
-               <div className="italic font-bold mb-1 text-light-2 dark:text-dark-2">
+               <div className="italic font-bold mb-1 text-gray-700">
                   {media.tagline}
                </div>
             )}
-            <div>{media.overview || "No overview available"}</div>
+            <div className="text-black">
+               {media.overview || "No overview available"}
+            </div>
          </div>
-      </div>
+      </Container>
    );
 }

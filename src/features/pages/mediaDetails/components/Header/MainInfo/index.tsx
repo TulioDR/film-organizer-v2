@@ -6,10 +6,10 @@ import Score from "./Score";
 import MainDetailsBookmark from "./MainDetailsBookmark";
 
 import RevealHorizontal from "@/animations/RevealHorizontal";
-import { MediaDetailsModel } from "../../models/MediaDetailsModel";
+import { MediaDetailsModel } from "../../../models/MediaDetailsModel";
 import MainInfoContainer from "./MainInfoContainer";
 import { MediaTypeModel } from "@/models/MediaTypeModel";
-import { separateArray } from "../../utils/separateFunctions";
+import { separateArray } from "../../../utils/separateFunctions";
 
 type Props = {
    media: MediaDetailsModel;

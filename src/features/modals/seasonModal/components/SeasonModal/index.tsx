@@ -11,7 +11,7 @@ import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonModalContainer from "./SeasonModalContainer";
 import API_PUBLIC from "@/api/public";
 import Subtitle from "@/components/Subtitle";
-import Date from "@/features/pages/mediaDetails/components/MainInfo/Date";
+import Date from "@/features/pages/mediaDetails/components/Header/MainInfo/Date";
 
 type Props = {
    close: () => void;

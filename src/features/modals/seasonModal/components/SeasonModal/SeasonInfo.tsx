@@ -1,5 +1,5 @@
 import RevealHorizontal from "@/animations/RevealHorizontal";
-import Date from "@/features/pages/mediaDetails/components/MainInfo/Date";
+import Date from "@/features/pages/mediaDetails/components/Header/MainInfo/Date";
 
 type Props = {
    season: any;

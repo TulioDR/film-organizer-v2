@@ -1,16 +1,17 @@
 import CustomPagination from "@/components/CustomPagination";
 import Subtitle from "@/components/Subtitle";
 import React, { useEffect, useState } from "react";
+import Container from "./Container";
 
 type InfoContainerProps<T> = {
    itemsPerPage: number;
    subtitle: string;
    media: T[];
    numberOfRows?: number;
-   // renderItem: ComponentType;
    renderItem: (item: T) => React.ReactNode;
    length?: number;
    columnLength?: number;
+   similar?: true;
 };
 
 export default function InfoContainer<T>({
@@ -20,6 +21,7 @@ export default function InfoContainer<T>({
    numberOfRows = 1,
    renderItem,
    columnLength = 1,
+   similar,
 }: InfoContainerProps<T>) {
    const [page, setPage] = useState<number>(1);
 
@@ -33,13 +35,7 @@ export default function InfoContainer<T>({
    }, [page, itemsPerPage, media]);
 
    return (
-      <div
-         style={{
-            gridColumn: `span ${columnLength} / span ${columnLength}`,
-            backdropFilter: "blur(20px)",
-         }}
-         className="w-full flex flex-col gap-4 p-8 rounded-2xl bg-black/50"
-      >
+      <Container columnLength={columnLength} similar={similar}>
          <Subtitle>{subtitle}</Subtitle>
          {displayedMedia.length > 0 ? (
             <div
@@ -49,7 +45,7 @@ export default function InfoContainer<T>({
                   }, minmax(0, 1fr))`,
                   gridTemplateRows: `repeat(${numberOfRows}, minmax(0, 1fr))`,
                }}
-               className="w-full grid gap-4"
+               className="w-full grid gap-8"
             >
                {displayedMedia.map((item, index) => (
                   <React.Fragment key={`${(item as any).id}-${index}`}>
@@ -65,6 +61,6 @@ export default function InfoContainer<T>({
             total={Math.ceil(media.length / itemsPerPage)}
             onChange={(page: number) => setPage(page)}
          />
-      </div>
+      </Container>
    );
 }

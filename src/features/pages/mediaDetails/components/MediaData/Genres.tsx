@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 type Props = {
    genres: any[];
@@ -7,8 +7,6 @@ type Props = {
 };
 
 export default function Genres({ genres, isMovie }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
-
    const router = useRouter();
    const goToGenre = (id: number): void => {
       router.push(`/genres/${isMovie ? "movie" : "tv"}/${id}`);
@@ -16,14 +14,15 @@ export default function Genres({ genres, isMovie }: Props) {
    return (
       <>
          {genres.map((genre) => (
-            <span
+            <motion.span
                key={genre.id}
+               whileHover={{ scale: 1.1 }}
+               whileTap={{ scale: 1 }}
                onClick={() => goToGenre(genre.id)}
-               style={{ backgroundColor: themeColor }}
-               className="text-white text-xs sm:text-sm rounded-md px-2 py-1 cursor-pointer mr-2 float-left my-1"
+               className="text-black text-xs sm:text-sm rounded-md px-2 py-1 cursor-pointer mr-2 float-left my-1 bg-white shadow-lg"
             >
                {genre.name}
-            </span>
+            </motion.span>
          ))}
       </>
    );

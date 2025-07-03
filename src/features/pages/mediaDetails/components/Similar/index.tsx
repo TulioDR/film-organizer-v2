@@ -10,6 +10,7 @@ type Props = {
 
 export default function Similar({ media, mediaType }: Props) {
    const similarMedia = media.similar.results;
+   const currentMedia = media;
 
    return (
       <InfoContainer
@@ -18,6 +19,7 @@ export default function Similar({ media, mediaType }: Props) {
          columnLength={2}
          subtitle={`Similar ${mediaType === "movie" ? "Movies" : "Series"}`}
          media={similarMedia}
+         similar
          renderItem={(similar) => (
             <MediaCard
                mediaType={mediaType}
@@ -25,6 +27,7 @@ export default function Similar({ media, mediaType }: Props) {
                isSelected={false}
                id={similar.id.toString()}
                setFixedValues={() => {}}
+               currentMedia={currentMedia}
             />
          )}
       />

@@ -21,6 +21,7 @@ type Props = {
    isSelected: boolean;
    id: string;
    setFixedValues: React.Dispatch<React.SetStateAction<FixedValues | null>>;
+   currentMedia?: MediaModel;
 };
 
 export default function MediaCard({
@@ -28,11 +29,15 @@ export default function MediaCard({
    media,
    isSelected,
    id,
+   currentMedia,
    setFixedValues,
 }: Props) {
    const { isHidden } = useSelector((state: StoreModel) => state.layout);
 
-   const { isHovered, scope, onHoverStart, onHoverEnd } = useCardHover(media);
+   const { isHovered, scope, onHoverStart, onHoverEnd } = useCardHover(
+      media,
+      currentMedia
+   );
    const { onLearnMore } = useLearnMore(id, mediaType, media, setFixedValues);
 
    useEffect(() => {

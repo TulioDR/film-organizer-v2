@@ -12,6 +12,7 @@ type Props = {
    backPoster?: true;
    trailer?: true;
    person?: true;
+   footer: React.ReactNode;
 };
 
 export default function CustomHyperlink({
@@ -23,6 +24,7 @@ export default function CustomHyperlink({
    backPoster,
    trailer,
    person,
+   footer,
 }: Props) {
    const [isHovered, setIsHovered] = useState<boolean>(false);
    const onHoverStart = () => setIsHovered(true);
@@ -37,25 +39,34 @@ export default function CustomHyperlink({
          rel="noreferrer"
          onMouseEnter={onHoverStart}
          onMouseLeave={onHoverEnd}
-         className={`w-full block rounded-xl overflow-hidden relative ${
-            horizontal ? "aspect-video" : "aspect-[2/3]"
-         }`}
+         className="flex flex-col rounded-xl bg-white text-black overflow-hidden shadow-xl"
       >
          <motion.div
-            animate={{ scale: isHovered ? 1.1 : 1 }}
-            transition={transition}
-            className="w-full h-full "
+            className={`w-full overflow-hidden relative ${
+               horizontal ? "aspect-video" : "aspect-[2/3]"
+            }`}
          >
-            <Poster
-               alt={alt}
-               posterPath={posterPath}
-               size="md"
-               backPoster={backPoster}
-               trailer={trailer}
-               person={person}
+            <motion.div
+               animate={{ scale: isHovered ? 1.1 : 1 }}
+               transition={transition}
+               className="w-full h-full "
+            >
+               <Poster
+                  alt={alt}
+                  posterPath={posterPath}
+                  size="md"
+                  backPoster={backPoster}
+                  trailer={trailer}
+                  person={person}
+               />
+            </motion.div>
+            <FrontIcon
+               logo={logo}
+               isHovered={isHovered}
+               transition={transition}
             />
          </motion.div>
-         <FrontIcon logo={logo} isHovered={isHovered} transition={transition} />
+         {footer}
       </motion.a>
    );
 }

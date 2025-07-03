@@ -6,6 +6,7 @@ type Props = {
 };
 
 export default function Directors({ array }: Props) {
+   if (!array.length) return <div>Not Available</div>;
    return (
       <div>
          {array.map((person, index) => (

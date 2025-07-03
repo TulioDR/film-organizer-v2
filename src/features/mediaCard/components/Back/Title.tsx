@@ -7,7 +7,7 @@ type Props = {
 
 export default function Title({ title, year }: Props) {
    return (
-      <div className="text-white leading-tight font-semibold">
+      <div className="text-black leading-tight font-semibold">
          <span className="uppercase text-base ">{title}</span>
          {year && (
             <span className="text-xs sm:text-sm">

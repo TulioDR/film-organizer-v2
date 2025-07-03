@@ -3,6 +3,7 @@ import { addCommasToNumber, separateByCommas } from "@/utils/commas";
 import Row from "./Row";
 import Genres from "./Genres";
 import Directors from "./Directors";
+import Container from "../InfoContainer/Container";
 type Props = {
    media: any;
    crew: any[];
@@ -29,11 +30,8 @@ export default function MediaData({ media, crew, isMovie }: Props) {
    const directorsValue = crew.filter((person) => person.job === "Director");
 
    return (
-      <div
-         style={{ backdropFilter: "blur(20px)" }}
-         className="text-xs sm:text-sm p-8 rounded-2xl bg-black/50"
-      >
-         <table className="">
+      <Container>
+         <table className="text-xs sm:text-sm">
             <tbody>
                <Row
                   name="Genres"
@@ -78,6 +76,6 @@ export default function MediaData({ media, crew, isMovie }: Props) {
                )}
             </tbody>
          </table>
-      </div>
+      </Container>
    );
 }

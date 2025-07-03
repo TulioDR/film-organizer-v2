@@ -1,6 +1,7 @@
 import StoreModel from "@/models/StoreModel";
 import { Pagination } from "@mantine/core";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 type Props = {
    sm?: true;
@@ -15,17 +16,15 @@ export default function InnerCustomPagination({
    onChange,
    value,
 }: Props) {
-   const { themeColor, isDarkMode } = useSelector(
-      (state: StoreModel) => state.theme
-   );
+   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+   const { isHidden } = useSelector((state: StoreModel) => state.layout);
 
-   const { backgroundImage } = useSelector(
-      (state: StoreModel) => state.background
-   );
-
-   const isDark = backgroundImage ? true : isDarkMode;
    return (
-      <div className="w-full flex justify-center">
+      <motion.div
+         animate={{ opacity: isHidden ? 0 : 1 }}
+         transition={{ duration: 0.2 }}
+         className="w-full flex justify-center"
+      >
          <Pagination
             total={total}
             value={value}
@@ -34,23 +33,23 @@ export default function InnerCustomPagination({
             styles={{
                control: {
                   border: "none",
-                  color: isDark ? "white" : "black",
+                  color: "black",
                   "&:hover": {
-                     color: isDark ? "black" : "white",
+                     color: "white",
                   },
                   "&[data-active]": {
                      backgroundColor: themeColor,
                      color: "white",
                   },
                   "&:not([data-disabled]):hover": {
-                     backgroundColor: isDark ? "white" : "black",
+                     backgroundColor: "black",
                   },
                },
                dots: {
-                  color: isDark ? "white" : "black",
+                  color: "black",
                },
             }}
          />
-      </div>
+      </motion.div>
    );
 }

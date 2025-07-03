@@ -9,19 +9,19 @@ type Props = {
 
 export default function Trailer({ trailer }: Props) {
    return (
-      <div className="flex flex-col gap-2">
-         <CustomHyperlink
-            href={`https://www.youtube.com/watch?v=${trailer.key}`}
-            posterPath={trailer.key}
-            alt={trailer.name}
-            logo={youtubeLogo.src}
-            horizontal
-            backPoster
-            trailer
-         />
-         <div className="w-full text-xs lg:text-sm truncate">
-            {trailer.name}
-         </div>
-      </div>
+      <CustomHyperlink
+         href={`https://www.youtube.com/watch?v=${trailer.key}`}
+         posterPath={trailer.key}
+         alt={trailer.name}
+         logo={youtubeLogo.src}
+         horizontal
+         backPoster
+         trailer
+         footer={
+            <div className="w-full text-xs lg:text-sm font-medium truncate p-4">
+               {trailer.name}
+            </div>
+         }
+      />
    );
 }

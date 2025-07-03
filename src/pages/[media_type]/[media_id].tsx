@@ -3,21 +3,21 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
 import { MediaDetailsModel } from "@/features/pages/mediaDetails/models/MediaDetailsModel";
-import MainPoster from "@/features/pages/mediaDetails/components/MainPoster";
-import MainInfo from "@/features/pages/mediaDetails/components/MainInfo";
-import ScrollDownIcon from "@/features/pages/mediaDetails/components/ScrollDownIcon";
+// import MainPoster from "@/features/pages/mediaDetails/components/MainPoster";
+// import MainInfo from "@/features/pages/mediaDetails/components/MainInfo";
+// import ScrollDownIcon from "@/features/pages/mediaDetails/components/ScrollDownIcon";
 import Overview from "@/features/pages/mediaDetails/components/Overview";
 import People from "@/features/pages/mediaDetails/components/People";
 import Seasons from "@/features/pages/mediaDetails/components/Seasons";
 import Trailers from "@/features/pages/mediaDetails/components/Trailers";
 import Similar from "@/features/pages/mediaDetails/components/Similar";
-import MainInfoMobile from "@/features/pages/mediaDetails/components/MainInfoMobile";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { layoutActions } from "@/store/slices/layout-slice";
 import Container from "@/features/pages/mediaDetails/components/Container";
 import MediaData from "@/features/pages/mediaDetails/components/MediaData";
+import Header from "@/features/pages/mediaDetails/components/Header";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -72,16 +72,8 @@ export default function Details({ media_type, media }: Props) {
                <meta name="description" content={media.overview} />
                <link rel="icon" href="/favicon.ico" />
             </Head>
-            <motion.div className="sm:h-[100svh] py-32 flex relative overflow-hidden">
-               <MainPoster
-                  alt={media.name || media.title}
-                  posterPath={media.poster_path}
-               />
-               <MainInfo media={media} mediaType={media_type} />
-               <ScrollDownIcon />
-            </motion.div>
-            <MainInfoMobile media={media} mediaType={media_type} />
-            <div className="-mt-24 gap-8 grid grid-cols-2">
+            <Header media={media} media_type={media_type} />
+            <div className="-mt-24 gap-8 grid grid-cols-2 text-black relative">
                <Overview media={media} />
                <MediaData
                   media={media}

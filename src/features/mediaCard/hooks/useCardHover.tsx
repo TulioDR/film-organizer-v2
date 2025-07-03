@@ -6,7 +6,10 @@ import useBackground from "@/features/layout/background/hooks/useBackground";
 import { MediaModel } from "@/models/MediaModel";
 import { layoutActions } from "@/store/slices/layout-slice";
 
-export default function useCardHover(media: MediaModel) {
+export default function useCardHover(
+   media: MediaModel,
+   currentMedia?: MediaModel
+) {
    const [isHovered, setIsHovered] = useState<boolean>(false);
    const [scope, animate] = useAnimate();
    const dispatch = useDispatch();
@@ -22,7 +25,11 @@ export default function useCardHover(media: MediaModel) {
    const onHoverEnd = async () => {
       setIsHovered(false);
       animate(".loader-animation", { width: "0%" }, { duration: 1 });
-      removeBackground();
+      if (currentMedia) {
+         changeBackground(currentMedia.id, currentMedia.backdrop_path);
+      } else {
+         removeBackground();
+      }
       dispatch(layoutActions.revealLayout());
       await animate(
          ".rotate-card",

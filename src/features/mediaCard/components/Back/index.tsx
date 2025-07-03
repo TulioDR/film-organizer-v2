@@ -26,7 +26,7 @@ export default function Back({ media, mediaType, onLearnMore }: Props) {
             <Poster alt={title} posterPath={backdrop} size="lg" backPoster />
             <Loader />
          </div>
-         <div className="w-full flex flex-col gap-2 flex-1 p-4 pt-6 overflow-hidden">
+         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-6 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
                <Title title={title} year={releaseDate} />
                <Overview overview={overview} />
