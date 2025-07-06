@@ -26,7 +26,9 @@ export default function BookmarkButton({
    return (
       <button
          onClick={handleBookmarkClick}
-         className={`aspect-square h-full flex items-center justify-center`}
+         style={{ backgroundColor: themeColor }}
+         className={`aspect-square flex items-center justify-center text-white rounded-lg
+         ${big ? "h-10 sm:h-16" : "h-12"}`}
       >
          {useLoading && isLoading ? (
             <div className="w-3/4">

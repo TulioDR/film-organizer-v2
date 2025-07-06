@@ -26,13 +26,15 @@ export default function Back({ media, mediaType, onLearnMore }: Props) {
             <Poster alt={title} posterPath={backdrop} size="lg" backPoster />
             <Loader />
          </div>
-         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-6 overflow-hidden">
+         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-5 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
                <Title title={title} year={releaseDate} />
                <Overview overview={overview} />
             </div>
             <div className="flex gap-2 h-12 w-full">
-               <BookmarkButton type={mediaType} media={media} />
+               <div className="bg-blue-500 h-full aspect-square rounded-md overflow-hidden">
+                  <BookmarkButton type={mediaType} media={media} />
+               </div>
                <LearnMore onClick={onLearnMore} />
             </div>
          </div>

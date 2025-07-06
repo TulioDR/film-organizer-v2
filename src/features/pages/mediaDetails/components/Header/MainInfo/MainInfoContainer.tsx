@@ -8,13 +8,13 @@ type Props = {
 
 export default function MainInfoContainer({ children }: Props) {
    return (
-      <div className="flex-1 overflow-hidden h-full md:pl-10">
+      <div className="flex-1 h-full md:pl-10">
          <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full h-full flex-col justify-center gap-5 text-white overflow-hidden hidden md:flex"
+            className="w-full h-full flex-col justify-center gap-5 text-white hidden md:flex"
          >
             {children}
          </motion.div>

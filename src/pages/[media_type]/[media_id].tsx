@@ -3,9 +3,6 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
 import { MediaDetailsModel } from "@/features/pages/mediaDetails/models/MediaDetailsModel";
-// import MainPoster from "@/features/pages/mediaDetails/components/MainPoster";
-// import MainInfo from "@/features/pages/mediaDetails/components/MainInfo";
-// import ScrollDownIcon from "@/features/pages/mediaDetails/components/ScrollDownIcon";
 import Overview from "@/features/pages/mediaDetails/components/Overview";
 import People from "@/features/pages/mediaDetails/components/People";
 import Seasons from "@/features/pages/mediaDetails/components/Seasons";
@@ -56,13 +53,9 @@ export default function Details({ media_type, media }: Props) {
       });
    }, [router]);
 
-   useEffect(() => {
-      console.log("first render");
-   }, []);
-
    // useEffect(() => {
-   //    console.log(media);
-   // }, [media]);
+   //    console.log("first render");
+   // }, []);
 
    return (
       <AnimatePresence mode="wait">

@@ -16,10 +16,8 @@ export default function Genres({ genres, isMovie }: Props) {
          {genres.map((genre) => (
             <motion.span
                key={genre.id}
-               whileHover={{ scale: 1.1 }}
-               whileTap={{ scale: 1 }}
                onClick={() => goToGenre(genre.id)}
-               className="text-black text-xs sm:text-sm rounded-md px-2 py-1 cursor-pointer mr-2 float-left my-1 bg-white shadow-lg"
+               className="text-xs sm:text-sm rounded-md px-2 h-8 flex items-center cursor-pointer mr-2 float-left my-1 bg-white text-black  hover:bg-black hover:text-white shadow-md"
             >
                {genre.name}
             </motion.span>

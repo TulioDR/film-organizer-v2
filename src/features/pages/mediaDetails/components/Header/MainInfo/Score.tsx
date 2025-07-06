@@ -15,16 +15,16 @@ export default function Score({ score }: Props) {
    };
    return (
       <div className="flex items-center space-x-2 font-oswald">
-         <div className="rounded-full border border-white grid place-content-center aspect-square w-8">
+         <div className="rounded-full bg-white flex items-center justify-center aspect-square w-10">
             <span
                style={{ fontVariationSettings: `"FILL" 1` }}
-               className="material-symbols-outlined text-yellow-600 !text-2xl "
+               className="material-symbols-outlined text-yellow-600 !text-3xl "
             >
                star_rate
             </span>
          </div>
          <div className="flex items-start gap-2">
-            <span style={{ color: themeColor }} className="text-4xl font-bold">
+            <span className="text-4xl font-bold text-white">
                {oneDecimal(score)}
             </span>
             <span className="text-lg">

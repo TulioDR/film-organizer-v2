@@ -1,8 +1,9 @@
+import GlassContainer from "@/components/GlassContainer";
 import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
 
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import PortalContainer from "./PortalContainer";
 type Props = {
    media: any;
    mediaType: "movie" | "tv";
@@ -10,34 +11,56 @@ type Props = {
 
 export default function MainDetailsBookmark({ mediaType, media }: Props) {
    const buttonRef = useRef<HTMLDivElement>(null);
-   const [isFixed, setIsFixed] = useState<boolean>(false);
+   const isInView = useInView(buttonRef, {
+      initial: true,
+      amount: "all",
+      margin: "-128px 0px 0px 0px",
+   });
 
-   useEffect(() => {
-      const handleScroll = () => {
-         const buttonTop = buttonRef.current!.getBoundingClientRect().top;
-         if (buttonTop < 128) {
-            if (!isFixed) setIsFixed(true);
-         } else {
-            if (isFixed) setIsFixed(false);
-         }
-      };
-
-      document.addEventListener("scroll", handleScroll);
-      return () => document.removeEventListener("scroll", handleScroll);
-   }, [isFixed]);
+   const transition = {
+      layout: { duration: 0.3 },
+   };
 
    return (
-      <div ref={buttonRef} className="w-10 sm:w-16">
-         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.4 } }}
-            layout="position"
-            className={`rounded-full overflow-hidden z-10 ${
-               isFixed ? "fixed top-1/2 -translate-y-1/2 right-8" : ""
-            }`}
-         >
-            <BookmarkButton useLoading media={media} type={mediaType} big />
-         </motion.div>
-      </div>
+      <>
+         <div ref={buttonRef} className="w-10 sm:w-16 aspect-square">
+            {isInView && (
+               <motion.div
+                  layoutId="details-bookmark"
+                  transition={transition}
+                  className="w-full h-full relative z-20"
+               >
+                  <GlassContainer className="hover:bg-white hover:text-black h-full">
+                     <BookmarkButton
+                        useLoading
+                        media={media}
+                        type={mediaType}
+                        big
+                     />
+                  </GlassContainer>
+               </motion.div>
+            )}
+            <PortalContainer>
+               <div className="fixed top-1/2 -translate-y-1/2 right-8 w-16 aspect-square">
+                  {!isInView && (
+                     <motion.div
+                        layoutId="details-bookmark"
+                        transition={transition}
+                        className="w-full h-full"
+                     >
+                        <GlassContainer className="hover:bg-white hover:text-black z-10 h-full">
+                           <BookmarkButton
+                              useLoading
+                              media={media}
+                              type={mediaType}
+                              big
+                           />
+                        </GlassContainer>
+                     </motion.div>
+                  )}
+               </div>
+            </PortalContainer>
+         </div>
+      </>
    );
 }

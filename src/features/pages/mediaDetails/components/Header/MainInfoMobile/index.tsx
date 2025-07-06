@@ -8,7 +8,7 @@ import { MediaTypeModel } from "@/models/MediaTypeModel";
 import Runtime from "../MainInfo/Runtime";
 import { separateArray } from "../../../utils/separateFunctions";
 import Score from "../MainInfo/Score";
-import MainDetailsBookmark from "../MainInfo/MainDetailsBookmark";
+// import MainDetailsBookmark from "../MainInfo/MainDetailsBookmark";
 
 type Props = {
    media: MediaDetailsModel;
@@ -40,7 +40,7 @@ export default function MainInfoMobile({ media, mediaType }: Props) {
          </div>
          <div className="flex items-center gap-3">
             <Score score={media.vote_average} />
-            <MainDetailsBookmark media={media} mediaType={mediaType} />
+            {/* <MainDetailsBookmark media={media} mediaType={mediaType} /> */}
          </div>
       </MainInfoMobileContainer>
    );
