@@ -9,7 +9,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
    el?: keyof JSX.IntrinsicElements;
 };
 
-export default function GlassContainer({
+export default function zGlassContainer({
    children,
    className = "",
    el: Wrapper = "div",
@@ -17,13 +17,13 @@ export default function GlassContainer({
 }: Props & HTMLMotionProps<keyof HTMLElementTagNameMap>) {
    const MotionWrapper = useMemo(() => motion.create(Wrapper), [Wrapper]);
 
-   // const { isHidden } = useSelector((state: StoreModel) => state.layout);
+   const { isHidden } = useSelector((state: StoreModel) => state.layout);
    return (
       <MotionWrapper
          {...rest}
-         // style={{ backdropFilter: "blur(20px)" }}
-         // animate={{ opacity: isHidden ? 0 : 1, transition: { duration: 0.2 } }}
-         className={`bg-black/50 rounded-md pointer-events-auto border border-border ${className}`}
+         style={{ backdropFilter: "blur(20px)" }}
+         animate={{ opacity: isHidden ? 0 : 1, transition: { duration: 0.2 } }}
+         className={`bg-black/50 rounded-md border border-border ${className}`}
       >
          {children}
       </MotionWrapper>

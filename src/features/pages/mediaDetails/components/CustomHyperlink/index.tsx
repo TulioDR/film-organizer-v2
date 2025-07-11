@@ -47,6 +47,7 @@ export default function CustomHyperlink({
             }`}
          >
             <motion.div
+               initial={false}
                animate={{ scale: isHovered ? 1.1 : 1 }}
                transition={transition}
                className="w-full h-full "

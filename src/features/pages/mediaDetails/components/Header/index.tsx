@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import MainPoster from "./MainPoster";
 import MainInfo from "./MainInfo";
 import ScrollDownIcon from "./ScrollDownIcon";
 import { MediaDetailsModel } from "../../models/MediaDetailsModel";
 import MainInfoMobile from "./MainInfoMobile";
 import { useSelector } from "react-redux";
 import StoreModel from "@/models/StoreModel";
+import HeaderPoster from "./HeaderPoster";
 
 type Props = {
    media: MediaDetailsModel;
@@ -20,9 +20,9 @@ export default function Header({ media, media_type }: Props) {
          <motion.div
             animate={{ opacity: isHidden ? 0 : 1 }}
             transition={{ duration: 0.2 }}
-            className="sm:h-[100svh] py-32 flex relative"
+            className="sm:h-[100svh] py-32 flex gap-8 relative"
          >
-            <MainPoster
+            <HeaderPoster
                alt={media.name || media.title}
                posterPath={media.poster_path}
             />

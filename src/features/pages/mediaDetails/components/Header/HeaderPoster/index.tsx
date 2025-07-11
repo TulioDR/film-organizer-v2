@@ -5,7 +5,7 @@ type Props = {
    posterPath: string;
 };
 
-export default function MainPoster({ alt, posterPath }: Props) {
+export default function HeaderPoster({ alt, posterPath }: Props) {
    return (
       <div className="aspect-[2/3] relative w-full sm:w-auto sm:h-full">
          <Image

@@ -1,3 +1,5 @@
+import CardContainer from "./CardContainer";
+
 type Props = {
    rating: any[];
    isMovie: boolean;
@@ -17,15 +19,15 @@ export default function Rating({ rating, isMovie }: Props) {
    const rated = getRating(rating, isMovie);
 
    return (
-      <span className="">
+      <CardContainer>
          {rated ? (
             <>
-               <span className="mr-1 uppercase text-xs">Rated</span>
-               <span className="text-base font-title">{rated}</span>
+               <span className="mr-1 uppercase">Rated</span>
+               <span className="">{rated}</span>
             </>
          ) : (
-            <span className="text-xs">Not yet Rated</span>
+            <span className="">Not yet Rated</span>
          )}
-      </span>
+      </CardContainer>
    );
 }

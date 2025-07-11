@@ -15,7 +15,7 @@ export default function Overview({ media }: Props) {
                   {media.tagline}
                </div>
             )}
-            <div className="text-black">
+            <div className="text-black text-xs sm:text-sm">
                {media.overview || "No overview available"}
             </div>
          </div>

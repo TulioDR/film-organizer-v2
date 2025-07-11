@@ -3,13 +3,12 @@ import Date from "./Date";
 import Rating from "./Rating";
 import Runtime from "./Runtime";
 import Score from "./Score";
-import MainDetailsBookmark from "./MainDetailsBookmark";
 
-import RevealHorizontal from "@/animations/RevealHorizontal";
 import { MediaDetailsModel } from "../../../models/MediaDetailsModel";
-import MainInfoContainer from "./MainInfoContainer";
 import { MediaTypeModel } from "@/models/MediaTypeModel";
-import { separateArray } from "../../../utils/separateFunctions";
+import { motion } from "framer-motion";
+import MainBookmark from "./MainBookmark";
+import { containerVariant } from "@/animations/revealVariants";
 
 type Props = {
    media: MediaDetailsModel;
@@ -17,41 +16,31 @@ type Props = {
 };
 
 export default function MainInfo({ media, mediaType }: Props) {
+   const TITLE = media.title || media.name;
+   const DATE = media.first_air_date || media.release_date;
+   const RATING =
+      media.release_dates?.results || media.content_ratings?.results;
+   const RUNTIME = media.runtime;
+   const SCORE = media.vote_average;
+
    return (
-      <MainInfoContainer>
-         <RevealHorizontal stagger>
-            <MainTitle>{media.title || media.name}</MainTitle>
-         </RevealHorizontal>
-         <RevealHorizontal stagger>
-            <div className="flex items-end gap-2">
-               <Date date={media.first_air_date || media.release_date} />
-               <span className="text-xl">○</span>
-               <Rating
-                  rating={
-                     media.release_dates?.results ||
-                     media.content_ratings?.results
-                  }
-                  isMovie={mediaType === "movie"}
-               />
-            </div>
-         </RevealHorizontal>
-         <RevealHorizontal stagger>
-            <div className="flex items-center gap-2 text-sm ">
-               {mediaType == "movie" && (
-                  <>
-                     <Runtime runtime={media.runtime} />
-                     <span className="text-xl">○</span>
-                  </>
-               )}
-               <span>{separateArray(media.genres)}</span>
-            </div>
-         </RevealHorizontal>
-         <div className="flex items-center gap-5">
-            <RevealHorizontal stagger>
-               <Score score={media.vote_average} />
-            </RevealHorizontal>
-            <MainDetailsBookmark media={media} mediaType={mediaType} />
+      <motion.div
+         variants={containerVariant}
+         initial="initial"
+         animate="animate"
+         exit="exit"
+         className="flex-1 h-full flex flex-col justify-center items-start gap-4 text-white"
+      >
+         <MainTitle>{TITLE}</MainTitle>
+         <div className="flex gap-4 h-10 text-sm sm:text-lg font-bold">
+            <Date date={DATE} />
+            <Rating rating={RATING} isMovie={mediaType === "movie"} />
+            {mediaType == "movie" && <Runtime runtime={RUNTIME} />}
          </div>
-      </MainInfoContainer>
+         <div className="flex gap-4">
+            <Score score={SCORE} />
+            <MainBookmark media={media} mediaType={mediaType} />
+         </div>
+      </motion.div>
    );
 }
