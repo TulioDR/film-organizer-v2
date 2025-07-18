@@ -21,6 +21,8 @@ import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/Logi
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import TutorialButton from "@/features/layout/tutorialButton/components/TutorialButton";
 import FixedContainer from "./FixedContainer";
+import Responsive from "../Responsive";
+import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
 
 type Props = {
    children: React.ReactNode;
@@ -55,9 +57,11 @@ export default function MainPageContainer({ children }: Props) {
          <div id="modals-container"></div>
          <FixedContainer>
             <Navbar />
-            <Searchbar />
-            <Sidebar />
-            <TutorialButton />
+            <Responsive minWidth={LG_MEDIA_QUERY}>
+               <Searchbar />
+               <Sidebar />
+               <TutorialButton />
+            </Responsive>
          </FixedContainer>
          <Background />
          <SaveMediaModal />

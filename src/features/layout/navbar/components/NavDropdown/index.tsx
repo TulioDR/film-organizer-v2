@@ -30,15 +30,14 @@ export default function NavDropdown() {
    const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
    return (
-      <GlassContainer className="h-full relative p-2">
+      <GlassContainer className="h-full relative hover:bg-white hover:text-black">
          <motion.button
             tabIndex={0}
             onBlur={handleBlur}
             onClick={toggle}
             className="rounded-full h-full aspect-square overflow-hidden"
-            style={{ backgroundColor: themeColor }}
          >
-            <div className="w-full h-full flex items-center justify-center text-white">
+            <div className="w-full h-full flex items-center justify-center">
                <span className="material-symbols-outlined">person</span>
             </div>
             {/* {user ? (

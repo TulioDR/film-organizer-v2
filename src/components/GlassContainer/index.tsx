@@ -7,12 +7,14 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
    children: React.ReactNode;
    className?: string;
    el?: keyof JSX.IntrinsicElements;
+   noHide?: true;
 };
 
 export default function zGlassContainer({
    children,
    className = "",
    el: Wrapper = "div",
+   noHide,
    ...rest
 }: Props & HTMLMotionProps<keyof HTMLElementTagNameMap>) {
    const MotionWrapper = useMemo(() => motion.create(Wrapper), [Wrapper]);
@@ -22,8 +24,12 @@ export default function zGlassContainer({
       <MotionWrapper
          {...rest}
          style={{ backdropFilter: "blur(20px)" }}
-         animate={{ opacity: isHidden ? 0 : 1, transition: { duration: 0.2 } }}
-         className={`bg-black/50 rounded-md border border-border ${className}`}
+         animate={
+            noHide
+               ? {}
+               : { opacity: isHidden ? 0 : 1, transition: { duration: 0.2 } }
+         }
+         className={`bg-black/50 rounded-md border border-border pointer-events-auto ${className}`}
       >
          {children}
       </MotionWrapper>

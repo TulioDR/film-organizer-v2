@@ -1,3 +1,5 @@
+import Responsive from "@/components/Responsive";
+import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
 import { motion } from "framer-motion";
 
 export default function ScrollDownIcon() {
@@ -15,13 +17,15 @@ export default function ScrollDownIcon() {
    };
 
    return (
-      <motion.div
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         transition={{ duration: 0.3 }}
-         className="absolute bottom-32 left-0 w-full flex justify-end pointer-events-none"
-      >
-         <ScrollIcon />
-      </motion.div>
+      <Responsive minWidth={LG_MEDIA_QUERY}>
+         <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="absolute bottom-32 left-0 w-full flex justify-end pointer-events-none"
+         >
+            <ScrollIcon />
+         </motion.div>
+      </Responsive>
    );
 }

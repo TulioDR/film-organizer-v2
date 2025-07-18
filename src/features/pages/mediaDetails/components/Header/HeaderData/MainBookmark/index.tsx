@@ -1,0 +1,32 @@
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import Button from "./Button";
+import Container from "./Container";
+import LayoutPortal from "@/components/LayoutPortal";
+type Props = {
+   media: any;
+   mediaType: "movie" | "tv";
+};
+
+export default function MainBookmark({ mediaType, media }: Props) {
+   const buttonRef = useRef<HTMLDivElement>(null);
+   const isInView = useInView(buttonRef, {
+      initial: true,
+      amount: "all",
+      margin: "-128px 0px 0px 0px",
+   });
+
+   return (
+      <Container buttonRef={buttonRef}>
+         {isInView ? (
+            <Button mediaType={mediaType} media={media} />
+         ) : (
+            <LayoutPortal>
+               <div className="absolute bottom-0 right-0 lg:bottom-1/2 lg:translate-y-1/2 w-16 aspect-square">
+                  <Button mediaType={mediaType} media={media} />
+               </div>
+            </LayoutPortal>
+         )}
+      </Container>
+   );
+}

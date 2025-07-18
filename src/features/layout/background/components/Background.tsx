@@ -26,7 +26,7 @@ export default function Background() {
    }, [src]);
 
    return (
-      <div className="fixed top-0 left-0 h-[100svh] -z-10 w-screen bg-[#24282F]">
+      <div className="fixed bottom-0 left-0 h-[100lvh] -z-10 w-screen bg-[#24282F]">
          <AnimatePresence>
             {src && (
                <motion.div

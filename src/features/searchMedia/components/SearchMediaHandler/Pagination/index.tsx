@@ -4,7 +4,7 @@ import PaginationButton from "./PaginationButton";
 import { usePagination } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import PaginationContainer from "./PaginationContainer";
+import LayoutPortal from "@/components/LayoutPortal";
 
 type Props = {
    total: number;
@@ -24,7 +24,7 @@ export default function Pagination({ total }: Props) {
 
    if (total === 0) return <></>;
    return (
-      <PaginationContainer>
+      <LayoutPortal>
          <motion.div
             layout
             className="h-32 absolute bottom-0 left-0 w-full flex items-center justify-center z-40 pointer-events-none"
@@ -61,6 +61,6 @@ export default function Pagination({ total }: Props) {
                </GlassContainer>
             </div>
          </motion.div>
-      </PaginationContainer>
+      </LayoutPortal>
    );
 }

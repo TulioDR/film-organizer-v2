@@ -22,7 +22,7 @@ export default function Container({ children, media }: Props) {
       <motion.div
          exit={{ opacity: 0 }}
          transition={{ duration: 0.4 }}
-         className="w-full pb-8 px-32"
+         className="w-full pb-24 lg:pb-4 xl:pb-8 px-4 lg:px-24 xl:px-32"
       >
          {children}
       </motion.div>

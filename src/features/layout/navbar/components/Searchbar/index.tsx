@@ -87,7 +87,7 @@ export default function Searchbar({}: Props) {
          initial={false}
          animate={{ top: isHome ? "50%" : 0, y: isHome ? "-50%" : 0 }}
          transition={{ duration: 0.6, ease: "easeInOut" }}
-         className="pointer-events-none flex justify-center items-center absolute w-full h-32 z-50"
+         className="pointer-events-none flex justify-center items-center absolute w-full h-16 z-50"
       >
          <form
             onSubmit={handleSubmit}

@@ -1,29 +1,43 @@
+import Responsive from "@/components/Responsive";
 import LoginButton from "./LoginButton";
 
-import { useDispatch } from "react-redux";
-import { sidebarActions } from "@/store/slices/sidebar-slice";
 import NavDropdown from "./NavDropdown";
-import ToggleSidebar from "@/components/ToggleSidebar";
+import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
+import GlassContainer from "@/components/GlassContainer";
 
 export default function Navbar() {
-   const dispatch = useDispatch();
-   const handleClick = () => dispatch(sidebarActions.toggleReveal());
-
    return (
       <div
          id="navbar"
-         className="w-full px-8 z-20 absolute top-0 h-32 py-8 flex justify-between items-center pointer-events-none"
+         className="w-full z-20 absolute top-0 h-16 flex justify-between items-center pointer-events-none"
       >
-         <div className="text-5xl font-black uppercase h-full flex items-center">
+         <Responsive maxWidth={LG_MEDIA_QUERY}>
+            <GlassContainer
+               el="button"
+               className="flex items-center justify-center w-16 aspect-square"
+            >
+               <span className="material-symbols-outlined">search</span>
+            </GlassContainer>
+         </Responsive>
+
+         <div className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase h-full flex items-center justify-center flex-1 lg:flex-initial">
             Agrios
          </div>
-         <div className="lg:hidden pointer-events-auto">
-            <ToggleSidebar onClick={handleClick} />
-         </div>
-         <div className="flex gap-5 pointer-events-auto h-full">
-            <NavDropdown />
-            <LoginButton />
-         </div>
+
+         <Responsive minWidth={LG_MEDIA_QUERY}>
+            <div className="flex lg:gap-4 xl:gap-8 pointer-events-auto h-full">
+               <LoginButton />
+               <NavDropdown />
+            </div>
+         </Responsive>
+         <Responsive maxWidth={LG_MEDIA_QUERY}>
+            <GlassContainer
+               el="button"
+               className="flex items-center justify-center w-16 aspect-square"
+            >
+               <span className="material-symbols-outlined">menu</span>
+            </GlassContainer>
+         </Responsive>
       </div>
    );
 }

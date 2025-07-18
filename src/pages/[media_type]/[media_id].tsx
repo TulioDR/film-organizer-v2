@@ -1,20 +1,17 @@
-import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
 import { MediaDetailsModel } from "@/features/pages/mediaDetails/models/MediaDetailsModel";
-import Overview from "@/features/pages/mediaDetails/components/Overview";
-import People from "@/features/pages/mediaDetails/components/People";
-import Seasons from "@/features/pages/mediaDetails/components/Seasons";
-import Trailers from "@/features/pages/mediaDetails/components/Trailers";
-import Similar from "@/features/pages/mediaDetails/components/Similar";
+
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { layoutActions } from "@/store/slices/layout-slice";
 import Container from "@/features/pages/mediaDetails/components/Container";
-import MediaData from "@/features/pages/mediaDetails/components/MediaData";
 import Header from "@/features/pages/mediaDetails/components/Header";
+import Body from "@/features/pages/mediaDetails/components/Body";
+import PageHead from "@/components/PageHead";
+import BackgroundViewButton from "@/features/pages/mediaDetails/components/BackgroundViewButton";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -53,35 +50,19 @@ export default function Details({ media_type, media }: Props) {
       });
    }, [router]);
 
-   // useEffect(() => {
-   //    console.log("first render");
-   // }, []);
-
    return (
-      <AnimatePresence mode="wait">
-         <Container key={router.asPath} media={media}>
-            <Head>
-               <title>{media.title || media.name}</title>
-               <meta name="description" content={media.overview} />
-               <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Header media={media} media_type={media_type} />
-            <div className="-mt-24 gap-8 grid grid-cols-2 text-black relative">
-               <Overview media={media} />
-               <MediaData
-                  media={media}
-                  crew={media.created_by || media.credits.crew}
-                  isMovie={media_type === "movie"}
+      <>
+         <BackgroundViewButton />
+         <AnimatePresence mode="wait">
+            <Container key={router.asPath} media={media}>
+               <PageHead
+                  title={media.title || media.name}
+                  content={media.overview}
                />
-               {media_type === "tv" && (
-                  <Seasons seasons={media.seasons} seriesID={media.id} />
-               )}
-               <Trailers trailers={media.videos.results} />
-               <People type="Cast" people={media.credits?.cast} />
-               <People type="Crew" people={media.credits?.crew} />
-               <Similar media={media} mediaType={media_type} />
-            </div>
-         </Container>
-      </AnimatePresence>
+               <Header media={media} media_type={media_type} />
+               <Body media={media} media_type={media_type} />
+            </Container>
+         </AnimatePresence>
+      </>
    );
 }

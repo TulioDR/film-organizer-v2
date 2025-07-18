@@ -14,8 +14,8 @@ import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import SideLoadingLists from "./SideLoadingLists";
 import SideLists from "./SideLists";
-import SideHeader from "./SideHeader";
 import CreateListModal from "@/features/modals/createListModal/components/CreateListModal";
+import GlassContainer from "@/components/GlassContainer";
 
 export default function Sidebar() {
    // const { isLoaded, user } = useUser();
@@ -31,8 +31,13 @@ export default function Sidebar() {
    const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
 
    return (
-      <SidebarContainer>
-         <SideLinks />
-      </SidebarContainer>
+      <div className="flex items-center w-16 pointer-events-none h-[100svh] z-40 absolute top-0 left-0">
+         <GlassContainer
+            el="nav"
+            className="w-16 flex flex-col py-4 pointer-events-auto"
+         >
+            <SideLinks />
+         </GlassContainer>
+      </div>
    );
 }

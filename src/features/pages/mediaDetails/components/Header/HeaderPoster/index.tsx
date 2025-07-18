@@ -1,21 +1,23 @@
-import Image from "next/image";
+import Responsive from "@/components/Responsive";
+import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
+import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 
 type Props = {
    alt: string;
    posterPath: string;
+   backPath: string;
 };
 
-export default function HeaderPoster({ alt, posterPath }: Props) {
+export default function HeaderPoster({ alt, posterPath, backPath }: Props) {
    return (
-      <div className="aspect-[2/3] relative w-full sm:w-auto sm:h-full">
-         <Image
-            alt={alt}
-            src={`https://image.tmdb.org/t/p/w${780}${posterPath}`}
-            placeholder="empty"
-            fill
-            sizes="100%"
-            priority
-         />
-      </div>
+      <>
+         <Responsive minWidth={LG_MEDIA_QUERY}>
+            <Desktop alt={alt} posterPath={posterPath} />
+         </Responsive>
+         <Responsive maxWidth={LG_MEDIA_QUERY}>
+            <Mobile alt={alt} posterPath={posterPath} backPath={backPath} />
+         </Responsive>
+      </>
    );
 }
