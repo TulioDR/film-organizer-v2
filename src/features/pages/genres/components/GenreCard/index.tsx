@@ -1,14 +1,11 @@
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 import GenreImage from "./GenreImage";
-import GenreCardOpen from "./GenreCardOpen";
-import GenreCardClosed from "./GenreCardClosed";
+
 import GenreModel from "../../models/GenreModel";
-import useBackground from "@/features/layout/background/hooks/useBackground";
-import { useDispatch, useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
+
 import { useState } from "react";
-import { layoutActions } from "@/store/slices/layout-slice";
+import { useRouter } from "next/router";
 
 type Props = {
    genre: GenreModel;
@@ -16,67 +13,43 @@ type Props = {
 };
 
 export default function GenreCard({ genre, mediaType }: Props) {
-   const { changeBackground, removeBackground } = useBackground();
-
-   const controls = useAnimationControls();
-   const loader = useAnimationControls();
-
    const [isHovered, setIsHovered] = useState(false);
-   const dispatch = useDispatch();
 
    const onHoverStart = async () => {
       setIsHovered(true);
-      controls.start({ y: -3, rotateX: 15, scale: 1.05 });
-      await loader.start({
-         width: "100%",
-         transition: { duration: 2 },
-      });
-      changeBackground(genre.id, genre.image);
-      dispatch(layoutActions.hideLayout());
    };
 
    const onHoverEnd = () => {
       setIsHovered(false);
-      controls.start({ y: 0, rotateX: 0, scale: 1 });
-      loader.start({
-         width: "0%",
-         transition: { duration: 0.4 },
-      });
-      removeBackground();
-      dispatch(layoutActions.revealLayout());
    };
 
-   const { isHidden } = useSelector((state: StoreModel) => state.layout);
-
-   const handleClick = () => {};
-
+   const router = useRouter();
+   const handleClick = () => {
+      router.push(`/${mediaType}/genres/${genre.id}`);
+   };
+   const transition = { type: "spring", stiffness: 150, damping: 20, mass: 1 };
    return (
       <motion.div
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
          onClick={handleClick}
-         className="w-full aspect-[3/2] [perspective:2000px]"
-         animate={{ opacity: isHidden && !isHovered ? 0 : 1 }}
-         transition={{ duration: 0.2 }}
+         className="w-full aspect-[3/2] relative overflow-hidden"
       >
          <motion.div
-            animate={controls}
-            transition={{ duration: 0.3 }}
-            className="w-full h-full relative origin-top [transform-style:preserve-3d] rounded-2xl overflow-hidden"
+            animate={{ scale: isHovered ? 1.15 : 1 }}
+            transition={transition}
+            className="relative w-full h-full"
          >
             <GenreImage alt={genre.name} src={genre.image} />
-            <div className="absolute bottom-0 left-0 w-full bg-black/40 p-4 backdrop-blur-lg">
-               <div className="absolute bottom-full left-0 w-full h-1 bg-white">
-                  <motion.div
-                     initial={{ width: 0 }}
-                     className="h-full bg-blue-500"
-                     animate={loader}
-                  />
-               </div>
-               <span className="text-lg uppercase font-title text-white truncate">
-                  {genre.name}
-               </span>
-            </div>
+         </motion.div>
+         <motion.div
+            animate={{ opacity: isHovered ? 0 : 1 }}
+            transition={{ duration: 0.2 }}
+            className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-start items-end"
+         >
+            <span className="text-lg uppercase font-title text-white">
+               {genre.name}
+            </span>
          </motion.div>
       </motion.div>
    );

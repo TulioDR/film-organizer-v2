@@ -1,4 +1,3 @@
-import Title from "@/components/Title";
 import PageHead from "@/components/PageHead";
 import { AnimatePresence } from "framer-motion";
 
@@ -9,6 +8,7 @@ import Pagination from "./SearchMediaHandler/Pagination";
 import SEARCH_PAGES, { PageInfoModel } from "../constants/SEARCH_PAGES";
 import SearchMediaSpinner from "./SearchMediaHandler/SearchMediaSpinner";
 import useApiUrl from "../hooks/useApiUrl";
+import GenresHandler from "./GenresHandler";
 
 type Props = {};
 
@@ -81,7 +81,6 @@ export default function SearchMedia({}: Props) {
          {pageInfo && (
             <>
                <PageHead title={pageInfo.title} />
-               <Title title={pageInfo.title} />
                {apiUrl && (
                   <AnimatePresence mode="wait" propagate>
                      <SearchMediaHandler
@@ -93,6 +92,7 @@ export default function SearchMedia({}: Props) {
                   </AnimatePresence>
                )}
                <Pagination total={totalPages} />
+               {pageInfo.title === "Genres" && <GenresHandler />}
             </>
          )}
          {is404 && (

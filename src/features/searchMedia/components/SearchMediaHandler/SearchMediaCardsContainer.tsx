@@ -14,7 +14,7 @@ export default function SearchMediaCardsContainer({
          animate={isExiting && { opacity: 0 }}
          exit={{ opacity: 0 }}
          transition={{ duration: 0.4 }}
-         className={`gap-8 grid grid-cols-2 md:grid-cols-3  ${
+         className={`gap-4 grid grid-cols-2 md:grid-cols-3 mt-12  ${
             true
                ? "lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
                : "lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"

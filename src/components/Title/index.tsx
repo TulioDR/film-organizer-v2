@@ -1,37 +1,63 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import TitleSection from "./TitleSection";
+import { useRouter } from "next/router";
+import SEARCH_PAGES from "@/constants/SEARCH_PAGES";
+import { AnimatePresence } from "framer-motion";
+import movieGenres from "@/data/genres/movieGenres";
+import tvGenres from "@/data/genres/tvGenres";
 
-type Props = {
-   title?: string;
-};
+type Props = {};
 
-export default function Title({ title }: Props) {
-   const item = {
-      initial: { y: "100%", opacity: 0 },
-      animate: {
-         y: 0,
-         opacity: 1,
-         transition: { duration: 0.4, ease: "easeInOut" },
-      },
-      exit: {
-         y: "-100%",
-         opacity: 0,
-         transition: { duration: 0.4, ease: "easeInOut" },
-      },
-   };
+export default function Title({}: Props) {
+   const router = useRouter();
 
-   if (!title) return <></>;
+   const [mediaType, setMediaType] = useState<string | null>(null);
+   const [searchType, setSearchType] = useState<string | null>(null);
+   const [genreType, setGenreType] = useState<string | null>(null);
+
+   useEffect(() => {
+      const path = SEARCH_PAGES.find((p) => p.pathname === router.pathname);
+      const MT = router.query.media_type;
+
+      console.log(path, MT);
+      if (path && MT && ["movie", "tv"].includes(MT as string)) {
+         setMediaType(MT === "movie" ? "Movies" : "TV Shows");
+         setSearchType(path.title);
+         if (path.pathname === "/[media_type]/genres/[genre_id]") {
+            const genreId = router.query.genre_id! as string;
+            const currentGenres = MT === "movie" ? movieGenres : tvGenres;
+            const selectedGenre = currentGenres.find((g) => g.id === +genreId!);
+            setGenreType(selectedGenre ? selectedGenre.name : null);
+         } else {
+            setGenreType(null);
+         }
+      } else {
+         setMediaType(null);
+         setSearchType(null);
+         setGenreType(null);
+      }
+   }, [router.pathname, router.query.media_type, router.query.genre_id]);
+
    return (
-      <div className="overflow-hidden mb-8">
-         <motion.h2
-            variants={item}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className={`text-4xl font-title text-center tracking-wide uppercase text-white`}
-         >
-            {title}
-         </motion.h2>
-      </div>
+      <>
+         {mediaType && searchType && (
+            <div className="fixed z-50 top-32 left-32 overflow-hidden h-8 flex gap-4">
+               <AnimatePresence mode="wait">
+                  <TitleSection key={mediaType} text={mediaType} />
+               </AnimatePresence>
+               <AnimatePresence mode="wait">
+                  <TitleSection
+                     key={`${mediaType}-${searchType}`}
+                     text={searchType}
+                  />
+               </AnimatePresence>
+               <AnimatePresence mode="wait">
+                  {genreType && (
+                     <TitleSection key={genreType} text={genreType} />
+                  )}
+               </AnimatePresence>
+            </div>
+         )}
+      </>
    );
 }

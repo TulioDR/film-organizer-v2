@@ -21,10 +21,6 @@ export default function Background() {
       else setSrc(backgroundImage);
    }, [backgroundImage]);
 
-   useEffect(() => {
-      console.log(src);
-   }, [src]);
-
    return (
       <div className="fixed bottom-0 left-0 h-[100lvh] -z-10 w-screen bg-[#24282F]">
          <AnimatePresence>

@@ -23,6 +23,7 @@ import TutorialButton from "@/features/layout/tutorialButton/components/Tutorial
 import FixedContainer from "./FixedContainer";
 import Responsive from "../Responsive";
 import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
+import Title from "../Title";
 
 type Props = {
    children: React.ReactNode;
@@ -63,6 +64,7 @@ export default function MainPageContainer({ children }: Props) {
                <TutorialButton />
             </Responsive>
          </FixedContainer>
+         <Title />
          <Background />
          <SaveMediaModal />
          <LoginAdviceModal />

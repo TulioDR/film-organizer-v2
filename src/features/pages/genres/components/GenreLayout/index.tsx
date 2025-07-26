@@ -11,7 +11,7 @@ export default function GenreLayout({ mediaType }: Props) {
    const genresArray = isMovie ? movieGenres : tvGenres;
 
    return (
-      <div className="w-full grid grid-cols-3 2xl:grid-cols-4 gap-8">
+      <div className="w-full grid grid-cols-3 2xl:grid-cols-4">
          {genresArray.map((genre) => (
             <GenreCard key={genre.id} genre={genre} mediaType={mediaType} />
          ))}
