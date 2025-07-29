@@ -1,8 +1,8 @@
 import { sidebarActions } from "@/store/slices/sidebar-slice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import SideItemIcon from "../SideInnerItem/SideItemIcon";
 import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
+import SideItemIcon from "../SideItemIcon";
 
 type Props = {
    link: string;
@@ -10,7 +10,7 @@ type Props = {
    text: string;
 };
 
-export default function SideDropdownItem({ link, icon, text }: Props) {
+export default function TooltipItem({ link, icon, text }: Props) {
    const dispatch = useDispatch();
    const hideSidebar = () => dispatch(sidebarActions.closeReveal());
 
@@ -23,11 +23,7 @@ export default function SideDropdownItem({ link, icon, text }: Props) {
       <Link
          href={link}
          onClick={hideSidebar}
-         className={`flex items-center h-12 gap-2 px-4 ${
-            isSelected
-               ? "bg-blue-500 text-white"
-               : "text-black hover:bg-black hover:text-white"
-         }`}
+         className={`h-12 px-2 text-black hover:bg-black hover:text-white flex items-center gap-2 rounded-md`}
       >
          <SideItemIcon isFilled={isSelected} icon={icon} smallIcon />
          <span className="text-sm">{text}</span>

@@ -1,42 +1,53 @@
-import CreateListButton from "./CreateListButton";
-import SidebarContainer from "./SidebarContainer";
-import SideSubtitle from "./SideSubtitle";
+import DropdownItemModel from "../models/DropdownItemModel";
+import SideItem from "./SideItem";
 
-import SideLinks from "./SideLinks";
-
-import { useState } from "react";
-import ModalPortal from "@/components/Modals/ModalPortal";
-
-import { useUser } from "@clerk/nextjs";
-import SideMessage from "./SideMessage";
-import { useRouter } from "next/router";
-import StoreModel from "@/models/StoreModel";
-import { useSelector } from "react-redux";
-import SideLoadingLists from "./SideLoadingLists";
-import SideLists from "./SideLists";
-import CreateListModal from "@/features/modals/createListModal/components/CreateListModal";
 import GlassContainer from "@/components/GlassContainer";
 
 export default function Sidebar() {
-   // const { isLoaded, user } = useUser();
+   const movieItems: DropdownItemModel[] = [
+      {
+         link: "/movie/popular",
+         icon: "local_fire_department",
+         text: "Popular",
+      },
+      { link: "/movie/genres", icon: "theater_comedy", text: "Genres" },
+      { link: "/movie/trending", icon: "trending_up", text: "Trending" },
+      { link: "/movie/top-rated", icon: "star", text: "Top Rated" },
+   ];
 
-   const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
-   const openForm = () => setShowCreateForm(true);
-   const closeForm = () => setShowCreateForm(false);
-
-   const router = useRouter();
-   const goToAuth = () => router.push("/auth");
-
-   const { lists } = useSelector((state: StoreModel) => state.lists);
-   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
-
+   const tvItems: DropdownItemModel[] = [
+      { link: "/tv/popular", icon: "local_fire_department", text: "Popular" },
+      { link: "/tv/genres", icon: "theater_comedy", text: "Genres" },
+      { link: "/tv/trending", icon: "trending_up", text: "Trending" },
+      { link: "/tv/top-rated", icon: "star", text: "Top Rated" },
+   ];
    return (
       <div className="flex items-center w-16 pointer-events-none h-[100svh] z-40 absolute top-0 left-0">
          <GlassContainer
             el="nav"
             className="w-16 flex flex-col py-4 pointer-events-auto"
          >
-            <SideLinks />
+            <SideItem link="/" icon="home" text="Home" />
+            <SideItem
+               link="/movie"
+               icon="movie"
+               text="Movies"
+               mediaType="movie"
+               items={movieItems}
+            />
+            <SideItem
+               link="/tv"
+               icon="smart_display"
+               text="Series"
+               mediaType="tv"
+               items={tvItems}
+            />
+            <SideItem link="/discover" icon="travel_explore" text="Discover" />
+            <SideItem
+               link="/lists"
+               icon="format_list_bulleted"
+               text="Manage Lists"
+            />
          </GlassContainer>
       </div>
    );
