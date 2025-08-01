@@ -45,7 +45,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
          <motion.div
             animate={{ opacity: isHovered ? 0 : 1 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-start items-end"
+            className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-start items-end"
          >
             <span className="text-lg uppercase font-title text-white">
                {genre.name}

@@ -10,13 +10,12 @@ export default function ActiveMark({}: Props) {
    return (
       <motion.div
          layoutId="activeMark"
-         // style={{ originX: "0px" }}
          className="absolute top-0 left-0 w-full h-full p-2 z-10 pointer-events-none"
          transition={{ duration: 0.6, type: "spring" }}
       >
          <div
             style={{ backgroundColor: themeColor }}
-            className="rounded-md w-full h-full"
+            className="rounded-[5px] w-full h-full"
          />
       </motion.div>
    );
