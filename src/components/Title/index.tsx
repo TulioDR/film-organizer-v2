@@ -41,7 +41,7 @@ export default function Title({}: Props) {
    return (
       <>
          {mediaType && searchType && (
-            <div className="fixed z-50 top-32 left-32 overflow-hidden h-8 flex gap-4">
+            <div className="fixed z-50 top-32 left-4 lg:left-32 overflow-hidden h-8 flex gap-2 xl:gap-4">
                <AnimatePresence mode="wait">
                   <TitleSection key={mediaType} text={mediaType} />
                </AnimatePresence>

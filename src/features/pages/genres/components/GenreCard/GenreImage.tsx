@@ -15,7 +15,7 @@ export default function GenreImage({ alt, src }: Props) {
          sizes="100%"
          quality={100}
          priority
-         className="object-cover"
+         className="object-cover pointer-events-none"
       />
    );
 }

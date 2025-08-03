@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import API_PUBLIC from "@/api/public";
-import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
 
 import { MediaModel } from "@/models/MediaModel";
@@ -33,7 +32,7 @@ export default function Home() {
    }, [nowPlaying]);
 
    return (
-      <TransitionPosterProvider>
+      <>
          <PageHead title="Film Organizer" />
          <div className="h-[100svh] w-full flex justify-center">
             <div className="w-[50vw] flex gap-4 h-full">
@@ -47,6 +46,6 @@ export default function Home() {
                ))}
             </div>
          </div>
-      </TransitionPosterProvider>
+      </>
    );
 }

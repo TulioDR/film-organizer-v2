@@ -3,7 +3,6 @@ import LearnMoreButton from "./LearnMoreButton";
 import { AnimatePresence, motion } from "framer-motion";
 import { mediaDescription } from "@/animations/homeAnimations";
 import HomeDate from "./HomeDate";
-import useTransitionPosterContext from "@/features/transitionPoster/context/TransitionPosterContext";
 import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
 import { MediaModel } from "@/models/MediaModel";
 
@@ -16,17 +15,9 @@ export default function MediaDescription({
    currentMedia,
    currentShowcase,
 }: Props) {
-   const { startPosterAnimation } = useTransitionPosterContext();
-
    const isMovie = currentShowcase !== "series";
    const mediaType = isMovie ? "movie" : "tv";
-   const handleLearnMoreClick = async () => {
-      startPosterAnimation(
-         mediaType,
-         currentMedia.id,
-         currentMedia.poster_path
-      );
-   };
+   const handleLearnMoreClick = async () => {};
    return (
       <AnimatePresence mode="wait">
          <motion.div

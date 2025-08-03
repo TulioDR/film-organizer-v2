@@ -1,7 +1,6 @@
 import ModalPortal from "@/components/Modals/ModalPortal";
 
 import { GetServerSideProps } from "next";
-import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 
 import Title from "@/components/Title";
 import PageHead from "@/components/PageHead";
@@ -54,16 +53,16 @@ export default function ListID({ list_id }: Props) {
          </div>
       );
    return (
-      <TransitionPosterProvider>
+      <>
          <PageHead title={list?.name || ""} />
-         <Title title={list.name}>
+         {/* <Title title={list.name}>
             <MediaFilter
                selectedType={selectedType}
                setSelectedType={setSelectedType}
                sortBy={sortBy}
                setSortBy={setSortBy}
             />
-         </Title>
+         </Title> */}
          <SavedMedia
             selectedType={selectedType}
             filteredMedia={filteredMedia}
@@ -90,6 +89,6 @@ export default function ListID({ list_id }: Props) {
                stopDeleteMode={stopDeleteMode}
             />
          </ModalPortal>
-      </TransitionPosterProvider>
+      </>
    );
 }

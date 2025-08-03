@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { createMedia, deleteMedia, getIsMediaSavedInList } from "@/api/media";
-import useNotification from "@/features/notification/hooks/useNotification";
 import ListModel from "@/models/ListModel";
 import { MediaModel } from "@/models/MediaModel";
 import { MediaTypeModel } from "@/models/MediaTypeModel";
 import { v4 as uuid } from "uuid";
+import useNotification from "@/features/layout/notification/hooks/useNotification";
 
 export default function useListToSaveBookmark(
    list: ListModel,

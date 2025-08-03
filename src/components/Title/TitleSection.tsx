@@ -24,7 +24,7 @@ export default function TitleSection({ text }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="h-full flex items-center cursor-pointer hover:border-b border-white uppercase text-3xl font-title tracking-wide"
+         className="h-full flex items-center cursor-pointer hover:border-b border-white uppercase text-xs xl:text-3xl font-title tracking-wide"
       >
          {`>\xa0${text}`}
       </motion.a>

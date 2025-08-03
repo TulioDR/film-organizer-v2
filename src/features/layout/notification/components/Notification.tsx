@@ -1,7 +1,7 @@
-import useNotification from "@/features/notification/hooks/useNotification";
 import StoreModel from "@/models/StoreModel";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import useNotification from "../hooks/useNotification";
 
 type Props = {};
 

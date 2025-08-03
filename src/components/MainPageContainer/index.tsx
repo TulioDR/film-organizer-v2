@@ -16,7 +16,6 @@ import { listActions } from "@/store/slices/list-slice";
 import { useDispatch } from "react-redux";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import SaveMediaModal from "@/features/modals/saveMediaModal/components/SaveMediaModal";
-import Notification from "@/features/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/loginAdviceModal/components/LoginAdviceModal";
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import TutorialButton from "@/features/layout/tutorialButton/components/TutorialButton";
@@ -24,6 +23,7 @@ import FixedContainer from "./FixedContainer";
 import Responsive from "../Responsive";
 import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
 import Title from "../Title";
+import Notification from "@/features/layout/notification/components/Notification";
 
 type Props = {
    children: React.ReactNode;

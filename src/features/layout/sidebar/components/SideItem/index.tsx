@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
-import { sideLinkAnimation } from "@/animations/SidebarAnimations";
 import ActiveMark from "./ActiveMark";
 import SideLink from "./SideLink";
 import MainTooltip from "./Tooltips/MainTooltip";
@@ -35,7 +34,6 @@ export default function SideItem({
       <motion.li
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
-         variants={sideLinkAnimation}
          ref={elementRef}
          className="h-16 w-full list-none select-none relative"
       >

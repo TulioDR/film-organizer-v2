@@ -3,8 +3,8 @@ import { getIsMediaSaved } from "@/api/media";
 import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
-import useNotification from "@/features/notification/hooks/useNotification";
 import { MediaTypeModel } from "@/models/MediaTypeModel";
+import useNotification from "@/features/layout/notification/hooks/useNotification";
 
 export default function useIsMediaSaved(id: number, mediaType: MediaTypeModel) {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);

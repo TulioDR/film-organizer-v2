@@ -13,7 +13,7 @@ export default function FixedCard({ fixedValues }: Props) {
    const selectedID = `${mediaType}-${fixedValues?.selectedMedia?.id}`;
 
    const DURATION = 0.4;
-
+   // const transition = { duration: 0.5, ease: [0.645, 0.045, 0.355, 1] };
    return (
       <motion.div
          layout

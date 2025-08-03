@@ -2,23 +2,34 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 import PageHead from "@/components/PageHead";
-import GenreLayout from "@/features/pages/genres/components/GenreLayout";
+import GenreCard from "@/features/pages/genres/components/GenreCard";
+import movieGenres from "@/data/genres/movieGenres";
+import tvGenres from "@/data/genres/tvGenres";
+import GenresContainer from "@/features/pages/genres/components/GenresContainer";
 
 export default function Genres() {
    const router = useRouter();
    const mediaType = router.query.media_type as "tv" | "movie";
+   const isMovie = mediaType === "movie";
+   const genresArray = isMovie ? movieGenres : tvGenres;
 
    return (
-      <div className="px-32 pt-32 pb-8">
+      <motion.div
+         exit={{ opacity: 0, transition: { duration: 0.4 } }}
+         className="px-4 lg:px-24 xl:px-32 pt-32 pb-8"
+      >
          <PageHead title="Genres" />
-         <motion.div
-            exit={{ opacity: 0, transition: { duration: 0.4 } }}
-            className="mt-12"
-         >
-            <AnimatePresence mode="wait">
-               <GenreLayout key={mediaType} mediaType={mediaType} />
-            </AnimatePresence>
-         </motion.div>
-      </div>
+         <AnimatePresence mode="wait">
+            <GenresContainer key={mediaType}>
+               {genresArray.map((genre) => (
+                  <GenreCard
+                     key={genre.id}
+                     genre={genre}
+                     mediaType={mediaType}
+                  />
+               ))}
+            </GenresContainer>
+         </AnimatePresence>
+      </motion.div>
    );
 }

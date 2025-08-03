@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
-import { TransitionPosterProvider } from "@/features/transitionPoster/context/TransitionPosterContext";
 import PageHead from "@/components/PageHead";
 
 import { MediaModel } from "@/models/MediaModel";
@@ -57,7 +56,7 @@ export default function Home() {
    }, [currentShowcase, nowPlaying, onAir, upcoming]);
 
    return (
-      <TransitionPosterProvider>
+      <>
          <PageHead title="Film Organizer" />
          <motion.div
             exit={{ opacity: 0 }}
@@ -87,6 +86,6 @@ export default function Home() {
                </div>
             )}
          </motion.div>
-      </TransitionPosterProvider>
+      </>
    );
 }
