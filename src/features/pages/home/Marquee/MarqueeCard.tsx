@@ -1,12 +1,12 @@
-import Poster from "@/components/Poster";
-import { MediaModel } from "@/models/MediaModel";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import Link from "next/link";
+import Poster from "@/common/components/Poster";
+import { Media } from "@/common/models/Media";
 
 type Props = {
-   media: MediaModel;
+   media: Media;
 };
 
 export default function MarqueeCard({ media }: Props) {

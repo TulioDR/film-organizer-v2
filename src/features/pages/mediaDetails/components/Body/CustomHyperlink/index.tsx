@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Poster from "@/components/Poster";
 import FrontIcon from "./FrontIcon";
+import Poster from "@/common/components/Poster";
 
 type Props = {
    href: string;

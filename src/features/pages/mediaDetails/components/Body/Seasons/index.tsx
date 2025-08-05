@@ -1,13 +1,12 @@
-import ModalPortal from "@/components/Modals/ModalPortal";
-
 import SeasonCard from "./SeasonCard";
 import { useState } from "react";
 
-import SeasonModal from "@/features/modals/seasonModal/components/SeasonModal";
 import InfoContainer from "../InfoContainer";
 import ResponsiveConfig from "../../../models/ResponsiveConfig";
-import { MD_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
-import Responsive from "@/components/Responsive";
+import SeasonModal from "./SeasonModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+import Responsive from "@/common/components/Responsive";
+import { MD_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 
 type Props = {
    seasons: any[];

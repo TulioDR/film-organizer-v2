@@ -1,4 +1,8 @@
-import { changeDateFormat, daysToRelease, isReleased } from "@/utils/date";
+import {
+   changeDateFormat,
+   daysToRelease,
+   isReleased,
+} from "@/common/utils/date";
 import CardContainer from "./CardContainer";
 
 type Props = {

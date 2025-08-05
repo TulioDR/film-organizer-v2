@@ -13,7 +13,7 @@ import LoginPanel from "@/features/authentication/components/AuthPanels/LoginPan
 import PanelsContainer from "@/features/authentication/components/AuthPanels/PanelsContainer";
 import AuthAppLogo from "@/features/authentication/components/AuthAppLogo";
 import AuthFormsContainer from "@/features/authentication/components/AuthForms/AuthFormsContainer";
-import PageHead from "@/components/PageHead";
+import PageHead from "@/common/components/PageHead";
 
 export default function Auth() {
    const { isLoaded, isSignedIn } = useUser();

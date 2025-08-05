@@ -1,4 +1,4 @@
-import StoreModel from "@/models/StoreModel";
+import Store from "@/common/models/Store";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function SavedMediaContainer({ children }: Props) {
-   const { expandSidebar } = useSelector((state: StoreModel) => state.sidebar);
+   const { expandSidebar } = useSelector((state: Store) => state.sidebar);
    return (
       <motion.div
          exit={{ opacity: 0 }}

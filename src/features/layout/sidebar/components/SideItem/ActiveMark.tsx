@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
+import Store from "@/common/models/Store";
 
 type Props = {};
 
 export default function ActiveMark({}: Props) {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+   const { themeColor } = useSelector((state: Store) => state.theme);
    return (
       <motion.div
          layoutId="activeMark"

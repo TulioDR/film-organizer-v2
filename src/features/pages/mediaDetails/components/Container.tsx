@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import useScrollToTop from "@/hooks/useScrollToTop";
 import { MediaDetailsModel } from "../models/MediaDetailsModel";
 import useBackground from "@/features/layout/background/hooks/useBackground";
+import useScrollToTop from "@/common/hooks/useScrollToTop";
 
 type Props = {
    children: React.ReactNode;

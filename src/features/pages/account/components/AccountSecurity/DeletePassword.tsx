@@ -1,9 +1,9 @@
 import { useUser } from "@clerk/nextjs";
 import React from "react";
 import AccountButton from "../AccountButton";
-import useModalState from "@/hooks/useModalState";
-import ModalPortal from "@/components/Modals/ModalPortal";
-import DeletePasswordModal from "@/features/modals/deletePasswordModal/components/DeletePasswordModal";
+import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
+import DeletePasswordModal from "@/features/modals/user-modals/delete-password-modal/components/DeletePasswordModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 
 export default function DeletePassword() {
    const { isModalOpen, openModal, closeModal } = useModalState();

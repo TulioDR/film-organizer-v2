@@ -1,8 +1,12 @@
-import { MediaModel } from "@/models/MediaModel";
-import { changeDateFormat, daysToRelease, isReleased } from "@/utils/date";
+import { Media } from "@/common/models/Media";
+import {
+   changeDateFormat,
+   daysToRelease,
+   isReleased,
+} from "@/common/utils/date";
 
 type Props = {
-   currentMedia: MediaModel;
+   currentMedia: Media;
    currentShowcase: string;
 };
 

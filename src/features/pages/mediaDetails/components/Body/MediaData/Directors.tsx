@@ -1,4 +1,4 @@
-import { separateByCommas } from "@/utils/commas";
+import { separateByCommas } from "@/common/utils/commas";
 import getPersonWiki from "../../../utils/getPersonWiki";
 
 type Props = {

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { themeActions } from "@/store/slices/theme-slice";
 import { useState, useEffect } from "react";
 import { darkThemeColors, lightThemeColors } from "@/data/themeColors";
-import StoreModel from "@/models/StoreModel";
+import Store from "@/common/models/Store";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -25,7 +25,7 @@ export default function ThemeColorsMenu({ setMenu }: Props) {
       };
       dispatch(themeActions.changeThemeColor(object));
    };
-   const { isDarkMode } = useSelector((state: StoreModel) => state.theme);
+   const { isDarkMode } = useSelector((state: Store) => state.theme);
    const [currentColors, setCurrentColors] =
       useState<ThemeColorsModel[]>(darkThemeColors);
 

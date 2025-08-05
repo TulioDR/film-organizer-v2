@@ -1,14 +1,14 @@
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 
-import { SavedMediaModel } from "@/models/MediaModel";
 import FrontTitle from "@/features/mediaCard/components/MediaCardFront/FrontTitle";
 import DeleteSelector from "./DeleteSelector";
+import { SavedMedia } from "@/common/models/Media";
 
 type Props = {
    isDeleteModeActive: boolean;
-   mediaToDelete: SavedMediaModel[];
-   media: SavedMediaModel;
+   mediaToDelete: SavedMedia[];
+   media: SavedMedia;
    markToDelete: () => void;
 };
 

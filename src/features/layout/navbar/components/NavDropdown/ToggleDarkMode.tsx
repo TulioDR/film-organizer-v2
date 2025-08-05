@@ -1,4 +1,4 @@
-import StoreModel from "@/models/StoreModel";
+import Store from "@/common/models/Store";
 import { motion } from "framer-motion";
 
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ const spring = {
 };
 export default function ToggleDarkMode() {
    const { themeColor, isDarkMode } = useSelector(
-      (state: StoreModel) => state.theme
+      (state: Store) => state.theme
    );
 
    return (

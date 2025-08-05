@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { SavedMediaModel } from "@/models/MediaModel";
 import { TypeFilterModel, OrderFilterModel } from "../models/MediaFilterModel";
+import { SavedMedia } from "@/common/models/Media";
 
 export default function useSavedMediaFilter(
-   media: SavedMediaModel[] | null,
+   media: SavedMedia[] | null,
    list_id: string
 ) {
-   const [filteredMedia, setFilteredMedia] = useState<SavedMediaModel[] | null>(
+   const [filteredMedia, setFilteredMedia] = useState<SavedMedia[] | null>(
       null
    );
-   const [orderedMedia, setOrderedMedia] = useState<SavedMediaModel[] | null>(
-      null
-   );
+   const [orderedMedia, setOrderedMedia] = useState<SavedMedia[] | null>(null);
    const [selectedType, setSelectedType] = useState<TypeFilterModel>("all");
    const [sortBy, setSortBy] = useState<OrderFilterModel>("oldest");
 

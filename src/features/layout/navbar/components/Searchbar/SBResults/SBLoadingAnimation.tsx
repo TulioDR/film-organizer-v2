@@ -1,4 +1,4 @@
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/common/components/LoadingSpinner";
 
 export default function SBLoadingAnimation() {
    return (

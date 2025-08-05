@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
-import ListModel from "@/models/ListModel";
-import StoreModel from "@/models/StoreModel";
 
-import ModalPortal from "@/components/Modals/ModalPortal";
-
-import Title from "@/components/Title";
 import ListFinder from "@/features/pages/manageLists/ListFinder";
 import ListsCardsContainer from "@/features/pages/manageLists/ListsCardsContainer";
 import ListCard from "@/features/pages/manageLists/ListCard";
 import NoListsMessage from "@/features/pages/manageLists/NoListsMessage";
 import ListsLoginAdvice from "@/features/pages/manageLists/ListsLoginAdvice";
-import PageHead from "@/components/PageHead";
-import DeleteListModal from "@/features/modals/deleteListModal/components/DeleteListModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+import DeleteListModal from "@/features/modals/list-modals/delete-list-modal/components/DeleteListModal";
+import PageHead from "@/common/components/PageHead";
+import PageTitle from "@/common/components/PageTitle";
+import List from "@/common/models/List";
+import Store from "@/common/models/Store";
 
 export default function Lists() {
    const { user } = useUser();
-   const { lists } = useSelector((state: StoreModel) => state.lists);
+   const { lists } = useSelector((state: Store) => state.lists);
 
-   const [listToDelete, setListToDelete] = useState<ListModel | null>(null);
+   const [listToDelete, setListToDelete] = useState<List | null>(null);
 
    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
    const openDeleteModal = (list: any) => {
@@ -31,7 +30,7 @@ export default function Lists() {
       setListToDelete(null);
    };
    const [inputValue, setInputValue] = useState<string>("");
-   const [filteredLists, setFilteredLists] = useState<ListModel[] | null>(null);
+   const [filteredLists, setFilteredLists] = useState<List[] | null>(null);
    useEffect(() => {
       if (!lists) {
          setFilteredLists([]);
@@ -47,12 +46,12 @@ export default function Lists() {
    return (
       <div className="overflow-hidden">
          <PageHead title="Manage Lists<" />
-         <Title title="Manage">
+         {/* <PageTitle title="Manage">
             <ListFinder
                onChange={(e) => setInputValue(e.currentTarget.value)}
                value={inputValue}
             />
-         </Title>
+         </PageTitle> */}
          {!user && <ListsLoginAdvice />}
          {user && filteredLists.length === 0 && <NoListsMessage />}
          {user && filteredLists.length > 0 && (

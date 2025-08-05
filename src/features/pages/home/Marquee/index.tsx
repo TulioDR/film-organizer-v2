@@ -1,4 +1,3 @@
-import { MediaModel } from "@/models/MediaModel";
 import React, { useState } from "react";
 import MarqueeCard from "./MarqueeCard";
 import MarqueeInnerContainer from "./MarqueeInnerContainer";
@@ -9,9 +8,10 @@ import {
    motion,
    useSpring,
 } from "framer-motion";
+import { Media } from "@/common/models/Media";
 
 type Props = {
-   array: MediaModel[];
+   array: Media[];
    reverse: boolean;
    initialY: number;
 };

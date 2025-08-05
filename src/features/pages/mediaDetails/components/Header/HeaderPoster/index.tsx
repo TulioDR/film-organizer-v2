@@ -1,7 +1,7 @@
-import Responsive from "@/components/Responsive";
-import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
+import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import Desktop from "./Desktop";
 import Mobile from "./Mobile";
+import Responsive from "@/common/components/Responsive";
 
 type Props = {
    alt: string;

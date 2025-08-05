@@ -5,7 +5,7 @@ import ToggleTypeButton from "./ToggleTypeButton";
 import SBResults from "./SBResults";
 import API_PUBLIC from "@/api/public";
 import { motion } from "framer-motion";
-import GlassContainer from "@/components/GlassContainer";
+import GlassContainer from "@/common/components/GlassContainer";
 
 type Props = {};
 

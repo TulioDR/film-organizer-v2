@@ -1,6 +1,6 @@
-import ThemeColorModel from "@/models/ThemeColor";
+import ThemeColor from "@/common/models/ThemeColor";
 
-export const lightThemeColors: ThemeColorModel[] = [
+export const lightThemeColors: ThemeColor[] = [
    { name: "grapefruit", color: "#d94555" },
    { name: "sunflower", color: "#f8ba43" },
    { name: "mint", color: "#36bc9b" },
@@ -10,7 +10,7 @@ export const lightThemeColors: ThemeColorModel[] = [
    { name: "grass", color: "#8ec148" },
 ];
 
-export const darkThemeColors: ThemeColorModel[] = [
+export const darkThemeColors: ThemeColor[] = [
    { name: "grapefruit", color: "#ed5564" },
    { name: "sunflower", color: "#ffce55" },
    { name: "mint", color: "#48cfae" },

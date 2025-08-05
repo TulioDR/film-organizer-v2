@@ -1,5 +1,5 @@
-import Responsive from "@/components/Responsive";
-import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
+import Responsive from "@/common/components/Responsive";
+import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import { motion } from "framer-motion";
 
 export default function ScrollDownIcon() {

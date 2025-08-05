@@ -1,6 +1,6 @@
-import { MediaModel } from "@/models/MediaModel";
+import { Media } from "@/common/models/Media";
 
-export interface MediaDetailsModel extends MediaModel {
+export interface MediaDetailsModel extends Media {
    budget: number;
    created_by: any[];
    seasons?: any;
@@ -53,7 +53,7 @@ interface ProductionCountry {
 
 interface Similar {
    page: number;
-   results: MediaModel[];
+   results: Media[];
    total_pages: number;
    total_results: number;
 }

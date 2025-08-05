@@ -1,11 +1,5 @@
-import ModalPortal from "@/components/Modals/ModalPortal";
-
 import { GetServerSideProps } from "next";
 
-import Title from "@/components/Title";
-import PageHead from "@/components/PageHead";
-
-import useModalState from "@/hooks/useModalState";
 import useListData from "@/features/pages/listDetails/hooks/useListData";
 import useMediaData from "@/features/pages/listDetails/hooks/useMediaData";
 import useSavedMediaFilter from "@/features/pages/listDetails/hooks/useSavedMediaFilter";
@@ -13,8 +7,11 @@ import useDeleteMode from "@/features/pages/listDetails/hooks/useDeleteMode";
 import SavedMedia from "@/features/pages/listDetails/components/SavedMedia";
 import DeleteMode from "@/features/pages/listDetails/components/DeleteMode";
 import MediaFilter from "@/features/pages/listDetails/components/MediaFilter";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import DeleteMediaModal from "@/features/modals/deleteMediaModal/components/DeleteMediaModal";
+import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
+import DeleteMediaModal from "@/features/modals/media-modals/delete-media-modal/components/DeleteMediaModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+import LoadingSpinner from "@/common/components/LoadingSpinner";
+import PageHead from "@/common/components/PageHead";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;

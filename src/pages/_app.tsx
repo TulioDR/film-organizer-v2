@@ -8,8 +8,8 @@ import { Provider } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Fragment } from "react";
-import MainPageContainer from "@/components/MainPageContainer";
 import { ReactLenis } from "lenis/react";
+import MainLayout from "@/features/layout/main-layout/components/MainLayout";
 
 function App({ Component, ...rest }: AppProps) {
    const { route } = useRouter();
@@ -30,9 +30,9 @@ function App({ Component, ...rest }: AppProps) {
                      <Component {...pageProps} />
                   </Fragment>
                ) : (
-                  <MainPageContainer key="main">
+                  <MainLayout key="main">
                      <Component {...pageProps} />
-                  </MainPageContainer>
+                  </MainLayout>
                )}
             </AnimatePresence>
          </Provider>

@@ -2,8 +2,7 @@ import { GetServerSideProps } from "next";
 
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
-
-import SearchMedia from "@/features/searchMedia/components/SearchMedia";
+import SearchMedia from "@/features/search-media/components/SearchMedia";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, genre_id } = context.query;

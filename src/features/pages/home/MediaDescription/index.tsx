@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { mediaDescription } from "@/animations/homeAnimations";
 import HomeDate from "./HomeDate";
 import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
-import { MediaModel } from "@/models/MediaModel";
+import { Media } from "@/common/models/Media";
 
 type Props = {
-   currentMedia: MediaModel;
+   currentMedia: Media;
    currentShowcase: string;
 };
 

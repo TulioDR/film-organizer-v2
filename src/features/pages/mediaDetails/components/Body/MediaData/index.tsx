@@ -1,9 +1,9 @@
 import React from "react";
-import { addCommasToNumber, separateByCommas } from "@/utils/commas";
 import Row from "./Row";
 import Genres from "./Genres";
 import Directors from "./Directors";
 import Container from "../InfoContainer/Container";
+import { addCommasToNumber, separateByCommas } from "@/common/utils/commas";
 type Props = {
    media: any;
    crew: any[];

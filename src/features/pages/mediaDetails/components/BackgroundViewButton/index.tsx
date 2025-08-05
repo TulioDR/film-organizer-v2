@@ -1,13 +1,13 @@
 import React from "react";
-import GlassContainer from "@/components/GlassContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { layoutActions } from "@/store/slices/layout-slice";
-import StoreModel from "@/models/StoreModel";
+import GlassContainer from "@/common/components/GlassContainer";
+import Store from "@/common/models/Store";
 type Props = {};
 
 export default function BackgroundViewButton({}: Props) {
    const dispatch = useDispatch();
-   const { isHidden } = useSelector((state: StoreModel) => state.layout);
+   const { isHidden } = useSelector((state: Store) => state.layout);
 
    const handleClick = () => {
       if (isHidden) {

@@ -1,9 +1,9 @@
 import { getSavedMedia } from "@/api/media";
-import { SavedMediaModel } from "@/models/MediaModel";
+import { SavedMedia } from "@/common/models/Media";
 import { useState, useEffect } from "react";
 
 export default function useMediaData(list_id: string) {
-   const [media, setMedia] = useState<SavedMediaModel[] | null>(null);
+   const [media, setMedia] = useState<SavedMedia[] | null>(null);
 
    const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
    const refresh = () => setIsRefreshing((prev) => !prev);

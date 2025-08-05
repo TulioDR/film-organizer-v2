@@ -1,16 +1,16 @@
-import StoreModel from "@/models/StoreModel";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import Store from "@/common/models/Store";
 
 type Props = {
    children: React.ReactNode;
    similar?: boolean;
-   className: string;
+   className?: string;
 };
 
 export default function Container({ children, similar, className }: Props) {
-   const { isHidden } = useSelector((state: StoreModel) => state.layout);
+   const { isHidden } = useSelector((state: Store) => state.layout);
    const [hideUi, setHideUi] = React.useState(false);
 
    useEffect(() => {

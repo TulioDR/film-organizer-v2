@@ -4,9 +4,9 @@ import ScrollDownIcon from "./ScrollDownIcon";
 import { MediaDetailsModel } from "../../models/MediaDetailsModel";
 // import MainInfoMobile from "./MainInfoMobile";
 import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
 import HeaderPoster from "./HeaderPoster";
 import HeaderData from "./HeaderData";
+import Store from "@/common/models/Store";
 
 type Props = {
    media: MediaDetailsModel;
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function Header({ media, media_type }: Props) {
-   const { isHidden } = useSelector((state: StoreModel) => state.layout);
+   const { isHidden } = useSelector((state: Store) => state.layout);
    return (
       <motion.div
          animate={{ opacity: isHidden ? 0 : 1 }}

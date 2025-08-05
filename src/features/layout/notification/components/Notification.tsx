@@ -1,13 +1,13 @@
-import StoreModel from "@/models/StoreModel";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import useNotification from "../hooks/useNotification";
+import Store from "@/common/models/Store";
 
 type Props = {};
 
 export default function Notification({}: Props) {
    const { notification, success } = useSelector(
-      (state: StoreModel) => state.notification
+      (state: Store) => state.notification
    );
 
    const { closeNotification } = useNotification();

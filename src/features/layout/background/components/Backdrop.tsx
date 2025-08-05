@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/common/components/LoadingSpinner";
 
 type Props = {
    backgroundKey: string;

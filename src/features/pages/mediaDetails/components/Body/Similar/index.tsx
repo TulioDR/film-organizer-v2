@@ -1,14 +1,14 @@
 import { MediaDetailsModel } from "../../../models/MediaDetailsModel";
 import InfoContainer from "../InfoContainer";
 import React from "react";
-import MediaCard from "@/features/mediaCard/components/MediaCard";
 import {
    LG_MEDIA_QUERY,
    SM_MEDIA_QUERY,
    XXL_MEDIA_QUERY,
-} from "@/constants/MEDIA_QUERIES";
-import Responsive from "@/components/Responsive";
+} from "@/common/constants/MEDIA_QUERIES";
 import ResponsiveConfig from "../../../models/ResponsiveConfig";
+import Responsive from "@/common/components/Responsive";
+import MediaCard from "@/features/media-card/components/MediaCard";
 
 type Props = {
    media: MediaDetailsModel;

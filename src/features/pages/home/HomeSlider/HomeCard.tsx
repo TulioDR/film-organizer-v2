@@ -1,7 +1,7 @@
 import { useSwiper } from "swiper/react";
-import Poster from "@/components/Poster";
 import { motion } from "framer-motion";
 import { staggerItem } from "@/animations/StaggerCards";
+import Poster from "@/common/components/Poster";
 
 type Props = {
    media: any;

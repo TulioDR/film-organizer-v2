@@ -1,4 +1,4 @@
-import GlassContainer from "@/components/GlassContainer";
+import GlassContainer from "@/common/components/GlassContainer";
 import React, { useEffect } from "react";
 
 type Props = {

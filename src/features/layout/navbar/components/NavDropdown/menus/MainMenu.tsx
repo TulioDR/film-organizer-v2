@@ -6,12 +6,12 @@ import DropdownItem from "./../DropdownItem";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import ToggleDarkMode from "../ToggleDarkMode";
-import StoreModel from "@/models/StoreModel";
 import { themeActions } from "@/store/slices/theme-slice";
 import { useEffect } from "react";
 import { darkThemeColors, lightThemeColors } from "@/data/themeColors";
 import { useUser } from "@clerk/nextjs";
 import { useClerk } from "@clerk/clerk-react";
+import Store from "@/common/models/Store";
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +19,7 @@ type Props = {
 
 export default function MainMenu({ setMenu, setIsOpen }: Props) {
    const { themeColor, isDarkMode, themeColorName } = useSelector(
-      (state: StoreModel) => state.theme
+      (state: Store) => state.theme
    );
    const dispatch = useDispatch();
 

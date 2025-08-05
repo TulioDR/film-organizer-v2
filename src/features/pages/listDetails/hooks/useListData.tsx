@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import ListModel from "@/models/ListModel";
-import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
+import List from "@/common/models/List";
+import Store from "@/common/models/Store";
 
 export default function useListData(list_id: string) {
-   const [list, setList] = useState<ListModel | null>(null);
-   const { lists } = useSelector((state: StoreModel) => state.lists);
+   const [list, setList] = useState<List | null>(null);
+   const { lists } = useSelector((state: Store) => state.lists);
 
    useEffect(() => {
       const getMediaListData = async () => {

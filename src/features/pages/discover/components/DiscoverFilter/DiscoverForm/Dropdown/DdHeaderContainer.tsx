@@ -1,4 +1,4 @@
-import StoreModel from "@/models/StoreModel";
+import Store from "@/common/models/Store";
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function DdHeaderContainer({ children }: Props) {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+   const { themeColor } = useSelector((state: Store) => state.theme);
    return (
       <div
          className="-mt-10 rounded-xl relative overflow-hidden"

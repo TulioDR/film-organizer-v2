@@ -1,5 +1,5 @@
-import Subtitle from "@/components/Subtitle";
 import Container from "../InfoContainer/Container";
+import PageSubtitle from "@/common/components/PageSubtitle";
 
 type Props = {
    media: any;
@@ -8,7 +8,7 @@ type Props = {
 export default function Overview({ media }: Props) {
    return (
       <Container>
-         <Subtitle>Overview</Subtitle>
+         <PageSubtitle>Overview</PageSubtitle>
          <div>
             {media.tagline && (
                <div className="italic font-bold mb-1 text-gray-700">

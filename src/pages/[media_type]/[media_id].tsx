@@ -10,8 +10,8 @@ import { layoutActions } from "@/store/slices/layout-slice";
 import Container from "@/features/pages/mediaDetails/components/Container";
 import Header from "@/features/pages/mediaDetails/components/Header";
 import Body from "@/features/pages/mediaDetails/components/Body";
-import PageHead from "@/components/PageHead";
 import BackgroundViewButton from "@/features/pages/mediaDetails/components/BackgroundViewButton";
+import PageHead from "@/common/components/PageHead";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;

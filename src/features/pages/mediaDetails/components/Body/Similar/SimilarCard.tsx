@@ -1,9 +1,9 @@
-import Poster from "@/components/Poster";
-import { MediaModel } from "@/models/MediaModel";
+import Poster from "@/common/components/Poster";
+import { Media } from "@/common/models/Media";
 import Link from "next/link";
 
 type Props = {
-   similar: MediaModel;
+   similar: Media;
    href: string;
 };
 

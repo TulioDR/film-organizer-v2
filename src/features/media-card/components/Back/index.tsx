@@ -1,0 +1,43 @@
+import React from "react";
+import Container from "./Container";
+import Loader from "./Loader";
+import Overview from "./Overview";
+import Title from "./Title";
+import LearnMore from "./LearnMore";
+import Bookmark from "@/features/bookmark/components/Bookmark";
+import Poster from "@/common/components/Poster";
+import { Media } from "@/common/models/Media";
+
+type Props = {
+   media: Media;
+   mediaType: "movie" | "tv";
+   onLearnMore: () => void;
+};
+
+export default function Back({ media, mediaType, onLearnMore }: Props) {
+   const title = media.name || media.title;
+   const backdrop = media.backdrop_path;
+   const releaseDate = media.release_date || media.first_air_date;
+   const overview = media.overview || "N/A";
+
+   return (
+      <Container>
+         <div className="relative">
+            <Poster alt={title} posterPath={backdrop} size="lg" backPoster />
+            <Loader />
+         </div>
+         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-5 overflow-hidden">
+            <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
+               <Title title={title} year={releaseDate} />
+               <Overview overview={overview} />
+            </div>
+            <div className="flex gap-2 h-12 w-full">
+               <div className="bg-blue-500 h-full aspect-square rounded-md overflow-hidden">
+                  <Bookmark media={media} type={mediaType} />
+               </div>
+               <LearnMore onClick={onLearnMore} />
+            </div>
+         </div>
+      </Container>
+   );
+}

@@ -1,9 +1,9 @@
-import Responsive from "@/components/Responsive";
+import Responsive from "@/common/components/Responsive";
 import LoginButton from "./LoginButton";
 
 import NavDropdown from "./NavDropdown";
-import { LG_MEDIA_QUERY } from "@/constants/MEDIA_QUERIES";
-import GlassContainer from "@/components/GlassContainer";
+import GlassContainer from "@/common/components/GlassContainer";
+import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 
 export default function Navbar() {
    return (

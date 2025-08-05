@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Poster from "@/components/Poster";
+import Poster from "@/common/components/Poster";
 
 type Props = {
    season: any;

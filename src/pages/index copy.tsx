@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 import API_PUBLIC from "@/api/public";
-import PageHead from "@/components/PageHead";
 
-import { MediaModel } from "@/models/MediaModel";
 import ChangeShowcase from "@/features/pages/home/ChangeShowcase";
 import MediaDescription from "@/features/pages/home/MediaDescription";
 import HomeSlider from "@/features/pages/home/HomeSlider";
 import useBackground from "@/features/layout/background/hooks/useBackground";
+import PageHead from "@/common/components/PageHead";
+import { Media } from "@/common/models/Media";
 
 export default function Home() {
-   const [nowPlaying, setNowPlaying] = useState<MediaModel[]>([]);
-   const [onAir, setOnAir] = useState<MediaModel[]>([]);
-   const [upcoming, setUpcoming] = useState<MediaModel[]>([]);
+   const [nowPlaying, setNowPlaying] = useState<Media[]>([]);
+   const [onAir, setOnAir] = useState<Media[]>([]);
+   const [upcoming, setUpcoming] = useState<Media[]>([]);
 
    useEffect(() => {
       const getData = async () => {
@@ -26,8 +26,8 @@ export default function Home() {
    }, []);
 
    const [activeIndex, setActiveIndex] = useState<number>(0);
-   const [currentMedia, setCurrentMedia] = useState<MediaModel>(nowPlaying[0]);
-   const [currentArray, setCurrentArray] = useState<MediaModel[]>(nowPlaying);
+   const [currentMedia, setCurrentMedia] = useState<Media>(nowPlaying[0]);
+   const [currentArray, setCurrentArray] = useState<Media[]>(nowPlaying);
 
    const { changeBackground } = useBackground();
    useEffect(() => {

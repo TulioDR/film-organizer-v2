@@ -1,10 +1,10 @@
-import Subtitle from "@/components/Subtitle";
 import ProfileCardsGrid from "../ProfileCardsGrid";
 import AccountCard from "../AccountCard";
 
 import { useUser } from "@clerk/nextjs";
 import AccountUsername from "./AccountUsername";
 import ConnectAccounts from "./ConnectAccounts";
+import PageSubtitle from "@/common/components/PageSubtitle";
 
 type Props = {};
 
@@ -14,7 +14,7 @@ export default function AccountProfile({}: Props) {
    if (!user) return <></>;
    return (
       <>
-         <Subtitle>Profile</Subtitle>
+         <PageSubtitle>Profile</PageSubtitle>
          <ProfileCardsGrid>
             <AccountCard title="Username">
                <AccountUsername />

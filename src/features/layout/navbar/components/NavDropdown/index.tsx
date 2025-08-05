@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
-import { useSelector } from "react-redux";
-import StoreModel from "@/models/StoreModel";
-import GlassContainer from "@/components/GlassContainer";
+import GlassContainer from "@/common/components/GlassContainer";
 
 export default function NavDropdown() {
    const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,8 +24,6 @@ export default function NavDropdown() {
    useEffect(() => {
       setMenuHeight(dropdownRef.current?.firstElementChild!.clientHeight!);
    }, [menu]);
-
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
 
    return (
       <GlassContainer className="h-full relative hover:bg-white hover:text-black">

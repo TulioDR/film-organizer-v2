@@ -7,9 +7,10 @@ import SearchMediaHandler from "@/features/searchMedia/components/SearchMediaHan
 import DiscoverFilter from "@/features/pages/discover/components/DiscoverFilter";
 import DiscoverInitialText from "@/features/pages/discover/components/DiscoverInitialText";
 import useDiscoverSearch from "@/features/pages/discover/hooks/useDiscoverSearch";
-import PageHead from "@/components/PageHead";
 import Pagination from "@/features/searchMedia/components/SearchMediaHandler/Pagination";
 import { useState } from "react";
+import PageHead from "@/common/components/PageHead";
+import PageTitle from "@/common/components/PageTitle";
 
 export default function Discover() {
    const { asPath, query } = useRouter();
@@ -19,7 +20,7 @@ export default function Discover() {
    return (
       <div className="p-32">
          <PageHead title="Discover" />
-         <Title title="Discover" />
+         {/* <PageTitle title="Discover" /> */}
          <DiscoverFilter />
          <AnimatePresence mode="wait">
             {page && apiUrl ? (

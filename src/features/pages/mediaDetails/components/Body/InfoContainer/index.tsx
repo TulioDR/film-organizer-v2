@@ -1,7 +1,7 @@
-import CustomPagination from "@/components/CustomPagination";
-import Subtitle from "@/components/Subtitle";
 import React, { useEffect, useState } from "react";
 import Container from "./Container";
+import CustomPagination from "../../CustomPagination";
+import PageSubtitle from "@/common/components/PageSubtitle";
 
 type InfoContainerProps<T> = {
    itemsPerPage: number;
@@ -36,7 +36,7 @@ export default function InfoContainer<T>({
 
    return (
       <Container similar={similar} className={className}>
-         <Subtitle>{subtitle}</Subtitle>
+         <PageSubtitle>{subtitle}</PageSubtitle>
          {displayedMedia.length > 0 ? (
             <div
                style={{

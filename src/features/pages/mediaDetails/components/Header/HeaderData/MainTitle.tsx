@@ -1,4 +1,4 @@
-import { itemVariant } from "@/animations/revealVariants";
+import { itemVariant } from "@/common/animations/revealVariants";
 import { motion } from "framer-motion";
 
 type Props = {

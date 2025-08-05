@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-import PageHead from "@/components/PageHead";
 import GenreCard from "@/features/pages/genres/components/GenreCard";
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import GenresContainer from "@/features/pages/genres/components/GenresContainer";
+import PageHead from "@/common/components/PageHead";
 
 export default function Genres() {
    const router = useRouter();

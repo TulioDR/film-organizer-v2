@@ -9,8 +9,8 @@ import EditButtonsContainer from "./EditButtonsContainer";
 import ErrorMessageForName from "./ErrorMessageForName";
 import { motion } from "framer-motion";
 import { staggerItem } from "@/animations/StaggerCards";
-import useListsRefresh from "@/hooks/useListsRefresh";
-import useNotification from "@/features/notification/hooks/useNotification";
+import useNotification from "@/features/layout/notification/hooks/useNotification";
+import useListsRefresh from "@/features/common/hooks/useListsRefresh";
 
 type Props = {
    list: any;

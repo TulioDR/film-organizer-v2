@@ -1,14 +1,14 @@
 import { deleteMedia } from "@/api/media";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/common/components/LoadingSpinner";
+import { SavedMedia } from "@/common/models/Media";
 import useBackground from "@/features/layout/background/hooks/useBackground";
-import useNotification from "@/features/notification/hooks/useNotification";
-import { SavedMediaModel } from "@/models/MediaModel";
+import useNotification from "@/features/layout/notification/hooks/useNotification";
 import { useState } from "react";
 
 type Props = {
    refresh: () => void;
    listId: string;
-   media: SavedMediaModel;
+   media: SavedMedia;
 };
 
 export default function DeleteButton({ refresh, listId, media }: Props) {

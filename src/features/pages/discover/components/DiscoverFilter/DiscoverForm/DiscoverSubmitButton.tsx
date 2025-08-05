@@ -1,8 +1,8 @@
-import StoreModel from "@/models/StoreModel";
+import Store from "@/common/models/Store";
 import { useSelector } from "react-redux";
 
 export default function DiscoverSubmitButton() {
-   const { themeColor } = useSelector((state: StoreModel) => state.theme);
+   const { themeColor } = useSelector((state: Store) => state.theme);
    return (
       <button
          type="submit"

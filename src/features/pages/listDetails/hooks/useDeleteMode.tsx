@@ -1,9 +1,9 @@
-import { SavedMediaModel } from "@/models/MediaModel";
+import { SavedMedia } from "@/common/models/Media";
 import { useAnimationControls } from "framer-motion";
 import { useState } from "react";
 
 export default function useDeleteMode() {
-   const [mediaToDelete, setMediaToDelete] = useState<SavedMediaModel[]>([]);
+   const [mediaToDelete, setMediaToDelete] = useState<SavedMedia[]>([]);
    const [isDeleteModeActive, setIsDeleteModeActive] = useState<boolean>(false);
    const [showButtons, setShowButtons] = useState<boolean>(false);
    const textControls = useAnimationControls();
@@ -22,7 +22,7 @@ export default function useDeleteMode() {
       setMediaToDelete([]);
    };
 
-   const onCardTap = (media: SavedMediaModel) => {
+   const onCardTap = (media: SavedMedia) => {
       const isSelected = mediaToDelete.includes(media);
       if (isSelected) {
          setMediaToDelete((old) => old.filter(({ id }) => id !== media.id));

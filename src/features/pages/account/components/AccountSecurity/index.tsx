@@ -1,8 +1,8 @@
-import Subtitle from "@/components/Subtitle";
 import ProfileCardsGrid from "../ProfileCardsGrid";
 import AccountCard from "../AccountCard";
 import { useUser } from "@clerk/nextjs";
 import UpdatePassword from "./UpdatePassword";
+import PageSubtitle from "@/common/components/PageSubtitle";
 // import DeletePassword from "./DeletePassword";
 
 type Props = {};
@@ -13,7 +13,7 @@ export default function AccountSecurity({}: Props) {
    if (!user) return <></>;
    return (
       <>
-         <Subtitle>Security</Subtitle>
+         <PageSubtitle>Security</PageSubtitle>
          <ProfileCardsGrid>
             <AccountCard
                title={user.passwordEnabled ? "Update password" : "Add password"}

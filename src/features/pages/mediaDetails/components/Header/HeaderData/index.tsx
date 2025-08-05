@@ -5,14 +5,14 @@ import Runtime from "./Runtime";
 import Score from "./Score";
 
 import { MediaDetailsModel } from "../../../models/MediaDetailsModel";
-import { MediaTypeModel } from "@/models/MediaTypeModel";
 import { motion } from "framer-motion";
 import MainBookmark from "./MainBookmark";
-import { containerVariant } from "@/animations/revealVariants";
+import { containerVariant } from "@/common/animations/revealVariants";
+import { MediaType } from "@/common/models/MediaType";
 
 type Props = {
    media: MediaDetailsModel;
-   mediaType: MediaTypeModel;
+   mediaType: MediaType;
 };
 
 export default function HeaderData({ media, mediaType }: Props) {

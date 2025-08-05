@@ -1,11 +1,11 @@
-import Subtitle from "@/components/Subtitle";
 import React from "react";
 import ProfileCardsGrid from "../ProfileCardsGrid";
 import ProfileCard from "../AccountCard";
 import AccountButton from "../AccountButton";
-import useModalState from "@/hooks/useModalState";
-import ModalPortal from "@/components/Modals/ModalPortal";
-import DeleteUserModal from "@/features/modals/deleteUserModal/components/DeleteUserModal";
+import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
+import DeleteUserModal from "@/features/modals/user-modals/delete-user-modal/components/DeleteUserModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+import PageSubtitle from "@/common/components/PageSubtitle";
 
 type Props = {};
 
@@ -14,7 +14,7 @@ export default function DangerZone({}: Props) {
 
    return (
       <>
-         <Subtitle>Danger Zone</Subtitle>
+         <PageSubtitle>Danger Zone</PageSubtitle>
          <ProfileCardsGrid>
             <ProfileCard title="Delete account" dangerZone expand>
                <div className="flex justify-between items-center">

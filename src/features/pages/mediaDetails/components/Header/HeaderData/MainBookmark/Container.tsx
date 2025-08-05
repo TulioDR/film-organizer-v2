@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { itemVariant } from "@/animations/revealVariants";
+import { itemVariant } from "@/common/animations/revealVariants";
 
 type Props = {
    children: React.ReactNode;

@@ -1,9 +1,9 @@
 import React from "react";
 import AccountButton from "../AccountButton";
 import { useUser } from "@clerk/nextjs";
-import ModalPortal from "@/components/Modals/ModalPortal";
-import UpdatePasswordModal from "@/features/modals/updatePasswordModal/components/UpdatePasswordModal";
-import useModalState from "@/hooks/useModalState";
+import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
+import UpdatePasswordModal from "@/features/modals/user-modals/update-password-modal/components/UpdatePasswordModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 
 export default function UpdatePassword() {
    const { isModalOpen, openModal, closeModal } = useModalState();

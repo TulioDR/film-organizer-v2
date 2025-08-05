@@ -1,4 +1,4 @@
-import { changeDateFormat } from "@/utils/date";
+import { changeDateFormat } from "@/common/utils/date";
 import React from "react";
 
 type Props = {

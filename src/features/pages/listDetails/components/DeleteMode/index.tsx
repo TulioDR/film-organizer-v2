@@ -1,13 +1,13 @@
-import { SavedMediaModel } from "@/models/MediaModel";
 import { AnimatePresence, AnimationControls } from "framer-motion";
 
 import DeleteFormIcon from "./DeleteFormIcon";
 import DeleteFormMessage from "./DeleteFormMessage";
 import DeleteFormButton from "./DeleteFormButton";
 import DeleteFormButtonsContainer from "./DeleteFormButtonsContainer";
+import { SavedMedia } from "@/common/models/Media";
 
 type Props = {
-   mediaToDelete: SavedMediaModel[];
+   mediaToDelete: SavedMedia[];
    startDeleteMode: () => void;
    stopDeleteMode: () => void;
    openDeleteModal: () => void;

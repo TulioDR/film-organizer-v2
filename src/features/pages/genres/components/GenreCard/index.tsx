@@ -1,7 +1,7 @@
 import GenreImage from "./GenreImage";
 import GenreModel from "../../models/GenreModel";
-import ImageLink from "@/components/ImageLink";
 import GenreName from "./GenreName";
+import ImageLink from "@/common/components/ImageLink";
 
 type Props = {
    genre: GenreModel;

@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 
 import API_PUBLIC from "@/api/public";
-import PageHead from "@/components/PageHead";
-
-import { MediaModel } from "@/models/MediaModel";
 
 import Marquee from "@/features/pages/home/Marquee";
+import PageHead from "@/common/components/PageHead";
+import { Media } from "@/common/models/Media";
 
 export default function Home() {
-   const [nowPlaying, setNowPlaying] = useState<MediaModel[]>([]);
+   const [nowPlaying, setNowPlaying] = useState<Media[]>([]);
 
    useEffect(() => {
       const getData = async () => {
@@ -20,8 +19,8 @@ export default function Home() {
       getData();
    }, []);
 
-   const [nowP1, setNowP1] = useState<MediaModel[]>([]);
-   const [nowP2, setNowP2] = useState<MediaModel[]>([]);
+   const [nowP1, setNowP1] = useState<Media[]>([]);
+   const [nowP2, setNowP2] = useState<Media[]>([]);
 
    useEffect(() => {
       const midpoint = Math.floor(nowPlaying.length / 2);

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getIsMediaSaved } from "@/api/media";
-import StoreModel from "@/models/StoreModel";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
-import { MediaTypeModel } from "@/models/MediaTypeModel";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
+import Store from "@/common/models/Store";
+import { MediaType } from "@/common/models/MediaType";
 
-export default function useIsMediaSaved(id: number, mediaType: MediaTypeModel) {
+export default function useIsMediaSaved(id: number, mediaType: MediaType) {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -22,7 +22,7 @@ export default function useIsMediaSaved(id: number, mediaType: MediaTypeModel) {
    const { user } = useUser();
 
    const { mediaToSave, isSaveMediaOpen } = useSelector(
-      (state: StoreModel) => state.bookmark
+      (state: Store) => state.bookmark
    );
 
    useEffect(() => {
