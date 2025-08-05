@@ -1,5 +1,4 @@
 import Link from "next/link";
-import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
 
 type Props = {
    link: string;
@@ -7,6 +6,7 @@ type Props = {
    children: React.ReactNode;
    hasItems: boolean;
    isHovered: boolean;
+   isSelected: boolean;
 };
 
 export default function SideLink({
@@ -15,12 +15,8 @@ export default function SideLink({
    children,
    hasItems,
    isHovered,
+   isSelected,
 }: Props) {
-   const { isSelected } = useSidebarActiveMark({
-      mediaType: undefined,
-      link: link,
-   });
-
    return (
       <Link
          href={link}

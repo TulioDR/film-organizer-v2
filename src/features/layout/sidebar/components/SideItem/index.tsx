@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import useSidebarActiveMark from "@/features/layout/sidebar/hooks/useSidebarActiveMark";
@@ -30,6 +30,12 @@ export default function SideItem({
    const handleHoverStart = () => setIsHovered(true);
    const handleHoverEnd = () => setIsHovered(false);
 
+   useEffect(() => {
+      if (text === "Movies") {
+         console.log(isSelected);
+      }
+   }, [isSelected, text]);
+
    return (
       <motion.li
          onHoverStart={handleHoverStart}
@@ -43,6 +49,7 @@ export default function SideItem({
             icon={icon}
             hasItems={!!items}
             isHovered={isHovered}
+            isSelected={isSelected}
          >
             {isHovered && <MainTooltip hasItems={!!items} text={text} />}
          </SideLink>
@@ -54,6 +61,7 @@ export default function SideItem({
                      link={item.link}
                      icon={item.icon}
                      text={item.text}
+                     isSelectedMainSelected={isSelected}
                   />
                ))}
             </div>

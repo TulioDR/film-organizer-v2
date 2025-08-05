@@ -9,17 +9,17 @@ type Props = {
 export default function useSidebarActiveMark({ mediaType, link }: Props) {
    const [isSelected, setIsSelected] = useState<boolean>(false);
    const { asPath, query } = useRouter();
-   const { media_type: queryMediaType } = query;
+   const { media_type } = query;
 
    useEffect(() => {
       if (mediaType) {
-         if (queryMediaType === mediaType) setIsSelected(true);
+         if (media_type === mediaType) setIsSelected(true);
          else setIsSelected(false);
          return;
       }
       if (asPath === link) setIsSelected(true);
       else setIsSelected(false);
-   }, [asPath, link, queryMediaType, mediaType]);
+   }, [asPath, link, media_type, mediaType]);
 
    return { isSelected };
 }
