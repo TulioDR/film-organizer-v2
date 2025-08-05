@@ -22,7 +22,7 @@ import useInitialThemeColor from "@/common/hooks/useInitialThemeColor";
 import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import FixedUIContainer from "./FixedUIContainer";
 import TutorialButton from "../../tutorial-button/components/TutorialButton";
-import PageTitle from "@/common/components/PageTitle copy";
+import PageTitle from "@/common/components/PageTitle";
 
 type Props = {
    children: React.ReactNode;

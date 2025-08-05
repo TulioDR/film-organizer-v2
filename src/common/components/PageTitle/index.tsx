@@ -40,14 +40,11 @@ export default function PageTitle({}: Props) {
 
    if (!mediaType || !searchType) return <></>;
    return (
-      // <div className="fixed">
-
-      // </div>
-      <motion.h1 className="absolute z-50 top-32 left-32 overflow-hidden h-8 flex gap-2 xl:gap-4 bg-green-500">
+      <motion.h1 className="fixed z-50 top-32 left-32 overflow-hidden h-8 flex gap-2 xl:gap-4">
          <AnimatePresence mode="wait">
             <TitleSection key={mediaType} text={mediaType} />
          </AnimatePresence>
-         {/* <AnimatePresence mode="wait">
+         <AnimatePresence mode="wait">
             <TitleSection
                key={`${mediaType}-${searchType}`}
                text={searchType}
@@ -55,7 +52,7 @@ export default function PageTitle({}: Props) {
          </AnimatePresence>
          <AnimatePresence mode="wait">
             {genreType && <TitleSection key={genreType} text={genreType} />}
-         </AnimatePresence> */}
+         </AnimatePresence>
       </motion.h1>
    );
 }

@@ -23,7 +23,7 @@ export default function TooltipItem({ link, icon, text }: Props) {
       <Link
          href={link}
          onClick={hideSidebar}
-         className={`h-12 px-2 text-black hover:bg-black hover:text-white flex items-center gap-2 rounded-md`}
+         className={`h-12 p-1.5 text-black hover:bg-black hover:text-white flex items-center gap-2 rounded-md`}
       >
          <SideItemIcon isFilled={isSelected} icon={icon} smallIcon />
          <span className="text-sm">{text}</span>

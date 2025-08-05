@@ -2,10 +2,7 @@
 module.exports = {
    content: [
       "./src/pages/**/*.{js,ts,jsx,tsx}",
-      "./src/containers/**/*.{js,ts,jsx,tsx}",
-      "./src/components/**/*.{js,ts,jsx,tsx}",
-      "./src/animations/**/*.{js,ts,jsx,tsx}",
-      "./src/layout/**/*.{js,ts,jsx,tsx}",
+      "./src/common/**/*.{js,ts,jsx,tsx}",
       "./src/features/**/*.{js,ts,jsx,tsx}",
    ],
    darkMode: "class",
