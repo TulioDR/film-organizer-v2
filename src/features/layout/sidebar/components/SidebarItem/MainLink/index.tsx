@@ -1,22 +1,27 @@
 import Link from "next/link";
+import useActiveMark from "../../../hooks/useActiveMark";
+import ActiveMark from "../ActiveMark";
+import MainTooltip from "./MainTooltip";
 
 type Props = {
    link: string;
    icon: string;
-   children: React.ReactNode;
    hasItems: boolean;
    isHovered: boolean;
-   isSelected: boolean;
+   mediaType?: "movie" | "tv";
+   text: string;
 };
 
-export default function SideLink({
+export default function MainLink({
    link,
    icon,
-   children,
    hasItems,
    isHovered,
-   isSelected,
+   mediaType,
+   text,
 }: Props) {
+   const { isSelected } = useActiveMark(link, mediaType);
+
    return (
       <Link
          href={link}
@@ -28,14 +33,15 @@ export default function SideLink({
             `}
       >
          <div
-            className={`rounded-l-md h-full w-full flex items-center justify-center pr-2 
-                  ${hasItems ? "group-hover:bg-black " : ""}
-                  ${isSelected ? "text-white" : ""}
-               `}
+            className={`rounded-l-md h-full w-full flex items-center relative justify-center pr-2 
+               ${hasItems ? "group-hover:bg-black " : ""}
+               ${isSelected ? "text-white" : ""}
+            `}
          >
+            {isSelected && <ActiveMark layoutId="main-active-mark" />}
             <span className="material-symbols-outlined z-10">{icon}</span>
          </div>
-         {children}
+         {isHovered && <MainTooltip hasItems={!!hasItems} text={text} />}
       </Link>
    );
 }

@@ -1,6 +1,6 @@
 import DropdownItemModel from "../models/DropdownItemModel";
 import SidebarContainer from "./SidebarContainer";
-import SideItem from "./SideItem";
+import SidebarItem from "./SidebarItem";
 
 export default function Sidebar() {
    const movieItems: DropdownItemModel[] = [
@@ -22,23 +22,23 @@ export default function Sidebar() {
    ];
    return (
       <SidebarContainer>
-         <SideItem link="/" icon="home" text="Home" />
-         <SideItem
+         <SidebarItem link="/" icon="home" text="Home" />
+         <SidebarItem
             link="/movie"
             icon="movie"
             text="Movies"
             mediaType="movie"
             items={movieItems}
          />
-         <SideItem
+         <SidebarItem
             link="/tv"
             icon="smart_display"
             text="Series"
             mediaType="tv"
             items={tvItems}
          />
-         <SideItem link="/discover" icon="travel_explore" text="Discover" />
-         <SideItem
+         <SidebarItem link="/discover" icon="travel_explore" text="Discover" />
+         <SidebarItem
             link="/lists"
             icon="format_list_bulleted"
             text="Manage Lists"
