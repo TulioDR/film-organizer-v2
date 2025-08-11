@@ -9,7 +9,7 @@ type Props = {
    media: MediaDetailsModel;
 };
 
-export default function Container({ children, media }: Props) {
+export default function MediaIdContainer({ children, media }: Props) {
    useScrollToTop();
 
    const { changeBackground } = useBackground();

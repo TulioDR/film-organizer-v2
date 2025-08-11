@@ -8,9 +8,9 @@ import SeasonSubtitle from "./SeasonSubtitle";
 import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonModalContainer from "./SeasonModalContainer";
 import API_PUBLIC from "@/api/public";
-import Date from "@/features/pages/mediaDetails/components/Header/HeaderData/Date";
 import PageSubtitle from "@/common/components/PageSubtitle";
 import Poster from "@/common/components/Poster";
+import Date from "../../../Header/HeaderData/Date";
 
 type Props = {
    close: () => void;

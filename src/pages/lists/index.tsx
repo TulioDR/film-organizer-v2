@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
 
-import ListFinder from "@/features/pages/manageLists/ListFinder";
-import ListsCardsContainer from "@/features/pages/manageLists/ListsCardsContainer";
-import ListCard from "@/features/pages/manageLists/ListCard";
-import NoListsMessage from "@/features/pages/manageLists/NoListsMessage";
-import ListsLoginAdvice from "@/features/pages/manageLists/ListsLoginAdvice";
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import DeleteListModal from "@/features/modals/list-modals/delete-list-modal/components/DeleteListModal";
 import PageHead from "@/common/components/PageHead";
-import PageTitle from "@/common/components/PageTitle";
 import List from "@/common/models/List";
 import Store from "@/common/models/Store";
+import ListsLoginAdvice from "@/features/pages/manage-lists/components/ListsLoginAdvice";
+import NoListsMessage from "@/features/pages/manage-lists/components/NoListsMessage";
+import ListsCardsContainer from "@/features/pages/manage-lists/components/ListsCardsContainer";
+import ListCard from "@/features/pages/manage-lists/components/ListCard";
 
 export default function Lists() {
    const { user } = useUser();
@@ -45,7 +43,7 @@ export default function Lists() {
    if (filteredLists === null) return <></>;
    return (
       <div className="overflow-hidden">
-         <PageHead title="Manage Lists<" />
+         <PageHead title="Manage Lists" />
          {/* <PageTitle title="Manage">
             <ListFinder
                onChange={(e) => setInputValue(e.currentTarget.value)}

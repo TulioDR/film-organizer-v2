@@ -1,17 +1,17 @@
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
-import { MediaDetailsModel } from "@/features/pages/mediaDetails/models/MediaDetailsModel";
-
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { layoutActions } from "@/store/slices/layout-slice";
-import Container from "@/features/pages/mediaDetails/components/Container";
-import Header from "@/features/pages/mediaDetails/components/Header";
-import Body from "@/features/pages/mediaDetails/components/Body";
-import BackgroundViewButton from "@/features/pages/mediaDetails/components/BackgroundViewButton";
+
 import PageHead from "@/common/components/PageHead";
+import { MediaDetailsModel } from "@/features/pages/media-id/models/MediaDetailsModel";
+import BackgroundViewButton from "@/features/pages/media-id/components/BackgroundViewButton";
+import MediaIdContainer from "@/features/pages/media-id/components/MediaIdContainer";
+import Header from "@/features/pages/media-id/components/Header";
+import Body from "@/features/pages/media-id/components/Body";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -35,7 +35,7 @@ type Props = {
    media: MediaDetailsModel;
 };
 
-export default function Details({ media_type, media }: Props) {
+export default function MediaId({ media_type, media }: Props) {
    const dispatch = useDispatch();
    const router = useRouter();
 
@@ -54,14 +54,14 @@ export default function Details({ media_type, media }: Props) {
       <>
          <BackgroundViewButton />
          <AnimatePresence mode="wait">
-            <Container key={router.asPath} media={media}>
+            <MediaIdContainer key={router.asPath} media={media}>
                <PageHead
                   title={media.title || media.name}
                   content={media.overview}
                />
                <Header media={media} media_type={media_type} />
                <Body media={media} media_type={media_type} />
-            </Container>
+            </MediaIdContainer>
          </AnimatePresence>
       </>
    );

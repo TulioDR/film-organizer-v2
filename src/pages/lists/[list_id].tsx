@@ -1,17 +1,16 @@
 import { GetServerSideProps } from "next";
 
-import useListData from "@/features/pages/listDetails/hooks/useListData";
-import useMediaData from "@/features/pages/listDetails/hooks/useMediaData";
-import useSavedMediaFilter from "@/features/pages/listDetails/hooks/useSavedMediaFilter";
-import useDeleteMode from "@/features/pages/listDetails/hooks/useDeleteMode";
-import SavedMedia from "@/features/pages/listDetails/components/SavedMedia";
-import DeleteMode from "@/features/pages/listDetails/components/DeleteMode";
-import MediaFilter from "@/features/pages/listDetails/components/MediaFilter";
 import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
 import DeleteMediaModal from "@/features/modals/media-modals/delete-media-modal/components/DeleteMediaModal";
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import LoadingSpinner from "@/common/components/LoadingSpinner";
 import PageHead from "@/common/components/PageHead";
+import useMediaData from "@/features/pages/list-id/hooks/useMediaData";
+import useListData from "@/features/pages/list-id/hooks/useListData";
+import useSavedMediaFilter from "@/features/pages/list-id/hooks/useSavedMediaFilter";
+import useDeleteMode from "@/features/pages/list-id/hooks/useDeleteMode";
+import SavedMediaCards from "@/features/pages/list-id/components/SavedMedia";
+import DeleteMode from "@/features/pages/list-id/components/DeleteMode";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { list_id } = context.query!;
@@ -60,7 +59,7 @@ export default function ListID({ list_id }: Props) {
                setSortBy={setSortBy}
             />
          </Title> */}
-         <SavedMedia
+         <SavedMediaCards
             selectedType={selectedType}
             filteredMedia={filteredMedia}
             mediaToDelete={mediaToDelete}

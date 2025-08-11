@@ -1,12 +1,12 @@
-import GenresBackground from "@/features/pages/mediaType/components/GenresBackground";
-import SelectorBackground from "@/features/pages/mediaType/components/SelectorBackground";
 import { useRouter } from "next/router";
-import MT_Title from "@/features/pages/mediaType/components/MT_Title";
 import ImageLink from "@/common/components/ImageLink";
+import MT_Title from "@/features/pages/media-type/components/MT_Title";
+import SelectorBackground from "@/features/pages/media-type/components/SelectorBackground";
+import GenresBackground from "@/features/pages/media-type/components/GenresBackground";
 
 type Props = {};
 
-export default function MediaTypePage({}: Props) {
+export default function MediaType({}: Props) {
    const router = useRouter();
    const mediaType = router.query.media_type;
 
