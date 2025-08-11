@@ -8,6 +8,7 @@ import {
 } from "@/common/constants/MEDIA_QUERIES";
 import ResponsiveConfig from "../../../models/ResponsiveConfig";
 import Responsive from "@/common/components/Responsive";
+import { useEffect } from "react";
 
 type Props = {
    trailers: any[];
@@ -28,6 +29,10 @@ export default function Trailers({ trailers }: Props) {
       },
       { maxWidth: SM_MEDIA_QUERY, itemsPerPage: 2, numberOfRows: 2 },
    ];
+
+   useEffect(() => {
+      console.log(trailers);
+   }, [trailers]);
 
    return (
       <>

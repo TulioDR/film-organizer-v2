@@ -8,11 +8,11 @@ type Props = {
 
 export default function Front({ media }: Props) {
    return (
-      <div className="relative [backface-visibility:hidden] overflow-hidden shadow-xl rounded-xl">
+      <div className="relative [backface-visibility:hidden] overflow-hidden shadow-xl rounded-sm">
          <Poster
             alt={media.name || media.title}
             posterPath={media.poster_path}
-            size="lg"
+            front
          />
       </div>
    );

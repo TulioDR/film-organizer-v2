@@ -39,6 +39,7 @@ export default function SBResultsItem({
                alt={media.title || media.name}
                size="sm"
                posterPath={media.poster_path}
+               front
             />
          </div>
          <div className="pl-2">

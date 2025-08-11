@@ -43,7 +43,7 @@ export default function CustomHyperlink({
       >
          <motion.div
             className={`w-full overflow-hidden relative ${
-               horizontal ? "aspect-video" : "aspect-[2/3]"
+               horizontal ? "aspect-video" : "aspect-[4/5]"
             }`}
          >
             <motion.div
@@ -56,7 +56,7 @@ export default function CustomHyperlink({
                   alt={alt}
                   posterPath={posterPath}
                   size="md"
-                  backPoster={backPoster}
+                  back={backPoster}
                   trailer={trailer}
                   person={person}
                />

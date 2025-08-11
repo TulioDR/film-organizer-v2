@@ -1,9 +1,9 @@
 import Link from "next/link";
-import useActiveMark from "../../../hooks/useActiveMark";
+import useActiveMark from "../../../../hooks/useActiveMark";
 import { AnimatePresence } from "framer-motion";
-import ActiveMark from "../ActiveMark";
+import ActiveMark from "../../ActiveMark";
 import ActiveMarkContainer from "./ActiveMarkContainer";
-import Icon from "./Icon";
+import SidebarIcon from "../../SidebarIcon";
 
 type Props = {
    link: string;
@@ -25,7 +25,11 @@ export default function DropdownItem({
          href={link}
          className="h-12 p-1.5 text-black hover:bg-black hover:text-white flex items-center gap-2 rounded-md"
       >
-         <div className="h-full flex items-center justify-center aspect-square relative">
+         <div
+            className={`h-full flex items-center justify-center aspect-square relative
+               ${isSelected ? "text-white" : ""}   
+            `}
+         >
             <AnimatePresence>
                {isMainSelected && (
                   <ActiveMarkContainer>
@@ -35,7 +39,7 @@ export default function DropdownItem({
                   </ActiveMarkContainer>
                )}
             </AnimatePresence>
-            <Icon isSelected={isSelected} icon={icon} />
+            <SidebarIcon icon={icon} dropdown />
          </div>
          <span className="text-sm">{text}</span>
       </Link>

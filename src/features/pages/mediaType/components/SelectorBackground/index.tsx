@@ -1,5 +1,5 @@
 import API_PUBLIC from "@/api/public";
-import Image from "next/image";
+import Poster from "@/common/components/Poster";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -24,13 +24,5 @@ export default function SelectorBackground({ type }: Props) {
    }, [type, router.query.media_type]);
 
    if (!background) return <></>;
-   return (
-      <Image
-         src={background}
-         alt="popular"
-         sizes="100%"
-         fill
-         className="object-cover"
-      />
-   );
+   return <Poster posterPath={background} alt={type} size="xl" />;
 }

@@ -1,7 +1,7 @@
-import GenreImage from "./GenreImage";
 import GenreModel from "../../models/GenreModel";
 import GenreName from "./GenreName";
 import ImageLink from "@/common/components/ImageLink";
+import Poster from "@/common/components/Poster";
 
 type Props = {
    genre: GenreModel;
@@ -13,7 +13,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
       <ImageLink
          key={genre.id}
          link={`/${mediaType}/${genre.id}`}
-         background={<GenreImage alt={genre.name} src={genre.image} />}
+         background={<Poster alt={genre.name} posterPath={genre.image} />}
          front={<GenreName name={genre.name} />}
          className="aspect-[3/2]"
       />

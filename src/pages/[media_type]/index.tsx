@@ -12,7 +12,7 @@ export default function MediaTypePage({}: Props) {
 
    return (
       <div className=" w-full h-[100svh] pt-36 xl:pt-44 px-24 xl:px-32 lg:pb-4 xl:pb-8">
-         <div className="w-full h-full grid grid-cols-2 grid-rows-2">
+         <div className="w-full h-full grid grid-cols-2 grid-rows-2 rounded-lg overflow-hidden border border-border">
             <ImageLink
                link={`/${mediaType}/popular`}
                background={<SelectorBackground type="popular" />}

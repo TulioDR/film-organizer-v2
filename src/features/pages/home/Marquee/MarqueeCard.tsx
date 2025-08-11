@@ -38,7 +38,7 @@ export default function MarqueeCard({ media }: Props) {
                <Poster
                   alt={media.title || media.name}
                   posterPath={media.poster_path}
-                  size="md"
+                  front
                />
             </motion.div>
             <motion.div

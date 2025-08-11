@@ -52,6 +52,7 @@ export default function SeasonModal({ close, seriesID, seasonNumber }: Props) {
                                  posterPath={season.poster_path}
                                  size="lg"
                                  alt={season.name}
+                                 front
                               />
                            </div>
                            <div className="flex flex-col justify-center gap-1">

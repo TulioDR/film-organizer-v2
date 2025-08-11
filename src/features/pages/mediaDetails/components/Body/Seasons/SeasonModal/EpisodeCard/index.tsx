@@ -24,15 +24,10 @@ export default function EpisodeCard({ episode }: Props) {
       <motion.article
          onHoverStart={enterHover}
          onHoverEnd={leaveHover}
-         className="w-full bg-accent shadow-lg rounded-xl hover:scale-105 hover:z-10 duration-200"
+         className="w-full shadow-lg rounded-xl hover:scale-105 hover:z-10 duration-200"
       >
          <div className="w-full relative rounded-t-xl overflow-hidden">
-            <Poster
-               alt={episode.name}
-               size="lg"
-               posterPath={episode.still_path}
-               backPoster
-            />
+            <Poster alt={episode.name} posterPath={episode.still_path} back />
             <InfoInPoster episode={episode} />
          </div>
          <div className="p-3 space-y-1">

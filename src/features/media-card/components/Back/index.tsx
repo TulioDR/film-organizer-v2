@@ -23,10 +23,10 @@ export default function Back({ media, mediaType, onLearnMore }: Props) {
    return (
       <Container>
          <div className="relative">
-            <Poster alt={title} posterPath={backdrop} size="lg" backPoster />
+            <Poster alt={title} posterPath={backdrop} size="lg" back />
             <Loader />
          </div>
-         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-5 overflow-hidden">
+         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-3 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
                <Title title={title} year={releaseDate} />
                <Overview overview={overview} />

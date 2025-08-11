@@ -2,6 +2,7 @@ import Link from "next/link";
 import useActiveMark from "../../../hooks/useActiveMark";
 import ActiveMark from "../ActiveMark";
 import MainTooltip from "./MainTooltip";
+import SidebarIcon from "../SidebarIcon";
 
 type Props = {
    link: string;
@@ -39,7 +40,7 @@ export default function MainLink({
             `}
          >
             {isSelected && <ActiveMark layoutId="main-active-mark" />}
-            <span className="material-symbols-outlined z-10">{icon}</span>
+            <SidebarIcon icon={icon} />
          </div>
          {isHovered && <MainTooltip hasItems={!!hasItems} text={text} />}
       </Link>

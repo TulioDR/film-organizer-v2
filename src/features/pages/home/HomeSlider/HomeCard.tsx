@@ -1,7 +1,5 @@
 import { useSwiper } from "swiper/react";
 import { motion } from "framer-motion";
-import { staggerItem } from "@/animations/StaggerCards";
-import Poster from "@/common/components/Poster";
 
 type Props = {
    media: any;
@@ -29,7 +27,6 @@ export default function HomeCard({
 
    return (
       <motion.div
-         variants={staggerItem}
          onClick={handleClick}
          className="aspect-[2/3] w-20 lg:w-24 xl:w-28 2xl:w-32 cursor-pointer"
       >
@@ -38,13 +35,7 @@ export default function HomeCard({
             className={`w-full h-full overflow-hidden rounded-lg duration-300 ${
                isActive ? "-translate-y-5" : "hover:-translate-y-5"
             } `}
-         >
-            <Poster
-               alt={media.title || media.name}
-               posterPath={media.poster_path}
-               size="lg"
-            />
-         </div>
+         ></div>
       </motion.div>
    );
 }
