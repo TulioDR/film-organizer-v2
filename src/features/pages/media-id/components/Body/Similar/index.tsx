@@ -33,9 +33,7 @@ export default function Similar({ media, mediaType }: Props) {
       <MediaCard
          mediaType={mediaType}
          media={similarItem}
-         isSelected={false} // This seems constant, ensure it's intended
          id={similarItem.id.toString()}
-         setFixedValues={() => {}} // This seems constant, ensure it's intended
          currentMedia={currentMedia}
       />
    );
@@ -48,7 +46,6 @@ export default function Similar({ media, mediaType }: Props) {
                   itemsPerPage={config.itemsPerPage}
                   subtitle={subtitleText}
                   media={similarMedia}
-                  similar
                   className="xl:col-span-2"
                   renderItem={renderMediaCardItem} // Use the pre-defined render function
                />

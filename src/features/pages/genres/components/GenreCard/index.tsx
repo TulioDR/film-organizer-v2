@@ -12,7 +12,7 @@ export default function GenreCard({ genre, mediaType }: Props) {
    return (
       <ImageLink
          key={genre.id}
-         link={`/${mediaType}/${genre.id}`}
+         link={`/${mediaType}/genres/${genre.id}`}
          background={<Poster alt={genre.name} posterPath={genre.image} />}
          front={<GenreName name={genre.name} />}
          className="aspect-[3/2]"

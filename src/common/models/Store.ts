@@ -11,6 +11,8 @@ export default interface Store {
    background: BackgroundModel;
    notification: NotificationModel;
    layout: LayoutModel;
+   pageTitle: PageTitle;
+   loader: LoaderStore;
 }
 
 interface ThemeModel {
@@ -41,4 +43,12 @@ interface NotificationModel {
 }
 interface LayoutModel {
    isHidden: boolean;
+}
+
+interface PageTitle {
+   title: [string | undefined, string | undefined, string | undefined];
+}
+
+interface LoaderStore {
+   isLoading: boolean;
 }

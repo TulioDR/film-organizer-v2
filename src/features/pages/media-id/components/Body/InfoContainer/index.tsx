@@ -10,7 +10,6 @@ type InfoContainerProps<T> = {
    numberOfRows?: number;
    renderItem: (item: T) => React.ReactNode;
    length?: number;
-   similar?: true;
    className?: string;
 };
 
@@ -20,7 +19,6 @@ export default function InfoContainer<T>({
    media,
    numberOfRows = 1,
    renderItem,
-   similar,
    className = "",
 }: InfoContainerProps<T>) {
    const [page, setPage] = useState<number>(1);
@@ -35,7 +33,7 @@ export default function InfoContainer<T>({
    }, [page, itemsPerPage, media]);
 
    return (
-      <Container similar={similar} className={className}>
+      <Container className={className}>
          <PageSubtitle>{subtitle}</PageSubtitle>
          {displayedMedia.length > 0 ? (
             <div

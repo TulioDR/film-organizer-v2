@@ -53,16 +53,14 @@ export default function MediaId({ media_type, media }: Props) {
    return (
       <>
          <BackgroundViewButton />
-         <AnimatePresence mode="wait">
-            <MediaIdContainer key={router.asPath} media={media}>
-               <PageHead
-                  title={media.title || media.name}
-                  content={media.overview}
-               />
-               <Header media={media} media_type={media_type} />
-               <Body media={media} media_type={media_type} />
-            </MediaIdContainer>
-         </AnimatePresence>
+         <MediaIdContainer media={media}>
+            <PageHead
+               title={media.title || media.name}
+               content={media.overview}
+            />
+            <Header media={media} media_type={media_type} />
+            <Body media={media} media_type={media_type} />
+         </MediaIdContainer>
       </>
    );
 }

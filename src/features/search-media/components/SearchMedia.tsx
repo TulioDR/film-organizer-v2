@@ -1,107 +1,51 @@
-import { AnimatePresence } from "framer-motion";
-
-import { useRouter } from "next/router";
-import SearchMediaHandler from "./SearchMediaHandler";
-import { useEffect, useState } from "react";
-import Pagination from "./SearchMediaHandler/Pagination";
-import SEARCH_PAGES, { PageInfoModel } from "@/common/constants/SEARCH_PAGES";
-import SearchMediaSpinner from "./SearchMediaHandler/SearchMediaSpinner";
-import useApiUrl from "../hooks/useApiUrl";
 import GenresHandler from "./GenresHandler";
 import PageHead from "@/common/components/PageHead";
+import useSearchMediaTitle from "../hooks/useSearchMediaTitle";
+import MediaCard from "@/features/media-card/components/MediaCard";
+import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
+import Pagination from "./Pagination";
+import { Media } from "@/common/models/Media";
 
-type Props = {};
+type Props = {
+   useGenres?: true;
+   useMediaType?: true;
+   useDiscover?: true;
+   title: string;
+   response: any;
+};
 
-export default function SearchMedia({}: Props) {
-   const [pageInfo, setPageInfo] = useState<PageInfoModel | null>(null);
-   const [isLoading, setIsLoading] = useState<boolean>(true);
-   const [is404, setIs404] = useState<boolean>(false);
-   const [totalPages, setTotalPages] = useState<number>(0);
-
-   const router = useRouter();
-
-   const { apiUrl, setDiscoverApi, setResultsApi, setGenresApi, setNormalApi } =
-      useApiUrl();
-
-   const [initialPathname, setInitialPathname] = useState<string | null>(null);
-   useEffect(() => {
-      if (!initialPathname) setInitialPathname(router.pathname);
-   }, [router.pathname, initialPathname]);
-
-   useEffect(() => {
-      if (!router.isReady) return;
-
-      const path = SEARCH_PAGES.find((p) => p.pathname === router.pathname);
-      const MT = router.query.media_type;
-      const isMediaTypeValid = MT && ["movie", "tv"].includes(MT as string);
-
-      // console.log(router.pathname, initialPathname);
-      if (router.pathname !== initialPathname) return;
-
-      if (path && isMediaTypeValid) {
-         setPageInfo(path);
-      } else {
-         console.log("SET 404");
-         setIs404(true);
-         setIsLoading(false);
-      }
-   }, [
-      router.isReady,
-      router.query.media_type,
-      router.pathname,
-      initialPathname,
-   ]);
-
-   useEffect(() => {
-      if (!pageInfo) return;
-      if (router.pathname !== initialPathname) return;
-
-      const page = router.query.page as string | undefined;
-      const p = Number(page);
-      const isPBad = !p || isNaN(p) || p < 1 || !Number.isInteger(p) || p > 20;
-
-      const isDiscover = pageInfo.pathname === "/discover";
-      const isResults = pageInfo.pathname === "/[media_type]/results";
-      const isGenres = pageInfo.pathname === "/[media_type]/genres/[genre_id]";
-
-      if (isPBad && !isDiscover) {
-         router.replace({ query: { ...router.query, page: 1 } });
-         return;
-      }
-
-      if (isDiscover) setDiscoverApi();
-      else if (isResults) setResultsApi();
-      else if (isGenres) setGenresApi();
-      else setNormalApi();
-   }, [router.query, router.pathname, pageInfo]);
+export default function SearchMedia({
+   useGenres,
+   useMediaType,
+   title,
+   useDiscover,
+   response,
+}: Props) {
+   const { mediaType, data } = response;
+   useSearchMediaTitle({ useGenres, useMediaType, title, mediaType });
 
    return (
-      <div className="p-32">
-         {isLoading && <SearchMediaSpinner />}
-         {pageInfo && (
-            <>
-               <PageHead title={pageInfo.title} />
-               {apiUrl && (
-                  <AnimatePresence mode="wait" propagate>
-                     <SearchMediaHandler
-                        key={apiUrl}
-                        apiUrl={apiUrl}
-                        setTotalPages={setTotalPages}
-                        setIsLoading={setIsLoading}
-                     />
-                  </AnimatePresence>
-               )}
-               <Pagination total={totalPages} />
-               {pageInfo.title === "Genres" && <GenresHandler />}
-            </>
-         )}
-         {is404 && (
-            <div className="flex flex-col items-center justify-center w-full h-full">
-               <h1 className="text-9xl font-bold text-white">
-                  404 - Not Found
-               </h1>
-            </div>
-         )}
-      </div>
+      <>
+         <PageHead title={title} />
+
+         <SearchMediaCardsContainer>
+            {data.results.map((media: Media, index: number) => (
+               <MediaCard
+                  key={`${mediaType}-${media.id}-${index}`}
+                  id={`${mediaType}-${media.id}-${index}`}
+                  media={media}
+                  mediaType={mediaType}
+               />
+            ))}
+         </SearchMediaCardsContainer>
+
+         <Pagination
+            total={data.total_pages > 20 ? 20 : data.total_pages}
+            currentPage={data.page}
+         />
+
+         {useGenres && <GenresHandler />}
+         {useDiscover && <></>}
+      </>
    );
 }

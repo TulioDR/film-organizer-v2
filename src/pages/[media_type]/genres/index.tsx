@@ -6,6 +6,7 @@ import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import GenresContainer from "@/features/pages/genres/components/GenresContainer";
 import PageHead from "@/common/components/PageHead";
+import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 
 export default function Genres() {
    const router = useRouter();
@@ -13,11 +14,10 @@ export default function Genres() {
    const isMovie = mediaType === "movie";
    const genresArray = isMovie ? movieGenres : tvGenres;
 
+   usePageTitle(`${mediaType === "movie" ? "Movies" : "TV"}`, "Genres");
+
    return (
-      <motion.div
-         exit={{ opacity: 0, transition: { duration: 0.4 } }}
-         className="px-4 lg:px-24 xl:px-32 pt-32 pb-8"
-      >
+      <motion.div exit={{ opacity: 0, transition: { duration: 0.4 } }}>
          <PageHead title="Genres" />
          <AnimatePresence mode="wait">
             <GenresContainer key={mediaType}>

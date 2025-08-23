@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingSpinner from "../LoadingSpinner";
+import Reel from "@/features/layout/loader/components/Reel";
 
 type Props = {
    front?: true;
@@ -8,15 +8,15 @@ type Props = {
 
 export default function PosterSpinner({ front, back }: Props) {
    return (
-      <div className="absolute w-full h-full top-0 left-0 flex items-center justify-center bg-black">
+      <div className="absolute w-full h-full top-0 left-0 flex items-center justify-center z-10">
          <div
             className={`
-                     ${front ? "w-2/5" : ""}
+                     ${front ? "w-2/4" : ""}
                      ${back ? "w-1/5" : ""}
-                     ${!front || !back ? "w-1/5" : ""}
+                     ${!front && !back ? "w-1/5" : ""}
                   `}
          >
-            <LoadingSpinner />
+            <Reel spin />
          </div>
       </div>
    );

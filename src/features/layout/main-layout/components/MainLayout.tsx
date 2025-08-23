@@ -12,7 +12,6 @@ import Background from "@/features/layout/background/components/Background";
 import { getLists } from "@/api/lists";
 import { listActions } from "@/store/slices/list-slice";
 import { useDispatch } from "react-redux";
-import useBackground from "@/features/layout/background/hooks/useBackground";
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import Notification from "@/features/layout/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/components/LoginAdviceModal";
@@ -22,7 +21,9 @@ import useInitialThemeColor from "@/common/hooks/useInitialThemeColor";
 import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import FixedUIContainer from "./FixedUIContainer";
 import TutorialButton from "../../tutorial-button/components/TutorialButton";
-import PageTitle from "@/common/components/PageTitle";
+import PageTitle from "@/features/layout/page-title/components/PageTitle";
+import TransitionCardLayout from "./TransitionCardLayout";
+import PageLoader from "../../loader/components/PageLoader";
 
 type Props = {
    children: React.ReactNode;
@@ -45,12 +46,12 @@ export default function MainLayout({ children }: Props) {
       getInitialLists();
    }, [user, dispatch]);
 
-   const { pathname } = useRouter();
-   const { removeBackground } = useBackground();
+   const { asPath } = useRouter();
+
    useEffect(() => {
-      if (pathname === "/[media_type]/[media_id]" || pathname === "/") return;
-      removeBackground();
-   }, [pathname, removeBackground]);
+      console.log("there was a change in asPath");
+      console.log(asPath);
+   }, [asPath]);
 
    return (
       <>
@@ -62,15 +63,16 @@ export default function MainLayout({ children }: Props) {
                <Sidebar />
                <TutorialButton />
             </Responsive>
-            <PageTitle />
          </FixedUIContainer>
+         <PageTitle />
+         <TransitionCardLayout />
          <Background />
          <SaveMediaModal />
          <LoginAdviceModal />
          <Notification />
 
-         <AnimatePresence mode="wait">
-            {pathname !== "/auth" && <div key={pathname}>{children}</div>}
+         <AnimatePresence mode="wait" propagate>
+            <PageLoader key={asPath}>{children}</PageLoader>
          </AnimatePresence>
       </>
    );

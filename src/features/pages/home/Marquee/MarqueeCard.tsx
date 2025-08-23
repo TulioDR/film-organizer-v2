@@ -28,7 +28,7 @@ export default function MarqueeCard({ media }: Props) {
          <motion.div
             onHoverStart={onHoverStart}
             onHoverEnd={onHoverEnd}
-            className="w-full flex-shrink-0 aspect-[2/3] rounded-lg overflow-hidden relative"
+            className="w-full flex-shrink-0 aspect-[2/3] rounded-sm overflow-hidden relative"
          >
             <motion.div
                animate={{ scale: isHovered ? 1.1 : 1 }}

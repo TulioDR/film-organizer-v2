@@ -20,7 +20,6 @@ export default function Account() {
    return (
       <div className="space-y-5 max-w-6xl">
          <PageHead title="Account" />
-         {/* <PageTitle title="Account" /> */}
          <AccountProfile />
          <AccountSecurity />
          <DangerZone />

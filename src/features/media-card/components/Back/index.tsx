@@ -1,32 +1,32 @@
 import React from "react";
-import Container from "./Container";
-import Loader from "./Loader";
 import Overview from "./Overview";
 import Title from "./Title";
 import LearnMore from "./LearnMore";
 import Bookmark from "@/features/bookmark/components/Bookmark";
-import Poster from "@/common/components/Poster";
 import { Media } from "@/common/models/Media";
+import BackHeader from "./BackHeader";
 
 type Props = {
    media: Media;
    mediaType: "movie" | "tv";
    onLearnMore: () => void;
+   currentMedia?: Media;
 };
 
-export default function Back({ media, mediaType, onLearnMore }: Props) {
+export default function Back({
+   media,
+   mediaType,
+   onLearnMore,
+   currentMedia,
+}: Props) {
    const title = media.name || media.title;
-   const backdrop = media.backdrop_path;
    const releaseDate = media.release_date || media.first_air_date;
    const overview = media.overview || "N/A";
 
    return (
-      <Container>
-         <div className="relative">
-            <Poster alt={title} posterPath={backdrop} size="lg" back />
-            <Loader />
-         </div>
-         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-3 overflow-hidden">
+      <div className="bg-white p-2 rounded-sm absolute flex flex-col inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden shadow-xl">
+         <BackHeader media={media} currentMedia={currentMedia} />
+         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-4 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
                <Title title={title} year={releaseDate} />
                <Overview overview={overview} />
@@ -38,6 +38,6 @@ export default function Back({ media, mediaType, onLearnMore }: Props) {
                <LearnMore onClick={onLearnMore} />
             </div>
          </div>
-      </Container>
+      </div>
    );
 }

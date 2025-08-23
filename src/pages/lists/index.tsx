@@ -40,16 +40,15 @@ export default function Lists() {
       setFilteredLists(founded);
    }, [inputValue, lists]);
 
+   return <></>;
    if (filteredLists === null) return <></>;
    return (
       <div className="overflow-hidden">
          <PageHead title="Manage Lists" />
-         {/* <PageTitle title="Manage">
-            <ListFinder
-               onChange={(e) => setInputValue(e.currentTarget.value)}
-               value={inputValue}
-            />
-         </PageTitle> */}
+         {/* <ListFinder
+            onChange={(e) => setInputValue(e.currentTarget.value)}
+            value={inputValue}
+         /> */}
          {!user && <ListsLoginAdvice />}
          {user && filteredLists.length === 0 && <NoListsMessage />}
          {user && filteredLists.length > 0 && (

@@ -5,9 +5,17 @@ type Props = {
    alt: string;
    image: string | StaticImageData;
    onLoadingComplete: () => void;
+   quality: number;
+   isLoaded: boolean;
 };
 
-export default function PosterImage({ alt, image, onLoadingComplete }: Props) {
+export default function PosterImage({
+   alt,
+   image,
+   onLoadingComplete,
+   quality,
+   isLoaded,
+}: Props) {
    return (
       <Image
          alt={alt}
@@ -15,8 +23,9 @@ export default function PosterImage({ alt, image, onLoadingComplete }: Props) {
          fill
          sizes="100%"
          priority
+         quality={quality}
          onLoadingComplete={onLoadingComplete}
-         className="object-cover"
+         className={`object-cover ${isLoaded ? "" : "opacity-0"}`}
       />
    );
 }

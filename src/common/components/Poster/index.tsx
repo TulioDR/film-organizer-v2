@@ -7,16 +7,17 @@ import PosterImage from "./PosterImage";
 import PosterSpinner from "./PosterSpinner";
 
 const width = {
-   sm: 92,
-   md: 342,
-   lg: 780,
-   xl: 1280,
+   sm: "w92",
+   md: "w342",
+   lg: "w780",
+   xl: "w1280",
+   original: "original",
 };
 
 type Props = {
    alt: string;
    posterPath: string | StaticImageData;
-   size?: "sm" | "md" | "lg" | "xl";
+   size?: "sm" | "md" | "lg" | "xl" | "original";
    front?: true;
    back?: true;
    trailer?: true;
@@ -47,7 +48,7 @@ export default function Poster({
 
          if (typeof src === "string") {
             if (trailer) return `http://i3.ytimg.com/vi/${src}/hqdefault.jpg`;
-            return `https://image.tmdb.org/t/p/w${width[size]}${src}`;
+            return `https://image.tmdb.org/t/p/${width[size]}${src}`;
          }
 
          return src;
@@ -57,7 +58,7 @@ export default function Poster({
 
    return (
       <div
-         className={`relative w-full 
+         className={`relative w-full bg-black
             ${front ? "aspect-[2/3]" : ""}
             ${back ? "aspect-video" : ""} 
             ${!front && !back ? "h-full" : ""}
@@ -67,7 +68,9 @@ export default function Poster({
             <PosterImage
                alt={alt}
                image={image}
+               quality={size === "original" ? 100 : 75}
                onLoadingComplete={onLoadingComplete}
+               isLoaded={isLoaded}
             />
          )}
          {!isLoaded && <PosterSpinner front={front} back={back} />}

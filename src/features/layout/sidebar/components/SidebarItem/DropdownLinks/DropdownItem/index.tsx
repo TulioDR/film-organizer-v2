@@ -23,6 +23,7 @@ export default function DropdownItem({
    return (
       <Link
          href={link}
+         scroll={false}
          className="h-12 p-1.5 text-black hover:bg-black hover:text-white flex items-center gap-2 rounded-md"
       >
          <div
