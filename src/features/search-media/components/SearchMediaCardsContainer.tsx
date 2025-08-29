@@ -1,6 +1,6 @@
 import useScrollToTop from "@/common/hooks/useScrollToTop";
 import Store from "@/common/models/Store";
-import { motion, stagger } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -28,17 +28,19 @@ export default function SearchMediaCardsContainer({ children }: Props) {
 
    return (
       <motion.div
-         variants={container}
-         initial="initial"
-         animate="animate"
-         exit="exit"
-         // initial={{ opacity: 0 }}
-         // animate={{ opacity: isHidden ? 0 : 1 }}
-         // exit={{ opacity: 0 }}
-         // transition={{ duration: 0.2 }}
-         className="gap-4 grid grid-cols-2 md:grid-cols-3 pb-24 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5"
+         animate={{ opacity: isHidden ? 0 : 1 }}
+         transition={{ duration: 0.2 }}
+         className="w-full"
       >
-         {children}
+         <motion.div
+            variants={container}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="gap-4 grid grid-cols-2 md:grid-cols-3 pb-24 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5"
+         >
+            {children}
+         </motion.div>
       </motion.div>
    );
 }

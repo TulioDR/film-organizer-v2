@@ -24,7 +24,7 @@ export default function Back({
    const overview = media.overview || "N/A";
 
    return (
-      <div className="bg-white p-2 rounded-sm absolute flex flex-col inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden shadow-xl">
+      <div className="bg-white p-2 rounded-sm absolute flex flex-col w-full h-full top-0 left-0 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden shadow-xl">
          <BackHeader media={media} currentMedia={currentMedia} />
          <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-4 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
