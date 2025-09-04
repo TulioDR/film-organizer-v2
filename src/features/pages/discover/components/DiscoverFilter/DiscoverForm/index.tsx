@@ -1,6 +1,5 @@
-import DiscoverSubmitButton from "./DiscoverSubmitButton";
+import FormButton from "./FormButton";
 import { Form } from "formik";
-import DiscoverFormContainer from "./DiscoverFormContainer";
 import MediaTypeDd from "./Dropdowns/MediaTypeDd";
 import LanguageDd from "./Dropdowns/LanguageDd";
 import GenresDd from "./Dropdowns/GenresDd";
@@ -19,18 +18,19 @@ type Props = {
 export default function DiscoverForm({ values, setFieldValue }: Props) {
    const isMovie = values.media_type.value === "movie";
    return (
-      <DiscoverFormContainer>
-         <Form className="space-y-5 p-10">
-            <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 w-full h-full">
-               <MediaTypeDd isMovie={isMovie} setFieldValue={setFieldValue} />
-               <LanguageDd />
-               <GenresDd isMovie={isMovie} />
-               <YearDd />
-               <RatingDd />
-               <SortByDd isMovie={isMovie} />
-            </div>
-            <DiscoverSubmitButton />
-         </Form>
-      </DiscoverFormContainer>
+      <Form className="w-full h-full flex flex-col gap-8 p-8 bg-gray-200 rounded-lg">
+         <div className="flex-[4] grid gap-8 grid-cols-3 grid-rows-2">
+            <MediaTypeDd isMovie={isMovie} setFieldValue={setFieldValue} />
+            <LanguageDd />
+            <GenresDd isMovie={isMovie} />
+            <YearDd />
+            <RatingDd />
+            <SortByDd isMovie={isMovie} />
+         </div>
+         <div className="flex-1 grid grid-cols-2 gap-8">
+            <FormButton text="reset" />
+            <FormButton text="search" type="submit" />
+         </div>
+      </Form>
    );
 }

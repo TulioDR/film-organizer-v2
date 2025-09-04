@@ -1,15 +1,9 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import DiscoverForm from "./DiscoverForm";
-import ToggleFilterButton from "./ToggleFilterButton";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 
 export default function DiscoverFilter() {
    const router = useRouter();
-
-   const [isOpen, setIsOpen] = useState<boolean>(true);
-   const toggle = () => setIsOpen((prev) => !prev);
 
    const handleSubmit = (values: any) => {
       const { media_type, with_original_language, with_genres } = values;
@@ -26,7 +20,6 @@ export default function DiscoverFilter() {
 
       const searchTerms = mt + l + g + y + r + sb;
       router.push(`/discover?${searchTerms}`);
-      setIsOpen(false);
    };
 
    const initialValues = {
@@ -38,20 +31,10 @@ export default function DiscoverFilter() {
       sort_by: { value: "popularity.desc", label: "Popularity Descending" },
    };
    return (
-      <>
-         <ToggleFilterButton onClick={toggle} isOpen={isOpen} />
-         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {({ values, setFieldValue }) => (
-               <AnimatePresence>
-                  {isOpen && (
-                     <DiscoverForm
-                        values={values}
-                        setFieldValue={setFieldValue}
-                     />
-                  )}
-               </AnimatePresence>
-            )}
-         </Formik>
-      </>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+         {({ values, setFieldValue }) => (
+            <DiscoverForm values={values} setFieldValue={setFieldValue} />
+         )}
+      </Formik>
    );
 }

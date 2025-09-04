@@ -13,21 +13,15 @@ export default function PageLoader({ children }: Props) {
 
    useEffect(() => {
       let timeout: NodeJS.Timeout;
-      const handleStart = () => {
-         clearTimeout(timeout);
+      const handleStart = (url: string) => {
+         if (url === router.asPath) return;
          timeout = setTimeout(() => setIsLoading(true), 200);
       };
-      const handleStop = () => setIsLoading(false);
 
       router.events.on("routeChangeStart", handleStart);
-      router.events.on("routeChangeComplete", handleStop);
-      router.events.on("routeChangeError", handleStop);
-
       return () => {
          clearTimeout(timeout);
          router.events.off("routeChangeStart", handleStart);
-         router.events.off("routeChangeComplete", handleStop);
-         router.events.off("routeChangeError", handleStop);
       };
    }, [router]);
 
@@ -50,15 +44,17 @@ export default function PageLoader({ children }: Props) {
                </div>
             </motion.div>
          )}
-         <motion.div
-            animate={{
-               filter: isLoading ? "brightness(0.3)" : "brightness(1)",
-            }}
-            transition={{ duration: 0.3 }}
-            className="pt-36 xl:pt-44 px-24 xl:px-32 lg:pb-4 xl:pb-8 min-h-screen flex flex-col"
-         >
-            {children}
-         </motion.div>
+         <div id="side-panel-container" className="w-full">
+            <motion.div
+               animate={{
+                  filter: isLoading ? "brightness(0.3)" : "brightness(1)",
+               }}
+               transition={{ duration: 0.3 }}
+               className="pt-36 xl:pt-44 px-24 xl:px-32 lg:pb-4 xl:pb-8 min-h-screen flex flex-col"
+            >
+               {children}
+            </motion.div>
+         </div>
       </>
    );
 }

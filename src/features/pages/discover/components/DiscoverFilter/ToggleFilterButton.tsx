@@ -7,7 +7,7 @@ export default function ToggleFilterButton({ onClick, isOpen }: Props) {
    return (
       <button
          onClick={onClick}
-         className={`h-10 aspect-square bg-secondary-light dark:bg-secondary-dark rounded-t-lg grid place-content-center ${
+         className={`fixed z-50 right-8 bottom-8 h-16 aspect-square bg-gray-200 rounded-t-lg grid place-content-center ${
             isOpen ? "" : "rounded-b-lg delay-700"
          }`}
       >

@@ -1,55 +1,32 @@
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import GenreModel from "@/features/pages/genres/models/GenreModel";
-import ReactLenis from "lenis/react";
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-import GenreCard from "@/features/pages/genres/components/GenreCard";
+import GenreCardModal from "@/features/pages/genres/components/GenreCardModal";
 
-type Props = {};
+type Props = {
+   mediaType: "movie" | "tv";
+};
 
-export default function GenresSelector({}: Props) {
-   const router = useRouter();
+export default function GenresSelector({ mediaType }: Props) {
    const [genres, setGenres] = React.useState<GenreModel[]>([]);
 
+   const isMovie = mediaType === "movie";
+
    useEffect(() => {
-      const MT = router.query.media_type;
-      const currentGenres = MT === "movie" ? movieGenres : tvGenres;
+      const currentGenres = isMovie ? movieGenres : tvGenres;
+      console.log(currentGenres.length);
       setGenres(currentGenres);
-   }, []);
+   }, [isMovie]);
    return (
-      <div className="w-full h-full overflow-hidden">
-         <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.3 }}
-            className="w-full h-full overflow-hidden"
-         >
-            <motion.div
-               initial={{ x: "-100%" }}
-               animate={{ x: 0 }}
-               exit={{ x: "100%" }}
-               transition={{ duration: 0.3 }}
-               className="w-full h-full"
-            >
-               <ReactLenis className="w-full h-full overflow-y-auto bg-gray-200 rounded-lg border-8 p-2 border-gray-200">
-                  <div className="w-full h-full pointer-events-auto grid grid-cols-3 2xl:grid-cols-4">
-                     {genres.map((genre, index) => (
-                        <GenreCard
-                           key={index}
-                           genre={genre}
-                           mediaType={
-                              (router?.query?.media_type as "tv" | "movie") ||
-                              "movie"
-                           }
-                        />
-                     ))}
-                  </div>
-               </ReactLenis>
-            </motion.div>
-         </motion.div>
+      <div
+         className={`w-full h-full bg-gray-200 pointer-events-auto rounded-lg p-4 grid grid-cols-4  
+            ${isMovie ? "grid-rows-5" : "grid-rows-4"}
+         `}
+      >
+         {genres.map((genre, index) => (
+            <GenreCardModal key={index} genre={genre} mediaType={mediaType} />
+         ))}
       </div>
    );
 }

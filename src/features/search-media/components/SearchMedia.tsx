@@ -1,10 +1,11 @@
-import GenresHandler from "./GenresHandler";
 import PageHead from "@/common/components/PageHead";
 import useSearchMediaTitle from "../hooks/useSearchMediaTitle";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
 import Pagination from "./Pagination";
 import { Media } from "@/common/models/Media";
+import SidePanel from "./SidePanel";
+import GenresSelector from "./GenresHandler/GenresSelector";
 
 type Props = {
    useGenres?: true;
@@ -44,7 +45,11 @@ export default function SearchMedia({
             currentPage={data.page}
          />
 
-         {useGenres && <GenresHandler />}
+         {useGenres && (
+            <SidePanel buttonIcon="theater_comedy">
+               <GenresSelector mediaType={mediaType} />
+            </SidePanel>
+         )}
          {useDiscover && <></>}
       </>
    );

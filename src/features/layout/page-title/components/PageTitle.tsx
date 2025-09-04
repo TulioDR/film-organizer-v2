@@ -10,7 +10,7 @@ export default function PageTitle({}: Props) {
    const { title } = useSelector((state: Store) => state.pageTitle);
 
    const { isHidden } = useSelector((state: Store) => state.layout);
-   useEffect(() => console.log(title), [title]);
+   // useEffect(() => console.log(title), [title]);
 
    return (
       <motion.div

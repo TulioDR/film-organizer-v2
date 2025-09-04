@@ -8,6 +8,7 @@ type Props = {
    background: React.ReactNode;
    front: React.ReactNode;
    className?: string;
+   fullFront?: true;
 };
 
 export default function ImageLink({
@@ -15,6 +16,7 @@ export default function ImageLink({
    background,
    front,
    className = "",
+   fullFront,
 }: Props) {
    const [isHovered, setIsHovered] = useState(false);
    const handleHoverStart = async () => setIsHovered(true);
@@ -38,7 +40,11 @@ export default function ImageLink({
          <motion.div
             animate={{ opacity: isHovered ? 0 : 1 }}
             transition={smoothScaleTransition}
-            className="absolute w-full h-1/2 bottom-0 left-0 bg-gradient-to-t from-black/90 to-transparent flex justify-start items-end p-4 pointer-events-none"
+            className={`absolute w-full flex bottom-0 left-0  p-4 pointer-events-none ${
+               fullFront
+                  ? "h-full justify-center items-center bg-black/90"
+                  : "h-1/2 justify-start items-end bg-gradient-to-t from-black/90 to-transparent"
+            }`}
          >
             {front}
          </motion.div>

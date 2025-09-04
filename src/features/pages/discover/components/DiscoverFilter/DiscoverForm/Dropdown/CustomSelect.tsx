@@ -12,57 +12,32 @@ interface Props {
 }
 
 export default function CustomSelect({ field, form, options }: Props) {
-   const { themeColor, isDarkMode } = useSelector(
-      (state: Store) => state.theme
-   );
-
-   const colors = {
-      primary: {
-         light: "#e5e7eb",
-         dark: "#040603",
-      },
-      secondary: {
-         light: "#FFFFFF",
-         dark: "#2a282a",
-      },
-
-      light: {
-         1: "#000000",
-         2: "#616161",
-      },
-      dark: {
-         1: "#FFFFFF",
-         2: "#9AA1AD",
-      },
-   };
-   const { primary, secondary, dark, light } = colors;
+   const { themeColor } = useSelector((state: Store) => state.theme);
    return (
       <Select
+         {...field}
          instanceId={field.name}
          options={options}
-         {...field}
          onChange={(option) => form.setFieldValue(field.name, option)}
          styles={{
             control: (styles) => ({
                ...styles,
                backgroundColor: "transparent",
-               borderColor: isDarkMode ? dark[2] : light[2],
+               borderColor: "#71717a",
             }),
-            singleValue: (styles) => ({
-               ...styles,
-               color: isDarkMode ? dark[1] : light[1],
-            }),
+            singleValue: (styles) => ({ ...styles, color: "black" }),
             menu: (styles) => ({
                ...styles,
-               backgroundColor: isDarkMode ? secondary.dark : secondary.light,
+               backgroundColor: "white",
+               color: "black",
             }),
             option: (styles, state) => ({
                ...styles,
                backgroundColor: state.isSelected ? themeColor : "",
                "&:hover": {
                   ...styles,
-                  color: isDarkMode ? dark[1] : light[1],
-                  backgroundColor: isDarkMode ? primary.dark : primary.light,
+                  color: "white",
+                  backgroundColor: "#24282F",
                },
             }),
          }}
