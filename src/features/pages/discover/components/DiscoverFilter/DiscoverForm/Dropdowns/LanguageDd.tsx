@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import DropDown from "../Dropdown";
 
 import API_PUBLIC from "@/api/public";
-import languages from "../../../../images/languages.jpg";
 import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 type Props = {};
@@ -32,7 +31,6 @@ export default function LanguageDd({}: Props) {
          title="Languages"
          options={languagesOptions}
          icon="translate"
-         image={languages}
       />
    );
 }

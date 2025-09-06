@@ -1,72 +1,50 @@
-// import SearchMediaHandler from "@/features/searchMedia/components/SearchMediaHandler";
-import DiscoverInitialText from "@/features/pages/discover/components/DiscoverInitialText";
-import useDiscoverSearch from "@/features/pages/discover/hooks/useDiscoverSearch";
-// import Pagination from "@/features/searchMedia/components/SearchMediaHandler/Pagination";
 import PageHead from "@/common/components/PageHead";
 import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
-import { getDiscoverData } from "@/features/pages/discover/utils/getDiscoverData";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DiscoverFilter from "@/features/pages/discover/components/DiscoverFilter";
 import SidePanel from "@/features/search-media/components/SidePanel";
-// import DiscoverFilter from "@/features/search-media/components/DiscoverFilter";
+import InitialMessage from "@/features/pages/discover/components/InitialMessage";
+import NotFoundMessage from "@/features/pages/discover/components/NotFoundMessage";
+import SearchMediaCardsContainer from "@/features/search-media/components/SearchMediaCardsContainer";
+import MediaCard from "@/features/media-card/components/MediaCard";
+import { Media } from "@/common/models/Media";
+import { getDiscoverData } from "@/common/utils/getServerSideData/getDiscoverData";
 
 export const getServerSideProps: GetServerSideProps = getDiscoverData();
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-export default function Discover({ response }: Props) {
-   useEffect(() => {
-      console.log("this is the response");
-      console.log(response);
-   }, [response]);
-
-   const { apiUrl } = useDiscoverSearch();
-
-   const { mediaType, data } = response;
-
+export default function Discover(response: Props) {
    usePageTitle("Discover");
+   useEffect(() => console.log(response), [response]);
+   const { mediaType, data } = response;
+   const [initialOpen, setInitialOpen] = useState<boolean>(false);
+
+   const results = data?.results;
+   const length = results?.length;
 
    return (
       <>
          <PageHead title="Discover" />
-         <SidePanel initiallyOpen buttonIcon="tune">
+         <SidePanel initialOpen={initialOpen} buttonIcon="tune">
             <DiscoverFilter />
          </SidePanel>
 
-         {data?.results ? (
-            <div></div>
-         ) : (
-            <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center px-32">
-               <div className="w-full flex items-center gap-8">
-                  <div className="flex-1" />
-                  <div className="text-center">
-                     <div>Click on the button to use the discover panel</div>
-                     <div>to search Movies or TV series</div>
-                     <div>with specific parameters</div>
-                  </div>
-                  <div className="flex-1 bg-white h-0.5 relative">
-                     <div className="absolute top-0 right-0 w-8 h-0.5 bg-white origin-right rotate-45"></div>
-                  </div>
-               </div>
-            </div>
-         )}
-
-         {/* <AnimatePresence mode="wait">
-            {page && apiUrl ? (
-               <>
-                  <SearchMediaHandler
-                     key={asPath}
-                     page={page}
-                     setTotalPages={setTotalPages}
-                     apiUrl={apiUrl}
+         {!results && <InitialMessage setInitialOpen={setInitialOpen} />}
+         {results && length === 0 && <NotFoundMessage />}
+         {results && length > 0 && (
+            <SearchMediaCardsContainer>
+               {results.map((media: Media, index: number) => (
+                  <MediaCard
+                     key={`${mediaType}-${media.id}-${index}`}
+                     id={`${mediaType}-${media.id}-${index}`}
+                     media={media}
+                     mediaType={mediaType}
                   />
-                  <Pagination total={totalPages} />
-               </>
-            ) : (
-               <DiscoverInitialText />
-            )}
-         </AnimatePresence> */}
+               ))}
+            </SearchMediaCardsContainer>
+         )}
       </>
    );
 }

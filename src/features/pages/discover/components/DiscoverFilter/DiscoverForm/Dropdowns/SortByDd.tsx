@@ -1,5 +1,4 @@
 import DropDown from "../Dropdown";
-import sortImage from "../../../../images/sort.jpeg";
 import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 type Props = {
@@ -31,7 +30,6 @@ export default function SortByDd({ isMovie }: Props) {
          title="Sort By"
          options={isMovie ? sortByMovie : sortByTv}
          icon="sort"
-         image={sortImage}
       />
    );
 }

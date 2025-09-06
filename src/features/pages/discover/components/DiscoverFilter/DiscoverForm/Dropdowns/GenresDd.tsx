@@ -3,7 +3,6 @@ import DropDown from "../Dropdown";
 
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
-import genres from "../../../../images/genres.jpg";
 import GenreModel from "@/features/pages/genres/models/GenreModel";
 import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
@@ -28,7 +27,6 @@ export default function GenresDd({ isMovie }: Props) {
          title="Genres"
          options={isMovie ? movieGenresOptions : tvGenresOptions}
          icon="theater_comedy"
-         image={genres}
       />
    );
 }

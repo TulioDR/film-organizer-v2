@@ -41,33 +41,33 @@ export default function Lists() {
    }, [inputValue, lists]);
 
    return <></>;
-   if (filteredLists === null) return <></>;
-   return (
-      <div className="overflow-hidden">
-         <PageHead title="Manage Lists" />
-         {/* <ListFinder
-            onChange={(e) => setInputValue(e.currentTarget.value)}
-            value={inputValue}
-         /> */}
-         {!user && <ListsLoginAdvice />}
-         {user && filteredLists.length === 0 && <NoListsMessage />}
-         {user && filteredLists.length > 0 && (
-            <ListsCardsContainer>
-               {filteredLists.map((list) => (
-                  <ListCard
-                     key={list.id}
-                     list={list}
-                     openDeleteModal={openDeleteModal}
-                  />
-               ))}
-            </ListsCardsContainer>
-         )}
-         <ModalPortal isOpen={isModalOpen}>
-            <DeleteListModal
-               close={closeDeleteModal}
-               listToDelete={listToDelete}
-            />
-         </ModalPortal>
-      </div>
-   );
+   // if (filteredLists === null) return <></>;
+   // return (
+   //    <div className="overflow-hidden">
+   //       <PageHead title="Manage Lists" />
+   //       {/* <ListFinder
+   //          onChange={(e) => setInputValue(e.currentTarget.value)}
+   //          value={inputValue}
+   //       /> */}
+   //       {!user && <ListsLoginAdvice />}
+   //       {user && filteredLists.length === 0 && <NoListsMessage />}
+   //       {user && filteredLists.length > 0 && (
+   //          <ListsCardsContainer>
+   //             {filteredLists.map((list) => (
+   //                <ListCard
+   //                   key={list.id}
+   //                   list={list}
+   //                   openDeleteModal={openDeleteModal}
+   //                />
+   //             ))}
+   //          </ListsCardsContainer>
+   //       )}
+   //       <ModalPortal isOpen={isModalOpen}>
+   //          <DeleteListModal
+   //             close={closeDeleteModal}
+   //             listToDelete={listToDelete}
+   //          />
+   //       </ModalPortal>
+   //    </div>
+   // );
 }

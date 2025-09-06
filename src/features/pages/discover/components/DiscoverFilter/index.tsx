@@ -19,7 +19,7 @@ export default function DiscoverFilter() {
       const sb = `&sort_by=${sort_by.value}`;
 
       const searchTerms = mt + l + g + y + r + sb;
-      router.push(`/discover?${searchTerms}`);
+      router.push(`/discover?${searchTerms}&page=1`);
    };
 
    const initialValues = {

@@ -8,8 +8,8 @@ export default async function handler(
    req: NextApiRequest,
    res: NextApiResponse<Data>
 ) {
-   const [mediaType, filters, page] = req.query.filters!;
-   const url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&${filters}&include_adult=false&page=${page}`;
+   const [mediaType, filters] = req.query.filters!;
+   const url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US${filters}&include_adult=false`;
    try {
       const response = await fetch(url);
       const data = await response.json();

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import DropDown from "../Dropdown";
-import yearImage from "../../../../images/year.jpg";
 import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 export default function YearDd() {
@@ -20,7 +19,6 @@ export default function YearDd() {
          title="Year of Release"
          options={releaseYears}
          icon="event"
-         image={yearImage}
       />
    );
 }

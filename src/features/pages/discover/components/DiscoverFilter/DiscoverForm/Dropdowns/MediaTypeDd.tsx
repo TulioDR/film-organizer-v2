@@ -1,6 +1,5 @@
 import DropDown from "../Dropdown";
 
-import search from "../../../../images/search.jpg";
 import { useEffect } from "react";
 import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
@@ -33,7 +32,6 @@ export default function MediaTypeDd({ isMovie, setFieldValue }: Props) {
          title="Type of Media"
          options={searchTypes}
          icon={isMovie ? "movie" : "smart_display"}
-         image={search}
       />
    );
 }

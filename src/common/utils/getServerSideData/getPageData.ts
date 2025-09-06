@@ -2,22 +2,20 @@ import API_PUBLIC from "@/api/public";
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { isMediaTypeInvalid, isPageInvalid } from "./dataValidation";
 
-type PageDataProps = {
-   response: any;
-};
+type PageDataProps = any;
 
 export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
    return async (
       context: GetServerSidePropsContext
    ): Promise<GetServerSidePropsResult<TProps>> => {
       const { query } = context;
+      const isGenresPage = !!query.genre_id;
 
-      const isGenresPage = apiPath === "genres";
+      const media_type = query.media_type as string;
 
-      const media_type = query.media_type as "tv" | "movie";
-      const isTypeInvalid = media_type !== "movie" && media_type !== "tv";
-      if (isTypeInvalid) return { notFound: true };
+      if (isMediaTypeInvalid(media_type)) return { notFound: true };
 
       if (isGenresPage) {
          const genreId = Number(query.genre_id);
@@ -29,9 +27,7 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
       }
 
       const page = Number(query.page);
-      const isPageInvalid = !(page > 0 && page < 21 && Number.isInteger(page));
-
-      if (isPageInvalid) {
+      if (isPageInvalid(page)) {
          const destination = isGenresPage
             ? `/${media_type}/${apiPath}/${query.genre_id}?page=1`
             : `/${media_type}/${apiPath}?page=1`;
@@ -48,7 +44,7 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
          const { data } = await API_PUBLIC.get(api);
          const response = { data, mediaType: media_type };
 
-         return { props: { response } as TProps };
+         return { props: response as TProps };
       } catch (error) {
          console.error("Error fetching data:", error);
          return { notFound: true };

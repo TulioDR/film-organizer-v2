@@ -1,5 +1,4 @@
 import DropDown from "../Dropdown";
-import ratingImage from "../../../../images/rating.jpg";
 import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 
 export default function RatingDd() {
@@ -21,7 +20,6 @@ export default function RatingDd() {
          title="Rating"
          options={ratings}
          icon="star_rate"
-         image={ratingImage}
       />
    );
 }

@@ -48,10 +48,10 @@ export default function MainLayout({ children }: Props) {
 
    const { asPath } = useRouter();
 
-   useEffect(() => {
-      console.log("there was a change in asPath");
-      console.log(asPath);
-   }, [asPath]);
+   // useEffect(() => {
+   //    console.log("there was a change in asPath");
+   //    console.log(asPath);
+   // }, [asPath]);
 
    return (
       <>

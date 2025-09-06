@@ -7,19 +7,19 @@ import { useAnimate, usePresence } from "framer-motion";
 type Props = {
    children: React.ReactNode;
    buttonIcon: string;
-   initiallyOpen?: true;
+   initialOpen?: boolean;
 };
 
 export default function SidePanel({
    children,
    buttonIcon,
-   initiallyOpen,
+   initialOpen,
 }: Props) {
    const [scope, animate] = useAnimate();
    const [isPresent, safeToRemove] = usePresence();
+   const [overflow, setOverflow] = useState(false);
 
    const [isOpen, setIsOpen] = useState(false);
-   const [overflow, setOverflow] = useState(false);
 
    const [isMounted, setIsMounted] = useState(false);
    useEffect(() => setIsMounted(true), []);
@@ -41,15 +41,6 @@ export default function SidePanel({
       animate(".first", { x: "100%" }, { duration: 0 });
    };
 
-   useEffect(() => {
-      if (!isMounted) return;
-      if (!initiallyOpen) return;
-      setTimeout(() => {
-         openAnimation();
-         setIsOpen(true);
-      }, 500);
-   }, [initiallyOpen, isMounted]);
-
    const togglePanel = () => {
       if (!isOpen) openAnimation();
       else closeAnimation();
@@ -64,6 +55,12 @@ export default function SidePanel({
       };
       exitAnimation();
    }, [isPresent, isOpen]);
+
+   useEffect(() => {
+      if (initialOpen === undefined) return;
+      setIsOpen(initialOpen);
+      if (initialOpen) openAnimation();
+   }, [initialOpen]);
 
    const onUpdate = (e: any) => {
       const percentage = e.x;

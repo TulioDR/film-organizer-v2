@@ -1,4 +1,3 @@
-import { StaticImageData } from "next/image";
 import { Field, FieldProps } from "formik";
 import CustomSelect from "./CustomSelect";
 import DdHeader from "./DdHeader";
@@ -9,7 +8,6 @@ type Props = {
    title: string;
    options: OptionModel[];
    icon: string;
-   image: StaticImageData;
    name: string;
 };
 
