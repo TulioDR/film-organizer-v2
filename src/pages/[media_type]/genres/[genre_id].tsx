@@ -1,5 +1,4 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-
 import SearchMedia from "@/features/search-media/components/SearchMedia";
 import { getPageData } from "@/common/utils/getServerSideData/getPageData";
 

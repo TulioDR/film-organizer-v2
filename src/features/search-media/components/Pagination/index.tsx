@@ -30,7 +30,7 @@ export default function Pagination({ total, currentPage }: Props) {
             layout
             className="h-16 absolute bottom-0 left-0 w-full flex gap-4 justify-center z-40 pointer-events-none"
          >
-            <GlassContainer className="h-full overflow-hidden">
+            <GlassContainer className="h-full overflow-hidden aspect-square">
                <PaginationButton
                   left
                   onClick={previous}
@@ -51,7 +51,7 @@ export default function Pagination({ total, currentPage }: Props) {
                   />
                ))}
             </GlassContainer>
-            <GlassContainer className="h-full overflow-hidden">
+            <GlassContainer className="h-full overflow-hidden aspect-square">
                <PaginationButton
                   right
                   onClick={next}

@@ -24,6 +24,7 @@ import TutorialButton from "../../tutorial-button/components/TutorialButton";
 import PageTitle from "@/features/layout/page-title/components/PageTitle";
 import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
+import CustomLoader from "./CustomLoader";
 
 type Props = {
    children: React.ReactNode;
@@ -46,7 +47,7 @@ export default function MainLayout({ children }: Props) {
       getInitialLists();
    }, [user, dispatch]);
 
-   const { asPath } = useRouter();
+   const { pathname, asPath } = useRouter();
 
    // useEffect(() => {
    //    console.log("there was a change in asPath");
@@ -72,7 +73,10 @@ export default function MainLayout({ children }: Props) {
          <Notification />
 
          <AnimatePresence mode="wait" propagate>
-            <PageLoader key={asPath}>{children}</PageLoader>
+            <CustomLoader key={asPath} />
+         </AnimatePresence>
+         <AnimatePresence mode="wait" propagate>
+            <PageLoader key={pathname}>{children}</PageLoader>
          </AnimatePresence>
       </>
    );

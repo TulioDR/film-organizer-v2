@@ -27,8 +27,8 @@ export default function PageLoader({ children }: Props) {
 
    return (
       <>
-         {isLoading && (
-            <motion.div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-50">
+         {/* {isLoading && (
+            <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-50">
                <div className="w-96 rounded-md aspect-square bg-gray-200 flex flex-col items-center justify-center gap-2">
                   <div className="aspect-[10/2] w-[70%]" />
                   <div className="w-3/6 -rotate-[10deg] origin-bottom-left">
@@ -42,12 +42,12 @@ export default function PageLoader({ children }: Props) {
                      </div>
                   </div>
                </div>
-            </motion.div>
-         )}
+            </div>
+         )} */}
          <div id="side-panel-container" className="w-full">
             <motion.div
                animate={{
-                  filter: isLoading ? "brightness(0.3)" : "brightness(1)",
+                  filter: false ? "brightness(0.3)" : "brightness(1)",
                }}
                transition={{ duration: 0.3 }}
                className="pt-36 xl:pt-44 px-24 xl:px-32 lg:pb-4 xl:pb-8 min-h-screen flex flex-col"

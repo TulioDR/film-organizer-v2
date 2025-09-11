@@ -3,6 +3,7 @@ import SidePanelContainer from "./SidePanelContainer";
 import ToggleButton from "./ToggleButton";
 import { createPortal } from "react-dom";
 import { useAnimate, usePresence } from "framer-motion";
+import { useRouter } from "next/router";
 
 type Props = {
    children: React.ReactNode;
@@ -46,6 +47,12 @@ export default function SidePanel({
       else closeAnimation();
       setIsOpen((prev) => !prev);
    };
+
+   const router = useRouter();
+   useEffect(() => {
+      closeAnimation();
+      setIsOpen(false);
+   }, [router.asPath]);
 
    useEffect(() => {
       if (isPresent) return;

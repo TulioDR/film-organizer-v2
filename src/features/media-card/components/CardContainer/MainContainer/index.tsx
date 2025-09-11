@@ -10,7 +10,6 @@ type Props = {
 
 export default function MainContainer({ layoutId, children }: Props) {
    const [scope, animate] = useAnimate();
-
    const ROTATE_CLASS = "rotate-card";
 
    const onHoverStart = async () => {

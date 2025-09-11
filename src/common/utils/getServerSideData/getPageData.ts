@@ -12,7 +12,6 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
    ): Promise<GetServerSidePropsResult<TProps>> => {
       const { query } = context;
       const isGenresPage = !!query.genre_id;
-
       const media_type = query.media_type as string;
 
       if (isMediaTypeInvalid(media_type)) return { notFound: true };
@@ -31,10 +30,7 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
          const destination = isGenresPage
             ? `/${media_type}/${apiPath}/${query.genre_id}?page=1`
             : `/${media_type}/${apiPath}?page=1`;
-
-         return {
-            redirect: { destination, permanent: false },
-         };
+         return { redirect: { destination, permanent: false } };
       }
 
       try {
