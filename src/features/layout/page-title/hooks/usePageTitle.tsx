@@ -2,20 +2,27 @@ import { pageTitleActions } from "@/store/slices/page-title-slice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+interface TitleSection {
+   text: string;
+   link: string;
+}
 export default function usePageTitle(
-   title1?: string,
-   title2?: string,
-   title3?: string
+   title1: TitleSection | "movie" | "tv",
+   text2: TitleSection | null = null,
+   text3: TitleSection | null = null
 ) {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      const titles = [title1, title2, title3];
+      let newTitle1 = null;
+      if (title1 === "movie" || title1 === "tv") {
+         newTitle1 = {
+            text: title1 === "movie" ? "Movies" : "TV",
+            link: `/${title1}`,
+         };
+      } else newTitle1 = title1;
+
+      const titles = [newTitle1, text2, text3];
       dispatch(pageTitleActions.setTitle(titles));
-      // console.log(titles);
-      // return () => {
-      //    // console.log("Removing page title");
-      //    dispatch(pageTitleActions.removeTitle());
-      // };
-   }, [title1, title2, title3]);
+   }, [title1, text2, text3]);
 }

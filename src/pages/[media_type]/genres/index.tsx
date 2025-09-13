@@ -31,7 +31,10 @@ export const getStaticProps: GetStaticProps<GenresProps> = async (context) => {
 };
 
 export default function Genres({ genres, mediaType }: GenresProps) {
-   usePageTitle(`${mediaType === "movie" ? "Movies" : "TV"}`, "Genres");
+   usePageTitle(mediaType, {
+      text: "Genres",
+      link: `/${mediaType}/genres`,
+   });
    useScrollToTop();
 
    return (

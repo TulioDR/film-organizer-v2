@@ -8,11 +8,13 @@ export const getDiscoverData = <TProps extends PageDataProps>() => {
    return async (
       context: GetServerSidePropsContext
    ): Promise<GetServerSidePropsResult<TProps>> => {
+      const title = [{ text: "Discover", link: `/discover` }, null, null];
+
       const { query } = context;
       const media_type = query.media_type;
 
       if (typeof media_type !== "string") {
-         const response = { data: null, mediaType: null };
+         const response = { title, data: null, mediaType: null };
          return { props: response as TProps };
       }
 
@@ -25,7 +27,8 @@ export const getDiscoverData = <TProps extends PageDataProps>() => {
          params.delete("media_type");
          const api = `/discover/${media_type}/&${params.toString()}`;
          const { data } = await API_PUBLIC.get(api);
-         const response = { data, mediaType: media_type };
+
+         const response = { title, data, mediaType: media_type };
 
          return { props: response as TProps };
       } catch (error) {

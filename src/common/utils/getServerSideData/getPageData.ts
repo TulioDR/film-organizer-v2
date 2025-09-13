@@ -38,7 +38,29 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
             ? `/${media_type}/${apiPath}/${query.genre_id}/${page}`
             : `/${media_type}/${apiPath}/${page}`;
          const { data } = await API_PUBLIC.get(api);
-         const response = { data, mediaType: media_type };
+
+         const title = [
+            media_type,
+            {
+               link: `/${media_type}/${apiPath}`,
+               text: isGenresPage ? "Genres" : apiPath,
+            },
+            isGenresPage
+               ? {
+                    link: `/${media_type}/genres/${query.genre_id}`,
+                    text:
+                       media_type === "movie"
+                          ? movieGenres.find(
+                               (g) => g.id === Number(query.genre_id)
+                            )?.name
+                          : tvGenres.find(
+                               (g) => g.id === Number(query.genre_id)
+                            )?.name,
+                 }
+               : null,
+         ];
+
+         const response = { data, mediaType: media_type, title };
 
          return { props: response as TProps };
       } catch (error) {

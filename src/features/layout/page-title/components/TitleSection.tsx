@@ -1,11 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 type Props = {
-   text: string;
+   title: {
+      text: string;
+      link: string;
+   };
 };
 
-export default function TitleSection({ text }: Props) {
+export default function TitleSection({ title }: Props) {
    const item = {
       initial: { y: "100%" },
       animate: {
@@ -19,14 +23,16 @@ export default function TitleSection({ text }: Props) {
    };
 
    return (
-      <motion.a
+      <motion.div
          variants={item}
          initial="initial"
          animate="animate"
          exit="exit"
          className="h-full flex items-center cursor-pointer hover:border-b border-white uppercase text-xs xl:text-3xl font-title tracking-wide"
       >
-         {`>\xa0${text}`}
-      </motion.a>
+         <Link href={title.link} className="h-full flex items-center">
+            {`>\xa0${title.text}`}
+         </Link>
+      </motion.div>
    );
 }

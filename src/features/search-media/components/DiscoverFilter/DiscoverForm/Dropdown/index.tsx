@@ -1,8 +1,8 @@
 import { Field, FieldProps } from "formik";
 import CustomSelect from "./CustomSelect";
 import DdHeader from "./DdHeader";
-import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 import CardContainer from "../CardContainer";
+import { OptionModel } from "@/features/search-media/models/DiscoverModel";
 
 type Props = {
    title: string;

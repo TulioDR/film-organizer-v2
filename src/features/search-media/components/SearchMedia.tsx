@@ -1,5 +1,4 @@
 import PageHead from "@/common/components/PageHead";
-import useSearchMediaTitle from "../hooks/useSearchMediaTitle";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
 import Pagination from "./Pagination";
@@ -9,42 +8,36 @@ import GenresSelector from "./GenresHandler/GenresSelector";
 import { AnimatePresence } from "framer-motion";
 import InitialMessage from "./InitialMessage";
 import NotFoundMessage from "./NotFoundMessage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DiscoverFilter from "./DiscoverFilter";
 import { useRouter } from "next/router";
+import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 
 type Props = {
    useGenres?: true;
-   useMediaType?: true;
    useDiscover?: true;
-   title: string;
    response: any;
 };
 
 export default function SearchMedia({
    useGenres,
-   useMediaType,
-   title,
    useDiscover,
    response,
 }: Props) {
-   const { mediaType, data } = response;
-   useSearchMediaTitle({ useGenres, useMediaType, title, mediaType });
+   const { mediaType, data, title } = response;
 
-   const [initialOpen, setInitialOpen] = useState<boolean>(false);
+   const [text1, text2, text3] = title;
+   usePageTitle(text1, text2, text3);
 
    const results = data?.results;
    const length = results?.length;
 
-   useEffect(() => {
-      console.log(response);
-   }, [response]);
-
    const { asPath } = useRouter();
 
+   const [initialOpen, setInitialOpen] = useState<boolean>(false);
    return (
       <>
-         <PageHead title={title} />
+         <PageHead title={title[2]?.text || title[1]?.text || title[0].text} />
 
          <AnimatePresence mode="wait" propagate>
             {!results && (

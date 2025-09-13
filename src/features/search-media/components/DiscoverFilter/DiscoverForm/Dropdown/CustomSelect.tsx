@@ -2,8 +2,8 @@ import Select from "react-select";
 
 import { FieldInputProps, FormikProps } from "formik";
 import { useSelector } from "react-redux";
-import { OptionModel } from "@/features/pages/discover/models/DiscoverModel";
 import Store from "@/common/models/Store";
+import { OptionModel } from "@/features/search-media/models/DiscoverModel";
 
 interface Props {
    options: OptionModel[];
@@ -16,6 +16,9 @@ export default function CustomSelect({ field, form, options }: Props) {
    return (
       <Select
          {...field}
+         menuPortalTarget={document.body}
+         menuPosition="fixed" // Tell the menu to use fixed positioning
+         menuPlacement="auto" // Tell the menu to dynamically place itself
          instanceId={field.name}
          options={options}
          onChange={(option) => form.setFieldValue(field.name, option)}
@@ -39,6 +42,10 @@ export default function CustomSelect({ field, form, options }: Props) {
                   color: "white",
                   backgroundColor: "#24282F",
                },
+            }),
+            menuPortal: (base) => ({
+               ...base,
+               zIndex: 9999, // A high zIndex ensures it's on top
             }),
          }}
       />

@@ -45,8 +45,13 @@ interface LayoutModel {
    isHidden: boolean;
 }
 
+interface TitleSection {
+   text: string;
+   link: string;
+}
+
 interface PageTitle {
-   title: [string | undefined, string | undefined, string | undefined];
+   title: [TitleSection, TitleSection | null, TitleSection | null];
 }
 
 interface LoaderStore {

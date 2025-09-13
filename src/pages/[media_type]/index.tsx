@@ -11,7 +11,6 @@ import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import AnimationContainer from "@/features/pages/media-type/components/AnimationContainer";
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type } = context.query;
@@ -60,14 +59,7 @@ export default function MediaType({
    media_type,
    genres,
 }: Props) {
-   usePageTitle(`${media_type === "movie" ? "Movies" : "TV"}`);
-
-   useEffect(() => {
-      console.log("this runs on enter");
-      return () => {
-         console.log("this runs on exit");
-      };
-   }, [media_type]);
+   usePageTitle(media_type);
 
    const elementsArray = [
       {
@@ -100,7 +92,7 @@ export default function MediaType({
       <AnimatePresence mode="wait" propagate>
          <div
             key={media_type}
-            className="w-full grid grid-cols-2 grid-rows-2 gap-4 flex-grow overflow-hidden"
+            className="w-full grid grid-cols-2 grid-rows-2 gap-8 flex-grow overflow-hidden"
          >
             {elementsArray.map((element, index) => (
                <AnimationContainer
@@ -114,7 +106,7 @@ export default function MediaType({
                      front={
                         <MT_Title icon={element.icon} title={element.title} />
                      }
-                     className="rounded border border-border h-full"
+                     className="rounded-md border border-border h-full"
                   />
                </AnimationContainer>
             ))}
