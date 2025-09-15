@@ -1,5 +1,4 @@
-import Store from "@/common/models/Store";
-import { useSelector } from "react-redux";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    showcase: "movies" | "series" | "upcoming";
@@ -14,9 +13,7 @@ export default function ChangeShowcaseButton({
    children,
    onClick,
 }: Props) {
-   const { themeColor, isDarkMode } = useSelector(
-      (state: Store) => state.theme
-   );
+   const { themeColor, isDarkMode } = useAppSelector((state) => state.theme);
 
    const isSelected = showcase === currentShowcase;
    return (

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { getIsMediaSaved } from "@/api/media";
-import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
-import Store from "@/common/models/Store";
 import { MediaType } from "@/common/models/MediaType";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 export default function useIsMediaSaved(id: number, mediaType: MediaType) {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
@@ -21,8 +20,8 @@ export default function useIsMediaSaved(id: number, mediaType: MediaType) {
 
    const { user } = useUser();
 
-   const { mediaToSave, isSaveMediaOpen } = useSelector(
-      (state: Store) => state.bookmark
+   const { mediaToSave, isSaveMediaOpen } = useAppSelector(
+      (state) => state.bookmark
    );
 
    useEffect(() => {

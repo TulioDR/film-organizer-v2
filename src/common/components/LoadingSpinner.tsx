@@ -1,14 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { SpinnerCircular } from "spinners-react";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 interface Props {
    white?: true;
 }
 
 export default function LoadingSpinner({ white }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
    return (
       <SpinnerCircular
          size="100%"

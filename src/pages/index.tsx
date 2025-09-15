@@ -5,10 +5,10 @@ import API_PUBLIC from "@/api/public";
 import Marquee from "@/features/pages/home/Marquee";
 import PageHead from "@/common/components/PageHead";
 import { Media } from "@/common/models/Media";
-import { useDispatch } from "react-redux";
 import { pageTitleActions } from "@/store/slices/page-title-slice";
 import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 import { AnimatePresence, motion } from "framer-motion";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 export const getServerSideProps = async () => {
    const { data } = await API_PUBLIC.get("/home");
@@ -27,7 +27,7 @@ interface Props {
 }
 
 export default function Home({ firstHalf, secondHalf }: Props) {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
    useEffect(() => {
       dispatch(pageTitleActions.removeTitle());
    }, []);

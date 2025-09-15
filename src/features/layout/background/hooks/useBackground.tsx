@@ -1,9 +1,11 @@
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { backgroundActions } from "@/store/slices/background-slice";
 import { StaticImageData } from "next/image";
 import { useDispatch } from "react-redux";
 
 export default function useBackground() {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
+   // const dispatch = );
 
    const changeBackground = (
       mediaId: number,

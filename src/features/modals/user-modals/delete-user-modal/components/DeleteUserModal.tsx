@@ -5,12 +5,12 @@ import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 import { useUser } from "@clerk/nextjs";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 type Props = {
    close: () => void;
@@ -20,7 +20,7 @@ export default function DeleteUserModal({ close }: Props) {
    const { user } = useUser();
    const router = useRouter();
 
-   const { lists } = useSelector((state: Store) => state.lists);
+   const { lists } = useAppSelector((state) => state.lists);
 
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const { showSuccessNotification, showErrorNotification } = useNotification();

@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    showcase: "movies" | "series" | "upcoming";
@@ -15,7 +14,7 @@ export default function ChangeShowcaseButton({
    children,
    onClick,
 }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
 
    return (
       <button className="relative">

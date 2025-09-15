@@ -1,12 +1,12 @@
 import { themeActions } from "@/store/slices/theme-slice";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 export default function useInitialThemeColor() {
-   const dispatch = useDispatch();
-   const { themeColor, themeColorName, isDarkMode } = useSelector(
-      (state: Store) => state.theme
+   const dispatch = useAppDispatch();
+   const { themeColor, themeColorName, isDarkMode } = useAppSelector(
+      (state) => state.theme
    );
 
    useEffect(() => {

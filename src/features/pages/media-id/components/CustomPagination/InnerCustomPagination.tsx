@@ -1,7 +1,6 @@
 import { Pagination } from "@mantine/core";
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    sm?: true;
@@ -16,8 +15,8 @@ export default function InnerCustomPagination({
    onChange,
    value,
 }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
-   const { isHidden } = useSelector((state: Store) => state.layout);
+   const { themeColor } = useAppSelector((state) => state.theme);
+   const { isHidden } = useAppSelector((state) => state.layout);
 
    return (
       <motion.div

@@ -1,7 +1,5 @@
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { motion } from "framer-motion";
-
-import { useSelector } from "react-redux";
 
 const spring = {
    type: "spring",
@@ -9,9 +7,7 @@ const spring = {
    damping: 30,
 };
 export default function ToggleDarkMode() {
-   const { themeColor, isDarkMode } = useSelector(
-      (state: Store) => state.theme
-   );
+   const { themeColor, isDarkMode } = useAppSelector((state) => state.theme);
 
    return (
       <div className="h-full py-2">

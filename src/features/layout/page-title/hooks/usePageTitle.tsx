@@ -1,6 +1,6 @@
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { pageTitleActions } from "@/store/slices/page-title-slice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 interface TitleSection {
    text: string;
@@ -11,7 +11,7 @@ export default function usePageTitle(
    text2: TitleSection | null = null,
    text3: TitleSection | null = null
 ) {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
    useEffect(() => {
       let newTitle1 = null;

@@ -11,10 +11,11 @@ import ListsLoginAdvice from "@/features/pages/manage-lists/components/ListsLogi
 import NoListsMessage from "@/features/pages/manage-lists/components/NoListsMessage";
 import ListsCardsContainer from "@/features/pages/manage-lists/components/ListsCardsContainer";
 import ListCard from "@/features/pages/manage-lists/components/ListCard";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 export default function Lists() {
    const { user } = useUser();
-   const { lists } = useSelector((state: Store) => state.lists);
+   const { lists } = useAppSelector((state) => state.lists);
 
    const [listToDelete, setListToDelete] = useState<List | null>(null);
 

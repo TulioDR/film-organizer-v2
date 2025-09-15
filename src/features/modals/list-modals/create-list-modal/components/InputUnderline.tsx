@@ -1,13 +1,12 @@
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { useSelector } from "react-redux";
 
 type Props = {
    isFocused: boolean;
 };
 export default function InputUnderline({ isFocused }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
    return (
       <AnimatePresence>
          {isFocused && (

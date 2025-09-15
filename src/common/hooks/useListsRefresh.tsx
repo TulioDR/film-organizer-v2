@@ -1,12 +1,11 @@
 import { getLists } from "@/api/lists";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { listActions } from "@/store/slices/list-slice";
 import { useUser } from "@clerk/nextjs";
 
-import { useDispatch } from "react-redux";
-
 export default function useListsRefresh() {
    const { user } = useUser();
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
    const refreshLists = async () => {
       if (!user) {

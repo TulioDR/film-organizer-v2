@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 interface Props {
    children: React.ReactNode;
 }
 
 export default function PageSubtitle({ children }: Props) {
-   const { isHidden } = useSelector((state: Store) => state.layout);
+   const { isHidden } = useAppSelector((state) => state.layout);
 
    return (
       <motion.h4

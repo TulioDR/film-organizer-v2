@@ -1,14 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    children: React.ReactNode;
 };
 
 export default function FixedUIContainer({ children }: Props) {
-   const { isHidden } = useSelector((state: Store) => state.layout);
+   const { isHidden } = useAppSelector((state) => state.layout);
    return (
       <motion.div
          layout

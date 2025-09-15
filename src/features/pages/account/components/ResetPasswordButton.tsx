@@ -1,10 +1,10 @@
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
 
 type Props = { openModal: () => void };
 
 export default function ResetPasswordButton({}: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor } = useAppSelector((state: any) => state.theme);
 
    const forgotPasswordHandler = async () => {
       // c

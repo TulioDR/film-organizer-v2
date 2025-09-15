@@ -1,15 +1,14 @@
 import React from "react";
 import TitleSection from "./TitleSection";
 import { AnimatePresence, motion } from "framer-motion";
-import Store from "@/common/models/Store";
-import { useSelector } from "react-redux";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {};
 
 export default function PageTitle({}: Props) {
-   const { title: titles } = useSelector((state: Store) => state.pageTitle);
+   const { title: titles } = useAppSelector((state) => state.pageTitle);
 
-   const { isHidden } = useSelector((state: Store) => state.layout);
+   const { isHidden } = useAppSelector((state) => state.layout);
    // useEffect(() => console.log(title), [title]);
 
    const getKey = (title: { text: string; link: string }, index: number) => {

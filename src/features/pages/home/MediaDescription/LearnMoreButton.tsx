@@ -1,6 +1,5 @@
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 import Link from "next/link";
-import { useSelector } from "react-redux";
 
 type Props = {
    onClick: () => void;
@@ -8,7 +7,7 @@ type Props = {
 };
 
 export default function LearnMoreButton({ onClick, href }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
 
    return (
       <Link

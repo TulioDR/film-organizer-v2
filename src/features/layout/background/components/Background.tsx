@@ -1,13 +1,12 @@
 import { StaticImageData } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import Backdrop from "./Backdrop";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 export default function Background() {
-   const { backgroundImage, backgroundKey } = useSelector(
-      (state: Store) => state.background
+   const { backgroundImage, backgroundKey } = useAppSelector(
+      (state) => state.background
    );
 
    const [src, setSrc] = useState<string | StaticImageData | null>(null);

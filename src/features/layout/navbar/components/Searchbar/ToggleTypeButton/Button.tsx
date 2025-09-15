@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    icon: string;
@@ -10,7 +9,7 @@ type Props = {
 };
 
 export default function Button({ icon, isSelected, onClick }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
 
    const [showTooltip, setShowTooltip] = useState<boolean>(false);
    const handleHoverStart = () => setShowTooltip(true);

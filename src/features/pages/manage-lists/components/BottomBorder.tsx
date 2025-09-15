@@ -1,12 +1,12 @@
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSelector } from "react-redux";
 
 type Props = {
    isOnFocus: boolean;
 };
 
 export default function BottomBorder({ isOnFocus }: Props) {
-   const { themeColor } = useSelector((state: any) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
 
    return (
       <AnimatePresence>

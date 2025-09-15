@@ -1,7 +1,6 @@
 import useScrollToTop from "@/common/hooks/useScrollToTop";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
 
 type Props = {
    children: React.ReactNode;
@@ -9,7 +8,8 @@ type Props = {
 
 export default function SearchMediaCardsContainer({ children }: Props) {
    useScrollToTop();
-   const { isHidden } = useSelector((state: Store) => state.layout);
+
+   const { isHidden } = useAppSelector((state) => state.layout);
 
    const container = {
       initial: {},

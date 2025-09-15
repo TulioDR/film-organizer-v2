@@ -1,9 +1,8 @@
 import Select from "react-select";
 
 import { FieldInputProps, FormikProps } from "formik";
-import { useSelector } from "react-redux";
-import Store from "@/common/models/Store";
 import { OptionModel } from "@/features/search-media/models/DiscoverModel";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 interface Props {
    options: OptionModel[];
@@ -12,7 +11,7 @@ interface Props {
 }
 
 export default function CustomSelect({ field, form, options }: Props) {
-   const { themeColor } = useSelector((state: Store) => state.theme);
+   const { themeColor } = useAppSelector((state) => state.theme);
    return (
       <Select
          {...field}

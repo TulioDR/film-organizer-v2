@@ -1,10 +1,10 @@
-import Store from "@/common/models/Store";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { loaderActions } from "@/store/slices/loader-slice";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function useLoader() {
-   const { isLoading } = useSelector((state: Store) => state.loader);
-   const dispatch = useDispatch();
+   const { isLoading } = useAppSelector((state) => state.loader);
+   const dispatch = useAppDispatch();
 
    const startLoading = () => {
       dispatch(loaderActions.startLoading());

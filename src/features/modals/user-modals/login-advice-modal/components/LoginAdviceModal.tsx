@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 
-import { useDispatch, useSelector } from "react-redux";
 import { bookmarkActions } from "@/store/slices/bookmark-slice";
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 export default function LoginAdviceModal() {
    const router = useRouter();
@@ -15,9 +15,9 @@ export default function LoginAdviceModal() {
       router.push("/auth");
    };
 
-   const { isLoginAdviceOpen } = useSelector((state: Store) => state.bookmark);
+   const { isLoginAdviceOpen } = useAppSelector((state) => state.bookmark);
 
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
    const closeModal = () => {
       dispatch(bookmarkActions.closeLoginAdviceModal());
    };

@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MediaDetailsModel } from "../models/MediaDetailsModel";
 import useBackground from "@/features/layout/background/hooks/useBackground";
-import Store from "@/common/models/Store";
-import { useSelector } from "react-redux";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    children: React.ReactNode;
@@ -13,7 +12,7 @@ type Props = {
 export default function MediaIdContainer({ children, media }: Props) {
    const { changeBackground, removeBackground } = useBackground();
 
-   const { isHidden } = useSelector((state: Store) => state.layout);
+   const { isHidden } = useAppSelector((state) => state.layout);
 
    useEffect(() => {
       changeBackground(media.id, media.backdrop_path);

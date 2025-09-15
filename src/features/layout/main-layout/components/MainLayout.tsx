@@ -11,7 +11,6 @@ import Background from "@/features/layout/background/components/Background";
 
 import { getLists } from "@/api/lists";
 import { listActions } from "@/store/slices/list-slice";
-import { useDispatch } from "react-redux";
 import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import Notification from "@/features/layout/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/components/LoginAdviceModal";
@@ -25,6 +24,7 @@ import PageTitle from "@/features/layout/page-title/components/PageTitle";
 import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
 import CustomLoader from "./CustomLoader";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 type Props = {
    children: React.ReactNode;
@@ -33,7 +33,7 @@ type Props = {
 export default function MainLayout({ children }: Props) {
    useInitialThemeColor();
 
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
    const { user } = useUser();
    useEffect(() => {
       const getInitialLists = async () => {

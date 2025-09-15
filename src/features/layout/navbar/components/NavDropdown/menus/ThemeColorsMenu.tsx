@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import ColorIcon from "../ColorIcon";
 import DropdownItem from "../DropdownItem";
-import { useDispatch, useSelector } from "react-redux";
 import { themeActions } from "@/store/slices/theme-slice";
 import { useState, useEffect } from "react";
 import { darkThemeColors, lightThemeColors } from "@/data/themeColors";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 type Props = {
    setMenu: React.Dispatch<React.SetStateAction<"main" | "colors">>;
@@ -17,7 +17,7 @@ interface ThemeColorsModel {
 }
 
 export default function ThemeColorsMenu({ setMenu }: Props) {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
    const setNewColor = (color: string, colorName: string) => {
       const object = {
          color: color,
@@ -25,7 +25,7 @@ export default function ThemeColorsMenu({ setMenu }: Props) {
       };
       dispatch(themeActions.changeThemeColor(object));
    };
-   const { isDarkMode } = useSelector((state: Store) => state.theme);
+   const { isDarkMode } = useAppSelector((state) => state.theme);
    const [currentColors, setCurrentColors] =
       useState<ThemeColorsModel[]>(darkThemeColors);
 

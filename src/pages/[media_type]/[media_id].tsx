@@ -1,9 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
-import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { layoutActions } from "@/store/slices/layout-slice";
 
 import PageHead from "@/common/components/PageHead";
@@ -12,6 +10,7 @@ import BackgroundViewButton from "@/features/pages/media-id/components/Backgroun
 import MediaIdContainer from "@/features/pages/media-id/components/MediaIdContainer";
 import Header from "@/features/pages/media-id/components/Header";
 import Body from "@/features/pages/media-id/components/Body";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -36,7 +35,7 @@ type Props = {
 };
 
 export default function MediaId({ media_type, media }: Props) {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
    const router = useRouter();
 
    useEffect(() => {

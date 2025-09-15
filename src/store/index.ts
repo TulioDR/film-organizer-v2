@@ -27,3 +27,6 @@ const makeStore = () => store;
 
 const wrapper = createWrapper(makeStore);
 export default wrapper;
+
+export type StoreState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

@@ -1,5 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-
 import ListToSave from "./ListToSave";
 import { bookmarkActions } from "@/store/slices/bookmark-slice";
 import NoListsText from "./NoListsText";
@@ -8,15 +6,17 @@ import ModalContainer from "@/features/modals/modal-parts/components/ModalContai
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
-import Store from "@/common/models/Store";
+import useAppSelector from "@/store/hooks/useAppSelector";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 export default function SaveMediaModal() {
-   const { lists } = useSelector((state: Store) => state.lists);
-   const { mediaToSave, isSaveMediaOpen } = useSelector(
-      (state: Store) => state.bookmark
+   const { lists } = useAppSelector((state) => state.lists);
+   const { mediaToSave, isSaveMediaOpen } = useAppSelector(
+      (state) => state.bookmark
    );
 
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
+
    const closeModal = () => {
       dispatch(bookmarkActions.closeSaveMediaModal());
    };

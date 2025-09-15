@@ -1,8 +1,8 @@
+import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { notificationActions } from "@/store/slices/notification-slice";
-import { useDispatch } from "react-redux";
 
 export default function useNotification() {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
    const setNotification = (message: string, success: boolean) => {
       dispatch(notificationActions.showNotification({ message, success }));
