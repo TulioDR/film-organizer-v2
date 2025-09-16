@@ -11,7 +11,11 @@ type Props = {
 };
 
 export default function Pagination({ total, currentPage }: Props) {
-   const { range } = usePagination({ total: total, initialPage: currentPage });
+   const { range } = usePagination({
+      total: total,
+      initialPage: currentPage,
+      page: currentPage,
+   });
 
    return (
       <FixedUIPortal>

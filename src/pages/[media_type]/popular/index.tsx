@@ -6,5 +6,5 @@ export const getServerSideProps: GetServerSideProps = getPageData("popular");
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 export default function Popular(response: Props) {
-   return <SearchMedia title="Popular" response={response} useMediaType />;
+   return <SearchMedia response={response} />;
 }

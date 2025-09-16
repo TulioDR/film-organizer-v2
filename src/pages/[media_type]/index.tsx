@@ -11,6 +11,7 @@ import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import AnimationContainer from "@/features/pages/media-type/components/AnimationContainer";
 import { AnimatePresence } from "framer-motion";
+import PageHead from "@/common/components/PageHead";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type } = context.query;
@@ -89,28 +90,34 @@ export default function MediaType({
    ];
 
    return (
-      <AnimatePresence mode="wait" propagate>
-         <div
-            key={media_type}
-            className="w-full grid grid-cols-2 grid-rows-2 gap-8 flex-grow overflow-hidden"
-         >
-            {elementsArray.map((element, index) => (
-               <AnimationContainer
-                  key={element.link}
-                  index={index}
-                  clockwise={true}
-               >
-                  <ImageLink
-                     link={element.link}
-                     background={element.background}
-                     front={
-                        <MT_Title icon={element.icon} title={element.title} />
-                     }
-                     className="rounded-md border border-border h-full"
-                  />
-               </AnimationContainer>
-            ))}
-         </div>
-      </AnimatePresence>
+      <>
+         <PageHead title={media_type === "movie" ? "Movies" : "TV"} />
+         <AnimatePresence mode="wait" propagate>
+            <div
+               key={media_type}
+               className="w-full grid grid-cols-2 grid-rows-2 gap-8 flex-grow overflow-hidden"
+            >
+               {elementsArray.map((element, index) => (
+                  <AnimationContainer
+                     key={element.link}
+                     index={index}
+                     clockwise={true}
+                  >
+                     <ImageLink
+                        link={element.link}
+                        background={element.background}
+                        front={
+                           <MT_Title
+                              icon={element.icon}
+                              title={element.title}
+                           />
+                        }
+                        className="rounded-md border border-border h-full"
+                     />
+                  </AnimationContainer>
+               ))}
+            </div>
+         </AnimatePresence>
+      </>
    );
 }

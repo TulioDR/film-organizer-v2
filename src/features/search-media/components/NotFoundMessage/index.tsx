@@ -1,12 +1,15 @@
 import { useAnimate, usePresence } from "framer-motion";
 import React, { useEffect } from "react";
 import InitialText from "../InitialMessage/InitialText";
+import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 
 type Props = {};
 
 export default function NotFoundMessage({}: Props) {
    const [scope, animate] = useAnimate();
    const [isPresent, safeToRemove] = usePresence();
+
+   useStopLoader();
 
    useEffect(() => {
       const handleInitialAnimations = async () => {

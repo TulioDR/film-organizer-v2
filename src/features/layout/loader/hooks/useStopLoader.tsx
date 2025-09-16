@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
-import useLoader from "./useLoader";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
+import { loaderActions } from "@/store/slices/loader-slice";
+import { useEffect } from "react";
 
 export default function useStopLoader() {
-   const { isLoading, stopLoading } = useLoader();
-
-   const [value, setValue] = useState(false);
+   const dispatch = useAppDispatch();
    useEffect(() => {
-      if (!value) setValue(true);
-   }, [value]);
-
-   useEffect(() => {
-      if (value) {
-         console.log("stop loading");
-         stopLoading();
-      }
-   }, [value]);
-
-   return { isLoading };
+      dispatch(loaderActions.stopLoading());
+   }, []);
 }

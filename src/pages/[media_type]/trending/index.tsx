@@ -6,5 +6,5 @@ export const getServerSideProps: GetServerSideProps = getPageData("trending");
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 export default function Trending(response: Props) {
-   return <SearchMedia response={response} title="Trending" useMediaType />;
+   return <SearchMedia response={response} />;
 }

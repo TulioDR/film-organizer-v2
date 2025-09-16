@@ -1,4 +1,5 @@
 import useScrollToTop from "@/common/hooks/useScrollToTop";
+import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 import useAppSelector from "@/store/hooks/useAppSelector";
 import { motion } from "framer-motion";
 
@@ -6,8 +7,9 @@ type Props = {
    children: React.ReactNode;
 };
 
-export default function SearchMediaCardsContainer({ children }: Props) {
+export default function MediaCardsGrid({ children }: Props) {
    useScrollToTop();
+   useStopLoader();
 
    const { isHidden } = useAppSelector((state) => state.layout);
 

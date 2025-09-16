@@ -7,5 +7,5 @@ export const getServerSideProps: GetServerSideProps = getDiscoverData();
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Discover(response: Props) {
-   return <SearchMedia useDiscover title="Discover" response={response} />;
+   return <SearchMedia useDiscover response={response} />;
 }

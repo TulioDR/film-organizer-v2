@@ -23,7 +23,6 @@ import TutorialButton from "../../tutorial-button/components/TutorialButton";
 import PageTitle from "@/features/layout/page-title/components/PageTitle";
 import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
-import CustomLoader from "./CustomLoader";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
 
 type Props = {
@@ -47,12 +46,7 @@ export default function MainLayout({ children }: Props) {
       getInitialLists();
    }, [user, dispatch]);
 
-   const { pathname, asPath } = useRouter();
-
-   // useEffect(() => {
-   //    console.log("there was a change in asPath");
-   //    console.log(asPath);
-   // }, [asPath]);
+   const { pathname } = useRouter();
 
    return (
       <>
@@ -72,9 +66,6 @@ export default function MainLayout({ children }: Props) {
          <LoginAdviceModal />
          <Notification />
 
-         <AnimatePresence mode="wait" propagate>
-            <CustomLoader key={asPath} />
-         </AnimatePresence>
          <AnimatePresence mode="wait" propagate>
             <PageLoader key={pathname}>{children}</PageLoader>
          </AnimatePresence>

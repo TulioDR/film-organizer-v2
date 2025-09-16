@@ -1,6 +1,5 @@
 import PageHead from "@/common/components/PageHead";
 import MediaCard from "@/features/media-card/components/MediaCard";
-import SearchMediaCardsContainer from "./SearchMediaCardsContainer";
 import Pagination from "./Pagination";
 import { Media } from "@/common/models/Media";
 import SidePanel from "./SidePanel";
@@ -12,6 +11,7 @@ import { useState } from "react";
 import DiscoverFilter from "./DiscoverFilter";
 import { useRouter } from "next/router";
 import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
+import MediaCardsGrid from "./MediaCardsGrid";
 
 type Props = {
    useGenres?: true;
@@ -45,7 +45,7 @@ export default function SearchMedia({
             )}
             {results && length === 0 && <NotFoundMessage key="not-found" />}
             {results && length > 0 && (
-               <SearchMediaCardsContainer key={asPath}>
+               <MediaCardsGrid key={asPath}>
                   {data.results.map((media: Media, index: number) => (
                      <MediaCard
                         key={`${mediaType}-${media.id}-${index}`}
@@ -54,7 +54,7 @@ export default function SearchMedia({
                         mediaType={mediaType}
                      />
                   ))}
-               </SearchMediaCardsContainer>
+               </MediaCardsGrid>
             )}
          </AnimatePresence>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 
 type Props = {
    index: number;
@@ -12,6 +13,8 @@ export default function AnimationContainer({
    children,
    clockwise,
 }: Props) {
+   useStopLoader();
+
    const getVariants = (multiplier: number): Variants => {
       const isHorizontal = index === 1 || index === 2;
       const reverse = index === 2 || index === 3;
