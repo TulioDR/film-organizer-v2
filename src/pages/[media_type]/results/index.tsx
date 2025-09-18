@@ -1,19 +1,11 @@
+import { getPageData } from "@/common/utils/getServerSideData/getPageData";
 import SearchMedia from "@/features/search-media/components/SearchMedia";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-   const { search_query } = context.query;
-   return {
-      props: { searchQuery: search_query },
-   };
-};
+export const getServerSideProps: GetServerSideProps = getPageData("results");
 
-type Props = {
-   searchQuery: string;
-};
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-export default function Results({ searchQuery }: Props) {
-   return (
-      <SearchMedia apiUrl={`/search/${searchQuery}`} title={`Search results`} />
-   );
+export default function Results(response: Props) {
+   return <SearchMedia response={response} />;
 }

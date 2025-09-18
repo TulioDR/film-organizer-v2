@@ -70,7 +70,7 @@ export default function Searchbar({}: Props) {
       if (currentIndex === null) {
          const type = isMovie ? "movie" : "tv";
          const value = inputValue.toLowerCase();
-         router.push(`/${type}/results?search_query=${value}`);
+         router.push(`/${type}/results?search_query=${value}&page=1`);
       } else {
          getDetails(currentIndex);
       }

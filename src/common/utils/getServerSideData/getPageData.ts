@@ -12,6 +12,8 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
    ): Promise<GetServerSidePropsResult<TProps>> => {
       const { query } = context;
       const isGenresPage = !!query.genre_id;
+      const isResultsPage = !!query.search_query;
+
       const media_type = query.media_type as string;
 
       if (isMediaTypeInvalid(media_type)) return { notFound: true };
@@ -27,16 +29,24 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
 
       const page = Number(query.page);
       if (isPageInvalid(page)) {
-         const destination = isGenresPage
-            ? `/${media_type}/${apiPath}/${query.genre_id}?page=1`
-            : `/${media_type}/${apiPath}?page=1`;
+         let destination: null | string = null;
+         if (isResultsPage)
+            destination = `/${media_type}/results?search_query=${query.search_query}&page=1`;
+         else if (isGenresPage)
+            destination = `/${media_type}/${apiPath}/${query.genre_id}?page=1`;
+         else destination = `/${media_type}/${apiPath}?page=1`;
+
          return { redirect: { destination, permanent: false } };
       }
 
       try {
-         const api = isGenresPage
-            ? `/${media_type}/${apiPath}/${query.genre_id}/${page}`
-            : `/${media_type}/${apiPath}/${page}`;
+         let api: string | null = null;
+         if (isResultsPage)
+            api = `/${media_type}/results/${query.search_query}/${page}`;
+         else if (isGenresPage)
+            api = `/${media_type}/${apiPath}/${query.genre_id}/${page}`;
+         else api = `/${media_type}/${apiPath}/${page}`;
+
          const { data } = await API_PUBLIC.get(api);
 
          const title = [
