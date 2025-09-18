@@ -24,7 +24,7 @@ export default function DropdownItem({
       <Link
          href={link}
          scroll={false}
-         className="h-12 p-1.5 text-black hover:bg-black hover:text-white flex items-center gap-2 rounded-md"
+         className="h-12 p-1.5 hover:bg-black flex items-center gap-2 rounded-md"
       >
          <div
             className={`h-full flex items-center justify-center aspect-square relative
@@ -40,9 +40,9 @@ export default function DropdownItem({
                   </ActiveMarkContainer>
                )}
             </AnimatePresence>
-            <SidebarIcon icon={icon} dropdown />
+            <SidebarIcon icon={icon} dropdown isSelected={isSelected} />
          </div>
-         <span className="text-sm">{text}</span>
+         <span className="text-sm mix-blend-difference">{text}</span>
       </Link>
    );
 }

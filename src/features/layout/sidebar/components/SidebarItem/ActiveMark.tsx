@@ -13,7 +13,7 @@ export default function ActiveMark({ layoutId }: Props) {
       <motion.div
          layoutId={layoutId}
          style={{ backgroundColor: themeColor, borderRadius: "5px" }}
-         className="absolute top-0 left-0 aspect-square h-full pointer-events-none"
+         className="w-full h-full pointer-events-none"
          transition={{ duration: 0.6, type: "spring" }}
       />
    );

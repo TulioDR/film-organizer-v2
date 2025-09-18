@@ -6,17 +6,16 @@ type Props = {
 export default function MainTooltip({ hasItems, text }: Props) {
    return (
       <div
-         className={`w-40 absolute left-full top-0 text-base h-16 py-2 pr-2 block rounded-r-md bg-white ${
+         className={`w-56 pl-20 absolute top-0 left-0 group text-base bg-white flex items-center h-full rounded-r-md ${
             hasItems ? "rounded-br-none" : ""
          }`}
       >
-         <div
-            className={`h-full w-full flex items-center pl-4 rounded-r-md ${
-               hasItems ? "group-hover:bg-black" : ""
-            }`}
-         >
-            {text}
-         </div>
+         {hasItems && (
+            <div className="p-2 absolute inset-0">
+               <div className="group-hover:bg-black rounded-md h-full w-full" />
+            </div>
+         )}
+         <span className="mix-blend-difference">{text}</span>
       </div>
    );
 }

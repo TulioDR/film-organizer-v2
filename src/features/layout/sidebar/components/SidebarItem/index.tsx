@@ -42,7 +42,7 @@ export default function SidebarItem({
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
          ref={elementRef}
-         className="h-16 w-full list-none select-none relative"
+         className="h-16 w-full list-none select-none relative font-light"
       >
          <MainLink
             link={link}

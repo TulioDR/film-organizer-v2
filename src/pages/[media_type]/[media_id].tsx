@@ -11,6 +11,7 @@ import MediaIdContainer from "@/features/pages/media-id/components/MediaIdContai
 import Header from "@/features/pages/media-id/components/Header";
 import Body from "@/features/pages/media-id/components/Body";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
+import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -35,6 +36,7 @@ type Props = {
 };
 
 export default function MediaId({ media_type, media }: Props) {
+   useStopLoader();
    const dispatch = useAppDispatch();
    const router = useRouter();
 

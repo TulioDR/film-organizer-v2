@@ -8,6 +8,7 @@ import { GetStaticProps } from "next";
 import { GetStaticPaths } from "next";
 import GenreModel from "@/features/pages/genres/models/GenreModel";
 import useScrollToTop from "@/common/hooks/useScrollToTop";
+import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 
 type GenresProps = {
    genres: GenreModel[];
@@ -36,6 +37,7 @@ export default function Genres({ genres, mediaType }: GenresProps) {
       link: `/${mediaType}/genres`,
    });
    useScrollToTop();
+   useStopLoader();
 
    return (
       <>
