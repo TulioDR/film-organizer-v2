@@ -29,46 +29,42 @@ export const getPageData = <TProps extends PageDataProps>(apiPath: string) => {
 
       const page = Number(query.page);
       if (isPageInvalid(page)) {
-         let destination: null | string = null;
+         let dest: null | string = null;
+         const mainPage = `/${media_type}/${apiPath}`;
          if (isResultsPage)
-            destination = `/${media_type}/results?search_query=${query.search_query}&page=1`;
-         else if (isGenresPage)
-            destination = `/${media_type}/${apiPath}/${query.genre_id}?page=1`;
-         else destination = `/${media_type}/${apiPath}?page=1`;
+            dest = `${mainPage}?search_query=${query.search_query}&page=1`;
+         else if (isGenresPage) dest = `${mainPage}/${query.genre_id}?page=1`;
+         else dest = `${mainPage}?page=1`;
 
-         return { redirect: { destination, permanent: false } };
+         return { redirect: { destination: dest, permanent: false } };
       }
 
       try {
          let api: string | null = null;
-         if (isResultsPage)
-            api = `/${media_type}/results/${query.search_query}/${page}`;
-         else if (isGenresPage)
-            api = `/${media_type}/${apiPath}/${query.genre_id}/${page}`;
-         else api = `/${media_type}/${apiPath}/${page}`;
+         const mainApi = `/${media_type}/${apiPath}`;
+         if (isResultsPage) api = `${mainApi}/${query.search_query}/${page}`;
+         else if (isGenresPage) api = `${mainApi}/${query.genre_id}/${page}`;
+         else api = `${mainApi}/${page}`;
 
          const { data } = await API_PUBLIC.get(api);
 
-         const title = [
-            media_type,
-            {
-               link: `/${media_type}/${apiPath}`,
-               text: isGenresPage ? "Genres" : apiPath,
-            },
-            isGenresPage
-               ? {
-                    link: `/${media_type}/genres/${query.genre_id}`,
-                    text:
-                       media_type === "movie"
-                          ? movieGenres.find(
-                               (g) => g.id === Number(query.genre_id)
-                            )?.name
-                          : tvGenres.find(
-                               (g) => g.id === Number(query.genre_id)
-                            )?.name,
-                 }
-               : null,
-         ];
+         const title1 = media_type;
+
+         const title2 = {
+            link: mainApi,
+            text: isGenresPage ? "Genres" : apiPath,
+         };
+
+         const genreId = Number(query.genre_id);
+         const title3 = {
+            link: `/${media_type}/genres/${query.genre_id}`,
+            text:
+               media_type === "movie"
+                  ? movieGenres.find((g) => g.id === genreId)?.name
+                  : tvGenres.find((g) => g.id === genreId)?.name,
+         };
+
+         const title = [title1, title2, isGenresPage ? title3 : null];
 
          const response = { data, mediaType: media_type, title };
 
