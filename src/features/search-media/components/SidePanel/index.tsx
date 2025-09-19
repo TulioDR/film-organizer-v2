@@ -47,7 +47,7 @@ export default function SidePanel({
 
    if (!isMounted) return <></>;
    return createPortal(
-      <div className="fixed top-0 left-0 h-[100svh] w-full z-20 pl-32 pr-24 pt-44 pb-8 pointer-events-none">
+      <div className="fixed top-0 left-0 h-[100svh] w-full pl-32 pr-24 pt-44 pb-8 pointer-events-none">
          <ToggleButton
             onClick={togglePanel}
             isOpen={isOpen}

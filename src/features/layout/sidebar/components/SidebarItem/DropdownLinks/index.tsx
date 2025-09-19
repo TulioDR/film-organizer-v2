@@ -9,7 +9,7 @@ type Props = {
 
 export default function DropdownLinks({ items, isMainSelected }: Props) {
    return (
-      <div className="pb-4 px-2 bg-white absolute top-full left-full w-40 rounded-br-md translate-x-0.5">
+      <div className="pb-4 px-2 bg-white absolute top-full left-full w-40 rounded-br-md translate-x-0.5 shadow-md">
          {items.map((item, index) => (
             <DropdownItem
                key={index}

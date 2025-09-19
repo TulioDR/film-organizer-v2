@@ -6,7 +6,7 @@ type Props = {
 export default function MainTooltip({ hasItems, text }: Props) {
    return (
       <div
-         className={`w-56 pl-20 absolute top-0 left-0 group text-base bg-white flex items-center h-full rounded-r-md ${
+         className={`w-56 pl-20 absolute top-0 left-0 group text-base bg-white flex items-center h-full rounded-r-md shadow-md ${
             hasItems ? "rounded-br-none" : ""
          }`}
       >

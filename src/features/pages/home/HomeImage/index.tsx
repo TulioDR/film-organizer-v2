@@ -10,7 +10,7 @@ export default function HomeImage({ src }: Props) {
    return (
       <div className="fixed top-0 left-0 h-screen w-screen overflow-hidden">
          <div className="w-full h-full translate-x-1/4 relative">
-            <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-black to-transparent z-10" />
+            <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-[#24282F] to-transparent z-10" />
             <AnimatePresence>
                {src && (
                   <motion.div
