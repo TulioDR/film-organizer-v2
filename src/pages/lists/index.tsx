@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useUser } from "@clerk/nextjs";
 
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import DeleteListModal from "@/features/modals/list-modals/delete-list-modal/components/DeleteListModal";
 import PageHead from "@/common/components/PageHead";
 import List from "@/common/models/List";
-import Store from "@/common/models/Store";
 import ListsLoginAdvice from "@/features/pages/manage-lists/components/ListsLoginAdvice";
 import NoListsMessage from "@/features/pages/manage-lists/components/NoListsMessage";
 import ListsCardsContainer from "@/features/pages/manage-lists/components/ListsCardsContainer";
 import ListCard from "@/features/pages/manage-lists/components/ListCard";
 import useAppSelector from "@/store/hooks/useAppSelector";
+import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
+import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 
 export default function Lists() {
    const { user } = useUser();
    const { lists } = useAppSelector((state) => state.lists);
+
+   useStopLoader();
+
+   usePageTitle({ text: "Playlists", link: "/lists" });
 
    const [listToDelete, setListToDelete] = useState<List | null>(null);
 

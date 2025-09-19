@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import useBackground from "@/features/layout/background/hooks/useBackground";
 import Link from "next/link";
 import Poster from "@/common/components/Poster";
 import { Media } from "@/common/models/Media";
 
 type Props = {
    media: Media;
+   setSrc: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export default function MarqueeCard({ media }: Props) {
-   const { changeBackground, removeBackground } = useBackground();
-
+export default function MarqueeCard({ media, setSrc }: Props) {
    const [isHovered, setIsHovered] = useState(false);
 
    const onHoverStart = () => {
-      changeBackground(media.id, media.backdrop_path);
+      setSrc(media.backdrop_path);
       setIsHovered(true);
    };
    const onHoverEnd = () => {
-      removeBackground();
       setIsHovered(false);
+      setSrc(null);
    };
 
    return (

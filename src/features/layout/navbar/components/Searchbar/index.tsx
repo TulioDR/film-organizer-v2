@@ -6,6 +6,7 @@ import SBResults from "./SBResults";
 import API_PUBLIC from "@/api/public";
 import { motion } from "framer-motion";
 import GlassContainer from "@/common/components/GlassContainer";
+import { createPortal } from "react-dom";
 
 type Props = {};
 
@@ -83,40 +84,56 @@ export default function Searchbar({}: Props) {
    }, [router.pathname]);
 
    return (
-      <motion.div
-         initial={false}
-         animate={{ top: isHome ? "50%" : 0, y: isHome ? "-50%" : 0 }}
-         transition={{ duration: 0.6, ease: "easeInOut" }}
-         className="pointer-events-none flex justify-center items-center absolute w-full h-16 z-50"
-      >
-         <form
-            onSubmit={handleSubmit}
-            className="h-16 relative pointer-events-auto"
+      <>
+         {/* {createPortal(
+            <div
+               onClick={() => setIsHome((prev) => !prev)}
+               className="h-32 bg-red-500 aspect-square fixed bottom-0 right-0 z-50 cursor-pointer"
+            ></div>,
+            document.body
+         )} */}
+         <motion.div
+            className={`pointer-events-none flex items-center fixed left-0 w-full h-16 z-50 px-32
+               ${isHome ? "top-1/2 -translate-y-1/2" : "justify-center"}
+            `}
          >
-            <GlassContainer
-               className={`h-full overflow-hidden flex 
+            <div className="w-1/2 flex justify-center">
+               <motion.form
+                  layout="position"
+                  // layoutRoot
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  onSubmit={handleSubmit}
+                  className="h-16 relative pointer-events-auto "
+               >
+                  <GlassContainer
+                     className={`h-full overflow-hidden flex 
                   ${showResults ? "rounded-b-none" : ""}
                `}
-            >
-               <SearchInput
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  onFocus={handleInputFocus}
-                  onBlur={handleInputBlur}
-                  placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
-               />
-               <ToggleTypeButton isMovie={isMovie} setIsMovie={setIsMovie} />
-            </GlassContainer>
-            {showResults && (
-               <SBResults
-                  isLoading={isLoading}
-                  results={results}
-                  currentIndex={currentIndex}
-                  setCurrentIndex={setCurrentIndex}
-                  getDetails={getDetails}
-               />
-            )}
-         </form>
-      </motion.div>
+                  >
+                     <SearchInput
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
+                        placeholder={`Search ${isMovie ? "Movies" : "Series"}`}
+                     />
+                     <ToggleTypeButton
+                        isMovie={isMovie}
+                        setIsMovie={setIsMovie}
+                     />
+                  </GlassContainer>
+                  {showResults && (
+                     <SBResults
+                        isLoading={isLoading}
+                        results={results}
+                        currentIndex={currentIndex}
+                        setCurrentIndex={setCurrentIndex}
+                        getDetails={getDetails}
+                     />
+                  )}
+               </motion.form>
+            </div>
+         </motion.div>
+      </>
    );
 }
