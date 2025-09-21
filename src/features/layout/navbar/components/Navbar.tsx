@@ -4,6 +4,7 @@ import LoginButton from "./LoginButton";
 import NavDropdown from "./NavDropdown";
 import GlassContainer from "@/common/components/GlassContainer";
 import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import NavTitle from "./NavTitle";
 
 export default function Navbar() {
    return (
@@ -20,9 +21,7 @@ export default function Navbar() {
             </GlassContainer>
          </Responsive>
 
-         <div className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase h-full flex items-center justify-center flex-1 lg:flex-initial">
-            Agrios
-         </div>
+         <NavTitle />
 
          <Responsive minWidth={LG_MEDIA_QUERY}>
             <div className="flex lg:gap-4 xl:gap-8 pointer-events-auto h-full">

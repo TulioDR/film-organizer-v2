@@ -28,7 +28,7 @@ export default function TitleSection({ title }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="h-full flex items-center cursor-pointer hover:border-b border-white uppercase text-xs xl:text-3xl font-title tracking-wide"
+         className="h-full flex items-center cursor-pointer hover:border-b border-white uppercase text-sm md:text-lg lg:text-3xl font-title tracking-wide"
       >
          <Link href={title.link} className="h-full flex items-center">
             {`>\xa0${title.text}`}

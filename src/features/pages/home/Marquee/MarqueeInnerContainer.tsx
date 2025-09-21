@@ -17,11 +17,11 @@ export default function MarqueeInnerContainer({
       <motion.div
          style={{
             y,
-            gap: GAP,
-            paddingTop: GAP / 2,
-            paddingBottom: GAP / 2,
+            // gap: GAP,
+            // paddingTop: GAP / 2,
+            // paddingBottom: GAP / 2,
          }}
-         className={`w-full flex flex-col absolute ${className}`}
+         className={`w-full flex flex-col gap-1 py-0.5 sm:gap-4 sm:py-2 absolute ${className}`}
       >
          {children}
       </motion.div>

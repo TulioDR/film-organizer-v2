@@ -6,7 +6,6 @@ import SBResults from "./SBResults";
 import API_PUBLIC from "@/api/public";
 import { motion } from "framer-motion";
 import GlassContainer from "@/common/components/GlassContainer";
-import { createPortal } from "react-dom";
 
 type Props = {};
 
@@ -85,22 +84,14 @@ export default function Searchbar({}: Props) {
 
    return (
       <>
-         {/* {createPortal(
-            <div
-               onClick={() => setIsHome((prev) => !prev)}
-               className="h-32 bg-red-500 aspect-square fixed bottom-0 right-0 z-50 cursor-pointer"
-            ></div>,
-            document.body
-         )} */}
-         <motion.div
-            className={`pointer-events-none flex items-center fixed left-0 w-full h-16 z-50 px-32
+         <div
+            className={`pointer-events-none flex items-center fixed left-0 w-full h-16 z-50 px-24 xl:px-32
                ${isHome ? "top-1/2 -translate-y-1/2" : "justify-center"}
             `}
          >
-            <div className="w-1/2 flex justify-center">
+            <div className="w-2/3 xl:w-1/2 flex justify-center">
                <motion.form
                   layout="position"
-                  // layoutRoot
                   transition={{ duration: 0.6, ease: "easeInOut" }}
                   onSubmit={handleSubmit}
                   className="h-16 relative pointer-events-auto "
@@ -133,7 +124,7 @@ export default function Searchbar({}: Props) {
                   )}
                </motion.form>
             </div>
-         </motion.div>
+         </div>
       </>
    );
 }

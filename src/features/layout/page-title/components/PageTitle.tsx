@@ -19,7 +19,7 @@ export default function PageTitle({}: Props) {
       <motion.div
          animate={{ opacity: isHidden ? 0 : 1 }}
          transition={{ duration: 0.2 }}
-         className="fixed top-32 left-32 overflow-hidden h-8 flex gap-2 xl:gap-4 pointer-events-auto z-10"
+         className="fixed top-24 xl:top-32 left-4 lg:left-24 xl:left-32 overflow-hidden h-4 lg:h-8 flex gap-2 xl:gap-4 pointer-events-auto z-10"
       >
          {titles.map((title, index) => (
             <AnimatePresence key={index} mode="wait">

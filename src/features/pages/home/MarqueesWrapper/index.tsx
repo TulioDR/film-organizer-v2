@@ -13,7 +13,7 @@ export default function MarqueesWrapper({
    onHoverEnd,
 }: Props) {
    return (
-      <motion.div className="fixed top-0 left-0 h-[100svh] w-full flex justify-start px-32 overflow-hidden">
+      <motion.div className="fixed inset-0 flex justify-start overflow-hidden px-4 lg:px-24 xl:px-32 pointer-events-none lg:pointer-events-auto brightness-50 lg:brightness-100">
          <motion.div
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
@@ -21,7 +21,7 @@ export default function MarqueesWrapper({
             transition={{ duration: 1 }}
             onHoverStart={onHoverStart}
             onHoverEnd={onHoverEnd}
-            className="w-1/2 flex gap-4 h-full"
+            className="w-full lg:w-2/3 xl:w-1/2 flex gap-1 sm:gap-4 h-full"
          >
             {children}
          </motion.div>

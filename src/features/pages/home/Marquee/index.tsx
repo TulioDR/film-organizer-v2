@@ -29,7 +29,7 @@ export default function Marquee({
          baseY.jump(0);
          return;
       }
-      const velocity = isHovered ? 0.4 : 1.3;
+      const velocity = isHovered ? 0.2 : 0.7;
       const moveBy = (direction * delta) / 1000;
       baseY.set(baseY.get() + moveBy * velocity);
    });
@@ -38,16 +38,28 @@ export default function Marquee({
       <div className="flex items-center flex-1 h-full relative">
          <MarqueeInnerContainer y={y} className="top-0">
             <MarqueeInnerContainer className="bottom-full">
-               {array.map((media) => (
-                  <MarqueeCard key={media.id} media={media} setSrc={setSrc} />
+               {array.map((media, index) => (
+                  <MarqueeCard
+                     key={media.id + "-" + index}
+                     media={media}
+                     setSrc={setSrc}
+                  />
                ))}
             </MarqueeInnerContainer>
-            {array.map((media) => (
-               <MarqueeCard key={media.id} media={media} setSrc={setSrc} />
+            {array.map((media, index) => (
+               <MarqueeCard
+                  key={media.id + "-" + index}
+                  media={media}
+                  setSrc={setSrc}
+               />
             ))}
             <MarqueeInnerContainer className="top-full">
-               {array.map((media) => (
-                  <MarqueeCard key={media.id} media={media} setSrc={setSrc} />
+               {array.map((media, index) => (
+                  <MarqueeCard
+                     key={media.id + "-" + index}
+                     media={media}
+                     setSrc={setSrc}
+                  />
                ))}
             </MarqueeInnerContainer>
          </MarqueeInnerContainer>

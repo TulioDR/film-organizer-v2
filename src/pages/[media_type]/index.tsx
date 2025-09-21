@@ -95,7 +95,7 @@ export default function MediaType({
          <AnimatePresence mode="wait" propagate>
             <div
                key={media_type}
-               className="w-full grid grid-cols-2 grid-rows-2 gap-8 flex-grow overflow-hidden"
+               className="w-full grid md:grid-cols-2 md:grid-rows-2 gap-4 xl:gap-8 flex-grow overflow-hidden"
             >
                {elementsArray.map((element, index) => (
                   <AnimationContainer

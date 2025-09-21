@@ -22,7 +22,13 @@ export const getServerSideProps = async () => {
    const array3 = originalArray.slice(quarterSize * 2, quarterSize * 3);
    const array4 = originalArray.slice(quarterSize * 3, originalArray.length);
 
-   const bigArray = [array1, array2, array3, array4];
+   const bigArray = [
+      [...array1, ...array1],
+      [...array2, ...array2],
+      [...array3, ...array3],
+      [...array4, ...array4],
+   ];
+
    return {
       props: { bigArray },
    };
@@ -55,7 +61,7 @@ export default function Home({ bigArray }: Props) {
                   key={index}
                   array={array}
                   reverse={index % 2 === 0}
-                  initialY={index * (100 / 4)}
+                  initialY={index + (index % 2 === 0 ? 75 : 25)}
                   setSrc={setSrc}
                   isHovered={isHovered}
                />

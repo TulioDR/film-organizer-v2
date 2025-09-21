@@ -56,7 +56,7 @@ export default function PageLoader({ children }: Props) {
                   filter: isLoading ? "brightness(0.3)" : "brightness(1)",
                }}
                transition={{ duration: 0.3 }}
-               className="pt-36 xl:pt-44 px-24 xl:px-32 lg:pb-4 xl:pb-8 min-h-screen flex flex-col"
+               className="pt-32 lg:pt-36 xl:pt-44 px-4 lg:px-24 xl:px-32 pb-4 xl:pb-8 min-h-screen flex flex-col"
             >
                {children}
             </motion.div>

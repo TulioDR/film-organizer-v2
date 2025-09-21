@@ -24,6 +24,7 @@ import PageTitle from "@/features/layout/page-title/components/PageTitle";
 import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
+import Link from "next/link";
 
 type Props = {
    children: React.ReactNode;
@@ -51,6 +52,20 @@ export default function MainLayout({ children }: Props) {
    return (
       <>
          <div id="modals-container"></div>
+
+         <Link
+            href="/"
+            className="fixed h-32 aspect-square bottom-0 left-0 z-50 bg-black text-white"
+         >
+            Home
+         </Link>
+         <Link
+            href="/movie/popular?page=1"
+            className="fixed h-32 aspect-square bottom-0 right-0 z-50 bg-black text-white"
+         >
+            Popular
+         </Link>
+
          <FixedUIContainer>
             <Navbar />
             <Responsive minWidth={LG_MEDIA_QUERY}>
