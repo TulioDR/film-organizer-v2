@@ -5,6 +5,8 @@ import LearnMore from "./LearnMore";
 import Bookmark from "@/features/bookmark/components/Bookmark";
 import { Media } from "@/common/models/Media";
 import BackHeader from "./BackHeader";
+import Responsive from "@/common/components/Responsive";
+import { SM_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 
 type Props = {
    media: Media;
@@ -25,8 +27,10 @@ export default function Back({
 
    return (
       <div className="bg-white p-2 rounded-sm absolute flex flex-col w-full h-full top-0 left-0 [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-hidden shadow-xl">
-         <BackHeader media={media} currentMedia={currentMedia} />
-         <div className="w-full flex flex-col gap-2 flex-1 p-2 pt-4 overflow-hidden">
+         <Responsive minWidth={SM_MEDIA_QUERY}>
+            <BackHeader media={media} currentMedia={currentMedia} />
+         </Responsive>
+         <div className="w-full flex flex-col gap-2 flex-1 p-0 sm:p-2 pt-2 sm:pt-4 overflow-hidden">
             <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
                <Title title={title} year={releaseDate} />
                <Overview overview={overview} />

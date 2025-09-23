@@ -1,7 +1,10 @@
 import React from "react";
-import { motion, useAnimate } from "framer-motion";
+import { useAnimate } from "framer-motion";
 import { ROTATE_DURATION } from "@/features/media-card/constants/ANIMATIONS_DURATIONS";
 import InitialAnimationContainer from "./InitialAnimationContainer";
+import Responsive from "@/common/components/Responsive";
+import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import InnerMainContainer from "./InnerMainContainer";
 
 type Props = {
    layoutId: string;
@@ -30,19 +33,29 @@ export default function MainContainer({ layoutId, children }: Props) {
 
    return (
       <InitialAnimationContainer>
-         <motion.div
-            layoutId={layoutId}
-            onHoverStart={onHoverStart}
-            onHoverEnd={onHoverEnd}
-            ref={scope}
-            className="h-full w-full [perspective:2000px]"
-         >
-            <motion.div
-               className={`[transform-style:preserve-3d] w-full h-full relative ${ROTATE_CLASS}`}
+         <Responsive maxWidth={LG_MEDIA_QUERY}>
+            <InnerMainContainer
+               tabIndex
+               scope={scope}
+               layoutId={layoutId}
+               onFocus={onHoverStart}
+               onBlur={onHoverEnd}
+               ROTATE_CLASS={ROTATE_CLASS}
             >
                {children}
-            </motion.div>
-         </motion.div>
+            </InnerMainContainer>
+         </Responsive>
+         <Responsive minWidth={LG_MEDIA_QUERY}>
+            <InnerMainContainer
+               scope={scope}
+               layoutId={layoutId}
+               onHoverStart={onHoverStart}
+               onHoverEnd={onHoverEnd}
+               ROTATE_CLASS={ROTATE_CLASS}
+            >
+               {children}
+            </InnerMainContainer>
+         </Responsive>
       </InitialAnimationContainer>
    );
 }
