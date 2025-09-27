@@ -19,7 +19,7 @@ export default function Pagination({ total, currentPage }: Props) {
 
    return (
       <FixedUIPortal>
-         <motion.div className="h-16 absolute bottom-0 left-0 w-full z-40 pointer-events-none overflow-hidden">
+         <motion.div className="h-16 absolute bottom-0 left-0 w-full z-20 pointer-events-none overflow-hidden">
             <motion.div
                initial={{ y: "100%" }}
                animate={{ y: "0%" }}

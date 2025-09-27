@@ -32,7 +32,7 @@ export default function Sidebar() {
          />
          <SidebarItem
             link="/tv"
-            icon="smart_display"
+            icon="tv"
             text="Series"
             mediaType="tv"
             items={tvItems}
