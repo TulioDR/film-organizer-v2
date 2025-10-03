@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent, useCallback } from "react";
 import { AnimationScope, motion } from "framer-motion";
 
 type Props = {
@@ -24,10 +24,20 @@ export default function InnerMainContainer({
    onFocus,
    onBlur,
 }: Props) {
+   const onMouseDown = useCallback(
+      (e: MouseEvent<HTMLDivElement>) => {
+         if (!scope.current) return;
+         if (document.activeElement !== scope.current) return;
+         e.preventDefault();
+         (scope.current as HTMLElement).blur();
+      },
+      [scope]
+   );
    return (
       <motion.div
          tabIndex={tabIndex ? 0 : undefined}
          layoutId={layoutId}
+         onMouseDown={tabIndex ? onMouseDown : undefined}
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
          onBlur={onBlur}

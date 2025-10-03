@@ -29,15 +29,6 @@ export default function Similar({ media, mediaType }: Props) {
       { maxWidth: SM_MEDIA_QUERY, itemsPerPage: 2 },
    ];
 
-   const renderMediaCardItem = (similarItem: any) => (
-      <MediaCard
-         mediaType={mediaType}
-         media={similarItem}
-         id={similarItem.id.toString()}
-         currentMedia={currentMedia}
-      />
-   );
-
    return (
       <>
          {responsiveConfigs.map((config, index) => (
@@ -47,7 +38,14 @@ export default function Similar({ media, mediaType }: Props) {
                   subtitle={subtitleText}
                   media={similarMedia}
                   className="xl:col-span-2"
-                  renderItem={renderMediaCardItem} // Use the pre-defined render function
+                  renderItem={(similarItem: any) => (
+                     <MediaCard
+                        mediaType={mediaType}
+                        media={similarItem}
+                        id={similarItem.id.toString()}
+                        currentMedia={currentMedia}
+                     />
+                  )}
                />
             </Responsive>
          ))}

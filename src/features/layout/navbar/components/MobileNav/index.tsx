@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
-import MobileNavButton from "./MobileNavButton";
+import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import MobileNavMenu from "./MobileNavMenu";
-import FixedUIPortal from "@/features/layout/main-layout/components/FixedUIPortal";
-import { useRouter } from "next/router";
+import MainMenu from "./MainMenu";
+import MovieMenu from "./SubMenu/MovieMenu";
+import TvMenu from "./SubMenu/TvMenu";
 
 type Props = {};
 
 export default function MobileNav({}: Props) {
-   const [isOpen, setIsOpen] = useState(false);
-   const toggleMenu = () => setIsOpen((prev) => !prev);
+   type MenuType = "movie" | "tv" | null | "settings";
+   const [currentMenu, setCurrentMenu] = useState<MenuType>(null);
 
-   const router = useRouter();
-   useEffect(() => {
-      setIsOpen(false);
-   }, [router.asPath]);
+   const setMainMenu = () => setCurrentMenu(null);
 
    return (
-      <FixedUIPortal>
-         <MobileNavButton
-            onClick={toggleMenu}
-            icon={isOpen ? "close" : "menu"}
-         />
-         <AnimatePresence>{isOpen && <MobileNavMenu />}</AnimatePresence>,
-      </FixedUIPortal>
+      <>
+         <MainMenu slideLeft={!!currentMenu} setCurrentMenu={setCurrentMenu} />
+         <AnimatePresence>
+            {currentMenu === "movie" && (
+               <MovieMenu key="movie" setMainMenu={setMainMenu} />
+            )}
+            {currentMenu === "tv" && (
+               <TvMenu key="tv" setMainMenu={setMainMenu} />
+            )}
+         </AnimatePresence>
+      </>
    );
 }

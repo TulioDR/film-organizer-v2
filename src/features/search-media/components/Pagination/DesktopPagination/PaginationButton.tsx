@@ -1,25 +1,14 @@
 import { motion } from "framer-motion";
-import PaginationContent from "./PaginationContent";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 type Props = {
-   page?: string | number;
-   left?: true;
-   right?: true;
-   isActive?: boolean;
-   disabled?: boolean;
-   grayText?: boolean;
+   page: string | number;
+   isActive: boolean;
+   disabled: boolean;
 };
 
-export default function PaginationButton({
-   page,
-   left,
-   right,
-   disabled = false,
-   grayText = false,
-   isActive = false,
-}: Props) {
+export default function PaginationButton({ page, disabled, isActive }: Props) {
    const router = useRouter();
    const { pathname, query } = router;
    const newQuery = { ...query, page: page };
@@ -28,9 +17,9 @@ export default function PaginationButton({
       <Link
          href={{ pathname: pathname, query: newQuery }}
          scroll={false}
-         className={`h-full aspect-square select-none relative hover:bg-white text-white hover:text-black 
+         className={`h-full aspect-square block select-none relative text-white md:hover:bg-white  
             ${disabled ? "pointer-events-none" : ""}
-            ${grayText ? "text-border" : ""}
+            ${isActive ? "" : "md:hover:text-black"}
          `}
       >
          {isActive && (
@@ -43,7 +32,7 @@ export default function PaginationButton({
             </motion.div>
          )}
          <div className="relative h-full w-full flex items-center justify-center">
-            <PaginationContent left={left} right={right} page={page} />
+            <div className="text-lg font-black">{page}</div>
          </div>
       </Link>
    );

@@ -6,7 +6,7 @@ type Props = {
 
 export default function MenuItemsContainer({ children }: Props) {
    return (
-      <div className="w-full h-full px-4 py-16 flex justify-center items-center flex-col gap-4">
+      <div className="w-full h-full px-4 py-16 flex justify-center items-center flex-col gap-2">
          {children}
       </div>
    );

@@ -11,7 +11,7 @@ import Responsive from "@/common/components/Responsive";
 import { useEffect } from "react";
 
 type Props = {
-   trailers: any[];
+   trailers: Video[];
 };
 
 export default function Trailers({ trailers }: Props) {

@@ -17,7 +17,7 @@ export default function MenuItem({
    onClick,
 }: Props) {
    return (
-      <div className="h-14 font-bold text-lg flex gap-4 items-center w-64">
+      <div className="h-12 font-bold text-lg flex gap-2 items-center w-60">
          <div className="h-full aspect-square bg-white text-black shadow-md rounded-md overflow-hidden">
             {href ? (
                <Link

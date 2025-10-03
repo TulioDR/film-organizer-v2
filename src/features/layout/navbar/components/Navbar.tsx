@@ -2,10 +2,11 @@ import Responsive from "@/common/components/Responsive";
 import LoginButton from "./LoginButton";
 
 import NavDropdown from "./NavDropdown";
-import GlassContainer from "@/common/components/GlassContainer";
 import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import NavTitle from "./NavTitle";
+import MobileMenu from "../../mobile-menu/components/MobileMenu";
 import MobileNav from "./MobileNav";
+import MobileSearchBar from "./Searchbar/MobileSearchBar";
 
 export default function Navbar() {
    return (
@@ -14,15 +15,6 @@ export default function Navbar() {
             id="navbar"
             className="w-full z-20 absolute top-0 h-16 flex justify-between items-center pointer-events-none"
          >
-            <Responsive maxWidth={LG_MEDIA_QUERY}>
-               <GlassContainer
-                  el="button"
-                  className="flex items-center justify-center w-16 aspect-square"
-               >
-                  <span className="material-symbols-outlined">search</span>
-               </GlassContainer>
-            </Responsive>
-
             <NavTitle />
 
             <Responsive minWidth={LG_MEDIA_QUERY}>
@@ -32,8 +24,16 @@ export default function Navbar() {
                </div>
             </Responsive>
          </div>
+
          <Responsive maxWidth={LG_MEDIA_QUERY}>
-            <MobileNav />
+            <MobileMenu position="topLeft" buttonIcon="search">
+               <MobileSearchBar />
+            </MobileMenu>
+         </Responsive>
+         <Responsive maxWidth={LG_MEDIA_QUERY}>
+            <MobileMenu position="topRight" buttonIcon="menu">
+               <MobileNav />
+            </MobileMenu>
          </Responsive>
       </>
    );

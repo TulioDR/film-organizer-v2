@@ -16,6 +16,7 @@ export default function Bookmark({ media, type, className = "" }: Props) {
    const { isMediaSaved, isLoading } = useIsMediaSaved(media.id, type);
    return (
       <button
+         onMouseDown={(e) => e.stopPropagation()}
          onClick={handleBookmarkClick}
          className={`w-full h-full flex items-center justify-center 
             ${className} 
