@@ -8,7 +8,7 @@ type Props = {
    children: React.ReactNode;
 };
 
-export default function MobileMenuInnerContainer({
+export default function MenuContainer({
    onExitComplete,
    isOpen,
    position,

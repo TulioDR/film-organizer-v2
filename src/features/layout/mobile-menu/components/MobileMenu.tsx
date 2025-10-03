@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import FixedUIPortal from "@/features/layout/main-layout/components/FixedUIPortal";
 import { useRouter } from "next/router";
-import MobileMenuInnerContainer from "./MobileMenuInnerContainer";
-import MobileMenuButtonContainer from "./MobileMenuButton/MobileMenuButtonContainer";
-import GlassContainer from "@/common/components/GlassContainer";
+import MenuContainer from "./MenuContainer";
+import HandlerContainer from "./HandlerContainer";
+import ToggleButton from "./ToggleButton";
 
 type Props = {
    children: React.ReactNode;
@@ -41,37 +41,23 @@ export default function MobileMenu({
 
    return (
       <FixedUIPortal>
-         <MobileMenuButtonContainer
-            position={position}
-            isAnimating={isAnimating}
-         >
+         <HandlerContainer position={position} isAnimating={isAnimating}>
             {renderItem ? (
                renderItem({ toggleMenu, isOpen })
             ) : (
-               <GlassContainer
-                  el="button"
+               <ToggleButton
                   onClick={toggleMenu}
-                  className="flex items-center justify-center w-16 aspect-square"
-               >
-                  <span className="material-symbols-outlined">
-                     {isOpen ? "close" : buttonIcon}
-                  </span>
-               </GlassContainer>
+                  icon={isOpen ? "close" : buttonIcon}
+               />
             )}
-         </MobileMenuButtonContainer>
-         {/* <MobileMenuButton
-            onClick={toggleMenu}
-            icon={isOpen ? "close" : buttonIcon}
-            isAnimating={isAnimating}
-            position={position}
-         /> */}
-         <MobileMenuInnerContainer
+         </HandlerContainer>
+         <MenuContainer
             isOpen={isOpen}
             position={position}
             onExitComplete={onExitComplete}
          >
             {children}
-         </MobileMenuInnerContainer>
+         </MenuContainer>
       </FixedUIPortal>
    );
 }
