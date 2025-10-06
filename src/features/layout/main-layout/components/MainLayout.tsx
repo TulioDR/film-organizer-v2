@@ -11,7 +11,6 @@ import Background from "@/features/layout/background/components/Background";
 
 import { getLists } from "@/api/lists";
 import { listActions } from "@/store/slices/list-slice";
-import Searchbar from "@/features/layout/navbar/components/Searchbar";
 import Notification from "@/features/layout/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/components/LoginAdviceModal";
 import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/components/SaveMediaModal";
@@ -55,7 +54,6 @@ export default function MainLayout({ children }: Props) {
          <FixedUIContainer>
             <Navbar />
             <Responsive minWidth={LG_MEDIA_QUERY}>
-               <Searchbar />
                <Sidebar />
                <TutorialButton />
             </Responsive>

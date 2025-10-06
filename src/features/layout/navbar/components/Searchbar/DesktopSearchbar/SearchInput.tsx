@@ -3,15 +3,15 @@ type Props = {
    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
    onFocus: () => void;
    onBlur: () => void;
-   placeholder: string;
+   mediaType: "movie" | "tv";
 };
 
 export default function SearchInput({
    value,
-   onChange,
    onFocus,
+   onChange,
    onBlur,
-   placeholder,
+   mediaType,
 }: Props) {
    return (
       <div className="overflow-hidden w-96 h-full flex-shrink-0 flex items-center pr-4">
@@ -27,7 +27,9 @@ export default function SearchInput({
             onBlur={onBlur}
             type="text"
             className="text-xs sm:text-sm md:text-base flex-1 outline-none bg-transparent text-white placeholder:text-gray-400"
-            placeholder={placeholder}
+            placeholder={`Search ${
+               mediaType === "movie" ? "Movies" : "Series"
+            }`}
          />
       </div>
    );

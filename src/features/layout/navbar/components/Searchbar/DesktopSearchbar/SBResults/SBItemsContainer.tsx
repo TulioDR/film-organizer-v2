@@ -1,4 +1,4 @@
-import GlassContainer from "@/common/components/GlassContainer";
+import ReactLenis from "lenis/react";
 import React, { useEffect } from "react";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
    setCurrentIndex: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-export default function SBResultsContainer({
+export default function SBItemsContainer({
    children,
    resultsLength,
    setCurrentIndex,
@@ -41,12 +41,9 @@ export default function SBResultsContainer({
          document.removeEventListener("keydown", handleKey);
       };
    });
-
    return (
-      <ul className="absolute top-full left-0 w-full">
-         <GlassContainer className="relative py-4 border-t-0 rounded-t-none overflow-hidden flex flex-col gap-1">
-            {children}
-         </GlassContainer>
-      </ul>
+      <ReactLenis className="w-full h-full overflow-hidden">
+         <ul className="w-full grid grid-cols-2 gap-y-2 py-4">{children}</ul>
+      </ReactLenis>
    );
 }
