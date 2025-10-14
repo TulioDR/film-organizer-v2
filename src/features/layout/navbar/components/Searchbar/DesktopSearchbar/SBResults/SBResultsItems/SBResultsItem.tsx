@@ -5,34 +5,30 @@ import Poster from "@/common/components/Poster";
 import Link from "next/link";
 
 type Props = {
+   href: string;
+   onMouseEnter: () => void;
+   isSelected: boolean;
    media: any;
-   index: number;
-   currentIndex: number | null;
-   setCurrentIndex: React.Dispatch<React.SetStateAction<number | null>>;
-   mediaType: "movie" | "tv";
 };
 
 export default function SBResultsItem({
+   href,
+   onMouseEnter,
+   isSelected,
    media,
-   index,
-   currentIndex,
-   setCurrentIndex,
-   mediaType,
 }: Props) {
-   const selected = index !== null && index === currentIndex;
-
    const getDate = (date?: string): string => {
       if (date) return date.substring(0, 4);
       return "N/A";
    };
    return (
-      <Link href={`/${mediaType}/${media.id}`}>
+      <Link href={href}>
          <motion.li
+            id={`sb-item-${media.id}`}
             onMouseDown={(e: any) => e.preventDefault()}
-            onMouseEnter={() => setCurrentIndex(index)}
-            onMouseLeave={() => setCurrentIndex(null)}
-            className={`h-32 cursor-pointer flex gap-2 items-center px-4 text-black ${
-               selected ? "bg-white shadow-md" : ""
+            onMouseEnter={onMouseEnter}
+            className={`h-32 cursor-pointer flex gap-2 items-center rounded overflow-hidden pr-4  ${
+               isSelected ? "bg-white text-black shadow-md" : "text-black"
             }`}
          >
             <div className="aspect-[2/3] h-full">
@@ -44,7 +40,7 @@ export default function SBResultsItem({
                />
             </div>
             <div className="">
-               <div className="text-text-1 text-sm">
+               <div className="text-text-1 text-xs">
                   {media.title || media.name}
                </div>
                <div className="text-text-2 text-xs">

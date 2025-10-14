@@ -29,9 +29,9 @@ export default function MediaCard({
       setHeight(minHeight);
       setScale(scale);
 
-      // router.push(`/${mediaType}/${media.id}`, undefined, {
-      //    scroll: false,
-      // });
+      router.push(`/${mediaType}/${media.id}`, undefined, {
+         scroll: false,
+      });
    };
 
    return (

@@ -1,50 +1,44 @@
 import API_PUBLIC from "@/api/public";
 import { useRouter } from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useReducer } from "react";
+import { State } from "../models/ReducerModels";
+import searchbarReducer from "../utils/searchbarReducer";
+
+const initialState: State = {
+   inputValue: "",
+   mediaType: "movie",
+   results: null,
+   showResults: false,
+   currentIndex: null,
+};
 
 export default function useSearchbar() {
    const router = useRouter();
-
-   const [results, setResults] = useState<any[] | null>(null);
-   const [mediaType, setMediaType] = useState<"movie" | "tv">("movie");
-   const [inputValue, setInputValue] = useState<string>("");
-   const [showResults, setShowResults] = useState<boolean>(false);
-   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+   const [state, dispatch] = useReducer(searchbarReducer, initialState);
+   const { inputValue, results, mediaType, currentIndex } = state;
 
    useEffect(() => {
       const query = router.query.search_query as string | undefined;
-      setInputValue(query || "");
+      if (query) dispatch({ type: "SET_INPUT_VALUE", payload: query });
    }, [router.query.search_query]);
 
    useEffect(() => {
-      setResults(null);
+      dispatch({ type: "START_LOADING" });
+      if (inputValue.length === 0) {
+         dispatch({ type: "REMOVE_RESULTS" });
+         return;
+      }
       const timeoutId = setTimeout(async () => {
-         if (inputValue.length > 0) {
-            const url = `/${mediaType}/results/${inputValue}/1`;
-            const { data } = await API_PUBLIC.get(url);
-            setResults(data.results);
-            setShowResults(true);
-         } else {
-            setResults(null);
-            setShowResults(false);
-         }
+         const url = `/${mediaType}/results/${inputValue}/1`;
+         const { data } = await API_PUBLIC.get(url);
+         dispatch({ type: "SET_RESULTS", payload: data.results });
       }, 300);
       return () => clearTimeout(timeoutId);
    }, [inputValue, mediaType]);
 
-   const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-      setInputValue(e.currentTarget.value);
-   };
-   const handleInputFocus = () => {
-      if (inputValue.length > 0) setShowResults(true);
-   };
-   const handleInputBlur = () => {
-      setShowResults(false);
-   };
-
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
-      setShowResults(false);
+      dispatch({ type: "HIDE_RESULTS" });
       if (currentIndex === null) {
          const value = inputValue.toLowerCase();
          router.push(`/${mediaType}/results?search_query=${value}&page=1`);
@@ -54,17 +48,5 @@ export default function useSearchbar() {
       }
    };
 
-   return {
-      inputValue,
-      mediaType,
-      results,
-      showResults,
-      currentIndex,
-      setCurrentIndex,
-      handleInputChange,
-      handleInputFocus,
-      handleInputBlur,
-      handleSubmit,
-      setMediaType,
-   };
+   return { state, dispatch, handleSubmit };
 }

@@ -1,21 +1,16 @@
-import SBResultsItem from "./SBResultsItem";
 import SBLoadingAnimation from "./SBLoadingAnimation";
 import SBResultsContainer from "./SBResultsContainer";
-import SBItemsContainer from "./SBItemsContainer";
+import { Action, State } from "@/features/layout/navbar/models/ReducerModels";
+import SBResultsItems from "./SBResultsItems";
 
 type Props = {
-   results: any[] | null;
-   currentIndex: number | null;
-   setCurrentIndex: React.Dispatch<React.SetStateAction<number | null>>;
-   mediaType: "movie" | "tv";
+   dispatch: React.Dispatch<Action>;
+   state: State;
 };
 
-export default function SBResults({
-   results,
-   currentIndex,
-   setCurrentIndex,
-   mediaType,
-}: Props) {
+export default function SBResults({ dispatch, state }: Props) {
+   const { results } = state;
+
    return (
       <SBResultsContainer>
          {!results && <SBLoadingAnimation />}
@@ -23,21 +18,12 @@ export default function SBResults({
             <>
                {results.length === 0 && <span>Nothing was found</span>}
                {results.length > 0 && (
-                  <SBItemsContainer
-                     resultsLength={results.length}
-                     setCurrentIndex={setCurrentIndex}
-                  >
-                     {results.map((media, index) => (
-                        <SBResultsItem
-                           key={media.id}
-                           media={media}
-                           index={index}
-                           currentIndex={currentIndex}
-                           setCurrentIndex={setCurrentIndex}
-                           mediaType={mediaType}
-                        />
-                     ))}
-                  </SBItemsContainer>
+                  <SBResultsItems
+                     dispatch={dispatch}
+                     state={state}
+                     results={results}
+                     length={results.length}
+                  />
                )}
             </>
          )}

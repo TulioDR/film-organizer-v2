@@ -5,48 +5,20 @@ import GlassContainer from "@/common/components/GlassContainer";
 import SearchbarContainer from "./SearchbarContainer";
 import useSearchbar from "../../../hooks/useSearchbar";
 
-type Props = {};
+export default function DesktopSearchbar() {
+   const { state, dispatch, handleSubmit } = useSearchbar();
 
-export default function DesktopSearchbar({}: Props) {
-   const {
-      inputValue,
-      mediaType,
-      results,
-      showResults,
-      currentIndex,
-      setCurrentIndex,
-      handleInputChange,
-      handleInputFocus,
-      handleInputBlur,
-      handleSubmit,
-      setMediaType,
-   } = useSearchbar();
+   const { showResults, mediaType } = state;
 
    return (
       <SearchbarContainer handleSubmit={handleSubmit}>
          <GlassContainer
             className={`h-full flex ${showResults ? "rounded-b-none" : ""}`}
          >
-            <SearchInput
-               value={inputValue}
-               onChange={handleInputChange}
-               onFocus={handleInputFocus}
-               onBlur={handleInputBlur}
-               mediaType={mediaType}
-            />
-            <ToggleTypeButton
-               mediaType={mediaType}
-               setMediaType={setMediaType}
-            />
+            <SearchInput state={state} dispatch={dispatch} />
+            <ToggleTypeButton mediaType={mediaType} dispatch={dispatch} />
          </GlassContainer>
-         {showResults && (
-            <SBResults
-               results={results}
-               currentIndex={currentIndex}
-               setCurrentIndex={setCurrentIndex}
-               mediaType={mediaType}
-            />
-         )}
+         {showResults && <SBResults state={state} dispatch={dispatch} />}
       </SearchbarContainer>
    );
 }

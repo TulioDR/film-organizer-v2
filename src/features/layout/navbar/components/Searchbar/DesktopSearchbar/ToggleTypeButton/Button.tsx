@@ -16,6 +16,7 @@ export default function Button({ icon, isSelected, onClick }: Props) {
    const handleHoverEnd = () => setShowTooltip(false);
    return (
       <motion.button
+         onMouseDown={(e: any) => e.preventDefault()}
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
          type="button"
