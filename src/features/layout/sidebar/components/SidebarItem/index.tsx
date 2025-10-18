@@ -1,26 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-import DropdownItemModel from "../../models/DropdownItemModel";
 import { useRouter } from "next/router";
 import MainLink from "./MainLink";
 import DropdownLinks from "./DropdownLinks";
+import { NavigationModel } from "../../models/NavigationModels";
 
 interface Props {
-   link: string;
-   icon: string;
-   text: string;
-   mediaType?: "movie" | "tv";
-   items?: DropdownItemModel[];
+   item: NavigationModel;
 }
 
-export default function SidebarItem({
-   link,
-   icon,
-   text,
-   mediaType,
-   items,
-}: Props) {
+export default function SidebarItem({ item }: Props) {
+   const { link, icon, text, mediaType, items } = item;
    const elementRef = useRef<HTMLLIElement>(null);
 
    const [isHovered, setIsHovered] = useState<boolean>(false);

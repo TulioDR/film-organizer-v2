@@ -14,11 +14,8 @@ import { listActions } from "@/store/slices/list-slice";
 import Notification from "@/features/layout/notification/components/Notification";
 import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/components/LoginAdviceModal";
 import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/components/SaveMediaModal";
-import Responsive from "@/common/components/Responsive";
 import useInitialThemeColor from "@/common/hooks/useInitialThemeColor";
-import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import FixedUIContainer from "./FixedUIContainer";
-import TutorialButton from "../../tutorial-button/components/TutorialButton";
 import PageTitle from "@/features/layout/page-title/components/PageTitle";
 import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
@@ -53,10 +50,7 @@ export default function MainLayout({ children }: Props) {
 
          <FixedUIContainer>
             <Navbar />
-            <Responsive minWidth={LG_MEDIA_QUERY}>
-               <Sidebar />
-               <TutorialButton />
-            </Responsive>
+            <Sidebar />
          </FixedUIContainer>
          <PageTitle />
          <TransitionCardLayout />

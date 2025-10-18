@@ -4,7 +4,7 @@ import React from "react";
 type Props = {
    href?: string;
    text: string;
-   dropdown?: true;
+   dropdown?: boolean;
    icon: string;
    onClick?: () => void;
 };

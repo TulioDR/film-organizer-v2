@@ -1,6 +1,7 @@
 import React from "react";
 import MainMenuContainer from "./MainMenuContainer";
 import MenuItem from "../MenuItem";
+import { NAVIGATION_ITEMS } from "../../../constants/NAVIGATION_ITEMS";
 
 type Props = {
    slideLeft: boolean;
@@ -14,23 +15,22 @@ export default function MainMenu({ slideLeft, setCurrentMenu }: Props) {
 
    return (
       <MainMenuContainer slideLeft={slideLeft}>
-         <MenuItem href="/" text="Home" icon="home" />
-         <MenuItem
-            href="/movie"
-            text="Movies"
-            icon="movie"
-            dropdown
-            onClick={setMovieMenu}
-         />
-         <MenuItem
-            href="/tv"
-            text="TV"
-            icon="tv"
-            dropdown
-            onClick={setTvMenu}
-         />
-         <MenuItem href="/discover" text="Discover" icon="travel_explore" />
-         <MenuItem href="/" text="Playlists" icon="format_list_bulleted" />
+         {NAVIGATION_ITEMS.map((item) => (
+            <MenuItem
+               key={item.link}
+               href={item.link}
+               text={item.text}
+               icon={item.icon}
+               dropdown={!!item.items}
+               onClick={
+                  !!item.items
+                     ? item.mediaType === "movie"
+                        ? setMovieMenu
+                        : setTvMenu
+                     : undefined
+               }
+            />
+         ))}
          <MenuItem href="/" text="Log in / Sign up" icon="login" />
          <MenuItem
             text="Settings"

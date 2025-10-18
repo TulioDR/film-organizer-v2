@@ -5,7 +5,6 @@ import NavDropdown from "./NavDropdown";
 import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import NavTitle from "./NavTitle";
 import MobileMenu from "../../mobile-menu/components/MobileMenu";
-import MobileNav from "./MobileNav";
 import MobileSearchbar from "./Searchbar/MobileSearchbar";
 import DesktopSearchbar from "./Searchbar/DesktopSearchbar";
 
@@ -32,11 +31,6 @@ export default function Navbar() {
          <Responsive maxWidth={LG_MEDIA_QUERY}>
             <MobileMenu position="topLeft" buttonIcon="search">
                <MobileSearchbar />
-            </MobileMenu>
-         </Responsive>
-         <Responsive maxWidth={LG_MEDIA_QUERY}>
-            <MobileMenu position="topRight" buttonIcon="menu">
-               <MobileNav />
             </MobileMenu>
          </Responsive>
       </>
