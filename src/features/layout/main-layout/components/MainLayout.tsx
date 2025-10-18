@@ -46,8 +46,6 @@ export default function MainLayout({ children }: Props) {
 
    return (
       <>
-         <div id="modals-container"></div>
-
          <FixedUIContainer>
             <Navbar />
             <Sidebar />

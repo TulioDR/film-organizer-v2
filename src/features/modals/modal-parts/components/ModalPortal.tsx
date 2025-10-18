@@ -16,6 +16,6 @@ export default function ModalPortal({ children, isOpen }: Props) {
    if (!isMounted) return <></>;
    return createPortal(
       <AnimatePresence>{isOpen && children}</AnimatePresence>,
-      document.getElementById("modals-container")!
+      document.body
    );
 }
