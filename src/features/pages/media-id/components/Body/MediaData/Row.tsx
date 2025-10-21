@@ -6,8 +6,8 @@ type Props = {
 export default function Row({ name, value }: Props) {
    return (
       <tr className="align-top">
-         <td className="text-gray-600">{name}</td>
-         <td>{value}</td>
+         <td className="text-gray-700 dark:text-gray-300">{name}</td>
+         <td className="text-black dark:text-white">{value}</td>
       </tr>
    );
 }

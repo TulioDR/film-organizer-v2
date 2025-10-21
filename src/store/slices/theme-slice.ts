@@ -1,12 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface InitialState {
+   themeColor: string;
+   themeColorName: string;
+   isDarkMode: boolean;
+}
+
+const initialState: InitialState = {
+   themeColor: "#5d9cec",
+   themeColorName: "blue",
+   isDarkMode: false,
+};
+
 const themeSlice = createSlice({
    name: "theme",
-   initialState: {
-      themeColor: "#5d9cec",
-      themeColorName: "blue",
-      isDarkMode: true,
-   },
+   initialState,
    reducers: {
       changeThemeColor(state, action) {
          state.themeColor = action.payload.color;

@@ -19,7 +19,7 @@ export default function NavTitle({}: Props) {
       <>
          <Responsive maxWidth={LG_MEDIA_QUERY}>
             <div
-               className={`text-3xl w-full sm:text-4xl font-black uppercase flex items-center justify-center ${
+               className={`text-3xl w-full sm:text-4xl text-black font-black uppercase flex items-center justify-center ${
                   isHome ? "fixed top-1/2 -translate-y-1/2 left-0" : "h-full"
                }`}
             >
@@ -29,7 +29,7 @@ export default function NavTitle({}: Props) {
             </div>
          </Responsive>
          <Responsive minWidth={LG_MEDIA_QUERY}>
-            <div className="text-5xl font-black flex items-center uppercase h-full">
+            <div className="text-5xl font-black flex items-center uppercase text-black dark:text-white h-full">
                Agrios
             </div>
          </Responsive>

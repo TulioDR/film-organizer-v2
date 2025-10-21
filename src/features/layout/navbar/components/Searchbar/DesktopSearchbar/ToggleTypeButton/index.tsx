@@ -8,7 +8,7 @@ type Props = {
 
 export default function ToggleTypeButton({ mediaType, dispatch }: Props) {
    return (
-      <div className="h-full flex text-white border-l border-border">
+      <div className="h-full flex text-white border-l-border-width border-border-light dark:border-border-dark">
          <Button
             icon="movie"
             isSelected={mediaType === "movie"}

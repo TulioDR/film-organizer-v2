@@ -1,13 +1,19 @@
+import List from "@/common/models/List";
 import { createSlice } from "@reduxjs/toolkit";
+
+interface InitialState {
+   lists: null | List[];
+}
+const initialState: InitialState = {
+   lists: null,
+};
 
 const listSlice = createSlice({
    name: "lists",
-   initialState: {
-      lists: null,
-   },
+   initialState,
    reducers: {
-      setLists(state, action) {
-         state.lists = action.payload;
+      setLists(state, { payload }: { payload: null | List[] }) {
+         state.lists = payload;
       },
    },
 });

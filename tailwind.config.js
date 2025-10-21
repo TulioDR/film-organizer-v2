@@ -12,6 +12,9 @@ module.exports = {
             roboto: "'Roboto', sans-serif",
             title: "Octosquares",
          },
+         borderWidth: {
+            "border-width": "2px",
+         },
          colors: {
             primary: {
                light: "#ffffff",
@@ -29,7 +32,12 @@ module.exports = {
                1: "#FFFFFF",
                2: "#9AA1AD",
             },
-            border: "#71717a",
+            accent: "#CBAB60",
+            border: {
+               DEFAULT: "#71717a",
+               light: "rgb(197 189 178)",
+               dark: "rgb(197 189 178 / 0.25)",
+            },
          },
       },
    },

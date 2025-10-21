@@ -39,7 +39,7 @@ export default function MediaCardsGrid({ children }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5"
+            className="gap-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5"
          >
             {children}
          </motion.div>

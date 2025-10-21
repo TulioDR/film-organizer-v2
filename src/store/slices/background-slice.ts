@@ -1,14 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface InitialState {
+   backgroundImage: string | null;
+   backgroundKey: string;
+}
+const initialState: InitialState = {
+   backgroundImage: null,
+   backgroundKey: "",
+};
+interface SetBackgroundPayload {
+   backgroundImage: string;
+   backgroundKey: string;
+}
+
 const backgroundSlice = createSlice({
    name: "background",
-   initialState: {
-      backgroundImage: null,
-      backgroundKey: "",
-   },
+   initialState,
    reducers: {
-      setBackground(state, action) {
-         const { backgroundImage, backgroundKey } = action.payload;
+      setBackground(state, { payload }: { payload: SetBackgroundPayload }) {
+         const { backgroundImage, backgroundKey } = payload;
          state.backgroundImage = backgroundImage;
          state.backgroundKey = backgroundKey + backgroundImage;
       },

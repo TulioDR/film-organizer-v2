@@ -8,11 +8,23 @@ export default function LearnMore({ onClick }: Props) {
    return (
       <button
          onClick={onClick}
-         className="rounded-md h-full flex-1 flex items-center justify-center text-xs sm:text-sm font-medium uppercase text-white bg-black"
+         className="rounded-md h-full flex-1 p-1 bg-[#CBAB60]"
       >
-         Learn More
+         <div className="w-full h-full flex items-center justify-center border border-black/40 rounded">
+            <span className="text-xs sm:text-sm font-medium uppercase text-black">
+               Learn More
+            </span>
+         </div>
       </button>
    );
+   // return (
+   //    <button
+   //       onClick={onClick}
+   //       className="rounded-md h-full flex-1 flex items-center justify-center text-xs sm:text-sm font-medium uppercase text-white dark:text-black bg-black dark:bg-white"
+   //    >
+   //       Learn More
+   //    </button>
+   // );
    // return (
    //    <Link
    //       href={href}

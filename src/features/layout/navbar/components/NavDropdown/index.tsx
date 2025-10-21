@@ -26,7 +26,7 @@ export default function NavDropdown() {
    }, [menu]);
 
    return (
-      <GlassContainer className="h-full relative hover:bg-white hover:text-black">
+      <GlassContainer className="h-full relative  hover:bg-white hover:text-black">
          <motion.button
             tabIndex={0}
             onBlur={handleBlur}
@@ -34,7 +34,7 @@ export default function NavDropdown() {
             className="rounded-full h-full aspect-square overflow-hidden"
          >
             <div className="w-full h-full flex items-center justify-center">
-               <span className="material-symbols-outlined">person</span>
+               <span className="material-symbols-outlined">menu</span>
             </div>
             {/* {user ? (
                <UserImage />

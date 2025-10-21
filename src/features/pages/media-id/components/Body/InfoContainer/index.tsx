@@ -43,7 +43,7 @@ export default function InfoContainer<T>({
                   }, minmax(0, 1fr))`,
                   gridTemplateRows: `repeat(${numberOfRows}, minmax(0, 1fr))`,
                }}
-               className="w-full grid gap-4 xl:gap-8"
+               className="w-full grid gap-4 xl:gap-4"
             >
                {displayedMedia.map((item, index) => (
                   <React.Fragment key={`${(item as any).id}-${index}`}>

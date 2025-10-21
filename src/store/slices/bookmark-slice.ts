@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const InitialState = {
+   isLoginAdviceOpen: false,
+   isSaveMediaOpen: false,
+   mediaToSave: null as string | null,
+};
+
 const bookmarkSlice = createSlice({
    name: "bookmark",
    initialState: {

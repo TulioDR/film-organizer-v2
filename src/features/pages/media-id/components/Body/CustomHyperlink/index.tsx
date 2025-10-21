@@ -39,7 +39,7 @@ export default function CustomHyperlink({
          rel="noreferrer"
          onMouseEnter={onHoverStart}
          onMouseLeave={onHoverEnd}
-         className="flex flex-col rounded-xl bg-white text-black overflow-hidden shadow-xl"
+         className="flex flex-col rounded-lg bg-white text-black dark:bg-black dark:text-white overflow-hidden shadow-xl border border-border-light dark:border-border-dark"
       >
          <motion.div
             className={`w-full overflow-hidden relative ${

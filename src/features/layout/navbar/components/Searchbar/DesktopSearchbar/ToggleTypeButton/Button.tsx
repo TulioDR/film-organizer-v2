@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    icon: string;
@@ -9,8 +8,6 @@ type Props = {
 };
 
 export default function Button({ icon, isSelected, onClick }: Props) {
-   const { themeColor } = useAppSelector((state) => state.theme);
-
    const [showTooltip, setShowTooltip] = useState<boolean>(false);
    const handleHoverStart = () => setShowTooltip(true);
    const handleHoverEnd = () => setShowTooltip(false);
@@ -31,10 +28,7 @@ export default function Button({ icon, isSelected, onClick }: Props) {
                className="absolute top-0 left-0 w-full h-full p-2"
                transition={{ duration: 0.6, type: "spring" }}
             >
-               <div
-                  style={{ backgroundColor: themeColor }}
-                  className="rounded-md w-full h-full"
-               />
+               <div className="rounded-md w-full h-full bg-accent" />
             </motion.div>
          )}
          <span className="material-symbols-outlined relative">{icon}</span>

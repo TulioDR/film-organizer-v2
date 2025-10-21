@@ -15,7 +15,7 @@ export default function InnerCustomPagination({
    onChange,
    value,
 }: Props) {
-   const { themeColor } = useAppSelector((state) => state.theme);
+   const { isDarkMode } = useAppSelector((state) => state.theme);
    const { isHidden } = useAppSelector((state) => state.layout);
 
    return (
@@ -32,16 +32,19 @@ export default function InnerCustomPagination({
             styles={{
                control: {
                   border: "none",
-                  color: "black",
+                  color: isDarkMode ? "white" : "black",
                   "&:hover": {
-                     color: "white",
+                     color: isDarkMode ? "black" : "white",
                   },
                   "&[data-active]": {
-                     backgroundColor: themeColor,
+                     backgroundColor: "#CBAB60",
                      color: "white",
+                     "&:hover": {
+                        backgroundColor: "rgba(203, 171, 96, 0.75) !important",
+                     },
                   },
                   "&:not([data-disabled]):hover": {
-                     backgroundColor: "black",
+                     backgroundColor: isDarkMode ? "white" : "black",
                   },
                },
                dots: {

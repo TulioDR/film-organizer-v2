@@ -7,7 +7,8 @@ type Props = {
 
 export default function InitialAnimationContainer({ children }: Props) {
    const isPresent = useIsPresent();
-   const [isAnimating, setIsAnimating] = useState(true);
+   // const [isAnimating, setIsAnimating] = useState(true);
+   const [isAnimating, setIsAnimating] = useState(false);
 
    const onAnimationComplete = (e: any) => {
       if (e === "animate") setIsAnimating(false);
@@ -28,10 +29,11 @@ export default function InitialAnimationContainer({ children }: Props) {
       exit: { y: "101%" },
    };
 
+   // ${isAnimating ? "overflow-hidden pointer-events-none" : ""}
    return (
       <motion.div
          className={`h-full w-full 
-            ${isAnimating ? "overflow-hidden pointer-events-none" : ""}
+         ${isAnimating ? "overflow-hidden pointer-events-none" : ""}
          `}
       >
          <motion.div

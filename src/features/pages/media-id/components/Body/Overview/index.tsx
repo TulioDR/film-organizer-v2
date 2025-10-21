@@ -11,11 +11,11 @@ export default function Overview({ media }: Props) {
          <PageSubtitle>Overview</PageSubtitle>
          <div>
             {media.tagline && (
-               <div className="italic font-bold mb-1 text-gray-700">
+               <div className="italic font-bold mb-1 text-gray-700 dark:text-gray-300">
                   {media.tagline}
                </div>
             )}
-            <div className="text-black text-xs sm:text-sm">
+            <div className="text-black dark:text-white text-xs sm:text-sm">
                {media.overview || "No overview available"}
             </div>
          </div>

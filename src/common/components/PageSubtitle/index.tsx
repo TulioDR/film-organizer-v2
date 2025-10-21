@@ -12,7 +12,7 @@ export default function PageSubtitle({ children }: Props) {
       <motion.h4
          animate={{ opacity: isHidden ? 0 : 1 }}
          transition={{ duration: 0.2 }}
-         className="text-2xl xl:text-3xl 2xl:text-4xl tracking-wide font-title text-black"
+         className="text-2xl xl:text-3xl 2xl:text-4xl tracking-wide font-title text-black dark:text-white"
       >
          {children}
       </motion.h4>
