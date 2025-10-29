@@ -26,12 +26,12 @@ export default function Back({
    const overview = media.overview || "N/A";
 
    return (
-      <div className="rounded-sm absolute w-full h-full top-0 left-0 [transform:rotateY(180deg)] border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
-         <div className="w-full h-full flex flex-col bg-white dark:bg-black p-2 overflow-hidden">
+      <div className="rounded-sm absolute w-full h-full top-0 left-0 [transform:rotateY(180deg)] bg-white dark:bg-black border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
+         <div className="w-full h-full flex flex-col overflow-hidden">
             <Responsive minWidth={SM_MEDIA_QUERY}>
                <BackHeader media={media} currentMedia={currentMedia} />
             </Responsive>
-            <div className="w-full flex flex-col gap-2 flex-1 p-0 sm:p-2 pt-2 sm:pt-4 overflow-hidden">
+            <div className="w-full flex flex-col gap-2 flex-1 p-0 sm:p-4 pt-2 sm:pt-4 overflow-hidden">
                <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
                   <Title title={title} year={releaseDate} />
                   <Overview overview={overview} />

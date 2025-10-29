@@ -32,12 +32,13 @@ const NAVIGATION_ITEMS: NavigationModel[] = [
    {
       link: "/tv",
       icon: "tv",
-      text: "TV",
+      text: "Series",
       mediaType: "tv",
       items: TV_SUB_NAVIGATION,
    },
-   { link: "/discover", icon: "travel_explore", text: "Discover" },
+   // { link: "/discover", icon: "travel_explore", text: "Discover" },
    { link: "/lists", icon: "format_list_bulleted", text: "Playlists" },
+   // { link: "/account", icon: "person", text: "Account" },
 ];
 
 export { NAVIGATION_ITEMS, MOVIE_SUB_NAVIGATION, TV_SUB_NAVIGATION };

@@ -12,7 +12,6 @@ export default function Front({ media }: Props) {
          <Poster
             alt={media.name || media.title}
             posterPath={media.poster_path}
-            front
          />
       </div>
    );

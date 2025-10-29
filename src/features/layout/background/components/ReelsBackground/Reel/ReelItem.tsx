@@ -8,7 +8,7 @@ export default function ReelItem({}: Props) {
          {Array.from({ length: 7 }).map((_, idx) => (
             <div
                key={idx}
-               className="w-3 aspect-[2/3] bg-[#E4DAD0] dark:bg-[#4a4235]"
+               className="w-3 aspect-[2/3] bg-background-light dark:bg-background-dark"
             ></div>
          ))}
       </div>

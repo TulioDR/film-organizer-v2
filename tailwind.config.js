@@ -33,10 +33,16 @@ module.exports = {
                2: "#9AA1AD",
             },
             accent: "#CBAB60",
+            background: {
+               light: "#DCD4CA",
+               dark: "#18191b",
+            },
             border: {
                DEFAULT: "#71717a",
-               light: "rgb(197 189 178)",
-               dark: "rgb(197 189 178 / 0.25)",
+               light: "white",
+               dark: "black",
+               // light: "rgb(197 189 178)",
+               // dark: "rgb(197 189 178 / 0.25)",
             },
          },
       },

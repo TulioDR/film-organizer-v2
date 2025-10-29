@@ -12,6 +12,7 @@ import DiscoverFilter from "./DiscoverFilter";
 import { useRouter } from "next/router";
 import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 import MediaCardsGrid from "./MediaCardsGrid";
+import GlassContainer from "@/common/components/GlassContainer";
 
 type Props = {
    useGenres?: true;
@@ -38,7 +39,12 @@ export default function SearchMedia({
    return (
       <>
          <PageHead title={title[2]?.text || title[1]?.text || title[0].text} />
-
+         <div className="flex items-end justify-between h-16 mb-4 sticky top-24 z-10">
+            <span className="text-xl uppercase font-medium">Movies</span>
+            <GlassContainer className="h-full aspect-square flex items-center justify-center text-black ">
+               <span className="material-symbols-outlined">filter_alt</span>
+            </GlassContainer>
+         </div>
          <AnimatePresence mode="wait" propagate>
             {!results && (
                <InitialMessage key="initial" setInitialOpen={setInitialOpen} />

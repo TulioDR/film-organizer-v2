@@ -48,9 +48,9 @@ export default function MainLayout({ children }: Props) {
       <>
          <FixedUIContainer>
             <Navbar />
-            <Sidebar />
+            {/* <Sidebar /> */}
          </FixedUIContainer>
-         <PageTitle />
+         {/* <PageTitle /> */}
          <TransitionCardLayout />
          <Background />
          <SaveMediaModal />

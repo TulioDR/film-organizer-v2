@@ -27,7 +27,7 @@ export default function GenresContainer({ children }: Props) {
          initial="initial"
          animate="animate"
          exit="exit"
-         className="w-full grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-4"
+         className="w-full grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8"
       >
          {children}
       </motion.div>

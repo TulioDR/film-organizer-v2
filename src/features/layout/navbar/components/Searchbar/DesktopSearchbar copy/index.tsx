@@ -12,10 +12,12 @@ export default function DesktopSearchbar() {
 
    return (
       <SearchbarContainer handleSubmit={handleSubmit}>
-         <div className={`h-full flex ${showResults ? "rounded-b-none" : ""}`}>
+         <GlassContainer
+            className={`h-full flex ${showResults ? "rounded-b-none" : ""}`}
+         >
             <SearchInput state={state} dispatch={dispatch} />
-            {/* <ToggleTypeButton mediaType={mediaType} dispatch={dispatch} /> */}
-         </div>
+            <ToggleTypeButton mediaType={mediaType} dispatch={dispatch} />
+         </GlassContainer>
          {showResults && <SBResults state={state} dispatch={dispatch} />}
       </SearchbarContainer>
    );

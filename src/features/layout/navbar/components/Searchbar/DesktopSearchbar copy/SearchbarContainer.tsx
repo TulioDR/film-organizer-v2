@@ -17,18 +17,20 @@ export default function SearchbarContainer({ children, handleSubmit }: Props) {
 
    return (
       <div
-         className={`pointer-events-none flex items-center w-72 h-full z-50
-            ${isHome ? "" : "justify-center"}
+         className={`pointer-events-none flex items-center fixed left-0 w-full h-16 z-50 px-24 xl:px-32
+            ${isHome ? "top-1/2 -translate-y-1/2" : "justify-center"}
          `}
       >
-         <motion.form
-            layout="position"
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            onSubmit={handleSubmit}
-            className="h-16 relative pointer-events-auto w-full"
-         >
-            {children}
-         </motion.form>
+         <div className="w-2/3 xl:w-1/2 flex justify-center">
+            <motion.form
+               layout="position"
+               transition={{ duration: 0.6, ease: "easeInOut" }}
+               onSubmit={handleSubmit}
+               className="h-16 relative pointer-events-auto "
+            >
+               {children}
+            </motion.form>
+         </div>
       </div>
    );
 }

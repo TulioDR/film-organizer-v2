@@ -24,7 +24,7 @@ export default function DropdownItem({
       <Link
          href={link}
          scroll={false}
-         className="h-12 p-1.5 hover:bg-black flex items-center gap-2 rounded-md"
+         className="h-12 pl-4 hover:bg-black flex items-center gap-2"
       >
          <div
             className={`h-full flex items-center justify-center aspect-square relative

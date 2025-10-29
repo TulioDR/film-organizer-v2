@@ -1,0 +1,37 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+type Props = {
+   icon: string;
+   isSelected: boolean;
+   onClick: () => void;
+};
+
+export default function Button({ icon, isSelected, onClick }: Props) {
+   const [showTooltip, setShowTooltip] = useState<boolean>(false);
+   const handleHoverStart = () => setShowTooltip(true);
+   const handleHoverEnd = () => setShowTooltip(false);
+   return (
+      <motion.button
+         onMouseDown={(e: any) => e.preventDefault()}
+         onHoverStart={handleHoverStart}
+         onHoverEnd={handleHoverEnd}
+         type="button"
+         onClick={onClick}
+         className={`h-full aspect-square flex items-center justify-center relative hover:bg-white
+            ${isSelected ? "" : "hover:text-black"}
+         `}
+      >
+         {isSelected && (
+            <motion.div
+               layoutId="searchTypeAnimation"
+               className="absolute top-0 left-0 w-full h-full p-2"
+               transition={{ duration: 0.6, type: "spring" }}
+            >
+               <div className="rounded-md w-full h-full bg-accent" />
+            </motion.div>
+         )}
+         <span className="material-symbols-outlined relative">{icon}</span>
+      </motion.button>
+   );
+}
