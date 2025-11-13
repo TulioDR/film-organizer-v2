@@ -21,8 +21,7 @@ export default function GlassContainer({
       <MotionWrapper
          {...rest}
          // style={{ backdropFilter: "blur(20px)" }}
-         className={`bg-white dark:bg-black backdrop-blur-lg rounded-lg border-border-width border-border-light dark:border-border-dark pointer-events-auto text-white ${className}`}
-         // className={`bg-black/50 rounded-md border border-border pointer-events-auto text-white ${className}`}
+         className={`bg-primary-light dark:bg-primary-dark text-black dark:text-white rounded-lg border-border-width border-border-light dark:border-border-dark pointer-events-auto shadow-lg  ${className}`}
       >
          {children}
       </MotionWrapper>

@@ -13,7 +13,7 @@ type Props = {
 
 export default function Header({ media, media_type }: Props) {
    return (
-      <motion.div className="lg:h-[100svh] -mt-44 pt-24 pb-4 lg:pt-24 lg:pb-24 xl:pt-32 xl:pb-32 flex flex-col lg:flex-row gap-4 xl:gap-8 relative">
+      <motion.div className="lg:h-[100svh] -mt-32 py-24 flex flex-col lg:flex-row gap-4 xl:gap-8 relative">
          <HeaderPoster
             alt={media.name || media.title}
             posterPath={media.poster_path}

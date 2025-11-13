@@ -13,12 +13,13 @@ module.exports = {
             title: "Octosquares",
          },
          borderWidth: {
-            "border-width": "2px",
+            "border-width": "1px",
          },
          colors: {
             primary: {
                light: "#ffffff",
-               dark: "#040603",
+               dark: "#000000",
+               // dark: "#575C60",
             },
             secondary: {
                light: "#e5e7eb",
@@ -34,15 +35,19 @@ module.exports = {
             },
             accent: "#CBAB60",
             background: {
-               light: "#DCD4CA",
+               light: "#E0E0E0",
+               // light: "#DCD4CA",
                dark: "#18191b",
+               "accent-light": "#e5e5e5",
+               // "accent-light": "#EFE7DC",
+               "accent-dark": "#222326",
             },
             border: {
                DEFAULT: "#71717a",
-               light: "white",
-               dark: "black",
-               // light: "rgb(197 189 178)",
-               // dark: "rgb(197 189 178 / 0.25)",
+               // light: "white",
+               // dark: "black",
+               light: "rgb(227 227 227)",
+               dark: "rgb(227 227 227 / 0.25)",
             },
          },
       },

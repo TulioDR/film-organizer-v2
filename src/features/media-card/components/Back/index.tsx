@@ -1,6 +1,6 @@
 import React from "react";
 import Overview from "./Overview";
-import Title from "./Title";
+import BackTitle from "./BackTitle";
 import LearnMore from "./LearnMore";
 import Bookmark from "@/features/bookmark/components/Bookmark";
 import { Media } from "@/common/models/Media";
@@ -26,22 +26,19 @@ export default function Back({
    const overview = media.overview || "N/A";
 
    return (
-      <div className="rounded-sm absolute w-full h-full top-0 left-0 [transform:rotateY(180deg)] bg-white dark:bg-black border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
-         <div className="w-full h-full flex flex-col overflow-hidden">
-            <Responsive minWidth={SM_MEDIA_QUERY}>
-               <BackHeader media={media} currentMedia={currentMedia} />
-            </Responsive>
-            <div className="w-full flex flex-col gap-2 flex-1 p-0 sm:p-4 pt-2 sm:pt-4 overflow-hidden">
-               <div className="overflow-hidden flex flex-col gap-2 flex-1 relative">
-                  <Title title={title} year={releaseDate} />
-                  <Overview overview={overview} />
+      <div className="rounded-sm absolute w-full h-full top-0 left-0 flex flex-col [transform:rotateY(180deg)] bg-primary-light dark:bg-primary-dark border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
+         <Responsive minWidth={SM_MEDIA_QUERY}>
+            <BackHeader media={media} currentMedia={currentMedia} />
+         </Responsive>
+         <BackTitle title={title} year={releaseDate} />
+
+         <div className="w-full p-4">
+            <div className="flex gap-2 h-12 w-full">
+               <div className="bg-[#CBAB60] h-full aspect-square rounded-md overflow-hidden">
+                  <Bookmark media={media} type={mediaType} />
                </div>
-               <div className="flex gap-2 h-12 w-full">
-                  <div className="bg-[#CBAB60] h-full aspect-square rounded-md overflow-hidden">
-                     <Bookmark media={media} type={mediaType} />
-                  </div>
-                  <LearnMore onClick={onLearnMore} />
-               </div>
+               <LearnMore onClick={onLearnMore} />
+               <div className="h-full aspect-square rounded-md overflow-hidden bg-amber-600"></div>
             </div>
          </div>
       </div>

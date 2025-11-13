@@ -29,7 +29,7 @@ export default function NavTitle({}: Props) {
             </div>
          </Responsive>
          <Responsive minWidth={LG_MEDIA_QUERY}>
-            <div className="text-2xl font-medium flex items-center text-black dark:text-white h-full mr-4">
+            <div className="text-2xl font-medium text-black dark:text-white">
                FilmVue
             </div>
          </Responsive>

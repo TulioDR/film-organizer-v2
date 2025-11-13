@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { NavigationModel } from "@/features/layout/sidebar/models/NavigationModels";
+import Link from "next/link";
 
 type Props = {
    item: NavigationModel;
@@ -16,9 +17,10 @@ export default function NavItem({ item }: Props) {
       <motion.div
          onMouseEnter={onMouseEnter}
          onMouseLeave={onMouseLeave}
-         className="h-full px-4 hover:bg-black dark:hover:bg-white flex items-center justify-center relative"
+         className="h-full px-0 hover:bg-black dark:hover:bg-white flex items-center justify-center relative"
       >
-         <div
+         <Link
+            href={item.link}
             className={`w-full h-full flex items-center justify-center ${
                isHovered
                   ? "text-white dark:text-black"
@@ -29,7 +31,7 @@ export default function NavItem({ item }: Props) {
                {item.text}
             </span>
             {/* <span className="material-symbols-outlined">{item.icon}</span> */}
-         </div>
+         </Link>
          {/* {isHovered && (
             <div className="bg-white absolute top-full left-1/2 -translate-x-1/2 translate-y-2 rounded-md h-12 w-40 flex items-center justify-center px-4">
                <span className="text-center text-black font-semibold">

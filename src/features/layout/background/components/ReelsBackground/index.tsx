@@ -9,7 +9,7 @@ export default function ReelsBackground({}: Props) {
          <div className="absolute top-0 right-0 rotate-[50deg] translate-x-[40%] z-10">
             <Reel />
          </div>
-         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 rotate-[-30deg] opacity-70 scale-95">
+         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 rotate-[-30deg]  scale-95">
             <div className="-translate-y-1/2">
                <Reel />
             </div>

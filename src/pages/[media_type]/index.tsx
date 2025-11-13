@@ -1,123 +1,65 @@
-import ImageLink from "@/common/components/ImageLink";
-import MT_Title from "@/features/pages/media-type/components/MT_Title";
-import SelectorBackground from "@/features/pages/media-type/components/SelectorBackground";
-import GenresBackground from "@/features/pages/media-type/components/GenresBackground";
-import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
-import { GetServerSideProps } from "next";
-import API_PUBLIC from "@/api/public";
 import { Media } from "@/common/models/Media";
-import GenreModel from "@/features/pages/genres/models/GenreModel";
-import movieGenres from "@/data/genres/movieGenres";
-import tvGenres from "@/data/genres/tvGenres";
-import AnimationContainer from "@/features/pages/media-type/components/AnimationContainer";
 import { AnimatePresence } from "framer-motion";
 import PageHead from "@/common/components/PageHead";
+import NotFoundMessage from "@/features/pages/media-type/components/NotFoundMessage";
+import MediaCardsGrid from "@/features/pages/media-type/components/MediaCardsGrid";
+import MediaCard from "@/features/media-card/components/MediaCard";
+import Pagination from "@/features/pages/media-type/components/Pagination";
+import { useRouter } from "next/router";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { getPageData } from "@/common/utils/getServerSideData/getPageData";
+import MediaFilter from "@/features/search-media/components/MediaFilter";
+import MediaFilterOld from "@/features/search-media/components/MediaFilterOld";
+import { useState } from "react";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-   const { media_type } = context.query;
-   if (media_type !== "movie" && media_type !== "tv") return { notFound: true };
+export const getServerSideProps: GetServerSideProps = getPageData("popular");
 
-   const popularApi = `/${media_type}/popular/1`;
-   const trendingApi = `/${media_type}/trending/1`;
-   const topRatedApi = `/${media_type}/top-rated/1`;
+type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-   const [
-      { data: popularData },
-      { data: trendingData },
-      { data: topRatedData },
-   ] = await Promise.all([
-      API_PUBLIC.get(popularApi),
-      API_PUBLIC.get(trendingApi),
-      API_PUBLIC.get(topRatedApi),
-   ]);
+export default function MediaType(response: Props) {
+   const { mediaType, data } = response;
 
-   const selectedGenres = media_type === "movie" ? movieGenres : tvGenres;
-   const newGenres = selectedGenres.slice(0, 16);
+   const results = data.results;
 
-   return {
-      props: {
-         popularMedia: popularData.results[0],
-         trendingMedia: trendingData.results[0],
-         topRatedMedia: topRatedData.results[0],
-         media_type,
-         genres: newGenres,
-      },
-   };
-};
+   const { asPath } = useRouter();
 
-type Props = {
-   popularMedia: Media;
-   trendingMedia: Media;
-   topRatedMedia: Media;
-   media_type: "movie" | "tv";
-   genres: GenreModel[];
-};
+   const title = mediaType === "movie" ? "Movies" : "Series";
 
-export default function MediaType({
-   popularMedia,
-   trendingMedia,
-   topRatedMedia,
-   media_type,
-   genres,
-}: Props) {
-   usePageTitle(media_type);
-
-   const elementsArray = [
-      {
-         link: `/${media_type}/popular`,
-         background: <SelectorBackground media={popularMedia} />,
-         icon: "local_fire_department",
-         title: "Popular",
-      },
-      {
-         link: `/${media_type}/genres`,
-         background: <GenresBackground genres={genres} />,
-         icon: "theater_comedy",
-         title: "Genres",
-      },
-      {
-         link: `/${media_type}/trending`,
-         background: <SelectorBackground media={trendingMedia} />,
-         icon: "trending_up",
-         title: "Trending",
-      },
-      {
-         link: `/${media_type}/top-rated`,
-         background: <SelectorBackground media={topRatedMedia} />,
-         icon: "star",
-         title: "Top Rated",
-      },
-   ];
+   const [isOpen, setIsOpen] = useState<boolean>(true);
 
    return (
       <>
-         <PageHead title={media_type === "movie" ? "Movies" : "TV"} />
+         <PageHead title={title} />
+
+         {/* <div className="flex items-center justify-end h-16 mb-4 sticky top-24 z-40">
+            <MediaFilterOld />
+         </div> */}
+
+         <MediaFilter title={title} isOpen={isOpen} setIsOpen={setIsOpen} />
+
          <AnimatePresence mode="wait" propagate>
-            <div
-               key={media_type}
-               className="w-full grid md:grid-cols-2 md:grid-rows-2 gap-4 xl:gap-8 flex-grow overflow-hidden"
-            >
-               {elementsArray.map((element, index) => (
-                  <AnimationContainer
-                     key={element.link}
-                     index={index}
-                     clockwise={true}
-                  >
-                     <ImageLink
-                        link={element.link}
-                        background={element.background}
-                        front={
-                           <MT_Title
-                              icon={element.icon}
-                              title={element.title}
-                           />
-                        }
-                        className="rounded-md border border-border h-full"
+            {results.length === 0 && <NotFoundMessage key="not-found" />}
+            {results.length > 0 && (
+               <MediaCardsGrid key={asPath} isOpen={isOpen}>
+                  {data.results.map((media: Media, index: number) => (
+                     <MediaCard
+                        key={`${mediaType}-${media.id}-${index}`}
+                        id={`${mediaType}-${media.id}-${index}`}
+                        media={media}
+                        mediaType={mediaType}
                      />
-                  </AnimationContainer>
-               ))}
-            </div>
+                  ))}
+               </MediaCardsGrid>
+            )}
          </AnimatePresence>
+
+         {data.total_pages && (
+            <Pagination
+               total={data.total_pages > 20 ? 20 : data.total_pages}
+               currentPage={data.page}
+               isOpen={isOpen}
+            />
+         )}
       </>
    );
 }

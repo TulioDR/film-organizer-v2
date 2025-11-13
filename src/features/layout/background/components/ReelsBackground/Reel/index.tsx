@@ -14,7 +14,7 @@ export default function Reel({}: Props) {
          animate={{ x: TOTAL_WIDTH }}
          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
          style={{ gap: GAP }}
-         className="bg-[#EFE7DC] dark:bg-[#222326] flex shadow-xl"
+         className="bg-background-accent-light dark:bg-background-accent-dark flex shadow-xl"
       >
          {Array.from({ length: 15 }).map((_, index) => (
             <div
@@ -25,7 +25,9 @@ export default function Reel({}: Props) {
                <ReelItem />
                <div
                   className={`aspect-[4/5] w-full rounded-md bg-background-light dark:bg-background-dark`}
-               ></div>
+               >
+                  <></>
+               </div>
                <ReelItem />
             </div>
          ))}

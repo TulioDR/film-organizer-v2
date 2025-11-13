@@ -43,27 +43,25 @@ export default function BackHeader({ media, currentMedia }: Props) {
       <motion.div
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
-         className="p-1.5 pb-0"
+         className="relative w-full"
       >
-         <div className="relative w-full h-full">
-            <Poster alt={title} posterPath={backdrop} size="original" back />
-            <AnimatePresence>
-               {isHovered && (
-                  <motion.div
-                     initial={{ opacity: 0 }}
-                     animate={{ opacity: 1 }}
-                     exit={{ opacity: 0 }}
-                     transition={{ duration: 0.3 }}
-                     onClick={handleClick}
-                     className="absolute cursor-pointer top-0 left-0 w-full h-full flex items-center justify-center text-center bg-black/90 dark:bg-white/90"
-                  >
-                     <div className="text-white dark:text-black w-min uppercase font-black">
-                        View Backdrop
-                     </div>
-                  </motion.div>
-               )}
-            </AnimatePresence>
-         </div>
+         <Poster alt={title} posterPath={backdrop} size="original" back />
+         <AnimatePresence>
+            {isHovered && (
+               <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={handleClick}
+                  className="absolute cursor-pointer top-0 left-0 w-full h-full flex items-center justify-center text-center bg-black/90 dark:bg-white/90"
+               >
+                  <div className="text-white dark:text-black w-min uppercase font-black">
+                     View Backdrop
+                  </div>
+               </motion.div>
+            )}
+         </AnimatePresence>
       </motion.div>
    );
 }

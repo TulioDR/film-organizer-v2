@@ -50,13 +50,26 @@ export default function PageLoader({ children }: Props) {
                </div>
             </div>
          )}
-         <div id="side-panel-container" className="w-full">
+         {/* <div id="side-panel-container" className="w-full">
             <motion.div
+               id="main-content"
                animate={{
                   filter: isLoading ? "brightness(0.3)" : "brightness(1)",
                }}
                transition={{ duration: 0.3 }}
-               className="pt-32 lg:pt-36 px-4 lg:px-16 pb-24 xl:pb-8 min-h-screen flex flex-col"
+               className="pt-32 lg:pt-32 px-4 lg:px-16 pb-24 xl:pb-8 min-h-screen flex flex-col"
+            >
+               {children}
+            </motion.div>
+         </div> */}
+         <div id="side-panel-container" className="w-full">
+            <motion.div
+               id="main-content"
+               animate={{
+                  filter: isLoading ? "brightness(0.3)" : "brightness(1)",
+               }}
+               transition={{ duration: 0.3 }}
+               className="pt-32 lg:pt-32 px-4 lg:px-32 pb-24 xl:pb-24"
             >
                {children}
             </motion.div>
