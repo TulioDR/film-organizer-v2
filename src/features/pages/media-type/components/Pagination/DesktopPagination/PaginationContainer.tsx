@@ -10,7 +10,7 @@ export default function PaginationContainer({ children, isOpen }: Props) {
    return (
       <motion.div className="h-16 md:absolute flex bottom-0 left-0 md:w-full z-20 pointer-events-none">
          <motion.div
-            animate={{ width: isOpen ? "25vw" : "0vw" }}
+            animate={{ width: isOpen ? "calc(20vw + 32px)" : "0vw" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="h-full"
          />

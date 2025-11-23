@@ -4,6 +4,11 @@ import FilterCard from "./FilterCard";
 import GenresFilter from "./Filters/GenresFilter";
 import ReactLenis from "lenis/react";
 import MediaTypeFilter from "./Filters/MediaTypeFilter";
+import SortByFilter from "./Filters/SortByFilter";
+import ReleaseYearFilter from "./Filters/ReleaseYearFilter";
+import OriginalLanguageFilter from "./Filters/OriginalLanguageFilter";
+import OriginCountryFilter from "./Filters/OriginCountryFilter";
+import RatingFilter from "./Filters/RatingFilter";
 
 type Props = {};
 
@@ -18,30 +23,19 @@ export default function LargeFilter({}: Props) {
             transition={{ duration: 0.2 }}
             className="w-full h-full"
          >
-            <div className="grid grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 xl:grid-cols-3 xl:grid-rows-4 gap-8">
                <MediaTypeFilter
                   isMovie={mediaType === "movie"}
                   setMediaType={setMediaType}
                />
-               <FilterCard name="Sort by">Hello</FilterCard>
-               <FilterCard name="Year of release">Hello</FilterCard>
+               <SortByFilter />
+               <ReleaseYearFilter />
                <GenresFilter isMovie={mediaType === "movie"} />
-               <FilterCard name="Max Rating" message="Can select only one">
-                  Hello
-               </FilterCard>
                <GenresFilter isMovie={mediaType === "movie"} exclude />
-
-               <FilterCard name="Min Rating" message="Can select only one">
-                  Hello
-               </FilterCard>
-               <FilterCard name="Original language">Hello</FilterCard>
-               <FilterCard wide name="Max duration">
-                  Hello
-               </FilterCard>
-               <FilterCard name="Origin country">Hello</FilterCard>
-               <FilterCard wide name="Min duration">
-                  Hello
-               </FilterCard>
+               <RatingFilter />
+               <OriginalLanguageFilter />
+               <OriginCountryFilter />
+               <FilterCard name="Duration range">Hello</FilterCard>
             </div>
          </motion.div>
       </ReactLenis>

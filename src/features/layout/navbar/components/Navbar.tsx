@@ -1,32 +1,18 @@
 import Responsive from "@/common/components/Responsive";
-import LoginButton from "./LoginButton";
 
-import NavDropdown from "./NavDropdown";
-import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
-import NavTitle from "./NavTitle";
-import MobileMenu from "../../mobile-menu/components/MobileMenu";
-import MobileSearchbar from "./Searchbar/MobileSearchbar";
-import DesktopSearchbar from "./Searchbar/DesktopSearchbar";
-import GlassContainer from "@/common/components/GlassContainer";
-import { NAVIGATION_ITEMS } from "../../sidebar/constants/NAVIGATION_ITEMS";
-import DarkModeButton from "./DesktopNavbar/DarkModeButton";
-import DesktopNavbar from "./DesktopNavbar";
+import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 
 export default function Navbar() {
    return (
       <>
-         <Responsive minWidth={LG_MEDIA_QUERY}>
-            <DesktopNavbar />
+         <Responsive minWidth={XL_MEDIA_QUERY}>
+            <Desktop />
          </Responsive>
-
-         {/* <Responsive minWidth={LG_MEDIA_QUERY}>
-            <DesktopSearchbar />
+         <Responsive maxWidth={XL_MEDIA_QUERY}>
+            <Mobile />
          </Responsive>
-         <Responsive maxWidth={LG_MEDIA_QUERY}>
-            <MobileMenu position="topLeft" buttonIcon="search">
-               <MobileSearchbar />
-            </MobileMenu>
-         </Responsive> */}
       </>
    );
 }

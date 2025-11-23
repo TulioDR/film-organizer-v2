@@ -14,7 +14,7 @@ export default function GenresFilter({ isMovie, exclude }: Props) {
 
    return (
       <FilterCard
-         wide
+         className="col-span-2"
          name={`${exclude ? "Exclude" : "Include"} genres`}
          message="Multiple can be selected"
       >

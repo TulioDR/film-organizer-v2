@@ -33,16 +33,16 @@ export default function MediaCardsGrid({ children, isOpen }: Props) {
       <motion.div
          animate={{ opacity: isHidden ? 0 : 1 }}
          transition={{ duration: 0.2 }}
-         className="w-full mt-20"
+         className={`w-full mt-20 ${isOpen ? "pl-96" : ""}`}
       >
          <motion.div
             variants={container}
             initial="initial"
             animate="animate"
             exit="exit"
-            className={`gap-8 grid ${
+            className={`gap-4 2xl:gap-8 grid ${
                isOpen
-                  ? "grid-cols-3 2xl:grid-cols-4 pl-[25vw]"
+                  ? "grid-cols-3 2xl:grid-cols-4 pl-8"
                   : "grid-cols-4 2xl:grid-cols-5"
             } `}
          >

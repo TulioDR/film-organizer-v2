@@ -23,11 +23,7 @@ export default function FilterContainer({
          onAnimationStart={onAnimationStart}
          onAnimationComplete={onAnimationComplete}
          animate={{
-            width: isOpen
-               ? isExpanded
-                  ? "100%"
-                  : "calc(25vw - 2rem)"
-               : "64px",
+            width: isOpen ? (isExpanded ? "100%" : "384px") : "64px",
             height: isOpen ? "100%" : "64px",
          }}
          transition={{ duration: DURATION }}

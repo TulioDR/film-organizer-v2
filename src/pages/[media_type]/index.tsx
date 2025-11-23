@@ -11,6 +11,8 @@ import { getPageData } from "@/common/utils/getServerSideData/getPageData";
 import MediaFilter from "@/features/search-media/components/MediaFilter";
 import MediaFilterOld from "@/features/search-media/components/MediaFilterOld";
 import { useState } from "react";
+import Responsive from "@/common/components/Responsive";
+import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 
 export const getServerSideProps: GetServerSideProps = getPageData("popular");
 
@@ -35,7 +37,9 @@ export default function MediaType(response: Props) {
             <MediaFilterOld />
          </div> */}
 
-         <MediaFilter title={title} isOpen={isOpen} setIsOpen={setIsOpen} />
+         <Responsive minWidth={LG_MEDIA_QUERY}>
+            <MediaFilter title={title} isOpen={isOpen} setIsOpen={setIsOpen} />
+         </Responsive>
 
          <AnimatePresence mode="wait" propagate>
             {results.length === 0 && <NotFoundMessage key="not-found" />}

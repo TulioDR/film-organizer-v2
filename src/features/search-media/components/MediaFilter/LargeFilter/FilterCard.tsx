@@ -3,16 +3,21 @@ import React from "react";
 type Props = {
    name: string;
    message?: string;
-   wide?: boolean;
    children: React.ReactNode;
+   className?: string;
 };
 
-export default function FilterCard({ name, message, children, wide }: Props) {
+export default function FilterCard({
+   name,
+   message,
+   children,
+   className = "",
+}: Props) {
    return (
       <div
-         className={`rounded-md bg-background-light dark:bg-background-accent-dark p-4 flex flex-col gap-4 ${
-            wide ? "col-span-2" : ""
-         }`}
+         className={`rounded-md bg-background-light dark:bg-background-accent-dark p-4 flex flex-col gap-4 
+            ${className}
+         `}
       >
          <div className="">
             <span className="text-lg font-semibold mr-2">{name}</span>

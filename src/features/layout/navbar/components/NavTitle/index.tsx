@@ -19,18 +19,18 @@ export default function NavTitle({}: Props) {
       <>
          <Responsive maxWidth={LG_MEDIA_QUERY}>
             <div
-               className={`text-3xl w-full sm:text-4xl text-black font-black uppercase flex items-center justify-center ${
+               className={`text-3xl w-full sm:text-4xl text-black dark:text-white font-black flex items-center justify-center ${
                   isHome ? "fixed top-1/2 -translate-y-1/2 left-0" : "h-full"
                }`}
             >
                <motion.span layout="position" className="block">
-                  Agrios
+                  FilmVue
                </motion.span>
             </div>
          </Responsive>
          <Responsive minWidth={LG_MEDIA_QUERY}>
-            <div className="text-4xl font-semibold flex items-center uppercase text-white h-full mr-12">
-               Agrios
+            <div className="text-2xl font-medium text-black dark:text-white">
+               FilmVue
             </div>
          </Responsive>
       </>
