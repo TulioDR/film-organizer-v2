@@ -14,7 +14,7 @@ export default function FixedUIContainer({ children }: Props) {
          layoutRoot
          animate={{ opacity: isHidden ? 0 : 1 }}
          transition={{ duration: 0.2 }}
-         className="z-20 pointer-events-none fixed inset-0 p-4 xl:py-4 px-4 lg:px-32"
+         className="z-20 pointer-events-none fixed inset-0 px-4 py-4 lg:px-32"
       >
          <div id="main-layout" className="w-full h-full relative">
             {children}
