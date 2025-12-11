@@ -12,6 +12,9 @@ module.exports = {
             roboto: "'Roboto', sans-serif",
             title: "Octosquares",
          },
+         gridTemplateRows: {
+            7: "repeat(7, minmax(0, 1fr))",
+         },
          borderWidth: {
             "border-width": "1px",
          },

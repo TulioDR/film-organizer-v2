@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import FilterCard from "./FilterCard";
-import GenresFilter from "./Filters/GenresFilter";
 import ReactLenis from "lenis/react";
-import MediaTypeFilter from "./Filters/MediaTypeFilter";
-import SortByFilter from "./Filters/SortByFilter";
-import ReleaseYearFilter from "./Filters/ReleaseYearFilter";
-import OriginalLanguageFilter from "./Filters/OriginalLanguageFilter";
-import OriginCountryFilter from "./Filters/OriginCountryFilter";
-import RatingFilter from "./Filters/RatingFilter";
+
+// Filters
+import MediaTypeFilter from "../../../MediaFilters/Filters/MediaTypeFilter";
+import SortByFilter from "../../../MediaFilters/Filters/SortByFilter";
+import RatingFilter from "../../../MediaFilters/Filters/RatingFilter";
+import GenresFilter from "../../../MediaFilters/Filters/GenresFilter";
+import ReleaseYearFilter from "../../../MediaFilters/Filters/ReleaseYearFilter";
+import OriginalLanguageFilter from "../../../MediaFilters/Filters/OriginalLanguageFilter";
+import OriginCountryFilter from "../../../MediaFilters/Filters/OriginCountryFilter";
+import DurationFilter from "../../../MediaFilters/Filters/DurationFilter";
 
 type Props = {};
 
 export default function LargeFilter({}: Props) {
-   const [mediaType, setMediaType] = useState<"movie" | "tv">("movie");
-
    return (
       <ReactLenis className="w-full h-full overflow-hidden p-4">
          <motion.div
@@ -23,22 +23,19 @@ export default function LargeFilter({}: Props) {
             transition={{ duration: 0.2 }}
             className="w-full h-full"
          >
-            <div className="grid xl:grid-rows-4 gap-4">
+            <div className="grid gap-4">
                <div className="grid grid-cols-3 gap-4">
-                  <MediaTypeFilter
-                     isMovie={mediaType === "movie"}
-                     setMediaType={setMediaType}
-                  />
+                  <MediaTypeFilter />
                   <SortByFilter />
                   <RatingFilter />
                </div>
                <div className="grid grid-cols-2 gap-4">
-                  <GenresFilter isMovie={mediaType === "movie"} />
-                  <GenresFilter isMovie={mediaType === "movie"} exclude />
+                  <GenresFilter />
+                  <GenresFilter exclude />
                </div>
                <div className="grid grid-cols-3 gap-4">
                   <ReleaseYearFilter />
-                  <FilterCard name="Duration range">Hello</FilterCard>
+                  <DurationFilter />
                </div>
                <div className="grid grid-cols-2 gap-4">
                   <OriginalLanguageFilter />

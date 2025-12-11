@@ -1,18 +1,38 @@
 import React from "react";
+import { motion } from "framer-motion";
+import ReactLenis from "lenis/react";
+
+// Filters
+import MediaTypeFilter from "../../../MediaFilters/Filters/MediaTypeFilter";
+import SortByFilter from "../../../MediaFilters/Filters/SortByFilter";
+import RatingFilter from "../../../MediaFilters/Filters/RatingFilter";
+import GenresFilter from "../../../MediaFilters/Filters/GenresFilter";
+import ReleaseYearFilter from "../../../MediaFilters/Filters/ReleaseYearFilter";
+import OriginalLanguageFilter from "../../../MediaFilters/Filters/OriginalLanguageFilter";
+import OriginCountryFilter from "../../../MediaFilters/Filters/OriginCountryFilter";
+import DurationFilter from "../../../MediaFilters/Filters/DurationFilter";
 
 type Props = {};
 
 export default function SmallFilter({}: Props) {
    return (
-      <div className="w-full flex-1 p-4">
-         <div className="w-full grid gap-4">
-            {Array.from({ length: 9 }).map((_, index) => (
-               <div
-                  key={index}
-                  className={`bg-background-light h-40 dark:bg-background-dark rounded-md`}
-               ></div>
-            ))}
-         </div>
-      </div>
+      <ReactLenis className="w-full h-full overflow-hidden p-4">
+         <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            className="w-full h-full grid grid-cols-1 gap-4"
+         >
+            <MediaTypeFilter />
+            <SortByFilter />
+            <RatingFilter />
+            <GenresFilter small />
+            <GenresFilter small exclude />
+            <ReleaseYearFilter small />
+            <DurationFilter />
+            <OriginalLanguageFilter />
+            <OriginCountryFilter />
+         </motion.div>
+      </ReactLenis>
    );
 }

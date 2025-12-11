@@ -1,16 +1,17 @@
 import React from "react";
 import FilterCard from "../../FilterCard";
 import MediaTypeButton from "./MediaTypeButton";
+import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 
-type Props = {
-   isMovie: boolean;
-   setMediaType: React.Dispatch<React.SetStateAction<"movie" | "tv">>;
-};
+type Props = {};
 
-export default function MediaTypeFilter({ isMovie, setMediaType }: Props) {
+export default function MediaTypeFilter({}: Props) {
+   const { mediaType, setMediaType } = useMediaFilterContext();
+   const isMovie = mediaType === "movie";
+
    return (
       <FilterCard name="Movies or Series">
-         <div className="flex w-full">
+         <div className="flex w-full gap-2">
             <MediaTypeButton
                text="Movies"
                isSelected={isMovie}

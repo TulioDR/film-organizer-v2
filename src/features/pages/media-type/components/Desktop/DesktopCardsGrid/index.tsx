@@ -38,7 +38,6 @@ export default function DesktopCardsGrid({
       <motion.div
          animate={{
             // opacity: isHidden ? 0 : 1,
-            scale: isExpanded ? 0.9 : 1,
             opacity: isExpanded ? 0.5 : 1,
          }}
          transition={{ duration: 0.3, ease: "easeInOut" }}

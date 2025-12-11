@@ -5,6 +5,7 @@ import OpenButton from "./OpenButton";
 import FilterContainer from "./FilterContainer";
 import SmallFilter from "./SmallFilter";
 import LargeFilter from "./LargeFilter";
+import { MediaFilterProvider } from "../../../context/MediaFilterContext";
 
 type Props = {
    title: string;
@@ -46,25 +47,27 @@ export default function DesktopMediaFilter({
             <div className="absolute left-16 pl-2 top-0 h-16 flex items-center">
                <span className="text-6xl uppercase font-thin">{title}</span>
             </div>
-            <FilterContainer
-               isOpen={isOpen}
-               isExpanded={isExpanded}
-               DURATION={DURATION}
-               onAnimationStart={onAnimationStart}
-               onAnimationComplete={onAnimationComplete}
-            >
-               <div className="flex-1 h-full flex flex-col items-start">
-                  <OpenButton onClick={toggleIsOpen} />
-                  {showSmallFilter && <SmallFilter />}
-                  {showLargeFilter && <LargeFilter />}
-               </div>
-               {isOpen && (
-                  <ExpandButton
-                     onClick={toggleIsExpanded}
-                     isExpanded={isExpanded}
-                  />
-               )}
-            </FilterContainer>
+            <MediaFilterProvider>
+               <FilterContainer
+                  isOpen={isOpen}
+                  isExpanded={isExpanded}
+                  DURATION={DURATION}
+                  onAnimationStart={onAnimationStart}
+                  onAnimationComplete={onAnimationComplete}
+               >
+                  <div className="flex-1 h-full flex flex-col items-start">
+                     <OpenButton onClick={toggleIsOpen} />
+                     {showSmallFilter && <SmallFilter />}
+                     {showLargeFilter && <LargeFilter />}
+                  </div>
+                  {isOpen && (
+                     <ExpandButton
+                        onClick={toggleIsExpanded}
+                        isExpanded={isExpanded}
+                     />
+                  )}
+               </FilterContainer>
+            </MediaFilterProvider>
          </div>
       </div>,
       document.body

@@ -7,9 +7,7 @@ type Props = {};
 export default function SortByFilter({}: Props) {
    return (
       <FilterCard name="Sort by">
-         <div className="w-full px-2">
-            <CustomSelect />
-         </div>
+         <CustomSelect />
       </FilterCard>
    );
 }
