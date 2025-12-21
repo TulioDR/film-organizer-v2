@@ -7,7 +7,7 @@ import MediaTypeFilter from "../../../MediaFilters/Filters/MediaTypeFilter";
 import SortByFilter from "../../../MediaFilters/Filters/SortByFilter";
 import RatingFilter from "../../../MediaFilters/Filters/RatingFilter";
 import GenresFilter from "../../../MediaFilters/Filters/GenresFilter";
-import ReleaseYearFilter from "../../../MediaFilters/Filters/ReleaseYearFilter";
+import ReleaseDateFilter from "../../../MediaFilters/Filters/ReleaseDateFilter";
 import OriginalLanguageFilter from "../../../MediaFilters/Filters/OriginalLanguageFilter";
 import OriginCountryFilter from "../../../MediaFilters/Filters/OriginCountryFilter";
 import DurationFilter from "../../../MediaFilters/Filters/DurationFilter";
@@ -28,7 +28,7 @@ export default function SmallFilter({}: Props) {
             <RatingFilter />
             <GenresFilter small />
             <GenresFilter small exclude />
-            <ReleaseYearFilter small />
+            <ReleaseDateFilter small />
             <DurationFilter />
             <OriginalLanguageFilter />
             <OriginCountryFilter />

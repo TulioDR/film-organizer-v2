@@ -3,16 +3,16 @@ import { motion } from "framer-motion";
 
 type Props = {
    name: string;
-   message?: string;
    children: React.ReactNode;
    className?: string;
+   icon: string | React.ReactNode;
 };
 
 export default function FilterCard({
    name,
-   message,
    children,
    className = "",
+   icon,
 }: Props) {
    return (
       <motion.div
@@ -21,11 +21,13 @@ export default function FilterCard({
             ${className}
          `}
       >
-         <div className="">
+         <div className="flex items-center gap-2">
+            {typeof icon === "string" ? (
+               <span className="material-symbols-outlined">{icon}</span>
+            ) : (
+               icon
+            )}
             <span className="text-lg font-semibold mr-2">{name}</span>
-            <span className="text-sm font-light">
-               {message && `(${message})`}
-            </span>
          </div>
          <div className="flex-1 flex items-center justify-center w-full text-black/70 dark:text-white/70">
             {children}

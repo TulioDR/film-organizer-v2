@@ -4,6 +4,8 @@ import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import GenreSelector from "./GenreSelector";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
+import GenresFilterGrid from "./GenresFilterGrid";
+import ExcludeIcon from "./ExcludeIcon";
 
 type Props = {
    exclude?: true;
@@ -11,28 +13,34 @@ type Props = {
 };
 
 export default function GenresFilter({ exclude, small }: Props) {
-   const { mediaType } = useMediaFilterContext();
+   const { mediaType, genresInc, genresExc, toggleIncluded, toggleExcluded } =
+      useMediaFilterContext();
    const isMovie = mediaType === "movie";
    const genres = isMovie ? movieGenres : tvGenres;
 
    return (
       <FilterCard
+         icon={exclude ? <ExcludeIcon /> : "theater_comedy"}
          name={`${exclude ? "Exclude" : "Include"} genres`}
-         message="Multiple can be selected"
       >
-         <div
-            className={`grid w-full gap-2
-            ${
-               small
-                  ? "grid-cols-2"
-                  : "grid-cols-3 2xl:grid-cols-4 grid-rows-7 2xl:grid-rows-5"
-            }   
-         `}
-         >
+         <GenresFilterGrid small={small}>
             {genres.map((genre) => (
-               <GenreSelector key={genre.id} name={genre.name} />
+               <GenreSelector
+                  key={genre.id}
+                  name={genre.name}
+                  onClick={
+                     exclude
+                        ? () => toggleExcluded(genre)
+                        : () => toggleIncluded(genre)
+                  }
+                  isSelected={
+                     exclude
+                        ? genresExc.some((g) => g.id === genre.id)
+                        : genresInc.some((g) => g.id === genre.id)
+                  }
+               />
             ))}
-         </div>
+         </GenresFilterGrid>
       </FilterCard>
    );
 }

@@ -1,30 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomRangeInput from "./CustomRangeInput";
 import CustomStep from "./CustomStep";
 
 type Props = {
    globalMin: number;
    globalMax: number;
-   initialRange: [number, number];
    step: number;
    markedSteps: number[];
    label: string;
+   minVal: number;
+   maxVal: number;
+   setMinVal: React.Dispatch<React.SetStateAction<number>>;
+   setMaxVal: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function RangeInput({
    globalMin,
    globalMax,
-   initialRange,
    step,
    markedSteps,
    label,
+   minVal,
+   maxVal,
+   setMinVal,
+   setMaxVal,
 }: Props) {
-   const initialMin = Math.max(globalMin, initialRange[0]);
-   const initialMax = Math.min(globalMax, initialRange[1]);
-
-   const [minVal, setMinVal] = useState<number>(initialMin);
-   const [maxVal, setMaxVal] = useState<number>(initialMax);
-
    const handleMinChange = (e: any) => {
       const newMin = Number(e.target.value);
       setMinVal(Math.min(newMin, maxVal));
@@ -58,7 +58,12 @@ export default function RangeInput({
       <>
          <div className="w-full flex flex-col pb-9">
             <div className="h-9 w-full  flex items-center justify-center font-bold text-lg">
-               {`${label}: ${minVal} - ${maxVal}`}
+               {`${label}: 
+                  ${minVal === maxVal ? minVal : `${minVal} - ${maxVal}`} 
+                  ${
+                     minVal === globalMin && maxVal === globalMax ? `(Any)` : ""
+                  } 
+               `}
             </div>
             <div className="w-full h-9 flex items-center  relative px-3">
                <div className="w-full h-full flex items-center justify-between relative">

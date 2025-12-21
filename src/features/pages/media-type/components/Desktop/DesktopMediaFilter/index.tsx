@@ -55,7 +55,7 @@ export default function DesktopMediaFilter({
                   onAnimationStart={onAnimationStart}
                   onAnimationComplete={onAnimationComplete}
                >
-                  <div className="flex-1 h-full flex flex-col items-start">
+                  <div className="flex-1 h-full flex flex-col items-start overflow-hidden">
                      <OpenButton onClick={toggleIsOpen} />
                      {showSmallFilter && <SmallFilter />}
                      {showLargeFilter && <LargeFilter />}

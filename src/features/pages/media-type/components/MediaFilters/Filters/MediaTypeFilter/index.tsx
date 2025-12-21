@@ -10,7 +10,7 @@ export default function MediaTypeFilter({}: Props) {
    const isMovie = mediaType === "movie";
 
    return (
-      <FilterCard name="Movies or Series">
+      <FilterCard icon={isMovie ? "movie" : "tv"} name="Movies or Series">
          <div className="flex w-full gap-2">
             <MediaTypeButton
                text="Movies"
