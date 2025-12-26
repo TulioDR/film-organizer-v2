@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useDurationFilter() {
-   const initialDuration = [40, 160];
+   const initialDuration = [0, 400];
    const [minDuration, setMinDuration] = useState<number>(initialDuration[0]);
    const [maxDuration, setMaxDuration] = useState<number>(initialDuration[1]);
 

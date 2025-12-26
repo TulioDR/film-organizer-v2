@@ -16,6 +16,10 @@ a {
    box-sizing: border-box;
 }
 
+#custom-tailwind-input + button + div > div:nth-child(2) {
+   @apply !border-none !outline !outline-1 !outline-border-light dark:!outline-border-dark !bg-primary-light dark:!bg-primary-dark;
+}
+
 /* Body scrollbar */
 body::-webkit-scrollbar {
    width: 12px;

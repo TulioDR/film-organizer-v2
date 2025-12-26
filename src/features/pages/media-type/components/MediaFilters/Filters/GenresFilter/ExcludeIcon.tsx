@@ -1,3 +1,4 @@
+import { GENRES_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 import React from "react";
 
 type Props = {};
@@ -9,7 +10,7 @@ export default function ExcludeIcon({}: Props) {
             <span className="material-symbols-outlined">close</span>
          </div>
          <span className="material-symbols-outlined opacity-50">
-            theater_comedy
+            {GENRES_ICON}
          </span>
       </div>
    );

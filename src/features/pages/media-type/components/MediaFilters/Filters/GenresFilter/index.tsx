@@ -6,6 +6,7 @@ import GenreSelector from "./GenreSelector";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import GenresFilterGrid from "./GenresFilterGrid";
 import ExcludeIcon from "./ExcludeIcon";
+import { GENRES_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 
 type Props = {
    exclude?: true;
@@ -20,7 +21,7 @@ export default function GenresFilter({ exclude, small }: Props) {
 
    return (
       <FilterCard
-         icon={exclude ? <ExcludeIcon /> : "theater_comedy"}
+         icon={exclude ? <ExcludeIcon /> : GENRES_ICON}
          name={`${exclude ? "Exclude" : "Include"} genres`}
       >
          <GenresFilterGrid small={small}>

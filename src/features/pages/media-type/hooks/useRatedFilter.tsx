@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useRatedFilter() {
-   const initialRated = [2, 7];
+   const initialRated = [0, 10];
    const [minRated, setMinRated] = useState<number>(initialRated[0]);
    const [maxRated, setMaxRated] = useState<number>(initialRated[1]);
 

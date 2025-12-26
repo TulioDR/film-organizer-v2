@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ReactLenis from "lenis/react";
 
 // Filters
 import MediaTypeFilter from "../../../MediaFilters/Filters/MediaTypeFilter";
@@ -12,6 +11,7 @@ import OriginalLanguageFilter from "../../../MediaFilters/Filters/OriginalLangua
 import OriginCountryFilter from "../../../MediaFilters/Filters/OriginCountryFilter";
 import DurationFilter from "../../../MediaFilters/Filters/DurationFilter";
 import FilterPreview from "./FilterPreview";
+import FiltersContainer from "./FiltersContainer";
 
 type Props = {};
 
@@ -23,29 +23,25 @@ export default function LargeFilter({}: Props) {
          transition={{ duration: 0.2 }}
          className="w-full h-full flex flex-col overflow-hidden"
       >
-         <div className="flex-1 w-full overflow-hidden pr-4">
-            <ReactLenis className="w-full h-full overflow-y-scroll">
-               <div className="grid gap-4 mb-4 px-4 pt-4 w-full">
-                  <div className="grid grid-cols-3 gap-4">
-                     <MediaTypeFilter />
-                     <SortByFilter />
-                     <RatingFilter />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                     <GenresFilter />
-                     <GenresFilter exclude />
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                     <ReleaseDateFilter />
-                     <DurationFilter />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                     <OriginalLanguageFilter />
-                     <OriginCountryFilter />
-                  </div>
-               </div>
-            </ReactLenis>
-         </div>
+         <FiltersContainer>
+            <div className="grid grid-cols-3 gap-4">
+               <MediaTypeFilter />
+               <SortByFilter />
+               <RatingFilter />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+               <GenresFilter />
+               <GenresFilter exclude />
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+               <ReleaseDateFilter />
+               <DurationFilter />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+               <OriginalLanguageFilter />
+               <OriginCountryFilter />
+            </div>
+         </FiltersContainer>
          <FilterPreview />
       </motion.div>
    );

@@ -9,7 +9,7 @@ import useFetchedOptions from "../hooks/useFetchedOptions";
 import useDateFilter from "../hooks/useDateFilter";
 import useSortByFilter from "../hooks/useSortByFilter";
 
-interface ContextInterface {
+export interface MediaFilterContextInterface {
    mediaType: "movie" | "tv";
    setMediaType: React.Dispatch<React.SetStateAction<"movie" | "tv">>;
    sortBy: OptionModel;
@@ -35,9 +35,10 @@ interface ContextInterface {
    country: OptionModel | null;
    setCountry: React.Dispatch<React.SetStateAction<OptionModel | null>>;
    reset: () => void;
+   resetDateRange: () => void;
 }
 
-const MediaFilterContext = createContext({} as ContextInterface);
+const MediaFilterContext = createContext({} as MediaFilterContextInterface);
 export default function useMediaFilterContext() {
    return useContext(MediaFilterContext);
 }
@@ -83,7 +84,7 @@ export function MediaFilterProvider({ children }: Props) {
       resetGenres();
    }, [mediaType]);
 
-   const value: ContextInterface = {
+   const value: MediaFilterContextInterface = {
       mediaType,
       setMediaType,
       sortBy,
@@ -109,6 +110,7 @@ export function MediaFilterProvider({ children }: Props) {
       country,
       setCountry,
       reset,
+      resetDateRange,
    };
 
    return (

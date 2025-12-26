@@ -59,7 +59,7 @@ export default function RangeInput({
          <div className="w-full flex flex-col pb-9">
             <div className="h-9 w-full  flex items-center justify-center font-bold text-lg">
                {`${label}: 
-                  ${minVal === maxVal ? minVal : `${minVal} - ${maxVal}`} 
+                  ${minVal === maxVal ? minVal : `${minVal} ~ ${maxVal}`} 
                   ${
                      minVal === globalMin && maxVal === globalMax ? `(Any)` : ""
                   } 

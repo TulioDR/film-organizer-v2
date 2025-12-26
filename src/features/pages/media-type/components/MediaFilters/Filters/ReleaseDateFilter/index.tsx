@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import FilterCard from "../../FilterCard";
 import Datepicker from "react-tailwindcss-datepicker";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
+import { RELEASE_DATE_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 
 type Props = {
    small?: true;
@@ -16,16 +17,11 @@ export default function ReleaseDateFilter({ small }: Props) {
       console.log(customInput);
    }, []);
 
-   useEffect(() => {
-      // Here you can handle the value change, e.g., update filters in parent component
-      console.log("Selected date range:", dateRange);
-   }, [dateRange]);
-
    return (
       <FilterCard
-         icon="date_range"
+         icon={RELEASE_DATE_ICON}
          name="Release date"
-         className={`${small ? "" : " col-span-2"}`}
+         className={`${small ? "" : "col-span-2"}`}
       >
          <Datepicker
             value={dateRange}
