@@ -11,8 +11,15 @@ import {
 type Props = {};
 
 export default function RatingFilter({}: Props) {
-   const { minRated, maxRated, setMinRated, setMaxRated } =
-      useMediaFilterContext();
+   const { state, dispatch } = useMediaFilterContext();
+
+   const changeMinValue = (value: number) => {
+      dispatch({ type: "SET_RATING", payload: [value, state.maxRated] });
+   };
+   const changeMaxValue = (value: number) => {
+      dispatch({ type: "SET_RATING", payload: [state.minRated, value] });
+   };
+
    return (
       <FilterCard icon={RATING_ICON} name="Rating Range">
          <RangeInput
@@ -20,10 +27,10 @@ export default function RatingFilter({}: Props) {
             globalMax={RATING_GLOBAL_MAX}
             step={1}
             markedSteps={[0, 5, 10]}
-            minVal={minRated}
-            maxVal={maxRated}
-            setMinVal={setMinRated}
-            setMaxVal={setMaxRated}
+            minVal={state.minRated}
+            maxVal={state.maxRated}
+            setMinVal={changeMinValue}
+            setMaxVal={changeMaxValue}
             label="Rated"
          />
       </FilterCard>

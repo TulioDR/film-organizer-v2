@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import DropDown from "../Dropdown";
-import { OptionModel } from "@/features/search-media/models/DiscoverModel";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 
 export default function YearDd() {
-   const [releaseYears, setReleaseYears] = useState<OptionModel[]>([]);
+   const [releaseYears, setReleaseYears] = useState<SelectOption[]>([]);
 
    useEffect(() => {
-      let years: OptionModel[] = [{ label: "Any year", value: "" }];
+      let years: SelectOption[] = [{ label: "Any year", value: "" }];
       const year = new Date().getFullYear();
       for (let i = year + 5; i >= 1950; i--) {
          years.push({ label: i, value: i });

@@ -1,4 +1,4 @@
-import { OptionModel } from "@/features/search-media/models/DiscoverModel";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 import DropDown from "../Dropdown";
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function SortByDd({ isMovie }: Props) {
-   const sortByMovie: OptionModel[] = [
+   const sortByMovie: SelectOption[] = [
       { label: "Popularity Descending", value: "popularity.desc" },
       { label: "Popularity Ascending", value: "popularity.asc" },
       { label: "Release Date Descending", value: "release_date.desc" },
@@ -16,7 +16,7 @@ export default function SortByDd({ isMovie }: Props) {
       { label: "Title Descending", value: "original_title.desc" },
       { label: "Title Ascending", value: "original_title.asc" },
    ];
-   const sortByTv: OptionModel[] = [
+   const sortByTv: SelectOption[] = [
       { label: "Popularity Descending", value: "popularity.desc" },
       { label: "Popularity Ascending", value: "popularity.asc" },
       { label: "First Air Date Descending", value: "first_air_date.desc" },

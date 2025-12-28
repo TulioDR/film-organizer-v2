@@ -6,12 +6,12 @@ import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 import { GetServerSideProps } from "next";
 import API_PUBLIC from "@/api/public";
 import { Media } from "@/common/models/Media";
-import GenreModel from "@/features/pages/genres/models/GenreModel";
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import AnimationContainer from "@/features/pages/media-type/components/AnimationContainer";
 import { AnimatePresence } from "framer-motion";
 import PageHead from "@/common/components/PageHead";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type } = context.query;
@@ -50,7 +50,7 @@ type Props = {
    trendingMedia: Media;
    topRatedMedia: Media;
    media_type: "movie" | "tv";
-   genres: GenreModel[];
+   genres: MediaGenre[];
 };
 
 export default function MediaType({

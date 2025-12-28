@@ -2,10 +2,10 @@ import ImageLink from "@/common/components/ImageLink";
 import Poster from "@/common/components/Poster";
 import React from "react";
 import GenreName from "../GenreCard/GenreName";
-import GenreModel from "../../models/GenreModel";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
 type Props = {
-   genre: GenreModel;
+   genre: MediaGenre;
    mediaType: "tv" | "movie";
 };
 

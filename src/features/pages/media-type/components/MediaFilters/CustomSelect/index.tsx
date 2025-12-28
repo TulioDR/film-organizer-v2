@@ -1,11 +1,11 @@
 import Select from "react-select";
 
-import { OptionModel } from "@/features/pages/media-type/models/DiscoverModel";
+import { SelectOption } from "../../../models/Filters";
 
 interface Props {
-   options: OptionModel[];
-   onChange: (option: OptionModel) => void;
-   value: OptionModel | null;
+   options: SelectOption[];
+   onChange: (option: SelectOption) => void;
+   value: SelectOption | null;
    menuPlacement?: "auto" | "top" | "bottom";
    isClearable?: true;
 }
@@ -23,7 +23,7 @@ export default function CustomSelect({
          menuPlacement={menuPlacement}
          isClearable={isClearable}
          options={options}
-         onChange={(option: OptionModel) => onChange(option)}
+         onChange={(option: SelectOption) => onChange(option)}
          className="w-full"
          classNames={{
             control: (state: any) =>

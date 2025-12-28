@@ -1,4 +1,4 @@
-import { OptionModel } from "@/features/search-media/models/DiscoverModel";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 import DropDown from "../Dropdown";
 
 import { useEffect } from "react";
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function MediaTypeDd({ isMovie, setFieldValue }: Props) {
-   const searchTypes: OptionModel[] = [
+   const searchTypes: SelectOption[] = [
       { label: "Movies", value: "movie" },
       { label: "Series", value: "tv" },
    ];

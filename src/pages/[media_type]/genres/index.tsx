@@ -6,12 +6,12 @@ import PageHead from "@/common/components/PageHead";
 import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 import { GetStaticProps } from "next";
 import { GetStaticPaths } from "next";
-import GenreModel from "@/features/pages/genres/models/GenreModel";
 import useScrollToTop from "@/common/hooks/useScrollToTop";
 import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
 type GenresProps = {
-   genres: GenreModel[];
+   genres: MediaGenre[];
    mediaType: "movie" | "tv";
 };
 

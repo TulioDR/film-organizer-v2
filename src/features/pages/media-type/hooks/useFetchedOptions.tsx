@@ -1,18 +1,10 @@
 import { useEffect, useState } from "react";
-import { OptionModel } from "../models/DiscoverModel";
 import API_PUBLIC from "@/api/public";
+import { SelectOption } from "../models/Filters";
 
 export default function useFetchedOptions() {
-   const [language, setLanguage] = useState<OptionModel | null>(null);
-   const [country, setCountry] = useState<OptionModel | null>(null);
-
-   const [languagesOptions, setLanguagesOptions] = useState<OptionModel[]>([]);
-   const [countriesOptions, setCountriesOptions] = useState<OptionModel[]>([]);
-
-   const resetFetchedOptions = () => {
-      setLanguage(null);
-      setCountry(null);
-   };
+   const [languagesOptions, setLanguagesOptions] = useState<SelectOption[]>([]);
+   const [countriesOptions, setCountriesOptions] = useState<SelectOption[]>([]);
 
    useEffect(() => {
       const controller = new AbortController();
@@ -53,10 +45,5 @@ export default function useFetchedOptions() {
    return {
       languagesOptions,
       countriesOptions,
-      language,
-      setLanguage,
-      country,
-      setCountry,
-      resetFetchedOptions,
    };
 }

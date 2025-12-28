@@ -1,11 +1,11 @@
 import Select from "react-select";
 
 import { FieldInputProps, FormikProps } from "formik";
-import { OptionModel } from "@/features/search-media/models/DiscoverModel";
 import useAppSelector from "@/store/hooks/useAppSelector";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 
 interface Props {
-   options: OptionModel[];
+   options: SelectOption[];
    field: FieldInputProps<any>;
    form: FormikProps<any>;
 }

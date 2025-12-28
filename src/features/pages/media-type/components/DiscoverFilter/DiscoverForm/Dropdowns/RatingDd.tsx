@@ -1,8 +1,8 @@
-import { OptionModel } from "@/features/search-media/models/DiscoverModel";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 import DropDown from "../Dropdown";
 
 export default function RatingDd() {
-   const ratings: OptionModel[] = [
+   const ratings: SelectOption[] = [
       { value: "", label: "Any Rating" },
       { value: 9, label: "9+" },
       { value: 8, label: "8+" },

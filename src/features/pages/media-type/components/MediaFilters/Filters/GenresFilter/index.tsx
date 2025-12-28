@@ -7,6 +7,7 @@ import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilt
 import GenresFilterGrid from "./GenresFilterGrid";
 import ExcludeIcon from "./ExcludeIcon";
 import { GENRES_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
 type Props = {
    exclude?: true;
@@ -14,10 +15,16 @@ type Props = {
 };
 
 export default function GenresFilter({ exclude, small }: Props) {
-   const { mediaType, genresInc, genresExc, toggleIncluded, toggleExcluded } =
-      useMediaFilterContext();
-   const isMovie = mediaType === "movie";
+   const { state, dispatch } = useMediaFilterContext();
+   const isMovie = state.mediaType === "movie";
    const genres = isMovie ? movieGenres : tvGenres;
+
+   const toggleExcluded = (genre: MediaGenre) => {
+      dispatch({ type: "TOGGLE_GENRE_EXC", payload: genre });
+   };
+   const toggleIncluded = (genre: MediaGenre) => {
+      dispatch({ type: "TOGGLE_GENRE_INC", payload: genre });
+   };
 
    return (
       <FilterCard
@@ -36,8 +43,8 @@ export default function GenresFilter({ exclude, small }: Props) {
                   }
                   isSelected={
                      exclude
-                        ? genresExc.some((g) => g.id === genre.id)
-                        : genresInc.some((g) => g.id === genre.id)
+                        ? state.genresExc.some((g) => g.id === genre.id)
+                        : state.genresInc.some((g) => g.id === genre.id)
                   }
                />
             ))}

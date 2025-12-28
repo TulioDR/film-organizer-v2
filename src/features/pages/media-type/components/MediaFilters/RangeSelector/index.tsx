@@ -10,8 +10,10 @@ type Props = {
    label: string;
    minVal: number;
    maxVal: number;
-   setMinVal: React.Dispatch<React.SetStateAction<number>>;
-   setMaxVal: React.Dispatch<React.SetStateAction<number>>;
+   setMinVal: (value: number) => void;
+   setMaxVal: (value: number) => void;
+   // setMinVal: React.Dispatch<React.SetStateAction<number>>;
+   // setMaxVal: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function RangeInput({

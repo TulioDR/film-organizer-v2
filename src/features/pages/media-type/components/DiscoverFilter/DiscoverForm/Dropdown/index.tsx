@@ -2,11 +2,11 @@ import { Field, FieldProps } from "formik";
 import CustomSelect from "./CustomSelect";
 import DdHeader from "./DdHeader";
 import CardContainer from "../CardContainer";
-import { OptionModel } from "@/features/search-media/models/DiscoverModel";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 
 type Props = {
    title: string;
-   options: OptionModel[];
+   options: SelectOption[];
    icon: string;
    name: string;
 };

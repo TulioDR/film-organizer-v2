@@ -1,11 +1,11 @@
-import GenreModel from "../../models/GenreModel";
 import GenreName from "./GenreName";
 import ImageLink from "@/common/components/ImageLink";
 import Poster from "@/common/components/Poster";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 import { motion } from "framer-motion";
 
 type Props = {
-   genre: GenreModel;
+   genre: MediaGenre;
    mediaType: "tv" | "movie";
 };
 

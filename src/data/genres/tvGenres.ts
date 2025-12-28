@@ -1,4 +1,3 @@
-import GenreModel from "@/features/pages/genres/models/GenreModel";
 import actionAdventure from "./tv/action-adventure.jpg";
 import animation from "./tv/animation.jpg";
 import comedy from "./tv/comedy.jpeg";
@@ -15,8 +14,9 @@ import soap from "./tv/soap.jpg";
 import talk from "./tv/talk.jpg";
 import warPolitics from "./tv/war-politics.jpg";
 import western from "./tv/western.jpg";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
-const tvGenres: GenreModel[] = [
+const tvGenres: MediaGenre[] = [
    {
       id: 10759,
       name: "Action & Adventure",

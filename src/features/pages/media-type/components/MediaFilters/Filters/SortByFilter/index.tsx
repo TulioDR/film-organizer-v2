@@ -6,24 +6,26 @@ import {
    SORT_BY_MOVIE,
    SORT_BY_TV,
 } from "@/features/pages/media-type/constants/SORT_BY";
-import { OptionModel } from "@/features/pages/media-type/models/DiscoverModel";
 import { SORT_BY_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
+import { SelectOption } from "@/features/pages/media-type/models/Filters";
 
 type Props = {};
 
 export default function SortByFilter({}: Props) {
-   const { mediaType, setSortBy, sortBy } = useMediaFilterContext();
+   const { state, dispatch } = useMediaFilterContext();
 
-   const handleChange = (option: OptionModel) => {
-      setSortBy(option);
+   const handleChange = (option: SelectOption) => {
+      dispatch({ type: "SET_SORT", payload: option });
    };
+
+   const isMovie = state.mediaType === "movie";
 
    return (
       <FilterCard icon={SORT_BY_ICON} name="Sort by">
          <CustomSelect
-            value={sortBy}
+            value={state.sortBy}
             onChange={handleChange}
-            options={mediaType === "movie" ? SORT_BY_MOVIE : SORT_BY_TV}
+            options={isMovie ? SORT_BY_MOVIE : SORT_BY_TV}
          />
       </FilterCard>
    );

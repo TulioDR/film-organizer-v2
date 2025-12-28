@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import FilterCard from "../../FilterCard";
-import Datepicker from "react-tailwindcss-datepicker";
+import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import { RELEASE_DATE_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 
@@ -9,13 +9,23 @@ type Props = {
 };
 
 export default function ReleaseDateFilter({ small }: Props) {
-   const { dateRange, setDateRange } = useMediaFilterContext();
+   const { state, dispatch } = useMediaFilterContext();
 
    useEffect(() => {
       const customInput = document.getElementById("custom-tailwind-input");
       if (!customInput) return;
       // console.log(customInput);
    }, []);
+
+   const setDateRange = (range: DateValueType) => {
+      dispatch({
+         type: "SET_DATES",
+         payload: {
+            startDate: range?.startDate || null,
+            endDate: range?.endDate || null,
+         },
+      });
+   };
 
    return (
       <FilterCard
@@ -24,7 +34,7 @@ export default function ReleaseDateFilter({ small }: Props) {
          className={`${small ? "" : "col-span-2"}`}
       >
          <Datepicker
-            value={dateRange}
+            value={state.dateRange}
             inputId="custom-tailwind-input"
             onChange={(newValue) => setDateRange(newValue)}
             showShortcuts={!small}

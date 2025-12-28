@@ -1,4 +1,3 @@
-import GenreModel from "../../genres/models/GenreModel";
 import ExcludeIcon from "../components/MediaFilters/Filters/GenresFilter/ExcludeIcon";
 import {
    DURATION_GLOBAL_MAX,
@@ -17,6 +16,7 @@ import {
    TV_ICON,
 } from "../constants/FILTER_ICONS";
 import { MediaFilterContextInterface } from "../context/MediaFilterContext";
+import { MediaGenre } from "../models/Filters";
 
 export interface PreviewInterface {
    condition: () => boolean;
@@ -29,26 +29,21 @@ export interface PreviewInterface {
 export default function filterLogic(
    ctx: MediaFilterContextInterface
 ): PreviewInterface[] {
-   const {
-      mediaType,
-      minRated,
-      maxRated,
-      dateRange,
-      minDuration,
-      maxDuration,
-      language,
-      country,
-   } = ctx;
+   const { state, dispatch } = ctx;
+   const { minRated, maxRated, minDuration, maxDuration } = state;
+   const { language, country } = state;
 
    const formatDate = (date: Date) => {
       return new Date(date).toISOString().split("T")[0];
    };
 
+   const isMovie = state.mediaType === "movie";
+
    const ratingCondition =
       minRated !== RATING_GLOBAL_MIN || maxRated !== RATING_GLOBAL_MAX;
 
-   const startDate = dateRange?.startDate;
-   const endDate = dateRange?.endDate;
+   const startDate = state.dateRange?.startDate;
+   const endDate = state.dateRange?.endDate;
    const dateCondition = !!(startDate && endDate);
 
    const durationCondition =
@@ -59,13 +54,13 @@ export default function filterLogic(
       {
          condition: () => true,
          id: "mediaType",
-         text: mediaType === "movie" ? "Movies" : "Series",
-         icon: mediaType === "movie" ? MOVIE_ICON : TV_ICON,
+         text: isMovie ? "Movies" : "Series",
+         icon: isMovie ? MOVIE_ICON : TV_ICON,
       },
       {
          condition: () => true,
          id: "sort",
-         text: ctx.sortBy.label,
+         text: state.sortBy.label,
          icon: SORT_BY_ICON,
       },
       {
@@ -74,30 +69,36 @@ export default function filterLogic(
          text: `${minRated} ~ ${maxRated}`,
          icon: RATING_ICON,
          onRemove: () => {
-            ctx.setMinRated(RATING_GLOBAL_MIN);
-            ctx.setMaxRated(RATING_GLOBAL_MAX);
+            dispatch({
+               type: "SET_RATING",
+               payload: [RATING_GLOBAL_MIN, RATING_GLOBAL_MAX],
+            });
          },
       },
-      ...ctx.genresInc.map((g: GenreModel) => ({
+      ...state.genresInc.map((g: MediaGenre) => ({
          condition: () => true,
          id: `inc-${g.id}`,
          text: g.name,
          icon: GENRES_ICON,
-         onRemove: () => ctx.toggleIncluded(g),
+         onRemove: () => dispatch({ type: "TOGGLE_GENRE_INC", payload: g }),
       })),
-      ...ctx.genresExc.map((g: GenreModel) => ({
+      ...state.genresExc.map((g: MediaGenre) => ({
          condition: () => true,
          id: `exc-${g.id}`,
          text: g.name,
          icon: <ExcludeIcon />,
-         onRemove: () => ctx.toggleExcluded(g),
+         onRemove: () => dispatch({ type: "TOGGLE_GENRE_EXC", payload: g }),
       })),
       {
          condition: () => dateCondition,
          id: "date",
          text: `${formatDate(startDate!)} ~ ${formatDate(endDate!)}`,
          icon: RELEASE_DATE_ICON,
-         onRemove: () => ctx.resetDateRange(),
+         onRemove: () =>
+            dispatch({
+               type: "SET_DATES",
+               payload: { startDate: null, endDate: null },
+            }),
       },
       {
          condition: () => durationCondition,
@@ -105,8 +106,10 @@ export default function filterLogic(
          text: `${minDuration} ~ ${maxDuration}`,
          icon: RATING_ICON,
          onRemove: () => {
-            ctx.setMinDuration(DURATION_GLOBAL_MIN);
-            ctx.setMaxDuration(DURATION_GLOBAL_MAX);
+            dispatch({
+               type: "SET_DURATION",
+               payload: [DURATION_GLOBAL_MIN, DURATION_GLOBAL_MAX],
+            });
          },
       },
       {
@@ -114,14 +117,14 @@ export default function filterLogic(
          id: "lang",
          text: language?.label!,
          icon: ORIGINAL_LANGUAGE_ICON,
-         onRemove: () => ctx.setLanguage(null),
+         onRemove: () => dispatch({ type: "SET_LANGUAGE", payload: null }),
       },
       {
          condition: () => !!country,
          id: "country",
          text: country?.label!,
          icon: ORIGIN_COUNTRY_ICON,
-         onRemove: () => ctx.setCountry(null),
+         onRemove: () => dispatch({ type: "SET_COUNTRY", payload: null }),
       },
    ];
 

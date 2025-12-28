@@ -11,8 +11,15 @@ import {
 type Props = {};
 
 export default function DurationFilter({}: Props) {
-   const { minDuration, maxDuration, setMinDuration, setMaxDuration } =
-      useMediaFilterContext();
+   const { state, dispatch } = useMediaFilterContext();
+
+   const changeMinValue = (value: number) => {
+      dispatch({ type: "SET_DURATION", payload: [value, state.maxDuration] });
+   };
+   const changeMaxValue = (value: number) => {
+      dispatch({ type: "SET_DURATION", payload: [state.minDuration, value] });
+   };
+
    return (
       <FilterCard icon={DURATION_ICON} name="Duration range">
          <RangeInput
@@ -21,10 +28,10 @@ export default function DurationFilter({}: Props) {
             step={20}
             markedSteps={[40, 140, 260, 360]}
             label="Minutes"
-            minVal={minDuration}
-            maxVal={maxDuration}
-            setMinVal={setMinDuration}
-            setMaxVal={setMaxDuration}
+            minVal={state.minDuration}
+            maxVal={state.maxDuration}
+            setMinVal={changeMinValue}
+            setMaxVal={changeMaxValue}
          />
       </FilterCard>
    );

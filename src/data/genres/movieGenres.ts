@@ -17,9 +17,9 @@ import tvMovie from "./movie/tv-movie.png";
 import thriller from "./movie/thriller.jpeg";
 import war from "./movie/war.jpg";
 import western from "./movie/western.jpg";
-import GenreModel from "@/features/pages/genres/models/GenreModel";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
-const movieGenres: GenreModel[] = [
+const movieGenres: MediaGenre[] = [
    {
       id: 28,
       name: "Action",

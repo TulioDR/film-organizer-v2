@@ -10,8 +10,13 @@ import {
 type Props = {};
 
 export default function MediaTypeFilter({}: Props) {
-   const { mediaType, setMediaType } = useMediaFilterContext();
-   const isMovie = mediaType === "movie";
+   const { state, dispatch } = useMediaFilterContext();
+
+   const isMovie = state.mediaType === "movie";
+
+   const changeMediaType = (mediaType: "movie" | "tv") => {
+      dispatch({ type: "SET_MEDIA_TYPE", payload: mediaType });
+   };
 
    return (
       <FilterCard icon={isMovie ? MOVIE_ICON : TV_ICON} name="Movies or Series">
@@ -19,12 +24,12 @@ export default function MediaTypeFilter({}: Props) {
             <MediaTypeButton
                text="Movies"
                isSelected={isMovie}
-               onClick={() => setMediaType("movie")}
+               onClick={() => changeMediaType("movie")}
             />
             <MediaTypeButton
                text="Series"
                isSelected={!isMovie}
-               onClick={() => setMediaType("tv")}
+               onClick={() => changeMediaType("tv")}
             />
          </div>
       </FilterCard>

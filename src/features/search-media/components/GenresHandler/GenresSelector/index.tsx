@@ -1,15 +1,15 @@
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
-import GenreModel from "@/features/pages/genres/models/GenreModel";
 import React, { useEffect } from "react";
 import GenreCardModal from "@/features/pages/genres/components/GenreCardModal";
+import { MediaGenre } from "@/features/pages/media-type/models/Filters";
 
 type Props = {
    mediaType: "movie" | "tv";
 };
 
 export default function GenresSelector({ mediaType }: Props) {
-   const [genres, setGenres] = React.useState<GenreModel[]>([]);
+   const [genres, setGenres] = React.useState<MediaGenre[]>([]);
 
    const isMovie = mediaType === "movie";
 
