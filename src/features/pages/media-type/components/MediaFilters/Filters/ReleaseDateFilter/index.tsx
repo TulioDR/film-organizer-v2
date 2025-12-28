@@ -14,7 +14,7 @@ export default function ReleaseDateFilter({ small }: Props) {
    useEffect(() => {
       const customInput = document.getElementById("custom-tailwind-input");
       if (!customInput) return;
-      console.log(customInput);
+      // console.log(customInput);
    }, []);
 
    return (

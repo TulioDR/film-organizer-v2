@@ -6,7 +6,6 @@ type Props = {
    isExpanded: boolean;
    DURATION: number;
    children: React.ReactNode;
-   onAnimationStart: (x: any) => void;
    onAnimationComplete: (x: any) => void;
 };
 
@@ -15,12 +14,10 @@ export default function FilterContainer({
    isExpanded,
    DURATION,
    children,
-   onAnimationStart,
    onAnimationComplete,
 }: Props) {
    return (
       <motion.div
-         onAnimationStart={onAnimationStart}
          onAnimationComplete={onAnimationComplete}
          animate={{
             width: isOpen ? (isExpanded ? "100%" : "410px") : "64px",

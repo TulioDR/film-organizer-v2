@@ -3,9 +3,11 @@ import { createPortal } from "react-dom";
 import ExpandButton from "./ExpandButton";
 import OpenButton from "./OpenButton";
 import FilterContainer from "./FilterContainer";
-import SmallFilter from "./SmallFilter";
-import LargeFilter from "./LargeFilter";
+import CompactFilter from "./CompactFilter";
 import { MediaFilterProvider } from "../../../context/MediaFilterContext";
+import ExpandedFilter from "./ExpandedFilter";
+import ExpandedPreview from "./ExpandedFilter/ExpandedPreview";
+import CompactPreview from "./CompactFilter/CompactPreview";
 
 type Props = {
    title: string;
@@ -30,15 +32,19 @@ export default function DesktopMediaFilter({
    const [showSmallFilter, setShowSmallFilter] = useState(false);
    const [showLargeFilter, setShowLargeFilter] = useState(false);
 
-   const onAnimationStart = () => {
+   useEffect(() => {
       setShowSmallFilter(false);
       setShowLargeFilter(false);
-   };
+   }, [isExpanded, isOpen]);
    const onAnimationComplete = (e: any) => {
       if (e.height !== "100%") return;
+      console.log("running complete");
       setShowSmallFilter(isOpen && !isExpanded);
       setShowLargeFilter(isOpen && isExpanded);
    };
+
+   const showCompact = showSmallFilter && isOpen && !isExpanded;
+   const showExpanded = showLargeFilter && isOpen && isExpanded;
 
    if (!isMounted) return <></>;
    return createPortal(
@@ -52,13 +58,20 @@ export default function DesktopMediaFilter({
                   isOpen={isOpen}
                   isExpanded={isExpanded}
                   DURATION={DURATION}
-                  onAnimationStart={onAnimationStart}
                   onAnimationComplete={onAnimationComplete}
                >
-                  <div className="flex-1 h-full flex flex-col items-start overflow-hidden">
-                     <OpenButton onClick={toggleIsOpen} />
-                     {showSmallFilter && <SmallFilter />}
-                     {showLargeFilter && <LargeFilter />}
+                  <div className="flex-1 h-full flex flex-col overflow-hidden">
+                     <div className="h-16 border-b border-border-light dark:border-border-dark flex justify-between">
+                        <OpenButton onClick={toggleIsOpen} />
+                     </div>
+                     <div className="flex-1 w-full overflow-hidden">
+                        {showCompact && <CompactFilter />}
+                        {showExpanded && <ExpandedFilter />}
+                     </div>
+                     <div className="h-28 bg-accent w-full">
+                        {showCompact && <CompactPreview />}
+                        {showExpanded && <ExpandedPreview />}
+                     </div>
                   </div>
                   {isOpen && (
                      <ExpandButton
