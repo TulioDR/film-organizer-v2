@@ -27,10 +27,10 @@ export default function CustomSelect({
          className="w-full"
          classNames={{
             control: (state: any) =>
-               `bg-primary-light dark:bg-primary-dark h-9 outline pl-2 rounded-sm flex ${
+               `bg-primary-light dark:bg-primary-dark h-9 pl-2 rounded flex border border-border-light dark:border-border-dark ${
                   state.isFocused
-                     ? "outline-2 outline-accent"
-                     : "outline-1 outline-border-light dark:outline-border-dark hover:outline-primary-dark dark:hover:outline-primary-light"
+                     ? "outline-2 outline-accent outline"
+                     : "hover:border-primary-dark dark:hover:border-primary-light"
                }`,
             input: () => `text-black dark:text-white`,
             singleValue: () => `text-black dark:text-white`,

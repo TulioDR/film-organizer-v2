@@ -11,10 +11,10 @@ export default function MediaTypeButton({ text, isSelected, onClick }: Props) {
       <button
          onClick={onClick}
          type="button"
-         className={`h-9 box-content w-full flex items-center justify-center bg-primary-light dark:bg-primary-dark outline rounded-sm ${
+         className={`h-9 w-full flex items-center justify-center bg-primary-light dark:bg-primary-dark rounded border border-border-light dark:border-border-dark  ${
             isSelected
-               ? "text-black dark:text-white outline-2 outline-accent"
-               : "hover:text-black hover:dark:text-white outline-1 outline-border-light dark:outline-border-dark hover:outline-primary-dark dark:hover:outline-primary-light"
+               ? "text-black dark:text-white outline outline-2 outline-accent"
+               : "hover:text-black hover:dark:text-white hover:border-primary-dark dark:hover:border-primary-light"
          }`}
       >
          {text}

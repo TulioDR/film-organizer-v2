@@ -31,7 +31,7 @@ export default function ReleaseDateFilter({ small }: Props) {
             useRange={!small}
             readOnly
             primaryColor="amber"
-            inputClassName="focus:!outline-accent text-black dark:text-white outline focus:outline-2 outline-border-light dark:outline-border-dark outline-1 w-full rounded-sm h-9 bg-primary-light dark:bg-primary-dark px-3 py-2 hover:outline-black dark:hover:outline-white"
+            inputClassName="focus:!outline-accent focus:!outline focus:outline-2 text-black dark:text-white border-border-light dark:border-border-dark w-full rounded h-9 bg-primary-light dark:bg-primary-dark px-3 py-2 border hover:!border-black dark:hover:!border-white focus:hover:border-none"
          />
       </FilterCard>
    );
