@@ -2,19 +2,18 @@ import React from "react";
 import PreviewButton from "./PreviewButton";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import { useRouter } from "next/router";
+import useMediaSearch from "@/features/pages/media-type/hooks/useMediaSearch";
 
 type Props = {};
 
 export default function CompactPreview({}: Props) {
    const { dispatch } = useMediaFilterContext();
-   const router = useRouter();
 
    const handleReset = () => {
       dispatch({ type: "RESET_FILTERS" });
    };
-   const handleSearch = () => {
-      router.push("/movie");
-   };
+
+   const { handleSearchButton } = useMediaSearch();
 
    return (
       <div className="w-full h-full flex p-4 gap-2">
@@ -26,7 +25,7 @@ export default function CompactPreview({}: Props) {
             icon="search"
             text="Search"
             square
-            onClick={handleSearch}
+            onClick={handleSearchButton}
          />
       </div>
    );

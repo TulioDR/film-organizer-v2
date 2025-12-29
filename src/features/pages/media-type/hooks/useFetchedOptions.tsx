@@ -10,22 +10,17 @@ export default function useFetchedOptions() {
       const controller = new AbortController();
       const fetchFilters = async () => {
          try {
-            const [langRes, countryRes] = await Promise.all([
-               API_PUBLIC.get("/discover/languages", {
-                  signal: controller.signal,
-               }),
-               API_PUBLIC.get("/discover/countries", {
-                  signal: controller.signal,
-               }),
-            ]);
+            const { data } = await API_PUBLIC.get("/config-options");
+            const { languages, countries } = data;
+
             setLanguagesOptions(
-               langRes.data.map((lang: any) => ({
+               languages.map((lang: any) => ({
                   value: lang.iso_639_1,
                   label: lang.english_name,
                }))
             );
             setCountriesOptions(
-               countryRes.data.map((country: any) => ({
+               countries.map((country: any) => ({
                   value: country.iso_3166_1,
                   label: country.english_name,
                }))

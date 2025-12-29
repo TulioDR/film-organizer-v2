@@ -1,16 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
 const apiKey = process.env.API_KEY;
-
 type Data = {
    name: string;
 };
 
 export default async function handler(
-   _req: NextApiRequest,
+   req: NextApiRequest,
    res: NextApiResponse<Data>
 ) {
-   const url = `https://api.themoviedb.org/3/configuration/countries?api_key=${apiKey}`;
+   const { media_type, filters } = req.query;
+   const url = `https://api.themoviedb.org/3/discover/${media_type}?api_key=${apiKey}&language=en-US${filters}&include_adult=false`;
    try {
       const response = await fetch(url);
       const data = await response.json();

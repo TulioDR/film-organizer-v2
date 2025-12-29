@@ -1,12 +1,13 @@
 import PageHead from "@/common/components/PageHead";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { getPageData } from "@/common/utils/getServerSideData/getPageData";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import Desktop from "@/features/pages/media-type/components/Desktop";
 import Mobile from "@/features/pages/media-type/components/Mobile";
+import { getPageData } from "@/features/pages/media-type/utils/getPageData";
+import { useEffect } from "react";
 
-export const getServerSideProps: GetServerSideProps = getPageData("popular");
+export const getServerSideProps: GetServerSideProps = getPageData();
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -14,6 +15,10 @@ export default function MediaType(response: Props) {
    const { mediaType } = response;
 
    const title = mediaType === "movie" ? "Movies" : "Series";
+
+   useEffect(() => {
+      console.log(response.data.results);
+   }, [response]);
 
    return (
       <>
