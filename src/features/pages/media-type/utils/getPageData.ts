@@ -8,12 +8,17 @@ export const getPageData = <TProps extends PageDataProps>() => {
    return async (
       context: GetServerSidePropsContext
    ): Promise<GetServerSidePropsResult<TProps>> => {
-      // const { query } = context;
       const query = context.query;
       const media_type = query.media_type as string;
 
-      if (!query.sort_by && !query.page) {
-         const dest = `/${media_type}?sort_by=popularity.desc&page=1`;
+      if (isMediaTypeInvalid(media_type)) return { notFound: true };
+
+      const page = Number(query.page);
+      const validPage = isPageInvalid(page) ? "1" : query.page;
+      const validSort = query.sort_by || "popularity.desc";
+
+      if (!query.sort_by || isPageInvalid(page)) {
+         const dest = `/${media_type}?sort_by=${validSort}&page=${validPage}`;
          return { redirect: { destination: dest, permanent: false } };
       }
 
