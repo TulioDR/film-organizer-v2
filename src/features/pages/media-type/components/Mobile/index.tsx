@@ -7,6 +7,8 @@ import MobilePagination from "./MobilePagination";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import { Media } from "@/common/models/Media";
 import MobileCardsGrid from "./MobileCardsGrid";
+import MobileMediaFilter from "./MobileMediaFilter";
+import { MediaFilterProvider } from "../../context/MediaFilterContext";
 
 type Props = {
    response: any;
@@ -21,9 +23,11 @@ export default function Mobile({ response }: Props) {
 
    return (
       <>
-         <MobileMenu position="bottomLeft" buttonIcon="filter_alt">
-            <div></div>
-         </MobileMenu>
+         <MediaFilterProvider>
+            <MobileMenu position="bottomLeft" buttonIcon="filter_alt">
+               <MobileMediaFilter />
+            </MobileMenu>
+         </MediaFilterProvider>
 
          <AnimatePresence mode="wait" propagate>
             {results.length === 0 && <NotFoundMessage key="not-found" />}

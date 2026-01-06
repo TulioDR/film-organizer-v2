@@ -45,9 +45,7 @@ export default function InitialMessage({ setInitialOpen }: Props) {
          <div className="w-full flex items-center gap-8">
             <div className="flex-1" />
             <div className="text-center">
-               <InitialText>
-                  Click on the button to use the discover panel
-               </InitialText>
+               <InitialText>Click on the button to use the panel</InitialText>
                <InitialText>to search Movies or TV series</InitialText>
                <InitialText>with specific parameters</InitialText>
             </div>

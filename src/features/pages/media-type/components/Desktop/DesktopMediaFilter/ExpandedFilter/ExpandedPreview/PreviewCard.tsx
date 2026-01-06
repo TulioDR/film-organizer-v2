@@ -5,21 +5,30 @@ type Props = {
    text: string;
    icon: string | React.ReactNode;
    onRemove?: () => void;
+   small?: true;
 };
 
-export default function PreviewCard({ text, icon, onRemove }: Props) {
+export default function PreviewCard({ text, icon, onRemove, small }: Props) {
    return (
       <motion.div
          layout
          initial={{ opacity: 0 }}
          animate={{ opacity: 1 }}
          exit={{ opacity: 0 }}
-         className="bg-white dark:bg-black text-black dark:text-white flex rounded w-40 h-9 border border-border-light dark:border-border-dark overflow-hidden"
+         className={`bg-white dark:bg-black text-black dark:text-white flex rounded border border-border-light dark:border-border-dark overflow-hidden ${
+            small ? "h-7 w-28" : "h-9 w-40"
+         }`}
       >
          <div className="h-full flex items-center flex-1 pr-2 overflow-hidden">
             <div className="h-full aspect-square flex items-center justify-center">
                {typeof icon === "string" ? (
-                  <span className="material-symbols-outlined">{icon}</span>
+                  <span
+                     className={`material-symbols-outlined ${
+                        small ? "!text-base" : ""
+                     }`}
+                  >
+                     {icon}
+                  </span>
                ) : (
                   icon
                )}

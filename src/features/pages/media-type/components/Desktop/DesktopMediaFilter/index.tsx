@@ -8,6 +8,7 @@ import { MediaFilterProvider } from "../../../context/MediaFilterContext";
 import ExpandedFilter from "./ExpandedFilter";
 import ExpandedPreview from "./ExpandedFilter/ExpandedPreview";
 import CompactPreview from "./CompactFilter/CompactPreview";
+import DesktopTemplates from "./DesktopTemplates";
 
 type Props = {
    title: string;
@@ -60,7 +61,8 @@ export default function DesktopMediaFilter({
                   DURATION={DURATION}
                   onAnimationComplete={onAnimationComplete}
                >
-                  <div className="flex-1 h-full flex flex-col overflow-hidden">
+                  <div className="flex-1 h-full flex flex-col overflow-hidden relative">
+                     <DesktopTemplates />
                      <div className="h-16 border-b border-border-light dark:border-border-dark flex justify-between">
                         <OpenButton onClick={toggleIsOpen} />
                      </div>

@@ -18,7 +18,7 @@ export default function MenuItem({
 }: Props) {
    return (
       <div className="h-12 font-bold text-lg flex gap-2 items-center w-60">
-         <div className="h-full aspect-square bg-white text-black shadow-md rounded-md overflow-hidden">
+         <div className="h-full aspect-square bg-background-light dark:bg-background-accent-dark text-black border border-border-light dark:border-border-dark rounded-md overflow-hidden">
             {href ? (
                <Link
                   href={href}

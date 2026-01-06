@@ -9,10 +9,10 @@ type Props = {};
 export default function Desktop({}: Props) {
    return (
       <div className="w-full z-20 absolute top-2 h-12 flex justify-center pointer-events-auto">
-         <div className="flex items-center w-96">
+         <div className="flex items-center w-[410px]">
             <NavTitle />
          </div>
-         <div className="flex flex-1 justify-between pl-8">
+         <div className="flex flex-1 justify-between pl-4">
             <div className="flex gap-8">
                {NAVIGATION_ITEMS.map((item) => (
                   <NavItem key={item.link} item={item} />

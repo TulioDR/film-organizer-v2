@@ -37,7 +37,7 @@ export default function MenuContainer({
                   animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
                   exit={{ clipPath: clipPath }}
                   transition={{ duration: 0.2, ease: "easeInOut" }}
-                  className="w-full h-full bg-gray-200 text-black relative"
+                  className="w-full h-full bg-primary-light dark:bg-primary-dark text-black dark:text-white relative border border-border-light dark:border-border-dark"
                >
                   {children}
                </motion.div>

@@ -1,7 +1,7 @@
 import React from "react";
 import SubMenuContainer from "./SubMenuContainer";
 import MenuItem from "../MenuItem";
-import { SubNavigationModel } from "../../../models/NavigationModels";
+import { SubNavigationModel } from "@/features/layout/sidebar/models/NavigationModels";
 
 type Props = {
    closeMenu: () => void;
