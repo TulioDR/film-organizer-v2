@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 // Filters
 import MediaTypeFilter from "../../../MediaFilters/Filters/MediaTypeFilter";
@@ -16,12 +15,7 @@ type Props = {};
 
 export default function ExpandedFilter({}: Props) {
    return (
-      <motion.div
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         transition={{ duration: 0.2 }}
-         className="w-full h-full flex flex-col overflow-hidden"
-      >
+      <div className="w-full h-full flex flex-col overflow-hidden">
          <FiltersContainer>
             <div className="grid grid-cols-3 gap-4">
                <MediaTypeFilter />
@@ -41,6 +35,6 @@ export default function ExpandedFilter({}: Props) {
                <OriginCountryFilter />
             </div>
          </FiltersContainer>
-      </motion.div>
+      </div>
    );
 }

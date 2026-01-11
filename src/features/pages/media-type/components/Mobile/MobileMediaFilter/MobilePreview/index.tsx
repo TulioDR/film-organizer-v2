@@ -3,8 +3,6 @@ import filterLogic, {
    PreviewInterface,
 } from "@/features/pages/media-type/utils/filterLogic";
 import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { AnimatePresence } from "framer-motion";
 import PreviewCard from "../../../Desktop/DesktopMediaFilter/ExpandedFilter/ExpandedPreview/PreviewCard";
 type Props = {};
 
@@ -18,28 +16,16 @@ export default function MobilePreview({}: Props) {
    }, [context]);
 
    return (
-      <div className="w-full overflow-hidden">
-         <Swiper
-            slidesPerView={"auto"}
-            spaceBetween={4}
-            observer={true}
-            observeParents={true}
-            className="mySwiper w-full !p-1"
-         >
-            <AnimatePresence>
-               {activeFilters.map((f) => (
-                  <SwiperSlide key={f.id} className="!w-max">
-                     <PreviewCard
-                        key={f.id}
-                        text={f.text}
-                        icon={f.icon}
-                        onRemove={f.onRemove}
-                        small
-                     />
-                  </SwiperSlide>
-               ))}
-            </AnimatePresence>
-         </Swiper>
+      <div className="w-full overflow-x-auto p-1 flex gap-1">
+         {activeFilters.map((f) => (
+            <PreviewCard
+               key={f.id}
+               text={f.text}
+               icon={f.icon}
+               onRemove={f.onRemove}
+               small
+            />
+         ))}
       </div>
    );
 }

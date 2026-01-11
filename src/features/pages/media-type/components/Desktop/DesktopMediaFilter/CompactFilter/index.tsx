@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import ReactLenis from "lenis/react";
 
 // Filters
@@ -18,12 +17,7 @@ export default function CompactFilter({}: Props) {
    return (
       <div className="h-full w-full pr-2 overflow-hidden">
          <ReactLenis className="w-full h-full overflow-y-auto pl-4 py-4 pr-2">
-            <motion.div
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               transition={{ duration: 0.2 }}
-               className="w-full h-full grid grid-cols-1 gap-4"
-            >
+            <div className="w-full h-full grid grid-cols-1 gap-4">
                <MediaTypeFilter />
                <SortByFilter />
                <RatingFilter />
@@ -33,7 +27,7 @@ export default function CompactFilter({}: Props) {
                <DurationFilter />
                <OriginalLanguageFilter />
                <OriginCountryFilter />
-            </motion.div>
+            </div>
          </ReactLenis>
       </div>
    );

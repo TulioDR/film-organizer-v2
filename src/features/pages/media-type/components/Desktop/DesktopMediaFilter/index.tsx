@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import ExpandButton from "./ExpandButton";
 import OpenButton from "./OpenButton";
-import FilterContainer from "./FilterContainer";
 import CompactFilter from "./CompactFilter";
 import { MediaFilterProvider } from "../../../context/MediaFilterContext";
 import ExpandedFilter from "./ExpandedFilter";
 import ExpandedPreview from "./ExpandedFilter/ExpandedPreview";
 import CompactPreview from "./CompactFilter/CompactPreview";
-import DesktopTemplates from "./DesktopTemplates";
+import { animate } from "framer-motion";
 
 type Props = {
    title: string;
@@ -25,63 +24,65 @@ export default function DesktopMediaFilter({
    isExpanded,
    toggleIsExpanded,
 }: Props) {
-   const DURATION = 0.3;
-
-   const [isMounted, setIsMounted] = useState(false);
-   useEffect(() => setIsMounted(true), []);
-
-   const [showSmallFilter, setShowSmallFilter] = useState(false);
-   const [showLargeFilter, setShowLargeFilter] = useState(false);
+   const [showSmallContent, setShowSmallContent] = useState(false);
+   const [showLargeContent, setShowLargeContent] = useState(false);
+   const CONTAINER_CLASS = "animated-filter-container";
 
    useEffect(() => {
-      setShowSmallFilter(false);
-      setShowLargeFilter(false);
-   }, [isExpanded, isOpen]);
-   const onAnimationComplete = (e: any) => {
-      if (e.height !== "100%") return;
-      console.log("running complete");
-      setShowSmallFilter(isOpen && !isExpanded);
-      setShowLargeFilter(isOpen && isExpanded);
-   };
+      const startAnimation = async () => {
+         const CONTAINER = `.${CONTAINER_CLASS}`;
+         setShowSmallContent(false);
+         setShowLargeContent(false);
+         await new Promise((resolve) => setTimeout(resolve, 50));
 
-   const showCompact = showSmallFilter && isOpen && !isExpanded;
-   const showExpanded = showLargeFilter && isOpen && isExpanded;
+         const dims = !isOpen
+            ? { width: "64px", height: "64px" }
+            : isExpanded
+            ? { width: "100%", height: "100%" }
+            : { width: "410px", height: "100%" };
 
-   if (!isMounted) return <></>;
+         await animate(CONTAINER, dims, { duration: 0.2 });
+         if (!isOpen) return;
+         isExpanded ? setShowLargeContent(true) : setShowSmallContent(true);
+      };
+      startAnimation();
+   }, [isOpen, isExpanded, animate, CONTAINER_CLASS]);
+
    return createPortal(
       <div className="fixed top-0 left-0 px-32 h-screen w-full pt-32 pb-4 pointer-events-none z-20">
          <div className="w-full h-full relative">
-            <div className="absolute left-16 pl-2 top-0 h-16 flex items-center">
+            <div className="absolute left-16 pl-2 top-0 h-16 flex items-center z-20">
                <span className="text-6xl uppercase font-thin">{title}</span>
             </div>
             <MediaFilterProvider>
-               <FilterContainer
-                  isOpen={isOpen}
-                  isExpanded={isExpanded}
-                  DURATION={DURATION}
-                  onAnimationComplete={onAnimationComplete}
+               <div
+                  className={`relative pointer-events-auto ${CONTAINER_CLASS}`}
                >
-                  <div className="flex-1 h-full flex flex-col overflow-hidden relative">
-                     <DesktopTemplates />
-                     <div className="h-16 border-b border-border-light dark:border-border-dark flex justify-between">
-                        <OpenButton onClick={toggleIsOpen} />
-                     </div>
-                     <div className="flex-1 w-full overflow-hidden">
-                        {showCompact && <CompactFilter />}
-                        {showExpanded && <ExpandedFilter />}
-                     </div>
-                     <div className="h-28 bg-accent w-full">
-                        {showCompact && <CompactPreview />}
-                        {showExpanded && <ExpandedPreview />}
-                     </div>
+                  <OpenButton onClick={toggleIsOpen} isOpen={isOpen} />
+                  <div className="w-full h-full flex bg-primary-light dark:bg-primary-dark border border-border-light dark:border-border-dark rounded overflow-hidden">
+                     {isOpen && (
+                        <>
+                           <div className="flex-1 h-full flex flex-col overflow-hidden relative">
+                              <div className="h-16 border-b border-border-light dark:border-border-dark -translate-y-px" />
+                              <div className="flex-1 w-full overflow-hidden">
+                                 {showSmallContent && <CompactFilter />}
+                                 {showLargeContent && <ExpandedFilter />}
+                              </div>
+                              <div className="h-28 bg-accent w-full ">
+                                 <div className="h-full w-full animated-filter-content">
+                                    {showSmallContent && <CompactPreview />}
+                                    {showLargeContent && <ExpandedPreview />}
+                                 </div>
+                              </div>
+                           </div>
+                           <ExpandButton
+                              onClick={toggleIsExpanded}
+                              isExpanded={isExpanded}
+                           />
+                        </>
+                     )}
                   </div>
-                  {isOpen && (
-                     <ExpandButton
-                        onClick={toggleIsExpanded}
-                        isExpanded={isExpanded}
-                     />
-                  )}
-               </FilterContainer>
+               </div>
             </MediaFilterProvider>
          </div>
       </div>,

@@ -19,8 +19,8 @@ export type FilterAction =
         payload: { startDate: Date | null; endDate: Date | null };
      }
    | { type: "SET_DURATION"; payload: [number, number] }
-   | { type: "SET_LANGUAGE"; payload: MediaGenre | null }
-   | { type: "SET_COUNTRY"; payload: MediaGenre | null }
+   | { type: "SET_LANGUAGE"; payload: SelectOption | null }
+   | { type: "SET_COUNTRY"; payload: SelectOption | null }
    | { type: "RESET_FILTERS" };
 
 export interface FilterState {

@@ -16,7 +16,7 @@ export default function PreviewCard({ text, icon, onRemove, small }: Props) {
          animate={{ opacity: 1 }}
          exit={{ opacity: 0 }}
          className={`bg-white dark:bg-black text-black dark:text-white flex rounded border border-border-light dark:border-border-dark overflow-hidden ${
-            small ? "h-7 w-28" : "h-9 w-40"
+            small ? "h-7 w-28 flex-shrink-0" : "h-9 w-40"
          }`}
       >
          <div className="h-full flex items-center flex-1 pr-2 overflow-hidden">

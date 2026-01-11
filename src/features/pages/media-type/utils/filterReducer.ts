@@ -87,6 +87,8 @@ export function filterReducer(
       case "RESET_FILTERS":
          return initialFilterState;
 
+         // case:""
+
       default:
          return state;
    }
