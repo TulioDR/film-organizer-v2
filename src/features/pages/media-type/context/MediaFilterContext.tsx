@@ -27,7 +27,6 @@ export function MediaFilterProvider({ children, mediaType }: Props) {
 
    useEffect(() => {
       dispatch({ type: "SET_MEDIA_TYPE", payload: mediaType });
-      console.log(mediaType);
    }, [mediaType]);
 
    const [state, dispatch] = useReducer(filterReducer, computedInitialState);
