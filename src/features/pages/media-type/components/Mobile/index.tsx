@@ -23,7 +23,7 @@ export default function Mobile({ response }: Props) {
 
    return (
       <>
-         <MediaFilterProvider>
+         <MediaFilterProvider mediaType={mediaType}>
             <MobileMenu position="bottomLeft" buttonIcon="filter_alt">
                <MobileMediaFilter />
             </MobileMenu>

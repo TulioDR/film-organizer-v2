@@ -42,6 +42,8 @@ export default function MediaId({ media_type, media }: Props) {
 
    useEffect(() => {
       dispatch(layoutActions.revealLayout());
+      console.log("vote_count:");
+      console.log(media.vote_count);
    }, []);
 
    useEffect(() => {

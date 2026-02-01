@@ -1,7 +1,8 @@
 import React from "react";
 import ToggleMenuButton from "./ToggleMenuButton";
 import PaginationContainer from "../../Desktop/DesktopPagination/PaginationContainer";
-import NavigationButton from "../../Desktop/DesktopPagination/NavigationButton";
+import PaginationButton from "../../Desktop/DesktopPagination/PaginationButton";
+import PaginationWrapper from "../../Desktop/DesktopPagination/PaginationWrapper";
 
 type Props = {
    isOpen: boolean;
@@ -18,11 +19,14 @@ export default function Handler({
 }: Props) {
    return (
       <PaginationContainer isOpen={isOpen}>
-         <NavigationButton
-            left
-            page={currentPage - 1}
-            disabled={currentPage === 1}
-         />
+         <PaginationWrapper>
+            <PaginationButton
+               page={currentPage - 1}
+               disabled={currentPage === 1}
+               navigation
+               icon="keyboard_arrow_left"
+            />
+         </PaginationWrapper>
 
          <ToggleMenuButton
             isOpen={isOpen}
@@ -31,11 +35,14 @@ export default function Handler({
             total={total}
          />
 
-         <NavigationButton
-            right
-            page={currentPage + 1}
-            disabled={currentPage === total}
-         />
+         <PaginationWrapper>
+            <PaginationButton
+               page={currentPage + 1}
+               disabled={currentPage === total}
+               navigation
+               icon="keyboard_arrow_right"
+            />
+         </PaginationWrapper>
       </PaginationContainer>
    );
 }

@@ -15,8 +15,8 @@ type Props = {};
 
 export default function CompactFilter({}: Props) {
    return (
-      <div className="h-full w-full pr-2 overflow-hidden">
-         <ReactLenis className="w-full h-full overflow-y-auto pl-4 py-4 pr-2">
+      <div className="h-full w-full overflow-hidden">
+         <ReactLenis className="w-full h-full overflow-y-auto p-4">
             <div className="w-full h-full grid grid-cols-1 gap-4">
                <MediaTypeFilter />
                <SortByFilter />

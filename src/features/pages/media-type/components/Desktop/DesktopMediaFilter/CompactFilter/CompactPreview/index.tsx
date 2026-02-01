@@ -7,25 +7,24 @@ type Props = {};
 
 export default function CompactPreview({}: Props) {
    const { handleSearchButton } = useMediaSearch();
-   const { dispatch, toggleTemplates } = useMediaFilterContext();
+   const { dispatch } = useMediaFilterContext();
    const handleReset = () => {
       dispatch({ type: "RESET_FILTERS" });
    };
 
    return (
-      <div className="w-full h-full flex p-4 gap-2">
-         <div className="flex-1 flex flex-col gap-2">
-            <PreviewButton icon="refresh" text="Reset" onClick={handleReset} />
-            <PreviewButton
-               icon="dashboard_customize"
-               text="Templates"
-               onClick={toggleTemplates}
-            />
-         </div>
+      <div className="w-full h-full flex p-3 gap-2">
          <PreviewButton
+            vertical
+            icon="refresh"
+            text="Reset"
+            onClick={handleReset}
+            square
+         />
+         <PreviewButton
+            vertical
             icon="search"
             text="Search"
-            square
             onClick={handleSearchButton}
          />
       </div>

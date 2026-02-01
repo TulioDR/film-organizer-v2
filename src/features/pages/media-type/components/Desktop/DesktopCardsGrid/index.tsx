@@ -41,7 +41,7 @@ export default function DesktopCardsGrid({
             opacity: isExpanded ? 0.5 : 1,
          }}
          transition={{ duration: 0.3, ease: "easeInOut" }}
-         className={`w-full mt-20 ${isOpen ? "pl-[410px]" : ""}`}
+         className={`w-full mt-20 ${isOpen ? "pl-[426px]" : ""}`}
       >
          <motion.div
             variants={container}
@@ -50,7 +50,7 @@ export default function DesktopCardsGrid({
             exit="exit"
             className={`gap-4 grid ${
                isOpen
-                  ? "grid-cols-3 2xl:grid-cols-4 pl-4"
+                  ? "grid-cols-3 2xl:grid-cols-4"
                   : "grid-cols-4 2xl:grid-cols-5"
             }`}
          >

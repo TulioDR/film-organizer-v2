@@ -4,7 +4,7 @@ import { isMediaTypeInvalid, isPageInvalid } from "./dataValidation";
 
 type PageDataProps = any;
 
-export const getPageData = <TProps extends PageDataProps>() => {
+export const getMediaData = <TProps extends PageDataProps>() => {
    return async (
       context: GetServerSidePropsContext
    ): Promise<GetServerSidePropsResult<TProps>> => {
@@ -32,7 +32,7 @@ export const getPageData = <TProps extends PageDataProps>() => {
          });
 
          const filterString = `&${filterParams.toString()}`;
-         const internalApiEndpoint = `/${media_type}/${filterString}&page=1`;
+         const internalApiEndpoint = `/${media_type}/${filterString}&page=${page}`;
 
          const { data } = await API_PUBLIC.get(internalApiEndpoint);
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import useFetchedOptions from "../hooks/useFetchedOptions";
 import { filterReducer, initialFilterState } from "../utils/filterReducer";
 import { FilterAction, FilterState, SelectOption } from "../models/Filters";
@@ -15,9 +15,22 @@ export default function useMediaFilterContext() {
    return useContext(MediaFilterContext);
 }
 
-type Props = { children: React.ReactNode };
-export function MediaFilterProvider({ children }: Props) {
-   const [state, dispatch] = useReducer(filterReducer, initialFilterState);
+type Props = {
+   children: React.ReactNode;
+   mediaType: "movie" | "tv";
+};
+export function MediaFilterProvider({ children, mediaType }: Props) {
+   const computedInitialState = {
+      ...initialFilterState,
+      mediaType: mediaType,
+   };
+
+   useEffect(() => {
+      dispatch({ type: "SET_MEDIA_TYPE", payload: mediaType });
+      console.log(mediaType);
+   }, [mediaType]);
+
+   const [state, dispatch] = useReducer(filterReducer, computedInitialState);
 
    const { languagesOptions, countriesOptions } = useFetchedOptions();
 

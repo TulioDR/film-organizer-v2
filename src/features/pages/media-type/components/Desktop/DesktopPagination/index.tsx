@@ -1,10 +1,9 @@
-import GlassContainer from "@/common/components/GlassContainer";
-import React from "react";
+import React, { Fragment } from "react";
 import PaginationButton from "./PaginationButton";
 import PaginationContainer from "./PaginationContainer";
 import FixedUIPortal from "@/features/layout/main-layout/components/FixedUIPortal";
 import { usePagination } from "@mantine/hooks";
-import NavigationButton from "./NavigationButton";
+import PaginationWrapper from "./PaginationWrapper";
 
 type Props = {
    currentPage: number;
@@ -26,28 +25,39 @@ export default function DesktopPagination({
    return (
       <FixedUIPortal>
          <PaginationContainer isOpen={isOpen}>
-            <NavigationButton
-               left
-               page={currentPage - 1}
-               disabled={currentPage === 1}
-            />
+            <PaginationWrapper>
+               <PaginationButton
+                  page={currentPage - 1}
+                  disabled={currentPage === 1}
+                  icon="keyboard_arrow_left"
+               />
+            </PaginationWrapper>
 
-            <GlassContainer className="h-full flex px-4">
+            <PaginationWrapper className="h-full flex px-4">
                {range.map((value, index) => (
-                  <PaginationButton
-                     key={index + "-" + value}
-                     page={value === "dots" ? "..." : value}
-                     isActive={currentPage === value}
-                     disabled={value === "dots"}
-                  />
+                  <Fragment key={index}>
+                     {value === "dots" ? (
+                        <div className="h-full aspect-square flex items-center justify-center">
+                           <span className="text-lg font-black">...</span>
+                        </div>
+                     ) : (
+                        <PaginationButton
+                           page={value}
+                           isActive={currentPage === value}
+                           text={value.toString()}
+                        />
+                     )}
+                  </Fragment>
                ))}
-            </GlassContainer>
+            </PaginationWrapper>
 
-            <NavigationButton
-               right
-               page={currentPage + 1}
-               disabled={currentPage === total}
-            />
+            <PaginationWrapper>
+               <PaginationButton
+                  page={currentPage + 1}
+                  disabled={currentPage === total}
+                  icon="keyboard_arrow_right"
+               />
+            </PaginationWrapper>
          </PaginationContainer>
       </FixedUIPortal>
    );

@@ -26,7 +26,7 @@ export default function Back({
    const overview = media.overview || "N/A";
 
    return (
-      <div className="rounded-sm absolute w-full h-full top-0 left-0 flex flex-col [transform:rotateY(180deg)] bg-primary-light dark:bg-primary-dark border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
+      <div className="rounded-lg absolute w-full h-full top-0 left-0 flex flex-col [transform:rotateY(180deg)] bg-primary-light dark:bg-primary-dark border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
          <Responsive minWidth={SM_MEDIA_QUERY}>
             <BackHeader media={media} currentMedia={currentMedia} />
          </Responsive>

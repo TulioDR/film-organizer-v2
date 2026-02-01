@@ -20,8 +20,7 @@ export default function GlassContainer({
    return (
       <MotionWrapper
          {...rest}
-         // style={{ backdropFilter: "blur(20px)" }}
-         className={`bg-primary-light dark:bg-primary-dark text-black dark:text-white rounded-lg border-border-width border-border-light dark:border-border-dark pointer-events-auto shadow-lg  ${className}`}
+         className={`bg-primary-light dark:bg-primary-dark text-black dark:text-white rounded-lg border border-border-light dark:border-border-dark pointer-events-auto ${className}`}
       >
          {children}
       </MotionWrapper>

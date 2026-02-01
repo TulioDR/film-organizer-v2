@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import ExpandButton from "./ExpandButton";
 import OpenButton from "./OpenButton";
 import CompactFilter from "./CompactFilter";
@@ -15,6 +14,7 @@ type Props = {
    toggleIsOpen: () => void;
    isExpanded: boolean;
    toggleIsExpanded: () => void;
+   mediaType: "movie" | "tv";
 };
 
 export default function DesktopMediaFilter({
@@ -23,6 +23,7 @@ export default function DesktopMediaFilter({
    toggleIsOpen,
    isExpanded,
    toggleIsExpanded,
+   mediaType,
 }: Props) {
    const [showSmallContent, setShowSmallContent] = useState(false);
    const [showLargeContent, setShowLargeContent] = useState(false);
@@ -38,8 +39,8 @@ export default function DesktopMediaFilter({
          const dims = !isOpen
             ? { width: "64px", height: "64px" }
             : isExpanded
-            ? { width: "100%", height: "100%" }
-            : { width: "410px", height: "100%" };
+              ? { width: "100%", height: "100%" }
+              : { width: "410px", height: "100%" };
 
          await animate(CONTAINER, dims, { duration: 0.2 });
          if (!isOpen) return;
@@ -48,18 +49,18 @@ export default function DesktopMediaFilter({
       startAnimation();
    }, [isOpen, isExpanded, animate, CONTAINER_CLASS]);
 
-   return createPortal(
+   return (
       <div className="fixed top-0 left-0 px-32 h-screen w-full pt-32 pb-4 pointer-events-none z-20">
          <div className="w-full h-full relative">
             <div className="absolute left-16 pl-2 top-0 h-16 flex items-center z-20">
                <span className="text-6xl uppercase font-thin">{title}</span>
             </div>
-            <MediaFilterProvider>
+            <MediaFilterProvider mediaType={mediaType}>
                <div
                   className={`relative pointer-events-auto ${CONTAINER_CLASS}`}
                >
                   <OpenButton onClick={toggleIsOpen} isOpen={isOpen} />
-                  <div className="w-full h-full flex bg-primary-light dark:bg-primary-dark border border-border-light dark:border-border-dark rounded overflow-hidden">
+                  <div className="w-full h-full flex bg-primary-light dark:bg-primary-dark border border-border-light dark:border-border-dark rounded-lg overflow-hidden">
                      {isOpen && (
                         <>
                            <div className="flex-1 h-full flex flex-col overflow-hidden relative">
@@ -68,11 +69,9 @@ export default function DesktopMediaFilter({
                                  {showSmallContent && <CompactFilter />}
                                  {showLargeContent && <ExpandedFilter />}
                               </div>
-                              <div className="h-28 bg-accent w-full ">
-                                 <div className="h-full w-full animated-filter-content">
-                                    {showSmallContent && <CompactPreview />}
-                                    {showLargeContent && <ExpandedPreview />}
-                                 </div>
+                              <div className="h-24 bg-accent w-full">
+                                 {showSmallContent && <CompactPreview />}
+                                 {showLargeContent && <ExpandedPreview />}
                               </div>
                            </div>
                            <ExpandButton
@@ -85,7 +84,6 @@ export default function DesktopMediaFilter({
                </div>
             </MediaFilterProvider>
          </div>
-      </div>,
-      document.body
+      </div>
    );
 }

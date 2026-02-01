@@ -7,6 +7,7 @@ import NotFoundMessage from "../NotFoundMessage";
 import DesktopCardsGrid from "./DesktopCardsGrid";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import { Media } from "@/common/models/Media";
+import { useLenis } from "lenis/react";
 
 type Props = {
    response: any;
@@ -24,6 +25,13 @@ export default function Desktop({ response }: Props) {
    const toggleIsExpanded = () => setIsExpanded((prev) => !prev);
    useEffect(() => setIsExpanded(false), [isOpen]);
 
+   const lenis = useLenis();
+
+   useEffect(() => {
+      if (!lenis) return;
+      lenis.resize();
+   }, [isOpen]);
+
    return (
       <>
          <DesktopMediaFilter
@@ -32,6 +40,7 @@ export default function Desktop({ response }: Props) {
             toggleIsOpen={toggleIsOpen}
             isExpanded={isExpanded}
             toggleIsExpanded={toggleIsExpanded}
+            mediaType={mediaType}
          />
 
          <AnimatePresence mode="wait" propagate>

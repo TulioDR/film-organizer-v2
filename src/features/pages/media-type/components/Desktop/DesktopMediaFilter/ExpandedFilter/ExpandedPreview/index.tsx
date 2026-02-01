@@ -78,7 +78,7 @@ export default function ExpandedPreview({}: Props) {
                modules={[Grid]}
                observer={true}
                observeParents={true}
-               className="mySwiper flex-1 !h-28 !p-4 !pl-12"
+               className="mySwiper flex-1 !h-24 !p-4 !pl-12"
             >
                <AnimatePresence>
                   {activeFilters.map((f) => (

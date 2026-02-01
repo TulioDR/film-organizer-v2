@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 import { useUser } from "@clerk/nextjs";
 
-import Sidebar from "@/features/layout/sidebar/components/Sidebar";
 import Navbar from "@/features/layout/navbar/components/Navbar";
 import Background from "@/features/layout/background/components/Background";
 
@@ -16,7 +15,6 @@ import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/c
 import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/components/SaveMediaModal";
 import useInitialThemeColor from "@/common/hooks/useInitialThemeColor";
 import FixedUIContainer from "./FixedUIContainer";
-import PageTitle from "@/features/layout/page-title/components/PageTitle";
 import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
@@ -48,9 +46,7 @@ export default function MainLayout({ children }: Props) {
       <>
          <FixedUIContainer>
             <Navbar />
-            {/* <Sidebar /> */}
          </FixedUIContainer>
-         {/* <PageTitle /> */}
          <TransitionCardLayout />
          <Background />
          <SaveMediaModal />

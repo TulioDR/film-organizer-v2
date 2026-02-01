@@ -16,7 +16,7 @@ export const initialFilterState: FilterState = {
 
 export function filterReducer(
    state: FilterState,
-   action: FilterAction
+   action: FilterAction,
 ): FilterState {
    switch (action.type) {
       case "SET_MEDIA_TYPE":
@@ -40,7 +40,7 @@ export function filterReducer(
 
       case "TOGGLE_GENRE_INC": {
          const isCurrentlyIncluded = state.genresInc.find(
-            (g) => g.id === action.payload.id
+            (g) => g.id === action.payload.id,
          );
          return {
             ...state,
@@ -48,14 +48,14 @@ export function filterReducer(
                ? state.genresInc.filter((g) => g.id !== action.payload.id)
                : [...state.genresInc, action.payload],
             genresExc: state.genresExc.filter(
-               (g) => g.id !== action.payload.id
+               (g) => g.id !== action.payload.id,
             ),
          };
       }
 
       case "TOGGLE_GENRE_EXC": {
          const isCurrentlyExcluded = state.genresExc.find(
-            (g) => g.id === action.payload.id
+            (g) => g.id === action.payload.id,
          );
          return {
             ...state,
@@ -63,7 +63,7 @@ export function filterReducer(
                ? state.genresExc.filter((g) => g.id !== action.payload.id)
                : [...state.genresExc, action.payload],
             genresInc: state.genresInc.filter(
-               (g) => g.id !== action.payload.id
+               (g) => g.id !== action.payload.id,
             ),
          };
       }
@@ -86,8 +86,6 @@ export function filterReducer(
 
       case "RESET_FILTERS":
          return initialFilterState;
-
-         // case:""
 
       default:
          return state;

@@ -31,7 +31,7 @@ export default function InnerMainContainer({
          e.preventDefault();
          (scope.current as HTMLElement).blur();
       },
-      [scope]
+      [scope],
    );
    return (
       <motion.div

@@ -20,17 +20,6 @@ a {
    @apply !border-none !outline !outline-1 !outline-border-light dark:!outline-border-dark !bg-primary-light dark:!bg-primary-dark;
 }
 
-/* Body scrollbar */
-/* body::-webkit-scrollbar {
-   width: 12px;
-}
-body::-webkit-scrollbar-track {
-   @apply bg-primary-light;
-}
-.dark body::-webkit-scrollbar-track {
-   @apply bg-primary-dark;
-} */
-
 @font-face {
    font-family: "Elianto";
    src: url("../fonts/Elianto-Regular.ttf");
