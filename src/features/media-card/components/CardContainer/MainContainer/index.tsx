@@ -1,61 +1,53 @@
 import React from "react";
-import { useAnimate } from "framer-motion";
+import { useAnimate, motion } from "framer-motion";
 import { ROTATE_DURATION } from "@/features/media-card/constants/ANIMATIONS_DURATIONS";
-import InitialAnimationContainer from "./InitialAnimationContainer";
-import Responsive from "@/common/components/Responsive";
-import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import InnerMainContainer from "./InnerMainContainer";
+import cardAnimation from "@/features/pages/media-type/animations/cardAnimation";
 
 type Props = {
    layoutId: string;
    children: React.ReactNode;
+   direction: "prev" | "next" | "default";
 };
 
-export default function MainContainer({ layoutId, children }: Props) {
+export default function MainContainer({
+   layoutId,
+   children,
+   direction,
+}: Props) {
    const [scope, animate] = useAnimate();
-   const ROTATE_CLASS = "rotate-card";
+   const ROTATE_CLASS = "media-card";
 
    const onHoverStart = async () => {
       animate(
          "." + ROTATE_CLASS,
          { rotateY: 180 },
-         { duration: ROTATE_DURATION }
+         { duration: ROTATE_DURATION },
       );
    };
    const onHoverEnd = async () => {
       await animate(
          "." + ROTATE_CLASS,
          { rotateY: 360 },
-         { duration: ROTATE_DURATION }
+         { duration: ROTATE_DURATION },
       );
       animate("." + ROTATE_CLASS, { rotateY: 0 }, { duration: 0 });
    };
 
    return (
-      <InitialAnimationContainer>
-         <Responsive maxWidth={LG_MEDIA_QUERY}>
-            <InnerMainContainer
-               tabIndex
-               scope={scope}
-               layoutId={layoutId}
-               onFocus={onHoverStart}
-               onBlur={onHoverEnd}
-               ROTATE_CLASS={ROTATE_CLASS}
-            >
-               {children}
-            </InnerMainContainer>
-         </Responsive>
-         <Responsive minWidth={LG_MEDIA_QUERY}>
-            <InnerMainContainer
-               scope={scope}
-               layoutId={layoutId}
-               onHoverStart={onHoverStart}
-               onHoverEnd={onHoverEnd}
-               ROTATE_CLASS={ROTATE_CLASS}
-            >
-               {children}
-            </InnerMainContainer>
-         </Responsive>
-      </InitialAnimationContainer>
+      <motion.div
+         initial={cardAnimation[direction].initial}
+         className="h-full w-full media-card"
+      >
+         <InnerMainContainer
+            scope={scope}
+            layoutId={layoutId}
+            onHoverStart={onHoverStart}
+            onHoverEnd={onHoverEnd}
+            ROTATE_CLASS={ROTATE_CLASS}
+         >
+            {children}
+         </InnerMainContainer>
+      </motion.div>
    );
 }

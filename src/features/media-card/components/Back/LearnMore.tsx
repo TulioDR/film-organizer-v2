@@ -8,9 +8,9 @@ export default function LearnMore({ onClick }: Props) {
    return (
       <button
          onClick={onClick}
-         className="rounded-md h-full flex-1 p-1 bg-[#CBAB60] flex items-center justify-center"
+         className="bg-black text-white dark:text-black dark:bg-white flex items-center justify-center h-10 w-full rounded-md"
       >
-         <span className="text-xs sm:text-sm font-medium uppercase text-black">
+         <span className="text-xs 2xl:text-sm font-medium uppercase">
             Learn More
          </span>
       </button>

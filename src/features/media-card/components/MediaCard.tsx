@@ -10,6 +10,7 @@ type Props = {
    media: Media;
    id: string;
    currentMedia?: Media;
+   direction: "prev" | "next" | "default";
 };
 
 export default function MediaCard({
@@ -17,25 +18,23 @@ export default function MediaCard({
    media,
    id,
    currentMedia,
+   direction,
 }: Props) {
-   const [height, setHeight] = useState<number | null>(null);
-   const [scale, setScale] = useState<number | null>(null);
+   const [showTransition, setShowTransition] = useState(false);
    const router = useRouter();
    const onLearnMore = async () => {
-      const minHeight = document.getElementById(id)!.clientHeight;
-      const containerID = `TRANSITION_CARD_CONTAINER`;
-      const maxHeight = document.getElementById(containerID)!.clientHeight;
-      const scale = maxHeight / minHeight;
-      setHeight(minHeight);
-      setScale(scale);
-
+      setShowTransition(true);
       router.push(`/${mediaType}/${media.id}`, undefined, {
          scroll: false,
       });
    };
 
    return (
-      <CardContainer id={id} height={height} scale={scale}>
+      <CardContainer
+         id={id}
+         direction={direction}
+         showTransition={showTransition}
+      >
          <Front media={media} />
          <Back
             media={media}

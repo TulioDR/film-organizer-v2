@@ -1,32 +1,25 @@
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
-import Link from "next/link";
 
 type Props = {
-   page: string | number;
    isActive?: boolean;
    disabled?: boolean;
    navigation?: true;
    icon?: string;
    text?: string;
+   onClick: () => void;
 };
 
 export default function PaginationButton({
-   page,
    disabled,
    isActive,
    navigation,
    icon,
    text,
+   onClick,
 }: Props) {
-   const router = useRouter();
-   const { pathname, query } = router;
-   const newQuery = { ...query, page: page };
-
    return (
-      <Link
-         href={{ pathname: pathname, query: newQuery }}
-         scroll={false}
+      <button
+         onClick={onClick}
          className={`h-full block select-none relative hover:bg-black dark:hover:bg-white  
             ${
                disabled
@@ -50,6 +43,6 @@ export default function PaginationButton({
             {icon && <span className="material-symbols-outlined">{icon}</span>}
             {text && <span className="text-lg font-black">{text}</span>}
          </div>
-      </Link>
+      </button>
    );
 }

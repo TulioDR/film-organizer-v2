@@ -32,7 +32,7 @@ export default function Bookmark({ media, type, className = "" }: Props) {
                style={{
                   fontVariationSettings: isMediaSaved ? `"FILL" 1` : undefined,
                }}
-               className="material-symbols-outlined !text-3xl"
+               className="material-symbols-outlined !text-2xl"
             >
                bookmark
             </span>

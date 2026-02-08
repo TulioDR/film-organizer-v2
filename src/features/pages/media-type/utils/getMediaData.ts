@@ -6,7 +6,7 @@ type PageDataProps = any;
 
 export const getMediaData = <TProps extends PageDataProps>() => {
    return async (
-      context: GetServerSidePropsContext
+      context: GetServerSidePropsContext,
    ): Promise<GetServerSidePropsResult<TProps>> => {
       const query = context.query;
       const media_type = query.media_type as string;

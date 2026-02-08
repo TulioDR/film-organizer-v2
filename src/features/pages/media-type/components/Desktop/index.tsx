@@ -7,7 +7,6 @@ import NotFoundMessage from "../NotFoundMessage";
 import DesktopCardsGrid from "./DesktopCardsGrid";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import { Media } from "@/common/models/Media";
-import { useLenis } from "lenis/react";
 
 type Props = {
    response: any;
@@ -25,12 +24,9 @@ export default function Desktop({ response }: Props) {
    const toggleIsExpanded = () => setIsExpanded((prev) => !prev);
    useEffect(() => setIsExpanded(false), [isOpen]);
 
-   const lenis = useLenis();
-
-   useEffect(() => {
-      if (!lenis) return;
-      lenis.resize();
-   }, [isOpen]);
+   const [direction, setDirection] = useState<"prev" | "next" | "default">(
+      "default",
+   );
 
    return (
       <>
@@ -43,20 +39,22 @@ export default function Desktop({ response }: Props) {
             mediaType={mediaType}
          />
 
-         <AnimatePresence mode="wait" propagate>
+         <AnimatePresence mode="wait" propagate custom={"value"}>
             {results.length === 0 && <NotFoundMessage key="not-found" />}
             {results.length > 0 && (
                <DesktopCardsGrid
                   key={asPath}
                   isOpen={isOpen}
-                  isExpanded={isExpanded}
+                  direction={direction}
+                  setDirection={setDirection}
                >
                   {data.results.map((media: Media, index: number) => (
                      <MediaCard
-                        key={`${mediaType}-${media.id}-${index}`}
-                        id={`${mediaType}-${media.id}-${index}`}
                         media={media}
                         mediaType={mediaType}
+                        direction={direction}
+                        key={`${mediaType}-${media.id}-${index}`}
+                        id={`${mediaType}-${media.id}-${index}`}
                      />
                   ))}
                </DesktopCardsGrid>
@@ -68,6 +66,7 @@ export default function Desktop({ response }: Props) {
                total={data.total_pages > 20 ? 20 : data.total_pages}
                currentPage={data.page}
                isOpen={isOpen}
+               setDirection={setDirection}
             />
          )}
       </>

@@ -1,12 +1,12 @@
 import React from "react";
-import Overview from "./Overview";
 import BackTitle from "./BackTitle";
 import LearnMore from "./LearnMore";
-import Bookmark from "@/features/bookmark/components/Bookmark";
 import { Media } from "@/common/models/Media";
 import BackHeader from "./BackHeader";
 import Responsive from "@/common/components/Responsive";
 import { SM_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import OverviewButton from "./Overview/OverviewButton";
+import CardBookmark from "./CardBookmark";
 
 type Props = {
    media: Media;
@@ -30,15 +30,14 @@ export default function Back({
          <Responsive minWidth={SM_MEDIA_QUERY}>
             <BackHeader media={media} currentMedia={currentMedia} />
          </Responsive>
-         <BackTitle title={title} year={releaseDate} />
-
-         <div className="w-full p-4">
-            <div className="flex gap-2 h-12 w-full">
-               <div className="bg-[#CBAB60] h-full aspect-square rounded-md overflow-hidden">
-                  <Bookmark media={media} type={mediaType} />
+         <div className="flex-1 w-full flex flex-col p-4 overflow-hidden">
+            <BackTitle title={title} year={releaseDate} />
+            <div className="w-full flex flex-col gap-2">
+               <div className="w-full flex gap-2 h-9">
+                  <CardBookmark media={media} mediaType={mediaType} />
+                  <OverviewButton />
                </div>
                <LearnMore onClick={onLearnMore} />
-               <div className="h-full aspect-square rounded-md overflow-hidden bg-amber-600"></div>
             </div>
          </div>
       </div>

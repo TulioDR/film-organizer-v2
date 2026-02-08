@@ -15,7 +15,6 @@ import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/c
 import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/components/SaveMediaModal";
 import useInitialThemeColor from "@/common/hooks/useInitialThemeColor";
 import FixedUIContainer from "./FixedUIContainer";
-import TransitionCardLayout from "./TransitionCardLayout";
 import PageLoader from "../../loader/components/PageLoader";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
 
@@ -47,7 +46,6 @@ export default function MainLayout({ children }: Props) {
          <FixedUIContainer>
             <Navbar />
          </FixedUIContainer>
-         <TransitionCardLayout />
          <Background />
          <SaveMediaModal />
          <LoginAdviceModal />

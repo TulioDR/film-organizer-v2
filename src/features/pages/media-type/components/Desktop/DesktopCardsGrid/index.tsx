@@ -1,61 +1,62 @@
 import useScrollToTop from "@/common/hooks/useScrollToTop";
 import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 import useAppSelector from "@/store/hooks/useAppSelector";
-import { motion } from "framer-motion";
+import { stagger, useAnimate, usePresence } from "framer-motion";
+import { useEffect } from "react";
+import cardAnimation from "../../../animations/cardAnimation";
 
 type Props = {
    children: React.ReactNode;
    isOpen: boolean;
-   isExpanded: boolean;
+   setDirection: (direction: "prev" | "next" | "default") => void;
+   direction: "prev" | "next" | "default";
 };
 
 export default function DesktopCardsGrid({
    children,
    isOpen,
-   isExpanded,
+   direction,
+   setDirection,
 }: Props) {
    useScrollToTop();
    useStopLoader();
 
    const { isHidden } = useAppSelector((state) => state.layout);
 
-   const container = {
-      initial: {},
-      animate: {
-         transition: {
-            staggerChildren: 0.08,
-         },
-      },
-      exit: {
-         transition: {
-            staggerChildren: 0.04,
-            staggerDirection: -1,
-         },
-      },
-   };
+   const [scope, animate] = useAnimate();
+   const [isPresent, safeToRemove] = usePresence();
+   useEffect(() => {
+      const startAnimation = async () => {
+         await animate(".media-card", cardAnimation[direction].animate, {
+            delay: stagger(0.04),
+            duration: 0.3,
+         });
+         setDirection("default");
+      };
+      const closeAnimation = async () => {
+         if (isPresent) return;
+         await animate(".media-card", cardAnimation[direction].exit, {
+            delay: stagger(0.02, { from: "last" }),
+            duration: 0.3,
+         });
+         safeToRemove();
+      };
+      if (isPresent) startAnimation();
+      else closeAnimation();
+   }, [isPresent, direction, cardAnimation]);
 
    return (
-      <motion.div
-         animate={{
-            // opacity: isHidden ? 0 : 1,
-            opacity: isExpanded ? 0.5 : 1,
-         }}
-         transition={{ duration: 0.3, ease: "easeInOut" }}
-         className={`w-full mt-20 ${isOpen ? "pl-[426px]" : ""}`}
-      >
-         <motion.div
-            variants={container}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+      <div className="w-full mt-20 overflow-hidden pb-24 px-4 lg:px-32 pt-32">
+         <div
+            ref={scope}
             className={`gap-4 grid ${
                isOpen
-                  ? "grid-cols-3 2xl:grid-cols-4"
-                  : "grid-cols-4 2xl:grid-cols-5"
+                  ? "grid-cols-2 min-[1400px]:grid-cols-3 min-[1700px]:grid-cols-4 pl-[426px]"
+                  : "grid-cols-3 min-[1400px]:grid-cols-4 min-[1700px]:grid-cols-5"
             }`}
          >
             {children}
-         </motion.div>
-      </motion.div>
+         </div>
+      </div>
    );
 }

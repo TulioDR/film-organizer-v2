@@ -1,37 +1,28 @@
-import { motion } from "framer-motion";
 import MainContainer from "./MainContainer";
 import TransitionContainer from "./TransitionContainer";
-import { useEffect, useState } from "react";
 
 type Props = {
    children: React.ReactNode;
    id: string;
-   height: number | null;
-   scale: number | null;
+   direction: "prev" | "next" | "default";
+   showTransition: boolean;
 };
 
-export default function CardContainer({ children, id, height, scale }: Props) {
-   const [container, setContainer] = useState<HTMLElement | null>(null);
-
-   useEffect(() => {
-      const container = document.getElementById("TRANSITION_CARD_CONTAINER");
-      setContainer(container);
-   }, []);
-
+export default function CardContainer({
+   children,
+   id,
+   direction,
+   showTransition,
+}: Props) {
    return (
-      <motion.div id={id} className="aspect-[2/3] w-full">
-         {scale && height && container ? (
-            <TransitionContainer
-               layoutId={id}
-               scale={scale}
-               height={height}
-               container={container}
-            >
-               {children}
-            </TransitionContainer>
+      <div id={id} className="aspect-[2/3] w-full">
+         {showTransition ? (
+            <TransitionContainer layoutId={id}>{children}</TransitionContainer>
          ) : (
-            <MainContainer layoutId={id}>{children}</MainContainer>
+            <MainContainer layoutId={id} direction={direction}>
+               {children}
+            </MainContainer>
          )}
-      </motion.div>
+      </div>
    );
 }

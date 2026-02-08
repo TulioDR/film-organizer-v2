@@ -33,9 +33,7 @@ export default function PageLoader({ children }: Props) {
    return (
       <>
          {isLoading && <LoadingBoard />}
-         <div
-            className={`pt-32 lg:pt-32 px-4 lg:px-32 pb-24 xl:pb-24 w-full ${isLoading ? "pointer-events-none" : ""}`}
-         >
+         <div className={`w-full ${isLoading ? "pointer-events-none" : ""}`}>
             {children}
          </div>
       </>
