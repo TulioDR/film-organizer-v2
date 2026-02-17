@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MediaDetailsModel } from "../models/MediaDetailsModel";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import useAppSelector from "@/store/hooks/useAppSelector";
+import { useLenis } from "lenis/react";
 
 type Props = {
    children: React.ReactNode;
@@ -10,14 +11,19 @@ type Props = {
 };
 
 export default function MediaIdContainer({ children, media }: Props) {
-   const { changeBackground, removeBackground } = useBackground();
+   const { changeBackground } = useBackground();
 
    const { isHidden } = useAppSelector((state) => state.layout);
 
    useEffect(() => {
       changeBackground(media.id, media.backdrop_path);
-      return () => removeBackground();
    }, [media]);
+
+   const lenis = useLenis();
+   useEffect(() => {
+      lenis!.scrollTo("top", { immediate: true });
+      return () => {};
+   }, []);
 
    return (
       <motion.div

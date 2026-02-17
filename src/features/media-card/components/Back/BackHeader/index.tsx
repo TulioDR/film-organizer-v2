@@ -9,9 +9,10 @@ import useAppDispatch from "@/store/hooks/useAppDispatch";
 type Props = {
    media: Media;
    currentMedia?: Media;
+   isLoading: boolean;
 };
 
-export default function BackHeader({ media, currentMedia }: Props) {
+export default function BackHeader({ media, currentMedia, isLoading }: Props) {
    const title = media.name || media.title;
    const backdrop = media.backdrop_path;
 
@@ -43,7 +44,10 @@ export default function BackHeader({ media, currentMedia }: Props) {
       <motion.div
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
-         className="relative w-full"
+         initial={false}
+         animate={{ height: isLoading ? 0 : "auto" }}
+         transition={{ duration: 0.2 }}
+         className="relative w-full overflow-hidden"
       >
          <Poster alt={title} posterPath={backdrop} size="original" back />
          <AnimatePresence>
@@ -53,12 +57,14 @@ export default function BackHeader({ media, currentMedia }: Props) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  onClick={handleClick}
-                  className="absolute cursor-pointer top-0 left-0 w-full h-full flex items-center justify-center text-center bg-black/90 dark:bg-white/90"
+                  className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white/70 dark:bg-black/70"
                >
-                  <div className="text-white dark:text-black w-min uppercase font-black">
+                  <button
+                     onClick={handleClick}
+                     className="text-black dark:text-white w-max font-medium py-1 px-3 rounded-lg bg-white dark:bg-black border border-border-light dark:border-border-dark hover:border-black dark:hover:border-white"
+                  >
                      View Backdrop
-                  </div>
+                  </button>
                </motion.div>
             )}
          </AnimatePresence>

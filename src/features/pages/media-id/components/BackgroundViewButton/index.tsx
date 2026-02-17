@@ -21,7 +21,7 @@ export default function BackgroundViewButton({}: Props) {
          onClick={handleClick}
          noHide
          el="button"
-         className="fixed bottom-4 right-4 xl:bottom-8 xl:right-8 w-16 aspect-square flex items-center justify-center hover:bg-white hover:text-black"
+         className="fixed bottom-4 right-8 w-16 aspect-square flex items-center justify-center hover:bg-white hover:text-black"
       >
          <span className="material-symbols-outlined">visibility</span>
       </GlassContainer>

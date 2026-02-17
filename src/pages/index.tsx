@@ -7,7 +7,6 @@ import PageHead from "@/common/components/PageHead";
 import { Media } from "@/common/models/Media";
 import { pageTitleActions } from "@/store/slices/page-title-slice";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
-import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 import HomeImage from "@/features/pages/home/HomeImage";
 import MarqueesWrapper from "@/features/pages/home/MarqueesWrapper";
 
@@ -39,7 +38,6 @@ interface Props {
 }
 
 export default function Home({ bigArray }: Props) {
-   useStopLoader();
    const dispatch = useAppDispatch();
    useEffect(() => {
       dispatch(pageTitleActions.removeTitle());

@@ -10,14 +10,11 @@ import NoListsMessage from "@/features/pages/manage-lists/components/NoListsMess
 import ListsCardsContainer from "@/features/pages/manage-lists/components/ListsCardsContainer";
 import ListCard from "@/features/pages/manage-lists/components/ListCard";
 import useAppSelector from "@/store/hooks/useAppSelector";
-import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
 
 export default function Lists() {
    const { user } = useUser();
    const { lists } = useAppSelector((state) => state.lists);
-
-   useStopLoader();
 
    usePageTitle({ text: "Playlists", link: "/lists" });
 
@@ -40,7 +37,7 @@ export default function Lists() {
          return;
       }
       const founded = lists.filter(({ name }) =>
-         name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
+         name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()),
       );
       setFilteredLists(founded);
    }, [inputValue, lists]);

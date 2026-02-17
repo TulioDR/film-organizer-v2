@@ -1,28 +1,47 @@
+import cardAnimation from "@/features/pages/media-type/animations/cardAnimation";
 import MainContainer from "./MainContainer";
 import TransitionContainer from "./TransitionContainer";
+import { motion, usePresence } from "framer-motion";
+import { useEffect } from "react";
 
 type Props = {
    children: React.ReactNode;
-   id: string;
-   direction: "prev" | "next" | "default";
-   showTransition: boolean;
+   layoutId: string;
+   direction?: "prev" | "next" | "default";
+   isLoading: boolean;
 };
 
 export default function CardContainer({
    children,
-   id,
+   layoutId,
    direction,
-   showTransition,
+   isLoading,
 }: Props) {
+   const [isPresent, safeToRemove] = usePresence();
+   const onAnimationComplete = () => {
+      if (!isPresent) safeToRemove();
+   };
+   useEffect(() => {
+      if (!isPresent && !isLoading) safeToRemove();
+   }, [isPresent, isLoading]);
+
    return (
-      <div id={id} className="aspect-[2/3] w-full">
-         {showTransition ? (
-            <TransitionContainer layoutId={id}>{children}</TransitionContainer>
+      <motion.div
+         initial={direction ? cardAnimation[direction].initial : false}
+         className={`aspect-[2/3] w-full media-card ${isLoading ? "pointer-events-none" : ""}`}
+      >
+         {isLoading && !isPresent ? (
+            <TransitionContainer
+               layoutId={layoutId}
+               onAnimationComplete={onAnimationComplete}
+            >
+               {children}
+            </TransitionContainer>
          ) : (
-            <MainContainer layoutId={id} direction={direction}>
+            <MainContainer layoutId={layoutId} isLoading={isLoading}>
                {children}
             </MainContainer>
          )}
-      </div>
+      </motion.div>
    );
 }

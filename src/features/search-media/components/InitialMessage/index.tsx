@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { motion, useAnimate, usePresence } from "framer-motion";
 import InitialText from "./InitialText";
 import InitialArrow from "./InitialArrow";
-import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 
 type Props = {
    setInitialOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,8 +10,6 @@ type Props = {
 export default function InitialMessage({ setInitialOpen }: Props) {
    const [scope, animate] = useAnimate();
    const [isPresent, safeToRemove] = usePresence();
-
-   useStopLoader();
 
    useEffect(() => {
       const handleInitialAnimations = async () => {

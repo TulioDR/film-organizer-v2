@@ -37,6 +37,7 @@ module.exports = {
                1: "#FFFFFF",
                2: "#9AA1AD",
             },
+            // accent: "#D0B07C",
             accent: "#CBAB60",
             background: {
                light: "#E0E0E0",

@@ -22,7 +22,7 @@ export default function ScrollDownIcon() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="absolute bottom-32 left-0 w-full flex justify-end pointer-events-none"
+            className="absolute bottom-20 left-0 w-full flex justify-center pointer-events-none"
          >
             <ScrollIcon />
          </motion.div>

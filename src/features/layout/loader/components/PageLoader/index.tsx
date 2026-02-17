@@ -5,11 +5,9 @@ import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { loaderActions } from "@/store/slices/loader-slice";
 import LoadingBoard from "./LoadingBoard";
 
-type Props = {
-   children: React.ReactNode;
-};
+type Props = {};
 
-export default function PageLoader({ children }: Props) {
+export default function PageLoader({}: Props) {
    const router = useRouter();
    const dispatch = useAppDispatch();
    const { isLoading } = useAppSelector((state) => state.loader);
@@ -23,19 +21,23 @@ export default function PageLoader({ children }: Props) {
          }, 200);
       };
 
+      const handleStop = () => {
+         clearTimeout(timeout);
+         dispatch(loaderActions.stopLoading());
+      };
+
       router.events.on("routeChangeStart", handleStart);
+      router.events.on("routeChangeComplete", handleStop);
+      router.events.on("routeChangeError", handleStop); // Handles canceled/failed routes
+
       return () => {
          clearTimeout(timeout);
          router.events.off("routeChangeStart", handleStart);
+         router.events.off("routeChangeComplete", handleStop);
+         router.events.off("routeChangeError", handleStop);
       };
    }, [router]);
 
-   return (
-      <>
-         {isLoading && <LoadingBoard />}
-         <div className={`w-full ${isLoading ? "pointer-events-none" : ""}`}>
-            {children}
-         </div>
-      </>
-   );
+   if (!isLoading) return <></>;
+   return <LoadingBoard />;
 }

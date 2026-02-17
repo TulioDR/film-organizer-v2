@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
-import { useRouter } from "next/router";
 import { layoutActions } from "@/store/slices/layout-slice";
 
 import PageHead from "@/common/components/PageHead";
@@ -11,7 +10,9 @@ import MediaIdContainer from "@/features/pages/media-id/components/MediaIdContai
 import Header from "@/features/pages/media-id/components/Header";
 import Body from "@/features/pages/media-id/components/Body";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
-import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
+import { AnimatePresence } from "framer-motion";
+import useBackground from "@/features/layout/background/hooks/useBackground";
+import { useLenis } from "lenis/react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -36,34 +37,33 @@ type Props = {
 };
 
 export default function MediaId({ media_type, media }: Props) {
-   useStopLoader();
    const dispatch = useAppDispatch();
-   const router = useRouter();
-
+   const { removeBackground } = useBackground();
    useEffect(() => {
       dispatch(layoutActions.revealLayout());
-      console.log("vote_count:");
-      console.log(media.vote_count);
-   }, []);
-
-   useEffect(() => {
-      router.beforePopState((state) => {
-         state.options.scroll = false;
-         return true;
-      });
-   }, [router]);
-
+      console.log(media.title || media.name);
+      return () => {
+         removeBackground();
+      };
+   }, [media.title || media.name]);
+   const lenis = useLenis();
    return (
       <>
          <BackgroundViewButton />
-         <MediaIdContainer media={media}>
-            <PageHead
-               title={media.title || media.name}
-               content={media.overview}
-            />
-            <Header media={media} media_type={media_type} />
-            <Body media={media} media_type={media_type} />
-         </MediaIdContainer>
+         <AnimatePresence
+            mode="wait"
+            propagate
+            onExitComplete={() => lenis!.scrollTo("top", { immediate: true })}
+         >
+            <MediaIdContainer key={media.id} media={media}>
+               <PageHead
+                  title={media.title || media.name}
+                  content={media.overview}
+               />
+               <Header media={media} media_type={media_type} />
+               <Body media={media} media_type={media_type} />
+            </MediaIdContainer>
+         </AnimatePresence>
       </>
    );
 }

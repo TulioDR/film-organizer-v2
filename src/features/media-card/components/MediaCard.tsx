@@ -10,7 +10,7 @@ type Props = {
    media: Media;
    id: string;
    currentMedia?: Media;
-   direction: "prev" | "next" | "default";
+   direction?: "prev" | "next" | "default";
 };
 
 export default function MediaCard({
@@ -20,26 +20,25 @@ export default function MediaCard({
    currentMedia,
    direction,
 }: Props) {
-   const [showTransition, setShowTransition] = useState(false);
    const router = useRouter();
+   const [isLoading, setIsLoading] = useState(false);
+
    const onLearnMore = async () => {
-      setShowTransition(true);
+      setIsLoading(true);
       router.push(`/${mediaType}/${media.id}`, undefined, {
          scroll: false,
       });
    };
 
    return (
-      <CardContainer
-         id={id}
-         direction={direction}
-         showTransition={showTransition}
-      >
+      <CardContainer layoutId={id} direction={direction} isLoading={isLoading}>
          <Front media={media} />
          <Back
+            id={id}
             media={media}
             mediaType={mediaType}
             onLearnMore={onLearnMore}
+            isLoading={isLoading}
             currentMedia={currentMedia}
          />
       </CardContainer>

@@ -58,7 +58,7 @@ export default function Poster({
 
    return (
       <div
-         className={`relative w-full bg-black
+         className={`relative w-full bg-white dark:bg-black
             ${front ? "aspect-[2/3]" : ""}
             ${back ? "aspect-video" : ""} 
             ${!front && !back ? "h-full" : ""}

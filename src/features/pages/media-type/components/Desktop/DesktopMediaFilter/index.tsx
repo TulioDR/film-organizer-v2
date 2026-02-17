@@ -6,7 +6,7 @@ import { MediaFilterProvider } from "../../../context/MediaFilterContext";
 import ExpandedFilter from "./ExpandedFilter";
 import ExpandedPreview from "./ExpandedFilter/ExpandedPreview";
 import CompactPreview from "./CompactFilter/CompactPreview";
-import { animate } from "framer-motion";
+import { animate, usePresence, motion, AnimatePresence } from "framer-motion";
 
 type Props = {
    title: string;
@@ -29,13 +29,27 @@ export default function DesktopMediaFilter({
    const [showLargeContent, setShowLargeContent] = useState(false);
    const CONTAINER_CLASS = "animated-filter-container";
 
-   useEffect(() => {
-      const startAnimation = async () => {
-         const CONTAINER = `.${CONTAINER_CLASS}`;
-         setShowSmallContent(false);
-         setShowLargeContent(false);
-         await new Promise((resolve) => setTimeout(resolve, 50));
+   const [isPresent, safeToRemove] = usePresence();
 
+   useEffect(() => {
+      const CONTAINER = `.${CONTAINER_CLASS}`;
+      setShowSmallContent(false);
+      setShowLargeContent(false);
+      if (!isPresent) {
+         const exitAnimation = async () => {
+            await new Promise((resolve) => setTimeout(resolve, 50));
+            await animate(
+               CONTAINER,
+               { width: "64px", height: "64px", opacity: 0 },
+               { duration: 0.2 },
+            );
+            safeToRemove();
+         };
+         exitAnimation();
+         return;
+      }
+      const startAnimation = async () => {
+         await new Promise((resolve) => setTimeout(resolve, 50));
          const dims = !isOpen
             ? { width: "64px", height: "64px" }
             : isExpanded
@@ -47,16 +61,31 @@ export default function DesktopMediaFilter({
          isExpanded ? setShowLargeContent(true) : setShowSmallContent(true);
       };
       startAnimation();
-   }, [isOpen, isExpanded, animate, CONTAINER_CLASS]);
+   }, [isOpen, isExpanded, animate, CONTAINER_CLASS, isPresent]);
 
    return (
       <div className="fixed top-0 left-0 px-32 h-screen w-full pt-32 pb-4 pointer-events-none z-20">
          <div className="w-full h-full relative">
-            <div className="absolute left-16 pl-2 top-0 h-16 flex items-center z-20">
-               <span className="text-6xl uppercase font-thin">{title}</span>
+            <div className="absolute left-16 pl-2 top-0 h-16 flex items-center z-20 overflow-hidden">
+               <AnimatePresence mode="wait" propagate>
+                  <motion.div
+                     key={title}
+                     initial={{ y: "100%" }}
+                     animate={{ y: "0%" }}
+                     exit={{ y: "-100%" }}
+                     transition={{ duration: 0.4 }}
+                     className="h-full flex items-center"
+                  >
+                     <span className="text-6xl uppercase font-thin">
+                        {title}
+                     </span>
+                  </motion.div>
+               </AnimatePresence>
             </div>
             <MediaFilterProvider mediaType={mediaType}>
-               <div
+               <motion.div
+                  initial={{ width: "64px", height: "64px", opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   className={`relative pointer-events-auto ${CONTAINER_CLASS}`}
                >
                   <OpenButton onClick={toggleIsOpen} isOpen={isOpen} />
@@ -81,7 +110,7 @@ export default function DesktopMediaFilter({
                         </>
                      )}
                   </div>
-               </div>
+               </motion.div>
             </MediaFilterProvider>
          </div>
       </div>

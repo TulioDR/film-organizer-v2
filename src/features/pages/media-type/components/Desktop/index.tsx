@@ -7,6 +7,7 @@ import NotFoundMessage from "../NotFoundMessage";
 import DesktopCardsGrid from "./DesktopCardsGrid";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import { Media } from "@/common/models/Media";
+import { useLenis } from "lenis/react";
 
 type Props = {
    response: any;
@@ -28,6 +29,13 @@ export default function Desktop({ response }: Props) {
       "default",
    );
 
+   const lenis = useLenis();
+   useEffect(() => {
+      return () => {
+         lenis!.scrollTo("top", { immediate: true });
+      };
+   }, []);
+
    return (
       <>
          <DesktopMediaFilter
@@ -39,7 +47,7 @@ export default function Desktop({ response }: Props) {
             mediaType={mediaType}
          />
 
-         <AnimatePresence mode="wait" propagate custom={"value"}>
+         <AnimatePresence mode="wait" propagate>
             {results.length === 0 && <NotFoundMessage key="not-found" />}
             {results.length > 0 && (
                <DesktopCardsGrid

@@ -7,7 +7,7 @@ type Props = {
 export default function Stick({ top }: Props) {
    return (
       <div
-         className={`w-full flex-1 bg-accent flex justify-evenly 
+         className={`w-full flex-1 bg-[#D0B07C] flex justify-evenly 
             ${top ? "-rotate-[10deg] origin-bottom-left" : ""}
          `}
       >

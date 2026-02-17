@@ -1,5 +1,4 @@
 import useScrollToTop from "@/common/hooks/useScrollToTop";
-import useStopLoader from "@/features/layout/loader/hooks/useStopLoader";
 import useAppSelector from "@/store/hooks/useAppSelector";
 import { stagger, useAnimate, usePresence } from "framer-motion";
 import { useEffect } from "react";
@@ -19,7 +18,6 @@ export default function DesktopCardsGrid({
    setDirection,
 }: Props) {
    useScrollToTop();
-   useStopLoader();
 
    const { isHidden } = useAppSelector((state) => state.layout);
 
@@ -28,7 +26,7 @@ export default function DesktopCardsGrid({
    useEffect(() => {
       const startAnimation = async () => {
          await animate(".media-card", cardAnimation[direction].animate, {
-            delay: stagger(0.04),
+            delay: stagger(0.08),
             duration: 0.3,
          });
          setDirection("default");
@@ -36,7 +34,7 @@ export default function DesktopCardsGrid({
       const closeAnimation = async () => {
          if (isPresent) return;
          await animate(".media-card", cardAnimation[direction].exit, {
-            delay: stagger(0.02, { from: "last" }),
+            delay: stagger(0.04, { from: "last" }),
             duration: 0.3,
          });
          safeToRemove();

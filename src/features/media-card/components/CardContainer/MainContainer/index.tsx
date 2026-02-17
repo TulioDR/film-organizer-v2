@@ -1,22 +1,20 @@
 import React from "react";
 import { useAnimate, motion } from "framer-motion";
 import { ROTATE_DURATION } from "@/features/media-card/constants/ANIMATIONS_DURATIONS";
-import InnerMainContainer from "./InnerMainContainer";
-import cardAnimation from "@/features/pages/media-type/animations/cardAnimation";
 
 type Props = {
    layoutId: string;
    children: React.ReactNode;
-   direction: "prev" | "next" | "default";
+   isLoading: boolean;
 };
 
 export default function MainContainer({
    layoutId,
    children,
-   direction,
+   isLoading,
 }: Props) {
    const [scope, animate] = useAnimate();
-   const ROTATE_CLASS = "media-card";
+   const ROTATE_CLASS = "rotate-card";
 
    const onHoverStart = async () => {
       animate(
@@ -26,6 +24,7 @@ export default function MainContainer({
       );
    };
    const onHoverEnd = async () => {
+      if (isLoading) return;
       await animate(
          "." + ROTATE_CLASS,
          { rotateY: 360 },
@@ -36,18 +35,17 @@ export default function MainContainer({
 
    return (
       <motion.div
-         initial={cardAnimation[direction].initial}
-         className="h-full w-full media-card"
+         ref={scope}
+         layoutId={layoutId}
+         onHoverStart={onHoverStart}
+         onHoverEnd={onHoverEnd}
+         className="h-full w-full [perspective:2000px]"
       >
-         <InnerMainContainer
-            scope={scope}
-            layoutId={layoutId}
-            onHoverStart={onHoverStart}
-            onHoverEnd={onHoverEnd}
-            ROTATE_CLASS={ROTATE_CLASS}
+         <motion.div
+            className={`[transform-style:preserve-3d] w-full h-full relative ${ROTATE_CLASS}`}
          >
             {children}
-         </InnerMainContainer>
+         </motion.div>
       </motion.div>
    );
 }

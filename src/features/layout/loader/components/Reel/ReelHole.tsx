@@ -6,7 +6,8 @@ type Props = {
 
 export default function ReelHole({ children }: Props) {
    return (
-      <div className="h-full aspect-square rounded-full bg-[#40382E] relative overflow-hidden">
+      <div className="h-full aspect-square rounded-full bg-black relative overflow-hidden">
+         {/* <div className="h-full aspect-square rounded-full bg-[#40382E] relative overflow-hidden"> */}
          {children}
       </div>
    );

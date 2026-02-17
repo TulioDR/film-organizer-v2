@@ -6,18 +6,33 @@ import wrapper from "@/store";
 import { Provider } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { ReactLenis } from "lenis/react";
 import MainLayout from "@/features/layout/main-layout/components/MainLayout";
 
 function App({ Component, ...rest }: AppProps) {
-   const { route } = useRouter();
+   const router = useRouter();
+   const { route } = router;
+
    const isAuth = route === "/auth" || route === "/auth/sso-callback";
 
    const { store, props } = wrapper.useWrappedStore(rest);
    const { pageProps } = props;
 
    const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+   useEffect(() => {
+      if ("scrollRestoration" in history) {
+         history.scrollRestoration = "manual";
+      }
+   }, []);
+
+   useEffect(() => {
+      router.beforePopState((state) => {
+         state.options.scroll = false;
+         return true;
+      });
+   }, [router]);
 
    return (
       <ClerkProvider publishableKey={publishableKey}>

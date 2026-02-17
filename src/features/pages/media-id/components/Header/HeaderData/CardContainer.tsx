@@ -12,7 +12,7 @@ export default function CardContainer({ children, className = "" }: Props) {
       <div className="overflow-hidden h-full">
          <motion.div
             variants={itemVariant}
-            className={`rounded-md bg-gray-200 text-black px-4 h-full flex items-center ${className}`}
+            className={`rounded-md bg-primary-light dark:bg-primary-dark border border-border-light dark:border-border-dark text-black dark:text-white px-4 h-full flex items-center ${className}`}
          >
             {children}
          </motion.div>

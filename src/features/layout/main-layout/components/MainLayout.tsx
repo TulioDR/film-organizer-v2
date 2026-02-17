@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 
 import { useUser } from "@clerk/nextjs";
 
@@ -44,15 +44,16 @@ export default function MainLayout({ children }: Props) {
    return (
       <>
          <FixedUIContainer>
-            <Navbar />
+            <></>
          </FixedUIContainer>
+         <Navbar />
          <Background />
          <SaveMediaModal />
          <LoginAdviceModal />
          <Notification />
-
+         <PageLoader />
          <AnimatePresence mode="wait" propagate>
-            <PageLoader key={pathname}>{children}</PageLoader>
+            <Fragment key={pathname}>{children}</Fragment>
          </AnimatePresence>
       </>
    );
