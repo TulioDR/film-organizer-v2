@@ -7,7 +7,6 @@ import bookmarkSlice from "./slices/bookmark-slice";
 import backgroundSlice from "./slices/background-slice";
 import notificationSlice from "./slices/notification-slice";
 import layoutSlice from "./slices/layout-slice";
-import pageTitleSlice from "./slices/page-title-slice";
 import loaderSlice from "./slices/loader-slice";
 
 const store = configureStore({
@@ -19,7 +18,6 @@ const store = configureStore({
       background: backgroundSlice.reducer,
       notification: notificationSlice.reducer,
       layout: layoutSlice.reducer,
-      pageTitle: pageTitleSlice.reducer,
       loader: loaderSlice.reducer,
    },
 });

@@ -6,20 +6,13 @@ import CardContainer from "./CardContainer";
 import { useRouter } from "next/router";
 
 type Props = {
+   id: string;
+   direction?: "prev" | "next" | "default";
    mediaType: "tv" | "movie";
    media: Media;
-   id: string;
-   currentMedia?: Media;
-   direction?: "prev" | "next" | "default";
 };
 
-export default function MediaCard({
-   mediaType,
-   media,
-   id,
-   currentMedia,
-   direction,
-}: Props) {
+export default function MediaCard({ mediaType, media, id, direction }: Props) {
    const router = useRouter();
    const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +32,6 @@ export default function MediaCard({
             mediaType={mediaType}
             onLearnMore={onLearnMore}
             isLoading={isLoading}
-            currentMedia={currentMedia}
          />
       </CardContainer>
    );

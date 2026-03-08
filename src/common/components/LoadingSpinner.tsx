@@ -1,19 +1,15 @@
 import React from "react";
 import { SpinnerCircular } from "spinners-react";
-import useAppSelector from "@/store/hooks/useAppSelector";
 
-interface Props {
-   white?: true;
-}
+interface Props {}
 
-export default function LoadingSpinner({ white }: Props) {
-   const { themeColor } = useAppSelector((state) => state.theme);
+export default function LoadingSpinner({}: Props) {
    return (
       <SpinnerCircular
          size="100%"
          thickness={100}
          speed={150}
-         color={white ? "white" : themeColor}
+         color={"#CBAB60"}
          secondaryColor={"transparent"}
       />
    );

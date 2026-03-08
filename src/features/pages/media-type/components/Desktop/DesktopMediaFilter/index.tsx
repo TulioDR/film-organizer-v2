@@ -64,7 +64,7 @@ export default function DesktopMediaFilter({
    }, [isOpen, isExpanded, animate, CONTAINER_CLASS, isPresent]);
 
    return (
-      <div className="fixed top-0 left-0 px-32 h-screen w-full pt-32 pb-4 pointer-events-none z-20">
+      <div className="fixed top-0 left-0 px-32 h-screen w-full pt-44 pb-4 pointer-events-none z-20">
          <div className="w-full h-full relative">
             <div className="absolute left-16 pl-2 top-0 h-16 flex items-center z-20 overflow-hidden">
                <AnimatePresence mode="wait" propagate>

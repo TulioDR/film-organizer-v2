@@ -41,11 +41,11 @@ export default function MediaId({ media_type, media }: Props) {
    const { removeBackground } = useBackground();
    useEffect(() => {
       dispatch(layoutActions.revealLayout());
-      console.log(media.title || media.name);
+      // console.log(media);
       return () => {
          removeBackground();
       };
-   }, [media.title || media.name]);
+   }, [media]);
    const lenis = useLenis();
    return (
       <>

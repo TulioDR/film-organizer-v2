@@ -28,7 +28,7 @@ export default function CardContainer({
    return (
       <motion.div
          initial={direction ? cardAnimation[direction].initial : false}
-         className={`aspect-[2/3] w-full media-card ${isLoading ? "pointer-events-none" : ""}`}
+         className={`aspect-[2/3] w-full media-card ${isLoading || !isPresent ? "pointer-events-none" : ""}`}
       >
          {isLoading && !isPresent ? (
             <TransitionContainer

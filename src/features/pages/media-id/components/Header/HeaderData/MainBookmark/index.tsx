@@ -21,11 +21,16 @@ export default function MainBookmark({ mediaType, media }: Props) {
          {isInView ? (
             <Button mediaType={mediaType} media={media} />
          ) : (
-            <FixedUIPortal>
+            <>
+               <div className="fixed right-8 bottom-1/2 translate-y-1/2 w-16 aspect-square">
+                  <Button mediaType={mediaType} media={media} />
+               </div>
+               {/* <FixedUIPortal>
                <div className="absolute bottom-0 right-0 lg:bottom-1/2 lg:translate-y-1/2 w-16 aspect-square">
                   <Button mediaType={mediaType} media={media} />
                </div>
-            </FixedUIPortal>
+            </FixedUIPortal> */}
+            </>
          )}
       </Container>
    );

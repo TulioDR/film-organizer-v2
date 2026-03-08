@@ -2,69 +2,92 @@ import { useEffect, useState } from "react";
 
 import API_PUBLIC from "@/api/public";
 
-import Marquee from "@/features/pages/home/Marquee";
 import PageHead from "@/common/components/PageHead";
 import { Media } from "@/common/models/Media";
-import { pageTitleActions } from "@/store/slices/page-title-slice";
-import useAppDispatch from "@/store/hooks/useAppDispatch";
-import HomeImage from "@/features/pages/home/HomeImage";
-import MarqueesWrapper from "@/features/pages/home/MarqueesWrapper";
+
+import { motion } from "framer-motion";
+import Banner from "@/common/components/Banner";
+import HomeMediaHandler from "@/features/pages/home/components/HomeMediaHandler";
+import ChangeMediaGroup from "@/features/pages/home/components/ChangeMediaGroup";
+import HomeTicker from "@/features/pages/home/components/HomeTicker";
+import MediaGroup from "@/features/pages/home/models/MediaGroup";
+import HomeTitle from "@/features/pages/home/components/HomeTitle";
 
 export const getServerSideProps = async () => {
    const { data } = await API_PUBLIC.get("/home");
-   const originalArray = data[0].results;
-
-   const quarterSize = originalArray.length / 4;
-
-   const array1 = originalArray.slice(0, quarterSize);
-   const array2 = originalArray.slice(quarterSize, quarterSize * 2);
-   const array3 = originalArray.slice(quarterSize * 2, quarterSize * 3);
-   const array4 = originalArray.slice(quarterSize * 3, originalArray.length);
-
-   const bigArray = [
-      [...array1, ...array1],
-      [...array2, ...array2],
-      [...array3, ...array3],
-      [...array4, ...array4],
-   ];
 
    return {
-      props: { bigArray },
+      props: { data },
    };
 };
 
 interface Props {
-   bigArray: Media[][];
+   data: [MediaGroup, MediaGroup, MediaGroup];
 }
 
-export default function Home({ bigArray }: Props) {
-   const dispatch = useAppDispatch();
+export default function Home({ data: allGroups }: Props) {
+   const [isForward, setIsForward] = useState(true);
+
+   const [mediaGroup, setMediaGroup] = useState<MediaGroup>(allGroups[0]);
+   const [media, setMedia] = useState<Media>(mediaGroup.media[0]);
+
+   const changeMediaGroup = (newMediagroup: MediaGroup) => {
+      const prevIdx = allGroups.findIndex((g) => g.id === mediaGroup.id);
+      const nextIdx = allGroups.findIndex((g) => g.id === newMediagroup.id);
+
+      if (nextIdx !== prevIdx) setIsForward(nextIdx > prevIdx);
+
+      setTimeout(() => {
+         setMediaGroup(newMediagroup);
+      }, 10);
+   };
+
+   const changeSelectedMedia = (newMedia: Media) => {
+      const prevIdx = mediaGroup.media.findIndex((m) => m.id === media.id);
+      const nextIdx = mediaGroup.media.findIndex((m) => m.id === newMedia.id);
+
+      if (nextIdx !== prevIdx) setIsForward(nextIdx > prevIdx);
+
+      setTimeout(() => {
+         setMedia(newMedia);
+      }, 10);
+   };
+
    useEffect(() => {
-      dispatch(pageTitleActions.removeTitle());
-   }, []);
-
-   const [src, setSrc] = useState<string | null>(null);
-
-   const [isHovered, setIsHovered] = useState(false);
-   const onHoverStart = () => setIsHovered(true);
-   const onHoverEnd = () => setIsHovered(false);
+      setMedia(mediaGroup.media[0]);
+   }, [mediaGroup]);
 
    return (
       <>
          <PageHead title="Film Organizer" />
-         <HomeImage src={src} />
-         <MarqueesWrapper onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
-            {bigArray.map((array, index) => (
-               <Marquee
-                  key={index}
-                  array={array}
-                  reverse={index % 2 === 0}
-                  initialY={index + (index % 2 === 0 ? 75 : 25)}
-                  setSrc={setSrc}
-                  isHovered={isHovered}
-               />
-            ))}
-         </MarqueesWrapper>
+         <motion.div className="fixed inset-0 flex overflow-hidden pl-4 lg:pl-24 xl:pl-32 pt-20">
+            <HomeTicker
+               media={media}
+               mediaGroup={mediaGroup}
+               allGroups={allGroups}
+               changeSelectedMedia={changeSelectedMedia}
+            />
+            <div className="h-full flex-1 flex flex-col gap-4 pl-4 pb-4">
+               <Banner backPath={media.backdrop_path} isForward={isForward} />
+               <div className="w-full flex-1 pr-32 flex flex-col justify-between">
+                  <div className="w-full flex items-start gap-8 2xl:gap-32">
+                     <HomeTitle title={media.title || media.name} />
+                     <HomeMediaHandler
+                        media={media}
+                        mediaGroup={mediaGroup}
+                        changeSelectedMedia={changeSelectedMedia}
+                        frontPath={media.poster_path}
+                        isForward={isForward}
+                     />
+                  </div>
+                  <ChangeMediaGroup
+                     mediaGroup={mediaGroup}
+                     changeMediaGroup={changeMediaGroup}
+                     data={allGroups}
+                  />
+               </div>
+            </div>
+         </motion.div>
       </>
    );
 }

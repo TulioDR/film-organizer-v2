@@ -44,7 +44,7 @@ export default function DesktopCardsGrid({
    }, [isPresent, direction, cardAnimation]);
 
    return (
-      <div className="w-full mt-20 overflow-hidden pb-24 px-4 lg:px-32 pt-32">
+      <div className="w-full mt-20 overflow-hidden pb-24 px-4 lg:px-32 pt-64">
          <div
             ref={scope}
             className={`gap-4 grid ${

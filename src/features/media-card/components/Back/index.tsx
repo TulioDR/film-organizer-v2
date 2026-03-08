@@ -8,14 +8,12 @@ import { SM_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import OverviewButton from "./Overview/OverviewButton";
 import CardBookmark from "./CardBookmark";
 import { motion } from "framer-motion";
-import PosterSpinner from "@/common/components/Poster/PosterSpinner";
 import Reel from "@/features/layout/loader/components/Reel";
 
 type Props = {
    media: Media;
    mediaType: "movie" | "tv";
    onLearnMore: () => void;
-   currentMedia?: Media;
    isLoading: boolean;
    id: string;
 };
@@ -24,7 +22,6 @@ export default function Back({
    media,
    mediaType,
    onLearnMore,
-   currentMedia,
    isLoading,
    id,
 }: Props) {
@@ -35,11 +32,7 @@ export default function Back({
    return (
       <div className="rounded-lg absolute w-full h-full top-0 left-0 flex flex-col [transform:rotateY(180deg)] bg-primary-light dark:bg-primary-dark border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
          <Responsive minWidth={SM_MEDIA_QUERY}>
-            <BackHeader
-               media={media}
-               currentMedia={currentMedia}
-               isLoading={isLoading}
-            />
+            <BackHeader media={media} isLoading={isLoading} />
          </Responsive>
          <div className="flex-1 w-full overflow-hidden relative">
             <motion.div

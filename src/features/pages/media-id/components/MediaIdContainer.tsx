@@ -16,14 +16,15 @@ export default function MediaIdContainer({ children, media }: Props) {
    const { isHidden } = useAppSelector((state) => state.layout);
 
    useEffect(() => {
-      changeBackground(media.id, media.backdrop_path);
+      changeBackground(media.backdrop_path);
    }, [media]);
 
    const lenis = useLenis();
    useEffect(() => {
-      lenis!.scrollTo("top", { immediate: true });
+      if (!lenis) return;
+      lenis.scrollTo("top", { immediate: true });
       return () => {};
-   }, []);
+   }, [lenis]);
 
    return (
       <motion.div

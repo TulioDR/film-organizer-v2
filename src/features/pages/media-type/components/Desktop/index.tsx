@@ -8,6 +8,8 @@ import DesktopCardsGrid from "./DesktopCardsGrid";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import { Media } from "@/common/models/Media";
 import { useLenis } from "lenis/react";
+import Image from "next/image";
+import Poster from "@/common/components/Poster";
 
 type Props = {
    response: any;
@@ -30,11 +32,10 @@ export default function Desktop({ response }: Props) {
    );
 
    const lenis = useLenis();
-   useEffect(() => {
-      return () => {
-         lenis!.scrollTo("top", { immediate: true });
-      };
-   }, []);
+
+   const onExitComplete = () => {
+      lenis!.scrollTo("top", { immediate: true });
+   };
 
    return (
       <>
@@ -47,7 +48,21 @@ export default function Desktop({ response }: Props) {
             mediaType={mediaType}
          />
 
-         <AnimatePresence mode="wait" propagate>
+         <div className="fixed h-64 w-full top-20 right-0 pl-[554px] pb-4">
+            <div className="w-full h-full flex items-center justify-center relative shadow-[0_0_32px_0px_#E0E0E0] dark:shadow-[0_0_32px_0px_#1A1A1A]">
+               <div className="absolute left-0 bottom-0 w-full h-4 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-10" />
+               <div className="absolute left-0 bottom-0 h-full w-4 bg-gradient-to-r from-background-light dark:from-background-dark to-transparent z-10" />
+               <div className="w-full h-full brightness-75">
+                  <Poster
+                     posterPath={data.results[0]!.backdrop_path}
+                     alt="hello"
+                     size="original"
+                  />
+               </div>
+            </div>
+         </div>
+
+         <AnimatePresence mode="wait" propagate onExitComplete={onExitComplete}>
             {results.length === 0 && <NotFoundMessage key="not-found" />}
             {results.length > 0 && (
                <DesktopCardsGrid
@@ -58,11 +73,11 @@ export default function Desktop({ response }: Props) {
                >
                   {data.results.map((media: Media, index: number) => (
                      <MediaCard
-                        media={media}
-                        mediaType={mediaType}
-                        direction={direction}
                         key={`${mediaType}-${media.id}-${index}`}
                         id={`${mediaType}-${media.id}-${index}`}
+                        direction={direction}
+                        mediaType={mediaType}
+                        media={media}
                      />
                   ))}
                </DesktopCardsGrid>
