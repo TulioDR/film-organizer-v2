@@ -11,7 +11,7 @@ export default function ToggleButton({ onClick, icon }: Props) {
       <GlassContainer
          el="button"
          onClick={onClick}
-         className="flex items-center justify-center w-16 aspect-square"
+         className="flex items-center justify-center w-12 aspect-square"
       >
          <span className="material-symbols-outlined">{icon}</span>
       </GlassContainer>

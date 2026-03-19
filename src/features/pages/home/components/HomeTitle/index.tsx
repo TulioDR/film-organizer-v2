@@ -1,13 +1,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
+import useHomeContext from "../../context/HomeContext";
+import { HOME_DURATION, HOME_EASE } from "../../constants/ANIMATIONS";
 
-type Props = {
-   title: string;
-};
+type Props = {};
 
-export default function HomeTitle({ title }: Props) {
+export default function HomeTitle({}: Props) {
+   const { media } = useHomeContext();
+
+   const title = media.title || media.name;
+
    return (
-      <div className="flex-1 h-full flex items-center">
+      <div className="flex-1 w-full flex items-center pb-16">
          <div className="overflow-hidden">
             <AnimatePresence mode="wait">
                <motion.div
@@ -15,8 +19,11 @@ export default function HomeTitle({ title }: Props) {
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
                   exit={{ y: "-100%" }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="uppercase text-5xl 2xl:text-7xl font-extralight"
+                  transition={{
+                     duration: HOME_DURATION / 2,
+                     ease: HOME_EASE,
+                  }}
+                  className="uppercase text-5xl 2xl:text-6xl font-extralight"
                >
                   {title}
                </motion.div>

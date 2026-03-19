@@ -1,24 +1,25 @@
 import React from "react";
-import ChangeButton from "./ChangeButton";
+import useHomeContext from "../../context/HomeContext";
+import GroupButton from "./GroupButton";
 import MediaGroup from "../../models/MediaGroup";
 
-type Props = {
-   data: [MediaGroup, MediaGroup, MediaGroup];
-   mediaGroup: MediaGroup;
-   changeMediaGroup: (newMediagroup: MediaGroup) => void;
-};
+type Props = {};
 
-export default function ChangeMediaGroup({
-   data,
-   mediaGroup,
-   changeMediaGroup,
-}: Props) {
+export default function ChangeMediaGroup({}: Props) {
+   const { allGroups, mediaGroup, changeMediaGroup, stopAutoPlay } =
+      useHomeContext();
+
+   const handleClick = (group: MediaGroup) => {
+      changeMediaGroup(group);
+      stopAutoPlay();
+   };
+
    return (
       <div className="h-16 flex gap-4 w-full">
-         {data.map((group) => (
-            <ChangeButton
+         {allGroups.map((group) => (
+            <GroupButton
                key={group.id}
-               onClick={() => changeMediaGroup(group)}
+               onClick={() => handleClick(group)}
                isSelected={mediaGroup.id === group.id}
                src={group.media[0].backdrop_path}
                text={group.name}
