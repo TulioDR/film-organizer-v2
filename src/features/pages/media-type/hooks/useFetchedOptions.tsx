@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import API_PUBLIC from "@/api/public";
 import { SelectOption } from "../models/Filters";
+import axios from "axios";
 
 export default function useFetchedOptions() {
    const [languagesOptions, setLanguagesOptions] = useState<SelectOption[]>([]);
@@ -10,20 +10,20 @@ export default function useFetchedOptions() {
       const controller = new AbortController();
       const fetchFilters = async () => {
          try {
-            const { data } = await API_PUBLIC.get("/config-options");
+            const { data } = await axios.get("/api/public/config-options");
             const { languages, countries } = data;
 
             setLanguagesOptions(
                languages.map((lang: any) => ({
                   value: lang.iso_639_1,
                   label: lang.english_name,
-               }))
+               })),
             );
             setCountriesOptions(
                countries.map((country: any) => ({
                   value: country.iso_3166_1,
                   label: country.english_name,
-               }))
+               })),
             );
          } catch (error: any) {
             if (error.name === "CanceledError" || error.name === "AbortError") {

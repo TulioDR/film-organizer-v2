@@ -13,7 +13,7 @@ export default function PaginationContainer({ children, isOpen }: Props) {
          animate={{ y: "0%", opacity: 1 }}
          exit={{ y: "100%", opacity: 0 }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
-         className="h-16 fixed flex bottom-4 left-0 w-full pointer-events-none"
+         className="h-12 xl:h-16 fixed flex bottom-14 mb-1 xl:bottom-4 left-0 w-full pointer-events-none"
       >
          <motion.div
             initial={{ width: "426px" }}
@@ -23,7 +23,7 @@ export default function PaginationContainer({ children, isOpen }: Props) {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="h-full"
          />
-         <motion.div className="flex flex-1 gap-1 md:gap-4 justify-center w-full">
+         <motion.div className="flex flex-1 gap-1 lg:gap-2 xl:gap-4 justify-center w-full">
             {children}
          </motion.div>
       </motion.div>

@@ -30,6 +30,9 @@ export default function MarqueeCard({ media }: Props) {
       <motion.div
          onHoverStart={onHoverStart}
          onHoverEnd={onHoverEnd}
+         onTapStart={onHoverStart}
+         onTap={onHoverEnd}
+         onTapCancel={onHoverEnd}
          className={`w-full flex-shrink-0 aspect-[2/3] rounded-sm overflow-hidden relative`}
       >
          <CardPoster media={media} isHovered={isHovered} />

@@ -20,20 +20,20 @@ export default function PaginationButton({
    return (
       <button
          onClick={onClick}
-         className={`h-full block select-none relative hover:bg-black dark:hover:bg-white  
+         className={`h-full block select-none relative hover:bg-black dark:hover:bg-white 
             ${
                disabled
                   ? "pointer-events-none text-black/50 dark:text-white/50"
                   : "text-black dark:text-white"
             }
             ${isActive ? "" : "dark:hover:text-black hover:text-white"}
-            ${navigation ? "w-12 " : "aspect-square"}
+            ${navigation ? "aspect-[2/3] xl:aspect-square" : "aspect-square"}
          `}
       >
          {isActive && (
             <motion.div
                layoutId="active-pagination"
-               className="absolute top-0 left-0 w-full h-full p-2"
+               className="absolute top-0 left-0 w-full h-full p-1 xl:p-2"
                transition={{ duration: 0.6, type: "spring" }}
             >
                <div className="rounded-md w-full h-full bg-accent" />

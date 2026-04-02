@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
+import useHomeContext from "../../../context/HomeContext";
 
-type Props = {
-   scope: React.RefObject<SVGCircleElement>;
-};
+type Props = {};
 
-export default function SpinAnimation({ scope }: Props) {
+export default function SpinAnimation({}: Props) {
+   const { scope } = useHomeContext();
+
    return (
       <div className={`absolute inset-0 pointer-events-none`}>
          <svg className="w-full h-full overflow-visible">

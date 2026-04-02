@@ -39,11 +39,11 @@ export default function Back({
                initial={false}
                animate={{ opacity: isLoading ? 0 : 1 }}
                transition={{ duration: 0.2 }}
-               className="w-full h-full flex flex-col p-4 overflow-hidden z-10 relative"
+               className="w-full h-full flex flex-col gap-2 xl:gap-4 p-2 xl:p-4 overflow-hidden z-10 relative"
             >
                <BackTitle title={title} year={releaseDate} />
-               <div className="w-full flex flex-col gap-2">
-                  <div className="w-full flex gap-2 h-9">
+               <div className="w-full flex flex-col gap-1 xl:gap-2">
+                  <div className="w-full flex gap-1 xl:gap-2 h-9">
                      <CardBookmark media={media} mediaType={mediaType} />
                      <OverviewButton />
                   </div>
@@ -54,8 +54,8 @@ export default function Back({
                initial={false}
                animate={{
                   opacity: isLoading ? 1 : 0.2,
-                  x: isLoading ? 0 : "33%",
-                  y: isLoading ? 0 : "33%",
+                  x: isLoading ? 0 : "40%",
+                  y: isLoading ? 0 : "-40%",
                }}
                transition={{ duration: 0.2 }}
                className="w-full h-full absolute top-0 left-0 flex items-center justify-center pointer-events-none"

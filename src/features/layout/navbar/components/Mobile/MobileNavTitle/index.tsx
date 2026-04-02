@@ -22,7 +22,7 @@ export default function MobileNavTitle({}: Props) {
                   : "h-full text-black dark:text-white"
             }`}
          >
-            <motion.span layout="position" className="block px-4">
+            <motion.span layout="position" className="block">
                FilmVue
             </motion.span>
          </div>

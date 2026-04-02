@@ -17,7 +17,7 @@ export default function HomeAutoPlay({}: Props) {
       <div className="w-full h-16 ">
          <button
             onClick={handleClick}
-            className="h-full flex items-center gap-4 hover:opacity-80 duration-100 pr-4"
+            className="h-full flex items-center gap-4 hover:opacity-80 active:opacity-80 duration-100 pr-4"
          >
             <div className="h-full aspect-square rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center relative">
                <span

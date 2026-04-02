@@ -11,7 +11,7 @@ export default function HomeTitle({}: Props) {
    const title = media.title || media.name;
 
    return (
-      <div className="flex-1 w-full flex items-center pb-16">
+      <div className="flex-1 w-full flex items-center">
          <div className="overflow-hidden">
             <AnimatePresence mode="wait">
                <motion.div

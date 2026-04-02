@@ -1,20 +1,19 @@
 import React from "react";
 import Poster from "../Poster";
 import { AnimatePresence, motion } from "framer-motion";
-import useHomeContext from "@/features/pages/home/context/HomeContext";
 import { HOME_DURATION } from "@/features/pages/home/constants/ANIMATIONS";
 
-type Props = {};
+type Props = {
+   backPath: string;
+   isForward?: boolean;
+};
 
-export default function Banner({}: Props) {
-   const { media, isForward } = useHomeContext();
-   const backPath = media.backdrop_path;
-
+export default function Banner({ backPath, isForward }: Props) {
    return (
       <div className="h-64 w-full">
-         <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
-            <div className="absolute left-0 bottom-0 w-full h-4 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-20" />
-            <div className="absolute left-0 bottom-0 h-full w-4 bg-gradient-to-r from-background-light dark:from-background-dark to-transparent z-20" />
+         <div className="w-full h-full flex items-center justify-center relative rounded-bl-lg overflow-hidden border-l border-b border-border-light dark:border-border-dark">
+            {/* <div className="absolute left-0 bottom-0 w-full h-4 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent z-20" />
+            <div className="absolute left-0 bottom-0 h-full w-4 bg-gradient-to-r from-background-light dark:from-background-dark to-transparent z-20" /> */}
             <AnimatePresence initial={false}>
                <motion.div
                   key={backPath}

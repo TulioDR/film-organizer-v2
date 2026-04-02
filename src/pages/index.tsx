@@ -3,7 +3,6 @@ import API_PUBLIC from "@/api/public";
 import PageHead from "@/common/components/PageHead";
 
 import { motion } from "framer-motion";
-import Banner from "@/common/components/Banner";
 import HomeMediaHandler from "@/features/pages/home/components/HomeMediaHandler";
 import ChangeMediaGroup from "@/features/pages/home/components/ChangeMediaGroup";
 import HomeTicker from "@/features/pages/home/components/HomeTicker";
@@ -14,6 +13,8 @@ import HomeAutoPlay from "@/features/pages/home/components/HomeAutoPlay";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import Mobile from "@/features/pages/home/components/Mobile";
+import NavigationButton from "@/features/pages/home/components/HomeMediaHandler/NavigationButton";
+import HomeBanner from "@/features/pages/home/components/HomeBanner";
 
 export const getServerSideProps = async () => {
    const { data } = await API_PUBLIC.get("/home");
@@ -35,13 +36,17 @@ export default function Home({ data: allGroups }: Props) {
             <motion.div className="fixed inset-0 flex overflow-hidden pl-4 lg:pl-24 xl:pl-32 pt-20">
                <HomeTicker />
                <div className="h-full flex-1 flex flex-col gap-4 pl-4 pb-4">
-                  <Banner />
-                  <div className="w-full flex-1 pr-32 flex flex-col justify-between">
-                     <div className="w-full flex items-start gap-8 2xl:gap-32">
-                        <div className="flex flex-col h-full flex-1">
-                           <HomeAutoPlay />
-                           <HomeTitle />
+                  <HomeBanner />
+                  <div className="w-full flex-1 pr-32 flex flex-col justify-between gap-4">
+                     <div className="flex w-full justify-between h-16">
+                        <HomeAutoPlay />
+                        <div className="h-full flex gap-4">
+                           <NavigationButton icon="chevron_backward" />
+                           <NavigationButton icon="chevron_forward" next />
                         </div>
+                     </div>
+                     <div className="w-full flex items-center justify-center gap-8 2xl:gap-32">
+                        <HomeTitle />
                         <HomeMediaHandler />
                      </div>
                      <ChangeMediaGroup />

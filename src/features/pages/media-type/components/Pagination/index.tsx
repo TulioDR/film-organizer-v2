@@ -12,18 +12,21 @@ type Props = {
    setDirection: React.Dispatch<
       React.SetStateAction<"prev" | "next" | "default">
    >;
+   siblings?: number;
 };
 
-export default function DesktopPagination({
+export default function Pagination({
    currentPage,
    total,
    isOpen,
    setDirection,
+   siblings = 1,
 }: Props) {
    const { range } = usePagination({
       total: total,
       initialPage: currentPage,
       page: currentPage,
+      siblings: siblings,
    });
    const router = useRouter();
 
@@ -48,10 +51,11 @@ export default function DesktopPagination({
                disabled={currentPage === 1}
                icon="keyboard_arrow_left"
                onClick={() => handlePageChange(currentPage - 1)}
+               navigation
             />
          </PaginationWrapper>
 
-         <PaginationWrapper className="h-full flex px-4">
+         <PaginationWrapper className="h-full flex xl:px-4">
             {range.map((value, index) => (
                <Fragment key={index}>
                   {value === "dots" ? (
@@ -74,6 +78,7 @@ export default function DesktopPagination({
                disabled={currentPage === total}
                icon="keyboard_arrow_right"
                onClick={() => handlePageChange(currentPage + 1)}
+               navigation
             />
          </PaginationWrapper>
       </PaginationContainer>

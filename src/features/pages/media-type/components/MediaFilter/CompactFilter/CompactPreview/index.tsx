@@ -13,16 +13,9 @@ export default function CompactPreview({}: Props) {
    };
 
    return (
-      <div className="w-full h-full flex p-3 gap-2">
+      <div className="w-full h-full flex p-2 gap-2">
+         <PreviewButton icon="refresh" text="Reset" onClick={handleReset} />
          <PreviewButton
-            vertical
-            icon="refresh"
-            text="Reset"
-            onClick={handleReset}
-            square
-         />
-         <PreviewButton
-            vertical
             icon="search"
             text="Search"
             onClick={handleSearchButton}

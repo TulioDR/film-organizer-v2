@@ -4,7 +4,7 @@ type Props = {};
 
 export default function OverviewButton({}: Props) {
    return (
-      <button className="h-full px-4 bg-background-light dark:bg-background-accent-dark text-black dark:text-white rounded flex items-center justify-center border border-border-light dark:border-border-dark">
+      <button className="h-full px-4 flex-1 xl:flex-none bg-background-light dark:bg-background-accent-dark text-black dark:text-white rounded flex items-center justify-center border border-border-light dark:border-border-dark">
          <span className="text-sm">Overview</span>
       </button>
    );

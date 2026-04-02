@@ -15,13 +15,12 @@ export default function ChangeMediaGroup({}: Props) {
    };
 
    return (
-      <div className="h-16 flex gap-4 w-full">
+      <div className="w-full h-16 flex gap-4">
          {allGroups.map((group) => (
             <GroupButton
                key={group.id}
                onClick={() => handleClick(group)}
                isSelected={mediaGroup.id === group.id}
-               src={group.media[0].backdrop_path}
                text={group.name}
             />
          ))}

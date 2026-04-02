@@ -1,14 +1,12 @@
-import MobileMenu from "@/features/layout/mobile-menu/components/MobileMenu";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
 import NotFoundMessage from "../NotFoundMessage";
-import MobilePagination from "./MobilePagination";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import { Media } from "@/common/models/Media";
-import MobileCardsGrid from "./MobileCardsGrid";
-import MobileMediaFilter from "./MobileMediaFilter";
-import { MediaFilterProvider } from "../../context/MediaFilterContext";
+import CardsGrid from "../CardsGrid";
+import Pagination from "../Pagination";
+import MediaFilter from "../MediaFilter";
 
 type Props = {
    response: any;
@@ -16,23 +14,33 @@ type Props = {
 
 export default function Mobile({ response }: Props) {
    const { mediaType, data } = response;
-
    const results = data.results;
-
    const { asPath } = useRouter();
+   const [isOpen, setIsOpen] = useState<boolean>(true);
+   const toggleIsOpen = () => setIsOpen((prev) => !prev);
+
+   const [direction, setDirection] = useState<"prev" | "next" | "default">(
+      "default",
+   );
 
    return (
       <>
-         <MediaFilterProvider mediaType={mediaType}>
-            <MobileMenu position="bottomLeft" buttonIcon="filter_alt">
-               <MobileMediaFilter />
-            </MobileMenu>
-         </MediaFilterProvider>
+         <MediaFilter
+            mediaType={mediaType}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            isExpanded={false}
+            toggleIsOpen={toggleIsOpen}
+         />
 
          <AnimatePresence mode="wait" propagate>
             {results.length === 0 && <NotFoundMessage key="not-found" />}
             {results.length > 0 && (
-               <MobileCardsGrid key={asPath}>
+               <CardsGrid
+                  key={asPath}
+                  direction={direction}
+                  setDirection={setDirection}
+               >
                   {data.results.map((media: Media, index: number) => (
                      <MediaCard
                         key={`${mediaType}-${media.id}-${index}`}
@@ -41,14 +49,17 @@ export default function Mobile({ response }: Props) {
                         mediaType={mediaType}
                      />
                   ))}
-               </MobileCardsGrid>
+               </CardsGrid>
             )}
          </AnimatePresence>
 
          {data.total_pages && (
-            <MobilePagination
+            <Pagination
                total={data.total_pages > 20 ? 20 : data.total_pages}
                currentPage={data.page}
+               isOpen={false}
+               setDirection={setDirection}
+               siblings={0}
             />
          )}
       </>

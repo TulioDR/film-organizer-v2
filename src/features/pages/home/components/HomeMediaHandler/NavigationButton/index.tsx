@@ -6,17 +6,22 @@ import SelectedAnimation from "./SelectedAnimation";
 
 type Props = {
    icon: string;
-   onClick: () => void;
+   next?: true;
 };
 
-export default function NavigationButton({ icon, onClick }: Props) {
+export default function NavigationButton({ icon, next }: Props) {
    const { isAnimating, stopAutoPlay } = useHomeContext();
    const [scope, animate] = useAnimate();
    const [startLoadingAnimation, setStartLoadingAnimation] = useState(false);
 
+   const { navigateMedia } = useHomeContext();
+   const goPrev = () => navigateMedia("backward");
+   const goNext = () => navigateMedia("forward");
+
    const handleClick = async () => {
       stopAutoPlay();
-      onClick();
+      if (next) goNext();
+      else goPrev();
       setStartLoadingAnimation(true);
       const { current } = scope;
       const DURATION = HOME_DURATION / 2;
@@ -42,7 +47,11 @@ export default function NavigationButton({ icon, onClick }: Props) {
                isAnimating || startLoadingAnimation ? undefined : handleClick
             }
             className={`h-full aspect-square rounded-full border-2 border-black dark:border-white text-black dark:text-white flex items-center justify-center 
-               ${startLoadingAnimation ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black"}
+               ${
+                  startLoadingAnimation
+                     ? "bg-black dark:bg-white text-white dark:text-black"
+                     : "hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black active:bg-black dark:active:bg-white active:text-white dark:active:text-black"
+               }
             `}
          >
             <span className="material-symbols-outlined !text-3xl">{icon}</span>

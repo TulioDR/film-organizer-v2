@@ -4,7 +4,7 @@ const apiKey = process.env.API_KEY;
 
 export default async function handler(
    _req: NextApiRequest,
-   res: NextApiResponse
+   res: NextApiResponse,
 ) {
    const baseUrl = "https://api.themoviedb.org/3/configuration";
    const countriesUrl = `${baseUrl}/countries?api_key=${apiKey}`;
