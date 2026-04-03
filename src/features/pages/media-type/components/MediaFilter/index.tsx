@@ -12,8 +12,6 @@ import MediaFiltersContainer from "./MediaFiltersContainer";
 type Props = {
    isOpen: boolean;
    toggleIsOpen: () => void;
-   isExpanded: boolean;
-   toggleIsExpanded?: () => void;
    mediaType: "movie" | "tv";
    setIsOpen: (isOpen: boolean) => void;
 };
@@ -21,14 +19,16 @@ type Props = {
 export default function MediaFilter({
    isOpen,
    toggleIsOpen,
-   isExpanded,
-   toggleIsExpanded,
    mediaType,
    setIsOpen,
 }: Props) {
    const [isPresent, safeToRemove] = usePresence();
    const [showSmallContent, setShowSmallContent] = useState(false);
    const [showLargeContent, setShowLargeContent] = useState(false);
+
+   const [isExpanded, setIsExpanded] = useState(false);
+   const toggleIsExpanded = () => setIsExpanded((prev) => !prev);
+   useEffect(() => setIsExpanded(false), [isOpen]);
 
    const title = mediaType === "movie" ? "Movies" : "Series";
 

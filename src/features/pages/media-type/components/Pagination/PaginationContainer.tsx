@@ -9,17 +9,15 @@ type Props = {
 export default function PaginationContainer({ children, isOpen }: Props) {
    return (
       <motion.div
-         initial={{ y: "100%", opacity: 0 }}
-         animate={{ y: "0%", opacity: 1 }}
-         exit={{ y: "100%", opacity: 0 }}
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{ opacity: 0 }}
          transition={{ duration: 0.4, ease: "easeInOut" }}
          className="h-12 xl:h-16 fixed flex bottom-14 mb-1 xl:bottom-4 left-0 w-full pointer-events-none"
       >
          <motion.div
-            initial={{ width: "426px" }}
-            animate={{
-               width: isOpen ? "426px" : 0,
-            }}
+            initial={false}
+            animate={{ width: isOpen ? "426px" : 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="h-full"
          />

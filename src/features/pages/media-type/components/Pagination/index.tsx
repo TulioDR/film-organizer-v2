@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PaginationButton from "./PaginationButton";
 import PaginationContainer from "./PaginationContainer";
 import { usePagination } from "@mantine/hooks";
@@ -12,7 +12,7 @@ type Props = {
    setDirection: React.Dispatch<
       React.SetStateAction<"prev" | "next" | "default">
    >;
-   siblings?: number;
+   isMobile: boolean;
 };
 
 export default function Pagination({
@@ -20,14 +20,21 @@ export default function Pagination({
    total,
    isOpen,
    setDirection,
-   siblings = 1,
+   isMobile,
 }: Props) {
+   const [siblings, setSiblings] = useState<number | undefined>(undefined);
+
+   useEffect(() => {
+      setSiblings(isMobile ? 0 : 1);
+   }, [isMobile]);
+
    const { range } = usePagination({
       total: total,
       initialPage: currentPage,
       page: currentPage,
       siblings: siblings,
    });
+
    const router = useRouter();
 
    const handlePageChange = (page: number) => {
@@ -44,6 +51,7 @@ export default function Pagination({
       );
    };
 
+   if (siblings === undefined) return <></>;
    return (
       <PaginationContainer isOpen={isOpen}>
          <PaginationWrapper>
@@ -55,7 +63,7 @@ export default function Pagination({
             />
          </PaginationWrapper>
 
-         <PaginationWrapper className="h-full flex xl:px-4">
+         <PaginationWrapper className="h-full flex">
             {range.map((value, index) => (
                <Fragment key={index}>
                   {value === "dots" ? (

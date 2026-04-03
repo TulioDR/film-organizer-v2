@@ -10,7 +10,7 @@ type Props = {
 export default function MediaFiltersContainer({ mediaType, children }: Props) {
    return (
       <MediaFilterProvider mediaType={mediaType}>
-         <div className="fixed top-0 left-0 px-4 xl:px-32 py-14 xl:pt-44 xl:pb-4 h-[100svh] w-full pointer-events-none z-20">
+         <div className="fixed top-0 left-0 px-4 lg:px-32 py-14 xl:pt-44 xl:pb-4 h-[100svh] w-full pointer-events-none z-20">
             <div className="w-full h-full relative py-1 xl:py-0">
                <motion.div
                   initial={{ opacity: 0 }}
