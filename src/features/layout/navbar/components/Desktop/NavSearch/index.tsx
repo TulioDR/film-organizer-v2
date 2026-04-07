@@ -1,11 +1,40 @@
 import React from "react";
+import { createPortal } from "react-dom";
+import SearchInput from "./SearchInput";
+import CloseSearch from "./CloseSearch";
+import OpenSearch from "./OpenSearch";
+import SearchContent from "./SearchContent";
+import useSearch from "../../../hooks/useSearch";
 
 type Props = {};
 
 export default function NavSearch({}: Props) {
+   const { state, dispatch } = useSearch();
+   const { isSearchOpen } = state;
+
+   const handleClick = () => {
+      if (isSearchOpen) dispatch({ type: "CLOSE_SEARCH" });
+      else dispatch({ type: "OPEN_SEARCH" });
+   };
+
    return (
-      <div className="h-full aspect-square flex items-center justify-center rounded-full border border-border-light dark:border-border-dark bg-primary-light dark:bg-primary-dark text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
-         <span className="material-symbols-outlined">search</span>
-      </div>
+      <>
+         {!isSearchOpen ? (
+            <OpenSearch onClick={handleClick} />
+         ) : (
+            createPortal(
+               <div className="fixed top-0 left-0 h-screen w-full bg-white/70 dark:bg-black/70 z-30 flex items-center justify-center">
+                  <div className="flex flex-col w-2/5 gap-4">
+                     <div className="h-16 w-full flex gap-4">
+                        <CloseSearch onClick={handleClick} />
+                        <SearchInput state={state} dispatch={dispatch} />
+                     </div>
+                     <SearchContent state={state} dispatch={dispatch} />
+                  </div>
+               </div>,
+               document.body,
+            )
+         )}
+      </>
    );
 }

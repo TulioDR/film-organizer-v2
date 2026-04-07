@@ -2,7 +2,7 @@ export default function calculateNewIndex(
    current: number | null,
    action: string,
    length: number,
-   COLUMNS: number
+   COLUMNS: number,
 ): number | null {
    let newIndex = current;
 

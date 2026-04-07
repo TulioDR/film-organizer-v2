@@ -8,7 +8,7 @@ type Props = {
 export default function PaginationWrapper({ children, className = "" }: Props) {
    return (
       <div
-         className={`bg-primary-light h-full dark:bg-primary-dark rounded-lg border border-border-light dark:border-border-dark pointer-events-auto overflow-hidden ${className}`}
+         className={`bg-primary-light h-full dark:bg-primary-dark rounded-lg border shadow-lg border-border-light dark:border-border-dark pointer-events-auto overflow-hidden ${className}`}
       >
          {children}
       </div>

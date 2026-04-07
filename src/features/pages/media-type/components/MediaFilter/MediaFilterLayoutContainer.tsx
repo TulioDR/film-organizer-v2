@@ -14,7 +14,7 @@ export default function MediaFilterLayoutContainer({
    return (
       <div
          className={`
-                        flex border rounded-lg overflow-hidden duration-200 pointer-events-auto
+                        flex border rounded-lg overflow-hidden duration-200 pointer-events-auto shadow-lg
                         bg-primary-light dark:bg-primary-dark border-border-light dark:border-border-dark
                          ${isOpen ? (isExpanded ? "h-full w-full" : "h-full w-full xl:w-[410px]") : "w-12 h-12 xl:w-16 xl:h-16"} 
                      `}

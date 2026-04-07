@@ -4,6 +4,7 @@ const getActionKey = (key: string): string | undefined => {
       ArrowDown: "DOWN",
       ArrowLeft: "LEFT",
       ArrowRight: "RIGHT",
+      Enter: "ENTER",
    };
    return keyMap[key];
 };
