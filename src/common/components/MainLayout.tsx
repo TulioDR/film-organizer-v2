@@ -14,9 +14,8 @@ import Notification from "@/features/layout/notification/components/Notification
 import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/components/LoginAdviceModal";
 import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/components/SaveMediaModal";
 import useInitialThemeColor from "@/common/hooks/useInitialThemeColor";
-import FixedUIContainer from "./FixedUIContainer";
-import PageLoader from "../../loader/components/PageLoader";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
+import PageLoader from "@/features/layout/loader/components/PageLoader";
 
 type Props = {
    children: React.ReactNode;
@@ -43,9 +42,6 @@ export default function MainLayout({ children }: Props) {
 
    return (
       <>
-         <FixedUIContainer>
-            <></>
-         </FixedUIContainer>
          <Navbar />
          <Background />
          <SaveMediaModal />

@@ -76,7 +76,7 @@ export default function SearchResults({ state, dispatch }: Props) {
          style={{ overscrollBehavior: "contain" }}
          className="w-full h-full overflow-auto"
       >
-         <div ref={gridRef} className="w-full h-max grid grid-cols-2 p-2">
+         <div ref={gridRef} className="w-full h-max grid xl:grid-cols-2 p-2">
             {results!.map((media, index) => (
                <ResultCard
                   key={media.id}

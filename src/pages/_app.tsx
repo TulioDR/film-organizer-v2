@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Fragment, useEffect } from "react";
 import { ReactLenis } from "lenis/react";
-import MainLayout from "@/features/layout/main-layout/components/MainLayout";
+import MainLayout from "@/common/components/MainLayout";
 
 function App({ Component, ...rest }: AppProps) {
    const router = useRouter();

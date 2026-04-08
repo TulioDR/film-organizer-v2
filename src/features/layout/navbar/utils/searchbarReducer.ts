@@ -15,7 +15,7 @@ const searchbarReducer = (state: State, action: Action): State => {
       case "OPEN_SEARCH":
          return { ...state, isSearchOpen: true };
       case "CLOSE_SEARCH":
-         return { ...state, isSearchOpen: false };
+         return { ...state, isSearchOpen: false, currentIndex: null };
    }
 };
 export default searchbarReducer;

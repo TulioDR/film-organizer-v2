@@ -23,9 +23,9 @@ export default function NavSearch({}: Props) {
             <OpenSearch onClick={handleClick} />
          ) : (
             createPortal(
-               <div className="fixed top-0 left-0 h-screen w-full bg-white/70 dark:bg-black/70 z-30 flex items-center justify-center">
-                  <div className="flex flex-col w-2/5 gap-4">
-                     <div className="h-16 w-full flex gap-4">
+               <div className="fixed top-0 left-0 h-[100svh] w-full p-4 bg-white/70 dark:bg-black/70 z-30 flex items-center justify-center">
+                  <div className="flex flex-col w-full h-full xl:h-3/5 xl:w-2/5 gap-1 lg:gap-2 xl:gap-4">
+                     <div className="h-12 xl:h-16 w-full flex gap-1 lg:gap-2 xl:gap-4">
                         <CloseSearch onClick={handleClick} />
                         <SearchInput state={state} dispatch={dispatch} />
                      </div>

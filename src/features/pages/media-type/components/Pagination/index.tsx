@@ -37,10 +37,11 @@ export default function Pagination({
 
    const router = useRouter();
 
-   const handlePageChange = (page: number) => {
+   const handlePageChange = async (page: number) => {
       if (page > currentPage) setDirection("next");
       else setDirection("prev");
 
+      await new Promise((resolve) => setTimeout(resolve, 50));
       router.push(
          {
             pathname: router.pathname,

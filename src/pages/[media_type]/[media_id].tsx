@@ -1,7 +1,5 @@
 import { GetServerSideProps } from "next";
-import { useEffect } from "react";
-
-import { layoutActions } from "@/store/slices/layout-slice";
+import { useEffect, useState } from "react";
 
 import PageHead from "@/common/components/PageHead";
 import { MediaDetailsModel } from "@/features/pages/media-id/models/MediaDetailsModel";
@@ -9,7 +7,6 @@ import BackgroundViewButton from "@/features/pages/media-id/components/Backgroun
 import MediaIdContainer from "@/features/pages/media-id/components/MediaIdContainer";
 import Header from "@/features/pages/media-id/components/Header";
 import Body from "@/features/pages/media-id/components/Body";
-import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { AnimatePresence } from "framer-motion";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import { useLenis } from "lenis/react";
@@ -37,19 +34,21 @@ type Props = {
 };
 
 export default function MediaId({ media_type, media }: Props) {
-   const dispatch = useAppDispatch();
    const { removeBackground } = useBackground();
    useEffect(() => {
-      dispatch(layoutActions.revealLayout());
       // console.log(media);
       return () => {
          removeBackground();
       };
    }, [media]);
    const lenis = useLenis();
+
+   const [hideUi, setHideUi] = useState<boolean>(false);
+   const toggleUi = () => setHideUi((prev) => !prev);
+
    return (
       <>
-         <BackgroundViewButton />
+         <BackgroundViewButton hideUi={hideUi} onClick={toggleUi} />
          <AnimatePresence
             mode="wait"
             propagate

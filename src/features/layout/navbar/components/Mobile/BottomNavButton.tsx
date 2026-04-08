@@ -37,7 +37,7 @@ export default function BottomNavButton({ icon, text, href }: Props) {
             {isActive && (
                <motion.div
                   layoutId="mobile-active-nav-item"
-                  className="absolute bottom-px left-0 w-full h-1 bg-accent"
+                  className="absolute bottom-px left-0 w-full h-0.5 bg-accent"
                   transition={{ duration: 0.6, type: "spring" }}
                />
             )}

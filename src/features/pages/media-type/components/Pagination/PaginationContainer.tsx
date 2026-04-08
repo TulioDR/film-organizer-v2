@@ -19,7 +19,7 @@ export default function PaginationContainer({ children, isOpen }: Props) {
             initial={false}
             animate={{ width: isOpen ? "426px" : 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="h-full"
+            className="h-full hidden xl:block"
          />
          <motion.div className="flex flex-1 gap-1 lg:gap-2 xl:gap-4 justify-center w-full">
             {children}

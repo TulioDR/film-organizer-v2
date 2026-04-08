@@ -60,7 +60,10 @@ export default function MediaTypePage(response: Props) {
 
          <Responsive minWidth={XL_MEDIA_QUERY}>
             <div className="fixed h-64 w-full top-20 right-0 pl-[554px] pb-4">
-               <Banner backPath={data.results[0].backdrop_path} />
+               <Banner
+                  backPath={data.results[0].backdrop_path}
+                  isForward={direction !== "prev"}
+               />
             </div>
          </Responsive>
 
@@ -71,7 +74,6 @@ export default function MediaTypePage(response: Props) {
                   key={asPath}
                   isOpen={isOpen}
                   direction={direction}
-                  isMobile={isMobile}
                   setDirection={setDirection}
                >
                   {data.results.map((media: Media, index: number) => (

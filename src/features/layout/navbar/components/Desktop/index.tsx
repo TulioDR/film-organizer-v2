@@ -15,7 +15,7 @@ export default function Desktop({}: Props) {
          </div>
          <div className="flex flex-1 justify-between pl-4">
             <NavItems />
-            <div className="flex gap-4">
+            <div className="flex gap-4 h-full items-center">
                <NavSearch />
                <NavDropdown />
                <DarkModeButton />

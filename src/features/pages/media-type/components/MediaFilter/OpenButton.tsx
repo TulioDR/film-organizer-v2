@@ -17,7 +17,9 @@ export default function OpenButton({ onClick, isOpen }: Props) {
          `}
       >
          <div className="h-full w-full flex items-center justify-center">
-            <span className="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined">
+               {isOpen ? "close" : "filter_alt"}
+            </span>
          </div>
       </button>
    );

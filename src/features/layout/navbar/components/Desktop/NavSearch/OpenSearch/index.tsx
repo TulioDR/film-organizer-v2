@@ -13,7 +13,11 @@ export default function OpenSearch({ onClick }: Props) {
          layoutId="search-border-wrapper"
          transition={{ duration: SEARCH_ANIMATION_DURATION }}
          style={{ borderRadius: 100 }}
-         className="h-full w-full p-px bg-border-light dark:bg-border-dark hover:bg-black dark:hover:bg-white block overflow-hidden"
+         className={`h-12 aspect-square p-px block overflow-hidden
+            bg-border-light dark:bg-border-dark 
+            hover:bg-black dark:hover:bg-white
+            active:bg-black dark:active:bg-white
+         `}
       >
          <motion.div
             layoutId="search-background-inner"

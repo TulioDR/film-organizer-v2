@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { NAVIGATION_ITEMS } from "@/features/layout/sidebar/constants/NAVIGATION_ITEMS";
 import NavItem from "./NavItem";
 import useNavItems from "../../../hooks/useNavItems";
+import { NAVIGATION_ITEMS } from "../../../constants/NAVIGATION_ITEMS";
 
 type Props = {};
 

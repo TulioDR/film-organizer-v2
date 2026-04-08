@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchKeys from "./SearchKeys";
 import SearchType from "./SearchType";
 import SearchContentContainer from "./SearchContentContainer";
 import { Action, State } from "@/features/layout/navbar/models/ReducerModels";
 import SearchMessage from "./SearchMessage";
 import SearchResults from "./SearchResults";
+import Responsive from "@/common/components/Responsive";
+import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 
 type Props = {
    state: State;
@@ -14,10 +16,20 @@ type Props = {
 export default function SearchContent({ state, dispatch }: Props) {
    const { inputValue, results } = state;
 
+   useEffect(() => {
+      const handleEscape = (e: KeyboardEvent) => {
+         if (e.key === "Escape") dispatch({ type: "CLOSE_SEARCH" });
+      };
+      document.addEventListener("keydown", handleEscape);
+      return () => {
+         document.removeEventListener("keydown", handleEscape);
+      };
+   }, [dispatch]);
+
    return (
       <SearchContentContainer>
-         <SearchType dispatch={dispatch} />
-         <div className="w-full h-96 overflow-hidden">
+         <SearchType state={state} dispatch={dispatch} />
+         <div className="w-full flex-1 overflow-hidden">
             {inputValue.length <= 1 ? (
                <SearchMessage message="Type at least 2 characters to see results" />
             ) : !results ? (
@@ -28,7 +40,9 @@ export default function SearchContent({ state, dispatch }: Props) {
                <SearchMessage message="The search did not return any results" />
             )}
          </div>
-         <SearchKeys />
+         <Responsive minWidth={XL_MEDIA_QUERY}>
+            <SearchKeys />
+         </Responsive>
       </SearchContentContainer>
    );
 }
