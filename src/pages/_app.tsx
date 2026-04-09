@@ -8,11 +8,14 @@ import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Fragment, useEffect } from "react";
 import { ReactLenis } from "lenis/react";
-import MainLayout from "@/common/components/MainLayout";
+import PageLoader from "@/features/layout/loader/components/PageLoader";
+import Background from "@/features/layout/background/components/Background";
+import Navbar from "@/features/layout/navbar/components/Navbar";
+import Notification from "@/features/layout/notification/components/Notification";
 
 function App({ Component, ...rest }: AppProps) {
    const router = useRouter();
-   const { route } = router;
+   const { route, pathname } = router;
 
    const isAuth = route === "/auth" || route === "/auth/sso-callback";
 
@@ -44,9 +47,17 @@ function App({ Component, ...rest }: AppProps) {
                      <Component {...pageProps} />
                   </Fragment>
                ) : (
-                  <MainLayout key="main">
-                     <Component {...pageProps} />
-                  </MainLayout>
+                  <Fragment key="main">
+                     <Navbar />
+                     <Background />
+                     <Notification />
+                     <PageLoader />
+                     <AnimatePresence mode="wait" propagate>
+                        <Fragment key={pathname}>
+                           <Component {...pageProps} />
+                        </Fragment>
+                     </AnimatePresence>
+                  </Fragment>
                )}
             </AnimatePresence>
          </Provider>

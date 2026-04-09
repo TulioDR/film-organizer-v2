@@ -1,0 +1,54 @@
+import React, { useEffect, useState } from "react";
+import BookmarkButton from "./BookmarkButton";
+import { MediaDetailsModel } from "@/features/pages/media-id/models/MediaDetailsModel";
+import { Media } from "@/common/models/Media";
+import useIsMediaSaved from "../hooks/useIsMediaSaved";
+import LoginAdviceModal from "@/features/modals/user-modals/login-advice-modal/components/LoginAdviceModal";
+import { useUser } from "@clerk/nextjs";
+import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/components/SaveMediaModal";
+
+type Props = {
+   media: Media | MediaDetailsModel;
+   mediaType: "tv" | "movie";
+};
+
+export default function Bookmark({ media, mediaType }: Props) {
+   const [isLoginAdviceOpen, setIsLoginAdviceOpen] = useState(false);
+   const [isSaveMediaOpen, setIsSaveMediaOpen] = useState(false);
+   const [mediaToSave, setMediaToSave] = useState<string | null>(null);
+
+   useEffect(() => {}, []);
+
+   const { user } = useUser();
+
+   const handleBookmarkClick = () => {
+      if (user) {
+         setIsSaveMediaOpen(true);
+      } else {
+         setIsLoginAdviceOpen(true);
+      }
+   };
+
+   // const { handleBookmarkClick } = useBookmarkClick(media, mediaType);
+   // const { isMediaSaved, isLoading } = useIsMediaSaved(media.id, mediaType);
+
+   return (
+      <>
+         <BookmarkButton
+            onClick={handleBookmarkClick}
+            isLoading={false}
+            isMediaSaved={false}
+         />
+         <LoginAdviceModal
+            isOpen={isLoginAdviceOpen}
+            closeModal={() => setIsLoginAdviceOpen(false)}
+            message="You need to be Logged in first to save Movies and TV Shows to your Lists"
+         />
+         <SaveMediaModal
+            isOpen={isSaveMediaOpen}
+            closeModal={() => setIsSaveMediaOpen(false)}
+            mediaToSave={{ media, mediaType }}
+         />
+      </>
+   );
+}

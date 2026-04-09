@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import DropdownMenu from "./DropdownMenu";
 import MainMenu from "./menus/MainMenu";
 import ThemeColorsMenu from "./menus/ThemeColorsMenu";
-import GlassContainer from "@/common/components/GlassContainer";
 
 export default function NavDropdown() {
    const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,12 +25,12 @@ export default function NavDropdown() {
    }, [menu]);
 
    return (
-      <GlassContainer className="h-12 relative  hover:bg-white hover:text-black">
+      <div className="h-12 relative  hover:bg-white hover:text-black">
          <motion.button
             tabIndex={0}
             onBlur={handleBlur}
             onClick={toggle}
-            className="rounded-full h-full aspect-square overflow-hidden"
+            className="rounded-full lh-ful aspect-square overflow-hidden"
          >
             <div className="w-full h-full flex items-center justify-center">
                <span className="material-symbols-outlined">menu</span>
@@ -52,6 +51,6 @@ export default function NavDropdown() {
                {menu === "colors" && <ThemeColorsMenu setMenu={setMenu} />}
             </DropdownMenu>
          )}
-      </GlassContainer>
+      </div>
    );
 }

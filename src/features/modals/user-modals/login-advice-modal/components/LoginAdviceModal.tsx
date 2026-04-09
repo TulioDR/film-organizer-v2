@@ -1,37 +1,35 @@
 import { useRouter } from "next/router";
 
-import { bookmarkActions } from "@/store/slices/bookmark-slice";
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
-import useAppSelector from "@/store/hooks/useAppSelector";
-import useAppDispatch from "@/store/hooks/useAppDispatch";
 
-export default function LoginAdviceModal() {
+type props = {
+   isOpen: boolean;
+   message: string;
+   closeModal: () => void;
+};
+
+export default function LoginAdviceModal({
+   isOpen,
+   message,
+   closeModal,
+}: props) {
    const router = useRouter();
    const goToLogin = () => {
       router.push("/auth");
    };
 
-   const { isLoginAdviceOpen } = useAppSelector((state) => state.bookmark);
-
-   const dispatch = useAppDispatch();
-   const closeModal = () => {
-      dispatch(bookmarkActions.closeLoginAdviceModal());
-   };
    return (
-      <ModalPortal isOpen={isLoginAdviceOpen}>
+      <ModalPortal isOpen={isOpen}>
          <ModalContainer closeModal={closeModal}>
             <ModalTitle>Login First!</ModalTitle>
-            <div className="w-full sm:w-80 text-text-2">
-               You need to be Logged in first to save Movies and TV Shows to
-               your Lists
-            </div>
+            <div className="w-full sm:w-80 text-text-2">{message}</div>
             <ModalButtonsContainer>
                <ModalButton onClick={closeModal}>Close</ModalButton>
-               <ModalButton onClick={goToLogin} blue>
+               <ModalButton onClick={goToLogin} special>
                   Login
                </ModalButton>
             </ModalButtonsContainer>

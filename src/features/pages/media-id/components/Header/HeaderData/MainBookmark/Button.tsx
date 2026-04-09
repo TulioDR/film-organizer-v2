@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Bookmark from "@/features/bookmark/components/Bookmark";
-import GlassContainer from "@/common/components/GlassContainer";
 
 type Props = {
    media: any;
@@ -19,13 +18,7 @@ export default function Button({ mediaType, media }: Props) {
          transition={transition}
          className="w-full h-full relative z-20"
       >
-         <GlassContainer className="h-full aspect-square overflow-hidden">
-            <Bookmark
-               media={media}
-               type={mediaType}
-               className="hover:bg-white hover:text-black"
-            />
-         </GlassContainer>
+         <Bookmark media={media} mediaType={mediaType} />
       </motion.div>
    );
 }

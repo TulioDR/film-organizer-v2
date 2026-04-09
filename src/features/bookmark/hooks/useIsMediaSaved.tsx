@@ -21,7 +21,7 @@ export default function useIsMediaSaved(id: number, mediaType: MediaType) {
    const { user } = useUser();
 
    const { mediaToSave, isSaveMediaOpen } = useAppSelector(
-      (state) => state.bookmark
+      (state) => state.bookmark,
    );
 
    useEffect(() => {

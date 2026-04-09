@@ -10,6 +10,8 @@ import Body from "@/features/pages/media-id/components/Body";
 import { AnimatePresence } from "framer-motion";
 import useBackground from "@/features/layout/background/hooks/useBackground";
 import { useLenis } from "lenis/react";
+import Responsive from "@/common/components/Responsive";
+import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -48,7 +50,10 @@ export default function MediaId({ media_type, media }: Props) {
 
    return (
       <>
-         <BackgroundViewButton hideUi={hideUi} onClick={toggleUi} />
+         <Responsive minWidth={XL_MEDIA_QUERY}>
+            <BackgroundViewButton hideUi={hideUi} onClick={toggleUi} />
+         </Responsive>
+
          <AnimatePresence
             mode="wait"
             propagate

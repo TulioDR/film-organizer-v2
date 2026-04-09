@@ -6,10 +6,10 @@ import BackHeader from "./BackHeader";
 import Responsive from "@/common/components/Responsive";
 import { SM_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import OverviewButton from "./Overview/OverviewButton";
-import CardBookmark from "./CardBookmark";
 import { AnimatePresence, motion } from "framer-motion";
 import BackIcon from "./BackIcon";
 import Overview from "./Overview/Overview";
+import Bookmark from "@/features/bookmark/components/Bookmark";
 
 type Props = {
    media: Media;
@@ -46,19 +46,12 @@ export default function Back({
                className="w-full h-full flex flex-col gap-2 xl:gap-4 p-2 xl:p-4 overflow-hidden z-10 relative"
             >
                <BackTitle title={title} year={releaseDate} />
-               {/* <div className="w-full h-16 flex gap-1">
-                  <CardBookmark media={media} mediaType={mediaType} />
-                  <div className="h-full flex-1 flex flex-col gap-1">
-                     <OverviewButton onClick={toggleOverview} />
-                     <LearnMore id={id} onClick={onLearnMore} />
-                  </div>
-               </div> */}
                <div className="w-full flex flex-col gap-1 xl:gap-2">
                   <div className="w-full h-9">
                      <OverviewButton onClick={toggleOverview} />
                   </div>
                   <div className="flex h-12 gap-1 xl:gap-2">
-                     <CardBookmark media={media} mediaType={mediaType} />
+                     <Bookmark media={media} mediaType={mediaType} />
                      <LearnMore id={id} onClick={onLearnMore} />
                   </div>
                </div>

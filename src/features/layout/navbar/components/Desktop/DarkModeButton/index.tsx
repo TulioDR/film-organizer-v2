@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { themeActions } from "@/store/slices/theme-slice";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {};
 
@@ -11,6 +12,23 @@ export default function DarkModeButton({}: Props) {
    const toggle = () => {
       dispatch(themeActions.toggleDarkMode());
    };
+
+   const { isDarkMode } = useAppSelector((state) => state.theme);
+
+   // const [darkMode, setDarkMode] = useState(
+   //    localStorage.getItem("theme") === "dark",
+   // );
+
+   useEffect(() => {
+      const root = window.document.documentElement;
+      if (isDarkMode) {
+         root.classList.add("dark");
+         // localStorage.setItem("theme", "dark");
+      } else {
+         root.classList.remove("dark");
+         // localStorage.setItem("theme", "light");
+      }
+   }, [isDarkMode]);
 
    return (
       <div className="h-12 py-2">

@@ -5,18 +5,14 @@ import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import DeleteListModal from "@/features/modals/list-modals/delete-list-modal/components/DeleteListModal";
 import PageHead from "@/common/components/PageHead";
 import List from "@/common/models/List";
-import ListsLoginAdvice from "@/features/pages/manage-lists/components/ListsLoginAdvice";
-import NoListsMessage from "@/features/pages/manage-lists/components/NoListsMessage";
-import ListsCardsContainer from "@/features/pages/manage-lists/components/ListsCardsContainer";
-import ListCard from "@/features/pages/manage-lists/components/ListCard";
 import useAppSelector from "@/store/hooks/useAppSelector";
-import usePageTitle from "@/features/layout/page-title/hooks/usePageTitle";
+import useAppDispatch from "@/store/hooks/useAppDispatch";
+import { listActions } from "@/store/slices/list-slice";
+import { getLists } from "@/api/lists";
 
 export default function Lists() {
    const { user } = useUser();
    const { lists } = useAppSelector((state) => state.lists);
-
-   usePageTitle({ text: "Playlists", link: "/lists" });
 
    const [listToDelete, setListToDelete] = useState<List | null>(null);
 
@@ -42,11 +38,24 @@ export default function Lists() {
       setFilteredLists(founded);
    }, [inputValue, lists]);
 
+   const dispatch = useAppDispatch();
+   useEffect(() => {
+      const getInitialLists = async () => {
+         if (!user) {
+            dispatch(listActions.setLists(null));
+            return;
+         }
+         const lists = await getLists(user.id);
+         dispatch(listActions.setLists(lists));
+      };
+      getInitialLists();
+   }, [user, dispatch]);
+
    return <></>;
    // if (filteredLists === null) return <></>;
    // return (
    //    <div className="overflow-hidden">
-   //       <PageHead title="Manage Lists" />
+   //       <PageHead title="Playlists" />
    //       {/* <ListFinder
    //          onChange={(e) => setInputValue(e.currentTarget.value)}
    //          value={inputValue}

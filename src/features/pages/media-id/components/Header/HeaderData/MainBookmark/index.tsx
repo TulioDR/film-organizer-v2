@@ -2,7 +2,6 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Button from "./Button";
 import Container from "./Container";
-import FixedUIPortal from "@/features/layout/main-layout/components/FixedUIPortal";
 type Props = {
    media: any;
    mediaType: "movie" | "tv";

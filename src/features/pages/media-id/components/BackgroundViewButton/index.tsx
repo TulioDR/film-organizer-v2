@@ -1,5 +1,5 @@
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 import React from "react";
-import GlassContainer from "@/common/components/GlassContainer";
 type Props = {
    hideUi: boolean;
    onClick: () => void;
@@ -7,15 +7,20 @@ type Props = {
 
 export default function BackgroundViewButton({ hideUi, onClick }: Props) {
    return (
-      <GlassContainer
+      <button
          onClick={onClick}
-         noHide
-         el="button"
-         className="fixed bottom-4 right-8 w-16 aspect-square flex items-center justify-center hover:bg-white hover:text-black"
+         style={{ borderRadius: STANDARD_RADIUS }}
+         className={`fixed bottom-4 right-8 w-16 z-10 aspect-square flex items-center justify-center 
+            border border-border-light dark:border-border-dark
+            hover:border-black dark:hover:border-white
+            active:border-black dark:active:border-white 
+            bg-white dark:bg-black text-black dark:text-white
+
+         `}
       >
          <span className="material-symbols-outlined">
             {hideUi ? "visibility" : "visibility_off"}
          </span>
-      </GlassContainer>
+      </button>
    );
 }
