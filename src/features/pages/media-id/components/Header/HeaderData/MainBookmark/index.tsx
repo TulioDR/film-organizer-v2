@@ -2,6 +2,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Button from "./Button";
 import Container from "./Container";
+import { createPortal } from "react-dom";
 type Props = {
    media: any;
    mediaType: "movie" | "tv";
@@ -20,16 +21,14 @@ export default function MainBookmark({ mediaType, media }: Props) {
          {isInView ? (
             <Button mediaType={mediaType} media={media} />
          ) : (
-            <>
-               <div className="fixed right-8 bottom-1/2 translate-y-1/2 w-16 aspect-square">
-                  <Button mediaType={mediaType} media={media} />
-               </div>
-               {/* <FixedUIPortal>
-               <div className="absolute bottom-0 right-0 lg:bottom-1/2 lg:translate-y-1/2 w-16 aspect-square">
-                  <Button mediaType={mediaType} media={media} />
-               </div>
-            </FixedUIPortal> */}
-            </>
+            createPortal(
+               <div className="fixed right-4 lg:right-8 top-0 flex items-center h-[100svh] w-16">
+                  <div className="w-full aspect-square">
+                     <Button mediaType={mediaType} media={media} />
+                  </div>
+               </div>,
+               document.body,
+            )
          )}
       </Container>
    );

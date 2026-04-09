@@ -1,3 +1,4 @@
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 import Image from "next/image";
 import React from "react";
 
@@ -9,7 +10,10 @@ type Props = {
 
 export default function Mobile({ alt, posterPath, backPath }: Props) {
    return (
-      <div className="w-full relative aspect-video border-2 border-gray-200 rounded-2xl overflow-hidden shadow-lg">
+      <div
+         style={{ borderRadius: STANDARD_RADIUS }}
+         className="w-full relative aspect-video border border-border-light dark:border-border-dark overflow-hidden shadow-lg"
+      >
          <Image
             alt={alt}
             src={`https://image.tmdb.org/t/p/w${780}${backPath}`}

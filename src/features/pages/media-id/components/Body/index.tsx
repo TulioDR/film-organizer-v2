@@ -14,7 +14,7 @@ type Props = {
 
 export default function Body({ media, media_type }: Props) {
    return (
-      <div className="gap-4 xl:gap-8 grid xl:grid-cols-2 text-black relative -mt-20 px-32 pb-4">
+      <div className="gap-4 xl:gap-8 grid xl:grid-cols-2 text-black relative mt-4 xl:-mt-20 px-4 lg:px-32 pb-14 mb-4 xl:mb-0 xl:pb-4">
          <Overview media={media} />
          <MediaData
             media={media}
