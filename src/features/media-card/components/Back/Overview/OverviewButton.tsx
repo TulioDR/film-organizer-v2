@@ -1,11 +1,24 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 
-type Props = {};
+type Props = {
+   onClick: () => void;
+};
 
-export default function OverviewButton({}: Props) {
+export default function OverviewButton({ onClick }: Props) {
    return (
-      <button className="h-full px-4 flex-1 xl:flex-none bg-background-light dark:bg-background-accent-dark text-black dark:text-white rounded flex items-center justify-center border border-border-light dark:border-border-dark">
+      <motion.button
+         onClick={onClick}
+         style={{ borderRadius: STANDARD_RADIUS }}
+         className={`w-full h-full px-4 flex items-center justify-center border
+            bg-background-light dark:bg-background-accent-dark
+            border-border-light dark:border-border-dark
+            hover:border-black dark:hover:border-white
+            active:border-black dark:active:border-white
+         `}
+      >
          <span className="text-sm">Overview</span>
-      </button>
+      </motion.button>
    );
 }

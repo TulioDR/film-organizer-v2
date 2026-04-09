@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import CustomPagination from "../../CustomPagination";
-import PageSubtitle from "@/common/components/PageSubtitle";
+import BodySubtitle from "../BodySubtitle";
 
 type InfoContainerProps<T> = {
    itemsPerPage: number;
@@ -34,7 +34,7 @@ export default function InfoContainer<T>({
 
    return (
       <Container className={className}>
-         <PageSubtitle>{subtitle}</PageSubtitle>
+         <BodySubtitle>{subtitle}</BodySubtitle>
          {displayedMedia.length > 0 ? (
             <div
                style={{

@@ -1,5 +1,4 @@
 import { Pagination } from "@mantine/core";
-import { motion } from "framer-motion";
 import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
@@ -16,14 +15,9 @@ export default function InnerCustomPagination({
    value,
 }: Props) {
    const { isDarkMode } = useAppSelector((state) => state.theme);
-   const { isHidden } = useAppSelector((state) => state.layout);
 
    return (
-      <motion.div
-         animate={{ opacity: isHidden ? 0 : 1 }}
-         transition={{ duration: 0.2 }}
-         className="w-full flex justify-center"
-      >
+      <div className="w-full flex justify-center">
          <Pagination
             total={total}
             value={value}
@@ -52,6 +46,6 @@ export default function InnerCustomPagination({
                },
             }}
          />
-      </motion.div>
+      </div>
    );
 }

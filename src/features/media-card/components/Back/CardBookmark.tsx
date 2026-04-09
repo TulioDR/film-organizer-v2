@@ -1,4 +1,4 @@
-import Bookmark from "@/features/bookmark/components/Bookmark";
+import BookmarkButton from "@/features/bookmark/components/BookmarkButton";
 import React from "react";
 
 type Props = {
@@ -7,9 +7,5 @@ type Props = {
 };
 
 export default function CardBookmark({ media, mediaType }: Props) {
-   return (
-      <div className="bg-accent h-full aspect-square rounded">
-         <Bookmark media={media} type={mediaType} />
-      </div>
-   );
+   return <BookmarkButton media={media} type={mediaType} />;
 }

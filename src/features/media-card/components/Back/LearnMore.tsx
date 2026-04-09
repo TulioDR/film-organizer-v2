@@ -10,7 +10,7 @@ export default function LearnMore({ onClick, id }: Props) {
       <motion.button
          layoutId={`back-loading-${id}`}
          onClick={onClick}
-         className="text-white dark:text-black bg-accent flex items-center justify-center h-8 xl:h-10 w-full rounded-md"
+         className="text-white dark:text-black bg-accent flex items-center justify-center flex-1 h-full rounded-md"
       >
          <span className="text-xs 2xl:text-sm font-medium uppercase">
             Learn More
