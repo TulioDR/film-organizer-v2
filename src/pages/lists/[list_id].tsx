@@ -24,33 +24,33 @@ type Props = {
 };
 
 export default function ListID({ list_id }: Props) {
-   const { media, refresh } = useMediaData(list_id);
-   const { list } = useListData(list_id);
+   // const { media, refresh } = useMediaData(list_id);
+   // const { list } = useListData(list_id);
 
-   const { filteredMedia, selectedType, setSelectedType, sortBy, setSortBy } =
-      useSavedMediaFilter(media, list_id);
+   // const { filteredMedia, selectedType, setSelectedType, sortBy, setSortBy } =
+   //    useSavedMediaFilter(media, list_id);
 
-   const {
-      mediaToDelete,
-      onCardTap,
-      isDeleteModeActive,
-      startDeleteMode,
-      stopDeleteMode,
-      showButtons,
-      textControls,
-   } = useDeleteMode();
+   // const {
+   //    mediaToDelete,
+   //    onCardTap,
+   //    isDeleteModeActive,
+   //    startDeleteMode,
+   //    stopDeleteMode,
+   //    showButtons,
+   //    textControls,
+   // } = useDeleteMode();
 
-   const { isModalOpen, openModal, closeModal } = useModalState();
+   // const { isModalOpen, openModal, closeModal } = useModalState();
 
-   if (!list || !filteredMedia)
-      return (
-         <div className="w-40 mx-auto mt-20">
-            <LoadingSpinner />
-         </div>
-      );
+   // if (!list || !filteredMedia)
+   //    return (
+   //       <div className="w-40 mx-auto mt-20">
+   //          <LoadingSpinner />
+   //       </div>
+   //    );
    return (
       <>
-         <PageHead title={list?.name || ""} />
+         {/* <PageHead title={list?.name || ""} /> */}
          {/* <Title title={list.name}>
             <MediaFilter
                selectedType={selectedType}
@@ -59,7 +59,7 @@ export default function ListID({ list_id }: Props) {
                setSortBy={setSortBy}
             />
          </Title> */}
-         <SavedMediaCards
+         {/* <SavedMediaCards
             selectedType={selectedType}
             filteredMedia={filteredMedia}
             mediaToDelete={mediaToDelete}
@@ -67,16 +67,16 @@ export default function ListID({ list_id }: Props) {
             onCardTap={onCardTap}
             listId={list_id}
             refresh={refresh}
-         />
-         <DeleteMode
+         /> */}
+         {/* <DeleteMode
             showButtons={showButtons}
             mediaToDelete={mediaToDelete}
             startDeleteMode={startDeleteMode}
             stopDeleteMode={stopDeleteMode}
             openDeleteModal={openModal}
             textControls={textControls}
-         />
-         <ModalPortal isOpen={isModalOpen}>
+         /> */}
+         {/* <ModalPortal isOpen={isModalOpen}>
             <DeleteMediaModal
                list={list}
                close={closeModal}
@@ -84,7 +84,7 @@ export default function ListID({ list_id }: Props) {
                refresh={refresh}
                stopDeleteMode={stopDeleteMode}
             />
-         </ModalPortal>
+         </ModalPortal> */}
       </>
    );
 }
