@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
 import useHomeContext from "../../context/HomeContext";
 import { HOME_DURATION, HOME_EASE } from "../../constants/ANIMATIONS";
 

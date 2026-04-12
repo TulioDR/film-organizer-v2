@@ -35,16 +35,17 @@ function App({ Component, ...rest }: AppProps) {
    return (
       <ClerkProvider {...pageProps}>
          <Provider store={store}>
-            <ReactLenis root />
-            <Navbar />
-            <Background />
-            <Notification />
-            <PageLoader />
-            <AnimatePresence mode="wait" propagate>
-               <Fragment key={router.pathname}>
-                  <Component {...pageProps} />
-               </Fragment>
-            </AnimatePresence>
+            <ReactLenis root>
+               <Navbar />
+               <Background />
+               <Notification />
+               <PageLoader />
+               <AnimatePresence mode="wait" propagate>
+                  <Fragment key={router.pathname}>
+                     <Component {...pageProps} />
+                  </Fragment>
+               </AnimatePresence>
+            </ReactLenis>
          </Provider>
       </ClerkProvider>
    );

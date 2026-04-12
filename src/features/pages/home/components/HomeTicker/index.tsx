@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import GroupTicker from "./GroupTicker";
 import useHomeContext from "../../context/HomeContext";
@@ -12,7 +11,13 @@ export default function HomeTicker({}: Props) {
    const currentIndex = allGroups.findIndex((g) => g.id === mediaGroup.id);
 
    return (
-      <div className="w-full xl:w-[410px] h-full flex-shrink-0 bg-primary-light dark:bg-primary-dark brightness-50 xl:brightness-100 pointer-events-none xl:pointer-events-auto overflow-hidden relative">
+      <motion.div
+         initial={{ x: "-100%", opacity: 0 }}
+         animate={{ x: "0%", opacity: 1 }}
+         exit={{ x: "-100%", opacity: 0 }}
+         transition={{ duration: 0.4 }}
+         className="w-full xl:w-[410px] h-full flex-shrink-0 bg-primary-light dark:bg-primary-dark brightness-50 xl:brightness-100 pointer-events-none xl:pointer-events-auto overflow-hidden relative"
+      >
          <motion.div
             animate={{ x: `-${(100 / allGroups.length) * currentIndex}%` }}
             transition={HOME_TRANSITION}
@@ -22,6 +27,6 @@ export default function HomeTicker({}: Props) {
                <GroupTicker key={group.id} groupMedia={group.media} />
             ))}
          </motion.div>
-      </div>
+      </motion.div>
    );
 }

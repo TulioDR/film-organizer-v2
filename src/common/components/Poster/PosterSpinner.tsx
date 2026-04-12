@@ -1,10 +1,12 @@
-import React from "react";
-import Reel from "@/features/layout/loader/components/Reel";
-
 type Props = {
    front?: true;
    back?: true;
 };
+import dynamic from "next/dynamic";
+const LoadingSpinner = dynamic(
+   () => import("@/common/components/LoadingSpinner"),
+   { ssr: false },
+);
 
 export default function PosterSpinner({ front, back }: Props) {
    return (
@@ -16,7 +18,7 @@ export default function PosterSpinner({ front, back }: Props) {
                      ${!front && !back ? "w-1/5" : ""}
                   `}
          >
-            <Reel spin />
+            <LoadingSpinner />
          </div>
       </div>
    );

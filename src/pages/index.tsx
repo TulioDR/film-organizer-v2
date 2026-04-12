@@ -37,7 +37,13 @@ export default function Home({ data: allGroups }: Props) {
                <HomeTicker />
                <div className="h-full flex-1 flex flex-col gap-4 pl-4 pb-4">
                   <HomeBanner />
-                  <div className="w-full flex-1 pr-32 flex flex-col justify-between gap-4">
+                  <motion.div
+                     initial={{ scale: 0.9, opacity: 0 }}
+                     animate={{ scale: 1, opacity: 1 }}
+                     exit={{ scale: 0.9, opacity: 0 }}
+                     transition={{ duration: 0.4 }}
+                     className="w-full flex-1 pr-32 flex flex-col justify-between gap-4"
+                  >
                      <div className="flex w-full justify-between h-16">
                         <HomeAutoPlay />
                         <div className="h-full flex gap-4">
@@ -50,7 +56,7 @@ export default function Home({ data: allGroups }: Props) {
                         <HomeMediaHandler />
                      </div>
                      <ChangeMediaGroup />
-                  </div>
+                  </motion.div>
                </div>
             </motion.div>
          </Responsive>

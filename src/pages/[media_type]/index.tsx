@@ -36,7 +36,8 @@ export default function MediaTypePage(response: Props) {
 
    const lenis = useLenis();
    const onExitComplete = () => {
-      lenis!.scrollTo("top", { immediate: true });
+      if (!lenis) return;
+      lenis.scrollTo("top", { immediate: true });
    };
 
    const isMobile = useMediaQuery({

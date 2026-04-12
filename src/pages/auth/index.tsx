@@ -15,13 +15,9 @@ import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import AuthContainer from "@/features/authentication/components/AuthContainer";
 
 import dynamic from "next/dynamic";
-
-// Replace your old import with this dynamic one
 const LoadingSpinner = dynamic(
    () => import("@/common/components/LoadingSpinner"),
-   {
-      ssr: false, // This tells Next.js not to try to render this on the server
-   },
+   { ssr: false },
 );
 
 export default function Auth() {
