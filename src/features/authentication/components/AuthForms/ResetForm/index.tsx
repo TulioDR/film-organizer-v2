@@ -1,9 +1,8 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Transition } from "framer-motion";
 import useResetPassword from "../../../hooks/useResetPassword";
 import MainResetForm from "./MainResetForm";
 import ResetVerificationForm from "./ResetVerificationForm";
-import AuthAppLogo from "../../AuthAppLogo";
-import SkipAuthButton from "../../SkipAuthButton";
+import { AUTH_TRANSITION } from "@/features/authentication/Constants/AUTH_TRANSITION";
 
 interface Props {
    showReset: boolean;
@@ -18,15 +17,19 @@ export default function ResetForm({ showReset, closeReset }: Props) {
       <AnimatePresence>
          {showReset && (
             <motion.div
-               initial={{ height: 0 }}
-               animate={{ height: "100%" }}
-               exit={{ height: 0 }}
-               transition={{ duration: 1 }}
-               className="fixed z-20 bottom-0 h-screen w-full bg-primary-dark text-dark-1 overflow-hidden origin-bottom flex items-end"
+               initial={{ y: "100%" }}
+               animate={{ y: 0 }}
+               exit={{ y: "100%" }}
+               transition={AUTH_TRANSITION}
+               className="absolute z-20 inset-0 bg-black dark:bg-white text-white dark:text-black overflow-hidden origin-bottom flex items-end"
             >
-               <div className="h-screen w-full flex justify-center md:items-center relative pt-20 md:pt-0">
-                  <AuthAppLogo white />
-                  <SkipAuthButton white />
+               <motion.div
+                  initial={{ y: "-100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-100%" }}
+                  transition={AUTH_TRANSITION}
+                  className="h-full w-full flex justify-center items-center relative"
+               >
                   {!successfulCreation && (
                      <MainResetForm
                         onSubmit={handleReset}
@@ -38,7 +41,7 @@ export default function ResetForm({ showReset, closeReset }: Props) {
                         onSubmit={handleResetVerification}
                      />
                   )}
-               </div>
+               </motion.div>
             </motion.div>
          )}
       </AnimatePresence>

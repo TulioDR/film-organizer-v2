@@ -4,12 +4,13 @@ import DarkModeButton from "./DarkModeButton";
 import NavDropdown from "./NavDropdown";
 import NavSearch from "./NavSearch";
 import NavItems from "./NavItems";
+import NavbarContainer from "../NavbarContainer";
 
 type Props = {};
 
 export default function Desktop({}: Props) {
    return (
-      <div className="w-full z-20 fixed top-0 left-0 bg-white dark:bg-black h-20 border-b border-border-light dark:border-border-dark flex justify-center pointer-events-auto py-4 px-32">
+      <NavbarContainer className="">
          <div className="flex items-center w-[410px]">
             <NavTitle />
          </div>
@@ -21,6 +22,6 @@ export default function Desktop({}: Props) {
                <DarkModeButton />
             </div>
          </div>
-      </div>
+      </NavbarContainer>
    );
 }

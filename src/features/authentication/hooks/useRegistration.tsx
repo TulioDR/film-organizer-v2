@@ -3,7 +3,7 @@ import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 
 export default function useRegistration() {
-   const { isLoaded, signUp, setActive } = useSignUp();
+   const { signUp } = useSignUp();
    const [pendingVerification, setPendingVerification] = useState(false);
 
    const router = useRouter();
@@ -18,47 +18,49 @@ export default function useRegistration() {
 
    const handleRegister = async (values: any) => {
       const { email, password, username } = values;
-      if (!isLoaded) return;
 
-      try {
-         await signUp.create({
-            username: username,
-            emailAddress: email,
-            password: password,
-         });
+      const { error } = await signUp.password({
+         emailAddress: email,
+         password,
+         username,
+      });
 
-         // send the email.
-         await signUp.prepareEmailAddressVerification({
-            strategy: "email_code",
-         });
-
-         // change the UI to our pending section.
+      if (error) {
+         console.error(JSON.stringify(error, null, 2));
+      } else {
+         await signUp.verifications.sendEmailCode();
          setPendingVerification(true);
-      } catch (err: any) {
-         console.error(JSON.stringify(err, null, 2));
       }
    };
 
    const handleRegisterVerification = async (values: any) => {
       const { code } = values;
-      if (!isLoaded) {
-         return;
-      }
-
+      console.log("the code is:", code);
       try {
-         const completeSignUp = await signUp.attemptEmailAddressVerification({
+         await signUp.verifications.verifyEmailCode({
             code,
          });
-         if (completeSignUp.status !== "complete") {
-            /*  investigate the response, to see if there was an error
-            or if the user needs to complete more steps.*/
-            console.log(JSON.stringify(completeSignUp, null, 2));
-         }
-         if (completeSignUp.status === "complete") {
-            await setActive({ session: completeSignUp.createdSessionId });
-            setIsComplete(true);
+         if (signUp.status === "complete") {
+            await signUp.finalize({
+               // Redirect the user to the home page after signing up
+               navigate: ({ session, decorateUrl }) => {
+                  if (session?.currentTask) {
+                     console.log(session?.currentTask);
+                     return;
+                  }
+
+                  // If no session tasks, navigate the signed-in user to the home page
+                  const url = decorateUrl("/");
+                  if (url.startsWith("http")) {
+                     window.location.href = url;
+                  } else {
+                     router.push(url);
+                  }
+               },
+            });
          }
       } catch (err: any) {
+         console.error("Sign-up attempt not complete:", signUp);
          console.error(JSON.stringify(err, null, 2));
       }
    };

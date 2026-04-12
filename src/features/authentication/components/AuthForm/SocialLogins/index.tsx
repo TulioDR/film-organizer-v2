@@ -1,19 +1,26 @@
 import SocialLogin from "./SocialLogin";
 import googleLogo from "@/data/images/logos/google.png";
 import githubLogo from "@/data/images/logos/github.png";
-import discordLogo from "@/data/images/logos/discord.png";
-import { OAuthStrategy } from "@clerk/types";
 
-import { useSignIn } from "@clerk/nextjs";
+import { useSignIn } from "@clerk/nextjs/legacy";
+import { useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
 
 type Props = {};
 
 export default function SocialLogins({}: Props) {
-   const { signIn } = useSignIn();
+   const { signIn, isLoaded } = useSignIn();
 
-   const handleAuth = (strategy: OAuthStrategy) => {
+   const user = useUser();
+   useEffect(() => {
+      console.log(user.user);
+   }, [user.user]);
+
+   const handleAuth = async (strategy: "oauth_google" | "oauth_github") => {
       try {
-         signIn!.authenticateWithRedirect({
+         if (!isLoaded) return;
+
+         await signIn.authenticateWithRedirect({
             strategy: strategy,
             redirectUrl: "/auth/sso-callback",
             redirectUrlComplete: "/",
@@ -25,10 +32,9 @@ export default function SocialLogins({}: Props) {
 
    const googleAuth = () => handleAuth("oauth_google");
    const githubAuth = () => handleAuth("oauth_github");
-   const discordAuth = () => handleAuth("oauth_discord");
 
    return (
-      <div className="flex justify-between gap-5">
+      <div className="flex justify-between gap-4">
          <SocialLogin
             logo={googleLogo}
             provider="google"
@@ -38,11 +44,6 @@ export default function SocialLogins({}: Props) {
             logo={githubLogo}
             provider="github"
             onClick={githubAuth}
-         />
-         <SocialLogin
-            logo={discordLogo}
-            provider="discord"
-            onClick={discordAuth}
          />
       </div>
    );

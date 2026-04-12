@@ -1,13 +1,13 @@
 import { useUser } from "@clerk/nextjs";
 import { useState, useRef } from "react";
 import EditButton from "./EditButton";
-import useNotification from "@/features/notification/hooks/useNotification";
+// import useNotification from "@/features/notification/hooks/useNotification";
 
 type Props = {};
 
 export default function AccountUsername({}: Props) {
    const { user } = useUser();
-   const { showSuccessNotification, showErrorNotification } = useNotification();
+   // const { showSuccessNotification, showErrorNotification } = useNotification();
 
    const inputRef = useRef<HTMLInputElement>(null);
    const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
@@ -20,20 +20,20 @@ export default function AccountUsername({}: Props) {
    };
 
    const updateUsername = async () => {
-      const { value } = inputRef.current!;
-      if (value == user!.username) {
-         setIsEditOpen(false);
-         return;
-      }
-      try {
-         await user!.update({
-            username: value,
-         });
-         showSuccessNotification("Username updated successfully");
-      } catch (error) {
-         showErrorNotification(error);
-      }
-      setIsEditOpen(false);
+      // const { value } = inputRef.current!;
+      // if (value == user!.username) {
+      //    setIsEditOpen(false);
+      //    return;
+      // }
+      // try {
+      //    await user!.update({
+      //       username: value,
+      //    });
+      //    showSuccessNotification("Username updated successfully");
+      // } catch (error) {
+      //    showErrorNotification(error);
+      // }
+      // setIsEditOpen(false);
    };
 
    if (!user) return <></>;

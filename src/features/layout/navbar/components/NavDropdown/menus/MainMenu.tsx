@@ -9,7 +9,7 @@ import { themeActions } from "@/store/slices/theme-slice";
 import { useEffect } from "react";
 import { darkThemeColors, lightThemeColors } from "@/data/themeColors";
 import { useUser } from "@clerk/nextjs";
-import { useClerk } from "@clerk/clerk-react";
+// import { useClerk } from "@clerk/clerk-react";
 import useAppSelector from "@/store/hooks/useAppSelector";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 
 export default function MainMenu({ setMenu, setIsOpen }: Props) {
    const { themeColor, isDarkMode, themeColorName } = useAppSelector(
-      (state) => state.theme
+      (state) => state.theme,
    );
    const dispatch = useAppDispatch();
 
@@ -29,9 +29,9 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
       router.push("/auth");
       setIsOpen(false);
    };
-   const { signOut } = useClerk();
+   // const { signOut } = useClerk();
    const logOut = async () => {
-      signOut();
+      // signOut();
       setIsOpen(false);
    };
 
@@ -47,12 +47,12 @@ export default function MainMenu({ setMenu, setIsOpen }: Props) {
    useEffect(() => {
       if (isDarkMode) {
          const newColor = darkThemeColors.find(
-            ({ name }) => name === themeColorName
+            ({ name }) => name === themeColorName,
          );
          dispatch(themeActions.changeThemeColor(newColor));
       } else {
          const newColor = lightThemeColors.find(
-            ({ name }) => name === themeColorName
+            ({ name }) => name === themeColorName,
          );
          dispatch(themeActions.changeThemeColor(newColor));
       }

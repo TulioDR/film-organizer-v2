@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer theme, base, clerk, components, utilities;
 html,
 body {
    padding: 0;
@@ -27,8 +27,4 @@ a {
 @font-face {
    font-family: "Octosquares";
    src: url("../fonts//TT\ Octosquares\ Trial\ Bold.ttf");
-}
-
-#custom-tailwind-input + button + div > div:nth-child(2) {
-   @apply !border-none !outline !outline-1 !outline-border-light dark:!outline-border-dark !bg-primary-light dark:!bg-primary-dark;
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import FilterCard from "../../FilterCard";
 import RangeInput from "../../RangeSelector";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";

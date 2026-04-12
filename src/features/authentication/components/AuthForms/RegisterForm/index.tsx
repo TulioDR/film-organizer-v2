@@ -1,23 +1,17 @@
 import useRegistration from "../../../hooks/useRegistration";
-import AuthFormContainer from "../../AuthForm/AuthFormContainer";
 import MainRegisterForm from "./MainRegisterForm";
 import RegisterVerificationForm from "./RegisterVerificationForm";
 
 interface Props {
-   showForm: boolean;
-   openLogin: () => void;
+   toggleForms: () => void;
 }
 
-export default function RegisterForm({ showForm, openLogin }: Props) {
+export default function RegisterForm({ toggleForms }: Props) {
    const { handleRegister, pendingVerification, handleRegisterVerification } =
       useRegistration();
-   return (
-      <AuthFormContainer showForm={showForm}>
-         {pendingVerification ? (
-            <RegisterVerificationForm onSubmit={handleRegisterVerification} />
-         ) : (
-            <MainRegisterForm onSubmit={handleRegister} openLogin={openLogin} />
-         )}
-      </AuthFormContainer>
+   return pendingVerification ? (
+      <RegisterVerificationForm onSubmit={handleRegisterVerification} />
+   ) : (
+      <MainRegisterForm onSubmit={handleRegister} openLogin={toggleForms} />
    );
 }

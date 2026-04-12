@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
    reactStrictMode: false,
-   swcMinify: true,
+   // swcMinify: true,
+   allowedDevOrigins: ["192.168.0.105"],
    images: {
+      qualities: [75, 100],
       remotePatterns: [
          {
             protocol: "https",

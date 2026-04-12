@@ -25,7 +25,7 @@ export default function Backdrop({ path }: Props) {
             fill
             sizes="100%"
             quality={100}
-            onLoadingComplete={onLoadingComplete}
+            onLoad={onLoadingComplete}
             className={`object-cover duration-200 ${isLoaded ? "" : "opacity-0"}`}
          />
          {!isLoaded && (

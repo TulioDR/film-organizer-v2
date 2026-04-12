@@ -10,7 +10,7 @@ export default function UnderlineButton({ onClick, children }: Props) {
       <button
          type="button"
          onClick={onClick}
-         className="hover:underline cursor-pointer text-xs sm:text-sm w-max mx-auto"
+         className="hover:underline active:underline cursor-pointer text-xs sm:text-sm w-max mx-auto"
       >
          {children}
       </button>

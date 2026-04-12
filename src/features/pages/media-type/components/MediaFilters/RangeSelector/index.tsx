@@ -1,4 +1,3 @@
-import React from "react";
 import CustomRangeInput from "./CustomRangeInput";
 import CustomStep from "./CustomStep";
 

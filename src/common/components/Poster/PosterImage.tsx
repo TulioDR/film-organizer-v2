@@ -24,7 +24,7 @@ export default function PosterImage({
          sizes="100%"
          priority
          quality={quality}
-         onLoadingComplete={onLoadingComplete}
+         onLoad={onLoadingComplete}
          className={`object-cover ${isLoaded ? "" : "opacity-0"}`}
       />
    );

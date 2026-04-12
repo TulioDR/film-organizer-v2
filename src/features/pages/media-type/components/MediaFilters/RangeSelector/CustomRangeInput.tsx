@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
    min: number;
    max: number;
@@ -24,7 +22,7 @@ export default function CustomRangeInput({
          value={value}
          onChange={onChange}
          style={{ padding: "0" }}
-         className="absolute w-full h-full appearance-none bg-transparent pointer-events-none left-0 z-10 
+         className="absolute w-full h-full appearance-none bg-transparent pointer-events-none left-0 
             [&::-webkit-slider-thumb]:w-6
             [&::-webkit-slider-thumb]:aspect-square
             [&::-webkit-slider-thumb]:pointer-events-auto

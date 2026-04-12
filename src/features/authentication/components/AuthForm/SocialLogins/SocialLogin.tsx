@@ -11,7 +11,7 @@ export default function SocialLogin({ onClick, logo, provider }: Props) {
       <button
          type="button"
          onClick={onClick}
-         className={`rounded-full h-11 aspect-square p-2 relative group border border-light-2`}
+         className={`rounded-full h-11 aspect-square p-2 relative group bg-white`}
       >
          <Image src={logo} alt={provider} className="h-full" />
          <div

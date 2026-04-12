@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import FilterCard from "../../FilterCard";
 import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";

@@ -32,12 +32,7 @@ export default function RegisterVerificationForm({ onSubmit }: Props) {
             A verification code has been sent to your email, please enter it on
             the input below to verify your account
          </AuthMessage>
-         <AuthInput
-            icon="key"
-            name="code"
-            placeholder="Verification code"
-            dark
-         />
+         <AuthInput icon="key" name="code" placeholder="Verification code" />
          <AuthButton submit>Verify</AuthButton>
       </AuthFormikContainer>
    );
