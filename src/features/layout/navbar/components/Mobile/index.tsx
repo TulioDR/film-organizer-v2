@@ -1,11 +1,10 @@
-import React from "react";
 import BottomNavButton from "./BottomNavButton";
 import MobileNavTitle from "./MobileNavTitle";
 import DarkModeButton from "../Desktop/DarkModeButton";
-import NavDropdown from "../NavDropdown";
 import NavSearch from "../Desktop/NavSearch";
 import { NAVIGATION_ITEMS } from "../../constants/NAVIGATION_ITEMS";
 import NavbarContainer from "../NavbarContainer";
+import NavDropdown from "../Desktop/NavDropdown";
 
 type Props = {};
 

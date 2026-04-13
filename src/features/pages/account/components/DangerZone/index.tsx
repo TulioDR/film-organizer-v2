@@ -13,16 +13,15 @@ export default function DangerZone({}: Props) {
    const { isModalOpen, openModal, closeModal } = useModalState();
 
    return (
-      <>
+      <div>
          <PageSubtitle>Danger Zone</PageSubtitle>
          <ProfileCardsGrid>
             <ProfileCard title="Delete account" dangerZone expand>
                <div className="flex justify-between items-center">
                   <div className="text-light-1 dark:text-dark-1">
                      <div>
-                        {
-                           "This will also delete all the lists that you've created."
-                        }
+                        This will also delete all the lists that you've created,
+                        and the that you have saved.
                      </div>
                      <div>This action cannot be undone.</div>
                   </div>
@@ -35,6 +34,6 @@ export default function DangerZone({}: Props) {
          <ModalPortal isOpen={isModalOpen}>
             <DeleteUserModal close={closeModal} />
          </ModalPortal>
-      </>
+      </div>
    );
 }

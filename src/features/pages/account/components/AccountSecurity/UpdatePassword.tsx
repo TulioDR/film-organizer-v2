@@ -11,7 +11,7 @@ export default function UpdatePassword() {
    const { user } = useUser();
    if (!user) return <></>;
    return (
-      <>
+      <div>
          <ModalPortal isOpen={isModalOpen}>
             <UpdatePasswordModal close={closeModal} />
          </ModalPortal>
@@ -38,6 +38,6 @@ export default function UpdatePassword() {
                )}
             </AccountButton>
          </div>
-      </>
+      </div>
    );
 }

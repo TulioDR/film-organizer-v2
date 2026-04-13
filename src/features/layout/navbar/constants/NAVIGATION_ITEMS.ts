@@ -14,7 +14,7 @@ const NAVIGATION_ITEMS: NavigationModel[] = [
       text: "Series",
       mediaType: "tv",
    },
-   { link: "/lists", icon: "format_list_bulleted", text: "Playlists" },
+   { link: "/playlists", icon: "format_list_bulleted", text: "Playlists" },
 ];
 
 export { NAVIGATION_ITEMS };

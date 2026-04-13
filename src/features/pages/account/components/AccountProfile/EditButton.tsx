@@ -1,3 +1,5 @@
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
+
 type Props = {
    onClick: () => void;
    icon: string;
@@ -7,8 +9,9 @@ type Props = {
 export default function EditButton({ onClick, icon, red }: Props) {
    return (
       <button
+         style={{ borderRadius: STANDARD_RADIUS }}
          onClick={onClick}
-         className={`text-dark-1 grid place-content-center rounded-lg w-10 aspect-square ${
+         className={`text-dark-1 flex items-center justify-center h-full aspect-square ${
             red ? "bg-red-700" : "bg-blue-600"
          }`}
       >

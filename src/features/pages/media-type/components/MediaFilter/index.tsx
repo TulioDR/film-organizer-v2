@@ -8,6 +8,7 @@ import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import FiltersLayout from "./FiltersLayout";
 import MediaFilterLayoutContainer from "./MediaFilterLayoutContainer";
 import MediaFiltersContainer from "./MediaFiltersContainer";
+import PageTitle from "@/common/components/PageTitle";
 
 type Props = {
    isOpen: boolean;
@@ -54,7 +55,7 @@ export default function MediaFilter({
       <MediaFiltersContainer mediaType={mediaType}>
          <div className="flex absolute top-0 left-0 gap-1 h-12 xl:h-16">
             <OpenButton onClick={toggleIsOpen} isOpen={isOpen} />
-            <FilterTitle title={title} />
+            <PageTitle title={title} />
          </div>
          <MediaFilterLayoutContainer isOpen={isOpen} isExpanded={isExpanded}>
             {isOpen && (

@@ -13,7 +13,7 @@ export default function AccountProfile({}: Props) {
 
    if (!user) return <></>;
    return (
-      <>
+      <div className="">
          <PageSubtitle>Profile</PageSubtitle>
          <ProfileCardsGrid>
             <AccountCard title="Username">
@@ -30,6 +30,6 @@ export default function AccountProfile({}: Props) {
                ))}
             </AccountCard>
          </ProfileCardsGrid>
-      </>
+      </div>
    );
 }

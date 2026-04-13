@@ -49,14 +49,16 @@ export default function AccountUsername({}: Props) {
          ) : (
             <span>{user.username || "You do not have an username yet"}</span>
          )}
-         {isEditOpen ? (
-            <div className="flex gap-3">
-               <EditButton onClick={updateUsername} icon="done" />
-               <EditButton onClick={closeEdit} icon="close" red />
-            </div>
-         ) : (
-            <EditButton onClick={openEdit} icon="edit" />
-         )}
+         <div className="h-12 flex gap-1">
+            {isEditOpen ? (
+               <>
+                  <EditButton onClick={updateUsername} icon="done" />
+                  <EditButton onClick={closeEdit} icon="close" red />
+               </>
+            ) : (
+               <EditButton onClick={openEdit} icon="edit" />
+            )}
+         </div>
       </div>
    );
 }

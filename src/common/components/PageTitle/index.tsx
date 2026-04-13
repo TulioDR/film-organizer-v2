@@ -4,9 +4,9 @@ type Props = {
    title: string;
 };
 
-export default function FilterTitle({ title }: Props) {
+export default function PageTitle({ title }: Props) {
    return (
-      <div className="h-full flex items-center z-20 overflow-hidden">
+      <div className="h-12 xl:h-16 flex items-center z-20 overflow-hidden">
          <AnimatePresence mode="wait" propagate>
             <motion.div
                key={title}

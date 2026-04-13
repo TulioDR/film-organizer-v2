@@ -12,7 +12,7 @@ export default function AccountSecurity({}: Props) {
 
    if (!user) return <></>;
    return (
-      <>
+      <div>
          <PageSubtitle>Security</PageSubtitle>
          <ProfileCardsGrid>
             <AccountCard
@@ -28,6 +28,6 @@ export default function AccountSecurity({}: Props) {
                </AccountCard>
             )} */}
          </ProfileCardsGrid>
-      </>
+      </div>
    );
 }

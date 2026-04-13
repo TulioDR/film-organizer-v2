@@ -3,5 +3,5 @@ type Props = {
 };
 
 export default function ProfileCardsGrid({ children }: Props) {
-   return <div className="mx-auto grid xl:grid-cols-2 gap-10">{children}</div>;
+   return <div className="w-full grid xl:grid-cols-2 gap-4">{children}</div>;
 }

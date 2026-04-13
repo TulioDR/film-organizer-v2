@@ -1,4 +1,3 @@
-import React from "react";
 import NavTitle from "../NavTitle";
 import DarkModeButton from "./DarkModeButton";
 import NavDropdown from "./NavDropdown";
