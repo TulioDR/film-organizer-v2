@@ -27,11 +27,11 @@ export default function MainButton({
 
    return (
       <button
-         onMouseDown={(e) => e.preventDefault()}
-         onClick={isLoading ? undefined : onClick}
+         onClick={onClick}
          type={submit ? "submit" : "button"}
          style={{ borderRadius: STANDARD_RADIUS }}
          className={`h-12 relative
+            ${isLoading ? "pointer-events-none" : ""}
             ${square ? "aspect-square" : "px-4"}
             ${isAccent ? "bg-accent text-white" : ""}      
             ${isDelete ? "bg-red-600 hover:bg-red-600/80 active:bg-red-600/80 text-white" : ""}

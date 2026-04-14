@@ -2,17 +2,17 @@ import Playlist from "@/common/models/Playlist";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
-   playlists: null | Playlist[];
+   playlists: Playlist[];
 }
 const initialState: InitialState = {
-   playlists: null,
+   playlists: [],
 };
 
 const playlistsSlice = createSlice({
    name: "lists",
    initialState,
    reducers: {
-      setPlaylists(state, { payload }: { payload: null | Playlist[] }) {
+      setPlaylists(state, { payload }: { payload: Playlist[] }) {
          state.playlists = payload;
       },
    },

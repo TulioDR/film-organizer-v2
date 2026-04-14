@@ -1,6 +1,7 @@
-import { Field } from "formik";
+import AuthInputError from "@/features/authentication/components/AuthForm/AuthInput/AuthInputError";
+import { Field, useFormikContext } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 type Props = {
    name: string;
@@ -10,30 +11,25 @@ type Props = {
 
 export default function ModalInput({ name, placeholder, maxLength }: Props) {
    const [isOnFocus, setIsOnFocus] = useState<boolean>(false);
-   const onFocus = () => setIsOnFocus(true);
-   const onBlur = () => setIsOnFocus(false);
-
-   const inputRef = useRef<HTMLInputElement>(null);
-
-   const [value, setValue] = useState<string>("");
-
-   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value);
+   const { errors, touched, values, setTouched } = useFormikContext<any>();
+   const onFocus = () => {
+      setTouched({ ...touched, [name]: true });
+      setIsOnFocus(true);
+   };
+   const onBlur = () => {
+      setIsOnFocus(false);
    };
 
    return (
       <div className="flex flex-col w-full">
          <div className="h-12 w-full relative">
             <Field
-               ref={inputRef}
                name={name}
                placeholder={placeholder}
                autoComplete="off"
                maxLength={maxLength}
                className="w-full h-full bg-transparent text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50 outline-none"
                onFocus={onFocus}
-               value={value}
-               onChange={handleChange}
                onBlur={onBlur}
             />
             <div className="absolute bottom-0 left-0 flex justify-center h-0.5 w-full">
@@ -51,11 +47,17 @@ export default function ModalInput({ name, placeholder, maxLength }: Props) {
                </AnimatePresence>
             </div>
          </div>
-         {maxLength && (
-            <div className="w-full flex justify-end">
-               <span className="text-xs text-text-2">
-                  {value.length}/{maxLength}
-               </span>
+
+         {(maxLength || (touched[name] && errors[name])) && (
+            <div className="w-full flex justify-between">
+               {touched[name] && errors[name] && (
+                  <AuthInputError message={errors[name] as string} />
+               )}
+               {maxLength && (
+                  <span className="text-xs text-black dark:text-white ml-auto">
+                     {values[name].length}/{maxLength}
+                  </span>
+               )}
             </div>
          )}
       </div>

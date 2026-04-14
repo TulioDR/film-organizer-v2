@@ -1,5 +1,5 @@
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
-import CreateListModal from "@/features/modals/list-modals/create-list-modal/components/CreateListModal";
+import CreateOrUpdateListModal from "@/features/modals/list-modals/create-or-update-playlist-modal/components/CreateOrUpdateListModal";
 import { useState } from "react";
 
 type Props = {};
@@ -27,7 +27,7 @@ export default function CreatePlaylistButton({}: Props) {
                Create playlist
             </span>
          </button>
-         <CreateListModal
+         <CreateOrUpdateListModal
             close={closeCreateListModal}
             isOpen={isCreateListModalOpen}
          />

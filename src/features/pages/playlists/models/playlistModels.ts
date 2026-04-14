@@ -2,7 +2,6 @@ export interface PlaylistState {
    value: string;
    isOnFocus: boolean;
    showError: string | null;
-   showEditButtons: boolean;
 }
 
 export type PlaylistAction =

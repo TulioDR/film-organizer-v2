@@ -1,15 +1,10 @@
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
-import PlaylistCardInput from "./PlaylistCardInput";
 
 import OpenCardLink from "./OpenCardLink";
-import { AnimatePresence } from "framer-motion";
-import InputFocusUnderline from "./InputFocusUnderline";
-import PlaylistInputError from "./PlaylistInputError";
 import PlaylistCardPoster from "./PlaylistCardPoster";
-import usePlaylistCard from "../../hooks/usePlaylistCard";
-import MainButton from "@/common/components/MainButton";
 import Playlist from "@/common/models/Playlist";
 import DeletePlaylistHandler from "./DeletePlaylistHandler";
+import UpdatePlaylistHandler from "./UpdatePlaylistHandler";
 // import DeletePlaylistHandler from "./DeletePlaylistHandler";
 
 type Props = {
@@ -17,20 +12,6 @@ type Props = {
 };
 
 export default function PlaylistCard({ playlist }: Props) {
-   const {
-      inputRef,
-      state,
-      onChange,
-      onFocus,
-      handleKeyDown,
-      openEdit,
-      closeEdit,
-      submitUpdate,
-      setShowError,
-   } = usePlaylistCard(playlist);
-
-   const { value, isOnFocus, showError, showEditButtons } = state;
-
    return (
       <div
          style={{ borderRadius: STANDARD_RADIUS }}
@@ -38,49 +19,13 @@ export default function PlaylistCard({ playlist }: Props) {
       >
          <PlaylistCardPoster />
          <div className="flex-1 h-full flex flex-col justify-between p-4 pt-8">
-            <div
-               className={`w-full h-12 relative ${isOnFocus ? "" : "pointer-events-none"}`}
-            >
-               <PlaylistCardInput
-                  inputRef={inputRef}
-                  value={value}
-                  onChange={onChange}
-                  handleKeyDown={handleKeyDown}
-                  onFocus={onFocus}
-                  onBlur={closeEdit}
-               />
-               <AnimatePresence>
-                  {isOnFocus && <InputFocusUnderline />}
-               </AnimatePresence>
-               {showError && isOnFocus && (
-                  <PlaylistInputError
-                     error={showError}
-                     setShowError={setShowError}
-                  />
-               )}
+            <div className="w-full h-12 relative flex items-center text-3xl font-thin text-black dark:text-white">
+               {playlist.name}
             </div>
-
             <div className="w-full flex justify-end gap-1 h-12">
-               {showEditButtons ? (
-                  <>
-                     <MainButton
-                        text="Update"
-                        onClick={submitUpdate}
-                        keyboardKey="Enter"
-                     />
-                     <MainButton
-                        text="Cancel"
-                        onClick={closeEdit}
-                        keyboardKey="Esc"
-                     />
-                  </>
-               ) : (
-                  <>
-                     <OpenCardLink href={`/playlists/${playlist.id}`} />
-                     <MainButton square icon="edit" onClick={openEdit} />
-                     <DeletePlaylistHandler playlistToDelete={playlist} />
-                  </>
-               )}
+               <OpenCardLink href={`/playlists/${playlist.id}`} />
+               <UpdatePlaylistHandler playlist={playlist} />
+               <DeletePlaylistHandler playlistToDelete={playlist} />
             </div>
          </div>
       </div>

@@ -20,16 +20,17 @@ export default function Playlists() {
    const { user, isLoaded } = useUser();
    const { playlists } = useAppSelector((state) => state.playlists);
    const [inputValue, setInputValue] = useState<string>("");
-   const [filteredLists, setFilteredLists] = useState<Playlist[]>([]);
+   const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
+
    useEffect(() => {
       if (!playlists) {
-         setFilteredLists([]);
+         setFilteredPlaylists([]);
          return;
       }
       const founded = playlists.filter(({ name }) =>
          name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()),
       );
-      setFilteredLists(founded);
+      setFilteredPlaylists(founded);
    }, [inputValue, playlists]);
    if (!isLoaded)
       return (
@@ -58,12 +59,19 @@ export default function Playlists() {
             />
             <CreatePlaylistButton />
          </div>
-         <div className="grid w-full xl:grid-cols-2 gap-4 mt-64">
-            {filteredLists.map((playlist) => (
-               <PlaylistCard playlist={playlist} key={playlist.id} />
-            ))}
+         <div className="w-full mt-64">
+            {playlists.length === 0 ? (
+               <NoListsMessage text="this is so empty... Create list to save movies and series" />
+            ) : filteredPlaylists.length > 0 ? (
+               <div className="grid w-full xl:grid-cols-2 gap-4">
+                  {filteredPlaylists.map((playlist) => (
+                     <PlaylistCard playlist={playlist} key={playlist.id} />
+                  ))}
+               </div>
+            ) : (
+               <NoListsMessage text="No lists found" />
+            )}
          </div>
-         {/* {filteredLists.length === 0 && <NoListsMessage />} */}
       </div>
    );
 }
