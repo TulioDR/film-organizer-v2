@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { createMedia, deleteMedia, getIsMediaSavedInList } from "@/api/media";
 import { v4 as uuid } from "uuid";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
-import List from "@/common/models/List";
+import List from "@/common/models/Playlist";
 import { MediaType } from "@/common/models/MediaType";
 import { Media } from "@/common/models/Media";
 
 export default function useListToSaveBookmark(
    list: List,
    media: Media,
-   mediaType: MediaType
+   mediaType: MediaType,
 ) {
    const { showErrorNotification } = useNotification();
    const [isSaved, setIsSaved] = useState<boolean>(false);

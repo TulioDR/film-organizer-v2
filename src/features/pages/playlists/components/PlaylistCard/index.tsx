@@ -1,5 +1,4 @@
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
-import PlaylistCardButton from "./PlaylistCardButton";
 import PlaylistCardInput from "./PlaylistCardInput";
 
 import OpenCardLink from "./OpenCardLink";
@@ -8,10 +7,16 @@ import InputFocusUnderline from "./InputFocusUnderline";
 import PlaylistInputError from "./PlaylistInputError";
 import PlaylistCardPoster from "./PlaylistCardPoster";
 import usePlaylistCard from "../../hooks/usePlaylistCard";
+import MainButton from "@/common/components/MainButton";
+import Playlist from "@/common/models/Playlist";
+import DeletePlaylistHandler from "./DeletePlaylistHandler";
+// import DeletePlaylistHandler from "./DeletePlaylistHandler";
 
-type Props = {};
+type Props = {
+   playlist: Playlist;
+};
 
-export default function PlaylistCard({}: Props) {
+export default function PlaylistCard({ playlist }: Props) {
    const {
       inputRef,
       state,
@@ -20,10 +25,9 @@ export default function PlaylistCard({}: Props) {
       handleKeyDown,
       openEdit,
       closeEdit,
-      openDeleteModal,
       submitUpdate,
       setShowError,
-   } = usePlaylistCard();
+   } = usePlaylistCard(playlist);
 
    const { value, isOnFocus, showError, showEditButtons } = state;
 
@@ -59,17 +63,22 @@ export default function PlaylistCard({}: Props) {
             <div className="w-full flex justify-end gap-1 h-12">
                {showEditButtons ? (
                   <>
-                     <PlaylistCardButton type="update" onClick={submitUpdate} />
-                     <PlaylistCardButton type="cancel" onClick={closeEdit} />
+                     <MainButton
+                        text="Update"
+                        onClick={submitUpdate}
+                        keyboardKey="Enter"
+                     />
+                     <MainButton
+                        text="Cancel"
+                        onClick={closeEdit}
+                        keyboardKey="Esc"
+                     />
                   </>
                ) : (
                   <>
-                     <OpenCardLink href={`/playlists/${"id"}`} />
-                     <PlaylistCardButton type="edit" onClick={openEdit} />
-                     <PlaylistCardButton
-                        type="delete"
-                        onClick={openDeleteModal}
-                     />
+                     <OpenCardLink href={`/playlists/${playlist.id}`} />
+                     <MainButton square icon="edit" onClick={openEdit} />
+                     <DeletePlaylistHandler playlistToDelete={playlist} />
                   </>
                )}
             </div>

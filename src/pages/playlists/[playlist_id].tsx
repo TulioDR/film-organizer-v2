@@ -1,29 +1,29 @@
-import { GetServerSideProps } from "next";
+// import { GetServerSideProps } from "next";
 
-import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
-import DeleteMediaModal from "@/features/modals/media-modals/delete-media-modal/components/DeleteMediaModal";
-import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
-import LoadingSpinner from "@/common/components/LoadingSpinner";
-import PageHead from "@/common/components/PageHead";
-import useMediaData from "@/features/pages/list-id/hooks/useMediaData";
-import useListData from "@/features/pages/list-id/hooks/useListData";
-import useSavedMediaFilter from "@/features/pages/list-id/hooks/useSavedMediaFilter";
-import useDeleteMode from "@/features/pages/list-id/hooks/useDeleteMode";
-import SavedMediaCards from "@/features/pages/list-id/components/SavedMedia";
-import DeleteMode from "@/features/pages/list-id/components/DeleteMode";
+// import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
+// import DeleteMediaModal from "@/features/modals/media-modals/delete-media-modal/components/DeleteMediaModal";
+// import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+// import LoadingSpinner from "@/common/components/LoadingSpinner";
+// import PageHead from "@/common/components/PageHead";
+// import useMediaData from "@/features/pages/list-id/hooks/useMediaData";
+// import useListData from "@/features/pages/list-id/hooks/useListData";
+// import useSavedMediaFilter from "@/features/pages/list-id/hooks/useSavedMediaFilter";
+// import useDeleteMode from "@/features/pages/list-id/hooks/useDeleteMode";
+// import SavedMediaCards from "@/features/pages/list-id/components/SavedMedia";
+// import DeleteMode from "@/features/pages/list-id/components/DeleteMode";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-   const { list_id } = context.query!;
-   return {
-      props: { list_id },
-   };
-};
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//    const { id } = context.query!;
+//    return {
+//       props: { id },
+//    };
+// };
 
-type Props = {
-   list_id: string;
-};
+// type Props = {
+//    list_id: string;
+// };
 
-export default function ListID({ list_id }: Props) {
+export default function PlaylistId() {
    // const { media, refresh } = useMediaData(list_id);
    // const { list } = useListData(list_id);
 

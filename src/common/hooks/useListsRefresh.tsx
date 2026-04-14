@@ -1,8 +1,8 @@
-import { getLists } from "@/api/lists";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
-import { listActions } from "@/store/slices/list-slice";
 import { useUser } from "@clerk/nextjs";
-import List from "../models/List";
+import { getPlaylists } from "@/api/playlists";
+import { playlistsActions } from "@/store/slices/playlist-slice";
+import Playlist from "../models/Playlist";
 
 export default function useListsRefresh() {
    const { user } = useUser();
@@ -10,14 +10,14 @@ export default function useListsRefresh() {
 
    const refreshLists = async () => {
       if (!user) {
-         dispatch(listActions.setLists(null));
+         dispatch(playlistsActions.setPlaylists(null));
          return;
       }
       console.log("refresh lists");
       setTimeout(async () => {
-         const lists: List[] = await getLists(user.id);
+         const lists: Playlist[] = await getPlaylists();
          console.log(lists);
-         dispatch(listActions.setLists(lists));
+         dispatch(playlistsActions.setPlaylists(lists));
       }, 100);
    };
 

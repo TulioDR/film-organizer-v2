@@ -1,29 +1,33 @@
 import { useState } from "react";
 
-import { deleteList } from "@/api/lists";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
-import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
 import useListsRefresh from "@/common/hooks/useListsRefresh";
-import List from "@/common/models/List";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+import { deletePlaylist } from "@/api/playlists";
+import Playlist from "@/common/models/Playlist";
+import MainButton from "@/common/components/MainButton";
 
 type Props = {
-   listToDelete: List | null;
+   playlistToDelete: Playlist;
    close: () => void;
+   isOpen: boolean;
 };
 
-export default function DeleteListModal({ listToDelete, close }: Props) {
+export default function DeleteListModal({
+   playlistToDelete,
+   close,
+   isOpen,
+}: Props) {
    const { refreshLists } = useListsRefresh();
-
    const [isLoading, setIsLoading] = useState<boolean>(false);
-
    const { showErrorNotification, showSuccessNotification } = useNotification();
 
    const deleteListFinally = async () => {
       setIsLoading(true);
-      const { error } = await deleteList(listToDelete!.id);
+      const { error } = await deletePlaylist(playlistToDelete.id);
       if (error) {
          showErrorNotification(error);
          setIsLoading(false);
@@ -35,27 +39,32 @@ export default function DeleteListModal({ listToDelete, close }: Props) {
    };
 
    return (
-      <ModalContainer closeModal={close}>
-         <ModalTitle>Delete List</ModalTitle>
-         <div className="text-sm leading-relaxed text-text-2 font-normal w-96">
-            <div>
-               <span>Are you sure you want to delete the list </span>
-               <em className="text-white">
-                  <strong>{`"${listToDelete?.name}"`}</strong>
-               </em>
-               <span>?</span>
+      <ModalPortal isOpen={isOpen}>
+         <ModalContainer closeModal={close}>
+            <ModalTitle>Delete List</ModalTitle>
+            <div className="text-sm leading-relaxed text-text-2 font-normal w-96 text-black/50 dark:text-white/50">
+               <div>
+                  <span>Are you sure you want to delete the list </span>
+                  <em className="text-black dark:text-white">
+                     <strong>{`"${playlistToDelete.name}"`}</strong>
+                  </em>
+                  <span>?</span>
+               </div>
+               <div>
+                  Note: Deleting a list is a permanent action and it cannot be
+                  undone.
+               </div>
             </div>
-            <div>
-               Note: Deleting a list is a permanent action and it cannot be
-               undone.
-            </div>
-         </div>
-         <ModalButtonsContainer>
-            <ModalButton onClick={close}>Cancel</ModalButton>
-            <ModalButton onClick={deleteListFinally} isLoading={isLoading} red>
-               Delete
-            </ModalButton>
-         </ModalButtonsContainer>
-      </ModalContainer>
+            <ModalButtonsContainer>
+               <MainButton onClick={close} text="Cancel" />
+               <MainButton
+                  type="delete"
+                  onClick={deleteListFinally}
+                  isLoading={isLoading}
+                  text="Delete"
+               />
+            </ModalButtonsContainer>
+         </ModalContainer>
+      </ModalPortal>
    );
 }

@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import List from "./List";
+import List from "./Playlist";
 
 export default interface Store {
    theme: ThemeModel;

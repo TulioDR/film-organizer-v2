@@ -17,12 +17,14 @@ export default function Account() {
 
    if (!user) return <></>;
    return (
-      <div className="w-full px-4 lg:px-32 pt-14 pb-14 xl:pb-4 mt-4 xl:mt-16 xl:pt-20">
+      <div className="w-full px-4 lg:px-32 pt-14 pb-14 xl:pb-4 mb-4 xl:mb-0 mt-4 xl:mt-16 xl:pt-20">
          <PageHead title="Account" />
          <div className="w-full flex flex-col gap-4">
             <AccountProfile />
-            <AccountSecurity />
-            <DangerZone />
+            <div className="w-full grid xl:grid-cols-2 gap-4">
+               <AccountSecurity />
+               <DangerZone />
+            </div>
          </div>
       </div>
    );

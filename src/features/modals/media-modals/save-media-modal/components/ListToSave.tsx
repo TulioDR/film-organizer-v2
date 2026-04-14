@@ -1,6 +1,6 @@
 import useListToSaveBookmark from "../hooks/useListToSaveBookmark";
 import LoadingSpinner from "@/common/components/LoadingSpinner";
-import List from "@/common/models/List";
+import List from "@/common/models/Playlist";
 import { Media } from "@/common/models/Media";
 import { MediaType } from "@/common/models/MediaType";
 

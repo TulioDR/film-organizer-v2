@@ -1,4 +1,3 @@
-import React from "react";
 import ConnectedAccount from "./ConnectedAccount";
 import { useUser } from "@clerk/nextjs";
 
@@ -9,7 +8,7 @@ export default function ConnectAccounts({}: Props) {
 
    if (!user) return <></>;
    return (
-      <div className="space-y-3">
+      <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-4">
          {user.externalAccounts.map((acc, index) => (
             <ConnectedAccount key={index} provider={acc.provider} />
          ))}

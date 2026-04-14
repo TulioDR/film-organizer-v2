@@ -1,4 +1,3 @@
-import ProfileCardsGrid from "../ProfileCardsGrid";
 import AccountCard from "../AccountCard";
 
 import { useUser } from "@clerk/nextjs";
@@ -15,12 +14,12 @@ export default function AccountProfile({}: Props) {
    return (
       <div className="">
          <PageSubtitle>Profile</PageSubtitle>
-         <ProfileCardsGrid>
+         <div className="w-full grid xl:grid-cols-2 xl:grid-rows-2 gap-4">
             <AccountCard title="Username">
                <AccountUsername />
             </AccountCard>
 
-            <AccountCard title="Connected accounts" row>
+            <AccountCard title="Connected accounts" className="xl:row-span-2">
                <ConnectAccounts />
             </AccountCard>
 
@@ -29,7 +28,7 @@ export default function AccountProfile({}: Props) {
                   <div key={index}>{email.emailAddress}</div>
                ))}
             </AccountCard>
-         </ProfileCardsGrid>
+         </div>
       </div>
    );
 }

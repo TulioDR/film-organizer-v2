@@ -1,0 +1,92 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import { createClerkSupabaseClient } from "@/lib/supabaseClient";
+import { getAuth } from "@clerk/nextjs/server";
+
+export default async function handler(
+   req: NextApiRequest,
+   res: NextApiResponse,
+) {
+   const session = getAuth(req);
+   const supabase = createClerkSupabaseClient(session);
+   const userId = session.userId;
+
+   if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+   }
+
+   if (req.method === "GET") {
+      try {
+         const { data, error } = await supabase
+            .from("playlists")
+            .select("*")
+            .eq("user_id", userId)
+            .order("created_at", { ascending: true });
+
+         if (error) return res.status(400).json({ error: error.message });
+         return res.status(200).json(data);
+      } catch (err) {
+         return res.status(500).json({ error: "Internal Server Error" });
+      }
+   }
+
+   if (req.method === "POST") {
+      try {
+         const { name, description } = req.body;
+
+         if (!name || name.length > 50) {
+            return res.status(400).json({
+               error: "Name is required and must be under 50 characters.",
+            });
+         }
+
+         if (description && description.length > 500) {
+            return res
+               .status(400)
+               .json({ error: "Description must be under 500 characters." });
+         }
+
+         const { data, error } = await supabase
+            .from("playlists")
+            .insert({
+               name,
+               description, // This is optional now!
+               user_id: userId,
+            })
+            .select()
+            .single();
+
+         if (error) return res.status(400).json({ error: error.message });
+         return res.status(201).json(data);
+      } catch (error) {
+         return res.status(500).json({ error: "Internal Server Error" });
+      }
+   }
+
+   if (req.method === "DELETE") {
+      try {
+         const { id } = req.body;
+
+         if (!id) {
+            return res
+               .status(400)
+               .json({ error: "Playlist ID is required for deletion." });
+         }
+
+         const { error } = await supabase
+            .from("playlists")
+            .delete()
+            .eq("id", id)
+            .eq("user_id", userId);
+
+         if (error) return res.status(400).json({ error: error.message });
+
+         return res
+            .status(200)
+            .json({ message: "Playlist deleted successfully" });
+      } catch (error) {
+         return res.status(500).json({ error: "Internal Server Error" });
+      }
+   }
+
+   return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
+}

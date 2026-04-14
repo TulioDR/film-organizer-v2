@@ -1,4 +1,3 @@
-import ProfileCardsGrid from "../ProfileCardsGrid";
 import AccountCard from "../AccountCard";
 import { useUser } from "@clerk/nextjs";
 import UpdatePassword from "./UpdatePassword";
@@ -12,22 +11,19 @@ export default function AccountSecurity({}: Props) {
 
    if (!user) return <></>;
    return (
-      <div>
+      <div className="w-full h-full">
          <PageSubtitle>Security</PageSubtitle>
-         <ProfileCardsGrid>
-            <AccountCard
-               title={user.passwordEnabled ? "Update password" : "Add password"}
-               expand
-            >
-               <UpdatePassword />
-            </AccountCard>
+         <AccountCard
+            title={user.passwordEnabled ? "Update password" : "Add password"}
+         >
+            <UpdatePassword />
+         </AccountCard>
 
-            {/* {user.passwordEnabled && user.externalAccounts.length > 0 && (
+         {/* {user.passwordEnabled && user.externalAccounts.length > 0 && (
                <AccountCard title="Delete password" expand>
                   <DeletePassword />
                </AccountCard>
             )} */}
-         </ProfileCardsGrid>
       </div>
    );
 }

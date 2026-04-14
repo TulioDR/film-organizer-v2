@@ -2,78 +2,82 @@ import { useState } from "react";
 
 import { Formik, Form } from "formik";
 
-import { useUser } from "@clerk/nextjs";
-import { v4 as uuid } from "uuid";
-import InputUnderline from "./InputUnderline";
-import CreateListInput from "./CreateListInput";
-import useListsRefresh from "@/features/common/hooks/useListsRefresh";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
-import { createList } from "@/api/lists";
-import listNameValidation from "@/utils/listNameValidation";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
+// import useListsRefresh from "@/common/hooks/useListsRefresh";
+import listNameValidation from "@/features/pages/playlists/utils/listNameValidation";
+import { onlyLettersNumbersSpaces } from "@/common/utils/onlyLettersNumbersSpaces";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
+import ModalInput from "@/features/modals/modal-parts/components/ModalInput";
+import MainButton from "@/common/components/MainButton";
+import { createPlaylist } from "@/api/playlists";
 
 type Props = {
    close: () => void;
+   isOpen: boolean;
 };
 
-export default function CreateListModal({ close }: Props) {
-   const { refreshLists } = useListsRefresh();
+export default function CreateListModal({ close, isOpen }: Props) {
+   // const { refreshLists } = useListsRefresh();
 
-   const [isFocused, setIsFocused] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
-
-   const { user } = useUser();
 
    const { showSuccessNotification, showErrorNotification } = useNotification();
 
    const handleSubmit = async (values: any) => {
       setIsLoading(true);
       const newListData = {
-         id: uuid(),
          name: values.name,
-         authorId: user?.id,
       };
-      const createdList = await createList(newListData);
+      const createdList = await createPlaylist(newListData);
+      console.log("this is the created list");
       console.log(createdList);
       if (createdList.error) {
          showErrorNotification(createdList.error);
          setIsLoading(false);
       } else {
+         setIsLoading(false);
          showSuccessNotification("List created Successfully");
-         refreshLists();
+         // refreshLists();
          close();
       }
    };
 
    return (
-      <ModalContainer closeModal={close}>
-         <Formik
-            initialValues={{ name: "" }}
-            validate={listNameValidation}
-            onSubmit={handleSubmit}
-         >
-            {({ errors, touched }) => (
-               <Form className="w-72">
-                  <ModalTitle>Create a List</ModalTitle>
-                  <div className="relative overflow-hidden">
-                     <CreateListInput setIsFocused={setIsFocused} />
-                     <InputUnderline isFocused={isFocused} />
-                  </div>
-                  {touched.name && errors.name && (
-                     <div className="w-full text-red-400">{errors.name}</div>
-                  )}
-                  <ModalButtonsContainer>
-                     <ModalButton onClick={close}>Cancel</ModalButton>
-                     <ModalButton submit blue isLoading={isLoading}>
-                        Create
-                     </ModalButton>
-                  </ModalButtonsContainer>
-               </Form>
-            )}
-         </Formik>
-      </ModalContainer>
+      <ModalPortal isOpen={isOpen}>
+         <ModalContainer closeModal={close}>
+            <Formik
+               initialValues={{ name: "" }}
+               // validate={onlyLettersNumbersSpaces}
+               onSubmit={handleSubmit}
+            >
+               {({ errors, touched }) => (
+                  <Form className="w-72 flex flex-col gap-4">
+                     <ModalTitle>Create a List</ModalTitle>
+                     <ModalInput
+                        name="name"
+                        placeholder="Name"
+                        maxLength={50}
+                     />
+                     <ModalInput
+                        name="Description"
+                        placeholder="Description (optional)"
+                        maxLength={500}
+                     />
+                     {touched.name && errors.name && (
+                        <div className="w-full text-red-400">{errors.name}</div>
+                     )}
+                     <ModalButtonsContainer>
+                        <MainButton onClick={close} text="Cancel" />
+                        <MainButton submit text="Create" />
+                     </ModalButtonsContainer>
+                  </Form>
+               )}
+            </Formik>
+         </ModalContainer>
+      </ModalPortal>
    );
 }

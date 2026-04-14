@@ -7,7 +7,7 @@ type Props = {
 
 export default function ListFinder({ onChange, value }: Props) {
    return (
-      <div className="h-10 w-72 px-5 bg-secondary-light dark:bg-secondary-dark flex items-center rounded-lg">
+      <div className="h-10 w-72 px-5 bg-white dark:bg-black border border-border-light dark:border-border-dark flex items-center rounded-lg">
          <input
             type="text"
             placeholder="Search for a List"

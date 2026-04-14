@@ -1,19 +1,15 @@
 import useNotification from "@/features/layout/notification/hooks/useNotification";
 import { useReducer, useRef } from "react";
 import listNameValidation from "../utils/listNameValidation";
-import { updateList } from "@/api/lists";
 import { playlistReducer } from "../utils/playlistReducer";
 import { PlaylistState } from "../models/playlistModels";
+import { updatePlaylist } from "@/api/playlists";
+import Playlist from "@/common/models/Playlist";
 
-export default function usePlaylistCard() {
-   const list = {
-      id: "1",
-      name: "Playlist name",
-   };
-
+export default function usePlaylistCard(playlist: Playlist) {
    const { showErrorNotification, showSuccessNotification } = useNotification();
    const initialState: PlaylistState = {
-      value: list.name,
+      value: playlist.name,
       isOnFocus: false,
       showError: null,
       showEditButtons: false,
@@ -28,8 +24,10 @@ export default function usePlaylistCard() {
          dispatch({ type: "SET_ERROR", payload: nameError });
          return;
       }
-      if (state.value === list.name) return;
-      const { error } = await updateList(list.id, { name: state.value });
+      if (state.value === playlist.name) return;
+      const { error } = await updatePlaylist(playlist.id, {
+         name: state.value,
+      });
       if (error) {
          showErrorNotification(error);
       } else {
@@ -47,7 +45,7 @@ export default function usePlaylistCard() {
    };
 
    const closeEdit = () => {
-      dispatch({ type: "CLOSE_EDIT", initialName: list.name });
+      dispatch({ type: "CLOSE_EDIT", initialName: playlist.name });
       inputRef.current?.blur();
    };
 
@@ -64,8 +62,6 @@ export default function usePlaylistCard() {
       dispatch({ type: "SET_ERROR", payload: val });
    };
 
-   const openDeleteModal = () => {};
-
    return {
       inputRef,
       state,
@@ -74,7 +70,6 @@ export default function usePlaylistCard() {
       handleKeyDown,
       openEdit,
       closeEdit,
-      openDeleteModal,
       submitUpdate,
       setShowError,
    };

@@ -5,7 +5,5 @@ type Props = {
 };
 
 export default function ModalButtonsContainer({ children }: Props) {
-   return (
-      <div className="w-full flex justify-end space-x-3 mt-5">{children}</div>
-   );
+   return <div className="w-full flex justify-end gap-2">{children}</div>;
 }

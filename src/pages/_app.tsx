@@ -12,6 +12,7 @@ import Background from "@/features/layout/background/components/Background";
 import Navbar from "@/features/layout/navbar/components/Navbar";
 import PageLoader from "@/features/layout/loader/components/PageLoader";
 import Notification from "@/features/layout/notification/components/Notification";
+import GetPlaylists from "@/common/components/GetPlaylists";
 
 function App({ Component, ...rest }: AppProps) {
    const router = useRouter();
@@ -36,6 +37,7 @@ function App({ Component, ...rest }: AppProps) {
       <ClerkProvider {...pageProps}>
          <Provider store={store}>
             <ReactLenis root>
+               <GetPlaylists />
                <Navbar />
                <Background />
                <Notification />

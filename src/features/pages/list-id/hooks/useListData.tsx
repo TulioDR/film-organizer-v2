@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import List from "@/common/models/List";
+import List from "@/common/models/Playlist";
 import useAppSelector from "@/store/hooks/useAppSelector";
 
 export default function useListData(list_id: string) {

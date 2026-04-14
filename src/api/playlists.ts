@@ -1,18 +1,16 @@
 import axios from "axios";
-const API = axios.create({ baseURL: "/api/database/lists" });
+const API = axios.create({ baseURL: "/api/database/playlists" });
 
-export const getLists = async (authorId: string) => {
+export const getPlaylists = async () => {
    try {
-      const { data } = await API.get("/", {
-         params: { authorId },
-      });
+      const { data } = await API.get("/");
       return data;
    } catch (error) {
       console.log(error);
    }
 };
 
-export const deleteAllLists = async (authorId: string) => {
+export const deleteAllPlaylists = async (authorId: string) => {
    try {
       const { data } = await API.delete(`/`, { data: authorId });
       return data;
@@ -21,7 +19,7 @@ export const deleteAllLists = async (authorId: string) => {
    }
 };
 
-export const createList = async (newListData: any) => {
+export const createPlaylist = async (newListData: any) => {
    try {
       const { data } = await API.post("/", newListData);
       return data;
@@ -30,7 +28,7 @@ export const createList = async (newListData: any) => {
    }
 };
 
-export const updateList = async (id: string, newName: any) => {
+export const updatePlaylist = async (id: string, newName: any) => {
    try {
       const { data } = await API.patch(`/${id}`, newName);
       return data;
@@ -39,7 +37,7 @@ export const updateList = async (id: string, newName: any) => {
    }
 };
 
-export const deleteList = async (id: string) => {
+export const deletePlaylist = async (id: string) => {
    try {
       const { data } = await API.delete(`/${id}`);
       return data;
