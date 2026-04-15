@@ -18,18 +18,18 @@ export default function SaveMediaModal({
    mediaToSave,
    closeModal,
 }: Props) {
-   const { lists } = useAppSelector((state) => state.lists);
+   const { playlists } = useAppSelector((state) => state.playlists);
 
    if (!mediaToSave) return <></>;
-   if (!lists) return <></>;
+   if (!playlists) return <></>;
    return (
       <ModalPortal isOpen={isOpen}>
          <ModalContainer closeModal={closeModal}>
             <ModalTitle>Save to...</ModalTitle>
             <div className="w-56 border-y border-light-2 dark:border-dark-2">
-               {lists.length === 0 && <NoListsText />}
-               {lists.length > 0 &&
-                  lists.map((list) => (
+               {playlists.length === 0 && <NoListsText />}
+               {playlists.length > 0 &&
+                  playlists.map((list) => (
                      <ListToSave
                         key={list.id}
                         list={list}

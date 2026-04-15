@@ -1,5 +1,3 @@
-import React from "react";
-import FilterCard from "../../FilterCard";
 import CustomSelect from "../../CustomSelect";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import {
@@ -8,6 +6,7 @@ import {
 } from "@/features/pages/media-type/constants/SORT_BY";
 import { SORT_BY_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 import { SelectOption } from "@/features/pages/media-type/models/Filters";
+import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
 
 type Props = {};
 
@@ -21,12 +20,12 @@ export default function SortByFilter({}: Props) {
    const isMovie = state.mediaType === "movie";
 
    return (
-      <FilterCard icon={SORT_BY_ICON} name="Sort by">
+      <MainFilterCard icon={SORT_BY_ICON} name="Sort by">
          <CustomSelect
             value={state.sortBy}
             onChange={handleChange}
             options={isMovie ? SORT_BY_MOVIE : SORT_BY_TV}
          />
-      </FilterCard>
+      </MainFilterCard>
    );
 }

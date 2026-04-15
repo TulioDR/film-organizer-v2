@@ -1,4 +1,3 @@
-import FilterCard from "../../FilterCard";
 import RangeInput from "../../RangeSelector";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import { DURATION_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
@@ -6,6 +5,7 @@ import {
    DURATION_GLOBAL_MAX,
    DURATION_GLOBAL_MIN,
 } from "@/features/pages/media-type/constants/FILTER_GLOBAL_RANGE";
+import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
 
 type Props = {};
 
@@ -20,7 +20,7 @@ export default function DurationFilter({}: Props) {
    };
 
    return (
-      <FilterCard icon={DURATION_ICON} name="Duration range">
+      <MainFilterCard icon={DURATION_ICON} name="Duration range">
          <RangeInput
             globalMin={DURATION_GLOBAL_MIN}
             globalMax={DURATION_GLOBAL_MAX}
@@ -32,6 +32,6 @@ export default function DurationFilter({}: Props) {
             setMinVal={changeMinValue}
             setMaxVal={changeMaxValue}
          />
-      </FilterCard>
+      </MainFilterCard>
    );
 }

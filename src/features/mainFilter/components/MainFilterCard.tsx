@@ -8,7 +8,7 @@ type Props = {
    icon: string | React.ReactNode;
 };
 
-export default function FilterCard({
+export default function MainFilterCard({
    name,
    children,
    className = "",

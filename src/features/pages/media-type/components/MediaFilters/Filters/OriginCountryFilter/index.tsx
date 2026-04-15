@@ -1,9 +1,8 @@
-import React from "react";
-import FilterCard from "../../FilterCard";
 import CustomSelect from "../../CustomSelect";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import { ORIGIN_COUNTRY_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 import { SelectOption } from "@/features/pages/media-type/models/Filters";
+import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
 
 type Props = {};
 
@@ -15,7 +14,7 @@ export default function OriginCountryFilter({}: Props) {
    };
 
    return (
-      <FilterCard icon={ORIGIN_COUNTRY_ICON} name="Origin country">
+      <MainFilterCard icon={ORIGIN_COUNTRY_ICON} name="Origin country">
          <CustomSelect
             isClearable
             value={state.country}
@@ -23,6 +22,6 @@ export default function OriginCountryFilter({}: Props) {
             options={countriesOptions}
             menuPlacement="top"
          />
-      </FilterCard>
+      </MainFilterCard>
    );
 }

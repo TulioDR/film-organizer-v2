@@ -10,11 +10,14 @@ import CardsGrid from "@/features/pages/media-type/components/CardsGrid";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import NotFoundMessage from "@/features/pages/media-type/components/NotFoundMessage";
 import Banner from "@/common/components/Banner";
-import MediaFilter from "@/features/pages/media-type/components/MediaFilter";
 import { Media } from "@/common/models/Media";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import { useMediaQuery } from "react-responsive";
+import MainFilter from "@/features/mainFilter/components/MainFilter";
+import { MediaFilterProvider } from "@/features/pages/media-type/context/MediaFilterContext";
+import CompactFilter from "@/features/pages/media-type/components/MediaFilters/CompactFilter";
+import ExpandedFilter from "@/features/pages/media-type/components/MediaFilters/ExpandedFilter";
 
 export const getServerSideProps: GetServerSideProps = getMediaData();
 
@@ -28,7 +31,6 @@ export default function MediaTypePage(response: Props) {
    const results = data.results;
    const { asPath } = useRouter();
    const [isOpen, setIsOpen] = useState<boolean>(true);
-   const toggleIsOpen = () => setIsOpen((prev) => !prev);
 
    const [direction, setDirection] = useState<"prev" | "next" | "default">(
       "default",
@@ -52,12 +54,15 @@ export default function MediaTypePage(response: Props) {
       <>
          <PageHead title={title} />
 
-         <MediaFilter
-            mediaType={mediaType}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            toggleIsOpen={toggleIsOpen}
-         />
+         <MediaFilterProvider mediaType={mediaType}>
+            <MainFilter
+               isOpen={isOpen}
+               setIsOpen={setIsOpen}
+               title={title}
+               compactContent={<CompactFilter />}
+               expandedContent={<ExpandedFilter />}
+            />
+         </MediaFilterProvider>
 
          <Responsive minWidth={XL_MEDIA_QUERY}>
             <div className="fixed h-64 w-full top-20 right-0 pl-[554px] pb-4">

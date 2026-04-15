@@ -1,5 +1,3 @@
-import React from "react";
-import FilterCard from "../../FilterCard";
 import RangeInput from "../../RangeSelector";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import { RATING_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
@@ -7,6 +5,7 @@ import {
    RATING_GLOBAL_MAX,
    RATING_GLOBAL_MIN,
 } from "@/features/pages/media-type/constants/FILTER_GLOBAL_RANGE";
+import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
 
 type Props = {};
 
@@ -21,7 +20,7 @@ export default function RatingFilter({}: Props) {
    };
 
    return (
-      <FilterCard icon={RATING_ICON} name="Rating Range">
+      <MainFilterCard icon={RATING_ICON} name="Rating Range">
          <RangeInput
             globalMin={RATING_GLOBAL_MIN}
             globalMax={RATING_GLOBAL_MAX}
@@ -33,6 +32,6 @@ export default function RatingFilter({}: Props) {
             setMaxVal={changeMaxValue}
             label="Rated"
          />
-      </FilterCard>
+      </MainFilterCard>
    );
 }

@@ -15,7 +15,6 @@ type Props = {
 export default function Bookmark({ media, mediaType }: Props) {
    const [isLoginAdviceOpen, setIsLoginAdviceOpen] = useState(false);
    const [isSaveMediaOpen, setIsSaveMediaOpen] = useState(false);
-   const [mediaToSave, setMediaToSave] = useState<string | null>(null);
 
    useEffect(() => {}, []);
 

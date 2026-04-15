@@ -1,5 +1,3 @@
-import React from "react";
-import FilterCard from "../../FilterCard";
 import movieGenres from "@/data/genres/movieGenres";
 import tvGenres from "@/data/genres/tvGenres";
 import GenreSelector from "./GenreSelector";
@@ -8,6 +6,7 @@ import GenresFilterGrid from "./GenresFilterGrid";
 import ExcludeIcon from "./ExcludeIcon";
 import { GENRES_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
 import { MediaGenre } from "@/features/pages/media-type/models/Filters";
+import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
 
 type Props = {
    exclude?: true;
@@ -27,7 +26,7 @@ export default function GenresFilter({ exclude, small }: Props) {
    };
 
    return (
-      <FilterCard
+      <MainFilterCard
          icon={exclude ? <ExcludeIcon /> : GENRES_ICON}
          name={`${exclude ? "Exclude" : "Include"} genres`}
       >
@@ -49,6 +48,6 @@ export default function GenresFilter({ exclude, small }: Props) {
                />
             ))}
          </GenresFilterGrid>
-      </FilterCard>
+      </MainFilterCard>
    );
 }

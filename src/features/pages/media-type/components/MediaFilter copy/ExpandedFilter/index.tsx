@@ -1,5 +1,3 @@
-import React from "react";
-
 // Filters
 import MediaTypeFilter from "../../MediaFilters/Filters/MediaTypeFilter";
 import SortByFilter from "../../MediaFilters/Filters/SortByFilter";

@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from "react";
+import MainFilterContainer from "./MainFilterContainer";
+
+import { useEffect, useState } from "react";
 import ExpandButton from "./ExpandButton";
 import OpenButton from "./OpenButton";
 import { usePresence } from "framer-motion";
-import FilterTitle from "./FilterTitle";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
-import FiltersLayout from "./FiltersLayout";
-import MediaFilterLayoutContainer from "./MediaFilterLayoutContainer";
-import MediaFiltersContainer from "./MediaFiltersContainer";
+import MainFilterLayoutContainer from "./MainFilterLayoutContainer";
 import PageTitle from "@/common/components/PageTitle";
 
 type Props = {
+   expandedContent?: React.ReactNode;
+   compactContent: React.ReactNode;
    isOpen: boolean;
-   toggleIsOpen: () => void;
-   mediaType: "movie" | "tv";
-   setIsOpen: (isOpen: boolean) => void;
+   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+   title: string;
 };
 
-export default function MediaFilter({
+export default function MainFilter({
+   expandedContent,
+   compactContent,
    isOpen,
-   toggleIsOpen,
-   mediaType,
    setIsOpen,
+   title,
 }: Props) {
    const [isPresent, safeToRemove] = usePresence();
    const [showSmallContent, setShowSmallContent] = useState(false);
@@ -31,7 +32,7 @@ export default function MediaFilter({
    const toggleIsExpanded = () => setIsExpanded((prev) => !prev);
    useEffect(() => setIsExpanded(false), [isOpen]);
 
-   const title = mediaType === "movie" ? "Movies" : "Series";
+   const toggleIsOpen = () => setIsOpen((prev) => !prev);
 
    useEffect(() => {
       setShowSmallContent(false);
@@ -52,28 +53,32 @@ export default function MediaFilter({
    }, [isOpen, isExpanded, isPresent]);
 
    return (
-      <MediaFiltersContainer mediaType={mediaType}>
+      <MainFilterContainer>
          <div className="flex absolute top-0 left-0 gap-1 h-12 xl:h-16">
             <OpenButton onClick={toggleIsOpen} isOpen={isOpen} />
             <PageTitle title={title} />
          </div>
-         <MediaFilterLayoutContainer isOpen={isOpen} isExpanded={isExpanded}>
+         <MainFilterLayoutContainer isOpen={isOpen} isExpanded={isExpanded}>
             {isOpen && (
                <>
-                  <FiltersLayout
-                     isExpanded={isExpanded}
-                     showLargeContent={showLargeContent}
-                     showSmallContent={showSmallContent}
-                  />
-                  <Responsive minWidth={XL_MEDIA_QUERY}>
-                     <ExpandButton
-                        onClick={toggleIsExpanded}
-                        isExpanded={isExpanded}
-                     />
-                  </Responsive>
+                  <div className="flex-1 h-full flex flex-col overflow-hidden relative">
+                     <div className="h-12 xl:h-16 border-b border-border-light dark:border-border-dark -translate-y-px" />
+                     <div className="flex-1 w-full overflow-hidden">
+                        {isExpanded && showLargeContent && expandedContent}
+                        {!isExpanded && showSmallContent && compactContent}
+                     </div>
+                  </div>
+                  {expandedContent && (
+                     <Responsive minWidth={XL_MEDIA_QUERY}>
+                        <ExpandButton
+                           onClick={toggleIsExpanded}
+                           isExpanded={isExpanded}
+                        />
+                     </Responsive>
+                  )}
                </>
             )}
-         </MediaFilterLayoutContainer>
-      </MediaFiltersContainer>
+         </MainFilterLayoutContainer>
+      </MainFilterContainer>
    );
 }

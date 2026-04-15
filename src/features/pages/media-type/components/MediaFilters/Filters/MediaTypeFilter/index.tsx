@@ -1,11 +1,10 @@
-import React from "react";
-import FilterCard from "../../FilterCard";
 import MediaTypeButton from "./MediaTypeButton";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import {
    MOVIE_ICON,
    TV_ICON,
 } from "@/features/pages/media-type/constants/FILTER_ICONS";
+import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
 
 type Props = {};
 
@@ -19,7 +18,10 @@ export default function MediaTypeFilter({}: Props) {
    };
 
    return (
-      <FilterCard icon={isMovie ? MOVIE_ICON : TV_ICON} name="Movies or Series">
+      <MainFilterCard
+         icon={isMovie ? MOVIE_ICON : TV_ICON}
+         name="Movies or Series"
+      >
          <div className="flex w-full gap-2">
             <MediaTypeButton
                text="Movies"
@@ -32,6 +34,6 @@ export default function MediaTypeFilter({}: Props) {
                onClick={() => changeMediaType("tv")}
             />
          </div>
-      </FilterCard>
+      </MainFilterCard>
    );
 }

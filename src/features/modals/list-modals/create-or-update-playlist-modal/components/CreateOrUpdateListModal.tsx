@@ -81,7 +81,7 @@ export default function CreateOrUpdateListModal({
                onSubmit={handleSubmit}
             >
                <Form className="w-72 flex flex-col gap-4">
-                  <ModalTitle>{`${playlist ? "Update" : "Create a"} List`}</ModalTitle>
+                  <ModalTitle>{`${playlist ? "Update" : "Create"} List`}</ModalTitle>
                   <ModalInput name="name" placeholder="Name" maxLength={50} />
                   <ModalInput
                      name="description"
