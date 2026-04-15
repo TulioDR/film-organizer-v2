@@ -7,19 +7,42 @@ import DeletePlaylistHandler from "./DeletePlaylistHandler";
 import UpdatePlaylistHandler from "./UpdatePlaylistHandler";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import LittlePill from "./LittlePill";
 
 type Props = {
    playlist: Playlist;
 };
 
 export default function PlaylistCard({ playlist }: Props) {
+   const [numberOfMovies, setNumberOfMovies] = useState<number>(0);
+   const [numberOfSeries, setNumberOfSeries] = useState<number>(0);
+
+   useEffect(() => {
+      setNumberOfMovies(3);
+      setNumberOfSeries(2);
+   }, []);
+
+   const totalItems = numberOfMovies + numberOfSeries;
+
    return (
       <motion.div
          layout
          style={{ borderRadius: STANDARD_RADIUS }}
-         className="flex flex-col border border-border-light dark:border-border-dark bg-white dark:bg-black"
+         className="flex flex-col border border-border-light dark:border-border-dark bg-white dark:bg-black relative"
       >
-         <PlaylistCardPoster />
+         <div className="w-full flex items-center justify-center p-4 aspect-square relative">
+            <LittlePill
+               accent
+               text={totalItems > 0 ? `${totalItems} items` : "empty"}
+               className="absolute top-2 right-2"
+            />
+            <PlaylistCardPoster />
+            <div className="absolute bottom-2 left-2 flex gap-2">
+               <LittlePill text={`${numberOfMovies} movies`} />
+               <LittlePill text={`${numberOfSeries} series`} />
+            </div>
+         </div>
          <div className={`flex flex-col w-full flex-1 gap-4 p-4 pt-0`}>
             <div className="flex flex-col w-full">
                <motion.div
@@ -35,31 +58,12 @@ export default function PlaylistCard({ playlist }: Props) {
                   {playlist.description}
                </motion.div>
             </div>
-            <motion.div
-               layout="position"
-               className="w-full flex justify-end gap-1 h-12"
-            >
-               <OpenCardLink href={`/playlists/${playlist.id}`} />
-               <UpdatePlaylistHandler playlist={playlist} />
-               <DeletePlaylistHandler playlistToDelete={playlist} />
-            </motion.div>
-         </div>
-         {/* <PlaylistCardPoster />
-         <div className="flex-1 h-full flex flex-col gap-8 justify-between p-4 pt-8 pl-8 overflow-hidden">
-            <div className="flex flex-col w-full">
-               <div className="w-full truncate h-12 relative flex items-center text-3xl font-thin text-black dark:text-white">
-                  {playlist.name}
-               </div>
-               <div className="truncate text-black/50 dark:text-white/50 text-xs sm:text-sm md:text-base w-full">
-                  {playlist.description}
-               </div>
-            </div>
             <div className="w-full flex justify-end gap-1 h-12">
                <OpenCardLink href={`/playlists/${playlist.id}`} />
                <UpdatePlaylistHandler playlist={playlist} />
                <DeletePlaylistHandler playlistToDelete={playlist} />
             </div>
-         </div> */}
+         </div>
       </motion.div>
    );
 }

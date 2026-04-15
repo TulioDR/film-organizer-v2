@@ -2,6 +2,7 @@ import MainButton from "@/common/components/MainButton";
 import Playlist from "@/common/models/Playlist";
 import CreateOrUpdateListModal from "@/features/modals/list-modals/create-or-update-playlist-modal/components/CreateOrUpdateListModal";
 import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
    playlist: Playlist;
@@ -14,7 +15,9 @@ export default function UpdatePlaylistHandler({ playlist }: Props) {
 
    return (
       <>
-         <MainButton square icon="edit" onClick={openUpdateModal} />
+         <motion.div layout className="block">
+            <MainButton square icon="edit" onClick={openUpdateModal} />
+         </motion.div>
          <CreateOrUpdateListModal
             isOpen={isUpdateOpen}
             close={closeUpdateModal}

@@ -19,9 +19,8 @@ const LoadingSpinner = dynamic(
 export default function Playlists() {
    const { user, isLoaded } = useUser();
    const { playlists } = useAppSelector((state) => state.playlists);
-   const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
-
    const [isFilterOpen, setIsFilterOpen] = useState(false);
+   const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
 
    useEffect(() => {
       if (playlists === null) return;
