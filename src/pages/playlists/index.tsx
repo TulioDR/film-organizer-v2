@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import PageHead from "@/common/components/PageHead";
@@ -22,6 +22,11 @@ export default function Playlists() {
    const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
 
    const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+   useEffect(() => {
+      if (playlists === null) return;
+      setFilteredPlaylists(playlists);
+   }, [playlists]);
 
    if (!isLoaded)
       return (
@@ -57,14 +62,20 @@ export default function Playlists() {
             <CreatePlaylistButton />
          </div>
          <div className="w-full mt-14 xl:mt-64">
-            {playlists.length === 0 ? (
+            {!playlists ? (
+               <div className="w-full h-64 flex items-center justify-center">
+                  <div className="w-60">
+                     <LoadingSpinner />
+                  </div>
+               </div>
+            ) : playlists.length === 0 ? (
                <NoListsMessage text="this is so empty... Create list to save movies and series" />
             ) : filteredPlaylists.length > 0 ? (
                <div
                   className={`grid gap-1 xl:gap-4 grid-cols-1 w-full ${
                      isFilterOpen
-                        ? "xl:grid-cols-1 xl:pl-[426px]"
-                        : "xl:grid-cols-2"
+                        ? "xl:grid-cols-2 2xl:grid-cols-3 xl:pl-[426px]"
+                        : "xl:grid-cols-3 2xl:grid-cols-4"
                   }`}
                >
                   {filteredPlaylists.map((playlist) => (
@@ -72,7 +83,7 @@ export default function Playlists() {
                   ))}
                </div>
             ) : (
-               <NoListsMessage text="No lists found" />
+               <NoListsMessage text="No playlist found" />
             )}
          </div>
       </div>

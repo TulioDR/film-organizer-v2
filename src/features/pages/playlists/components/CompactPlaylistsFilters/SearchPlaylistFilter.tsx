@@ -1,23 +1,15 @@
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
-import Playlist from "@/common/models/Playlist";
 import MainFilterCard from "@/features/mainFilter/components/MainFilterCard";
-import useAppSelector from "@/store/hooks/useAppSelector";
-import { useEffect, useState } from "react";
 
 type Props = {
-   setFilteredPlaylists: React.Dispatch<React.SetStateAction<Playlist[]>>;
+   inputValue: string;
+   setInputValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function SearchPlaylistFilter({ setFilteredPlaylists }: Props) {
-   const { playlists } = useAppSelector((state) => state.playlists);
-   const [inputValue, setInputValue] = useState<string>("");
-   useEffect(() => {
-      const founded = playlists.filter(({ name }) =>
-         name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()),
-      );
-      setFilteredPlaylists(founded);
-   }, [inputValue, playlists]);
-
+export default function SearchPlaylistFilter({
+   inputValue,
+   setInputValue,
+}: Props) {
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
    };
@@ -26,7 +18,7 @@ export default function SearchPlaylistFilter({ setFilteredPlaylists }: Props) {
       <MainFilterCard name="Search playlist" icon="search">
          <div
             style={{ borderRadius: STANDARD_RADIUS }}
-            className="h-12 w-full px-4 bg-white dark:bg-black border border-border-light dark:border-border-dark flex items-center"
+            className="h-10 w-full px-4 bg-white dark:bg-black border border-border-light dark:border-border-dark flex items-center"
          >
             <input
                type="text"

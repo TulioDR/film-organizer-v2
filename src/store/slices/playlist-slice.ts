@@ -2,10 +2,10 @@ import Playlist from "@/common/models/Playlist";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
-   playlists: Playlist[];
+   playlists: Playlist[] | null;
 }
 const initialState: InitialState = {
-   playlists: [],
+   playlists: null,
 };
 
 const playlistsSlice = createSlice({
