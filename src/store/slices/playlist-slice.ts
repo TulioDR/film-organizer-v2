@@ -12,7 +12,7 @@ const playlistsSlice = createSlice({
    name: "lists",
    initialState,
    reducers: {
-      setPlaylists(state, { payload }: { payload: Playlist[] }) {
+      setPlaylists(state, { payload }: { payload: Playlist[] | null }) {
          state.playlists = payload;
       },
    },

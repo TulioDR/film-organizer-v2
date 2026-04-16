@@ -10,23 +10,35 @@ export default async function handler(
    const supabase = createClerkSupabaseClient(session);
    const userId = session.userId;
 
+   console.log("API Request User ID:", userId);
+
    if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
    }
 
    if (req.method === "GET") {
-      try {
-         const { data, error } = await supabase
-            .from("playlists")
-            .select("*")
-            .eq("user_id", userId)
-            .order("created_at", { ascending: true });
+      const { preview } = req.query;
 
-         if (error) return res.status(400).json({ error: error.message });
-         return res.status(200).json(data);
-      } catch (err) {
-         return res.status(500).json({ error: "Internal Server Error" });
+      let query = supabase.from("playlists").select("*").eq("user_id", userId);
+
+      if (preview === "true") {
+         query = supabase
+            .from("playlists")
+            .select(
+               `*,
+               playlist_items (
+                  media_type,
+                  poster_path
+               )
+            `,
+            )
+            .eq("user_id", userId);
       }
+
+      const { data, error } = await query;
+
+      if (error) return res.status(400).json({ error: error.message });
+      return res.status(200).json(data);
    }
 
    if (req.method === "POST") {

@@ -5,3 +5,13 @@ export default interface Playlist {
    description?: string;
    created_at: string;
 }
+
+export interface PlaylistWithItems extends Playlist {
+   playlist_items: {
+      media_type: "movie" | "tv";
+      media: {
+         title: string;
+         poster_path: string | null;
+      };
+   }[];
+}

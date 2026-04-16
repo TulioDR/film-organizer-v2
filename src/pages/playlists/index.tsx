@@ -1,42 +1,57 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
 
 import PageHead from "@/common/components/PageHead";
-import useAppSelector from "@/store/hooks/useAppSelector";
 import ListsLoginAdvice from "@/features/pages/playlists/components/ListsLoginAdvice";
 import NoListsMessage from "@/features/pages/playlists/components/NoListsMessage";
 import PlaylistCard from "@/features/pages/playlists/components/PlaylistCard";
 import CreatePlaylistButton from "@/features/pages/playlists/components/CreatePlaylistButton";
-import Playlist from "@/common/models/Playlist";
-import dynamic from "next/dynamic";
+import { PlaylistWithItems } from "@/common/models/Playlist";
 import MainFilter from "@/features/mainFilter/components/MainFilter";
 import CompactPlaylistsFilters from "@/features/pages/playlists/components/CompactPlaylistsFilters";
-const LoadingSpinner = dynamic(
-   () => import("@/common/components/LoadingSpinner"),
-   { ssr: false },
-);
+import { getAuth } from "@clerk/nextjs/server";
+import { createClerkSupabaseClient } from "@/lib/supabaseClient";
+import { fetchPlaylistsData } from "@/api/playlistsService";
 
-export default function Playlists() {
-   const { user, isLoaded } = useUser();
-   const { playlists } = useAppSelector((state) => state.playlists);
+export const getServerSideProps = async (context: any) => {
+   const authData = getAuth(context.req);
+   const userId = authData.userId;
+
+   if (!userId) {
+      return { props: { initialPlaylists: null } };
+   }
+
+   try {
+      const supabase = createClerkSupabaseClient(authData);
+
+      const playlists = await fetchPlaylistsData(supabase, userId, true);
+
+      return {
+         props: {
+            initialPlaylists: JSON.parse(JSON.stringify(playlists || [])),
+            userId,
+         },
+      };
+   } catch (error) {
+      console.error("Direct Fetch Error:", error);
+      return { props: { initialPlaylists: [] } };
+   }
+};
+type Props = {
+   initialPlaylists: PlaylistWithItems[] | null;
+};
+
+export default function Playlists({ initialPlaylists: playlists }: Props) {
    const [isFilterOpen, setIsFilterOpen] = useState(false);
-   const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
+   const [filteredPlaylists, setFilteredPlaylists] = useState<
+      PlaylistWithItems[]
+   >(playlists || []);
 
    useEffect(() => {
-      if (playlists === null) return;
-      setFilteredPlaylists(playlists);
+      console.log("the initial playlists are:");
+      console.log(playlists);
    }, [playlists]);
 
-   if (!isLoaded)
-      return (
-         <div className="h-[100svh] w-full flex items-center justify-center">
-            <PageHead title="loading playlists..." />
-            <div className="w-64">
-               <LoadingSpinner />
-            </div>
-         </div>
-      );
-   if (!user)
+   if (playlists === null)
       return (
          <div className="h-[100svh] w-full flex items-center justify-center">
             <PageHead title="Login first" />
@@ -53,6 +68,7 @@ export default function Playlists() {
             title={"Playlists"}
             compactContent={
                <CompactPlaylistsFilters
+                  playlists={playlists}
                   setFilteredPlaylists={setFilteredPlaylists}
                />
             }
@@ -61,13 +77,7 @@ export default function Playlists() {
             <CreatePlaylistButton />
          </div>
          <div className="w-full mt-14 xl:mt-64">
-            {!playlists ? (
-               <div className="w-full h-64 flex items-center justify-center">
-                  <div className="w-60">
-                     <LoadingSpinner />
-                  </div>
-               </div>
-            ) : playlists.length === 0 ? (
+            {playlists.length === 0 ? (
                <NoListsMessage text="this is so empty... Create list to save movies and series" />
             ) : filteredPlaylists.length > 0 ? (
                <div
@@ -77,9 +87,26 @@ export default function Playlists() {
                         : "xl:grid-cols-3 2xl:grid-cols-4"
                   }`}
                >
-                  {filteredPlaylists.map((playlist) => (
-                     <PlaylistCard playlist={playlist} key={playlist.id} />
-                  ))}
+                  {filteredPlaylists.map((playlist) => {
+                     const movies = playlist.playlist_items.filter(
+                        (i) => i.media_type === "movie",
+                     ).length;
+                     const series = playlist.playlist_items.filter(
+                        (i) => i.media_type === "tv",
+                     ).length;
+                     const posters = playlist.playlist_items
+                        .slice(0, 3)
+                        .map((i) => i.media.poster_path);
+                     return (
+                        <PlaylistCard
+                           playlist={playlist}
+                           key={playlist.id}
+                           numberOfMovies={movies}
+                           numberOfSeries={series}
+                           posterPaths={posters}
+                        />
+                     );
+                  })}
                </div>
             ) : (
                <NoListsMessage text="No playlist found" />

@@ -1,15 +1,6 @@
 import axios from "axios";
 const API = axios.create({ baseURL: "/api/database/playlists" });
 
-export const getPlaylists = async () => {
-   try {
-      const { data } = await API.get("/");
-      return data;
-   } catch (error) {
-      console.log(error);
-   }
-};
-
 export const deleteAllPlaylists = async (authorId: string) => {
    try {
       const { data } = await API.delete(`/`, { data: authorId });
@@ -43,5 +34,17 @@ export const deletePlaylist = async (id: string) => {
       return data;
    } catch (error) {
       console.log(error);
+   }
+};
+
+export const getUserPlaylists = async (isPreview: boolean = false) => {
+   try {
+      const { data } = await API.get("/", {
+         params: { preview: isPreview },
+      });
+      return data;
+   } catch (error) {
+      console.error("Client-side fetch error:", error);
+      return [];
    }
 };

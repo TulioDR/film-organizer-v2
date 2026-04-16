@@ -7,22 +7,21 @@ import DeletePlaylistHandler from "./DeletePlaylistHandler";
 import UpdatePlaylistHandler from "./UpdatePlaylistHandler";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import LittlePill from "./LittlePill";
 
 type Props = {
    playlist: Playlist;
+   numberOfMovies: number;
+   numberOfSeries: number;
+   posterPaths: (string | null)[];
 };
 
-export default function PlaylistCard({ playlist }: Props) {
-   const [numberOfMovies, setNumberOfMovies] = useState<number>(0);
-   const [numberOfSeries, setNumberOfSeries] = useState<number>(0);
-
-   useEffect(() => {
-      setNumberOfMovies(3);
-      setNumberOfSeries(2);
-   }, []);
-
+export default function PlaylistCard({
+   playlist,
+   numberOfMovies,
+   numberOfSeries,
+   posterPaths,
+}: Props) {
    const totalItems = numberOfMovies + numberOfSeries;
 
    return (
@@ -37,7 +36,7 @@ export default function PlaylistCard({ playlist }: Props) {
                text={totalItems > 0 ? `${totalItems} items` : "empty"}
                className="absolute top-2 right-2"
             />
-            <PlaylistCardPoster />
+            <PlaylistCardPoster posterPaths={posterPaths} />
             <div className="absolute bottom-2 left-2 flex gap-2">
                <LittlePill text={`${numberOfMovies} movies`} />
                <LittlePill text={`${numberOfSeries} series`} />

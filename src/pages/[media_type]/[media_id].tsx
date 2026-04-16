@@ -38,7 +38,6 @@ type Props = {
 export default function MediaId({ media_type, media }: Props) {
    const { removeBackground } = useBackground();
    useEffect(() => {
-      // console.log(media);
       return () => {
          removeBackground();
       };
@@ -48,17 +47,18 @@ export default function MediaId({ media_type, media }: Props) {
    const [hideUi, setHideUi] = useState<boolean>(false);
    const toggleUi = () => setHideUi((prev) => !prev);
 
+   const onExitComplete = () => {
+      if (!lenis) return;
+      lenis.scrollTo("top", { immediate: true });
+   };
+
    return (
       <>
          <Responsive minWidth={XL_MEDIA_QUERY}>
             <BackgroundViewButton hideUi={hideUi} onClick={toggleUi} />
          </Responsive>
 
-         <AnimatePresence
-            mode="wait"
-            propagate
-            onExitComplete={() => lenis!.scrollTo("top", { immediate: true })}
-         >
+         <AnimatePresence mode="wait" propagate onExitComplete={onExitComplete}>
             <MediaIdContainer key={media.id} media={media}>
                <PageHead
                   title={media.title || media.name}

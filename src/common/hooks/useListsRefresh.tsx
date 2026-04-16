@@ -1,6 +1,6 @@
 import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { useUser } from "@clerk/nextjs";
-import { getPlaylists } from "@/api/playlists";
+import { getUserPlaylists } from "@/api/playlists";
 import { playlistsActions } from "@/store/slices/playlist-slice";
 import Playlist from "../models/Playlist";
 
@@ -15,7 +15,7 @@ export default function useListsRefresh() {
       }
       console.log("refresh lists");
       setTimeout(async () => {
-         const lists: Playlist[] = await getPlaylists();
+         const lists: Playlist[] = await getUserPlaylists(false);
          console.log(lists);
          dispatch(playlistsActions.setPlaylists(lists));
       }, 100);

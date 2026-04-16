@@ -1,20 +1,21 @@
 import ReactLenis from "lenis/react";
-import Playlist from "@/common/models/Playlist";
 import SearchPlaylistFilter from "./SearchPlaylistFilter";
 import SortByPlaylistsFilter from "./SortByPlaylistsFilter";
 import { useEffect, useState } from "react";
-import useAppSelector from "@/store/hooks/useAppSelector";
 import { SelectOption } from "@/features/pages/media-type/models/Filters";
+import { PlaylistWithItems } from "@/common/models/Playlist";
 
 type Props = {
-   setFilteredPlaylists: React.Dispatch<React.SetStateAction<Playlist[]>>;
+   setFilteredPlaylists: React.Dispatch<
+      React.SetStateAction<PlaylistWithItems[]>
+   >;
+   playlists: PlaylistWithItems[];
 };
 
 export default function CompactPlaylistsFilters({
    setFilteredPlaylists,
+   playlists,
 }: Props) {
-   const { playlists } = useAppSelector((state) => state.playlists);
-
    const SORT_PLAYLISTS_OPTIONS: SelectOption[] = [
       { value: "alpha_asc", label: "Name (A-Z)" },
       { value: "alpha_desc", label: "Name (Z-A)" },
