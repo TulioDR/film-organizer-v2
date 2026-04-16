@@ -17,9 +17,13 @@ export interface PlaylistWithItems extends Playlist {
       };
    }[];
 }
+
+export interface PlaylistItems {
+   added_at: string;
+   media_type: "movie" | "tv";
+   media: Media;
+}
+
 export interface PlaylistDetails extends Playlist {
-   playlist_items: {
-      media_type: "movie" | "tv";
-      media: Media;
-   }[];
+   playlist_items: PlaylistItems[];
 }

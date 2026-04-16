@@ -92,26 +92,9 @@ export default function Playlists({ initialPlaylists: playlists }: Props) {
                         : "xl:grid-cols-3 2xl:grid-cols-4"
                   }`}
                >
-                  {filteredPlaylists.map((playlist) => {
-                     const movies = playlist.playlist_items.filter(
-                        (i) => i.media_type === "movie",
-                     ).length;
-                     const series = playlist.playlist_items.filter(
-                        (i) => i.media_type === "tv",
-                     ).length;
-                     const posters = playlist.playlist_items
-                        .slice(0, 3)
-                        .map((i) => i.media.poster_path);
-                     return (
-                        <PlaylistCard
-                           playlist={playlist}
-                           key={playlist.id}
-                           numberOfMovies={movies}
-                           numberOfSeries={series}
-                           posterPaths={posters}
-                        />
-                     );
-                  })}
+                  {filteredPlaylists.map((playlist) => (
+                     <PlaylistCard playlist={playlist} key={playlist.id} />
+                  ))}
                </div>
             ) : (
                <NoListsMessage text="No playlist found" />

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PaginationButton from "./PaginationButton";
 import PaginationContainer from "./PaginationContainer";
 import { usePagination } from "@mantine/hooks";
@@ -8,18 +8,11 @@ import { useRouter } from "next/router";
 type Props = {
    currentPage: number;
    total: number;
-   setDirection: React.Dispatch<
-      React.SetStateAction<"prev" | "next" | "default">
-   >;
+
    isMobile: boolean;
 };
 
-export default function Pagination({
-   currentPage,
-   total,
-   setDirection,
-   isMobile,
-}: Props) {
+export default function Pagination({ currentPage, total, isMobile }: Props) {
    const [siblings, setSiblings] = useState<number | undefined>(undefined);
 
    useEffect(() => {
@@ -36,9 +29,6 @@ export default function Pagination({
    const router = useRouter();
 
    const handlePageChange = async (page: number) => {
-      if (page > currentPage) setDirection("next");
-      else setDirection("prev");
-
       await new Promise((resolve) => setTimeout(resolve, 50));
       router.push(
          {

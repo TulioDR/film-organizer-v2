@@ -2,7 +2,7 @@ import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 
 import OpenCardLink from "./OpenCardLink";
 import PlaylistCardPoster from "./PlaylistCardPoster";
-import Playlist from "@/common/models/Playlist";
+import { PlaylistWithItems } from "@/common/models/Playlist";
 import DeletePlaylistHandler from "./DeletePlaylistHandler";
 import UpdatePlaylistHandler from "./UpdatePlaylistHandler";
 
@@ -10,20 +10,20 @@ import { motion } from "framer-motion";
 import LittlePill from "./LittlePill";
 
 type Props = {
-   playlist: Playlist;
-   numberOfMovies: number;
-   numberOfSeries: number;
-   posterPaths: (string | null)[];
+   playlist: PlaylistWithItems;
 };
 
-export default function PlaylistCard({
-   playlist,
-   numberOfMovies,
-   numberOfSeries,
-   posterPaths,
-}: Props) {
-   const totalItems = numberOfMovies + numberOfSeries;
-
+export default function PlaylistCard({ playlist }: Props) {
+   const movies = playlist.playlist_items.filter(
+      (i) => i.media_type === "movie",
+   ).length;
+   const series = playlist.playlist_items.filter(
+      (i) => i.media_type === "tv",
+   ).length;
+   const posters = playlist.playlist_items
+      .slice(0, 3)
+      .map((i) => i.media.poster_path);
+   const totalItems = movies + series;
    return (
       <motion.div
          layout
@@ -36,10 +36,10 @@ export default function PlaylistCard({
                text={totalItems > 0 ? `${totalItems} items` : "empty"}
                className="absolute top-2 right-2"
             />
-            <PlaylistCardPoster posterPaths={posterPaths} />
+            <PlaylistCardPoster posterPaths={posters} />
             <div className="absolute bottom-2 left-2 flex gap-2">
-               <LittlePill text={`${numberOfMovies} movies`} />
-               <LittlePill text={`${numberOfSeries} series`} />
+               <LittlePill text={`${movies} movies`} />
+               <LittlePill text={`${series} series`} />
             </div>
          </div>
          <div className={`flex flex-col w-full flex-1 gap-4 p-4 pt-0`}>

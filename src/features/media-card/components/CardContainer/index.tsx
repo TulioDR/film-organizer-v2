@@ -1,4 +1,3 @@
-import cardAnimation from "@/features/pages/media-type/animations/cardAnimation";
 import MainContainer from "./MainContainer";
 import TransitionContainer from "./TransitionContainer";
 import { motion, usePresence } from "framer-motion";
@@ -7,14 +6,12 @@ import { useEffect } from "react";
 type Props = {
    children: React.ReactNode;
    layoutId: string;
-   direction?: "prev" | "next" | "default";
    isLoading: boolean;
 };
 
 export default function CardContainer({
    children,
    layoutId,
-   direction,
    isLoading,
 }: Props) {
    const [isPresent, safeToRemove] = usePresence();
@@ -27,8 +24,7 @@ export default function CardContainer({
 
    return (
       <motion.div
-         initial={direction ? cardAnimation[direction].initial : false}
-         className={`aspect-[2/3] w-full media-card ${isLoading || !isPresent ? "pointer-events-none" : ""}`}
+         className={`aspect-[2/3] w-full ${isLoading || !isPresent ? "pointer-events-none" : ""}`}
       >
          {isLoading && !isPresent ? (
             <TransitionContainer

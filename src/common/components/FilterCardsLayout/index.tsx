@@ -1,4 +1,6 @@
 import MainFilter from "@/features/mainFilter/components/MainFilter";
+import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 
 type Props = {
    title: string;
@@ -7,6 +9,7 @@ type Props = {
    children: React.ReactNode;
    isOpen: boolean;
    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+   innerKey?: string;
 };
 
 export default function FilterCardsLayout({
@@ -16,7 +19,14 @@ export default function FilterCardsLayout({
    children,
    isOpen,
    setIsOpen,
+   innerKey,
 }: Props) {
+   const lenis = useLenis();
+   const onExitComplete = () => {
+      if (!lenis) return;
+      lenis.scrollTo("top", { immediate: true });
+   };
+
    return (
       <>
          <MainFilter
@@ -26,11 +36,20 @@ export default function FilterCardsLayout({
             compactContent={compactFilter}
             expandedContent={expandedFilter}
          />
-         <div className="overflow-hidden py-14 px-4 lg:px-32 xl:mt-20 xl:pt-64 xl:pb-24">
-            <div className={`w-full ${isOpen ? "xl:pl-[426px]" : ""}`}>
-               {children}
-            </div>
-         </div>
+         <AnimatePresence mode="wait" propagate onExitComplete={onExitComplete}>
+            <motion.div
+               key={innerKey}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               exit={{ opacity: 0 }}
+               transition={{ duration: 0.2 }}
+               className="overflow-hidden py-14 px-4 lg:px-32 xl:mt-20 xl:pt-64 xl:pb-24"
+            >
+               <div className={`w-full ${isOpen ? "xl:pl-[426px]" : ""}`}>
+                  {children}
+               </div>
+            </motion.div>
+         </AnimatePresence>
       </>
    );
 }

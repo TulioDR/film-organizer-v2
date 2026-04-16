@@ -1,15 +1,15 @@
 import { fetchSinglePlaylistWithMedia } from "@/api/playlistsService";
 import FilterCardsLayout from "@/common/components/FilterCardsLayout";
 import PageHead from "@/common/components/PageHead";
-import { PlaylistDetails } from "@/common/models/Playlist";
+import { PlaylistDetails, PlaylistItems } from "@/common/models/Playlist";
 import MediaCard from "@/features/media-card/components/MediaCard";
 import CardsGrid from "@/features/pages/media-type/components/CardsGrid";
+import CompactPlaylistDetailsFilter from "@/features/pages/playlist-id/components/CompactPlaylistDetailsFilter";
+import PlaylistDetailsDescription from "@/features/pages/playlist-id/components/PlaylistDetailsDescription";
 import { createClerkSupabaseClient } from "@/lib/supabaseClient";
 import { getAuth } from "@clerk/nextjs/server";
-import { AnimatePresence } from "framer-motion";
-import { useLenis } from "lenis/react";
 import { GetServerSideProps } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { playlist_id } = context.params as { playlist_id: string };
@@ -48,13 +48,15 @@ type Props = {
 export default function PlaylistId({ playlist: initialPlaylist }: Props) {
    const [playlist, _setPlaylist] = useState<PlaylistDetails>(initialPlaylist);
 
+   useEffect(() => {
+      console.log(playlist);
+   }, []);
+
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-   const lenis = useLenis();
-   const onExitComplete = () => {
-      if (!lenis) return;
-      lenis.scrollTo("top", { immediate: true });
-   };
+   const [filteredMedia, setFilteredMedia] = useState<PlaylistItems[]>(
+      playlist.playlist_items,
+   );
 
    return (
       <>
@@ -64,26 +66,33 @@ export default function PlaylistId({ playlist: initialPlaylist }: Props) {
             isOpen={isFilterOpen}
             setIsOpen={setIsFilterOpen}
             title={playlist.name}
-            compactFilter={<></>}
+            compactFilter={
+               <CompactPlaylistDetailsFilter
+                  allMedia={playlist.playlist_items}
+                  setFilteredMedia={setFilteredMedia}
+               />
+            }
          >
-            <AnimatePresence
-               mode="wait"
-               propagate
-               onExitComplete={onExitComplete}
-            >
-               <CardsGrid isOpen={isFilterOpen}>
-                  {playlist.playlist_items.map(
-                     ({ media, media_type }, index) => (
-                        <MediaCard
-                           key={`${media_type}-${media.id}-${index}`}
-                           id={`${media_type}-${media.id}-${index}`}
-                           media={media}
-                           mediaType={media_type}
-                        />
-                     ),
-                  )}
-               </CardsGrid>
-            </AnimatePresence>
+            <div className="w-full flex flex-col gap-41 pb-4">
+               <div className="text-black dark:text-white font-medium tracking-wider uppercase">
+                  Description
+               </div>
+               <div className="text-black/80 dark:text-white/80">
+                  {playlist.description || "This playlist has no description"}
+               </div>
+            </div>
+            <PlaylistDetailsDescription description={playlist.description} />
+
+            <CardsGrid isOpen={isFilterOpen}>
+               {filteredMedia.map(({ media, media_type }, index) => (
+                  <MediaCard
+                     key={`${media_type}-${media.id}-${index}`}
+                     id={`${media_type}-${media.id}-${index}`}
+                     media={media}
+                     mediaType={media_type}
+                  />
+               ))}
+            </CardsGrid>
          </FilterCardsLayout>
       </>
    );

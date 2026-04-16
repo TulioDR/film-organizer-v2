@@ -44,6 +44,7 @@ export const fetchSinglePlaylistWithMedia = async (
          *,
          playlist_items (
             id,
+            added_at,
             media_type,
             media:media_id (
                *
