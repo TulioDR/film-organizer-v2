@@ -10,20 +10,28 @@ import ModalButtonsContainer from "@/features/modals/modal-parts/components/Moda
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import ModalInput from "@/features/modals/modal-parts/components/ModalInput";
 import MainButton from "@/common/components/MainButton";
-import { createPlaylist, updatePlaylist } from "@/api/playlists";
+import {
+   createPlaylist,
+   getUserPlaylists,
+   updatePlaylist,
+} from "@/api/playlists";
 import useListsRefresh from "@/common/hooks/useListsRefresh";
-import Playlist from "@/common/models/Playlist";
+import { PlaylistWithItems } from "@/common/models/Playlist";
 
 type Props = {
    close: () => void;
    isOpen: boolean;
-   playlist?: Playlist;
+   playlist?: PlaylistWithItems;
+   setFilteredPlaylists: React.Dispatch<
+      React.SetStateAction<PlaylistWithItems[]>
+   >;
 };
 
 export default function CreateOrUpdateListModal({
    close,
    isOpen,
    playlist,
+   setFilteredPlaylists,
 }: Props) {
    const { refreshLists } = useListsRefresh();
 
@@ -40,13 +48,15 @@ export default function CreateOrUpdateListModal({
       let error = null;
       if (playlist) {
          const updatedList = await updatePlaylist(playlist.id, newListData);
-         console.log("this is the updated list");
-         console.log(updatedList);
+         const newPlaylists = await getUserPlaylists(true);
+         console.log(newPlaylists);
+         setFilteredPlaylists(newPlaylists);
          error = updatedList.error;
       } else {
          const createdList = await createPlaylist(newListData);
-         console.log("this is the created list");
-         console.log(createdList);
+         const newPlaylists = await getUserPlaylists(true);
+         console.log(newPlaylists);
+         setFilteredPlaylists(newPlaylists);
          error = createdList.error;
       }
       if (error) {

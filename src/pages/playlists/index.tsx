@@ -74,7 +74,7 @@ export default function Playlists({ initialPlaylists: playlists }: Props) {
             }
          />
          <div className="fixed top-14 xl:top-20 left-0 pr-4 lg:pr-32 z-10 w-full h-14 py-1 lg:py-0 xl:h-64 flex items-center justify-end pointer-events-none">
-            <CreatePlaylistButton />
+            <CreatePlaylistButton setFilteredPlaylists={setFilteredPlaylists} />
          </div>
          <div className="w-full mt-14 xl:mt-64">
             {playlists.length === 0 ? (
