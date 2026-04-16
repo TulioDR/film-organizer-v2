@@ -1,90 +1,90 @@
-// import { GetServerSideProps } from "next";
+import { fetchSinglePlaylistWithMedia } from "@/api/playlistsService";
+import FilterCardsLayout from "@/common/components/FilterCardsLayout";
+import PageHead from "@/common/components/PageHead";
+import { PlaylistDetails } from "@/common/models/Playlist";
+import MediaCard from "@/features/media-card/components/MediaCard";
+import CardsGrid from "@/features/pages/media-type/components/CardsGrid";
+import { createClerkSupabaseClient } from "@/lib/supabaseClient";
+import { getAuth } from "@clerk/nextjs/server";
+import { AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
+import { GetServerSideProps } from "next";
+import { useState } from "react";
 
-// import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
-// import DeleteMediaModal from "@/features/modals/media-modals/delete-media-modal/components/DeleteMediaModal";
-// import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
-// import LoadingSpinner from "@/common/components/LoadingSpinner";
-// import PageHead from "@/common/components/PageHead";
-// import useMediaData from "@/features/pages/list-id/hooks/useMediaData";
-// import useListData from "@/features/pages/list-id/hooks/useListData";
-// import useSavedMediaFilter from "@/features/pages/list-id/hooks/useSavedMediaFilter";
-// import useDeleteMode from "@/features/pages/list-id/hooks/useDeleteMode";
-// import SavedMediaCards from "@/features/pages/list-id/components/SavedMedia";
-// import DeleteMode from "@/features/pages/list-id/components/DeleteMode";
+export const getServerSideProps: GetServerSideProps = async (context) => {
+   const { playlist_id } = context.params as { playlist_id: string };
+   const authData = getAuth(context.req);
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//    const { id } = context.query!;
-//    return {
-//       props: { id },
-//    };
-// };
+   if (!authData.userId) {
+      return { redirect: { destination: "/auth", permanent: false } };
+   }
 
-// type Props = {
-//    list_id: string;
-// };
+   try {
+      const supabase = createClerkSupabaseClient(authData);
+      const playlist = await fetchSinglePlaylistWithMedia(
+         supabase,
+         playlist_id,
+      );
 
-export default function PlaylistId() {
-   // const { media, refresh } = useMediaData(list_id);
-   // const { list } = useListData(list_id);
+      if (playlist.user_id !== authData.userId) {
+         return { notFound: true };
+      }
 
-   // const { filteredMedia, selectedType, setSelectedType, sortBy, setSortBy } =
-   //    useSavedMediaFilter(media, list_id);
+      return {
+         props: {
+            playlist: JSON.parse(JSON.stringify(playlist)),
+         },
+      };
+   } catch (error) {
+      console.error("Error fetching detailed playlist:", error);
+      return { notFound: true };
+   }
+};
 
-   // const {
-   //    mediaToDelete,
-   //    onCardTap,
-   //    isDeleteModeActive,
-   //    startDeleteMode,
-   //    stopDeleteMode,
-   //    showButtons,
-   //    textControls,
-   // } = useDeleteMode();
+type Props = {
+   playlist: PlaylistDetails;
+};
 
-   // const { isModalOpen, openModal, closeModal } = useModalState();
+export default function PlaylistId({ playlist: initialPlaylist }: Props) {
+   const [playlist, _setPlaylist] = useState<PlaylistDetails>(initialPlaylist);
 
-   // if (!list || !filteredMedia)
-   //    return (
-   //       <div className="w-40 mx-auto mt-20">
-   //          <LoadingSpinner />
-   //       </div>
-   //    );
+   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+   const lenis = useLenis();
+   const onExitComplete = () => {
+      if (!lenis) return;
+      lenis.scrollTo("top", { immediate: true });
+   };
+
    return (
       <>
-         {/* <PageHead title={list?.name || ""} /> */}
-         {/* <Title title={list.name}>
-            <MediaFilter
-               selectedType={selectedType}
-               setSelectedType={setSelectedType}
-               sortBy={sortBy}
-               setSortBy={setSortBy}
-            />
-         </Title> */}
-         {/* <SavedMediaCards
-            selectedType={selectedType}
-            filteredMedia={filteredMedia}
-            mediaToDelete={mediaToDelete}
-            isDeleteModeActive={isDeleteModeActive}
-            onCardTap={onCardTap}
-            listId={list_id}
-            refresh={refresh}
-         /> */}
-         {/* <DeleteMode
-            showButtons={showButtons}
-            mediaToDelete={mediaToDelete}
-            startDeleteMode={startDeleteMode}
-            stopDeleteMode={stopDeleteMode}
-            openDeleteModal={openModal}
-            textControls={textControls}
-         /> */}
-         {/* <ModalPortal isOpen={isModalOpen}>
-            <DeleteMediaModal
-               list={list}
-               close={closeModal}
-               mediaToDelete={mediaToDelete}
-               refresh={refresh}
-               stopDeleteMode={stopDeleteMode}
-            />
-         </ModalPortal> */}
+         <PageHead title={playlist.name} />
+
+         <FilterCardsLayout
+            isOpen={isFilterOpen}
+            setIsOpen={setIsFilterOpen}
+            title={playlist.name}
+            compactFilter={<></>}
+         >
+            <AnimatePresence
+               mode="wait"
+               propagate
+               onExitComplete={onExitComplete}
+            >
+               <CardsGrid isOpen={isFilterOpen}>
+                  {playlist.playlist_items.map(
+                     ({ media, media_type }, index) => (
+                        <MediaCard
+                           key={`${media_type}-${media.id}-${index}`}
+                           id={`${media_type}-${media.id}-${index}`}
+                           media={media}
+                           mediaType={media_type}
+                        />
+                     ),
+                  )}
+               </CardsGrid>
+            </AnimatePresence>
+         </FilterCardsLayout>
       </>
    );
 }

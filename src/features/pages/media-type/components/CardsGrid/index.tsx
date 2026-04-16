@@ -6,14 +6,14 @@ import cardAnimation from "../../animations/cardAnimation";
 type Props = {
    children: React.ReactNode;
    isOpen: boolean;
-   setDirection: (direction: "prev" | "next" | "default") => void;
-   direction: "prev" | "next" | "default";
+   setDirection?: (direction: "prev" | "next" | "default") => void;
+   direction?: "prev" | "next" | "default";
 };
 
 export default function CardsGrid({
    children,
    isOpen,
-   direction,
+   direction = "default",
    setDirection,
 }: Props) {
    useScrollToTop();
@@ -27,7 +27,7 @@ export default function CardsGrid({
             duration: 0.3,
          });
          console.log("set default");
-         setDirection("default");
+         if (setDirection) setDirection("default");
       };
       const closeAnimation = async () => {
          if (isPresent) return;
@@ -42,17 +42,15 @@ export default function CardsGrid({
    }, [isPresent, cardAnimation]);
 
    return (
-      <div className="overflow-hidden py-14 px-4 lg:px-32 xl:mt-20 xl:pt-64 xl:pb-24">
-         <div
-            ref={scope}
-            className={`py-14 xl:py-0 xl:pt-4 grid gap-1 xl:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 ${
-               isOpen
-                  ? "xl:grid-cols-2 min-[1400px]:grid-cols-3 min-[1700px]:grid-cols-4 xl:pl-[426px]"
-                  : "xl:grid-cols-3 min-[1400px]:grid-cols-4 min-[1700px]:grid-cols-5"
-            }`}
-         >
-            {children}
-         </div>
+      <div
+         ref={scope}
+         className={`py-14 xl:py-0 xl:pt-4 grid gap-1 xl:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 ${
+            isOpen
+               ? "xl:grid-cols-2 min-[1400px]:grid-cols-3 min-[1700px]:grid-cols-4"
+               : "xl:grid-cols-3 min-[1400px]:grid-cols-4 min-[1700px]:grid-cols-5"
+         }`}
+      >
+         {children}
       </div>
    );
 }

@@ -7,7 +7,7 @@ import { usePresence } from "framer-motion";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import MainFilterLayoutContainer from "./MainFilterLayoutContainer";
-import PageTitle from "@/common/components/PageTitle";
+import FilterTitle from "./FilterTitle";
 
 type Props = {
    expandedContent?: React.ReactNode;
@@ -56,7 +56,7 @@ export default function MainFilter({
       <MainFilterContainer>
          <div className="flex absolute top-0 left-0 gap-1 h-12 xl:h-16">
             <OpenButton onClick={toggleIsOpen} isOpen={isOpen} />
-            <PageTitle title={title} />
+            <FilterTitle title={title} />
          </div>
          <MainFilterLayoutContainer isOpen={isOpen} isExpanded={isExpanded}>
             {isOpen && (

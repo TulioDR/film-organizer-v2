@@ -12,7 +12,12 @@ type Props = {
    media: Media;
 };
 
-export default function MediaCard({ mediaType, media, id, direction }: Props) {
+export default function MediaCard({
+   mediaType,
+   media,
+   id,
+   direction = "default",
+}: Props) {
    const router = useRouter();
    const [isLoading, setIsLoading] = useState(false);
 

@@ -18,7 +18,6 @@ export const getIsMediaSavedInList = async (params: any) => {
       const link = `/isMediaSavedInList/${playlist_id}/${media_id}/${media_type}`;
 
       const { data } = await API.get(link);
-      console.log("the data is", data);
 
       return { data, error: null };
    } catch (error: any) {
@@ -35,7 +34,6 @@ export const getIsMediaSaved = async (
       const link = `/isMediaSaved/${media_id}/${media_type}`;
       const { data } = await API.get(link);
 
-      // Data will now be { isSaved: true/false }
       return { data, error: null };
    } catch (error: any) {
       console.log(error);

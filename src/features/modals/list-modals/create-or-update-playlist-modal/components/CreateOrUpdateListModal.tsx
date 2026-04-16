@@ -22,16 +22,14 @@ type Props = {
    close: () => void;
    isOpen: boolean;
    playlist?: PlaylistWithItems;
-   setFilteredPlaylists: React.Dispatch<
-      React.SetStateAction<PlaylistWithItems[]>
-   >;
+   setAllPlaylists: React.Dispatch<React.SetStateAction<PlaylistWithItems[]>>;
 };
 
 export default function CreateOrUpdateListModal({
    close,
    isOpen,
    playlist,
-   setFilteredPlaylists,
+   setAllPlaylists,
 }: Props) {
    const { refreshLists } = useListsRefresh();
 
@@ -48,17 +46,14 @@ export default function CreateOrUpdateListModal({
       let error = null;
       if (playlist) {
          const updatedList = await updatePlaylist(playlist.id, newListData);
-         const newPlaylists = await getUserPlaylists(true);
-         console.log(newPlaylists);
-         setFilteredPlaylists(newPlaylists);
          error = updatedList.error;
       } else {
          const createdList = await createPlaylist(newListData);
-         const newPlaylists = await getUserPlaylists(true);
-         console.log(newPlaylists);
-         setFilteredPlaylists(newPlaylists);
          error = createdList.error;
       }
+
+      const newPlaylists = await getUserPlaylists(true);
+      setAllPlaylists(newPlaylists);
       if (error) {
          showErrorNotification(error);
          setIsLoading(false);

@@ -1,8 +1,6 @@
-import React from "react";
-
 type Props = {
    title: string;
-   year: Date;
+   year: string;
 };
 
 export default function BackTitle({ title, year }: Props) {

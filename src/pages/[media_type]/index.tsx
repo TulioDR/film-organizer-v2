@@ -14,10 +14,10 @@ import { Media } from "@/common/models/Media";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import { useMediaQuery } from "react-responsive";
-import MainFilter from "@/features/mainFilter/components/MainFilter";
 import { MediaFilterProvider } from "@/features/pages/media-type/context/MediaFilterContext";
 import CompactFilter from "@/features/pages/media-type/components/MediaFilters/CompactFilter";
 import ExpandedFilter from "@/features/pages/media-type/components/MediaFilters/ExpandedFilter";
+import FilterCardsLayout from "@/common/components/FilterCardsLayout";
 
 export const getServerSideProps: GetServerSideProps = getMediaData();
 
@@ -30,7 +30,6 @@ export default function MediaTypePage(response: Props) {
 
    const results = data.results;
    const { asPath } = useRouter();
-   const [isOpen, setIsOpen] = useState<boolean>(true);
 
    const [direction, setDirection] = useState<"prev" | "next" | "default">(
       "default",
@@ -46,23 +45,14 @@ export default function MediaTypePage(response: Props) {
       query: `(max-width: ${XL_MEDIA_QUERY}px)`,
    });
 
+   const [isFilterOpen, setIsFilterOpen] = useState(false);
    useEffect(() => {
-      if (isMobile) setIsOpen(false);
+      if (isMobile) setIsFilterOpen(false);
    }, [isMobile]);
 
    return (
       <>
          <PageHead title={title} />
-
-         <MediaFilterProvider mediaType={mediaType}>
-            <MainFilter
-               isOpen={isOpen}
-               setIsOpen={setIsOpen}
-               title={title}
-               compactContent={<CompactFilter />}
-               expandedContent={<ExpandedFilter />}
-            />
-         </MediaFilterProvider>
 
          <Responsive minWidth={XL_MEDIA_QUERY}>
             <div className="fixed h-64 w-full top-20 right-0 pl-[554px] pb-4">
@@ -73,33 +63,46 @@ export default function MediaTypePage(response: Props) {
             </div>
          </Responsive>
 
-         <AnimatePresence mode="wait" propagate onExitComplete={onExitComplete}>
-            {results.length === 0 && <NotFoundMessage key="not-found" />}
-            {results.length > 0 && (
-               <CardsGrid
-                  key={asPath}
-                  isOpen={isOpen}
-                  direction={direction}
-                  setDirection={setDirection}
+         <MediaFilterProvider mediaType={mediaType}>
+            <FilterCardsLayout
+               isOpen={isFilterOpen}
+               setIsOpen={setIsFilterOpen}
+               title={title}
+               compactFilter={<CompactFilter />}
+               expandedFilter={<ExpandedFilter />}
+            >
+               <AnimatePresence
+                  mode="wait"
+                  propagate
+                  onExitComplete={onExitComplete}
                >
-                  {data.results.map((media: Media, index: number) => (
-                     <MediaCard
-                        key={`${mediaType}-${media.id}-${index}`}
-                        id={`${mediaType}-${media.id}-${index}`}
+                  {results.length === 0 && <NotFoundMessage key="not-found" />}
+                  {results.length > 0 && (
+                     <CardsGrid
+                        key={asPath}
+                        isOpen={isFilterOpen}
                         direction={direction}
-                        media={media}
-                        mediaType={mediaType}
-                     />
-                  ))}
-               </CardsGrid>
-            )}
-         </AnimatePresence>
+                        setDirection={setDirection}
+                     >
+                        {data.results.map((media: Media, index: number) => (
+                           <MediaCard
+                              key={`${mediaType}-${media.id}-${index}`}
+                              id={`${mediaType}-${media.id}-${index}`}
+                              direction={direction}
+                              media={media}
+                              mediaType={mediaType}
+                           />
+                        ))}
+                     </CardsGrid>
+                  )}
+               </AnimatePresence>
+            </FilterCardsLayout>
+         </MediaFilterProvider>
 
          {data.total_pages && (
             <Pagination
                total={data.total_pages > 20 ? 20 : data.total_pages}
                currentPage={data.page}
-               isOpen={isOpen}
                isMobile={isMobile}
                setDirection={setDirection}
             />

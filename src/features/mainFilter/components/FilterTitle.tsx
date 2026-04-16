@@ -4,7 +4,7 @@ type Props = {
    title: string;
 };
 
-export default function PageTitle({ title }: Props) {
+export default function FilterTitle({ title }: Props) {
    return (
       <div className="h-12 xl:h-16 flex items-center z-20 overflow-hidden">
          <AnimatePresence mode="wait" propagate>

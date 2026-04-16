@@ -6,12 +6,10 @@ import CreateOrUpdateListModal from "@/features/modals/list-modals/create-or-upd
 import { useState } from "react";
 
 type Props = {
-   setFilteredPlaylists: React.Dispatch<
-      React.SetStateAction<PlaylistWithItems[]>
-   >;
+   setAllPlaylists: React.Dispatch<React.SetStateAction<PlaylistWithItems[]>>;
 };
 
-export default function CreatePlaylistButton({ setFilteredPlaylists }: Props) {
+export default function CreatePlaylistButton({ setAllPlaylists }: Props) {
    const [isCreateListModalOpen, setIsCreateListModalOpen] = useState(false);
    const openCreateListModal = () => {
       setIsCreateListModalOpen(true);
@@ -42,7 +40,7 @@ export default function CreatePlaylistButton({ setFilteredPlaylists }: Props) {
             </Responsive>
          </button>
          <CreateOrUpdateListModal
-            setFilteredPlaylists={setFilteredPlaylists}
+            setAllPlaylists={setAllPlaylists}
             close={closeCreateListModal}
             isOpen={isCreateListModalOpen}
          />

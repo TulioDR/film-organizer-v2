@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BackTitle from "./BackTitle";
 import LearnMore from "./LearnMore";
 import { Media } from "@/common/models/Media";

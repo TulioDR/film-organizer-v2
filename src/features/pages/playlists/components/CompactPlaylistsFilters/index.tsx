@@ -9,12 +9,12 @@ type Props = {
    setFilteredPlaylists: React.Dispatch<
       React.SetStateAction<PlaylistWithItems[]>
    >;
-   playlists: PlaylistWithItems[];
+   allPlaylists: PlaylistWithItems[];
 };
 
 export default function CompactPlaylistsFilters({
    setFilteredPlaylists,
-   playlists,
+   allPlaylists,
 }: Props) {
    const SORT_PLAYLISTS_OPTIONS: SelectOption[] = [
       { value: "alpha_asc", label: "Name (A-Z)" },
@@ -29,8 +29,8 @@ export default function CompactPlaylistsFilters({
    );
 
    useEffect(() => {
-      if (!playlists) return;
-      let result = [...playlists];
+      if (!allPlaylists) return;
+      let result = [...allPlaylists];
 
       if (inputValue) {
          result = result.filter((p) =>
@@ -51,7 +51,7 @@ export default function CompactPlaylistsFilters({
       });
 
       setFilteredPlaylists(result);
-   }, [inputValue, selectedSort.value, playlists, setFilteredPlaylists]);
+   }, [inputValue, selectedSort.value, allPlaylists, setFilteredPlaylists]);
 
    return (
       <ReactLenis className="h-full w-full overflow-y-auto">

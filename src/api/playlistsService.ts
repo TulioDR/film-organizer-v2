@@ -32,3 +32,28 @@ export const fetchPlaylistsData = async (
 
    return data;
 };
+
+export const fetchSinglePlaylistWithMedia = async (
+   supabase: any,
+   playlistId: string,
+) => {
+   const { data, error } = await supabase
+      .from("playlists")
+      .select(
+         `
+         *,
+         playlist_items (
+            id,
+            media_type,
+            media:media_id (
+               *
+            )
+         )
+      `,
+      )
+      .eq("id", playlistId)
+      .single(); // Gets the object directly instead of an array
+
+   if (error) throw error;
+   return data;
+};

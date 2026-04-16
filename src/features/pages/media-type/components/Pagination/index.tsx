@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 type Props = {
    currentPage: number;
    total: number;
-   isOpen: boolean;
    setDirection: React.Dispatch<
       React.SetStateAction<"prev" | "next" | "default">
    >;
@@ -18,7 +17,6 @@ type Props = {
 export default function Pagination({
    currentPage,
    total,
-   isOpen,
    setDirection,
    isMobile,
 }: Props) {
@@ -54,7 +52,7 @@ export default function Pagination({
 
    if (siblings === undefined) return <></>;
    return (
-      <PaginationContainer isOpen={isOpen}>
+      <PaginationContainer>
          <PaginationWrapper>
             <PaginationButton
                disabled={currentPage === 1}
