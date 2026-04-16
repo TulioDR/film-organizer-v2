@@ -17,6 +17,7 @@ type Props = {
    onLearnMore: () => void;
    isLoading: boolean;
    id: string;
+   setIsBookmarkOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Back({
@@ -25,6 +26,7 @@ export default function Back({
    onLearnMore,
    isLoading,
    id,
+   setIsBookmarkOpen,
 }: Props) {
    const title = media.name || media.title;
    const releaseDate = media.release_date || media.first_air_date;
@@ -51,7 +53,11 @@ export default function Back({
                      <OverviewButton onClick={toggleOverview} />
                   </div>
                   <div className="flex h-12 gap-1 xl:gap-2">
-                     <Bookmark media={media} mediaType={mediaType} />
+                     <Bookmark
+                        media={media}
+                        mediaType={mediaType}
+                        setIsBookmarkOpen={setIsBookmarkOpen}
+                     />
                      <LearnMore id={id} onClick={onLearnMore} />
                   </div>
                </div>

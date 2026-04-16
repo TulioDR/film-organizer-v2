@@ -1,3 +1,4 @@
+import { getPlaylistDetails } from "@/api/playlists";
 import { fetchSinglePlaylistWithMedia } from "@/api/playlistsService";
 import FilterCardsLayout from "@/common/components/FilterCardsLayout";
 import PageHead from "@/common/components/PageHead";
@@ -15,48 +16,55 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
    const { playlist_id } = context.params as { playlist_id: string };
    const authData = getAuth(context.req);
 
-   if (!authData.userId) {
-      return { redirect: { destination: "/auth", permanent: false } };
-   }
+   if (!authData.userId)
+      return { redirect: { destination: "/sign-in", permanent: false } };
 
    try {
       const supabase = createClerkSupabaseClient(authData);
+
       const playlist = await fetchSinglePlaylistWithMedia(
          supabase,
          playlist_id,
+         authData.userId,
       );
-
-      if (playlist.user_id !== authData.userId) {
-         return { notFound: true };
-      }
 
       return {
          props: {
-            playlist: JSON.parse(JSON.stringify(playlist)),
+            initialPlaylist: JSON.parse(JSON.stringify(playlist)),
          },
       };
    } catch (error) {
-      console.error("Error fetching detailed playlist:", error);
       return { notFound: true };
    }
 };
 
 type Props = {
-   playlist: PlaylistDetails;
+   initialPlaylist: PlaylistDetails;
 };
 
-export default function PlaylistId({ playlist: initialPlaylist }: Props) {
-   const [playlist, _setPlaylist] = useState<PlaylistDetails>(initialPlaylist);
+export default function PlaylistId({ initialPlaylist }: Props) {
+   const [playlist, setPlaylist] = useState<PlaylistDetails>(initialPlaylist);
 
-   const [isFilterOpen, setIsFilterOpen] = useState(false);
+   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
    const [filteredMedia, setFilteredMedia] = useState<PlaylistItems[]>(
       playlist.playlist_items,
    );
 
    useEffect(() => {
-      console.log(filteredMedia);
-   }, [filteredMedia]);
+      setFilteredMedia(playlist.playlist_items);
+   }, [playlist.playlist_items]);
+
+   const [isBookmarkOpen, setIsBookmarkOpen] = useState<boolean>(false);
+
+   useEffect(() => {
+      const refreshPlaylist = async () => {
+         if (isBookmarkOpen) return;
+         const updatedData = await getPlaylistDetails(initialPlaylist.id);
+         setPlaylist(updatedData);
+      };
+      refreshPlaylist();
+   }, [isBookmarkOpen]);
 
    return (
       <>
@@ -81,6 +89,7 @@ export default function PlaylistId({ playlist: initialPlaylist }: Props) {
             <CardsGrid isOpen={isFilterOpen}>
                {filteredMedia.map(({ media, media_type, id }) => (
                   <MediaCard
+                     setIsBookmarkOpen={setIsBookmarkOpen}
                      key={`${media_type}-${media.id}-${id}`}
                      id={`${media_type}-${media.id}-${id}`}
                      media={media}

@@ -36,6 +36,7 @@ export const fetchPlaylistsData = async (
 export const fetchSinglePlaylistWithMedia = async (
    supabase: any,
    playlistId: string,
+   userId: string, // Add this parameter
 ) => {
    const { data, error } = await supabase
       .from("playlists")
@@ -53,7 +54,8 @@ export const fetchSinglePlaylistWithMedia = async (
       `,
       )
       .eq("id", playlistId)
-      .single(); // Gets the object directly instead of an array
+      .eq("user_id", userId) // Add this security check
+      .single();
 
    if (error) throw error;
    return data;

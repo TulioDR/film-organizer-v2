@@ -10,13 +10,21 @@ import SaveMediaModal from "@/features/modals/media-modals/save-media-modal/comp
 type Props = {
    media: Media | MediaDetailsModel;
    mediaType: "tv" | "movie";
+   setIsBookmarkOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Bookmark({ media, mediaType }: Props) {
+export default function Bookmark({
+   media,
+   mediaType,
+   setIsBookmarkOpen,
+}: Props) {
    const [isLoginAdviceOpen, setIsLoginAdviceOpen] = useState(false);
    const [isSaveMediaOpen, setIsSaveMediaOpen] = useState(false);
 
-   useEffect(() => {}, []);
+   useEffect(() => {
+      if (!setIsBookmarkOpen) return;
+      setIsBookmarkOpen(isSaveMediaOpen);
+   }, [isSaveMediaOpen]);
 
    const { user } = useUser();
 

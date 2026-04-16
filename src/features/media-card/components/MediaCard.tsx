@@ -9,9 +9,15 @@ type Props = {
    id: string;
    mediaType: "tv" | "movie";
    media: Media;
+   setIsBookmarkOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function MediaCard({ mediaType, media, id }: Props) {
+export default function MediaCard({
+   mediaType,
+   media,
+   id,
+   setIsBookmarkOpen,
+}: Props) {
    const router = useRouter();
    const [isLoading, setIsLoading] = useState(false);
 
@@ -31,6 +37,7 @@ export default function MediaCard({ mediaType, media, id }: Props) {
             mediaType={mediaType}
             onLearnMore={onLearnMore}
             isLoading={isLoading}
+            setIsBookmarkOpen={setIsBookmarkOpen}
          />
       </CardContainer>
    );
