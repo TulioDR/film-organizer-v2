@@ -8,8 +8,8 @@ export interface Media {
    overview: string;
    popularity: number;
    poster_path: string;
-   release_date: Date;
-   first_air_date: Date;
+   release_date: string;
+   first_air_date: string;
    title: string;
    name: string;
    vote_average: number;
@@ -17,13 +17,12 @@ export interface Media {
 }
 
 export interface SavedMedia {
-   id?: string;
+   playlist_id: string;
    media_id: number;
-   media_title: string;
-   media_poster: string;
-   media_backdrop: string;
-   media_overview: string;
-   media_release_date: Date;
    media_type: "movie" | "tv";
-   list_id: string;
+   title: string;
+   poster_path: string;
+   backdrop_path: string;
+   overview: string;
+   release_date: string;
 }

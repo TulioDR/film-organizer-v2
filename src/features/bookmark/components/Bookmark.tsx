@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BookmarkButton from "./BookmarkButton";
 import { MediaDetailsModel } from "@/features/pages/media-id/models/MediaDetailsModel";
 import { Media } from "@/common/models/Media";
@@ -28,15 +28,18 @@ export default function Bookmark({ media, mediaType }: Props) {
       }
    };
 
-   // const { handleBookmarkClick } = useBookmarkClick(media, mediaType);
-   // const { isMediaSaved, isLoading } = useIsMediaSaved(media.id, mediaType);
+   const { isMediaSaved, isLoading } = useIsMediaSaved(
+      media.id,
+      mediaType,
+      isSaveMediaOpen,
+   );
 
    return (
       <>
          <BookmarkButton
             onClick={handleBookmarkClick}
-            isLoading={false}
-            isMediaSaved={false}
+            isLoading={isLoading}
+            isMediaSaved={isMediaSaved}
          />
          <LoginAdviceModal
             isOpen={isLoginAdviceOpen}

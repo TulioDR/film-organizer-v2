@@ -3,9 +3,12 @@ import { getIsMediaSaved } from "@/api/media";
 import { useUser } from "@clerk/nextjs";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
 import { MediaType } from "@/common/models/MediaType";
-import useAppSelector from "@/store/hooks/useAppSelector";
 
-export default function useIsMediaSaved(id: number, mediaType: MediaType) {
+export default function useIsMediaSaved(
+   id: number,
+   mediaType: MediaType,
+   isSaveMediaOpen: boolean,
+) {
    const [isMediaSaved, setIsMediaSaved] = useState<boolean>(false);
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -20,30 +23,24 @@ export default function useIsMediaSaved(id: number, mediaType: MediaType) {
 
    const { user } = useUser();
 
-   const { mediaToSave, isSaveMediaOpen } = useAppSelector(
-      (state) => state.bookmark,
-   );
-
    useEffect(() => {
       const isMediaIsSavedEffect = async () => {
+         if (isSaveMediaOpen) return;
          if (!user) {
             setIsMediaSaved(false);
             return;
          }
-         if (isSaveMediaOpen) return;
-         if (mediaToSave && mediaToSave.media.id !== id) return;
          setIsLoading(true);
          const { data, error } = await getIsMediaSaved(id, mediaType);
          setIsLoading(false);
          if (error) {
             setErrorData(error);
          } else {
-            if (data.length) setIsMediaSaved(true);
-            else setIsMediaSaved(false);
+            setIsMediaSaved(data.isSaved);
          }
       };
       isMediaIsSavedEffect();
-   }, [id, mediaType, user, mediaToSave, isSaveMediaOpen]);
+   }, [id, mediaType, user, isSaveMediaOpen]);
 
    return { isMediaSaved, isLoading };
 }

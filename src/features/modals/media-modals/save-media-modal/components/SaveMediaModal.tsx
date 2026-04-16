@@ -4,8 +4,8 @@ import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
-import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
 import useAppSelector from "@/store/hooks/useAppSelector";
+import MainButton from "@/common/components/MainButton";
 
 type Props = {
    isOpen: boolean;
@@ -25,23 +25,24 @@ export default function SaveMediaModal({
    return (
       <ModalPortal isOpen={isOpen}>
          <ModalContainer closeModal={closeModal}>
-            <ModalTitle>Save to...</ModalTitle>
-            <div className="w-56 border-y border-light-2 dark:border-dark-2">
-               {playlists.length === 0 && <NoListsText />}
-               {playlists.length > 0 &&
-                  playlists.map((list) => (
-                     <ListToSave
-                        key={list.id}
-                        list={list}
-                        media={mediaToSave.media}
-                        mediaType={mediaToSave.mediaType}
-                     />
-                  ))}
+            <div className="w-64 flex flex-col gap-4">
+               <ModalTitle>Save to...</ModalTitle>
+               <div className="w-full max-h-[24rem] border-y border-border-light dark:border-border-dark overflow-y-auto">
+                  {playlists.length === 0 && <NoListsText />}
+                  {playlists.length > 0 &&
+                     playlists.map((playlist) => (
+                        <ListToSave
+                           key={playlist.id}
+                           playlist={playlist}
+                           media={mediaToSave.media}
+                           mediaType={mediaToSave.mediaType}
+                        />
+                     ))}
+               </div>
+               <ModalButtonsContainer>
+                  <MainButton onClick={closeModal} text="Close" />
+               </ModalButtonsContainer>
             </div>
-
-            <ModalButtonsContainer>
-               <ModalButton onClick={closeModal}>Close</ModalButton>
-            </ModalButtonsContainer>
          </ModalContainer>
       </ModalPortal>
    );

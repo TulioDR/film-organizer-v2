@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { createMedia, deleteMedia, getIsMediaSavedInList } from "@/api/media";
-import { v4 as uuid } from "uuid";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
-import List from "@/common/models/Playlist";
 import { MediaType } from "@/common/models/MediaType";
 import { Media } from "@/common/models/Media";
+import Playlist from "@/common/models/Playlist";
 
 export default function useListToSaveBookmark(
-   list: List,
+   playlist: Playlist,
    media: Media,
    mediaType: MediaType,
 ) {
@@ -24,7 +23,7 @@ export default function useListToSaveBookmark(
    useEffect(() => {
       const checkIfSavedInList = async () => {
          const { error, data } = await getIsMediaSavedInList({
-            list_id: list.id,
+            playlist_id: playlist.id,
             media_id: media.id,
             media_type: mediaType,
          });
@@ -32,41 +31,50 @@ export default function useListToSaveBookmark(
          if (error) {
             setErrorData(error);
          } else {
-            if (data.length) setIsSaved(true);
-            else setIsSaved(false);
+            setIsSaved(!!data?.length);
          }
       };
-      checkIfSavedInList();
-   }, [mediaType, media, list]);
+      if (playlist?.id && media?.id) {
+         checkIfSavedInList();
+      }
+   }, [mediaType, media, playlist]);
 
    const saveToList = async () => {
       setIsLoading(true);
+
       const { error } = await createMedia({
-         id: uuid(),
-         media_id: media.id,
-         media_title: media.title || media.name,
-         media_poster: media.poster_path,
-         media_backdrop: media.backdrop_path,
-         media_overview: media.overview,
-         media_release_date: media.first_air_date || media.release_date,
+         media_id: Number(media.id),
+         title: media.title || media.name,
+         poster_path: media.poster_path,
+         backdrop_path: media.backdrop_path,
+         overview: media.overview,
+         release_date: media.first_air_date || media.release_date,
          media_type: mediaType,
-         list_id: list.id,
+         playlist_id: playlist.id, // This is for the junction table
       });
+
       setIsLoading(false);
-      if (error) showErrorNotification(error);
-      else setIsSaved(true);
+      if (error) {
+         showErrorNotification(error);
+      } else {
+         setIsSaved(true);
+      }
    };
 
    const removeFromList = async () => {
       setIsLoading(true);
       const { error } = await deleteMedia({
-         list_id: list.id,
-         media_id: media.id,
+         playlist_id: playlist.id,
+         media_id: Number(media.id),
          media_type: mediaType,
       });
+
       setIsLoading(false);
-      if (error) showErrorNotification(error);
-      else setIsSaved(false);
+      if (error) {
+         showErrorNotification(error);
+      } else {
+         setIsSaved(false);
+      }
    };
 
    return { isSaved, isLoading, saveToList, removeFromList };

@@ -14,43 +14,68 @@ export const getSavedMedia = async (listId: String) => {
 
 export const getIsMediaSavedInList = async (params: any) => {
    try {
-      const { list_id, media_id, media_type } = params;
-      const link = `/isMediaSavedInList/${list_id}/${media_id}/${media_type}`;
+      const { playlist_id, media_id, media_type } = params;
+      const link = `/isMediaSavedInList/${playlist_id}/${media_id}/${media_type}`;
+
       const { data } = await API.get(link);
-      return data;
-   } catch (error) {
+      console.log("the data is", data);
+
+      return { data, error: null };
+   } catch (error: any) {
       console.log(error);
+      return { data: null, error: error.response?.data || error.message };
    }
 };
 
 export const getIsMediaSaved = async (
    media_id: number,
-   media_type: MediaType
+   media_type: MediaType,
 ) => {
    try {
       const link = `/isMediaSaved/${media_id}/${media_type}`;
       const { data } = await API.get(link);
-      return data;
-   } catch (error) {
+
+      // Data will now be { isSaved: true/false }
+      return { data, error: null };
+   } catch (error: any) {
       console.log(error);
+      return {
+         data: { isSaved: false },
+         error: error.response?.data || error.message,
+      };
    }
 };
 
 export const createMedia = async (media: SavedMedia) => {
    try {
       const { data } = await API.post("/", media);
-      return data;
-   } catch (error) {
+      return { data, error: null };
+   } catch (error: any) {
       console.log(error);
+      return {
+         data: null,
+         error:
+            error.response?.data?.error || error.message || "Failed to create",
+      };
    }
 };
 
-export const deleteMedia = async (values: any) => {
+export const deleteMedia = async (params: any) => {
    try {
-      const { data } = await API.delete("/", { data: values });
-      return data;
-   } catch (error) {
-      console.log(error);
+      const response = await API.delete("/", { data: params });
+
+      return {
+         data: response.data,
+         error: null,
+      };
+   } catch (error: any) {
+      console.error("Delete Error:", error);
+
+      return {
+         data: null,
+         error:
+            error.response?.data?.error || error.message || "Failed to delete",
+      };
    }
 };
 

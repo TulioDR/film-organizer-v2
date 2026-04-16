@@ -1,25 +1,27 @@
 import useListToSaveBookmark from "../hooks/useListToSaveBookmark";
 import LoadingSpinner from "@/common/components/LoadingSpinner";
-import List from "@/common/models/Playlist";
 import { Media } from "@/common/models/Media";
 import { MediaType } from "@/common/models/MediaType";
+import Playlist from "@/common/models/Playlist";
 
 interface Props {
-   list: List;
+   playlist: Playlist;
    media: Media;
    mediaType: MediaType;
 }
 
-export default function ListToSave({ list, media, mediaType }: Props) {
+export default function ListToSave({ playlist, media, mediaType }: Props) {
    const { isSaved, isLoading, saveToList, removeFromList } =
-      useListToSaveBookmark(list, media, mediaType);
+      useListToSaveBookmark(playlist, media, mediaType);
 
    return (
       <li
          onClick={isSaved ? removeFromList : saveToList}
-         className={`h-10 flex items-center hover:bg-secondary-light dark:hover:bg-secondary-dark text-text-2 ${
-            isLoading ? "pointer-events-none" : "cursor-pointer"
-         }`}
+         className={`h-12 flex items-center text-black dark:text-white
+            hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black
+            active:bg-black dark:active:bg-white active:text-white dark:active:text-black
+            ${isLoading ? "pointer-events-none" : "cursor-pointer"}
+         `}
       >
          <div className="h-full aspect-square grid place-content-center">
             {isLoading ? (
@@ -32,7 +34,9 @@ export default function ListToSave({ list, media, mediaType }: Props) {
                </span>
             )}
          </div>
-         <span className="text-xs sm:text-sm md:text-base">{list.name}</span>
+         <span className="text-xs sm:text-sm md:text-base">
+            {playlist.name}
+         </span>
       </li>
    );
 }
