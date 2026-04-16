@@ -24,6 +24,7 @@ export default function CardContainer({
 
    return (
       <motion.div
+         layout
          className={`aspect-[2/3] w-full ${isLoading || !isPresent ? "pointer-events-none" : ""}`}
       >
          {isLoading && !isPresent ? (

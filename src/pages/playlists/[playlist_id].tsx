@@ -48,15 +48,15 @@ type Props = {
 export default function PlaylistId({ playlist: initialPlaylist }: Props) {
    const [playlist, _setPlaylist] = useState<PlaylistDetails>(initialPlaylist);
 
-   useEffect(() => {
-      console.log(playlist);
-   }, []);
-
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
    const [filteredMedia, setFilteredMedia] = useState<PlaylistItems[]>(
       playlist.playlist_items,
    );
+
+   useEffect(() => {
+      console.log(filteredMedia);
+   }, [filteredMedia]);
 
    return (
       <>
@@ -73,21 +73,16 @@ export default function PlaylistId({ playlist: initialPlaylist }: Props) {
                />
             }
          >
-            <div className="w-full flex flex-col gap-41 pb-4">
-               <div className="text-black dark:text-white font-medium tracking-wider uppercase">
-                  Description
-               </div>
-               <div className="text-black/80 dark:text-white/80">
-                  {playlist.description || "This playlist has no description"}
-               </div>
-            </div>
-            <PlaylistDetailsDescription description={playlist.description} />
+            <PlaylistDetailsDescription
+               description={playlist.description}
+               isFilterOpen={isFilterOpen}
+            />
 
             <CardsGrid isOpen={isFilterOpen}>
-               {filteredMedia.map(({ media, media_type }, index) => (
+               {filteredMedia.map(({ media, media_type, id }) => (
                   <MediaCard
-                     key={`${media_type}-${media.id}-${index}`}
-                     id={`${media_type}-${media.id}-${index}`}
+                     key={`${media_type}-${media.id}-${id}`}
+                     id={`${media_type}-${media.id}-${id}`}
                      media={media}
                      mediaType={media_type}
                   />

@@ -48,7 +48,7 @@ export default function MediaTypePage(response: Props) {
                isOpen={isFilterOpen}
                setIsOpen={setIsFilterOpen}
                title={title}
-               innerKey={data.page}
+               innerKey={`${data.page}-${mediaType}`}
                compactFilter={<CompactFilter />}
                expandedFilter={<ExpandedFilter />}
             >

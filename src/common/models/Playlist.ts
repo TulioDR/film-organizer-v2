@@ -19,6 +19,7 @@ export interface PlaylistWithItems extends Playlist {
 }
 
 export interface PlaylistItems {
+   id: string;
    added_at: string;
    media_type: "movie" | "tv";
    media: Media;
