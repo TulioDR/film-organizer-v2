@@ -14,9 +14,19 @@ export default function NavDropdown({}: Props) {
    const [isOpen, setIsOpen] = useState(false);
 
    const toggleIsOpen = () => setIsOpen((prev) => !prev);
-   const logIn = () => router.push("/auth");
-   const logOut = async () => signOut();
-   const goToUserSettings = () => router.push("/account");
+
+   const logIn = () => {
+      router.push("/auth");
+      setIsOpen(false);
+   };
+   const logOut = async () => {
+      signOut();
+      setIsOpen(false);
+   };
+   const goToUserSettings = () => {
+      router.push("/account");
+      setIsOpen(false);
+   };
 
    return (
       <div className="relative mr-4 2xl:mr-16">

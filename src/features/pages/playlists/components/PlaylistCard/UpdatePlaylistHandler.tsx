@@ -1,11 +1,12 @@
 import MainButton from "@/common/components/MainButton";
-import Playlist from "@/common/models/Playlist";
+import { PlaylistWithItems } from "@/common/models/Playlist";
 import CreateOrUpdateListModal from "@/features/modals/list-modals/create-or-update-playlist-modal/components/CreateOrUpdateListModal";
 import React from "react";
 import { motion } from "framer-motion";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 
 type Props = {
-   playlist: Playlist;
+   playlist: PlaylistWithItems;
 };
 
 export default function UpdatePlaylistHandler({ playlist }: Props) {
@@ -18,11 +19,12 @@ export default function UpdatePlaylistHandler({ playlist }: Props) {
          <motion.div layout className="block">
             <MainButton square icon="edit" onClick={openUpdateModal} />
          </motion.div>
-         <CreateOrUpdateListModal
-            isOpen={isUpdateOpen}
-            close={closeUpdateModal}
-            playlist={playlist}
-         />
+         <ModalPortal isOpen={isUpdateOpen}>
+            <CreateOrUpdateListModal
+               close={closeUpdateModal}
+               playlist={playlist}
+            />
+         </ModalPortal>
       </>
    );
 }

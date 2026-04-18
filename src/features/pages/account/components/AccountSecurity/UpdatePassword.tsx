@@ -1,21 +1,11 @@
 import { useUser } from "@clerk/nextjs";
-import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
-import UpdatePasswordModal from "@/features/modals/user-modals/update-password-modal/components/UpdatePasswordModal";
-import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
-import PlaylistCardButton from "@/features/pages/playlists/components/PlaylistCard/PlaylistCardButton";
+import PasswordHandler from "./PasswordHandler";
 
 export default function UpdatePassword() {
-   const { isModalOpen, openModal, closeModal } = useModalState();
-
    const { user } = useUser();
-   if (!user) return <></>;
    return (
       <>
-         <ModalPortal isOpen={isModalOpen}>
-            <UpdatePasswordModal close={closeModal} />
-         </ModalPortal>
-
-         {user.passwordEnabled ? (
+         {user?.passwordEnabled ? (
             <span>{"Change the account's password."}</span>
          ) : (
             <div>
@@ -30,10 +20,7 @@ export default function UpdatePassword() {
             </div>
          )}
          <div className="flex w-full justify-end h-12">
-            <PlaylistCardButton
-               text={user?.passwordEnabled ? "Update Password" : "Add Password"}
-               onClick={openModal}
-            />
+            <PasswordHandler />
          </div>
       </>
    );

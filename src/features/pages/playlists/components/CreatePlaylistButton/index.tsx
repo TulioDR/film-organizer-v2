@@ -3,6 +3,7 @@ import { SM_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 import { PlaylistWithItems } from "@/common/models/Playlist";
 import CreateOrUpdateListModal from "@/features/modals/list-modals/create-or-update-playlist-modal/components/CreateOrUpdateListModal";
+import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import { useState } from "react";
 
 type Props = {
@@ -39,11 +40,12 @@ export default function CreatePlaylistButton({ setAllPlaylists }: Props) {
                </span>
             </Responsive>
          </button>
-         <CreateOrUpdateListModal
-            setAllPlaylists={setAllPlaylists}
-            close={closeCreateListModal}
-            isOpen={isCreateListModalOpen}
-         />
+         <ModalPortal isOpen={isCreateListModalOpen}>
+            <CreateOrUpdateListModal
+               setAllPlaylists={setAllPlaylists}
+               close={closeCreateListModal}
+            />
+         </ModalPortal>
       </>
    );
 }

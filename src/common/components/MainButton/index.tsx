@@ -10,6 +10,7 @@ type Props = {
    keyboardKey?: string;
    isLoading?: boolean;
    submit?: true;
+   isDisabled?: boolean;
 };
 
 export default function MainButton({
@@ -21,6 +22,7 @@ export default function MainButton({
    keyboardKey,
    isLoading,
    submit,
+   isDisabled,
 }: Props) {
    const isDelete = type === "delete";
    const isAccent = type === "accent";
@@ -32,6 +34,7 @@ export default function MainButton({
          style={{ borderRadius: STANDARD_RADIUS }}
          className={`h-12 relative
             ${isLoading ? "pointer-events-none" : ""}
+            ${isDisabled ? "pointer-events-none opacity-80" : ""}
             ${square ? "aspect-square" : "px-4"}
             ${isAccent ? "bg-accent text-white" : ""}      
             ${isDelete ? "bg-red-600 hover:bg-red-600/80 active:bg-red-600/80 text-white" : ""}

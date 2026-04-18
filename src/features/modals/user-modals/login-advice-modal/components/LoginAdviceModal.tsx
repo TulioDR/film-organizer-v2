@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
-import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
-import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
+import ModalAnimationContainer from "@/features/modals/modal-parts/components/ModalAnimationContainer";
+import MainButton from "@/common/components/MainButton";
 
 type props = {
    isOpen: boolean;
@@ -24,16 +24,16 @@ export default function LoginAdviceModal({
 
    return (
       <ModalPortal isOpen={isOpen}>
-         <ModalContainer closeModal={closeModal}>
+         <ModalAnimationContainer closeModal={closeModal}>
             <ModalTitle>Login First!</ModalTitle>
-            <div className="w-full sm:w-80 text-text-2">{message}</div>
+            <div className="w-full sm:w-80 text-black dark:text-white">
+               {message}
+            </div>
             <ModalButtonsContainer>
-               <ModalButton onClick={closeModal}>Close</ModalButton>
-               <ModalButton onClick={goToLogin} special>
-                  Login
-               </ModalButton>
+               <MainButton onClick={closeModal} text="Close" />
+               <MainButton onClick={goToLogin} text="Login" type="accent" />
             </ModalButtonsContainer>
-         </ModalContainer>
+         </ModalAnimationContainer>
       </ModalPortal>
    );
 }

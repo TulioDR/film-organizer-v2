@@ -1,12 +1,10 @@
 import { useUser } from "@clerk/nextjs";
-import { Form, Formik } from "formik";
-import React, { useState } from "react";
-import UpdateInput from "./UpdateInput";
+import { useState } from "react";
 import useNotification from "@/features/layout/notification/hooks/useNotification";
 import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
-import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
-import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
+import MainButton from "@/common/components/MainButton";
+import ModalInput from "@/features/modals/modal-parts/components/ModalInput";
 
 type Props = {
    close: () => void;
@@ -62,35 +60,30 @@ export default function UpdatePasswordModal({ close }: Props) {
    };
 
    return (
-      <ModalContainer closeModal={close}>
-         <ModalTitle>Update Password</ModalTitle>
-         <Formik
-            initialValues={initialValues}
-            validate={validation}
-            onSubmit={handleSubmit}
-         >
-            <Form className="w-full sm:w-96">
-               <div className="space-y-5">
-                  {user!.passwordEnabled && (
-                     <UpdateInput
-                        name="currentPassword"
-                        placeholder="Current password"
-                     />
-                  )}
-                  <UpdateInput name="newPassword" placeholder="New password" />
-                  <UpdateInput
-                     name="confirmNewPassword"
-                     placeholder="Confirm new password"
-                  />
-               </div>
-               <ModalButtonsContainer>
-                  <ModalButton onClick={close}>Cancel</ModalButton>
-                  <ModalButton blue submit isLoading={isLoading}>
-                     Update
-                  </ModalButton>
-               </ModalButtonsContainer>
-            </Form>
-         </Formik>
+      <ModalContainer
+         closeModal={close}
+         title="Update Password"
+         initialValues={initialValues}
+         validate={validation}
+         onSubmit={handleSubmit}
+      >
+         {user!.passwordEnabled && (
+            <ModalInput name="currentPassword" placeholder="Current password" />
+         )}
+         <ModalInput name="newPassword" placeholder="New password" />
+         <ModalInput
+            name="confirmNewPassword"
+            placeholder="Confirm new password"
+         />
+         <ModalButtonsContainer>
+            <MainButton onClick={close} text="Cancel" />
+            <MainButton
+               onClick={close}
+               text="Update"
+               submit
+               isLoading={isLoading}
+            />
+         </ModalButtonsContainer>
       </ModalContainer>
    );
 }

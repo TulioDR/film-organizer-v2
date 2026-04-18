@@ -1,15 +1,10 @@
 import ProfileCard from "../AccountCard";
-import useModalState from "@/features/modals/modal-parts/hooks/useModalState";
-import DeleteUserModal from "@/features/modals/user-modals/delete-user-modal/components/DeleteUserModal";
-import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import PageSubtitle from "@/common/components/PageSubtitle";
-import PlaylistCardButton from "@/features/pages/playlists/components/PlaylistCard/PlaylistCardButton";
+import DeleteUserHandler from "./DeleteUserHandler";
 
 type Props = {};
 
 export default function DangerZone({}: Props) {
-   const { isModalOpen, openModal, closeModal } = useModalState();
-
    return (
       <div className="w-full h-full flex flex-col">
          <PageSubtitle>Danger Zone</PageSubtitle>
@@ -21,17 +16,10 @@ export default function DangerZone({}: Props) {
                </div>
                <div>This action cannot be undone.</div>
             </div>
-            <div className="h-12 flex justify-end">
-               <PlaylistCardButton
-                  type="delete"
-                  text="Delete Account"
-                  onClick={openModal}
-               />
+            <div className="flex justify-end">
+               <DeleteUserHandler />
             </div>
          </ProfileCard>
-         <ModalPortal isOpen={isModalOpen}>
-            <DeleteUserModal close={closeModal} />
-         </ModalPortal>
       </div>
    );
 }
