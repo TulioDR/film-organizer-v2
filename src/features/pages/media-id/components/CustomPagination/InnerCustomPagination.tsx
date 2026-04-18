@@ -1,51 +1,63 @@
-import { Pagination } from "@mantine/core";
-import useAppSelector from "@/store/hooks/useAppSelector";
+import { usePagination } from "@mantine/hooks";
+import { Fragment, useEffect } from "react";
+import PaginationButton from "./PaginationButton";
 
 type Props = {
-   sm?: true;
    total: number;
    value: number;
    onChange: (page: number) => void;
 };
 
 export default function InnerCustomPagination({
-   sm,
    total,
    onChange,
-   value,
+   value: currentValue,
 }: Props) {
-   const { isDarkMode } = useAppSelector((state) => state.theme);
+   const { range } = usePagination({
+      total: total,
+      page: currentValue,
+   });
+
+   useEffect(() => {
+      console.log(range);
+   }, [range]);
 
    return (
       <div className="w-full flex justify-center">
-         <Pagination
-            total={total}
-            value={value}
-            onChange={onChange}
-            size={sm ? "xs" : "md"}
-            styles={{
-               control: {
-                  border: "none",
-                  color: isDarkMode ? "white" : "black",
-                  "&:hover": {
-                     color: isDarkMode ? "black" : "white",
-                  },
-                  "&[data-active]": {
-                     backgroundColor: "#CBAB60",
-                     color: "white",
-                     "&:hover": {
-                        backgroundColor: "rgba(203, 171, 96, 0.75) !important",
-                     },
-                  },
-                  "&:not([data-disabled]):hover": {
-                     backgroundColor: isDarkMode ? "white" : "black",
-                  },
-               },
-               dots: {
-                  color: "black",
-               },
-            }}
-         />
+         <div className="h-6 lg:h-8 flex gap-1">
+            <PaginationButton
+               onClick={() => onChange(currentValue - 1)}
+               isDisabled={currentValue === 1}
+            >
+               <span className="material-symbols-outlined">
+                  keyboard_arrow_left
+               </span>
+            </PaginationButton>
+            {range.map((value, index) => (
+               <Fragment key={index}>
+                  {value === "dots" ? (
+                     <div className="h-full aspect-square flex items-center justify-center">
+                        <span className="text-lg font-black">...</span>
+                     </div>
+                  ) : (
+                     <PaginationButton
+                        isActive={currentValue === value}
+                        onClick={() => onChange(value)}
+                     >
+                        {value.toString()}
+                     </PaginationButton>
+                  )}
+               </Fragment>
+            ))}
+            <PaginationButton
+               onClick={() => onChange(currentValue + 1)}
+               isDisabled={currentValue === total}
+            >
+               <span className="material-symbols-outlined">
+                  keyboard_arrow_right
+               </span>
+            </PaginationButton>
+         </div>
       </div>
    );
 }

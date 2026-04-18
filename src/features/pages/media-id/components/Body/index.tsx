@@ -1,4 +1,3 @@
-import React from "react";
 import { MediaDetailsModel } from "../../models/MediaDetailsModel";
 import Overview from "./Overview";
 import MediaData from "./MediaData";
