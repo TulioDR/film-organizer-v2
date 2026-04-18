@@ -1,15 +1,29 @@
 import Responsive from "@/common/components/Responsive";
 import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import useAppSelector from "@/store/hooks/useAppSelector";
 import { motion } from "framer-motion";
 
 export default function ScrollDownIcon() {
+   const { background } = useAppSelector((state) => state.background);
+
    const ScrollIcon = () => {
       return (
          <div className="flex flex-col items-center">
-            <div className="border border-black dark:border-white h-14 w-8 rounded-xl pt-3">
-               <div className="mx-auto animate-bounce bg-black dark:bg-white w-1 h-4 rounded-full"></div>
+            <div
+               className={`border h-14 w-8 rounded-xl pt-3
+                  ${background ? "border-white" : "border-black dark:border-white"}
+               `}
+            >
+               <div
+                  className={`mx-auto animate-bounce w-1 h-4 rounded-full
+                  ${background ? "bg-white" : "bg-black dark:bg-white"}   
+               `}
+               />
             </div>
-            <span className="material-symbols-outlined text-black dark:text-white">
+            <span
+               className={`material-symbols-outlined 
+               ${background ? "text-white" : "text-black dark:text-white"} `}
+            >
                keyboard_arrow_down
             </span>
          </div>

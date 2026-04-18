@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import ScrollDownIcon from "./ScrollDownIcon";
 import { MediaDetailsModel } from "../../models/MediaDetailsModel";
