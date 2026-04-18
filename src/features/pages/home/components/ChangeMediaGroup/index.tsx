@@ -1,4 +1,3 @@
-import React from "react";
 import useHomeContext from "../../context/HomeContext";
 import GroupButton from "./GroupButton";
 import MediaGroup from "../../models/MediaGroup";
