@@ -4,7 +4,7 @@ type Props = {
 
 export default function SeasonSubtitle({ children }: Props) {
    return (
-      <div className="my-5 text-white text-2xl 2xl:text-3xl font-medium">
+      <div className="text-black dark:text-white text-2xl 2xl:text-3xl font-light">
          {children}
       </div>
    );

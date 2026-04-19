@@ -7,7 +7,7 @@ export default function BackTitle({ title, year }: Props) {
    return (
       <div className="w-full flex-1 overflow-hidden flex items-center justify-center">
          <div className="leading-tight font-semibold text-black dark:text-white ">
-            <span className="uppercase text-base xl:text-2xl min-[1400px]:text-xl min-[1700px]:text-2xl leading-none">
+            <span className="uppercase text-base xl:text-xl min-[1400px]:text-lg min-[1700px]:text-xl leading-none">
                {title}
             </span>
             {year && (

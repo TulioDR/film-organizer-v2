@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import BackIcon from "./BackIcon";
 import Overview from "./Overview/Overview";
 import Bookmark from "@/features/bookmark/components/Bookmark";
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 
 type Props = {
    media: Media;
@@ -36,7 +37,10 @@ export default function Back({
    const toggleOverview = () => setOpenOverview((prev) => !prev);
 
    return (
-      <div className="rounded-lg absolute w-full h-full top-0 left-0 flex flex-col [transform:rotateY(180deg)] bg-primary-light dark:bg-primary-dark border-border-width border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl">
+      <div
+         style={{ borderRadius: STANDARD_RADIUS }}
+         className="absolute w-full h-full top-0 left-0 flex flex-col [transform:rotateY(180deg)] bg-primary-light dark:bg-primary-dark border border-border-light dark:border-border-dark [backface-visibility:hidden] overflow-hidden shadow-xl"
+      >
          <Responsive minWidth={SM_MEDIA_QUERY}>
             <BackHeader media={media} isLoading={isLoading} />
          </Responsive>

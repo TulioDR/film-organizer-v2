@@ -4,7 +4,7 @@ type Props = {
 
 export default function SeasonOverview({ overview }: Props) {
    return (
-      <div className="mt-3 text-xs sm:text-sm text-text-2">
+      <div className="text-xs sm:text-sm text-black/50 dark:text-white/50">
          {overview || "No overview available for this season"}
       </div>
    );

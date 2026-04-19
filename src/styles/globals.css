@@ -28,3 +28,16 @@ a {
    font-family: "Octosquares";
    src: url("../fonts//TT\ Octosquares\ Trial\ Bold.ttf");
 }
+
+/* @utility .btn-hover {
+   @apply border bg-white dark:bg-black text-black dark:text-white border-border-light dark:border-border-dark hover:border-black dark:hover:border-white active:border-black dark:active:border-white;
+} */
+
+@layer components {
+   .btn-hover {
+      @apply border bg-white dark:bg-black text-black dark:text-white 
+           border-border-light dark:border-border-dark 
+           hover:border-black dark:hover:border-white 
+           active:border-black dark:active:border-white;
+   }
+}

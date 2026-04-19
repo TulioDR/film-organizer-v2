@@ -1,14 +1,15 @@
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
+
 type Props = { onClick: () => void };
 
 export default function CloseSeasonButton({ onClick }: Props) {
    return (
-      <div className="absolute z-10 top-0 right-4">
-         <button
-            onClick={onClick}
-            className="w-10 h-10 rounded-md bg-secondary text-white grid place-content-center shadow-lg"
-         >
-            <span className="material-symbols-outlined">close</span>
-         </button>
-      </div>
+      <button
+         style={{ borderRadius: STANDARD_RADIUS }}
+         onClick={onClick}
+         className={`w-12 xl:w-16 aspect-square absolute left-4 xl:left-8 top-4 xl:top-8 flex items-center justify-center btn-hover z-10`}
+      >
+         <span className="material-symbols-outlined">chevron_left</span>
+      </button>
    );
 }

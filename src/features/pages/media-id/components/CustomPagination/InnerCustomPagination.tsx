@@ -1,5 +1,5 @@
 import { usePagination } from "@mantine/hooks";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import PaginationButton from "./PaginationButton";
 
 type Props = {
@@ -17,10 +17,6 @@ export default function InnerCustomPagination({
       total: total,
       page: currentValue,
    });
-
-   useEffect(() => {
-      console.log(range);
-   }, [range]);
 
    return (
       <div className="w-full flex justify-center">

@@ -1,7 +1,7 @@
 import SeasonPoster from "./SeasonPoster";
 import Header from "./Header";
 import Overview from "./Overview";
-import LearnMoreButton from "./LearnMoreButton";
+import MainButton from "@/common/components/MainButton";
 
 type Props = {
    season: any;
@@ -16,7 +16,9 @@ export default function SeasonCard({ season, onClick }: Props) {
             <div className="w-full h-full flex flex-col gap-2 justify-between">
                <Header season={season} />
                <Overview season={season} />
-               <LearnMoreButton onClick={onClick} />
+               <div className="flex justify-end w-full">
+                  <MainButton onClick={onClick} text="Learn more" />
+               </div>
             </div>
          </div>
       </article>

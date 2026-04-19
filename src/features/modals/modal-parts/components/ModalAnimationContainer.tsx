@@ -29,7 +29,7 @@ export default function ModalAnimationContainer({
             exit={{ opacity: 0 }}
             transition={{ duration: MODAL_DURATION }}
             onClick={closeModal}
-            className="fixed top-0 left-0 w-screen h-screen bg-black/50 grid place-content-center z-50"
+            className="fixed top-0 left-0 w-screen h-[100svh] bg-black/50 grid place-content-center z-50"
             onMouseDown={(e: any) => e.preventDefault()}
          />
          <motion.div
