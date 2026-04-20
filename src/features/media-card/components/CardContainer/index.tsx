@@ -1,7 +1,7 @@
-import MainContainer from "./MainContainer";
-import TransitionContainer from "./TransitionContainer";
-import { motion, usePresence } from "framer-motion";
-import { useEffect } from "react";
+import Responsive from "@/common/components/Responsive";
+import { LG_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 
 type Props = {
    children: React.ReactNode;
@@ -14,31 +14,18 @@ export default function CardContainer({
    layoutId,
    isLoading,
 }: Props) {
-   const [isPresent, safeToRemove] = usePresence();
-   const onAnimationComplete = () => {
-      if (!isPresent) safeToRemove();
-   };
-   useEffect(() => {
-      if (!isPresent && !isLoading) safeToRemove();
-   }, [isPresent, isLoading]);
-
    return (
-      <motion.div
-         layout
-         className={`aspect-[2/3] w-full ${isLoading || !isPresent ? "pointer-events-none" : ""}`}
-      >
-         {isLoading && !isPresent ? (
-            <TransitionContainer
-               layoutId={layoutId}
-               onAnimationComplete={onAnimationComplete}
-            >
+      <>
+         <Responsive minWidth={LG_MEDIA_QUERY}>
+            <Desktop layoutId={layoutId} isLoading={isLoading}>
                {children}
-            </TransitionContainer>
-         ) : (
-            <MainContainer layoutId={layoutId} isLoading={isLoading}>
+            </Desktop>
+         </Responsive>
+         <Responsive maxWidth={LG_MEDIA_QUERY}>
+            <Mobile layoutId={layoutId} isLoading={isLoading}>
                {children}
-            </MainContainer>
-         )}
-      </motion.div>
+            </Mobile>
+         </Responsive>
+      </>
    );
 }
