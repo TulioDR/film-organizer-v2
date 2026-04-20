@@ -1,11 +1,11 @@
 import ListToSave from "./ListToSave";
 import NoListsText from "./NoListsText";
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
-import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import useAppSelector from "@/store/hooks/useAppSelector";
 import MainButton from "@/common/components/MainButton";
+import ModalAnimationContainer from "@/features/modals/modal-parts/components/ModalAnimationContainer";
 
 type Props = {
    isOpen: boolean;
@@ -24,7 +24,7 @@ export default function SaveMediaModal({
    if (!playlists) return <></>;
    return (
       <ModalPortal isOpen={isOpen}>
-         <ModalContainer closeModal={closeModal}>
+         <ModalAnimationContainer closeModal={closeModal}>
             <div className="w-64 flex flex-col gap-4">
                <ModalTitle>Save to...</ModalTitle>
                <div className="w-full max-h-[24rem] border-y border-border-light dark:border-border-dark overflow-y-auto">
@@ -43,7 +43,7 @@ export default function SaveMediaModal({
                   <MainButton onClick={closeModal} text="Close" />
                </ModalButtonsContainer>
             </div>
-         </ModalContainer>
+         </ModalAnimationContainer>
       </ModalPortal>
    );
 }

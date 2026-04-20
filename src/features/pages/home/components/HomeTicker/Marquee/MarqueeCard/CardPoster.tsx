@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import Poster from "@/common/components/Poster";
 import { Media } from "@/common/models/Media";

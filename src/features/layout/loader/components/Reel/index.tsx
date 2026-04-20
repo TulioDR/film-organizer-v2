@@ -1,4 +1,3 @@
-import React from "react";
 import ReelHole from "./ReelHole";
 import ReelTape from "./ReelTape";
 

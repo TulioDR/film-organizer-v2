@@ -1,8 +1,9 @@
 import { LenisRef } from "lenis/react";
+import { RefObject } from "react";
 
 const scrollItemIntoView = (
    index: number,
-   lenisRef: React.RefObject<LenisRef>,
+   lenisRef: RefObject<LenisRef | null>,
    results: any[],
 ) => {
    const lenis = lenisRef.current?.lenis;

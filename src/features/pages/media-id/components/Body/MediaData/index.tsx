@@ -1,4 +1,3 @@
-import React from "react";
 import Row from "./Row";
 import Genres from "./Genres";
 import Directors from "./Directors";

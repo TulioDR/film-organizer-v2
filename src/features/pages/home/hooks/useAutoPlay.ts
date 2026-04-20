@@ -19,7 +19,7 @@ export default function useAutoPlay(
          return;
       }
       navigateMedia("forward");
-   }, [booleanValue]);
+   }, [booleanValue, navigateMedia]);
 
    useEffect(() => {
       if (!isAutoPlay) return;
@@ -46,7 +46,7 @@ export default function useAutoPlay(
          };
          endingAnimation();
       };
-   }, [isAutoPlay, animate, scope.current]);
+   }, [isAutoPlay, animate, scope]);
 
    return { isAutoPlay, startAutoPlay, stopAutoPlay, scope };
 }

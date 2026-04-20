@@ -1,4 +1,3 @@
-import React from "react";
 import Poster from "@/common/components/Poster";
 
 type Props = {

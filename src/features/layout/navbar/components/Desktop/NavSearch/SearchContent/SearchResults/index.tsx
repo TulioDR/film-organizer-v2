@@ -49,14 +49,7 @@ export default function SearchResults({ state, dispatch }: Props) {
          }
          dispatch({ type: "SET_CURRENT_INDEX", payload: newI });
       },
-      [
-         length,
-         scrollItemIntoView,
-         currentIndex,
-         results,
-         calculateNewIndex,
-         dispatch,
-      ],
+      [results, dispatch, mediaType, router, currentIndex],
    );
 
    useEffect(() => {

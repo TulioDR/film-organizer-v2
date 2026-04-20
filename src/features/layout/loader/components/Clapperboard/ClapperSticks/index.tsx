@@ -1,4 +1,3 @@
-import React from "react";
 import Pivot from "./Pivot";
 import Stick from "./Stick";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 
 import filterLogic, {
@@ -30,7 +30,7 @@ export default function ExpandedPreview({}: Props) {
       const result = filterLogic(context);
       setActiveFilters(result);
       if (swiperInstance) updateNavigationState(swiperInstance);
-   }, [context]);
+   }, [context, swiperInstance]);
 
    return (
       <div className="flex h-full w-full border-t border-border-light dark:border-border-dark">

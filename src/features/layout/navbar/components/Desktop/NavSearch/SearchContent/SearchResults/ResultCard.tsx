@@ -1,5 +1,3 @@
-import React from "react";
-
 import { motion } from "framer-motion";
 import Poster from "@/common/components/Poster";
 import Link from "next/link";

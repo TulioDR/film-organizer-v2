@@ -64,7 +64,7 @@ export default function PlaylistId({ initialPlaylist }: Props) {
          setPlaylist(updatedData);
       };
       refreshPlaylist();
-   }, [isBookmarkOpen]);
+   }, [isBookmarkOpen, initialPlaylist.id]);
 
    return (
       <>

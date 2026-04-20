@@ -37,18 +37,12 @@ export default function ResetVerificationForm({ onSubmit }: Props) {
             A verification code has been sent to your email, please enter it on
             the input below to verify your account
          </AuthMessage>
-         <AuthInput
-            icon="key"
-            name="code"
-            placeholder="Verification code"
-            dark
-         />
+         <AuthInput icon="key" name="code" placeholder="Verification code" />
          <AuthInput
             icon="lock"
             name="password"
             placeholder="New Password"
             password
-            dark
          />
          <AuthButton submit>Verify and Change Password</AuthButton>
       </AuthFormikContainer>

@@ -1,5 +1,5 @@
 import { useAnimate, usePresence, motion } from "framer-motion";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 type Props = {};
 
@@ -12,7 +12,7 @@ export default function NotFoundMessage({}: Props) {
          await animate(".item", { y: 0 }, { duration: 0.4 });
       };
       handleInitialAnimations();
-   }, []);
+   }, [animate]);
 
    useEffect(() => {
       if (isPresent) return;
@@ -21,7 +21,7 @@ export default function NotFoundMessage({}: Props) {
          safeToRemove();
       };
       exitAnimation();
-   }, [isPresent]);
+   }, [isPresent, safeToRemove, animate]);
 
    return (
       <div

@@ -1,4 +1,6 @@
-const smoothScaleTransition = {
+import { Transition } from "framer-motion";
+
+const smoothScaleTransition: Transition = {
    type: "spring",
    stiffness: 150,
    damping: 20,

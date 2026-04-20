@@ -5,7 +5,7 @@ import {
 } from "@/common/utils/date";
 
 type Props = {
-   date: Date;
+   date: string;
 };
 
 export default function Date({ date }: Props) {

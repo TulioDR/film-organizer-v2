@@ -1,5 +1,3 @@
-import React from "react";
-import Text from "./Text";
 import Corners from "./Corners";
 import ClapperSticks from "./ClapperSticks";
 import Reel from "../Reel";
@@ -16,7 +14,6 @@ export default function Clapperboard({ withReel, spinningReel }: Props) {
          <div className="w-full h-1 bg-white dark:bg-black" />
          <div className="w-full aspect-[5/3] bg-accent relative p-3">
             <div className="h-full w-full border border-[#8A7553] relative pt-3 pl-4 flex flex-col gap-3">
-               {/* <Text /> */}
                <Corners />
             </div>
             {withReel && (

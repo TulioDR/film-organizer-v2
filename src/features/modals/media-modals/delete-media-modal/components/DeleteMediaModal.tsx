@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { deleteManyMedia } from "@/api/media";
+// import { deleteManyMedia } from "@/api/media";
 
 import MediaToDelete from "./MediaToDelete";
 import Subtitle from "./Subtitle";
 
-import useNotification from "@/features/layout/notification/hooks/useNotification";
-import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
+// import useNotification from "@/features/layout/notification/hooks/useNotification";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
-import ModalButton from "@/features/modals/modal-parts/components/ModalButton";
 import { SavedMedia } from "@/common/models/Media";
+import ModalAnimationContainer from "@/features/modals/modal-parts/components/ModalAnimationContainer";
+import MainButton from "@/common/components/MainButton";
 
 type Props = {
    close: () => void;
@@ -23,18 +23,18 @@ export default function DeleteMediaModal({
    close,
    mediaToDelete,
    list,
-   refresh,
-   stopDeleteMode,
+   // refresh,
+   // stopDeleteMode,
 }: Props) {
    const [movies, setMovies] = useState<SavedMedia[]>([]);
    const [tvSeries, setTvSeries] = useState<SavedMedia[]>([]);
 
    const [isLoading, setIsLoading] = useState<boolean>(false);
-   const { showSuccessNotification, showErrorNotification } = useNotification();
+   // const { showSuccessNotification, showErrorNotification } = useNotification();
 
    useEffect(() => {
       const movie = mediaToDelete.filter(
-         ({ media_type }) => media_type === "movie"
+         ({ media_type }) => media_type === "movie",
       );
       const tv = mediaToDelete.filter(({ media_type }) => media_type === "tv");
       setMovies(movie);
@@ -43,21 +43,21 @@ export default function DeleteMediaModal({
 
    const deleteMediaFunction = async () => {
       setIsLoading(true);
-      const ids = mediaToDelete.map(({ id }) => id);
-      const { error } = await deleteManyMedia(ids);
-      if (error) {
-         setIsLoading(false);
-         showErrorNotification(error);
-      } else {
-         showSuccessNotification("Media deleted Successfully");
-         refresh();
-         stopDeleteMode();
-         close();
-      }
+      // const ids = mediaToDelete.map(({ media_id }) => id);
+      // const { error } = await deleteManyMedia(ids);
+      // if (error) {
+      //    setIsLoading(false);
+      //    showErrorNotification(error);
+      // } else {
+      //    showSuccessNotification("Media deleted Successfully");
+      //    refresh();
+      //    stopDeleteMode();
+      //    close();
+      // }
    };
 
    return (
-      <ModalContainer closeModal={close}>
+      <ModalAnimationContainer closeModal={close}>
          <ModalTitle>
             Delete from <em>{list.name}</em>
          </ModalTitle>
@@ -75,15 +75,13 @@ export default function DeleteMediaModal({
             </div>
          </div>
          <ModalButtonsContainer>
-            <ModalButton onClick={close}>Cancel</ModalButton>
-            <ModalButton
-               red
+            <MainButton onClick={close} text="cancel" />
+            <MainButton
                onClick={deleteMediaFunction}
                isLoading={isLoading}
-            >
-               Delete
-            </ModalButton>
+               text="Delete"
+            />
          </ModalButtonsContainer>
-      </ModalContainer>
+      </ModalAnimationContainer>
    );
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import useNotification from "@/features/layout/notification/hooks/useNotification";
-import ModalContainer from "@/features/modals/modal-parts/components/ModalContainer";
 import ModalTitle from "@/features/modals/modal-parts/components/ModalTitle";
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import useListsRefresh from "@/common/hooks/useListsRefresh";
@@ -9,6 +8,7 @@ import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import { deletePlaylist } from "@/api/playlists";
 import Playlist from "@/common/models/Playlist";
 import MainButton from "@/common/components/MainButton";
+import ModalAnimationContainer from "@/features/modals/modal-parts/components/ModalAnimationContainer";
 
 type Props = {
    playlistToDelete: Playlist;
@@ -40,7 +40,7 @@ export default function DeleteListModal({
 
    return (
       <ModalPortal isOpen={isOpen}>
-         <ModalContainer closeModal={close}>
+         <ModalAnimationContainer closeModal={close}>
             <ModalTitle>Delete List</ModalTitle>
             <div className="text-sm leading-relaxed text-text-2 font-normal w-96 text-black/50 dark:text-white/50">
                <div>
@@ -64,7 +64,7 @@ export default function DeleteListModal({
                   text="Delete"
                />
             </ModalButtonsContainer>
-         </ModalContainer>
+         </ModalAnimationContainer>
       </ModalPortal>
    );
 }

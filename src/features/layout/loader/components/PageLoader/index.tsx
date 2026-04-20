@@ -36,7 +36,7 @@ export default function PageLoader({}: Props) {
          router.events.off("routeChangeComplete", handleStop);
          router.events.off("routeChangeError", handleStop);
       };
-   }, [router]);
+   }, [router, dispatch]);
 
    if (!isLoading) return <></>;
    return <LoadingBoard />;

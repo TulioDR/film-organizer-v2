@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 type Props = {
@@ -18,7 +18,7 @@ export default function BottomNavButton({ icon, text, href }: Props) {
       } else {
          setIsActive(router.pathname === href);
       }
-   }, [href, router.pathname]);
+   }, [href, router.pathname, router.query.media_type]);
 
    return (
       <Link href={href} className="h-full flex-1 flex justify-center">

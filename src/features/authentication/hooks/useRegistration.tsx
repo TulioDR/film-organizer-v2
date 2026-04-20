@@ -7,7 +7,7 @@ export default function useRegistration() {
    const [pendingVerification, setPendingVerification] = useState(false);
 
    const router = useRouter();
-   const [isComplete, setIsComplete] = useState<boolean>(false);
+   const [isComplete, _setIsComplete] = useState<boolean>(false);
    useEffect(() => {
       if (isComplete && router.isReady) {
          setTimeout(() => {

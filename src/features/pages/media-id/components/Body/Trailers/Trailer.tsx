@@ -1,4 +1,3 @@
-import React from "react";
 import youtubeLogo from "@/data/images/logos/youtube.svg";
 import CustomHyperlink from "../CustomHyperlink";
 import { Video } from "../../../models/MediaDetailsModel";

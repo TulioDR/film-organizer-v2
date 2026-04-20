@@ -1,4 +1,3 @@
-import React from "react";
 import Reel from "./Reel";
 
 type Props = {};

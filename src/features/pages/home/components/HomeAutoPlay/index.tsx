@@ -1,4 +1,3 @@
-import React from "react";
 import useHomeContext from "../../context/HomeContext";
 import AutoPlayAnimation from "./AutoPlayAnimation";
 import { AnimatePresence } from "framer-motion";

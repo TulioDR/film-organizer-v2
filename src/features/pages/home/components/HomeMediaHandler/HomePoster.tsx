@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
    AnimationOptions,
    motion,
@@ -30,7 +30,7 @@ export default function HomePoster({ frontPath }: Props) {
          safeToRemove();
       };
       exitAnimation();
-   }, [isForward, isPresent]);
+   }, [isForward, isPresent, safeToRemove, animate, scope]);
 
    return (
       <motion.div

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Transition } from "framer-motion";
 import FrontIcon from "./FrontIcon";
 import Poster from "@/common/components/Poster";
 
@@ -30,7 +30,12 @@ export default function CustomHyperlink({
    const onHoverStart = () => setIsHovered(true);
    const onHoverEnd = () => setIsHovered(false);
 
-   const transition = { type: "spring", stiffness: 150, damping: 20, mass: 1 };
+   const transition: Transition = {
+      type: "spring",
+      stiffness: 150,
+      damping: 20,
+      mass: 1,
+   };
 
    return (
       <motion.a

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, Transition } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useResetPassword from "../../../hooks/useResetPassword";
 import MainResetForm from "./MainResetForm";
 import ResetVerificationForm from "./ResetVerificationForm";

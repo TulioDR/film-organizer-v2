@@ -1,4 +1,3 @@
-import React from "react";
 import SearchKey from "./SearchKey";
 
 type Props = {};

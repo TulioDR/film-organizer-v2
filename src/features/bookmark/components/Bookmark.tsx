@@ -24,7 +24,7 @@ export default function Bookmark({
    useEffect(() => {
       if (!setIsBookmarkOpen) return;
       setIsBookmarkOpen(isSaveMediaOpen);
-   }, [isSaveMediaOpen]);
+   }, [isSaveMediaOpen, setIsBookmarkOpen]);
 
    const { user } = useUser();
 

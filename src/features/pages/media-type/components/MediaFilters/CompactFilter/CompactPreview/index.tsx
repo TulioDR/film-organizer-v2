@@ -1,4 +1,3 @@
-import React from "react";
 import PreviewButton from "./PreviewButton";
 import useMediaFilterContext from "@/features/pages/media-type/context/MediaFilterContext";
 import useMediaSearch from "@/features/pages/media-type/hooks/useMediaSearch";

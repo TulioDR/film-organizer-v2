@@ -9,7 +9,7 @@ export default function PlaylistInputError({ error, setShowError }: Props) {
    useEffect(() => {
       const timeout = setTimeout(() => setShowError(null), 5000);
       return () => clearTimeout(timeout);
-   }, [error]);
+   }, [error, setShowError]);
 
    return (
       <div className="absolute left-0 top-full z-10 text-red-500 w-full h-10 rounded-lg flex items-center justify-between">

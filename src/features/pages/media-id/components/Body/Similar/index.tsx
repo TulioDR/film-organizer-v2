@@ -1,6 +1,5 @@
 import { MediaDetailsModel } from "../../../models/MediaDetailsModel";
 import InfoContainer from "../InfoContainer";
-import React from "react";
 import {
    LG_MEDIA_QUERY,
    SM_MEDIA_QUERY,
@@ -17,7 +16,6 @@ type Props = {
 
 export default function Similar({ media, mediaType }: Props) {
    const similarMedia = media.similar.results;
-   const currentMedia = media;
    const subtitleText = `Similar ${
       mediaType === "movie" ? "Movies" : "Series"
    }`;
@@ -43,7 +41,6 @@ export default function Similar({ media, mediaType }: Props) {
                         mediaType={mediaType}
                         media={similarItem}
                         id={similarItem.id.toString()}
-                        currentMedia={currentMedia}
                      />
                   )}
                />

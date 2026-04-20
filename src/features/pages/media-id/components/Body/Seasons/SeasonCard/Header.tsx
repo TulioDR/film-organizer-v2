@@ -1,5 +1,4 @@
 import { changeDateFormat } from "@/common/utils/date";
-import React from "react";
 
 type Props = {
    season: any;

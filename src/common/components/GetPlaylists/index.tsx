@@ -19,6 +19,6 @@ export default function GetPlaylists({}: Props) {
          }
       };
       getInitialPLaylists();
-   }, [isLoaded, isLoaded]);
+   }, [isLoaded, dispatch, user]);
    return <></>;
 }

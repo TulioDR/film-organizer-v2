@@ -41,7 +41,7 @@ export default function MainContainer({
          }
       };
       animations();
-   }, [isHovered]);
+   }, [isHovered, animate]);
 
    const onHoverStart = async () => {
       setIsHovered(true);

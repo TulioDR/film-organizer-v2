@@ -41,7 +41,7 @@ export default function MediaId({ media_type, media }: Props) {
       return () => {
          removeBackground();
       };
-   }, [media]);
+   }, [media, removeBackground]);
    const lenis = useLenis();
 
    const [hideUi, setHideUi] = useState<boolean>(false);

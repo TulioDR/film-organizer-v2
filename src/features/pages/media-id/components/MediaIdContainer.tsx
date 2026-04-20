@@ -14,7 +14,7 @@ export default function MediaIdContainer({ children, media }: Props) {
 
    useEffect(() => {
       changeBackground(media.backdrop_path);
-   }, [media.backdrop_path]);
+   }, [media.backdrop_path, changeBackground]);
 
    const lenis = useLenis();
    useEffect(() => {

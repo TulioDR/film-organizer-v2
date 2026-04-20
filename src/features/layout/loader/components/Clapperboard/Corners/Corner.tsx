@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
    hor?: true;
    ver?: true;

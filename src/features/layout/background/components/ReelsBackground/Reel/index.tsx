@@ -1,4 +1,3 @@
-import React from "react";
 import ReelItem from "./ReelItem";
 import { motion } from "framer-motion";
 

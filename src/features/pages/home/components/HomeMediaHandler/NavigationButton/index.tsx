@@ -1,5 +1,5 @@
 import { motion, useAnimate } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 import useHomeContext from "../../../context/HomeContext";
 import { HOME_DURATION } from "../../../constants/ANIMATIONS";
 import SelectedAnimation from "./SelectedAnimation";

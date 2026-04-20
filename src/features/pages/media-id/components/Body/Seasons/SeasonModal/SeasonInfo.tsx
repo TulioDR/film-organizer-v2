@@ -1,11 +1,10 @@
-import Date from "@/features/pages/mediaDetails/components/Header/HeaderData/Date";
+import Date from "../../../Header/HeaderData/Date";
 
 type Props = {
    season: any;
 };
 
 export default function SeasonInfo({ season }: Props) {
-   //Using the date component from media details info bar
    return (
       <div className="flex items-center text-text-2 mt-3 text-sm">
          <Date date={season.air_date} />

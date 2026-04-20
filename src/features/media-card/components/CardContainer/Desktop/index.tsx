@@ -16,7 +16,7 @@ export default function Desktop({ children, layoutId, isLoading }: Props) {
    };
    useEffect(() => {
       if (!isPresent && !isLoading) safeToRemove();
-   }, [isPresent, isLoading]);
+   }, [isPresent, isLoading, safeToRemove]);
 
    return (
       <motion.div

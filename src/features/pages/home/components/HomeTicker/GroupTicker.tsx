@@ -1,4 +1,3 @@
-import React from "react";
 import { Media } from "@/common/models/Media";
 import Marquee from "./Marquee";
 

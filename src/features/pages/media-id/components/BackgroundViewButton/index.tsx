@@ -1,5 +1,4 @@
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
-import React from "react";
 type Props = {
    hideUi: boolean;
    onClick: () => void;

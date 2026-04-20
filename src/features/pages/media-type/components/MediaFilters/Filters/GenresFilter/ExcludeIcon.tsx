@@ -1,5 +1,4 @@
 import { GENRES_ICON } from "@/features/pages/media-type/constants/FILTER_ICONS";
-import React from "react";
 
 type Props = {};
 

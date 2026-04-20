@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import SEARCH_ANIMATION_DURATION from "@/features/layout/navbar/constants/SEARCH_ANIMATION_DURATION";
 

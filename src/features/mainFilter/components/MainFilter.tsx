@@ -50,7 +50,7 @@ export default function MainFilter({
          }
       };
       runAnimations();
-   }, [isOpen, isExpanded, isPresent]);
+   }, [isOpen, isExpanded, isPresent, safeToRemove, setIsOpen]);
 
    return (
       <MainFilterContainer>

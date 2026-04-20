@@ -1,4 +1,3 @@
-import React from "react";
 import MarqueeCard from "./MarqueeCard";
 import { motion } from "framer-motion";
 import { Media } from "@/common/models/Media";

@@ -1,4 +1,3 @@
-import React from "react";
 import HomeTicker from "../HomeTicker";
 
 type Props = {};

@@ -1,6 +1,5 @@
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 import Image from "next/image";
-import React from "react";
 
 type Props = {
    alt: string;

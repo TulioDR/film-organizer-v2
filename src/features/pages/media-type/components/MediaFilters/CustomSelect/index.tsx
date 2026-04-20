@@ -23,7 +23,7 @@ export default function CustomSelect({
          menuPlacement={menuPlacement}
          isClearable={isClearable}
          options={options}
-         onChange={(option: SelectOption) => onChange(option)}
+         onChange={(option: any) => onChange(option)}
          className="w-full"
          classNames={{
             control: (state: any) =>

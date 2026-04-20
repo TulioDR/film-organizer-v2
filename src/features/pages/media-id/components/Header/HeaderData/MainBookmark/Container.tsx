@@ -4,7 +4,7 @@ import { itemVariant } from "@/common/animations/revealVariants";
 
 type Props = {
    children: React.ReactNode;
-   buttonRef: React.RefObject<HTMLDivElement>;
+   buttonRef: React.RefObject<HTMLDivElement | null>;
 };
 
 export default function Container({ children, buttonRef }: Props) {

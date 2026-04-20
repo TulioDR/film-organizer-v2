@@ -1,6 +1,5 @@
-import React from "react";
+import { NavigationModel } from "@/features/layout/navbar/models/NavigationModels";
 import { motion } from "framer-motion";
-import { NavigationModel } from "@/features/layout/sidebar/models/NavigationModels";
 import Link from "next/link";
 
 type Props = {

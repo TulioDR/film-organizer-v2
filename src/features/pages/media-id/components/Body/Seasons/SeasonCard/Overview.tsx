@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = { season: any };
 
 export default function Overview({ season }: Props) {
