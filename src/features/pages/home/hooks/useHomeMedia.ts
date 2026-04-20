@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MediaGroup from "../models/MediaGroup";
 import { Media } from "@/common/models/Media";
 
@@ -26,23 +26,26 @@ export default function useHomeMedia(
       changeItem(mediaGroup.media, media, newMedia, setMedia, d);
    };
 
-   const navigateMedia = (direction: "forward" | "backward") => {
-      const index = mediaGroup.media.findIndex((m) => m.id === media.id);
-      let newMedia: null | Media = null;
+   const navigateMedia = useCallback(
+      (direction: "forward" | "backward") => {
+         const index = mediaGroup.media.findIndex((m) => m.id === media.id);
+         let newMedia: null | Media = null;
 
-      const lastIndex = mediaGroup.media.length - 1;
-      const firstIndex = 0;
+         const lastIndex = mediaGroup.media.length - 1;
+         const firstIndex = 0;
 
-      if (direction === "forward") {
-         if (index >= lastIndex) newMedia = mediaGroup.media[firstIndex];
-         else newMedia = mediaGroup.media[index + 1];
-      }
-      if (direction === "backward") {
-         if (index === firstIndex) newMedia = mediaGroup.media[lastIndex];
-         else newMedia = mediaGroup.media[index - 1];
-      }
-      changeMedia(newMedia!, direction);
-   };
+         if (direction === "forward") {
+            if (index >= lastIndex) newMedia = mediaGroup.media[firstIndex];
+            else newMedia = mediaGroup.media[index + 1];
+         }
+         if (direction === "backward") {
+            if (index === firstIndex) newMedia = mediaGroup.media[lastIndex];
+            else newMedia = mediaGroup.media[index - 1];
+         }
+         changeMedia(newMedia!, direction);
+      },
+      [changeMedia, mediaGroup],
+   );
 
    return { media, mediaGroup, changeMediaGroup, changeMedia, navigateMedia };
 }
