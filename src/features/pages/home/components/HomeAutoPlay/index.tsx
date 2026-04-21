@@ -5,10 +5,10 @@ import { AnimatePresence } from "framer-motion";
 type Props = {};
 
 export default function HomeAutoPlay({}: Props) {
-   const { isAutoPlay, stopAutoPlay, startAutoPlay } = useHomeContext();
+   const { isAutoPlayActive, startAutoPlay, stopAutoPlay } = useHomeContext();
 
    const handleClick = () => {
-      if (isAutoPlay) stopAutoPlay();
+      if (isAutoPlayActive) stopAutoPlay();
       else startAutoPlay();
    };
 
@@ -25,14 +25,14 @@ export default function HomeAutoPlay({}: Props) {
                   }}
                   className="material-symbols-outlined !text-4xl"
                >
-                  {isAutoPlay ? "pause" : "play_arrow"}
+                  {isAutoPlayActive ? "pause" : "play_arrow"}
                </span>
                <AnimatePresence>
-                  {isAutoPlay && <AutoPlayAnimation />}
+                  {isAutoPlayActive && <AutoPlayAnimation />}
                </AnimatePresence>
             </div>
             <span className="text-xl font-semibold">
-               {isAutoPlay ? "Playing" : "Auto"}
+               {isAutoPlayActive ? "Playing" : "Auto"}
             </span>
          </button>
       </div>

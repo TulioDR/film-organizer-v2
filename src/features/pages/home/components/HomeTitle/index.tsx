@@ -5,9 +5,9 @@ import { HOME_DURATION, HOME_EASE } from "../../constants/ANIMATIONS";
 type Props = {};
 
 export default function HomeTitle({}: Props) {
-   const { media } = useHomeContext();
+   const { currentMedia } = useHomeContext();
 
-   const title = media.title || media.name;
+   const title = currentMedia.title || currentMedia.name;
 
    return (
       <div className="flex-1 w-full flex items-center">

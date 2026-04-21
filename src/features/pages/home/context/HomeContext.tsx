@@ -1,25 +1,22 @@
 import { Media } from "@/common/models/Media";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import MediaGroup from "../models/MediaGroup";
-import useIsForward from "../hooks/useIsForward";
 import useIsAnimating from "../hooks/useIsAnimating";
-import useHomeMedia from "../hooks/useHomeMedia";
-import useAutoPlay from "../hooks/useAutoPlay";
-import { AnimationScope } from "framer-motion";
 
 export interface HomeContextInterface {
    isAnimating: boolean;
-   media: Media;
-   mediaGroup: MediaGroup;
+   currentMedia: Media;
+   currentGroup: MediaGroup;
    allGroups: [MediaGroup, MediaGroup, MediaGroup];
-   changeMediaGroup: (newMediagroup: MediaGroup) => void;
-   changeMedia: (newMedia: Media, d?: "forward" | "backward") => void;
-   navigateMedia: (direction: "forward" | "backward") => void;
-   isForward: boolean;
-   isAutoPlay: boolean;
+   changeMediaGroup: (newIndex: number) => void;
+   changeMedia: (newIndex: number) => void;
+   navigateMedia: (direction: 1 | -1) => void;
+   direction: 1 | -1;
    startAutoPlay: () => void;
    stopAutoPlay: () => void;
-   scope: AnimationScope<any>;
+   isAutoPlayActive: boolean;
+   mediaIndex: number;
+   groupIndex: number;
 }
 
 const HomeContext = createContext({} as HomeContextInterface);
@@ -34,29 +31,54 @@ interface Props {
 }
 
 export function HomeProvider({ children, allGroups }: Props) {
-   const { isForward, changeItem } = useIsForward();
+   const [mediaIndex, setMediaIndex] = useState(0);
+   const [groupIndex, setGroupIndex] = useState(0);
+   const [direction, setDirection] = useState<1 | -1>(1);
+   const [isAutoPlayActive, setIsAutoPlayActive] = useState(false);
 
-   const { media, mediaGroup, changeMediaGroup, changeMedia, navigateMedia } =
-      useHomeMedia(allGroups, changeItem);
+   const currentGroup = allGroups[groupIndex];
+   const currentMedia = currentGroup.media[mediaIndex];
 
-   const { isAutoPlay, startAutoPlay, stopAutoPlay, scope } =
-      useAutoPlay(navigateMedia);
+   const startAutoPlay = () => setIsAutoPlayActive(true);
+   const stopAutoPlay = () => setIsAutoPlayActive(false);
 
-   const { isAnimating } = useIsAnimating(media);
+   const changeMediaGroup = (newIndex: number) => {
+      const direction = newIndex > groupIndex ? 1 : -1;
+      setDirection(direction);
+      setGroupIndex(newIndex);
+      setMediaIndex(0);
+   };
+
+   const changeMedia = (newIndex: number) => {
+      const direction = newIndex > mediaIndex ? 1 : -1;
+      setDirection(direction);
+      setMediaIndex(newIndex);
+   };
+
+   const navigateMedia = (direction: 1 | -1) => {
+      const total = allGroups[groupIndex].media.length;
+      let newIndex;
+      if (direction > 0) newIndex = (mediaIndex + 1) % total;
+      else newIndex = (mediaIndex - 1 + total) % total;
+      changeMedia(newIndex);
+   };
+
+   const { isAnimating } = useIsAnimating(mediaIndex);
 
    const value: HomeContextInterface = {
       isAnimating,
-      media,
-      mediaGroup,
+      currentMedia,
+      currentGroup,
       allGroups,
       changeMediaGroup,
       changeMedia,
       navigateMedia,
-      isForward,
-      isAutoPlay,
+      direction,
+      isAutoPlayActive,
       startAutoPlay,
       stopAutoPlay,
-      scope,
+      mediaIndex,
+      groupIndex,
    };
 
    return <HomeContext.Provider value={value}>{children}</HomeContext.Provider>;

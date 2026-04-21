@@ -1,12 +1,15 @@
 import SpinAnimation from "./SpinAnimation";
 import ButtonText from "./ButtonText";
 import Link from "next/link";
+import useHomeContext from "../../../context/HomeContext";
+import { AnimatePresence } from "framer-motion";
 
 type Props = {
    href: string;
 };
 
 export default function LearnButton({ href }: Props) {
+   const { isAutoPlayActive } = useHomeContext();
    return (
       <Link
          href={href}
@@ -17,7 +20,9 @@ export default function LearnButton({ href }: Props) {
             flex items-center justify-center`}
       >
          <ButtonText />
-         <SpinAnimation />
+         <AnimatePresence>
+            {isAutoPlayActive && <SpinAnimation />}
+         </AnimatePresence>
       </Link>
    );
 }

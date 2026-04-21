@@ -15,8 +15,8 @@ export default function NavigationButton({ icon, next }: Props) {
    const [startLoadingAnimation, setStartLoadingAnimation] = useState(false);
 
    const { navigateMedia } = useHomeContext();
-   const goPrev = () => navigateMedia("backward");
-   const goNext = () => navigateMedia("forward");
+   const goPrev = () => navigateMedia(-1);
+   const goNext = () => navigateMedia(1);
 
    const handleClick = async () => {
       stopAutoPlay();

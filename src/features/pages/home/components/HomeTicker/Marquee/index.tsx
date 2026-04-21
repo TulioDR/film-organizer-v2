@@ -22,11 +22,19 @@ export default function Marquee({ array, reverse }: Props) {
                className={`absolute w-full flex flex-col gap-1 py-0.5 ${reverse ? "top-full" : "bottom-full"}`}
             >
                {array.map((media, index) => (
-                  <MarqueeCard key={media.id + "-" + index} media={media} />
+                  <MarqueeCard
+                     key={media.id + "-" + index}
+                     media={media}
+                     index={index}
+                  />
                ))}
             </div>
             {array.map((media, index) => (
-               <MarqueeCard key={media.id + "-" + index} media={media} />
+               <MarqueeCard
+                  key={media.id + "-" + index}
+                  media={media}
+                  index={index}
+               />
             ))}
          </motion.div>
       </div>

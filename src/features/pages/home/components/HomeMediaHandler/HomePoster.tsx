@@ -1,45 +1,40 @@
-import { useEffect } from "react";
-import {
-   AnimationOptions,
-   motion,
-   useAnimate,
-   usePresence,
-} from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import Poster from "@/common/components/Poster";
-import useHomeContext from "../../context/HomeContext";
-import { HOME_TRANSITION } from "../../constants/ANIMATIONS";
+import { HOME_DURATION } from "../../constants/ANIMATIONS";
 
 type Props = {
    frontPath: string;
+   direction: number;
 };
 
-export default function HomePoster({ frontPath }: Props) {
-   const [scope, animate] = useAnimate();
-   const [isPresent, safeToRemove] = usePresence();
-
-   const { isForward } = useHomeContext();
-
-   useEffect(() => {
-      if (isPresent) return;
-      const exitAnimation = async () => {
-         await animate(
-            scope.current,
-            { x: isForward ? "-100%" : "100%" },
-            HOME_TRANSITION as AnimationOptions,
-         );
-         safeToRemove();
-      };
-      exitAnimation();
-   }, [isForward, isPresent, safeToRemove, animate, scope]);
+export default function HomePoster({ frontPath, direction }: Props) {
+   const slideVariants: Variants = {
+      enter: (direction: number) => ({
+         x: direction > 0 ? "100%" : "-100%",
+      }),
+      center: {
+         x: 0,
+         transition: { duration: HOME_DURATION, ease: "easeInOut" },
+      },
+      exit: (direction: number) => ({
+         x: direction > 0 ? "-100%" : "100%",
+         transition: { duration: HOME_DURATION, ease: "easeInOut" },
+      }),
+   };
 
    return (
-      <motion.div
-         ref={scope}
-         initial={{ x: isForward ? "100%" : "-100%" }}
-         animate={{ x: 0, transition: HOME_TRANSITION }}
-         className="w-full h-full absolute top-0 left-0"
-      >
-         <Poster alt="Featured Poster" posterPath={frontPath} size="md" />
-      </motion.div>
+      <AnimatePresence initial={false} custom={direction}>
+         <motion.div
+            key={frontPath}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="w-full h-full absolute inset-0"
+         >
+            <Poster alt="Featured Poster" posterPath={frontPath} size="md" />
+         </motion.div>
+      </AnimatePresence>
    );
 }

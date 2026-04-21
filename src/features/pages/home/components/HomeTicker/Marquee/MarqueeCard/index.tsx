@@ -7,9 +7,10 @@ import CardPoster from "./CardPoster";
 
 type Props = {
    media: Media;
+   index: number;
 };
 
-export default function MarqueeCard({ media }: Props) {
+export default function MarqueeCard({ media, index }: Props) {
    const [isHovered, setIsHovered] = useState(false);
 
    const onHoverStart = () => {
@@ -22,7 +23,7 @@ export default function MarqueeCard({ media }: Props) {
    const { changeMedia, stopAutoPlay } = useHomeContext();
    const onAnimationComplete = (e: any) => {
       if (e.pathLength !== 1) return;
-      changeMedia(media);
+      changeMedia(index);
       stopAutoPlay();
    };
 

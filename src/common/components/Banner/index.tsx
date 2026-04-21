@@ -1,13 +1,27 @@
 import Poster from "../Poster";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { HOME_DURATION } from "@/features/pages/home/constants/ANIMATIONS";
 
 type Props = {
    backPath: string;
-   isForward?: boolean;
+   direction?: number;
 };
 
-export default function Banner({ backPath, isForward }: Props) {
+export default function Banner({ backPath, direction = 1 }: Props) {
+   const slideVariants: Variants = {
+      enter: (direction: number) => ({
+         x: direction > 0 ? "100%" : "-100%",
+      }),
+      center: {
+         x: 0,
+         transition: { duration: HOME_DURATION, ease: "easeInOut" },
+      },
+      exit: (direction: number) => ({
+         x: direction > 0 ? "-100%" : "100%",
+         transition: { duration: HOME_DURATION, ease: "easeInOut" },
+      }),
+   };
+
    return (
       <motion.div
          initial={{ y: "-100%" }}
@@ -23,37 +37,21 @@ export default function Banner({ backPath, isForward }: Props) {
             transition={{ duration: 0.4 }}
             className="w-full h-full flex items-center justify-center relative overflow-hidden"
          >
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={false} custom={direction}>
                <motion.div
                   key={backPath}
-                  initial={{ x: isForward ? "100%" : "-100%" }}
-                  animate={{
-                     x: 0,
-                     transition: { duration: HOME_DURATION, ease: "easeInOut" },
-                  }}
-                  exit={{
-                     opacity: 0,
-                     transition: { duration: 0, delay: HOME_DURATION },
-                  }}
-                  className="absolute inset-0 overflow-hidden"
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0"
                >
-                  <motion.div
-                     initial={{ x: isForward ? "-100%" : "100%" }}
-                     animate={{
-                        x: 0,
-                        transition: {
-                           duration: HOME_DURATION,
-                           ease: "easeInOut",
-                        },
-                     }}
-                     className="w-full h-full "
-                  >
-                     <Poster
-                        posterPath={backPath}
-                        alt="hello"
-                        size="original"
-                     />
-                  </motion.div>
+                  <Poster
+                     posterPath={backPath}
+                     alt={backPath}
+                     size="original"
+                  />
                </motion.div>
             </AnimatePresence>
          </motion.div>
