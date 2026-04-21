@@ -1,20 +1,20 @@
 import ReactLenis from "lenis/react";
 import SearchPlaylistFilter from "./SearchPlaylistFilter";
 import SortByPlaylistsFilter from "./SortByPlaylistsFilter";
-import { useEffect, useState } from "react";
 import { SelectOption } from "@/features/pages/media-type/models/Filters";
-import { PlaylistWithItems } from "@/common/models/Playlist";
 
 type Props = {
-   setFilteredPlaylists: React.Dispatch<
-      React.SetStateAction<PlaylistWithItems[]>
-   >;
-   allPlaylists: PlaylistWithItems[];
+   inputValue: string;
+   setInputValue: React.Dispatch<React.SetStateAction<string>>;
+   selectedSort: SelectOption;
+   setSelectedSort: React.Dispatch<React.SetStateAction<SelectOption>>;
 };
 
 export default function CompactPlaylistsFilters({
-   setFilteredPlaylists,
-   allPlaylists,
+   inputValue,
+   selectedSort,
+   setInputValue,
+   setSelectedSort,
 }: Props) {
    const SORT_PLAYLISTS_OPTIONS: SelectOption[] = [
       { value: "alpha_asc", label: "Name (A-Z)" },
@@ -22,36 +22,6 @@ export default function CompactPlaylistsFilters({
       { value: "date_desc", label: "Newest First" },
       { value: "date_asc", label: "Oldest First" },
    ];
-
-   const [inputValue, setInputValue] = useState<string>("");
-   const [selectedSort, setSelectedSort] = useState<SelectOption>(
-      SORT_PLAYLISTS_OPTIONS[3],
-   );
-
-   useEffect(() => {
-      if (!allPlaylists) return;
-      let result = [...allPlaylists];
-
-      if (inputValue) {
-         result = result.filter((p) =>
-            p.name.toLowerCase().includes(inputValue.toLowerCase()),
-         );
-      }
-
-      const sortType = selectedSort.value;
-      result.sort((a, b) => {
-         if (sortType === "alpha_asc") return a.name.localeCompare(b.name);
-         if (sortType === "alpha_desc") return b.name.localeCompare(a.name);
-
-         const dateA = new Date(a.created_at || 0).getTime();
-         const dateB = new Date(b.created_at || 0).getTime();
-
-         if (sortType === "date_asc") return dateA - dateB;
-         return dateB - dateA;
-      });
-
-      setFilteredPlaylists(result);
-   }, [inputValue, selectedSort.value, allPlaylists, setFilteredPlaylists]);
 
    return (
       <ReactLenis className="h-full w-full overflow-y-auto">

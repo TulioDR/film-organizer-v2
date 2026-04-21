@@ -5,25 +5,16 @@ import ModalContainer from "@/features/modals/modal-parts/components/ModalContai
 import ModalButtonsContainer from "@/features/modals/modal-parts/components/ModalButtonsContainer";
 import ModalInput from "@/features/modals/modal-parts/components/ModalInput";
 import MainButton from "@/common/components/MainButton";
-import {
-   createPlaylist,
-   getUserPlaylists,
-   updatePlaylist,
-} from "@/api/playlists";
+import { createPlaylist, updatePlaylist } from "@/api/playlists";
 import useListsRefresh from "@/common/hooks/useListsRefresh";
 import { PlaylistWithItems } from "@/common/models/Playlist";
 
 type Props = {
    close: () => void;
    playlist?: PlaylistWithItems;
-   setAllPlaylists?: React.Dispatch<React.SetStateAction<PlaylistWithItems[]>>;
 };
 
-export default function CreateOrUpdateListModal({
-   close,
-   playlist,
-   setAllPlaylists,
-}: Props) {
+export default function CreateOrUpdateListModal({ close, playlist }: Props) {
    const { refreshLists } = useListsRefresh();
 
    const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,11 +33,8 @@ export default function CreateOrUpdateListModal({
          error = updatedList.error;
       } else {
          const createdList = await createPlaylist(newListData);
-         error = createdList.error;
+         if (createdList.error) error = createdList.error;
       }
-
-      const newPlaylists = await getUserPlaylists(true);
-      if (setAllPlaylists) setAllPlaylists(newPlaylists);
       if (error) {
          showErrorNotification(error);
          setIsLoading(false);
@@ -67,7 +55,6 @@ export default function CreateOrUpdateListModal({
       const { name } = values;
       let error: any = {};
       if (!name) error.name = "Required";
-      // console.log(error);
       return error;
    };
    return (

@@ -11,6 +11,9 @@ import { getAuth } from "@clerk/nextjs/server";
 import { createClerkSupabaseClient } from "@/lib/supabaseClient";
 import { fetchPlaylistsData } from "@/api/playlistsService";
 import FilterCardsLayout from "@/common/components/FilterCardsLayout";
+import usePlaylistsFilters from "@/features/pages/playlists/hooks/usePlaylistsFilters";
+import useAppSelector from "@/store/hooks/useAppSelector";
+import { getUserPlaylists } from "@/api/playlists";
 
 export const getServerSideProps = async (context: any) => {
    const authData = getAuth(context.req);
@@ -40,23 +43,32 @@ type Props = {
    initialPlaylists: PlaylistWithItems[] | null;
 };
 
-export default function Playlists({ initialPlaylists: playlists }: Props) {
+export default function Playlists({ initialPlaylists }: Props) {
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
    const [allPlaylists, setAllPlaylists] = useState<PlaylistWithItems[]>(
-      playlists || [],
+      initialPlaylists || [],
    );
 
-   const [filteredPlaylists, setFilteredPlaylists] = useState<
-      PlaylistWithItems[]
-   >(playlists || []);
+   const { playlists } = useAppSelector((s) => s.playlists);
 
    useEffect(() => {
-      console.log("the initial playlists are:");
-      console.log(playlists);
+      const refresh = async () => {
+         const newPlaylists = await getUserPlaylists(true);
+         setAllPlaylists(newPlaylists);
+      };
+      refresh();
    }, [playlists]);
 
-   if (playlists === null)
+   const {
+      setInputValue,
+      setSelectedSort,
+      filteredPlaylists,
+      inputValue,
+      selectedSort,
+   } = usePlaylistsFilters(allPlaylists);
+
+   if (initialPlaylists === null)
       return (
          <div className="h-[100svh] w-full flex items-center justify-center">
             <PageHead title="Login first" />
@@ -68,7 +80,7 @@ export default function Playlists({ initialPlaylists: playlists }: Props) {
          <PageHead title="Playlists" />
 
          <div className="fixed top-14 xl:top-20 left-0 pr-4 lg:pr-32 z-20 w-full h-14 py-1 lg:py-0 xl:h-64 flex items-center justify-end pointer-events-none">
-            <CreatePlaylistButton setAllPlaylists={setAllPlaylists} />
+            <CreatePlaylistButton />
          </div>
 
          <FilterCardsLayout
@@ -77,12 +89,14 @@ export default function Playlists({ initialPlaylists: playlists }: Props) {
             title={"Playlists"}
             compactFilter={
                <CompactPlaylistsFilters
-                  allPlaylists={allPlaylists}
-                  setFilteredPlaylists={setFilteredPlaylists}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  selectedSort={selectedSort}
+                  setSelectedSort={setSelectedSort}
                />
             }
          >
-            {playlists.length === 0 ? (
+            {initialPlaylists.length === 0 ? (
                <NoListsMessage text="this is so empty... Create list to save movies and series" />
             ) : filteredPlaylists.length > 0 ? (
                <div

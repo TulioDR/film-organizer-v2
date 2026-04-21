@@ -5,7 +5,7 @@ const getBaseURL = () => {
       return `${window.location.origin}/api/public`;
    }
    // Fallback for server-side or if window isn't ready
-   return process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/public";
+   return `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:4000"}/api/public`;
 };
 
 const API_PUBLIC = axios.create({

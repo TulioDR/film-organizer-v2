@@ -10,12 +10,29 @@ export const deleteAllPlaylists = async (authorId: string) => {
    }
 };
 
+export const getUserPlaylists = async (isPreview: boolean = false) => {
+   try {
+      const { data } = await API.get("/", {
+         params: { preview: isPreview },
+      });
+      console.log("frontend data");
+      console.log(data);
+      return data;
+   } catch (error: any) {
+      const errorMessage =
+         error.response?.data?.error || "An unexpected error occurred";
+      return { data: null, error: errorMessage };
+   }
+};
+
 export const createPlaylist = async (newListData: any) => {
    try {
       const { data } = await API.post("/", newListData);
-      return data;
+      return { data };
    } catch (error: any) {
-      console.log(error);
+      const errorMessage =
+         error.response?.data?.error || "An unexpected error occurred";
+      return { data: null, error: errorMessage };
    }
 };
 
@@ -34,18 +51,6 @@ export const deletePlaylist = async (id: string) => {
       return data;
    } catch (error) {
       console.log(error);
-   }
-};
-
-export const getUserPlaylists = async (isPreview: boolean = false) => {
-   try {
-      const { data } = await API.get("/", {
-         params: { preview: isPreview },
-      });
-      return data;
-   } catch (error) {
-      console.error("Client-side fetch error:", error);
-      return [];
    }
 };
 

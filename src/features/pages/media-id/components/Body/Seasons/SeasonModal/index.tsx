@@ -23,7 +23,6 @@ export default function SeasonModal({ close, seriesID, seasonNumber }: Props) {
          try {
             const url = `/season/${seriesID}/${seasonNumber}`;
             const { data } = await API_PUBLIC.get(url);
-            console.log(data);
             setSeason(data);
          } catch (error) {
             console.log(error);

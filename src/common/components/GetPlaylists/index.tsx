@@ -12,13 +12,13 @@ export default function GetPlaylists({}: Props) {
    const { user, isLoaded } = useUser();
 
    useEffect(() => {
-      const getInitialPLaylists = async () => {
-         if (isLoaded && user) {
-            const data = await getUserPlaylists(false);
-            dispatch(playlistsActions.setPlaylists(data));
-         }
-      };
-      getInitialPLaylists();
+      // const getInitialPLaylists = async () => {
+      //    if (isLoaded && user) {
+      //       const data = await getUserPlaylists(false);
+      //       dispatch(playlistsActions.setPlaylists(data));
+      //    }
+      // };
+      // getInitialPLaylists();
    }, [isLoaded, dispatch, user]);
    return <></>;
 }

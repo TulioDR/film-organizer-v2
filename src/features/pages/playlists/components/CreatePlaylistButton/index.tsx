@@ -1,16 +1,13 @@
 import Responsive from "@/common/components/Responsive";
 import { SM_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
 import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
-import { PlaylistWithItems } from "@/common/models/Playlist";
 import CreateOrUpdateListModal from "@/features/modals/list-modals/create-or-update-playlist-modal/components/CreateOrUpdateListModal";
 import ModalPortal from "@/features/modals/modal-parts/components/ModalPortal";
 import { useState } from "react";
 
-type Props = {
-   setAllPlaylists: React.Dispatch<React.SetStateAction<PlaylistWithItems[]>>;
-};
+type Props = {};
 
-export default function CreatePlaylistButton({ setAllPlaylists }: Props) {
+export default function CreatePlaylistButton({}: Props) {
    const [isCreateListModalOpen, setIsCreateListModalOpen] = useState(false);
    const openCreateListModal = () => {
       setIsCreateListModalOpen(true);
@@ -41,10 +38,7 @@ export default function CreatePlaylistButton({ setAllPlaylists }: Props) {
             </Responsive>
          </button>
          <ModalPortal isOpen={isCreateListModalOpen}>
-            <CreateOrUpdateListModal
-               setAllPlaylists={setAllPlaylists}
-               close={closeCreateListModal}
-            />
+            <CreateOrUpdateListModal close={closeCreateListModal} />
          </ModalPortal>
       </>
    );

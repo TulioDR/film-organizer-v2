@@ -16,7 +16,6 @@ export default function useListsRefresh() {
       console.log("refresh lists");
       setTimeout(async () => {
          const lists: Playlist[] = await getUserPlaylists(false);
-         console.log(lists);
          dispatch(playlistsActions.setPlaylists(lists));
       }, 100);
    };

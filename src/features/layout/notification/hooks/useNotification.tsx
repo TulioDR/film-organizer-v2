@@ -20,7 +20,7 @@ export default function useNotification() {
    const showErrorNotification = (error: any) => {
       const message = getErrorMessage(error.code);
       const success = false;
-      setAndCloseNotification(message, success);
+      setAndCloseNotification(error, success);
    };
 
    const showSuccessNotification = (message: string) => {

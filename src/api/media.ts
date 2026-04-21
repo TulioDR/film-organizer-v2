@@ -76,12 +76,3 @@ export const deleteMedia = async (params: any) => {
       };
    }
 };
-
-export const deleteManyMedia = async (idsArray: any) => {
-   try {
-      const { data } = await API.delete("/deleteMany", { data: idsArray });
-      return data;
-   } catch (error) {
-      console.log(error);
-   }
-};

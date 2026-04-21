@@ -6,7 +6,7 @@ type Props = {};
 
 export default function Notification({}: Props) {
    const { notification, success } = useAppSelector(
-      (state) => state.notification
+      (state) => state.notification,
    );
 
    const { closeNotification } = useNotification();
@@ -19,7 +19,7 @@ export default function Notification({}: Props) {
                animate={{ y: 0, opacity: 1, scale: 1 }}
                exit={{ y: "100%", opacity: 0, scale: 0.9 }}
                transition={{ duration: 0.3 }}
-               className="fixed bottom-0 left-0 z-50 pl-10 pb-10"
+               className="fixed bottom-0 left-0 z-[1000] pl-10 pb-10"
             >
                <div
                   className={`rounded-xl px-4 py-3 text-white flex items-center gap-2 ${

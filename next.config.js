@@ -2,7 +2,7 @@
 const nextConfig = {
    reactStrictMode: false,
    // swcMinify: true,
-   allowedDevOrigins: ["192.168.0.105"],
+   allowedDevOrigins: ["192.168.0.105", "192.168.1.4"],
    images: {
       qualities: [75, 100],
       remotePatterns: [
