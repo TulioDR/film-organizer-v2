@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import PageHead from "@/common/components/PageHead";
 import { MediaDetailsModel } from "@/features/pages/media-id/models/MediaDetailsModel";
@@ -44,9 +44,6 @@ export default function MediaId({ media_type, media }: Props) {
    }, [media, removeBackground]);
    const lenis = useLenis();
 
-   const [hideUi, setHideUi] = useState<boolean>(false);
-   const toggleUi = () => setHideUi((prev) => !prev);
-
    const onExitComplete = () => {
       if (!lenis) return;
       lenis.scrollTo("top", { immediate: true });
@@ -55,7 +52,7 @@ export default function MediaId({ media_type, media }: Props) {
    return (
       <>
          <Responsive minWidth={XL_MEDIA_QUERY}>
-            <BackgroundViewButton hideUi={hideUi} onClick={toggleUi} />
+            <BackgroundViewButton />
          </Responsive>
 
          <AnimatePresence mode="wait" propagate onExitComplete={onExitComplete}>

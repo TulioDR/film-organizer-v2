@@ -22,7 +22,6 @@ export default function HeaderData({ media, mediaType }: Props) {
       media.release_dates?.results || media.content_ratings?.results;
    const RUNTIME = media.runtime;
    const SCORE = media.vote_average;
-   //400.000.000
    return (
       <motion.div
          variants={containerVariant}

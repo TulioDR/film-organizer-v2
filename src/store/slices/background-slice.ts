@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
    background: string | null;
+   hideUi: boolean;
 }
 
 const initialState: InitialState = {
    background: null,
+   hideUi: false,
 };
 
 const backgroundSlice = createSlice({
@@ -17,6 +19,15 @@ const backgroundSlice = createSlice({
       },
       removeBackground(state) {
          state.background = null;
+      },
+      showBackground(state) {
+         state.hideUi = true;
+      },
+      hideBackground(state) {
+         state.hideUi = false;
+      },
+      toggleBackground(state) {
+         state.hideUi = !state.hideUi;
       },
    },
 });

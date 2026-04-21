@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import useAppSelector from "@/store/hooks/useAppSelector";
 
 type Props = {
    top?: true;
@@ -14,10 +15,12 @@ export default function NavbarContainer({
    children,
    className = "",
 }: Props) {
+   const { hideUi } = useAppSelector((state) => state.background);
+
    return (
       <motion.div
          initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
+         animate={{ opacity: hideUi ? 0 : 1 }}
          exit={{ opacity: 0 }}
          transition={{ duration: 0.2 }}
          className={`w-full z-20 fixed left-0 pointer-events-auto

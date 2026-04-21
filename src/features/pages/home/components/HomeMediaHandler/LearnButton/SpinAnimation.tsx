@@ -32,6 +32,7 @@ export default function SpinAnimation({}: Props) {
          startSequence();
       };
       startSequence();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [isPresent]);
 
    return (
