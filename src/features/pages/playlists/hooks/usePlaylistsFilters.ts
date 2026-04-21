@@ -14,12 +14,13 @@ export default function usePlaylistsFilters(allPlaylists: PlaylistWithItems[]) {
    const [selectedSort, setSelectedSort] = useState<SelectOption>(
       SORT_PLAYLISTS_OPTIONS[3],
    );
-   const [filteredPlaylists, setFilteredPlaylists] = useState<
-      PlaylistWithItems[]
-   >(allPlaylists || []);
+   const [filteredPlaylists, setFilteredPlaylists] =
+      useState<PlaylistWithItems[]>(allPlaylists);
 
    useEffect(() => {
       if (!allPlaylists) return;
+      console.log("all playlists are:");
+      console.log(allPlaylists);
       let result = [...allPlaylists];
 
       if (inputValue) {

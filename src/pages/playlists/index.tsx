@@ -22,12 +22,12 @@ export const getServerSideProps = async (context: any) => {
    }
 
    try {
-      const playlists = await getAllPlaylists("withPreview", {
+      const { data } = await getAllPlaylists("withPreview", {
          headers: { Cookie: context.req.headers.cookie },
       });
       return {
          props: {
-            initialPlaylists: playlists,
+            initialPlaylists: data,
             userId,
          },
       };
@@ -43,10 +43,6 @@ type Props = {
 export default function Playlists({ initialPlaylists }: Props) {
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-   useEffect(() => {
-      console.log(initialPlaylists);
-   }, [initialPlaylists]);
-
    const [allPlaylists, setAllPlaylists] = useState<PlaylistWithItems[]>(
       initialPlaylists || [],
    );
@@ -55,8 +51,8 @@ export default function Playlists({ initialPlaylists }: Props) {
 
    useEffect(() => {
       const refresh = async () => {
-         const newPlaylists = await getAllPlaylists("withPreview");
-         setAllPlaylists(newPlaylists);
+         const { data } = await getAllPlaylists("withPreview");
+         setAllPlaylists(data);
       };
       refresh();
    }, [playlists]);

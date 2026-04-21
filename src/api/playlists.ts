@@ -15,7 +15,7 @@ export const getAllPlaylists = async (type?: "withPreview", config = {}) => {
          params: { preview: isPreview },
          ...config,
       });
-      return data;
+      return { data: data, error: null };
    } catch (error: any) {
       const errorMessage =
          error.response?.data?.error || "An unexpected error occurred";
