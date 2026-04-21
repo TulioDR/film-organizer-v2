@@ -1,6 +1,5 @@
-import { getUserPlaylists } from "@/api/playlists";
+import useListsRefresh from "@/common/hooks/useListsRefresh";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
-import { playlistsActions } from "@/store/slices/playlist-slice";
 import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
 
@@ -10,15 +9,9 @@ export default function GetPlaylists({}: Props) {
    const dispatch = useAppDispatch();
 
    const { user, isLoaded } = useUser();
-
+   const { refreshLists } = useListsRefresh();
    useEffect(() => {
-      // const getInitialPLaylists = async () => {
-      //    if (isLoaded && user) {
-      //       const data = await getUserPlaylists(false);
-      //       dispatch(playlistsActions.setPlaylists(data));
-      //    }
-      // };
-      // getInitialPLaylists();
+      refreshLists();
    }, [isLoaded, dispatch, user]);
    return <></>;
 }

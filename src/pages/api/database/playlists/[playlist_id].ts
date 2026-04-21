@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getAuth } from "@clerk/nextjs/server";
 import { createClerkSupabaseClient } from "@/lib/supabaseClient";
-import { fetchSinglePlaylistWithMedia } from "@/api/playlistsService";
 
 export default async function handler(
    req: NextApiRequest,
@@ -17,18 +16,26 @@ export default async function handler(
    }
 
    if (req.method === "GET") {
-      try {
-         // 2. Use the service instead of writing the query here
-         const data = await fetchSinglePlaylistWithMedia(
-            supabase,
-            playlist_id as string,
-            userId,
-         );
-         return res.status(200).json(data);
-      } catch (error: any) {
-         console.error("Fetch Error:", error);
-         return res.status(404).json({ error: "Playlist not found" });
-      }
+      const { data, error } = await supabase
+         .from("playlists")
+         .select(
+            `
+                  *,
+                  playlist_items (
+                     id,
+                     added_at,
+                     media_type,
+                     media:media_id (
+                        *
+                     )
+                  )
+               `,
+         )
+         .eq("id", playlist_id)
+         .eq("user_id", userId)
+         .single();
+      if (error) return res.status(400).json({ error: error.message });
+      return res.status(200).json(data);
    }
 
    if (req.method === "PATCH") {

@@ -1,5 +1,4 @@
-import { getPlaylistDetails } from "@/api/playlists";
-import { fetchSinglePlaylistWithMedia } from "@/api/playlistsService";
+import { getSinglePlaylistDetails } from "@/api/playlists";
 import FilterCardsLayout from "@/common/components/FilterCardsLayout";
 import PageHead from "@/common/components/PageHead";
 import { PlaylistDetails, PlaylistItems } from "@/common/models/Playlist";
@@ -7,7 +6,6 @@ import MediaCard from "@/features/media-card/components/MediaCard";
 import CardsGrid from "@/features/pages/media-type/components/CardsGrid";
 import CompactPlaylistDetailsFilter from "@/features/pages/playlist-id/components/CompactPlaylistDetailsFilter";
 import PlaylistDetailsDescription from "@/features/pages/playlist-id/components/PlaylistDetailsDescription";
-import { createClerkSupabaseClient } from "@/lib/supabaseClient";
 import { getAuth } from "@clerk/nextjs/server";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
@@ -20,17 +18,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return { redirect: { destination: "/sign-in", permanent: false } };
 
    try {
-      const supabase = createClerkSupabaseClient(authData);
-
-      const playlist = await fetchSinglePlaylistWithMedia(
-         supabase,
-         playlist_id,
-         authData.userId,
-      );
+      const playlist = await getSinglePlaylistDetails(playlist_id, {
+         headers: { Cookie: context.req.headers.cookie },
+      });
 
       return {
          props: {
-            initialPlaylist: JSON.parse(JSON.stringify(playlist)),
+            initialPlaylist: playlist,
          },
       };
    } catch (error) {
@@ -60,7 +54,7 @@ export default function PlaylistId({ initialPlaylist }: Props) {
    useEffect(() => {
       const refreshPlaylist = async () => {
          if (isBookmarkOpen) return;
-         const updatedData = await getPlaylistDetails(initialPlaylist.id);
+         const updatedData = await getSinglePlaylistDetails(initialPlaylist.id);
          setPlaylist(updatedData);
       };
       refreshPlaylist();

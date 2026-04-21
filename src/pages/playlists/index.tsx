@@ -8,12 +8,10 @@ import CreatePlaylistButton from "@/features/pages/playlists/components/CreatePl
 import { PlaylistWithItems } from "@/common/models/Playlist";
 import CompactPlaylistsFilters from "@/features/pages/playlists/components/CompactPlaylistsFilters";
 import { getAuth } from "@clerk/nextjs/server";
-import { createClerkSupabaseClient } from "@/lib/supabaseClient";
-import { fetchPlaylistsData } from "@/api/playlistsService";
 import FilterCardsLayout from "@/common/components/FilterCardsLayout";
 import usePlaylistsFilters from "@/features/pages/playlists/hooks/usePlaylistsFilters";
 import useAppSelector from "@/store/hooks/useAppSelector";
-import { getUserPlaylists } from "@/api/playlists";
+import { getAllPlaylists } from "@/api/playlists";
 
 export const getServerSideProps = async (context: any) => {
    const authData = getAuth(context.req);
@@ -24,13 +22,12 @@ export const getServerSideProps = async (context: any) => {
    }
 
    try {
-      const supabase = createClerkSupabaseClient(authData);
-
-      const playlists = await fetchPlaylistsData(supabase, userId, true);
-
+      const playlists = await getAllPlaylists("withPreview", {
+         headers: { Cookie: context.req.headers.cookie },
+      });
       return {
          props: {
-            initialPlaylists: JSON.parse(JSON.stringify(playlists || [])),
+            initialPlaylists: playlists,
             userId,
          },
       };
@@ -46,15 +43,19 @@ type Props = {
 export default function Playlists({ initialPlaylists }: Props) {
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+   useEffect(() => {
+      console.log(initialPlaylists);
+   }, [initialPlaylists]);
+
    const [allPlaylists, setAllPlaylists] = useState<PlaylistWithItems[]>(
       initialPlaylists || [],
    );
 
-   const { playlists } = useAppSelector((s) => s.playlists);
+   const { playlists } = useAppSelector((state) => state.playlists);
 
    useEffect(() => {
       const refresh = async () => {
-         const newPlaylists = await getUserPlaylists(true);
+         const newPlaylists = await getAllPlaylists("withPreview");
          setAllPlaylists(newPlaylists);
       };
       refresh();

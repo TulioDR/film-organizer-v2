@@ -19,7 +19,7 @@ export default async function handler(
 
       let query = supabase.from("playlists").select("*").eq("user_id", userId);
 
-      if (preview === "true") {
+      if (preview) {
          query = supabase
             .from("playlists")
             .select(
@@ -37,6 +37,7 @@ export default async function handler(
       }
 
       const { data, error } = await query;
+
       if (error) return res.status(400).json({ error: error.message });
       return res.status(200).json(data);
    }
@@ -69,32 +70,6 @@ export default async function handler(
 
          if (error) return res.status(400).json({ error: error.message });
          return res.status(201).json(data);
-      } catch (error) {
-         return res.status(500).json({ error: "Internal Server Error" });
-      }
-   }
-
-   if (req.method === "DELETE") {
-      try {
-         const { id } = req.body;
-
-         if (!id) {
-            return res
-               .status(400)
-               .json({ error: "Playlist ID is required for deletion." });
-         }
-
-         const { error } = await supabase
-            .from("playlists")
-            .delete()
-            .eq("id", id)
-            .eq("user_id", userId);
-
-         if (error) return res.status(400).json({ error: error.message });
-
-         return res
-            .status(200)
-            .json({ message: "Playlist deleted successfully" });
       } catch (error) {
          return res.status(500).json({ error: "Internal Server Error" });
       }

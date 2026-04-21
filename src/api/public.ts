@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const getBaseURL = () => {
-   if (typeof window !== "undefined") {
+   if (typeof window !== "undefined")
       return `${window.location.origin}/api/public`;
-   }
+
    // Fallback for server-side or if window isn't ready
    return `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:4000"}/api/public`;
 };
