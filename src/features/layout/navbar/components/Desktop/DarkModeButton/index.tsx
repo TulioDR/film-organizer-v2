@@ -15,18 +15,23 @@ export default function DarkModeButton({}: Props) {
 
    const { isDarkMode } = useAppSelector((state) => state.theme);
 
-   // const [darkMode, setDarkMode] = useState(
-   //    localStorage.getItem("theme") === "dark",
-   // );
+   useEffect(() => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+         dispatch(themeActions.startDarkMode());
+      } else if (savedTheme === "light") {
+         dispatch(themeActions.stopDarkMode());
+      }
+   }, [dispatch]);
 
    useEffect(() => {
       const root = window.document.documentElement;
       if (isDarkMode) {
          root.classList.add("dark");
-         // localStorage.setItem("theme", "dark");
+         localStorage.setItem("theme", "dark");
       } else {
          root.classList.remove("dark");
-         // localStorage.setItem("theme", "light");
+         localStorage.setItem("theme", "light");
       }
    }, [isDarkMode]);
 

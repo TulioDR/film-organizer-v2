@@ -23,6 +23,12 @@ const themeSlice = createSlice({
       toggleDarkMode(state) {
          state.isDarkMode = !state.isDarkMode;
       },
+      startDarkMode(state) {
+         state.isDarkMode = true;
+      },
+      stopDarkMode(state) {
+         state.isDarkMode = false;
+      },
    },
 });
 export default themeSlice;
