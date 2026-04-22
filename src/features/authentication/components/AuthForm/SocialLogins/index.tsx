@@ -3,18 +3,11 @@ import googleLogo from "@/data/images/logos/google.png";
 import githubLogo from "@/data/images/logos/github.png";
 
 import { useSignIn } from "@clerk/nextjs/legacy";
-import { useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
 
 type Props = {};
 
 export default function SocialLogins({}: Props) {
    const { signIn, isLoaded } = useSignIn();
-
-   const user = useUser();
-   useEffect(() => {
-      console.log(user.user);
-   }, [user.user]);
 
    const handleAuth = async (strategy: "oauth_google" | "oauth_github") => {
       try {
@@ -22,7 +15,7 @@ export default function SocialLogins({}: Props) {
 
          await signIn.authenticateWithRedirect({
             strategy: strategy,
-            redirectUrl: "/auth/sso-callback",
+            redirectUrl: "/",
             redirectUrlComplete: "/",
          });
       } catch (error) {
