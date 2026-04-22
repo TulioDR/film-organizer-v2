@@ -1,5 +1,23 @@
-import { AuthenticateWithRedirectCallback } from "@clerk/nextjs";
+import { useClerk } from "@clerk/nextjs";
+import { useEffect } from "react";
 
 export default function SSOCallback() {
-   return <AuthenticateWithRedirectCallback />;
+   const { handleRedirectCallback } = useClerk();
+
+   useEffect(() => {
+      const handleCallback = async () => {
+         await handleRedirectCallback({
+            signInFallbackRedirectUrl: "/",
+            signUpFallbackRedirectUrl: "/",
+         });
+      };
+
+      handleCallback();
+   }, [handleRedirectCallback]);
+
+   return (
+      <div className="h-[100svh] w-full flex items-center justify-center">
+         <div>Loading...</div>
+      </div>
+   );
 }

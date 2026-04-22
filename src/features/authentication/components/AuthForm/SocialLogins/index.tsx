@@ -15,7 +15,7 @@ export default function SocialLogins({}: Props) {
 
          await signIn.authenticateWithRedirect({
             strategy: strategy,
-            redirectUrl: "/",
+            redirectUrl: "/auth/sso-callback",
             redirectUrlComplete: "/",
          });
       } catch (error) {
