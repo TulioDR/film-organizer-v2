@@ -15,10 +15,9 @@ import Notification from "@/features/layout/notification/components/Notification
 import GetPlaylists from "@/common/components/GetPlaylists";
 
 function App({ Component, ...rest }: AppProps) {
-   const router = useRouter();
-
    const { store, props } = wrapper.useWrappedStore(rest);
-   const { pageProps } = props;
+   const { pageProps } = props || {};
+   const router = useRouter();
 
    useEffect(() => {
       if ("scrollRestoration" in history) {

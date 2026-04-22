@@ -1,21 +1,19 @@
 import axios from "axios";
 
-const API_PUBLIC = axios.create();
-
-API_PUBLIC.interceptors.request.use((config) => {
-   let baseURL = "";
-
+const getBaseURL = () => {
+   // 1. If we are in the browser, always use a relative path
+   // This is the safest way for client-side calls
    if (typeof window !== "undefined") {
-      // On the browser, use the current domain
-      baseURL = `${window.location.origin}/api/public`;
-   } else {
-      // On the server (Vercel build/SSR), use the Env variable
-      // Ensure this includes https:// in your Vercel settings!
-      baseURL = `${process.env.NEXT_PUBLIC_SITE_URL}/api/public`;
+      return "/api/public";
    }
 
-   config.baseURL = baseURL;
-   return config;
+   // 2. If we are on the server (SSR/Build time)
+   // Use the Vercel URL in production, or localhost in dev
+   return `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/public`;
+};
+
+const API_PUBLIC = axios.create({
+   baseURL: getBaseURL(),
 });
 
 export default API_PUBLIC;
