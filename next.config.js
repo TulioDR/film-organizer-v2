@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   reactStrictMode: false,
-   // swcMinify: true,
+   reactStrictMode: true,
    allowedDevOrigins: ["192.168.0.105", "192.168.0.101"],
    images: {
       qualities: [75, 100],

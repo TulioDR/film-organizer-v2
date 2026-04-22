@@ -22,6 +22,8 @@ export default function useSearch() {
       const timeoutId = setTimeout(async () => {
          const url = `/${mediaType}/results/${inputValue}/1`;
          const { data } = await axios.get("/api/public" + url);
+         console.log("data");
+         console.log(data);
          dispatch({ type: "SET_RESULTS", payload: data.results });
       }, 300);
       return () => clearTimeout(timeoutId);

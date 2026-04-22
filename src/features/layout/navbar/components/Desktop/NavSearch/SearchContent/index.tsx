@@ -14,8 +14,6 @@ type Props = {
 };
 
 export default function SearchContent({ state, dispatch }: Props) {
-   const { inputValue, results } = state;
-
    useEffect(() => {
       const handleEscape = (e: KeyboardEvent) => {
          if (e.key === "Escape") dispatch({ type: "CLOSE_SEARCH" });
@@ -28,14 +26,19 @@ export default function SearchContent({ state, dispatch }: Props) {
 
    return (
       <SearchContentContainer>
+         <></>
          <SearchType state={state} dispatch={dispatch} />
          <div className="w-full flex-1 overflow-hidden">
-            {inputValue.length <= 1 ? (
+            {state.inputValue.length <= 1 ? (
                <SearchMessage message="Type at least 2 characters to see results" />
-            ) : !results ? (
+            ) : state.results === null ? (
                <SearchMessage message="Loading..." />
-            ) : results.length > 0 ? (
-               <SearchResults state={state} dispatch={dispatch} />
+            ) : state.results.length > 0 ? (
+               <SearchResults
+                  state={state}
+                  dispatch={dispatch}
+                  results={state.results}
+               />
             ) : (
                <SearchMessage message="The search did not return any results" />
             )}

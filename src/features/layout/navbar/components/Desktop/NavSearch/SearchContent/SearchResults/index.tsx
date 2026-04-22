@@ -10,10 +10,10 @@ import { useRouter } from "next/router";
 type Props = {
    state: State;
    dispatch: React.Dispatch<Action>;
+   results: any[];
 };
 
-export default function SearchResults({ state, dispatch }: Props) {
-   const { results, mediaType, currentIndex } = state;
+export default function SearchResults({ state, dispatch, results }: Props) {
    const router = useRouter();
 
    const lenisRef = useRef<LenisRef>(null);
@@ -27,29 +27,29 @@ export default function SearchResults({ state, dispatch }: Props) {
          if (!action) return;
 
          if (action === "ENTER") {
-            if (currentIndex === null) return;
-            const id = results[currentIndex].id;
-            router.push(`/${mediaType}/${id}`);
+            if (state.currentIndex === null) return;
+            const id = results[state.currentIndex].id;
+            router.push(`/${state.mediaType}/${id}`);
          }
 
-         if (currentIndex !== null) e.preventDefault();
+         if (state.currentIndex !== null) e.preventDefault();
 
          const styles = window.getComputedStyle(gridRef.current);
 
          const gridTemplate = styles.getPropertyValue("grid-template-columns");
          const columns = gridTemplate.split(" ").filter((v) => v !== "").length;
          const newI = calculateNewIndex(
-            currentIndex,
+            state.currentIndex,
             action,
             results.length,
             columns,
          );
-         if (newI !== null && newI !== currentIndex) {
+         if (newI !== null && newI !== state.currentIndex) {
             scrollItemIntoView(newI, lenisRef, results);
          }
          dispatch({ type: "SET_CURRENT_INDEX", payload: newI });
       },
-      [results, dispatch, mediaType, router, currentIndex],
+      [results, dispatch, state.mediaType, router, state.currentIndex],
    );
 
    useEffect(() => {
@@ -70,12 +70,12 @@ export default function SearchResults({ state, dispatch }: Props) {
          className="w-full h-full overflow-auto"
       >
          <div ref={gridRef} className="w-full h-max grid xl:grid-cols-2 p-2">
-            {results!.map((media, index) => (
+            {results.map((media, index) => (
                <ResultCard
-                  key={media.id}
+                  key={media.id || index}
                   media={media}
-                  href={`/${mediaType}/${media.id}`}
-                  isSelected={index === currentIndex}
+                  href={`/${state.mediaType}/${media.id}`}
+                  isSelected={index === state.currentIndex}
                   onMouseEnter={() => changeIndex(index)}
                />
             ))}
