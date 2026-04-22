@@ -5,9 +5,9 @@ const searchbarReducer = (state: State, action: Action): State => {
       case "SET_INPUT_VALUE":
          return { ...state, inputValue: action.payload };
       case "START_LOADING":
-         return { ...state, results: null, currentIndex: null };
+         return { ...state, results: [], isLoading: true, currentIndex: null };
       case "SET_RESULTS":
-         return { ...state, results: action.payload };
+         return { ...state, results: action.payload, isLoading: false };
       case "CHANGE_MEDIA_TYPE":
          return { ...state, mediaType: action.payload };
       case "SET_CURRENT_INDEX":

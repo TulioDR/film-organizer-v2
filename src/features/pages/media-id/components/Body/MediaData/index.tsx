@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function MediaData({ media, crew, isMovie }: Props) {
-   const separateArray = (array: any[]): JSX.Element[] => {
+   const separateArray = (array: any[]): any => {
       return array.map((item, index) => (
          <span key={item.iso_639_1 || item.id} className="mr-2">
             {item.english_name || item.name}

@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "lenis/dist/lenis.css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 
@@ -7,12 +8,12 @@ import { Provider } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Fragment, useEffect } from "react";
-import { ReactLenis } from "@studio-freight/react-lenis";
 import Background from "@/features/layout/background/components/Background";
 import Navbar from "@/features/layout/navbar/components/Navbar";
 import PageLoader from "@/features/layout/loader/components/PageLoader";
 import Notification from "@/features/layout/notification/components/Notification";
 import GetPlaylists from "@/common/components/GetPlaylists";
+import { useCustomLenis } from "@/common/hooks/useCustomLenis";
 
 function App({ Component, ...rest }: AppProps) {
    const { store, props } = wrapper.useWrappedStore(rest);
@@ -32,10 +33,12 @@ function App({ Component, ...rest }: AppProps) {
       });
    }, [router]);
 
+   useCustomLenis(true);
+
    return (
-      <ClerkProvider {...pageProps}>
-         <Provider store={store}>
-            <ReactLenis root>
+      <>
+         <ClerkProvider>
+            <Provider store={store}>
                <GetPlaylists />
                <Navbar />
                <Background />
@@ -46,9 +49,9 @@ function App({ Component, ...rest }: AppProps) {
                      <Component {...pageProps} />
                   </Fragment>
                </AnimatePresence>
-            </ReactLenis>
-         </Provider>
-      </ClerkProvider>
+            </Provider>
+         </ClerkProvider>
+      </>
    );
 }
 

@@ -2,8 +2,9 @@ export interface State {
    isSearchOpen: boolean;
    inputValue: string;
    mediaType: "movie" | "tv";
-   results: any[] | null;
+   results: any[];
    currentIndex: number | null;
+   isLoading: boolean;
 }
 
 export type Action =

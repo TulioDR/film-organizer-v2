@@ -1,7 +1,7 @@
-import ReactLenis from "lenis/react";
 import SearchPlaylistFilter from "./SearchPlaylistFilter";
 import SortByPlaylistsFilter from "./SortByPlaylistsFilter";
 import { SelectOption } from "@/features/pages/media-type/models/Filters";
+import { useCustomLenis } from "@/common/hooks/useCustomLenis";
 
 type Props = {
    inputValue: string;
@@ -22,9 +22,9 @@ export default function CompactPlaylistsFilters({
       { value: "date_desc", label: "Newest First" },
       { value: "date_asc", label: "Oldest First" },
    ];
-
+   const { scrollWrapperRef } = useCustomLenis();
    return (
-      <ReactLenis className="h-full w-full overflow-y-auto">
+      <div ref={scrollWrapperRef} className="h-full w-full overflow-y-auto">
          <div className="grid gap-4 p-4 min-h-max">
             <SearchPlaylistFilter
                inputValue={inputValue}
@@ -36,6 +36,6 @@ export default function CompactPlaylistsFilters({
                setSelectedSort={setSelectedSort}
             />
          </div>
-      </ReactLenis>
+      </div>
    );
 }

@@ -1,10 +1,9 @@
-import ReactLenis from "lenis/react";
-
 import { useEffect, useState } from "react";
 import { SelectOption } from "@/features/pages/media-type/models/Filters";
 import SortByMediaFilter from "./SortByMediaFilter";
 import DisplayMediaFilter from "./DisplayMediaFilter";
 import { PlaylistItems } from "@/common/models/Playlist";
+import { useCustomLenis } from "@/common/hooks/useCustomLenis";
 
 type Props = {
    allMedia: PlaylistItems[];
@@ -75,8 +74,10 @@ export default function CompactPlaylistDetailsFilter({
       setFilteredMedia(result);
    }, [allMedia, selectedSort.value, displayMedia, setFilteredMedia]);
 
+   const { scrollWrapperRef } = useCustomLenis();
+
    return (
-      <ReactLenis className="h-full w-full overflow-y-auto">
+      <div ref={scrollWrapperRef} className="h-full w-full overflow-y-auto">
          <div className="grid gap-4 p-4 min-h-max">
             <DisplayMediaFilter
                displayMedia={displayMedia}
@@ -88,6 +89,6 @@ export default function CompactPlaylistDetailsFilter({
                setSelectedSort={setSelectedSort}
             />
          </div>
-      </ReactLenis>
+      </div>
    );
 }

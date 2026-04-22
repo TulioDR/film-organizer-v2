@@ -9,9 +9,9 @@ import Header from "@/features/pages/media-id/components/Header";
 import Body from "@/features/pages/media-id/components/Body";
 import { AnimatePresence } from "framer-motion";
 import useBackground from "@/features/layout/background/hooks/useBackground";
-import { useLenis } from "lenis/react";
 import Responsive from "@/common/components/Responsive";
 import { XL_MEDIA_QUERY } from "@/common/constants/MEDIA_QUERIES";
+import { useCustomLenisInstance } from "@/common/hooks/useCustomLenisInstance";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
    const { media_type, media_id } = context.query!;
@@ -42,11 +42,11 @@ export default function MediaId({ media_type, media }: Props) {
          removeBackground();
       };
    }, [media, removeBackground]);
-   const lenis = useLenis();
+   const { instance } = useCustomLenisInstance();
 
    const onExitComplete = () => {
-      if (!lenis) return;
-      lenis.scrollTo("top", { immediate: true });
+      if (!instance) return;
+      instance.scrollTo("top", { immediate: true });
    };
 
    return (

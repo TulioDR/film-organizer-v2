@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { MediaDetailsModel } from "../models/MediaDetailsModel";
 import useBackground from "@/features/layout/background/hooks/useBackground";
-import { useLenis } from "lenis/react";
 import useAppSelector from "@/store/hooks/useAppSelector";
 import useAppDispatch from "@/store/hooks/useAppDispatch";
 import { backgroundActions } from "@/store/slices/background-slice";
+import { useCustomLenisInstance } from "@/common/hooks/useCustomLenisInstance";
 
 type Props = {
    children: React.ReactNode;
@@ -20,12 +20,12 @@ export default function MediaIdContainer({ children, media }: Props) {
       changeBackground(media.backdrop_path);
    }, [media.backdrop_path, changeBackground]);
 
-   const lenis = useLenis();
+   const { instance } = useCustomLenisInstance();
    useEffect(() => {
-      if (!lenis) return;
-      lenis.scrollTo("top", { immediate: true });
+      if (!instance) return;
+      instance.scrollTo("top", { immediate: true });
       return () => {};
-   }, [lenis]);
+   }, [instance]);
 
    const dispatch = useAppDispatch();
    useEffect(() => {

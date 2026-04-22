@@ -1,6 +1,6 @@
+import { useCustomLenisInstance } from "@/common/hooks/useCustomLenisInstance";
 import MainFilter from "@/features/mainFilter/components/MainFilter";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLenis } from "lenis/react";
 
 type Props = {
    title: string;
@@ -21,10 +21,10 @@ export default function FilterCardsLayout({
    setIsOpen,
    innerKey,
 }: Props) {
-   const lenis = useLenis();
+   const { instance } = useCustomLenisInstance();
    const onExitComplete = () => {
-      if (!lenis) return;
-      lenis.scrollTo("top", { immediate: true });
+      if (!instance) return;
+      instance.scrollTo("top", { immediate: true });
    };
 
    return (

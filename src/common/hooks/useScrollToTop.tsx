@@ -1,11 +1,10 @@
-import { useLenis } from "lenis/react";
 import { useEffect } from "react";
+import { useCustomLenisInstance } from "./useCustomLenisInstance";
 
 export default function useScrollToTop() {
-   const lenis = useLenis();
-
+   const { instance } = useCustomLenisInstance();
    useEffect(() => {
-      if (!lenis) return;
-      lenis.scrollTo("top", { immediate: true });
-   }, [lenis]);
+      if (!instance) return;
+      instance.scrollTo("top", { immediate: true });
+   }, [instance]);
 }

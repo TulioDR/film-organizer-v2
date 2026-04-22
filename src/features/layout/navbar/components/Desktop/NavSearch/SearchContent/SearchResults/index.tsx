@@ -1,4 +1,3 @@
-import ReactLenis, { LenisRef } from "lenis/react";
 import React, { useCallback, useEffect, useRef } from "react";
 import ResultCard from "./ResultCard";
 import { Action, State } from "@/features/layout/navbar/models/ReducerModels";
@@ -6,6 +5,7 @@ import getActionKey from "@/features/layout/navbar/utils/getActionKey";
 import calculateNewIndex from "@/features/layout/navbar/utils/calculateResultIndex";
 import scrollItemIntoView from "@/features/layout/navbar/utils/scrollItemIntoView";
 import { useRouter } from "next/router";
+import { useCustomLenis } from "@/common/hooks/useCustomLenis";
 
 type Props = {
    state: State;
@@ -15,14 +15,12 @@ type Props = {
 
 export default function SearchResults({ state, dispatch, results }: Props) {
    const router = useRouter();
-
-   const lenisRef = useRef<LenisRef>(null);
+   const { scrollWrapperRef, instance } = useCustomLenis();
    const gridRef = useRef<HTMLDivElement>(null);
 
    const handleKey = useCallback(
       (e: KeyboardEvent) => {
-         if (!gridRef.current) return;
-         if (!results) return;
+         if (!gridRef.current || !results || !instance) return;
          const action = getActionKey(e.key);
          if (!action) return;
 
@@ -45,8 +43,9 @@ export default function SearchResults({ state, dispatch, results }: Props) {
             columns,
          );
          if (newI !== null && newI !== state.currentIndex) {
-            scrollItemIntoView(newI, lenisRef, results);
+            scrollItemIntoView(newI, instance, results);
          }
+
          dispatch({ type: "SET_CURRENT_INDEX", payload: newI });
       },
       [results, dispatch, state.mediaType, router, state.currentIndex],
@@ -64,8 +63,8 @@ export default function SearchResults({ state, dispatch, results }: Props) {
    };
 
    return (
-      <ReactLenis
-         ref={lenisRef}
+      <div
+         ref={scrollWrapperRef}
          style={{ overscrollBehavior: "contain" }}
          className="w-full h-full overflow-auto"
       >
@@ -80,6 +79,6 @@ export default function SearchResults({ state, dispatch, results }: Props) {
                />
             ))}
          </div>
-      </ReactLenis>
+      </div>
    );
 }

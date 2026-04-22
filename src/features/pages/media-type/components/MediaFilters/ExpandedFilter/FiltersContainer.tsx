@@ -1,4 +1,4 @@
-import ReactLenis from "lenis/react";
+import { useCustomLenis } from "@/common/hooks/useCustomLenis";
 import React from "react";
 
 type Props = {
@@ -6,11 +6,15 @@ type Props = {
 };
 
 export default function FiltersContainer({ children }: Props) {
+   const { scrollWrapperRef } = useCustomLenis();
    return (
       <div className="flex-1 w-full overflow-hidden">
-         <ReactLenis className="w-full h-full overflow-y-scroll">
+         <div
+            ref={scrollWrapperRef}
+            className="w-full h-full overflow-y-scroll"
+         >
             <div className="grid gap-4 p-4 w-full">{children}</div>
-         </ReactLenis>
+         </div>
       </div>
    );
 }

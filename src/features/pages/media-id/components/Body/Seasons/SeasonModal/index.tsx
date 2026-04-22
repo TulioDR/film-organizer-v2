@@ -6,8 +6,8 @@ import SeasonSubtitle from "./SeasonSubtitle";
 import SeasonLoadingAnimation from "./SeasonLoadingAnimation";
 import SeasonModalContainer from "./SeasonModalContainer";
 import API_PUBLIC from "@/api/public";
-import ReactLenis from "lenis/react";
 import SeasonModalHeader from "./SeasonModalHeader";
+import { useCustomLenis } from "@/common/hooks/useCustomLenis";
 
 type Props = {
    close: () => void;
@@ -31,10 +31,12 @@ export default function SeasonModal({ close, seriesID, seasonNumber }: Props) {
       getSeasonData();
    }, [seriesID, seasonNumber]);
 
+   const { scrollWrapperRef } = useCustomLenis();
+
    return (
       <SeasonModalContainer close={close}>
          <CloseSeasonButton onClick={close} />
-         <ReactLenis className="w-full h-full overflow-y-auto">
+         <div ref={scrollWrapperRef} className="w-full h-full overflow-y-auto">
             <div className="w-full p-4 xl:p-8 relative">
                {season ? (
                   <>
@@ -52,7 +54,7 @@ export default function SeasonModal({ close, seriesID, seasonNumber }: Props) {
                   <SeasonLoadingAnimation />
                )}
             </div>
-         </ReactLenis>
+         </div>
       </SeasonModalContainer>
    );
 }

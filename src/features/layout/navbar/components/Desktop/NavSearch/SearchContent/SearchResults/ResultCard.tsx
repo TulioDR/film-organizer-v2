@@ -15,10 +15,10 @@ export default function ResultCard({
    isSelected,
    media,
 }: Props) {
-   const getDate = (date?: string): string => {
-      if (date) return date.substring(0, 4);
-      return "N/A";
-   };
+   // const getDate = (date?: string): string => {
+   //    if (date) return date.substring(0, 4);
+   //    return "N/A";
+   // };
    return (
       <Link href={href}>
          <motion.li
@@ -43,9 +43,9 @@ export default function ResultCard({
                <div className="text-text-1 text-xs sm:text-sm tracking-wider font-medium">
                   {media.title || media.name}
                </div>
-               <div className="text-text-2 text-xs tracking-wide">
+               {/* <div className="text-text-2 text-xs tracking-wide">
                   {getDate(media.release_date || media.first_air_date)}
-               </div>
+               </div> */}
             </div>
          </motion.li>
       </Link>

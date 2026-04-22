@@ -24,14 +24,17 @@ export default function SearchContent({ state, dispatch }: Props) {
       };
    }, [dispatch]);
 
+   useEffect(() => {
+      console.log(state.results);
+   }, [state.results]);
+
    return (
       <SearchContentContainer>
-         <></>
          <SearchType state={state} dispatch={dispatch} />
          <div className="w-full flex-1 overflow-hidden">
             {state.inputValue.length <= 1 ? (
                <SearchMessage message="Type at least 2 characters to see results" />
-            ) : state.results === null ? (
+            ) : state.isLoading ? (
                <SearchMessage message="Loading..." />
             ) : state.results.length > 0 ? (
                <SearchResults

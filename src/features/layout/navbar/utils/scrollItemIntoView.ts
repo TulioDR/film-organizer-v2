@@ -1,18 +1,16 @@
-import { LenisRef } from "lenis/react";
-import { RefObject } from "react";
+import Lenis from "lenis";
 
 const scrollItemIntoView = (
    index: number,
-   lenisRef: RefObject<LenisRef | null>,
+   lenis: Lenis | null, // Pass the direct instance here
    results: any[],
 ) => {
-   const lenis = lenisRef.current?.lenis;
-   if (!lenis) return;
+   if (!lenis || !results) return;
 
-   if (!results) return;
    const currentMedia = results[index];
    if (!currentMedia) return;
 
+   // Ensure this ID matches the id prop on your ResultCard
    const itemCard = document.getElementById(`sb-item-${currentMedia.id}`);
    if (!itemCard) return;
 
