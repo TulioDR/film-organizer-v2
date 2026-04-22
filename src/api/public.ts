@@ -1,15 +1,21 @@
 import axios from "axios";
 
-const getBaseURL = () => {
-   if (typeof window !== "undefined")
-      return `${window.location.origin}/api/public`;
+const API_PUBLIC = axios.create();
 
-   // Fallback for server-side or if window isn't ready
-   return `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:4000"}/api/public`;
-};
+API_PUBLIC.interceptors.request.use((config) => {
+   let baseURL = "";
 
-const API_PUBLIC = axios.create({
-   baseURL: getBaseURL(),
+   if (typeof window !== "undefined") {
+      // On the browser, use the current domain
+      baseURL = `${window.location.origin}/api/public`;
+   } else {
+      // On the server (Vercel build/SSR), use the Env variable
+      // Ensure this includes https:// in your Vercel settings!
+      baseURL = `${process.env.NEXT_PUBLIC_SITE_URL}/api/public`;
+   }
+
+   config.baseURL = baseURL;
+   return config;
 });
 
 export default API_PUBLIC;
