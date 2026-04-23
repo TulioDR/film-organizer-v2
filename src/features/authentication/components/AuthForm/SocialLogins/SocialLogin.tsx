@@ -1,3 +1,4 @@
+import { STANDARD_RADIUS } from "@/common/constants/STANDARD_RADIUS";
 import Image, { StaticImageData } from "next/image";
 
 type Props = {
@@ -9,18 +10,16 @@ type Props = {
 export default function SocialLogin({ onClick, logo, provider }: Props) {
    return (
       <button
+         style={{ borderRadius: STANDARD_RADIUS }}
          type="button"
          onClick={onClick}
-         className={`rounded-full h-11 aspect-square p-2 relative group bg-white`}
+         className={`w-full h-12 flex justify-center items-center p-3 gap-2 group bg-white`}
       >
-         <Image src={logo} alt={provider} className="h-full" />
-         <div
-            className={`absolute right-1/2 translate-x-1/2 top-full translate-y-1 text-xs rounded-full px-3 py-1 scale-0 group-hover:scale-100 duration-200 bg-light-2 text-dark-1 z-50`}
-         >
-            <div className="relative capitalize font-medium">
-               {provider}
-               <div className="absolute right-1/2 translate-x-1/2 bottom-full w-2 h-2 rotate-45 bg-light-2"></div>
-            </div>
+         <div className="h-full aspect-square relative">
+            <Image src={logo} alt={provider} className="h-full" />
+         </div>
+         <div className="text-base tracking-widest font-medium text-black uppercase">
+            {provider}
          </div>
       </button>
    );

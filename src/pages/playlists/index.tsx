@@ -12,13 +12,14 @@ import FilterCardsLayout from "@/common/components/FilterCardsLayout";
 import usePlaylistsFilters from "@/features/pages/playlists/hooks/usePlaylistsFilters";
 import useAppSelector from "@/store/hooks/useAppSelector";
 import { getAllPlaylists } from "@/api/playlists";
+import { useUser } from "@clerk/nextjs";
 
 export const getServerSideProps = async (context: any) => {
    const authData = getAuth(context.req);
    const userId = authData.userId;
 
    if (!userId) {
-      return { props: { initialPlaylists: [], userId: null } };
+      return { props: { initialPlaylists: [] } };
    }
 
    try {
@@ -26,27 +27,24 @@ export const getServerSideProps = async (context: any) => {
          headers: { Cookie: context.req.headers.cookie },
       });
       return {
-         props: {
-            initialPlaylists: data,
-            userId,
-         },
+         props: { initialPlaylists: data },
       };
    } catch (error) {
       console.error("Direct Fetch Error:", error);
-      return { props: { initialPlaylists: [], userId } };
+      return { props: { initialPlaylists: [] } };
    }
 };
 type Props = {
    initialPlaylists: PlaylistWithItems[];
-   userId: string | null;
 };
 
-export default function Playlists({ initialPlaylists, userId }: Props) {
+export default function Playlists({ initialPlaylists }: Props) {
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-   const [allPlaylists, setAllPlaylists] = useState<PlaylistWithItems[]>(
-      initialPlaylists || [],
-   );
+   const { user, isLoaded } = useUser();
+
+   const [allPlaylists, setAllPlaylists] =
+      useState<PlaylistWithItems[]>(initialPlaylists);
 
    const { playlists } = useAppSelector((state) => state.playlists);
 
@@ -66,7 +64,16 @@ export default function Playlists({ initialPlaylists, userId }: Props) {
       selectedSort,
    } = usePlaylistsFilters(allPlaylists);
 
-   if (!userId)
+   if (!isLoaded)
+      return (
+         <div className="h-[100svh] w-full flex items-center justify-center">
+            <PageHead title="Loading" />
+            <div className="text-black dark:text-white text-2xl font-medium">
+               Loading...
+            </div>
+         </div>
+      );
+   if (!user)
       return (
          <div className="h-[100svh] w-full flex items-center justify-center">
             <PageHead title="Login first" />

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useSignIn } from "@clerk/nextjs";
 
 export default function useLogin() {
-   const { signIn, errors } = useSignIn();
+   const { signIn } = useSignIn();
    const router = useRouter();
    const handleLogin = async (values: any) => {
       const { email, password } = values;
@@ -19,8 +19,9 @@ export default function useLogin() {
             if (destination) router.push(destination);
             else router.push("/");
          }
-      } catch (err) {
-         console.error(errors);
+      } catch (err: any) {
+         console.error("Sign-up attempt not complete:", signIn);
+         console.error(JSON.stringify(err, null, 2));
       }
    };
 

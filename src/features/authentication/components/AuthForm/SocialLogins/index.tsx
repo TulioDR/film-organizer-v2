@@ -13,8 +13,8 @@ export default function SocialLogins({}: Props) {
 
          await signIn.authenticateWithRedirect({
             strategy: "oauth_google",
-            redirectUrl: "/sso-callback",
-            redirectUrlComplete: "/dashboard",
+            redirectUrl: "/auth/sso-callback",
+            redirectUrlComplete: "/",
          });
       } catch (err) {
          console.log(err);
@@ -22,7 +22,7 @@ export default function SocialLogins({}: Props) {
       }
    };
    return (
-      <div className="flex flex-col justify-between gap-4">
+      <div className="flex w-full">
          <SocialLogin
             logo={googleLogo}
             provider="google"
