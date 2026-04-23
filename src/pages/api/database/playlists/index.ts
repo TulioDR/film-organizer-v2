@@ -9,7 +9,7 @@ export default async function handler(
    const session = getAuth(req);
    const supabase = createClerkSupabaseClient(session);
    const userId = session.userId;
-
+   console.log(userId);
    if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
    }

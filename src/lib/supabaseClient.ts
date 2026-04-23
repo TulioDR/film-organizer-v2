@@ -7,7 +7,9 @@ export const createClerkSupabaseClient = (session: any) => {
       {
          global: {
             fetch: async (url, options = {}) => {
-               const clerkToken = await session?.getToken();
+               const clerkToken = await session?.getToken({
+                  template: "supabase",
+               });
 
                // Construct headers
                const headers = new Headers(options.headers);
