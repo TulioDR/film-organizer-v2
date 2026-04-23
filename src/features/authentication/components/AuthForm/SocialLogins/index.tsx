@@ -8,13 +8,18 @@ export default function SocialLogins({}: Props) {
    const { signIn } = useSignIn();
 
    const handleGoogleSignIn = async () => {
-      if (!signIn) return;
+      try {
+         if (!signIn) return;
 
-      await signIn.authenticateWithRedirect({
-         strategy: "oauth_google",
-         redirectUrl: "/sso-callback",
-         redirectUrlComplete: "/",
-      });
+         await signIn.authenticateWithRedirect({
+            strategy: "oauth_google",
+            redirectUrl: "/sso-callback",
+            redirectUrlComplete: "/dashboard",
+         });
+      } catch (err) {
+         console.log(err);
+         console.error("OAuth error:", err);
+      }
    };
    return (
       <div className="flex flex-col justify-between gap-4">
