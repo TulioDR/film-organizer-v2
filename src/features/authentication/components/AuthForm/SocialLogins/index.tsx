@@ -7,17 +7,17 @@ import { useSignIn } from "@clerk/nextjs/legacy";
 type Props = {};
 
 export default function SocialLogins({}: Props) {
-   const { signIn, isLoaded } = useSignIn();
+   const { isLoaded } = useSignIn();
 
-   const handleAuth = async (strategy: "oauth_google" | "oauth_github") => {
+   const handleAuth = async (_strategy: "oauth_google" | "oauth_github") => {
       try {
          if (!isLoaded) return;
-
-         await signIn.authenticateWithRedirect({
-            strategy: strategy,
-            redirectUrl: "/auth/sso-callback",
-            redirectUrlComplete: "/",
-         });
+         console.log("Sign-in URL:", process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL);
+         // await signIn.authenticateWithRedirect({
+         //    strategy: strategy,
+         //    redirectUrl: "/auth/sso-callback",
+         //    redirectUrlComplete: "/",
+         // });
       } catch (error) {
          console.log(error);
       }
