@@ -16,7 +16,7 @@ export default function SSOCallback() {
    }, [handleRedirectCallback]);
 
    return (
-      <div className="h-[100svh] w-full flex items-center">
+      <div className="h-[100svh] w-full flex items-center justify-center">
          <div>Loading...</div>
       </div>
    );
