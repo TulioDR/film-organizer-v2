@@ -1,38 +1,30 @@
 import SocialLogin from "./SocialLogin";
 import googleLogo from "@/data/images/logos/google.png";
-
-import { OAuthStrategy } from "@clerk/shared/types";
-import { useSignIn } from "@clerk/nextjs";
-
+import { useSignIn } from "@clerk/react";
 type Props = {};
 
 export default function SocialLogins({}: Props) {
-   const { signIn } = useSignIn();
-
-   const signInWith = async (strategy: OAuthStrategy) => {
+   const { signIn, errors } = useSignIn();
+   const signInWithGoogle = async () => {
       const { error } = await signIn.sso({
-         strategy,
-         redirectCallbackUrl: "/auth/sso-callback",
+         strategy: "oauth_google",
+         redirectCallbackUrl: "/sso-callback",
          redirectUrl: "/",
       });
 
       if (error) {
          console.error(JSON.stringify(error, null, 2));
       }
+      // If no error, the browser redirects to Google
    };
-
    return (
-      <div className="flex justify-between gap-4">
+      <div className="flex flex-col justify-between gap-4">
          <SocialLogin
             logo={googleLogo}
             provider="google"
-            onClick={() => signInWith("oauth_google")}
+            onClick={signInWithGoogle}
          />
-         {/* <SocialLogin
-            logo={githubLogo}
-            provider="github"
-            onClick={githubAuth}
-         /> */}
+         {errors.fields.identifier && <p>{errors.fields.identifier.message}</p>}
       </div>
    );
 }
