@@ -8,7 +8,7 @@ export default function SocialLogins({}: Props) {
    const signInWithGoogle = async () => {
       const { error } = await signIn.sso({
          strategy: "oauth_google",
-         redirectCallbackUrl: "/sso-callback",
+         redirectCallbackUrl: "/auth/sso-callback",
          redirectUrl: "/",
       });
 
