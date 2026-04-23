@@ -18,7 +18,7 @@ export const getServerSideProps = async (context: any) => {
    const userId = authData.userId;
 
    if (!userId) {
-      return { props: { initialPlaylists: null } };
+      return { props: { initialPlaylists: [], userId: null } };
    }
 
    try {
@@ -33,14 +33,15 @@ export const getServerSideProps = async (context: any) => {
       };
    } catch (error) {
       console.error("Direct Fetch Error:", error);
-      return { props: { initialPlaylists: [] } };
+      return { props: { initialPlaylists: [], userId } };
    }
 };
 type Props = {
-   initialPlaylists: PlaylistWithItems[] | null;
+   initialPlaylists: PlaylistWithItems[];
+   userId: string | null;
 };
 
-export default function Playlists({ initialPlaylists }: Props) {
+export default function Playlists({ initialPlaylists, userId }: Props) {
    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
    const [allPlaylists, setAllPlaylists] = useState<PlaylistWithItems[]>(
@@ -65,7 +66,7 @@ export default function Playlists({ initialPlaylists }: Props) {
       selectedSort,
    } = usePlaylistsFilters(allPlaylists);
 
-   if (initialPlaylists === null)
+   if (!userId)
       return (
          <div className="h-[100svh] w-full flex items-center justify-center">
             <PageHead title="Login first" />
