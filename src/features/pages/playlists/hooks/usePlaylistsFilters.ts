@@ -19,8 +19,6 @@ export default function usePlaylistsFilters(allPlaylists: PlaylistWithItems[]) {
 
    useEffect(() => {
       if (!allPlaylists) return;
-      console.log("all playlists are:");
-      console.log(allPlaylists);
       let result = [...allPlaylists];
 
       if (inputValue) {

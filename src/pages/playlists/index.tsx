@@ -54,7 +54,7 @@ export default function Playlists({ initialPlaylists }: Props) {
          setAllPlaylists(data);
       };
       refresh();
-   }, [playlists]);
+   }, [playlists?.length]);
 
    const {
       setInputValue,
