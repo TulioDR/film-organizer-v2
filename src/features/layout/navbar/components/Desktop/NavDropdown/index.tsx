@@ -22,6 +22,7 @@ export default function NavDropdown({}: Props) {
    const logOut = async () => {
       signOut();
       setIsOpen(false);
+      router.push("/");
    };
    const goToUserSettings = () => {
       router.push("/account");

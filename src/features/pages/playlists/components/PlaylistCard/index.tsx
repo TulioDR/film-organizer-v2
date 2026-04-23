@@ -54,7 +54,7 @@ export default function PlaylistCard({ playlist }: Props) {
                   layout="position"
                   className="truncate text-black/50 dark:text-white/50 text-xs sm:text-sm w-full"
                >
-                  {playlist.description}
+                  {playlist.description || "No description"}
                </motion.div>
             </div>
             <div className="w-full flex justify-end gap-1 h-12">

@@ -1,9 +1,21 @@
 import { useRouter } from "next/router";
 import { useSignIn } from "@clerk/nextjs";
+import useNotification from "@/features/layout/notification/hooks/useNotification";
+import { useEffect } from "react";
 
 export default function useLogin() {
-   const { signIn } = useSignIn();
+   const { signIn, errors } = useSignIn();
    const router = useRouter();
+
+   const { showErrorNotification } = useNotification();
+
+   useEffect(() => {
+      const fields = errors.fields;
+      showErrorNotification(
+         fields.identifier?.message || fields.password?.message,
+      );
+   }, [errors.fields]);
+
    const handleLogin = async (values: any) => {
       const { email, password } = values;
       try {
@@ -21,7 +33,6 @@ export default function useLogin() {
          }
       } catch (err: any) {
          console.error("Sign-up attempt not complete:", signIn);
-         console.error(JSON.stringify(err, null, 2));
       }
    };
 
