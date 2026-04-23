@@ -16,7 +16,7 @@ export default function SocialLogins({}: Props) {
    const signInWith = async (strategy: OAuthStrategy) => {
       const { error } = await signIn.sso({
          strategy,
-         redirectCallbackUrl: "/sso-callback",
+         redirectCallbackUrl: "/auth/sso-callback",
          redirectUrl: "/",
       });
 
